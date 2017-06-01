@@ -1,0 +1,13 @@
+!/dist
+node_modules
+/src
+config/**/private.json
+config/**/private.*.json
+/docs
+/test
+/examples
+.vscode
+npm-debug.log
+gulpfile.json
+tsconfig.json
+tslint.json
