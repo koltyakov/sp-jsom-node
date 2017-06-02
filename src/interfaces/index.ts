@@ -1,8 +1,12 @@
 import { IAuthOptions } from 'node-sp-auth';
+import { IAuthConfigSettings } from 'node-sp-auth-config';
 
-export interface IAuthContext {
-    siteUrl: string;
+export interface IJsomNodeSettings {
+    siteUrl?: string;
     authOptions?: IAuthOptions;
+    config?: IAuthConfigSettings;
+    modules?: string[];
+    envCode?: string;
 }
 
 export interface IJsomModule {
