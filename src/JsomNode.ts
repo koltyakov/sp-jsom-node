@@ -1,9 +1,12 @@
 import * as spauth from 'node-sp-auth';
+import * as spRequest from 'sp-request';
 import * as https from 'https';
 import * as path from 'path';
 
 import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
+
 import { XMLHttpRequest } from 'xmlhttprequest';
+
 import { Cpass } from 'cpass';
 
 import { Utils } from './utils';
@@ -18,7 +21,9 @@ const cpass = new Cpass();
 export class JsomNode {
 
     private settings: IJsomNodeSettings;
+    private request: spRequest.ISPRequest;
     private headers: any;
+    private digest: string;
 
     constructor(settings: IJsomNodeSettings) {
         this.settings = settings;
@@ -32,19 +37,32 @@ export class JsomNode {
         // global.XMLHttpRequest = XMLHttpRequest;
         // XMLHttpRequest.authcookies =
 
-        return <any>spauth.getAuth(this.settings.siteUrl, {
+        let creds = {
             ...this.settings.authOptions,
             password:
                 (this.settings.authOptions as any).password &&
                 cpass.decode((this.settings.authOptions as any).password)
-        })
+        };
+
+        this.request = spRequest.create(creds);
+
+        return Promise.all([
+            <any>spauth.getAuth(this.settings.siteUrl, creds)
+            // spRequest.create(creds).requestDigest(this.settings.siteUrl)
+        ])
             .then(response => {
-                this.headers = response.headers;
-                return response.headers;
+                this.headers = response[0].headers;
+                // this.digest = response[1];
+                return {
+                    headers: this.headers
+                    // digest: this.digest
+                };
             });
     }
 
     private mimicBrowserEnvironment() {
+
+        // Sys$Net$XMLHttpExecutor$executeRequest
 
         global.XMLHttpRequest = () => {
             let invocation = new XMLHttpRequest();
@@ -70,35 +88,37 @@ export class JsomNode {
             // tslint:disable-next-line:no-empty
             attachEvent: () => {},
             _spPageContextInfo: {
-                webServerRelativeUrl: `/${this.settings.siteUrl.replace('://', '___').split('/').slice(1, 100).join('/')}`
+                webServerRelativeUrl: `/${
+                    this.settings.siteUrl
+                        .replace('://', '___').split('/').slice(1, 100).join('/')
+                    }`
             }
         };
 
-        global.formdigest = {
-            value: 'DUMMY VALUE',
-            // value: '0xCBCCA93892764E227629A4D742FD2A3C8C7C72D89046ECFA31E4A9069992DABC10C6D9FC4EBBEF' +
-            //        '811E6DB206252FBF427602418654B5F98EF000B4CD0FAB6C28,02 Jun 2017 12:35:22 -0000',
-            tagName: 'INPUT',
-            type: 'hidden'
-        };
+        // global.formdigest = {
+        //     value: this.digest, // 'DUMMY VALUE',
+        //     tagName: 'INPUT',
+        //     type: 'hidden'
+        // };
 
         global.document = {
             documentElement: {},
             URL: '',
-            getElementsByName: (name) => {
-                if (name === '__REQUESTDIGEST') {
-                    return [global.formdigest];
-                }
-            },
+            // getElementsByName: (name) => {
+            //     // console.log('getElementsByName', name);
+            //     if (name === '__REQUESTDIGEST') {
+            //         return [global.formdigest];
+            //     }
+            // },
             getElementsByTagName: (name) => {
+                // console.log('getElementsByTagName', name);
                 return [];
             }
         };
 
-        // global.window.escapeUrlForCallback = escapeUrlForCallback;
-
         // tslint:disable-next-line:no-empty
-        global.NotifyScriptLoadedAndExecuteWaitingJobs = (scriptFileName) => {};
+        // global.NotifyScriptLoadedAndExecuteWaitingJobs = (scriptFileName) => {};
+
         global.Type = Function;
 
         this.registerNamespace('Sys');
@@ -106,7 +126,7 @@ export class JsomNode {
         this.registerNamespace('Microsoft.SharePoint.Packaging');
 
         // tslint:disable-next-line:no-empty
-        global.RegisterModuleInit = () => {};
+        // global.RegisterModuleInit = () => {};
 
     }
 
@@ -150,6 +170,78 @@ export class JsomNode {
             }
             return origRegisterInterface.apply(this, [].slice.call(arguments));
         };
+
+        (<any>Sys.Net)._WebRequestManager.prototype
+            .executeRequest = (wReq: any) => {
+
+                let isJsom: boolean = wReq._url.indexOf('/_vti_bin/client.svc/ProcessQuery') !== -1;
+
+                let jsomHeaders = {};
+                if (isJsom) {
+                    jsomHeaders = {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-RequestDigest': this.digest,
+                        'Content-Length': (wReq._body || '').length
+                    };
+                }
+
+                if (wReq._httpVerb.toLowerCase() === 'post') {
+                    this.request.post({
+                        url: `${
+                            this.settings.siteUrl
+                                .replace('://', '___')
+                                .split('/')[0]
+                                .replace('___', '://')
+                            }${wReq._url}`,
+                        headers: {
+                            ...wReq._headers,
+                            ...jsomHeaders
+                        },
+                        body: wReq._body,
+                        json: !isJsom
+                    })
+                        .then(response => {
+
+                            let responseData = response.body;
+                            if (wReq._url.indexOf('/_api/contextinfo') !== -1) {
+                                this.digest = responseData.d.GetContextWebInformation.FormDigestValue;
+                                // FormDigestTimeoutSeconds
+                            }
+
+                            if (!isJsom) {
+                                responseData = JSON.stringify(responseData);
+                            }
+
+                            wReq._events._list.completed[0]({
+                                _xmlHttpRequest: {
+                                    status: 200,
+                                    responseText: responseData
+                                },
+                                get_aborted: () => {
+                                    return false;
+                                },
+                                get_timedOut: () => {
+                                    return false;
+                                },
+                                _SPError_: undefined,
+                                get_statusCode: () => {
+                                    return 200;
+                                },
+                                get_responseData: () => {
+                                    return responseData;
+                                },
+                                get_responseAvailable: () => {
+                                    return true;
+                                },
+                                getResponseHeader: (header) => {
+                                    return response.headers[header.toLowerCase()];
+                                }
+                            });
+                        })
+                        .catch(console.log);
+                }
+
+            };
     }
 
     private setDocumentProperty(prop: string, value: any) {

@@ -3147,7 +3147,6 @@ SP.ClientRuntimeContext.prototype = {
 
             if ($v_3) {
                 var $v_4 = window._spPageContextInfo;
-
                 if (!SP.ScriptUtility.isNullOrUndefined($v_4)) {
                     SP.ClientRuntimeContext.$Q[$v_1] = new SP.FormDigestInfo();
                     SP.ClientRuntimeContext.$Q[$v_1].$f_0 = $v_3.value;
@@ -3162,6 +3161,7 @@ SP.ClientRuntimeContext.prototype = {
             this.executeClientRequestAsync($v_0, succeededCallback, failedCallback);
         }
         else {
+
             var $v_5 = new Sys.Net.WebRequest();
 
             $v_5.set_url($v_1);
@@ -3177,8 +3177,13 @@ SP.ClientRuntimeContext.prototype = {
             var $$t_F = this;
 
             $v_5.add_completed(function($p1_0) {
+
+                // console.log($p1_0._xmlHttpRequest.status, $p1_0._xmlHttpRequest.responseText);
+
                 if ($p1_0.get_aborted() || $p1_0.get_timedOut()) {
                     var $v_7;
+
+                    // console.log('=== 1111 ====');
 
                     if (typeof $p1_0._SPError_ === 'string') {
                         $v_7 = $p1_0._SPError_;
@@ -3188,7 +3193,14 @@ SP.ClientRuntimeContext.prototype = {
                     }
                     $$t_F.$x_0($v_0, $p1_0, $v_7, failedCallback);
                 }
-                else if (!$p1_0.get_responseAvailable() || $p1_0.get_statusCode() !== 200 || SP.ScriptUtility.isNullOrEmptyString($p1_0.getResponseHeader('content-type')) || (($p1_0.getResponseHeader('content-type')).toLowerCase()).indexOf('json') < 0) {
+                else if (
+                    !$p1_0.get_responseAvailable() || 
+                    $p1_0.get_statusCode() !== 200 || 
+                    SP.ScriptUtility.isNullOrEmptyString($p1_0.getResponseHeader('content-type')) || (($p1_0.getResponseHeader('content-type')).toLowerCase()).indexOf('json') < 0
+                ) {
+
+                    // console.log('=== 2222 ====');
+
                     var $v_8;
 
                     if (typeof $p1_0._SPError_ === 'string') {
@@ -3200,6 +3212,10 @@ SP.ClientRuntimeContext.prototype = {
                     $$t_F.$x_0($v_0, $p1_0, $v_8, failedCallback);
                 }
                 else {
+
+                    // console.log('=== 3333 ====');
+                    // console.log($p1_0.get_responseData());
+
                     var $v_9 = $$t_F.$3W_0($p1_0.get_responseData());
 
                     if (!$v_9) {

@@ -2,7 +2,7 @@ import { JsomNode, IJsomNodeSettings } from '../src';
 
 declare let global: any;
 
-let settings: any = require('../config/integration/private.2016.json');
+let settings: any = require('../config/integration/private.2013.json');
 
 console.log(settings.siteUrl);
 
@@ -11,52 +11,41 @@ let jsom = new JsomNode({
     authOptions: {
         ...(settings as any)
     },
-    envCode: '16'
+    envCode: '15'
 });
 
 jsom.createRequestClient()
-    .then((auth) => {
-
-        // global.XMLHttpRequest.authcookies = auth.Cookie || auth.Authorization;
-        // global.XMLHttpRequest.setRequestHeader('Authorization', auth.Cookie || auth.Authorization);
-
-        // global.XMLHttpRequest.withCredentials = true;
+    .then((context) => {
 
         let ctx = SP.ClientContext.get_current();
 
-        // options: {
-        //     agent: keepaliveAgent     /* keep alive agent */
-        // }
-
-        ctx.add_executingWebRequest((sender, e) => {
-            let headers = e.get_webRequest().get_headers();
-            for (let header of Object.keys(auth)) {
-                if (['Cookie', 'Authorization'].indexOf(header) !== -1) {
-                    headers[header] = auth[header];
-                    console.log(header, headers[header]);
-                }
-            }
-        });
+        // ctx.get_webRequestExecutorFactory
+        // ctx.add_executingWebRequest((sender, e) => {
+        //     let headers = e.get_webRequest().get_headers();
+        //     for (let header of Object.keys(context.headers)) {
+        //         if (['Cookie', 'Authorization'].indexOf(header) !== -1) {
+        //             headers[header] = context.headers[header];
+        //             // headers['X-RequestDigest'] = context.digest;
+        //             // console.log(headers);
+        //         }
+        //     }
+        //     console.log(e.get_webRequest().get_url());
+        // });
 
         let oWeb = ctx.get_web();
-        // let oLists = oWeb.get_lists();
+        let oLists = oWeb.get_lists();
 
         ctx.load(oWeb);
+        ctx.load(oLists);
 
         ctx.executeQueryAsync(() => {
             console.log(oWeb.get_title());
+            console.log(oLists.get_data().length);
         }, (sender, args) => {
             console.log(`Error: ${args.get_message()}`);
             console.log(args.get_stackTrace());
         });
 
-        // ctx.load(oLists);
-
-        // ctx.executeQueryAsync(() => {
-        //     console.log(oLists.get_data());
-        // }, (sender, args) => {
-        //     console.log(`Error: ${args.get_message()}`);
-        // });
 
     })
     .catch(console.log);
