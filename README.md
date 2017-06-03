@@ -55,13 +55,7 @@ import { JsomNode } from 'sp-jsom-node';
 
     let ctx = SP.ClientContext.get_current();
     // let ctx = SP.ClientContext(webRelativeUrl);
-    let oWeb = ctx.get_web();
-    ctx.load(oWeb);
-    ctx.executeQueryAsync(() => {
-        console.log(oWeb.get_title());
-    }, (sender, args) => {
-        console.log(`Error: ${args.get_message()}`);
-    });
+    ...
 
 }).catch(console.log);
 
