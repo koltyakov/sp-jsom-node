@@ -124,6 +124,14 @@ export class JsomNode {
             global.window[nsName] = global[nsName];
         };
 
+        global.Type = Function;
+        global.NotifyScriptLoadedAndExecuteWaitingJobs = (scriptFileName) => {
+            //
+        };
+        global.RegisterModuleInit = () => {
+            //
+        };
+
         registerNamespace('Sys');
         registerNamespace('SP.UI');
         registerNamespace('Microsoft.SharePoint.Packaging');
