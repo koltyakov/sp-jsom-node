@@ -1,4 +1,5 @@
 !/dist
+!/jsom
 node_modules
 /src
 config/**/private.json
@@ -6,6 +7,7 @@ config/**/private.*.json
 /docs
 /test
 /examples
+/scripts
 .vscode
 npm-debug.log
 gulpfile.json

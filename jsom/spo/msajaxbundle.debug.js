@@ -5963,56 +5963,56 @@ Sys.Net.XMLDOM = function Sys$Net$XMLDOM(markup) {
     }
     return null;
 }
-    Sys.Net.XMLHttpExecutor = function Sys$Net$XMLHttpExecutor() {
-        /// <summary locid="M:J#Sys.Net.XMLHttpExecutor.#ctor" />
-        if (arguments.length !== 0) throw Error.parameterCount();
-        Sys.Net.XMLHttpExecutor.initializeBase(this);
-        var _this = this;
-        this._xmlHttpRequest = null;
-        this._webRequest = null;
-        this._responseAvailable = false;
-        this._timedOut = false;
-        this._timer = null;
-        this._aborted = false;
-        this._started = false;
-        this._onReadyStateChange = (function () {
-            
-            if (_this._xmlHttpRequest.readyState === 4 ) {
-                try {
-                    if (typeof(_this._xmlHttpRequest.status) === "undefined") {
-                        return;
-                    }
-                }
-                catch(ex) {
+Sys.Net.XMLHttpExecutor = function Sys$Net$XMLHttpExecutor() {
+    /// <summary locid="M:J#Sys.Net.XMLHttpExecutor.#ctor" />
+    if (arguments.length !== 0) throw Error.parameterCount();
+    Sys.Net.XMLHttpExecutor.initializeBase(this);
+    var _this = this;
+    this._xmlHttpRequest = null;
+    this._webRequest = null;
+    this._responseAvailable = false;
+    this._timedOut = false;
+    this._timer = null;
+    this._aborted = false;
+    this._started = false;
+    this._onReadyStateChange = (function () {
+        
+        if (_this._xmlHttpRequest.readyState === 4 ) {
+            try {
+                if (typeof(_this._xmlHttpRequest.status) === "undefined") {
                     return;
                 }
+            }
+            catch(ex) {
+                return;
+            }
 
-                _this._clearTimer();
-                _this._responseAvailable = true;
-                _this._webRequest.completed(Sys.EventArgs.Empty);
-                if (_this._xmlHttpRequest != null) {
-                    _this._xmlHttpRequest.onreadystatechange = Function.emptyMethod;
-                    _this._xmlHttpRequest = null;
-                }
-            }
-        });
-        this._clearTimer = (function() {
-            if (_this._timer != null) {
-                window.clearTimeout(_this._timer);
-                _this._timer = null;
-            }
-        });
-        this._onTimeout = (function() {
-            if (!_this._responseAvailable) {
-                _this._clearTimer();
-                _this._timedOut = true;
+            _this._clearTimer();
+            _this._responseAvailable = true;
+            _this._webRequest.completed(Sys.EventArgs.Empty);
+            if (_this._xmlHttpRequest != null) {
                 _this._xmlHttpRequest.onreadystatechange = Function.emptyMethod;
-                _this._xmlHttpRequest.abort();
-                _this._webRequest.completed(Sys.EventArgs.Empty);
                 _this._xmlHttpRequest = null;
             }
-        });
-    }
+        }
+    });
+    this._clearTimer = (function() {
+        if (_this._timer != null) {
+            window.clearTimeout(_this._timer);
+            _this._timer = null;
+        }
+    });
+    this._onTimeout = (function() {
+        if (!_this._responseAvailable) {
+            _this._clearTimer();
+            _this._timedOut = true;
+            _this._xmlHttpRequest.onreadystatechange = Function.emptyMethod;
+            _this._xmlHttpRequest.abort();
+            _this._webRequest.completed(Sys.EventArgs.Empty);
+            _this._xmlHttpRequest = null;
+        }
+    });
+}
     function Sys$Net$XMLHttpExecutor$get_timedOut() {
         /// <value type="Boolean" locid="P:J#Sys.Net.XMLHttpExecutor.timedOut"></value>
         if (arguments.length !== 0) throw Error.parameterCount();
@@ -6036,9 +6036,6 @@ Sys.Net.XMLDOM = function Sys$Net$XMLDOM(markup) {
     function Sys$Net$XMLHttpExecutor$executeRequest() {
         /// <summary locid="M:J#Sys.Net.XMLHttpExecutor.executeRequest" />
         if (arguments.length !== 0) throw Error.parameterCount();
-
-        // console.log(this);
-
         this._webRequest = this.get_webRequest();
         if (this._started) {
             throw Error.invalidOperation(String.format(Sys.Res.cannotCallOnceStarted, 'executeRequest'));
@@ -6072,9 +6069,6 @@ Sys.Net.XMLDOM = function Sys$Net$XMLDOM(markup) {
         if (timeout > 0) {
             this._timer = window.setTimeout(Function.createDelegate(this, this._onTimeout), timeout);
         }
-
-        // console.log(body);
-
         this._xmlHttpRequest.send(body);
         this._started = true;
     }

@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 6518,
-                "rpr": 1209
+                "rup": 6525,
+                "rpr": 1205
             }
         };
     }
@@ -6424,7 +6424,7 @@ var browserUpdatedWithServerRedirectedUrl;
 function UpdateUrlWhenServerRedirects() {
     var pageContextInfo = window['_spPageContextInfo'];
 
-    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(708) && !(window["OffSwitch"] == null || OffSwitch.IsActive("90329B12-2C48-4DBE-A1B9-08BC2BBA2C26")) && (window["OffSwitch"] == null || OffSwitch.IsActive("3EDB0B41-115A-410E-9C6B-9390F1D1AD94") || !browserUpdatedWithServerRedirectedUrl) && Boolean(pageContextInfo) && Boolean(pageContextInfo.serverRedirectedUrl)) {
+    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(708) && !(window["OffSwitch"] == null || OffSwitch.IsActive("90329B12-2C48-4DBE-A1B9-08BC2BBA2C26")) && (window["OffSwitch"] == null || OffSwitch.IsActive("DC0DFB52-4F4C-479D-9D07-43DE94F3123F")) && (window["OffSwitch"] == null || OffSwitch.IsActive("3EDB0B41-115A-410E-9C6B-9390F1D1AD94") || !browserUpdatedWithServerRedirectedUrl) && Boolean(pageContextInfo) && Boolean(pageContextInfo.serverRedirectedUrl)) {
         var serverRedirectedUrl = pageContextInfo.serverRedirectedUrl;
 
         if (!(window["OffSwitch"] == null || OffSwitch.IsActive("F1754AB4-0FF5-4169-A2E1-7665F6FF4E9F")) && Boolean(pageContextInfo.isSPO) && window.location.protocol.toLowerCase() === 'https:') {

@@ -20,7 +20,7 @@ export class JsomNode {
     private request: spRequest.ISPRequest;
     private requestCache: IRequestsCache = {};
 
-    constructor(settings: IJsomNodeSettings) {
+    constructor(settings: IJsomNodeSettings = {}) {
         let config = settings.config || {};
         this.settings = {
             ...settings,
@@ -52,6 +52,9 @@ export class JsomNode {
             if (typeof this.settings.authOptions === 'undefined') {
                 this.spAuthConfigirator.getContext()
                     .then((context) => {
+                        const cpass = new Cpass();
+                        (context.authOptions as any).password = (context.authOptions as any).password &&
+                            cpass.decode((context.authOptions as any).password);
                         this.settings = {
                             ...this.settings,
                             ...context
