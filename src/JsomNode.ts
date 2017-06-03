@@ -1,33 +1,71 @@
 import * as spRequest from 'sp-request';
 import * as path from 'path';
-
 import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
-
 import { Cpass } from 'cpass';
 
-import { Utils } from './utils';
+import { JsomModules, lcid } from './config';
 import { IJsomNodeSettings } from './interfaces';
 
-import { JsomModules, lcid } from './config';
-
 declare let global: any;
+declare let sp_initialize: any;
 
-const cpass = new Cpass();
+interface IRequestsCache {
+    [siteUrl: string]: spRequest.ISPRequest;
+}
 
 export class JsomNode {
 
     private settings: IJsomNodeSettings;
+    private spAuthConfigirator: SPAuthConfigirator;
     private request: spRequest.ISPRequest;
+    private requestCache: IRequestsCache = {};
 
     constructor(settings: IJsomNodeSettings) {
-        this.settings = settings;
+        let config = settings.config || {};
+        this.settings = {
+            ...settings,
+            config: {
+                ...config,
+                configPath: path.resolve(config.configPath || path.join(process.cwd(), 'config/private.json')),
+                encryptPassword: typeof config.encryptPassword !== 'undefined' ? config.encryptPassword : true,
+                saveConfigOnDisk: typeof config.saveConfigOnDisk !== 'undefined' ? config.saveConfigOnDisk : true
+            }
+        };
+        if (typeof this.settings.authOptions !== 'undefined') {
+            const cpass = new Cpass();
+            (this.settings.authOptions as any).password = (this.settings.authOptions as any).password &&
+                cpass.decode((this.settings.authOptions as any).password);
+        }
+        this.spAuthConfigirator = new SPAuthConfigirator(this.settings.config);
     }
 
+    // Init JsomNode environment
     public init() {
         this.mimicBrowser();
         this.loadScripts(this.settings.modules, this.settings.envCode);
         this.proxyRequestManager();
-        // this.setDocumentProperty('URL', this.settings.siteUrl);
+    }
+
+    // Trigger wizard and init JsomNode environment
+    public wizard(): Promise<IJsomNodeSettings> {
+        return new Promise((resolve, reject) => {
+            if (typeof this.settings.authOptions === 'undefined') {
+                this.spAuthConfigirator.getContext()
+                    .then((context) => {
+                        this.settings = {
+                            ...this.settings,
+                            ...context
+                        };
+                        this.init();
+                        resolve(this.settings);
+                    })
+                    .catch((error: any) => {
+                        reject(error);
+                    });
+            } else {
+                resolve(this.settings);
+            }
+        });
     }
 
     // Mimic environment to pretend as a browser
@@ -43,7 +81,8 @@ export class JsomNode {
                 pathname: ''
             },
             document: {
-                cookie: ''
+                cookie: '',
+                URL: this.settings.siteUrl
             },
             setTimeout: global.setTimeout,
             clearTimeout: global.clearTimeout,
@@ -127,12 +166,8 @@ export class JsomNode {
 
     // Proxy JSOM XmlHttpRequest through sp-request
     private proxyRequestManager() {
-        this.request = spRequest.create({
-            ...this.settings.authOptions,
-            password:
-                (this.settings.authOptions as any).password &&
-                cpass.decode((this.settings.authOptions as any).password)
-        });
+
+        this.request = this.getCachedRequest();
 
         (<any>Sys.Net)._WebRequestManager.prototype
             .executeRequest = (wReq: any) => {
@@ -147,6 +182,10 @@ export class JsomNode {
                 let webAbsoluteUrl = requestUrl
                     .split('/_api')[0]
                     .split('/_vti_bin')[0];
+
+                // console.log(this.settings.siteUrl);
+                // console.log(wReq._url);
+                // console.log(webAbsoluteUrl);
 
                 this.request.requestDigest(webAbsoluteUrl)
                     .then(digest => {
@@ -198,9 +237,11 @@ export class JsomNode {
             };
     }
 
-    // private setDocumentProperty(prop: string, value: any) {
-    //     global.document = global.document || {};
-    //     global.document[prop] = value;
-    // }
+    // Cache request client
+    private getCachedRequest = (): spRequest.ISPRequest => {
+        this.request = this.requestCache[this.settings.siteUrl] || spRequest.create(this.settings.authOptions);
+        this.requestCache[this.settings.siteUrl] = this.request;
+        return this.request;
+    }
 
 }

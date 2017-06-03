@@ -2,8 +2,6 @@ import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
 import * as colors from 'colors';
 import * as path from 'path';
 
-console.log(path);
-
 import { Environments } from './configs';
 
 export async function checkOrPromptForIntegrationConfigCreds(): Promise<void> {
