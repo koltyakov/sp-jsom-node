@@ -315,6 +315,15 @@ for (let testConfig of TestsConfigs) {
 
         });
 
+        /**
+         * TBD:
+         *  - Taxonomy
+         *  - User profiles
+         *  - Search
+         *  ...
+         *
+         */
+
     });
 
 }

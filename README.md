@@ -114,6 +114,25 @@ ctx.executeQueryAsync(() => {
 
 ```
 
+### Modules
+
+By default, only core modules are loaded.
+Additional CSOM features can be requested in `modules` setting.
+
+```javascript
+import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
+
+let settings: any = require('../config/private.json');
+let jsomNodeOptions: IJsomNodeSettings = {
+    modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
+};
+
+(new JsomNode(jsomNodeOptions)).init();
+
+/// ... <<< JSOM can be used here
+...
+```
+
 #### JSOM Node Settings options
 
 - siteUrl?: string; // Optional SPWeb url
@@ -122,6 +141,8 @@ ctx.executeQueryAsync(() => {
   - configPath?: string; // Path to auth config .json | Default is './config/private.json'
   - encryptPassword?: boolean; // Encrypts password to a machine-bind hash | Default is 'true'
   - saveConfigOnDisk?: boolean; // Saves config .json to disk | Default is 'true'
+- modules?: string[]; // On demand modules load, [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
+- envCode?: 'spo' | '16' | '15'; // Loads different version of JSOM javascripts
 
 Settings can be left blank. Auth options in such a case will be asked by `node-sp-auth-config` [options](https://github.com/koltyakov/node-sp-auth-config) in a wizard like approach.
 

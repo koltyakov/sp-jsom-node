@@ -10,7 +10,8 @@ console.log(settings.siteUrl);
     siteUrl: settings.siteUrl,
     authOptions: {
         ...(settings as any)
-    }
+    },
+    modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
 })).init();
 
 /////
