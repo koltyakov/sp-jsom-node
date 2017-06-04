@@ -86,7 +86,7 @@ const JsomNode = require('sp-jsom-node').JsomNode;
 ```javascript
 import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
 
-let settings: any = require('../config/private.json');
+let settings: any = require('./config/private.json');
 let jsomNodeOptions: IJsomNodeSettings = {
     siteUrl: settings.siteUrl,
     authOptions: {
@@ -124,7 +124,7 @@ Additional CSOM features can be requested in `modules` setting.
 ```javascript
 import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
 
-let settings: any = require('../config/private.json');
+let settings: any = require('./config/private.json');
 let jsomNodeOptions: IJsomNodeSettings = {
     modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
 };
