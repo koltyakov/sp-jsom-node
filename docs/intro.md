@@ -122,4 +122,4 @@ The project contains integration tests (I test recent libraries with SharePoint 
 
 If you need JSOM in Node.js for any crazy or rational reasons and something prevented you from doing this, welcome on board with `sp-jsom-node`. And don't forget to comment about your use cases.
 
-I truly hope the library will find it's users and that it wasn't developed only for the tasks I needed to be solved.
+I truly hope the library will find its users and that it wasn't developed only for the tasks I needed to be solved.
