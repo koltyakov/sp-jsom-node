@@ -44,6 +44,8 @@ yarn add sp-jsom-node
 
 ## Usage examples
 
+![JsomNode Demo](./docs/imgs/JsomNode.demo.gif)
+
 ### Minimal setup (TypeScript)
 
 ```javascript
@@ -160,7 +162,7 @@ Settings can be left blank. Auth options in such a case will be asked by `node-s
 npm run test
 ```
 
-![Integration tests](./docs/mocha.jpg)
+![Integration tests](./docs/imgs/mocha.jpg)
 
 ## Inspiration and references
 
