@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 6525,
-            "rpr": 1205
+            "rup": 6607,
+            "rpr": 1206
         }
     };
 }
@@ -888,7 +888,8 @@ SP.SpecialFolderType.prototype = {
     appRoot: 5,
     desktop: 6,
     documents: 7,
-    screenShots: 8
+    screenShots: 8,
+    templates: 9
 };
 SP.SpecialFolderType.registerEnum('SP.SpecialFolderType', false);
 SP.SPEffectiveInformationRightsManagementSettingsSource = function() {
@@ -27118,11 +27119,6 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.AppInstance($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'LoadAndInstallAppInSpecifiedLocale', [appPackageStream, installationLocaleLCID]));
-        ($v_1.get_path()).setPendingReplace();
-        var $v_2 = new SP.ObjectIdentityQuery($v_1.get_path());
-
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        $v_0.addQuery($v_2);
         return $v_1;
     },
     loadApp: function SP_Web$loadApp(appPackageStream, installationLocaleLCID) {
@@ -28360,6 +28356,15 @@ SP.Utilities.Utility.resolvePrincipal = function SP_Utilities_Utility$resolvePri
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
     return $v_0;
 };
+SP.Utilities.Utility.localizeWebPartGallery = function SP_Utilities_Utility$localizeWebPartGallery(context, items) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+
+    $v_0 = new SP.ClientObjectList(context, new SP.ObjectPathStaticMethod(context, '{16f43e7e-bf35-475d-b677-9dc61e549339}', 'LocalizeWebPartGallery', [items]), SP.ListItem);
+    return $v_0;
+};
 SP.Utilities.Utility.getAppLicenseInformation = function SP_Utilities_Utility$getAppLicenseInformation(context, productId) {
     if (!context) {
         throw Error.argumentNull('context');
@@ -28414,15 +28419,6 @@ SP.Utilities.Utility.logCustomRemoteAppError = function SP_Utilities_Utility$log
     context.addQuery($v_1);
     $v_0 = new SP.IntResult();
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
-    return $v_0;
-};
-SP.Utilities.Utility.localizeWebPartGallery = function SP_Utilities_Utility$localizeWebPartGallery(context, items) {
-    if (!context) {
-        throw Error.argumentNull('context');
-    }
-    var $v_0;
-
-    $v_0 = new SP.ClientObjectList(context, new SP.ObjectPathStaticMethod(context, '{16f43e7e-bf35-475d-b677-9dc61e549339}', 'LocalizeWebPartGallery', [items]), SP.ListItem);
     return $v_0;
 };
 SP.Utilities.Utility.getLocalizedString = function SP_Utilities_Utility$getLocalizedString(context, source, defaultResourceFile, language) {

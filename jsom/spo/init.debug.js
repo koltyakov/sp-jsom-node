@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 6525,
-                "rpr": 1205
+                "rup": 6607,
+                "rpr": 1206
             }
         };
     }
@@ -4112,9 +4112,11 @@ function Nav_module_def() {
                 currentElem = currentElem.parentNode;
             }
             if (anchorClick && currentElem.href != null && currentElem.href.length > 0 && currentElem.href != "#" && !/^javascript:/i.test(currentElem.href)) {
-                DOM.cancelDefault(evt);
-                Nav.navigate(currentElem.href);
-                return false;
+                if (window["OffSwitch"] == null || OffSwitch.IsActive("911A3FDF-0DB6-45AC-BD03-E2FE43E0925B") || Nav.isPageUrlValid(currentElem.href)) {
+                    DOM.cancelDefault(evt);
+                    Nav.navigate(currentElem.href);
+                    return false;
+                }
             }
         }
         return (function(u) {
@@ -6442,11 +6444,20 @@ function UpdateUrlWhenServerRedirects() {
     }
 }
 function OnePageNavigationHandler(evt) {
-    var registerFunc = function registerOnePageNavigationFunc() {
-        performModernOnePageNavigation(evt);
-    };
+    var registerFunc;
 
-    EnsureScriptFunc('SP.core.js', "performModernOnePageNavigation", registerFunc);
+    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(77)) {
+        registerFunc = function registerOnePageNavigationFunc() {
+            performModernOnePageNavigationForFasterOnePage(evt);
+        };
+        EnsureScriptFunc('SP.core.js', "performModernOnePageNavigationForFasterOnePage", registerFunc);
+    }
+    else {
+        registerFunc = function registerOnePageNavigationFunc() {
+            performModernOnePageNavigation(evt);
+        };
+        EnsureScriptFunc('SP.core.js', "performModernOnePageNavigation", registerFunc);
+    }
 }
 function isBrowserSupportedModernApp() {
     var browserSupported = true;

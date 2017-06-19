@@ -74,10 +74,11 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
     $5_1: false,
     $6_1: false,
     $7_1: false,
-    $8_1: 0,
-    $9_1: null,
+    $8_1: null,
+    $9_1: 0,
     $A_1: null,
     $B_1: null,
+    $C_1: null,
     
     get_autoDelete: function SP_CompliancePolicy_ComplianceTag$get_autoDelete() {
         return this.$3_1;
@@ -99,20 +100,24 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         return this.$7_1;
     },
     
-    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
         return this.$8_1;
     },
     
-    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
         return this.$9_1;
     },
     
-    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
         return this.$A_1;
     },
     
-    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
         return this.$B_1;
+    },
+    
+    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+        return this.$C_1;
     },
     
     get_typeId: function SP_CompliancePolicy_ComplianceTag$get_typeId() {
@@ -126,7 +131,7 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AutoDelete', 'BlockDelete', 'BlockEdit', 'HasRetentionAction', 'IsEventTag', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
+        var $v_0 = [ 'AutoDelete', 'BlockDelete', 'BlockEdit', 'HasRetentionAction', 'IsEventTag', 'ReviewerEmail', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -159,24 +164,29 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
             this.$7_1 = ($v_0);
             delete parentNode.IsEventTag;
         }
-        $v_0 = parentNode.TagDuration;
+        $v_0 = parentNode.ReviewerEmail;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$8_1 = ($v_0);
+            delete parentNode.ReviewerEmail;
+        }
+        $v_0 = parentNode.TagDuration;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$9_1 = ($v_0);
             delete parentNode.TagDuration;
         }
         $v_0 = parentNode.TagId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9_1 = ($v_0);
+            this.$A_1 = ($v_0);
             delete parentNode.TagId;
         }
         $v_0 = parentNode.TagName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A_1 = ($v_0);
+            this.$B_1 = ($v_0);
             delete parentNode.TagName;
         }
         $v_0 = parentNode.TagRetentionBasedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$B_1 = ($v_0);
+            this.$C_1 = ($v_0);
             delete parentNode.TagRetentionBasedOn;
         }
     }
