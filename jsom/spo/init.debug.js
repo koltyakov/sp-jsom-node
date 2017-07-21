@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 6607,
-                "rpr": 1206
+                "rup": 6712,
+                "rpr": 1207
             }
         };
     }
@@ -3936,7 +3936,7 @@ function Nav_module_def() {
                     hashObject["url"] = "/";
                 }
                 else if (hash != null && hash.length != 0) {
-                    var parts = (hash.substr(1)).split('#');
+                    var parts = (hash.substr(1)).split(/#|%23/);
                     var partsLength = parts.length;
                     var partPosStart = 0;
 
@@ -4644,6 +4644,7 @@ function ListModule_module_def() {
         NewWOPIDocumentUrl: undefined,
         AllowCreateFolder: undefined,
         CanShareLinkForNewDocument: undefined,
+        VisioDrawingCreationEnabled: undefined,
         noGroupCollapse: undefined,
         SiteTemplateId: undefined,
         RealSiteTemplateId: undefined,
@@ -6468,8 +6469,9 @@ function isBrowserSupportedModernApp() {
 
         if (-1 !== i) {
             var v = parseInt(a.substring(i + 5));
+            var supportedMode = !(window["OffSwitch"] == null || OffSwitch.IsActive("68B2E51A-1AC2-4ABF-924A-DFB7CD5C18E1")) ? 11 : 10;
 
-            if (v < 10 && Boolean(document.documentMode) && document.documentMode < 10) {
+            if (v < supportedMode && Boolean(document.documentMode) && document.documentMode < supportedMode) {
                 browserSupported = false;
             }
         }
@@ -14087,6 +14089,7 @@ function PerformanceLogger_module_def() {
         var isEUPLCollected = false;
         var isMDSTimingCollected = false;
         var isW3cTimingCollected = false;
+        var isW3cResourceTimingCollected = false;
         var isScenarioIdCollected = false;
         var isServerUrlCollected = false;
         var euplBreakDown = {};
@@ -14194,6 +14197,7 @@ function PerformanceLogger_module_def() {
             isEUPLCollected = false;
             isMDSTimingCollected = false;
             isW3cTimingCollected = false;
+            isW3cResourceTimingCollected = false;
             isScenarioIdCollected = false;
             isServerUrlCollected = false;
             controls = new Array(0);
@@ -14434,6 +14438,104 @@ function PerformanceLogger_module_def() {
             }
             isW3cTimingCollected = true;
         };
+        this.CollectW3cResourceTimings = function() {
+            var index = 0;
+
+            if (!isW3cResourceTimingCollected) {
+                var allRequests = GetPerfResourcesTimingObject(false, 0);
+                var iFrames = document.getElementsByTagName("iframe");
+
+                for (index = 0; index < iFrames.length; index++) {
+                    var iFramePerformance = null;
+
+                    try {
+                        iFramePerformance = GetPerfResourcesTimingObject(true, index);
+                    }
+                    catch (e) { }
+                    if (Boolean(iFramePerformance)) {
+                        allRequests.concat(iFramePerformance.getEntriesByType("resource"));
+                    }
+                }
+                var fromSources = {};
+
+                fromSources["SharePoint"] = function(element) {
+                    return /\.sharepoint\.com|\.spoppe\.com/i.test(element.name);
+                };
+                fromSources["CDN"] = function(element) {
+                    return /(cdn(ppe)?|static(ppe)?)\.sharepointonline\.com|contentstorage\.osi\.office\.net|\.akamaihd\.net/i.test(element.name);
+                };
+                fromSources["ThirdParty"] = function(element) {
+                    return !fromSources["SharePoint"](element) && !fromSources["CDN"](element);
+                };
+                var types = {};
+
+                types["ASPX"] = function(element) {
+                    return /\.aspx/i.test(element.name);
+                };
+                types["JS"] = function(element) {
+                    return /script/i.test(element.initiatorType);
+                };
+                types["CSS"] = function(element) {
+                    return /link|css/i.test(element.initiatorType);
+                };
+                types["IMG"] = function(element) {
+                    return /img/i.test(element.initiatorType);
+                };
+                var sources = Object.keys(fromSources);
+
+                for (index = 0; index < sources.length; index++) {
+                    var source = sources[index];
+                    var requests = CategorizeResourceRequests(allRequests, {
+                        from: fromSources[source],
+                        requestType: null
+                    });
+
+                    that.LogPerformanceData(source + "RequestCountTotal", requests.length);
+                    var typeKeys = Object.keys(types);
+
+                    for (var typeIndex = 0; typeIndex < typeKeys.length; typeIndex++) {
+                        var type = typeKeys[typeIndex];
+
+                        that.LogPerformanceData(source + "RequestCount" + type, (CategorizeResourceRequests(requests, {
+                            from: null,
+                            requestType: types[type]
+                        })).length);
+                    }
+                    if (requests.length > 0) {
+                        that.LogPerformanceData(source + "RequestDownloadTime", Math.round(requests.reduce(function(sum, currentVal) {
+                            return sum + currentVal.duration;
+                        }, 0) / requests.length));
+                        var files = JSON.stringify(requests.map(function(timing) {
+                            return {
+                                name: ((((timing.name.split("/")).map(function(urlToken) {
+                                    return (urlToken.split("?"))[0];
+                                })).filter(function(urlToken) {
+                                    return urlToken && urlToken.length > 0;
+                                })).slice(-1))[0].replace(/\(.*?\)/g, '()'),
+                                startTime: Math.round(timing.startTime),
+                                duration: Math.round(timing.duration)
+                            };
+                        }));
+
+                        that.LogPerformanceData(source + "RequestNames", files);
+                    }
+                }
+                isW3cResourceTimingCollected = true;
+            }
+        };
+        function CategorizeResourceRequests(requests, categorizer) {
+            var ret = [];
+
+            for (var index = 0; index < requests.length; index++) {
+                var request = requests[index];
+
+                if ((!categorizer.from || categorizer.from(request)) && (!categorizer.requestType || categorizer.requestType(request))) {
+                    ret.push(request);
+                }
+            }
+            return ret;
+        }
+        ;
         function GetW3cTimingName(timingName) {
             return 'W3c' + (timingName.charAt(0)).toUpperCase() + timingName.slice(1);
         }
@@ -14445,6 +14547,31 @@ function PerformanceLogger_module_def() {
                 return null;
             }
             var timingObject = perfObject.timing;
+
+            if (IsNullOrUndefined(timingObject)) {
+                return null;
+            }
+            return timingObject;
+        }
+        ;
+        function GetPerfResourcesTimingObject(biframe, index) {
+            var perfObject = null;
+
+            try {
+                if (biframe) {
+                    var iFrames = document.getElementsByTagName("iframe");
+
+                    perfObject = iFrames & iFrames.length > index ? iFrames[index].contentWindow["performance"] : null;
+                }
+                else {
+                    perfObject = window.self["performance"];
+                }
+            }
+            catch (e) { }
+            if (IsNullOrUndefined(perfObject)) {
+                return null;
+            }
+            var timingObject = perfObject.getEntriesByType("resource");
 
             if (IsNullOrUndefined(timingObject)) {
                 return null;
@@ -14527,6 +14654,21 @@ function PerformanceLogger_module_def() {
         this.AddExpectedControl = function(control) {
             if (expectedControls.indexOf && expectedControls.indexOf(control) === -1) {
                 expectedControls.push(control);
+            }
+        };
+        this.WriteEUPLBreakdown = function(euplBreakdown, overwrite) {
+            if (euplBreakdown) {
+                try {
+                    var breakdown = JSON.parse(euplBreakdown);
+
+                    for (var key in breakdown) {
+                        if (!breakdown.hasOwnProperty(key)) {
+                            continue;
+                        }
+                        that.AddEUPLBreakdown(key, breakdown[key], overwrite);
+                    }
+                }
+                catch (e) { }
             }
         };
         this.AddEUPLBreakdown = function(euplName, value, overwrite) {
@@ -14826,7 +14968,10 @@ function SPThemeUtils_module_def() {
         return typeof Flighting !== strUndefined && typeof Flighting.VariantConfiguration !== strUndefined && typeof Flighting.VariantConfiguration.IsExpFeatureClientEnabled !== strUndefined;
     }
     function UseClientSideTheming() {
-        var featureEnabled = FlightingAvailable() && Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104);
+        var wtGroup = 64;
+        var wtCommSite = 68;
+        var wt;
+        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite));
         var useCST = featureEnabled && typeof Theming !== strUndefined;
 
         return useCST;
