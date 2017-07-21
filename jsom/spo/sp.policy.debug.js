@@ -2048,6 +2048,16 @@ SP.CompliancePolicy.SPPolicyStore.prototype = {
         return $v_1;
     },
     
+    getComplianceTags: function SP_CompliancePolicy_SPPolicyStore$getComplianceTags() {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetComplianceTags', null);
+        $v_0.addQuery($v_2);
+        $v_1 = (([]));
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    
     getPolicyDefinitions: function SP_CompliancePolicy_SPPolicyStore$getPolicyDefinitions(scenario) {
         var $v_0 = this.get_context();
         var $v_1;
