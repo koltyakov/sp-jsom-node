@@ -1,8 +1,10 @@
 import * as spRequest from 'sp-request';
 import * as path from 'path';
+import * as https from 'https';
 import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
 import { Cpass } from 'cpass';
 
+import { Utils } from './utils';
 import { JsomModules, lcid } from './config';
 import { IJsomNodeSettings } from './interfaces';
 
@@ -19,6 +21,8 @@ export class JsomNode {
     private spAuthConfigirator: SPAuthConfigirator;
     private request: spRequest.ISPRequest;
     private requestCache: IRequestsCache = {};
+    private agent: https.Agent;
+    private utils: Utils;
 
     constructor(settings: IJsomNodeSettings = {}) {
         let config = settings.config || {};
@@ -36,6 +40,12 @@ export class JsomNode {
             (this.settings.authOptions as any).password = (this.settings.authOptions as any).password &&
                 cpass.decode((this.settings.authOptions as any).password);
         }
+        this.utils = new Utils();
+        this.agent = new https.Agent({
+            rejectUnauthorized: false,
+            keepAlive: true,
+            keepAliveMsecs: 10000
+        });
         this.spAuthConfigirator = new SPAuthConfigirator(this.settings.config);
     }
 
@@ -57,7 +67,7 @@ export class JsomNode {
                             cpass.decode((context.authOptions as any).password);
                         this.settings = {
                             ...this.settings,
-                            ...context
+                            ...<any>context
                         };
                         this.init();
                         resolve(this.settings);
@@ -194,10 +204,6 @@ export class JsomNode {
                     .split('/_api')[0]
                     .split('/_vti_bin')[0];
 
-                // console.log(this.settings.siteUrl);
-                // console.log(wReq._url);
-                // console.log(webAbsoluteUrl);
-
                 this.request.requestDigest(webAbsoluteUrl)
                     .then(digest => {
 
@@ -217,7 +223,8 @@ export class JsomNode {
                                     ...jsomHeaders
                                 },
                                 body: wReq._body,
-                                json: !isJsom
+                                json: !isJsom,
+                                agent: this.utils.isUrlHttps(requestUrl) ? this.agent : undefined
                             }).then(response => {
                                 let responseData = isJsom ? response.body : JSON.stringify(response.body);
                                 wReq._events._list.completed[0]({
