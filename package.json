@@ -1,7 +1,7 @@
 {
   "name": "sp-jsom-node",
   "description": "SharePoint JavaScript Object Model for Node.js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "./dist/index.js",
   "typings": "./dist/index",
   "scripts": {
@@ -28,9 +28,9 @@
   "homepage": "https://github.com/koltyakov/sp-jsom-node#readme",
   "dependencies": {
     "@types/sharepoint": "^2013.1.6",
-    "node-sp-auth-config": "^2.0.0",
-    "sp-request": "^2.0.3",
-    "cpass": "^2.0.0"
+    "cpass": "^2.0.0",
+    "node-sp-auth-config": "^2.0.1",
+    "sp-request": "^2.0.3"
   },
   "devDependencies": {
     "@types/chai": "^3.5.2",
