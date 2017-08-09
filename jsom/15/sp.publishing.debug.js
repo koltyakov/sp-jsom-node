@@ -2326,4 +2326,3 @@ if( typeof(Sys) != "undefined" && Sys && Sys.Application ){
    Sys.Application.notifyScriptLoaded();
 }
 NotifyScriptLoadedAndExecuteWaitingJobs("SP.Publishing.js");
-

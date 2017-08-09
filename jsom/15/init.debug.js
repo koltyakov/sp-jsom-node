@@ -7265,7 +7265,12 @@ function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla, bIsDismissi
         rg.push(dismissAltText);
         rg.push("\" src=\"/_layouts/15/images/spcommon.png\" onclick=\"javascript:removeStatus('");
         rg.push(st.id);
-        rg.push("');__doPostBack('DismissOffice365Notification');\"/></a>");
+        if (((String(strHtml)).toLowerCase()).indexOf("configssc.aspx") != -1) {
+            rg.push("');__doPostBack('DismissSiteCreationOnlineNotification');\"/></a>");
+        }
+        else {
+            rg.push("');__doPostBack('DismissOffice365Notification');\"/></a>");
+        }
     }
     if (bWithBR && !bIsVanilla)
         rg.push("<br/>");
@@ -8842,4 +8847,3 @@ function notifyScriptsLoadedAndExecuteWaitingJobs(scriptName) {
 var initJsLoaded;
 
 $_global_init();
-

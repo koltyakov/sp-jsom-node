@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 6712,
-                "rpr": 1207
+                "rup": 6802,
+                "rpr": 1203
             }
         };
     }
@@ -1357,13 +1357,28 @@ function $_global_init() {
     Flighting.VariantConfiguration = {};
     Flighting.VariantConfiguration.IsExpFeatureClientEnabled = function(id) {
         var elem = Math.floor(id / 32);
+        var mask;
 
-        if (elem < 0 || elem >= Flighting.ExpFeatures.length) {
-            return false;
+        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("AF5A380E-20E0-4096-BA87-2C4CDFB4DBDF"))) {
+            var expFeatures = Flighting.ExpFeatures;
+            var pageContextInfo = window['_spPageContextInfo'];
+
+            if (expFeatures.length === 0 && pageContextInfo != null && pageContextInfo.ExpFeatures != null) {
+                expFeatures = _spPageContextInfo.ExpFeatures;
+            }
+            if (elem < 0 || elem >= expFeatures.length) {
+                return false;
+            }
+            mask = 1 << id % 32;
+            return (expFeatures[elem] & mask) != 0;
         }
-        var mask = 1 << id % 32;
-
-        return (Flighting.ExpFeatures[elem] & mask) != 0;
+        else {
+            if (elem < 0 || elem >= Flighting.ExpFeatures.length) {
+                return false;
+            }
+            mask = 1 << id % 32;
+            return (Flighting.ExpFeatures[elem] & mask) != 0;
+        }
     };
     String.prototype.trim = function() {
         return (this.replace(/^\s\s*/, '')).replace(/\s\s*$/, '');
@@ -3739,7 +3754,7 @@ var escapeProperly;
 var escapeProperlyCore;
 var escapeProperlyCoreCore;
 
-function PageContextInfo(webServerRelativeUrl, webLanguage, currentLanguage, webUIVersion, pageListId, pageItemId, userId, alertsEnabled, siteServerRelativeUrl, allowSilverlightPrompt, webAbsoluteUrl, siteClientTag, layoutsUrl, tenantAppVersion, siteAbsoluteUrl, themedImageRootPath, themedImageFileNames, clientServerTimeDelta, serverRedirectedUrl) {
+function PageContextInfo(webServerRelativeUrl, webLanguage, currentLanguage, webUIVersion, pageListId, pageItemId, userId, alertsEnabled, siteServerRelativeUrl, allowSilverlightPrompt, webAbsoluteUrl, siteClientTag, layoutsUrl, tenantAppVersion, siteAbsoluteUrl, themedImageRootPath, themedImageFileNames, clientServerTimeDelta, serverRedirectedUrl, expFeatures) {
     this.webServerRelativeUrl = webServerRelativeUrl;
     this.webAbsoluteUrl = webAbsoluteUrl;
     this.siteAbsoluteUrl = siteAbsoluteUrl;
@@ -3760,6 +3775,7 @@ function PageContextInfo(webServerRelativeUrl, webLanguage, currentLanguage, web
     this.clientServerTimeDelta = clientServerTimeDelta;
     this.updateFormDigestPageLoaded = new Date();
     this.serverRedirectedUrl = serverRedirectedUrl;
+    this.ExpFeatures = expFeatures;
 }
 function PageContextInfo_InitializePrototype() {
     var dynamicNull = null;
@@ -3799,6 +3815,7 @@ function PageContextInfo_InitializePrototype() {
     PageContextInfo.prototype.showNGSCDialogForSyncOnTS = false;
     PageContextInfo.prototype.isSPO = false;
     PageContextInfo.prototype.serverRedirectedUrl = null;
+    PageContextInfo.prototype.ExpFeatures = [];
 }
 var _spPageContextInfo;
 var Nav;
@@ -12778,16 +12795,7 @@ function RegisterSharedWithFieldRenderer() {
         var principalCount = Number(ctxListItem.PrincipalCount);
         var sharedUsers = Boolean(csomSharedWithUsers) ? csomSharedWithUsers : ctxListItem.SharedWithUsers;
 
-        if (principalCount > 0 && !fIsNullOrUndefined(sharedUsers) && sharedUsers.length > 0 && (window["OffSwitch"] == null || OffSwitch.IsActive("256C90D2-ACA9-4A6C-9804-875A2F16EB18"))) {
-            var numSharedUser = principalCount - 1;
-            var lastSharedUser = sharedUsers[sharedUsers.length - 1].value;
-
-            if (Boolean(csomSharedWithUsers) && !Boolean(lastSharedUser)) {
-                lastSharedUser = csomSharedWithUsers[csomSharedWithUsers.length - 1].get_lookupValue();
-            }
-            sharingStr = numSharedUser > 0 ? StringUtil.BuildParam(Strings.STS.L_UserFieldInlineAndMore, lastSharedUser, numSharedUser) : lastSharedUser;
-        }
-        else if (principalCount > 0) {
+        if (principalCount > 0) {
             sharingStr = Strings.STS.L_SharingHintShared_Short;
         }
         var sharingHintHtml = "<span class='js-sharingHintString ms-noWrap ms-imnSpan ms-displayInlineBlock' >" + Encoding.HtmlEncode(sharingStr) + "</span>";
@@ -15444,6 +15452,9 @@ function SPThemeUtils_module_def() {
             });
             if (IsSiteThemed())
                 LoadThemableResources();
+        }
+        else if (!(window["OffSwitch"] == null || OffSwitch.IsActive("DCF7FB71-8493-4615-8A9A-53F9E7ED0210"))) {
+            RemoveAllElementsWithId(idThemingCurtain);
         }
     }
     function LoadThemableResources() {

@@ -289,4 +289,3 @@ if( typeof(Sys) != "undefined" && Sys && Sys.Application ){
    Sys.Application.notifyScriptLoaded();
 }
 NotifyScriptLoadedAndExecuteWaitingJobs("sp.policy.js");
-

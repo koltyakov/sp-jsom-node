@@ -70,54 +70,84 @@ SP.CompliancePolicy.ComplianceTag = function SP_CompliancePolicy_ComplianceTag()
 }
 SP.CompliancePolicy.ComplianceTag.prototype = {
     $3_1: false,
-    $4_1: false,
-    $5_1: false,
+    $4_1: null,
+    $5_1: null,
     $6_1: false,
     $7_1: false,
-    $8_1: null,
-    $9_1: 0,
-    $A_1: null,
-    $B_1: null,
-    $C_1: null,
+    $8_1: false,
+    $9_1: false,
+    $A_1: false,
+    $B_1: false,
+    $C_1: false,
+    $D_1: null,
+    $E_1: null,
+    $F_1: 0,
+    $G_1: null,
+    $H_1: null,
+    $I_1: null,
     
-    get_autoDelete: function SP_CompliancePolicy_ComplianceTag$get_autoDelete() {
+    get_acceptMessagesOnlyFromSendersOrMembers: function SP_CompliancePolicy_ComplianceTag$get_acceptMessagesOnlyFromSendersOrMembers() {
         return this.$3_1;
     },
     
-    get_blockDelete: function SP_CompliancePolicy_ComplianceTag$get_blockDelete() {
+    get_accessType: function SP_CompliancePolicy_ComplianceTag$get_accessType() {
         return this.$4_1;
     },
     
-    get_blockEdit: function SP_CompliancePolicy_ComplianceTag$get_blockEdit() {
+    get_allowAccessFromUnmanagedDevice: function SP_CompliancePolicy_ComplianceTag$get_allowAccessFromUnmanagedDevice() {
         return this.$5_1;
     },
     
-    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
+    get_autoDelete: function SP_CompliancePolicy_ComplianceTag$get_autoDelete() {
         return this.$6_1;
     },
     
-    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
+    get_blockDelete: function SP_CompliancePolicy_ComplianceTag$get_blockDelete() {
         return this.$7_1;
     },
     
-    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
+    get_blockEdit: function SP_CompliancePolicy_ComplianceTag$get_blockEdit() {
         return this.$8_1;
     },
     
-    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+    get_containsSiteLabel: function SP_CompliancePolicy_ComplianceTag$get_containsSiteLabel() {
         return this.$9_1;
     },
     
-    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
         return this.$A_1;
     },
     
-    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
         return this.$B_1;
     },
     
-    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
         return this.$C_1;
+    },
+    
+    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
+        return this.$D_1;
+    },
+    
+    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
+        return this.$E_1;
+    },
+    
+    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+        return this.$F_1;
+    },
+    
+    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+        return this.$G_1;
+    },
+    
+    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+        return this.$H_1;
+    },
+    
+    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+        return this.$I_1;
     },
     
     get_typeId: function SP_CompliancePolicy_ComplianceTag$get_typeId() {
@@ -131,7 +161,7 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AutoDelete', 'BlockDelete', 'BlockEdit', 'HasRetentionAction', 'IsEventTag', 'ReviewerEmail', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
+        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'HasRetentionAction', 'IsEventTag', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -139,54 +169,84 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
     initPropertiesFromJson: function SP_CompliancePolicy_ComplianceTag$initPropertiesFromJson(parentNode) {
         SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
-        $v_0 = parentNode.AutoDelete;
+        $v_0 = parentNode.AcceptMessagesOnlyFromSendersOrMembers;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$3_1 = ($v_0);
+            delete parentNode.AcceptMessagesOnlyFromSendersOrMembers;
+        }
+        $v_0 = parentNode.AccessType;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$4_1 = ($v_0);
+            delete parentNode.AccessType;
+        }
+        $v_0 = parentNode.AllowAccessFromUnmanagedDevice;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$5_1 = ($v_0);
+            delete parentNode.AllowAccessFromUnmanagedDevice;
+        }
+        $v_0 = parentNode.AutoDelete;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$6_1 = ($v_0);
             delete parentNode.AutoDelete;
         }
         $v_0 = parentNode.BlockDelete;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$4_1 = ($v_0);
+            this.$7_1 = ($v_0);
             delete parentNode.BlockDelete;
         }
         $v_0 = parentNode.BlockEdit;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$5_1 = ($v_0);
+            this.$8_1 = ($v_0);
             delete parentNode.BlockEdit;
+        }
+        $v_0 = parentNode.ContainsSiteLabel;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$9_1 = ($v_0);
+            delete parentNode.ContainsSiteLabel;
         }
         $v_0 = parentNode.HasRetentionAction;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$6_1 = ($v_0);
+            this.$A_1 = ($v_0);
             delete parentNode.HasRetentionAction;
         }
         $v_0 = parentNode.IsEventTag;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$7_1 = ($v_0);
+            this.$B_1 = ($v_0);
             delete parentNode.IsEventTag;
+        }
+        $v_0 = parentNode.RequireSenderAuthenticationEnabled;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$C_1 = ($v_0);
+            delete parentNode.RequireSenderAuthenticationEnabled;
         }
         $v_0 = parentNode.ReviewerEmail;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$8_1 = ($v_0);
+            this.$D_1 = ($v_0);
             delete parentNode.ReviewerEmail;
+        }
+        $v_0 = parentNode.SharingCapabilities;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$E_1 = ($v_0);
+            delete parentNode.SharingCapabilities;
         }
         $v_0 = parentNode.TagDuration;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9_1 = ($v_0);
+            this.$F_1 = ($v_0);
             delete parentNode.TagDuration;
         }
         $v_0 = parentNode.TagId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A_1 = ($v_0);
+            this.$G_1 = ($v_0);
             delete parentNode.TagId;
         }
         $v_0 = parentNode.TagName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$B_1 = ($v_0);
+            this.$H_1 = ($v_0);
             delete parentNode.TagName;
         }
         $v_0 = parentNode.TagRetentionBasedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$C_1 = ($v_0);
+            this.$I_1 = ($v_0);
             delete parentNode.TagRetentionBasedOn;
         }
     }
@@ -2117,6 +2177,17 @@ SP.CompliancePolicy.SPPolicyStoreProxy.getAvailableTagsForSite = function SP_Com
     }
     var $v_0;
     var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetAvailableTagsForSite', [ siteUrl ]);
+    context.addQuery($v_1);
+    $v_0 = (([]));
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.getAvailableTagsForSiteLabel = function SP_CompliancePolicy_SPPolicyStoreProxy$getAvailableTagsForSiteLabel(context) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetAvailableTagsForSiteLabel', null);
     context.addQuery($v_1);
     $v_0 = (([]));
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);

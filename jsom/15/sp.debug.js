@@ -8077,6 +8077,16 @@ SP.List.prototype = {
         $v_1 = new SP.ChangeCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetChanges', [query]));
         return $v_1;
     },
+    getListItemChangesSinceToken: function SP_List$getListItemChangesSinceToken(query) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetListItemChangesSinceToken', [query]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = [];
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
     getUserEffectivePermissions: function SP_List$getUserEffectivePermissions(userName) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -12408,6 +12418,36 @@ SP.SubwebQuery.prototype = {
         }
     }
 };
+SP.TenantSettings = function SP_TenantSettings(context, objectPath) {
+    SP.TenantSettings.initializeBase(this, [context, objectPath]);
+};
+SP.TenantSettings.getCurrent = function SP_TenantSettings$getCurrent(Context) {
+    var $v_0 = (Context.get_staticObjects())['Microsoft$SharePoint$TenantSettings$Current'];
+
+    if (!$v_0) {
+        $v_0 = new SP.TenantSettings(Context, new SP.ObjectPathStaticProperty(Context, '{e9a11c41-0667-4c14-a4a5-e0d6cf67f6fa}', 'Current'));
+        (Context.get_staticObjects())['Microsoft$SharePoint$TenantSettings$Current'] = $v_0;
+    }
+    return $v_0;
+};
+SP.TenantSettings.prototype = {
+    get_corporateCatalogUrl: function SP_TenantSettings$get_corporateCatalogUrl() {
+        this.checkUninitializedProperty('CorporateCatalogUrl');
+        return ((this.get_objectData()).get_properties())['CorporateCatalogUrl'];
+    },
+    initPropertiesFromJson: function SP_TenantSettings$initPropertiesFromJson(parentNode) {
+        SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+
+        $v_0 = parentNode.CorporateCatalogUrl;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            ((this.get_objectData()).get_properties())['CorporateCatalogUrl'] = $v_0;
+            delete parentNode.CorporateCatalogUrl;
+        }
+    }
+};
+SP.TenantSettingsPropertyNames = function SP_TenantSettingsPropertyNames() {
+};
 SP.ThemeInfo = function SP_ThemeInfo(context, objectPath) {
     SP.ThemeInfo.initializeBase(this, [context, objectPath]);
 };
@@ -15423,6 +15463,11 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.AppInstance($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'LoadAndInstallAppInSpecifiedLocale', [appPackageStream, installationLocaleLCID]));
+        ($v_1.get_path()).setPendingReplace();
+        var $v_2 = new SP.ObjectIdentityQuery($v_1.get_path());
+
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        $v_0.addQuery($v_2);
         return $v_1;
     },
     loadApp: function SP_Web$loadApp(appPackageStream, installationLocaleLCID) {
@@ -15442,6 +15487,11 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.AppInstance($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'LoadAndInstallApp', [appPackageStream]));
+        ($v_1.get_path()).setPendingReplace();
+        var $v_2 = new SP.ObjectIdentityQuery($v_1.get_path());
+
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        $v_0.addQuery($v_2);
         return $v_1;
     },
     ensureUser: function SP_Web$ensureUser(logonName) {
@@ -21133,6 +21183,8 @@ SP.SitePropertyNames.registerClass('SP.SitePropertyNames');
 SP.SiteObjectPropertyNames.registerClass('SP.SiteObjectPropertyNames');
 SP.SiteUrl.registerClass('SP.SiteUrl', SP.ClientObject);
 SP.SubwebQuery.registerClass('SP.SubwebQuery', SP.ClientValueObject);
+SP.TenantSettings.registerClass('SP.TenantSettings', SP.ClientObject);
+SP.TenantSettingsPropertyNames.registerClass('SP.TenantSettingsPropertyNames');
 SP.ThemeInfo.registerClass('SP.ThemeInfo', SP.ClientObject);
 SP.ThemeInfoPropertyNames.registerClass('SP.ThemeInfoPropertyNames');
 SP.TimeZone.registerClass('SP.TimeZone', SP.ClientObject);
@@ -21748,6 +21800,7 @@ function sp_initialize() {
     SP.SiteObjectPropertyNames.rootWeb = 'RootWeb';
     SP.SiteObjectPropertyNames.secondaryContact = 'SecondaryContact';
     SP.SiteObjectPropertyNames.userCustomActions = 'UserCustomActions';
+    SP.TenantSettingsPropertyNames.corporateCatalogUrl = 'CorporateCatalogUrl';
     SP.ThemeInfoPropertyNames.accessibleDescription = 'AccessibleDescription';
     SP.ThemeInfoPropertyNames.themeBackgroundImageUri = 'ThemeBackgroundImageUri';
     SP.TimeZonePropertyNames.description = 'Description';
@@ -22012,4 +22065,3 @@ if (typeof Sys != "undefined" && Sys && Sys.Application) {
 if (typeof NotifyScriptLoadedAndExecuteWaitingJobs == "function") {
     NotifyScriptLoadedAndExecuteWaitingJobs("sp.js");
 }
-

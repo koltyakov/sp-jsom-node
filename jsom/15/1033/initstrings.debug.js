@@ -294,6 +294,5 @@ Strings.STS.L_SPDiscBestTooltip='Set as best reply';
 Strings.STS.L_SPCheckedoutto='Checked Out To';
 Strings.STS.L_SPRatingsNotRatedAltText='Click to apply your rating as {0} stars.||Click to apply your rating as {0} star.||Click to apply your rating as {0} stars.';
 
-
 if(typeof(Sys)!='undefined' && Sys && Sys.Application) { Sys.Application.notifyScriptLoaded(); }
                            if (typeof(NotifyScriptLoadedAndExecuteWaitingJobs)!='undefined') { NotifyScriptLoadedAndExecuteWaitingJobs('initstrings.js'); }
