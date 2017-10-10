@@ -272,11 +272,43 @@ SP.InformationPolicy.ProjectPolicyPropertyNames = function SP_InformationPolicy_
 }
 
 
+Type.registerNamespace('SP.RecordsRepository');
+
+SP.RecordsRepository.Records = function SP_RecordsRepository_Records() {
+}
+SP.RecordsRepository.Records.declareItemAsRecord = function SP_RecordsRepository_Records$declareItemAsRecord$st(context, itemToDeclare) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{ea8e1356-5910-4e69-bc05-d0c30ed657fc}', 'DeclareItemAsRecord', [ itemToDeclare ]);
+    context.addQuery($v_0);
+}
+SP.RecordsRepository.Records.undeclareItemAsRecord = function SP_RecordsRepository_Records$undeclareItemAsRecord$st(context, item) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{ea8e1356-5910-4e69-bc05-d0c30ed657fc}', 'UndeclareItemAsRecord', [ item ]);
+    context.addQuery($v_0);
+}
+SP.RecordsRepository.Records.isRecord = function SP_RecordsRepository_Records$isRecord$st(context, item) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{ea8e1356-5910-4e69-bc05-d0c30ed657fc}', 'IsRecord', [ item ]);
+    context.addQuery($v_1);
+    $v_0 = new SP.BooleanResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+
+
 SP.Discovery.Case.registerClass('SP.Discovery.Case', SP.ClientObject);
 SP.Discovery.Export.registerClass('SP.Discovery.Export', SP.ClientObject);
 SP.Discovery.ExportPropertyNames.registerClass('SP.Discovery.ExportPropertyNames');
 SP.InformationPolicy.ProjectPolicy.registerClass('SP.InformationPolicy.ProjectPolicy', SP.ClientObject);
 SP.InformationPolicy.ProjectPolicyPropertyNames.registerClass('SP.InformationPolicy.ProjectPolicyPropertyNames');
+SP.RecordsRepository.Records.registerClass('SP.RecordsRepository.Records');
 function sp_policy_initialize() {
 SP.Discovery.ExportPropertyNames.status = 'Status';
 SP.InformationPolicy.ProjectPolicyPropertyNames.description = 'Description';

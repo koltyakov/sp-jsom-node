@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 6802,
-                "rpr": 1203
+                "rup": 6927,
+                "rpr": 1207
             }
         };
     }
@@ -2018,6 +2018,187 @@ function $_global_init() {
             g_workspaceResizedHandlers.splice(match, 1);
         }
     };
+    AriaLogger = {};
+    (function() {
+        AriaLogger.TenantToken = {
+            stsPPE: "9eeb6da3b66f4f20aec8c84bdaccb30d-429a3df1-6962-4e5e-bfc8-31dfd52c4e12-7768",
+            stsProd: "66034bde775d42a19f1a2d3d2e647e42-82d9432e-bacf-4067-bb5d-fe87f33fa915-7384"
+        };
+        var token = null;
+        var logger = null;
+
+        AriaLogger.Logger = function() {
+            var context = window["_spPageContextInfo"];
+
+            if (!Boolean(context))
+                return;
+            switch (context.env) {
+            case "edog":
+            case "prodbubble":
+                token = AriaLogger.TenantToken.stsPPE;
+                break;
+            case "prod":
+            case "dprod":
+                token = AriaLogger.TenantToken.stsProd;
+                break;
+            default:
+                token = AriaLogger.TenantToken.stsPPE;
+                break;
+            }
+            if (!Boolean(logger)) {
+                logger = AWTLogManager.initialize(token);
+                var semanticContext = logger.getSemanticContext();
+
+                semanticContext.setUserId(context.systemUserKey);
+                var logContext = {
+                    AccountType: getAccountType(context),
+                    Environment: context.env,
+                    IsAuthenticated: isUserAuthenticated(context),
+                    BrowserUserAgent: navigator.userAgent,
+                    BrowserIsMobile: isMobile(),
+                    SiteSubscriptionId: context.siteSubscriptionId
+                };
+
+                if (Boolean(context.farmLabel)) {
+                    logContext.FarmLabel = context.farmLabel;
+                }
+                for (var key4 in logContext) {
+                    logger.setContext(key4, logContext[key4]);
+                }
+            }
+            this.safeLogEvent = function(ev) {
+                try {
+                    this.logEvent(ev);
+                }
+                catch (exception) {
+                    ;
+                }
+            };
+            this.logEvent = function(ev) {
+                if (!Boolean(logger) || !ariaEnabledEvent(ev))
+                    return;
+                var eName = ev.eventName.toString();
+                var eType = "Start";
+                var eResultType;
+                var eResultCode;
+                var eComponent;
+                var nName;
+
+                if (ev.eventName == "RUMOne") {
+                    eName = "RUMOneDataUpload";
+                    eType = "single";
+                    nName = ev.data.ScenarioId.toString();
+                }
+                else if (ev.eventName == "UserEngagement") {
+                    eName = "qos";
+                    if (Boolean(ev.data) && Boolean(ev.data.EngagementName)) {
+                        eType = ev.data.EngagementName.endsWith(".Start") ? "Start" : ev.data.EngagementName.endsWith(".Success") ? "End" : ev.data.EngagementName.endsWith(".Failure") ? "Failure" : "NA";
+                        eResultType = eType == "End" ? "Success" : eType == "Failure" ? "Failure" : "NA";
+                        eComponent = ev.data.EngagementName.substring(0, ev.data.EngagementName.indexOf('.'));
+                        nName = ev.data.EngagementName.substring(0, ev.data.EngagementName.lastIndexOf('.'));
+                        eResultCode = Boolean(ev.data.Properties) ? ev.data.Properties.ErrorCode.toString() : "NA";
+                    }
+                }
+                var eventProperties = new AWTEventProperties();
+                var values = {
+                    "CorrelationVector": ev.correlationVector,
+                    "Component": eComponent,
+                    "Name": nName,
+                    "WebLog_FullName": eName,
+                    "WebLog_EventType": eType
+                };
+
+                values["WebLog_Type_" + eName.toString()] = 1;
+                values["Workload"] = getWorkLoad(ev);
+                if (eType == "End") {
+                    values["ResultType"] = eResultType;
+                    values["ResultCode"] = eResultCode;
+                }
+                var prefixName;
+
+                if (ev.eventName == "RUMOne") {
+                    prefixName = eName + "_dictionary_";
+                }
+                else if (eName == "qos") {
+                    prefixName = "Qos_extraData_";
+                }
+                var dictProperties = ev.data;
+
+                for (var key2 in dictProperties) {
+                    var v = dictProperties[key2];
+
+                    if (!Boolean(v))
+                        continue;
+                    values[prefixName + key2] = dictProperties[key2];
+                }
+                eventProperties.setName("ev_" + eName.toString());
+                this.setProperties(eventProperties, values);
+                logger.logEvent(eventProperties);
+            };
+            this.setProperties = function(properties, values) {
+                try {
+                    for (var key3 in values) {
+                        properties.setProperty(key3, values[key3]);
+                    }
+                }
+                catch (exception) {
+                    var errorCode = void 0;
+
+                    if (exception != null) {
+                        errorCode = exception.ErrorCode();
+                        if (typeof console != "undefined" && Boolean(console) && typeof console.log == "function") {
+                            console.log("Aria error: " + exception.toString() + errorCode.toString());
+                        }
+                    }
+                    throw exception;
+                }
+            };
+            this.isInitialized = function() {
+                return Boolean(logger);
+            };
+            function ariaEnabledEvent(ev) {
+                if (ev.eventName == "RUMOne" || ev.eventName == "UserEngagement") {
+                    return true;
+                }
+                return false;
+            }
+            function Capitalize(str) {
+                if (Boolean(str)) {
+                    return str[0].toUpperCase() + str.substr(1);
+                }
+                return str;
+            }
+            function getWorkLoad(ev) {
+                if (ev.eventName == "RUMOne" && Boolean(ev.data) && Boolean(ev.data.ScenarioId)) {
+                    return ev.data.ScenarioId.substring(0, ev.data.ScenarioId.indexOf('-'));
+                }
+                if (ev.EventName == "UserEngagement" && Boolean(ev.data) && Boolean(ev.data.name)) {
+                    return ev.data.EngagementName.substring(0, ev.data.EngagementName.indexOf('.'));
+                }
+                return "STS";
+            }
+            function isMobile() {
+                var isIOS = BrowserDetection.userAgent.ipad || (navigator.userAgent.toLowerCase()).indexOf("iphone") > -1;
+                var isAndroid = (navigator.userAgent.toLowerCase()).indexOf("android") > -1 && !isIOS;
+
+                return !!(BrowserDetection.userAgent.windowsphone || isIOS || isAndroid);
+            }
+            function isUserAuthenticated(ctx1) {
+                return Boolean(ctx1.userLoginName);
+            }
+            function getAccountType(ctx2) {
+                return isUserAuthenticated(ctx2) ? "Business" : "BusinessAnonymouse";
+            }
+        };
+        var ariaLogger = null;
+
+        AriaLogger.GetLogger = function() {
+            if (!Boolean(ariaLogger)) {
+                ariaLogger = new AriaLogger.Logger();
+            }
+            return ariaLogger;
+        };
+    })();
     BaseLogger = {};
     (function() {
         BaseLogger.Constants = {
@@ -2457,8 +2638,23 @@ function OffSwitch_module_def() {
     OffSwitch.IsActive = OffSwitch_IsActive;
     function OffSwitch_IsActive(guidOffSwitchKey) {
         var offSwitches = window["g_SPOffSwitches"];
-        var offSwitchActivated = offSwitches == null ? true : offSwitches.hasOwnProperty(guidOffSwitchKey);
+        var contextOffSwitches = null;
+        var defaultResultWhenDataMissing = true;
 
+        if (offSwitches == null) {
+            var pageContextInfo = window["_spPageContextInfo"];
+
+            contextOffSwitches = pageContextInfo == null ? null : pageContextInfo["killSwitches"];
+            if (contextOffSwitches != null && !contextOffSwitches.hasOwnProperty("2625010B-67AA-49D2-B302-A12D0281E865")) {
+                offSwitches = contextOffSwitches;
+            }
+        }
+        if (offSwitches != null && !offSwitches.hasOwnProperty("DA1F7C1B-A819-4265-BD85-6D15C304CFDC")) {
+            defaultResultWhenDataMissing = false;
+        }
+        var offSwitchActivated;
+
+        offSwitchActivated = offSwitches == null ? defaultResultWhenDataMissing : offSwitches.hasOwnProperty(guidOffSwitchKey);
         return offSwitchActivated;
     }
 }
@@ -4659,6 +4855,7 @@ function ListModule_module_def() {
         IsAppWeb: undefined,
         NewWOPIDocumentEnabled: undefined,
         NewWOPIDocumentUrl: undefined,
+        NewWOPIDocumentTypes: undefined,
         AllowCreateFolder: undefined,
         CanShareLinkForNewDocument: undefined,
         VisioDrawingCreationEnabled: undefined,
@@ -12098,13 +12295,13 @@ function getUniqueIndex() {
     g_uniqueIndex++;
     return g_uniqueIndex;
 }
-function addStatus(strTitle, strHtml, atBegining, isVanilla) {
+function addStatus(strTitle, strHtml, atBegining, isVanilla, bIsDismissible, dismissAltText) {
     var sb = document.getElementById("pageStatusBar");
 
     if (sb != null) {
         sb.setAttribute("aria-live", "polite");
         sb.setAttribute("aria-relevant", "all");
-        var st = _createStatusMarkup(strTitle, strHtml, true, isVanilla);
+        var st = _createStatusMarkup(strTitle, strHtml, true, isVanilla, bIsDismissible, dismissAltText);
 
         if (!atBegining)
             sb.appendChild(st);
@@ -12148,7 +12345,7 @@ function appendStatus(sid, strTitle, strHtml) {
     }
     return null;
 }
-function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla) {
+function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla, bIsDismissible, dismissAltText) {
     var st = document.createElement("SPAN");
 
     st.id = "status_" + String(getUniqueIndex());
@@ -12174,6 +12371,15 @@ function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla) {
     rg.push("'>");
     rg.push(strHtml);
     rg.push("</span>");
+    if (bIsDismissible) {
+        rg.push("<a href=\"#\" class=\"ms-status-iconSpan\"><img class=\"ms-status-dismissIconImg\" alt=\"");
+        rg.push(dismissAltText);
+        rg.push("\" src=\"/_layouts/15/images/spcommon.png\" onclick=\"javascript:removeStatus('");
+        rg.push(st.id);
+        if (((String(strHtml)).toLowerCase()).indexOf("configssc.aspx") != -1) {
+            rg.push("');__doPostBack('DismissSiteCreationOnlineNotification');\"/></a>");
+        }
+    }
     if (bWithBR && !bIsVanilla)
         rg.push("<br/>");
     st.innerHTML = rg.join("");
@@ -13570,6 +13776,7 @@ function _EnsureJSClass(nsStr) {
 }
 var g_prefetch;
 var g_ribbonImagePrefetch;
+var AriaLogger;
 var BaseLogger;
 var CacheLogger;
 
@@ -13604,6 +13811,8 @@ function CacheLogger_module_def() {
             upload();
         });
     };
+    var ariaLogger = null;
+
     CacheLogger.Logger = function(storagePrefix, logger, uploaderConstructor) {
         if (!Boolean(storagePrefix) || storagePrefix.length == 0)
             storagePrefix = "CacheLogger";
@@ -13643,12 +13852,37 @@ function CacheLogger_module_def() {
                 return "";
             }
         };
+        var ensureSessionID = function() {
+            if (typeof window[SessionID] == "undefined") {
+                if (typeof g_correlationId == "string" && g_correlationId != null) {
+                    window[SessionID] = g_correlationId;
+                }
+                else {
+                    window[SessionID] = generateGuid();
+                }
+            }
+        };
+        var ensureAriaLogger = function(ev) {
+            if (!Boolean(ariaLogger) || typeof ariaLogger.isInitialized != "function") {
+                EnsureScriptFunc("ariaSDK.js", "AWTLogManager", function() {
+                    ariaLogger = new AriaLogger.Logger();
+                    if (Boolean(ev) && Boolean(ariaLogger) && ariaLogger.isInitialized()) {
+                        ariaLogger.safeLogEvent(ev);
+                    }
+                });
+            }
+        };
         var uploadData = function() {
             if (!uploader.CanUpload())
                 return;
             storageSize = getStorageSize(storageSize);
             var haveData = false;
 
+            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("D6FA4689-03B2-493E-A113-C03B78D9DA53"))) {
+                if (!Boolean(ariaLogger) || typeof ariaLogger.isInitialized != "function") {
+                    ensureAriaLogger();
+                }
+            }
             for (var i = 0; i < storageSize; i++) {
                 var dataItemStr = BrowserStorage.session.getItem(storagePrefix + i.toString());
 
@@ -13657,6 +13891,16 @@ function CacheLogger_module_def() {
 
                     logger.WriteLog(String(dataItem.name), dataItem.props);
                     haveData = true;
+                    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("D6FA4689-03B2-493E-A113-C03B78D9DA53"))) {
+                        var ev = setAriaEvent(String(dataItem.name), dataItem.props);
+
+                        if (Boolean(ariaLogger) && typeof ariaLogger.isInitialized == "function") {
+                            ariaLogger.safeLogEvent(ev);
+                        }
+                        else {
+                            ensureAriaLogger(ev);
+                        }
+                    }
                 }
                 catch (e) {
                     continue;
@@ -13664,12 +13908,17 @@ function CacheLogger_module_def() {
             }
             if (!haveData)
                 return;
-            if (typeof window[SessionID] == "undefined") {
-                if (typeof g_correlationId == "string" && g_correlationId != null) {
-                    window[SessionID] = g_correlationId;
-                }
-                else {
-                    window[SessionID] = generateGuid();
+            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("D6FA4689-03B2-493E-A113-C03B78D9DA53"))) {
+                ensureSessionID();
+            }
+            else {
+                if (typeof window[SessionID] == "undefined") {
+                    if (typeof g_correlationId == "string" && g_correlationId != null) {
+                        window[SessionID] = g_correlationId;
+                    }
+                    else {
+                        window[SessionID] = generateGuid();
+                    }
                 }
             }
             logger.SetCorrelationId(window[SessionID]);
@@ -13716,6 +13965,17 @@ function CacheLogger_module_def() {
                 setTimeout(uploadData, 0);
             }
         };
+        function setAriaEvent(evName, props) {
+            ensureSessionID();
+            var ev = {
+                "eventName": evName,
+                "sessionId": window[SessionID],
+                "correlationVector": window[SessionID],
+                "data": props
+            };
+
+            return ev;
+        }
     };
     var defaultLogger = null;
 
@@ -14979,7 +15239,7 @@ function SPThemeUtils_module_def() {
         var wtGroup = 64;
         var wtCommSite = 68;
         var wt;
-        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite));
+        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(157) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite));
         var useCST = featureEnabled && typeof Theming !== strUndefined;
 
         return useCST;
@@ -15839,8 +16099,15 @@ function SuiteNavRendering_module_def() {
         if (linksData.UserDisplayName == null) {
             var userNameDiv = document.getElementById("SuiteNavUserName");
 
-            if (userNameDiv != null && Boolean(userNameDiv.innerHTML)) {
-                linksData.UserDisplayName = userNameDiv.innerHTML;
+            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("13D9D3F9-5EDF-41A0-8178-A7C87C2EF82F"))) {
+                if (userNameDiv != null && Boolean(userNameDiv.textContent)) {
+                    linksData.UserDisplayName = userNameDiv.textContent;
+                }
+            }
+            else {
+                if (userNameDiv != null && Boolean(userNameDiv.innerHTML)) {
+                    linksData.UserDisplayName = userNameDiv.innerHTML;
+                }
             }
         }
         var scriptEncodedSlashUppercase = "\\U002F";

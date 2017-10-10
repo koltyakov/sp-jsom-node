@@ -6,7 +6,7 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 4483,
+            "rup": 4588,
             "rpr": 1001
         }
     };
@@ -20252,6 +20252,14 @@ SP.ViewFieldCollectionPropertyNames = function SP_ViewFieldCollectionPropertyNam
 SP.Web = function SP_Web(context, objectPath) {
     SP.Web.initializeBase(this, [context, objectPath]);
 };
+SP.Web.deleteAllAnonymousLinksForObject = function SP_Web$deleteAllAnonymousLinksForObject$st(context, url) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{a489add2-5d3a-4de8-9445-49259462dceb}', 'DeleteAllAnonymousLinksForObject', [url]);
+
+    context.addQuery($v_0);
+};
 SP.Web.deleteAnonymousLinkForObject = function SP_Web$deleteAnonymousLinkForObject$st(context, url, isEditLink, removeAssociatedSharingLinkGroup) {
     if (!context) {
         throw Error.argumentNull('context');
@@ -20339,14 +20347,6 @@ SP.Web.createAnonymousLinkWithExpiration = function SP_Web$createAnonymousLinkWi
     $v_0 = new SP.StringResult();
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
     return $v_0;
-};
-SP.Web.deleteAllAnonymousLinksForObject = function SP_Web$deleteAllAnonymousLinksForObject$st(context, url) {
-    if (!context) {
-        throw Error.argumentNull('context');
-    }
-    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{a489add2-5d3a-4de8-9445-49259462dceb}', 'DeleteAllAnonymousLinksForObject', [url]);
-
-    context.addQuery($v_0);
 };
 SP.Web.getDocumentLibraries = function SP_Web$getDocumentLibraries$st(context, webFullUrl) {
     if (!context) {
@@ -21717,11 +21717,6 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.AppInstance($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'LoadAndInstallApp', [appPackageStream]));
-        ($v_1.get_path()).setPendingReplace();
-        var $v_2 = new SP.ObjectIdentityQuery($v_1.get_path());
-
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        $v_0.addQuery($v_2);
         return $v_1;
     },
     ensureUser: function SP_Web$ensureUser$in(logonName) {

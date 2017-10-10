@@ -2200,6 +2200,11 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
         return ((this.get_objectData().get_properties()['PolicyStoreUrl']));
     },
     
+    get_reviewCenterUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_reviewCenterUrl() {
+        this.checkUninitializedProperty('ReviewCenterUrl');
+        return ((this.get_objectData().get_properties()['ReviewCenterUrl']));
+    },
+    
     initPropertiesFromJson: function SP_CompliancePolicy_SPPolicyStoreProxy$initPropertiesFromJson(parentNode) {
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
@@ -2207,6 +2212,11 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['PolicyStoreUrl'] = ($v_0);
             delete parentNode.PolicyStoreUrl;
+        }
+        $v_0 = parentNode.ReviewCenterUrl;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ReviewCenterUrl'] = ($v_0);
+            delete parentNode.ReviewCenterUrl;
         }
     },
     
@@ -2864,6 +2874,7 @@ SP.CompliancePolicy.SPPolicyRulePropertyNames.version = 'Version';
 SP.CompliancePolicy.SPPolicyRulePropertyNames.whenChangedUTC = 'WhenChangedUTC';
 SP.CompliancePolicy.SPPolicyRulePropertyNames.whenCreatedUTC = 'WhenCreatedUTC';
 SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames.policyStoreUrl = 'PolicyStoreUrl';
+SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames.reviewCenterUrl = 'ReviewCenterUrl';
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.farmLabel = 'FarmLabel';
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.scsEndPointUrl = 'ScsEndPointUrl';
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.searchFarmId = 'SearchFarmId';

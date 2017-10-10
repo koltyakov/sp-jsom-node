@@ -7,7 +7,7 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 4483,
+                "rup": 4588,
                 "rpr": 1001
             }
         };
@@ -3737,6 +3737,7 @@ function PageContextInfo_InitializePrototype() {
     PageContextInfo.prototype.userId = "";
     PageContextInfo.prototype.systemUserKey = "";
     PageContextInfo.prototype.alertsEnabled = false;
+    PageContextInfo.prototype.customMarkupInCalculatedFieldDisabled = false;
     PageContextInfo.prototype.siteServerRelativeUrl = "";
     PageContextInfo.prototype.allowSilverlightPrompt = "";
     PageContextInfo.prototype.tenantAppVersion = null;
