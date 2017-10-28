@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sp-jsom-node": "^0.1.1"
+    "sp-jsom-node": "^1.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",
@@ -19,6 +19,7 @@
     "mocha": "^3.4.2",
     "ts-node": "^3.0.4",
     "tslint": "^5.4.2",
+    "tslint-config-standard": "^7.0.0",
     "typescript": "^2.3.4"
   }
 }
