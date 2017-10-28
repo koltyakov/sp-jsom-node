@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as mkdirp from 'mkdirp';
 import * as spRequest from 'sp-request';
+// tslint:disable-next-line:no-duplicate-imports
 import { ISPRequest } from 'sp-request';
 import * as colors from 'colors';
 import { Cpass } from 'cpass';
@@ -11,7 +12,7 @@ import { IEnvironmentConfig } from '../interfaces';
 
 const cpass = new Cpass();
 
-export async function downloadJsomScripts(envCfgs: IEnvironmentConfig[]) {
+export async function downloadJsomScripts (envCfgs: IEnvironmentConfig[]) {
   for (let envCfg of envCfgs) {
     console.log(`\n== ${colors.yellow.bold(`Downloading assets from ${envCfg.environmentName}`)} ==\n`);
     const confOptions: any = require(path.resolve(envCfg.configPath));

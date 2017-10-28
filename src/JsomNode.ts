@@ -24,7 +24,7 @@ export class JsomNode {
   private agent: https.Agent;
   private utils: Utils;
 
-  constructor(settings: IJsomNodeSettings = {}) {
+  constructor (settings: IJsomNodeSettings = {}) {
     let config = settings.config || {};
     this.settings = {
       ...settings,
@@ -50,14 +50,14 @@ export class JsomNode {
   }
 
   // Init JsomNode environment
-  public init() {
+  public init () {
     this.mimicBrowser();
     this.loadScripts(this.settings.modules, this.settings.envCode);
     this.proxyRequestManager();
   }
 
   // Trigger wizard and init JsomNode environment
-  public wizard(): Promise<IJsomNodeSettings> {
+  public wizard (): Promise<IJsomNodeSettings> {
     return new Promise((resolve, reject) => {
       if (typeof this.settings.authOptions === 'undefined') {
         this.spAuthConfigirator.getContext()
@@ -82,7 +82,7 @@ export class JsomNode {
   }
 
   // Mimic environment to pretend as a browser
-  private mimicBrowser() {
+  private mimicBrowser () {
 
     global.navigator = {
       userAgent: 'sp-jsom-node'
@@ -149,7 +149,7 @@ export class JsomNode {
   }
 
   // Load JSOM scripts to global context
-  private loadScripts(modules: string[] = ['core'], envCode: string = 'spo') {
+  private loadScripts (modules: string[] = ['core'], envCode: string = 'spo') {
     global.loadedJsomScripts = global.loadedJsomScripts || [];
     modules.forEach((module: string) => {
       JsomModules[module].forEach(jsomScript => {
@@ -169,7 +169,7 @@ export class JsomNode {
   }
 
   // Escape Microsoft Ajax issues
-  private patchMicrosoftAjax() {
+  private patchMicrosoftAjax () {
     let origRegisterInterface = Type.prototype.registerInterface;
     Type.prototype.registerInterface = function (typeName) {
       if (['IEnumerator', 'IEnumerable', 'IDisposable'].indexOf(typeName) !== -1) {
@@ -186,7 +186,7 @@ export class JsomNode {
   }
 
   // Proxy JSOM XmlHttpRequest through sp-request
-  private proxyRequestManager() {
+  private proxyRequestManager () {
 
     this.request = this.getCachedRequest();
 
