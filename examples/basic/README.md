@@ -16,7 +16,7 @@ npm install typescript@2.3.4 ts-lint ts-node -g
 npm install
 ```
 
-# Run
+## Run
 
 ```bash
 npm run index

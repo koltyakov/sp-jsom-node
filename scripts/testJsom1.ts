@@ -7,11 +7,11 @@ let settings: any = require('../config/integration/private.2013.json');
 console.log(settings.siteUrl);
 
 (new JsomNode({
-    siteUrl: settings.siteUrl,
-    authOptions: {
-        ...(settings as any)
-    },
-    modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
+  siteUrl: settings.siteUrl,
+  authOptions: {
+    ...(settings as any)
+  },
+  modules: ['core', 'taxonomy', 'userprofiles', 'publishing', 'policy']
 })).init();
 
 /////
@@ -33,7 +33,6 @@ console.log(settings.siteUrl);
 //     console.log(args.get_stackTrace());
 // });
 
-
 const ctx = SP.ClientContext.get_current();
 const oWeb = ctx.get_web();
 const oLists = oWeb.get_lists();
@@ -43,7 +42,7 @@ listCreationInfo.set_templateType(100);
 const oList = oLists.add(listCreationInfo);
 ctx.load(oList);
 ctx.executeQueryAsync(() => {
-    console.log(oList);
+  console.log(oList);
 }, (sender, args) => {
-    console.log(args.get_message());
+  console.log(args.get_message());
 });

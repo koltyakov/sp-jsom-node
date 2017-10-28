@@ -10,7 +10,7 @@
 
 `sp-jsom-node` patches global variables and request client which let's `JSOM` used to behave as if it were in it's usual environment - a browser's SharePoint page.
 
-## Supported SharePoint versions:
+## Supported SharePoint versions
 
 - SharePoint Online
 - SharePoint 2013
@@ -54,11 +54,11 @@ import { JsomNode } from 'sp-jsom-node';
 
 (new JsomNode()).wizard().then((settings) => {
 
-    /// ... <<< JSOM can be used here
+  /// ... <<< JSOM can be used here
 
-    let ctx = SP.ClientContext.get_current();
-    // let ctx = SP.ClientContext(webRelativeUrl);
-    ...
+  let ctx = SP.ClientContext.get_current();
+  // let ctx = SP.ClientContext(webRelativeUrl);
+  ...
 
 }).catch(console.log);
 
@@ -74,10 +74,10 @@ const JsomNode = require('sp-jsom-node').JsomNode;
 
 (new JsomNode()).wizard().then((settings) => {
 
-    /// ... <<< JSOM can be used here
+  /// ... <<< JSOM can be used here
 
-    let ctx = SP.ClientContext.get_current();
-    ...
+  let ctx = SP.ClientContext.get_current();
+  ...
 
 }).catch(console.log);
 ```
@@ -89,10 +89,10 @@ import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
 
 let settings: any = require('./config/private.json');
 let jsomNodeOptions: IJsomNodeSettings = {
-    siteUrl: settings.siteUrl,
-    authOptions: {
-        ...(settings as any)
-    }
+  siteUrl: settings.siteUrl,
+  authOptions: {
+    ...(settings as any)
+  }
 };
 
 (new JsomNode(jsomNodeOptions)).init();
@@ -110,9 +110,9 @@ const oList = oLists.add(listCreationInfo);
 
 ctx.load(oList);
 ctx.executeQueryAsync(() => {
-    console.log(oList);
+  console.log(oList);
 }, (sender, args) => {
-    console.log(args.get_message());
+  console.log(args.get_message());
 });
 
 ```
@@ -127,7 +127,7 @@ import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
 
 let settings: any = require('./config/private.json');
 let jsomNodeOptions: IJsomNodeSettings = {
-    modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
+  modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
 };
 
 (new JsomNode(jsomNodeOptions)).init();
