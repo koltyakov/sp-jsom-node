@@ -7,7 +7,7 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7018,
+                "rup": 7108,
                 "rpr": 1207
             }
         };
@@ -2029,6 +2029,7 @@ function $_global_init() {
 
         AriaLogger.Logger = function() {
             var context = window["_spPageContextInfo"];
+            var flushed = false;
 
             if (!Boolean(context))
                 return;
@@ -2066,6 +2067,17 @@ function $_global_init() {
                     logger.setContext(key4, logContext[key4]);
                 }
             }
+            var OnBeforeUnload = function(e) {
+                if (Boolean(logger) && !Boolean(logger.flushed)) {
+                    AWTLogManager.flush(function() {
+                    });
+                    logger.flushed = true;
+                }
+            };
+
+            if (typeof window.addEventListener != "undefined") {
+                window.addEventListener("beforeunload", OnBeforeUnload, true);
+            }
             this.safeLogEvent = function(ev) {
                 try {
                     this.logEvent(ev);
@@ -2096,7 +2108,7 @@ function $_global_init() {
                         eResultType = eType == "End" ? "Success" : eType == "Failure" ? "Failure" : "NA";
                         eComponent = ev.data.EngagementName.substring(0, ev.data.EngagementName.indexOf('.'));
                         nName = ev.data.EngagementName.substring(0, ev.data.EngagementName.lastIndexOf('.'));
-                        eResultCode = Boolean(ev.data.Properties) ? ev.data.Properties.ErrorCode.toString() : "NA";
+                        eResultCode = Boolean(ev.data.Properties) && Boolean(ev.data.Properties.ErrorCode) ? ev.data.Properties.ErrorCode.toString() : "NA";
                     }
                 }
                 var eventProperties = new AWTEventProperties();
