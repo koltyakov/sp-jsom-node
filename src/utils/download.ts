@@ -12,7 +12,7 @@ import { IEnvironmentConfig } from '../interfaces';
 
 const cpass = new Cpass();
 
-export async function downloadJsomScripts (envCfgs: IEnvironmentConfig[]) {
+export const downloadJsomScripts = async (envCfgs: IEnvironmentConfig[]): Promise<void> => {
   for (let envCfg of envCfgs) {
     console.log(`\n== ${colors.yellow.bold(`Downloading assets from ${envCfg.environmentName}`)} ==\n`);
     const confOptions: any = require(path.resolve(envCfg.configPath));
@@ -49,4 +49,4 @@ export async function downloadJsomScripts (envCfgs: IEnvironmentConfig[]) {
     }
   }
   console.log('');
-}
+};
