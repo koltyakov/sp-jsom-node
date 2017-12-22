@@ -30,6 +30,7 @@
   "dependencies": {
     "@types/sharepoint": "^2016.0.2",
     "cpass": "^2.0.3",
+    "deep-assign": "^2.0.0",
     "node-sp-auth-config": "^2.1.1",
     "sp-request": "^2.1.2"
   },

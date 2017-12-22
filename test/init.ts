@@ -4,7 +4,7 @@ import * as path from 'path';
 
 import { Environments } from './configs';
 
-export async function checkOrPromptForIntegrationConfigCreds(): Promise<void> {
+export async function checkOrPromptForIntegrationConfigCreds (): Promise<void> {
 
   let configs = [];
 
