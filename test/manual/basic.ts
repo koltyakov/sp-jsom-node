@@ -7,11 +7,21 @@ init().then(async settings => {
   let oWeb: SP.Web = clientContext.get_web();
   let oLists: SP.ListCollection = oWeb.get_lists();
 
-  clientContext.load(oLists, 'Include(Title)');
+  clientContext.load(oLists, 'Include(Id,Title)');
 
   await executeQueryPromise(clientContext);
 
-  let listsTitlesArr = oLists.get_data().map(l => l.get_title());
-  console.log(listsTitlesArr);
+  let listsDataArr = oLists.get_data();
+  let listsTitlesArr = listsDataArr.map(l => l.get_title());
+  console.log('Lists', listsTitlesArr);
+
+  // Just an items from a random list
+  let oItems: SP.ListItemCollection = (oLists.getByTitle('TestList') as any).getItems('');
+
+  clientContext.load(oItems, 'Include(Title)');
+
+  await executeQueryPromise(clientContext);
+
+  console.log(oItems.get_data().map(i => i.get_fieldValues()['Title']));
 
 }).catch(console.log);
