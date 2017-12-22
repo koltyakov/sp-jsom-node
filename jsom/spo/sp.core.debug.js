@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 7108,
-            "rpr": 1206
+            "rup": 7206,
+            "rpr": 1208
         }
     };
 }
@@ -4302,6 +4302,16 @@ SP.SlapiInternal.ActivitySiphonResponseLog.prototype = {
     EventTimestampUtc: null,
     Succeeded: false
 };
+SP.SlapiInternal.ActivitySiphonResponseLogNonAudit = function SP_SlapiInternal_ActivitySiphonResponseLogNonAudit(pEventId, pEventTimestampUtc, pSucceeded) {
+    this.EventId = pEventId;
+    this.EventTimestampUtc = pEventTimestampUtc;
+    this.Succeeded = pSucceeded;
+};
+SP.SlapiInternal.ActivitySiphonResponseLogNonAudit.prototype = {
+    EventId: null,
+    EventTimestampUtc: null,
+    Succeeded: false
+};
 SP.BWsaConfig.registerClass('SP.BWsaConfig');
 SP.Ticks.registerClass('SP.Ticks');
 SP.TimerResetCheck.registerClass('SP.TimerResetCheck');
@@ -4364,6 +4374,7 @@ SP.SlapiInternal.TaxonomyCacheStatisticsLog.registerClass('SP.SlapiInternal.Taxo
 SP.SlapiInternal.PJContentDatabaseVersionLog.registerClass('SP.SlapiInternal.PJContentDatabaseVersionLog');
 SP.SlapiInternal.DelveEmbedClickLog.registerClass('SP.SlapiInternal.DelveEmbedClickLog');
 SP.SlapiInternal.ActivitySiphonResponseLog.registerClass('SP.SlapiInternal.ActivitySiphonResponseLog');
+SP.SlapiInternal.ActivitySiphonResponseLogNonAudit.registerClass('SP.SlapiInternal.ActivitySiphonResponseLogNonAudit');
 function sp_core_initialize() {
     SP.BWsaConfig.defaultMaxStreamRows = 1000;
     SP.BWsaConfig.defaultMaxInt32 = 4294967295;

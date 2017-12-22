@@ -2181,6 +2181,13 @@ SP.CompliancePolicy.SPPolicyStoreProxy.getPolicyEvaluationInfo = function SP_Com
     $v_0 = new SP.CompliancePolicy.PolicyEvaluationInfo(context, new SP.ObjectPathStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetPolicyEvaluationInfo', [ itemUrl, policyScenario, infos ]));
     return $v_0;
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.applyDlpActions = function SP_CompliancePolicy_SPPolicyStoreProxy$applyDlpActions(context, itemUrl, actionsPayload) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'ApplyDlpActions', [ itemUrl, actionsPayload ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.getAvailableTagsForSite = function SP_CompliancePolicy_SPPolicyStoreProxy$getAvailableTagsForSite(context, siteUrl) {
     if ((!context)) {
         throw Error.argumentNull('context');

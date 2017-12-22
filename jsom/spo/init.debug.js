@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7108,
-                "rpr": 1207
+                "rup": 7206,
+                "rpr": 1208
             }
         };
     }
@@ -2083,7 +2083,9 @@ function $_global_init() {
                     this.logEvent(ev);
                 }
                 catch (exception) {
-                    ;
+                    if (Boolean(exception)) {
+                        ;
+                    }
                 }
             };
             this.logEvent = function(ev) {
@@ -12819,6 +12821,14 @@ function DispDocItem(ele, strProgId) {
 }
 function DispDocItemExWithServerRedirect(ele, objEvent, fTransformServiceOn, fShouldTransformExtension, fTransformHandleUrl, strProgId, iDefaultItemOpen, strServerFileRedirect) {
     CoreInvoke('_DispDocItemExWithServerRedirect', ele, objEvent, fTransformServiceOn, fShouldTransformExtension, fTransformHandleUrl, strProgId, iDefaultItemOpen, strServerFileRedirect);
+}
+function DispDocItemExWithServerRedirectOrNavigate(ele, objEvent, fTransformServiceOn, fShouldTransformExtension, fTransformHandleUrl, strProgId, iDefaultItemOpen, strServerFileRedirect) {
+    if (IsSupportedMacBrowser() && !(window["OffSwitch"] == null || OffSwitch.IsActive("BDD1B8EC-6631-4FD1-B8DE-BB70531B030E"))) {
+        NavigateElementHref(ele);
+    }
+    else {
+        DispDocItemExWithServerRedirect(ele, objEvent, fTransformServiceOn, fShouldTransformExtension, fTransformHandleUrl, strProgId, iDefaultItemOpen, strServerFileRedirect);
+    }
 }
 function DispDocItemEx(ele, fTransformServiceOn, fShouldTransformExtension, fTransformHandleUrl, strProgId) {
     CoreInvoke('_DispDocItemEx', ele, fTransformServiceOn, fShouldTransformExtension, fTransformHandleUrl, strProgId);

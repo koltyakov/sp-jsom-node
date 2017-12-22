@@ -2,6 +2,6 @@
 
 export const executeQueryPromise = (ctx: SP.ClientContext) => {
   return new Promise((resolve, reject) => {
-    ctx.executeQueryAsync(resolve, reject);
+    ctx.executeQueryAsync(resolve, (...args) => reject(args[1].get_message()));
   });
 };
