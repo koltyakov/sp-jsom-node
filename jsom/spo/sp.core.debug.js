@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 7206,
-            "rpr": 1208
+            "rup": 7213,
+            "rpr": 1209
         }
     };
 }
@@ -3840,7 +3840,7 @@ SP.SlapiInternal.InsertedSignals.prototype = {
     SignalsSource: null,
     NumberOfDifferentUsers: 0
 };
-SP.SlapiInternal.SpoSignalToOls = function SP_SlapiInternal_SpoSignalToOls(pOlsCorrelationId, pSignalActionType, pSignalSuccessfullySent, pAppTokenDispatchTime, pSignalConversionTime, pAppTokenWaitTime, pMintTokenCreationTime, pPostTime, pTotalTime, pNumberOfAttempts, pErrorCode, pLogicalIdConstructedInSpo, pTokenReadFromCache, pHttpStatusCode, pOlsServerName, pTenantId, pActionToBatchTime, pBatchToSignalTime, pTotalTimeUserView) {
+SP.SlapiInternal.SpoSignalToOls = function SP_SlapiInternal_SpoSignalToOls(pOlsCorrelationId, pSignalActionType, pSignalSuccessfullySent, pAppTokenDispatchTime, pSignalConversionTime, pAppTokenWaitTime, pMintTokenCreationTime, pPostTime, pTotalTime, pNumberOfAttempts, pErrorCode, pLogicalIdConstructedInSpo, pTokenReadFromCache, pHttpStatusCode, pOlsServerName, pTenantId, pActionToBatchTime, pBatchToSignalTime, pTotalTimeUserView, pSiteId, pEntitySet, pCorrelationId) {
     this.OlsCorrelationId = pOlsCorrelationId;
     this.SignalActionType = pSignalActionType;
     this.SignalSuccessfullySent = pSignalSuccessfullySent;
@@ -3860,6 +3860,9 @@ SP.SlapiInternal.SpoSignalToOls = function SP_SlapiInternal_SpoSignalToOls(pOlsC
     this.ActionToBatchTime = pActionToBatchTime;
     this.BatchToSignalTime = pBatchToSignalTime;
     this.TotalTimeUserView = pTotalTimeUserView;
+    this.SiteId = pSiteId;
+    this.EntitySet = pEntitySet;
+    this.CorrelationId = pCorrelationId;
 };
 SP.SlapiInternal.SpoSignalToOls.prototype = {
     OlsCorrelationId: null,
@@ -3880,7 +3883,10 @@ SP.SlapiInternal.SpoSignalToOls.prototype = {
     TenantId: null,
     ActionToBatchTime: 0,
     BatchToSignalTime: 0,
-    TotalTimeUserView: 0
+    TotalTimeUserView: 0,
+    SiteId: null,
+    EntitySet: null,
+    CorrelationId: null
 };
 SP.SlapiInternal.PSCacheLog = function SP_SlapiInternal_PSCacheLog(pLoggingKey, pCacheContainer, pIsCacheHit, pDurationMilliseconds) {
     this.LoggingKey = pLoggingKey;

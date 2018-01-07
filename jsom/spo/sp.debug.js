@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 7206,
-            "rpr": 1208
+            "rup": 7213,
+            "rpr": 1209
         }
     };
 }
@@ -9563,6 +9563,17 @@ SP.File.prototype = {
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'Recycle', null);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.GuidResult();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        this.removeFromParentCollection();
+        return $v_1;
+    },
+    recycleWithETag: function SP_File$recycleWithETag(etagMatch) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'RecycleWithETag', [etagMatch]);
 
         $v_0.addQuery($v_2);
         $v_1 = new SP.GuidResult();
@@ -22800,6 +22811,10 @@ SP.Site.prototype = {
         }
         return value;
     },
+    get_thicketSupportDisabled: function SP_Site$get_thicketSupportDisabled() {
+        this.checkUninitializedProperty('ThicketSupportDisabled');
+        return ((this.get_objectData()).get_properties())['ThicketSupportDisabled'];
+    },
     get_trimAuditLog: function SP_Site$get_trimAuditLog() {
         this.checkUninitializedProperty('TrimAuditLog');
         return ((this.get_objectData()).get_properties())['TrimAuditLog'];
@@ -23118,6 +23133,11 @@ SP.Site.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             ((this.get_objectData()).get_properties())['StatusBarText'] = $v_0;
             delete parentNode.StatusBarText;
+        }
+        $v_0 = parentNode.ThicketSupportDisabled;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            ((this.get_objectData()).get_properties())['ThicketSupportDisabled'] = $v_0;
+            delete parentNode.ThicketSupportDisabled;
         }
         $v_0 = parentNode.TrimAuditLog;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -28295,6 +28315,11 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.AppInstance($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'LoadAndInstallAppInSpecifiedLocale', [appPackageStream, installationLocaleLCID]));
+        ($v_1.get_path()).setPendingReplace();
+        var $v_2 = new SP.ObjectIdentityQuery($v_1.get_path());
+
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        $v_0.addQuery($v_2);
         return $v_1;
     },
     loadApp: function SP_Web$loadApp(appPackageStream, installationLocaleLCID) {
@@ -33423,25 +33448,6 @@ SP.BusinessData.Runtime.EntityInstance.prototype = {
             this.retrieve($v_0.key);
         }
     },
-    deleteObject: function SP_BusinessData_Runtime_EntityInstance$deleteObject() {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteObject', null);
-
-        $v_0.addQuery($v_1);
-    },
-    update: function SP_BusinessData_Runtime_EntityInstance$update() {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'Update', null);
-
-        $v_0.addQuery($v_1);
-        this.refreshLoad();
-    },
-    fromXml: function SP_BusinessData_Runtime_EntityInstance$fromXml(xml) {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'FromXml', [xml]);
-
-        $v_0.addQuery($v_1);
-    },
     $7W_1: function SP_BusinessData_Runtime_EntityInstance$$7W_1($p0, $p1) {
         var $v_0 = this.get_context();
 
@@ -33470,6 +33476,25 @@ SP.BusinessData.Runtime.EntityInstance.prototype = {
 
         $v_1 = new SP.BusinessData.Runtime.EntityIdentity($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetIdentity', null));
         return $v_1;
+    },
+    deleteObject: function SP_BusinessData_Runtime_EntityInstance$deleteObject() {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteObject', null);
+
+        $v_0.addQuery($v_1);
+    },
+    update: function SP_BusinessData_Runtime_EntityInstance$update() {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'Update', null);
+
+        $v_0.addQuery($v_1);
+        this.refreshLoad();
+    },
+    fromXml: function SP_BusinessData_Runtime_EntityInstance$fromXml(xml) {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'FromXml', [xml]);
+
+        $v_0.addQuery($v_1);
     },
     toXml: function SP_BusinessData_Runtime_EntityInstance$toXml() {
         var $v_0 = this.get_context();
@@ -36692,6 +36717,7 @@ function sp_initialize() {
     SP.SitePropertyNames.showUrlStructure = 'ShowUrlStructure';
     SP.SitePropertyNames.statusBarLink = 'StatusBarLink';
     SP.SitePropertyNames.statusBarText = 'StatusBarText';
+    SP.SitePropertyNames.thicketSupportDisabled = 'ThicketSupportDisabled';
     SP.SitePropertyNames.trimAuditLog = 'TrimAuditLog';
     SP.SitePropertyNames.uiVersionConfigurationEnabled = 'UIVersionConfigurationEnabled';
     SP.SitePropertyNames.upgradeInfo = 'UpgradeInfo';
