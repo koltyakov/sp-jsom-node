@@ -4,9 +4,14 @@ import * as https from 'https';
 import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
 import { Cpass } from 'cpass';
 
-import { Utils } from './utils';
+import utils from './utils';
 import { JsomModules, lcid } from './config';
 import { IJsomNodeSettings } from './interfaces';
+
+// Import JSOM ententions
+import { executeQueryPromise } from './extentions/executeQueryPromise';
+import './interfaces/extentions';
+// Import JSOM ententions
 
 declare let global: any;
 declare let sp_initialize: any;
@@ -22,7 +27,6 @@ export class JsomNode {
   private request: spRequest.ISPRequest;
   private requestCache: IRequestsCache = {};
   private agent: https.Agent;
-  private utils: Utils;
 
   constructor (settings: IJsomNodeSettings = {}) {
     let config = settings.config || {};
@@ -40,7 +44,6 @@ export class JsomNode {
       (this.settings.authOptions as any).password = (this.settings.authOptions as any).password &&
         cpass.decode((this.settings.authOptions as any).password);
     }
-    this.utils = new Utils();
     this.agent = new https.Agent({
       rejectUnauthorized: false,
       keepAlive: true,
@@ -148,24 +151,37 @@ export class JsomNode {
 
   }
 
+  // JSOM extentions
+  private extendContext () {
+    SP.ClientRuntimeContext.prototype.executeQueryPromise = function (): Promise<void> {
+      return executeQueryPromise(this);
+    };
+  }
+
   // Load JSOM scripts to global context
   private loadScripts (modules: string[] = ['core'], envCode: string = 'spo') {
     global.loadedJsomScripts = global.loadedJsomScripts || [];
-    modules.forEach((module: string) => {
-      JsomModules[module].forEach(jsomScript => {
-        if (global.loadedJsomScripts.indexOf(jsomScript) === -1) {
-          let filePath: string = path.join(
-            __dirname, '..', 'jsom', envCode,
-            jsomScript.replace('{{lcid}}', lcid)
-          );
-          require(filePath);
-          if (jsomScript === 'msajaxbundle.debug.js') {
-            this.patchMicrosoftAjax();
+    if (modules.indexOf('core') !== 0) { // Core module first
+      modules = ['core'].concat(modules);
+    }
+    modules
+      .filter((value, index, self) => self.indexOf(value) === index) // Unique modules
+      .forEach((module: string) => {
+        JsomModules[module].forEach(jsomScript => {
+          if (global.loadedJsomScripts.indexOf(jsomScript) === -1) {
+            let filePath: string = path.join(
+              __dirname, '..', 'jsom', envCode,
+              jsomScript.replace('{{lcid}}', lcid)
+            );
+            require(filePath);
+            if (jsomScript === 'msajaxbundle.debug.js') {
+              this.patchMicrosoftAjax();
+            }
+            global.loadedJsomScripts.push(jsomScript);
           }
-          global.loadedJsomScripts.push(jsomScript);
-        }
+        });
       });
-    });
+    this.extendContext(); // Extending ClientContext
   }
 
   // Escape Microsoft Ajax issues
@@ -224,7 +240,7 @@ export class JsomNode {
                 },
                 body: wReq._body,
                 json: !isJsom,
-                agent: this.utils.isUrlHttps(requestUrl) ? this.agent : undefined
+                agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
               }).then(response => {
                 let responseData = isJsom ? response.body : JSON.stringify(response.body);
                 wReq._events._list.completed[0]({
