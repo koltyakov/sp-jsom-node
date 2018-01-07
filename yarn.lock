@@ -348,6 +348,10 @@ chalk@^2.0.0, chalk@^2.1.0:
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
+chardet@^0.4.0:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
+
 check-error@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
@@ -410,9 +414,13 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.11.0, commander@^2.11.0, commander@^2.9.0:
+commander@2.11.0, commander@^2.9.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
+
+commander@^2.12.2:
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -698,6 +706,14 @@ external-editor@^2.0.4:
   dependencies:
     iconv-lite "^0.4.17"
     jschardet "^1.4.2"
+    tmp "^0.0.33"
+
+external-editor@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/external-editor/-/external-editor-2.1.0.tgz#3d026a21b7f95b5726387d4200ac160d372c3b48"
+  dependencies:
+    chardet "^0.4.0"
+    iconv-lite "^0.4.17"
     tmp "^0.0.33"
 
 extglob@^0.3.1:
@@ -1190,6 +1206,25 @@ inquirer@^3.3.0:
     cli-cursor "^2.1.0"
     cli-width "^2.0.0"
     external-editor "^2.0.4"
+    figures "^2.0.0"
+    lodash "^4.3.0"
+    mute-stream "0.0.7"
+    run-async "^2.2.0"
+    rx-lite "^4.0.8"
+    rx-lite-aggregates "^4.0.8"
+    string-width "^2.1.0"
+    strip-ansi "^4.0.0"
+    through "^2.3.6"
+
+inquirer@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-4.0.2.tgz#cc678b4cbc0e183a3500cc63395831ec956ab0a3"
+  dependencies:
+    ansi-escapes "^3.0.0"
+    chalk "^2.0.0"
+    cli-cursor "^2.1.0"
+    cli-width "^2.0.0"
+    external-editor "^2.1.0"
     figures "^2.0.0"
     lodash "^4.3.0"
     mute-stream "0.0.7"
@@ -1780,20 +1815,43 @@ node-sp-auth-config@^2.0.2:
     mkdirp "^0.5.1"
     node-sp-auth "^2.2.9"
 
-node-sp-auth-config@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/node-sp-auth-config/-/node-sp-auth-config-2.1.1.tgz#0f41c41076d2418472f54cd4a1f05f1a8d52a0df"
+node-sp-auth-config@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/node-sp-auth-config/-/node-sp-auth-config-2.4.2.tgz#dab2ef77c4e55d8e450dfd110830e38ee32d7284"
   dependencies:
     colors "^1.1.2"
-    commander "^2.11.0"
+    commander "^2.12.2"
     cpass "^2.0.3"
-    inquirer "^3.3.0"
+    inquirer "^4.0.2"
     mkdirp "^0.5.1"
-    node-sp-auth "^2.2.9"
+    node-sp-auth "^2.3.1"
 
 node-sp-auth@^2.1.1, node-sp-auth@^2.2.9:
   version "2.2.9"
   resolved "https://registry.yarnpkg.com/node-sp-auth/-/node-sp-auth-2.2.9.tgz#e8294edcf6dc697368e400002ef4992dc0cc775f"
+  dependencies:
+    "@types/bluebird" "^3.5.8"
+    "@types/cookie" "^0.1.29"
+    "@types/core-js" "^0.9.34"
+    "@types/jsonwebtoken" "^7.2.3"
+    "@types/lodash" "^4.14.69"
+    "@types/node" "^6.0.45"
+    "@types/request" "0.0.31"
+    "@types/request-promise" "^4.1.36"
+    bluebird "^3.4.6"
+    cookie "^0.3.1"
+    cpass "^2.0.0"
+    httpntlm "^1.6.1"
+    jsonwebtoken "^7.4.3"
+    lodash "^4.17.4"
+    node-sp-auth-config "^2.0.2"
+    request "^2.75.0"
+    request-promise "^4.1.1"
+    xmldoc "^0.5.1"
+
+node-sp-auth@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/node-sp-auth/-/node-sp-auth-2.3.1.tgz#17ca53d197b989999546222acb21e87ff60e3d5a"
   dependencies:
     "@types/bluebird" "^3.5.8"
     "@types/cookie" "^0.1.29"
