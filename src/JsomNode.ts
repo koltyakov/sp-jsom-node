@@ -9,8 +9,8 @@ import { JsomModules, lcid } from './config';
 import { IJsomNodeSettings } from './interfaces';
 
 // Import JSOM ententions
-import { executeQueryPromise } from './extentions/executeQueryPromise';
-import './interfaces/extentions';
+import { executeQueryPromise } from './extensions/executeQueryPromise';
+import './interfaces/extensions';
 // Import JSOM ententions
 
 declare let global: any;
@@ -151,7 +151,7 @@ export class JsomNode {
 
   }
 
-  // JSOM extentions
+  // JSOM extensions
   private extendContext () {
     SP.ClientRuntimeContext.prototype.executeQueryPromise = function (): Promise<void> {
       return executeQueryPromise(this);

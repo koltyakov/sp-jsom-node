@@ -167,7 +167,7 @@ Settings can be left blank. Auth options in such a case will be asked by `node-s
   let oLists: SP.ListCollection = oWeb.get_lists();
 
   clientContext.load(oLists, 'Include(Title)');
-  await clientContext.executeQueryPromise(); // Using JSOM extention
+  await clientContext.executeQueryPromise(); // Using JSOM extension
 
   let listsTitlesArr = oLists.get_data().map(l => l.get_title());
   console.log('Lists', listsTitlesArr);

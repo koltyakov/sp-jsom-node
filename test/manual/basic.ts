@@ -8,7 +8,7 @@ init().then(async settings => {
 
   clientContext.load(oLists, 'Include(Id,Title)');
 
-  await clientContext.executeQueryPromise(); // Using JSOM extention
+  await clientContext.executeQueryPromise(); // Using JSOM extension
 
   let listsDataArr = oLists.get_data();
   let listsTitlesArr = listsDataArr.map(l => l.get_title());
