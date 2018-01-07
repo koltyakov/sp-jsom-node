@@ -1,5 +1,4 @@
 import { initEnvironment as init } from './utils/init';
-import { executeQueryPromise } from './utils/jsom';
 
 init().then(async settings => {
 
@@ -9,7 +8,6 @@ init().then(async settings => {
 
   clientContext.load(oLists, 'Include(Id,Title)');
 
-  // await executeQueryPromise(clientContext);
   await clientContext.executeQueryPromise(); // Using JSOM extention
 
   let listsDataArr = oLists.get_data();
@@ -21,7 +19,6 @@ init().then(async settings => {
 
   clientContext.load(oItems, 'Include(Title)');
 
-  // await executeQueryPromise(clientContext);
   await clientContext.executeQueryPromise();
 
   console.log(oItems.get_data().map(i => i.get_fieldValues()['Title']));

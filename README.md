@@ -157,6 +157,23 @@ Settings can be left blank. Auth options in such a case will be asked by `node-s
   - credentials should not be dumped on disc
 - Config file with prepopulated credentials: schedule, job automation, continues integration
 
+## Async/Await usage
+
+```javascript
+(async () => {
+  // Initiation lines are ommited here
+  const clientContext: SP.ClientContext = SP.ClientContext.get_current();
+  let oWeb: SP.Web = clientContext.get_web();
+  let oLists: SP.ListCollection = oWeb.get_lists();
+
+  clientContext.load(oLists, 'Include(Title)');
+  await clientContext.executeQueryPromise(); // Using JSOM extention
+
+  let listsTitlesArr = oLists.get_data().map(l => l.get_title());
+  console.log('Lists', listsTitlesArr);
+})();
+```
+
 ## Integration tests
 
 ```bash
