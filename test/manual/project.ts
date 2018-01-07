@@ -11,13 +11,13 @@ const config = {
 
 init(config).then(async settings => {
 
-  const projContext = new PS.ProjectContext(settings.siteUrl);
+  const projContext = PS.ProjectContext.get_current();
   let projects = projContext.get_projects();
   projContext.load(projects, 'Include(Name, Id)');
   projContext.executeQueryAsync(() => {
-    console.log(projects.get_data());
-  }, (...args) => {
     console.log(projects.get_data().map(p => p.get_name()));
+  }, (...args) => {
+    console.log(args[1].get_message());
   });
 
 }).catch(console.log);

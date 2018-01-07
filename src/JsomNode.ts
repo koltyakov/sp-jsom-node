@@ -220,12 +220,12 @@ export class JsomNode {
     (Sys.Net as any)._WebRequestManager.prototype
       .executeRequest = (wReq: any) => {
 
-        let requestUrl = `${
-          this.settings.siteUrl
-            .replace('://', '___')
-            .split('/')[0]
-            .replace('___', '://')
-          }${wReq._url}`;
+        let hostUrl = this.settings.siteUrl
+          .replace('://', '___')
+          .split('/')[0]
+          .replace('___', '://');
+
+        let requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
 
         let webAbsoluteUrl = requestUrl
           .split('/_api')[0]
