@@ -123,7 +123,7 @@ export class JsomNode {
 
     global.Type = Function;
 
-    const registerNamespace = (namespaceString: string) => {
+    const registerNamespace = (namespaceString: string): void => {
       let curNs = global;
       global.window = global.window || {};
       namespaceString.split('.').forEach(function (nsName) {
@@ -137,17 +137,27 @@ export class JsomNode {
       global.window[nsName] = global[nsName];
     };
 
-    global.Type = Function;
-    global.NotifyScriptLoadedAndExecuteWaitingJobs = (scriptFileName) => {
-      //
-    };
-    global.RegisterModuleInit = () => {
-      //
+    // tslint:disable-next-line:no-empty
+    global.NotifyScriptLoadedAndExecuteWaitingJobs = (scriptFileName) => {};
+    // tslint:disable-next-line:no-empty
+    global.RegisterModuleInit = () => {};
+
+    // For PS.js case only
+    global.ExecuteOrDelayUntilScriptLoaded = (callback: () => void, jsomScript: string) => {
+      jsomScript = jsomScript.replace('.debug.js', '').replace('.js', '') + '.debug.js';
+      if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
+        let filePath = path.join(__dirname, '..', 'jsom', global.envCode || 'spo', jsomScript);
+        require(filePath);
+        callback();
+      } else {
+        callback();
+      }
     };
 
     registerNamespace('Sys');
     registerNamespace('SP.UI');
     registerNamespace('Microsoft.SharePoint.Packaging');
+    registerNamespace('PS');
 
   }
 
@@ -160,6 +170,7 @@ export class JsomNode {
 
   // Load JSOM scripts to global context
   private loadScripts (modules: string[] = ['core'], envCode: string = 'spo') {
+    global.envCode = envCode;
     global.loadedJsomScripts = global.loadedJsomScripts || [];
     if (modules.indexOf('core') !== 0) { // Core module first
       modules = ['core'].concat(modules);
@@ -168,7 +179,7 @@ export class JsomNode {
       .filter((value, index, self) => self.indexOf(value) === index) // Unique modules
       .forEach((module: string) => {
         JsomModules[module].forEach(jsomScript => {
-          if (global.loadedJsomScripts.indexOf(jsomScript) === -1) {
+          if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
             let filePath: string = path.join(
               __dirname, '..', 'jsom', envCode,
               jsomScript.replace('{{lcid}}', lcid)
@@ -177,7 +188,7 @@ export class JsomNode {
             if (jsomScript === 'msajaxbundle.debug.js') {
               this.patchMicrosoftAjax();
             }
-            global.loadedJsomScripts.push(jsomScript);
+            global.loadedJsomScripts.push(jsomScript.toLowerCase());
           }
         });
       });
