@@ -14,5 +14,6 @@ export const JsomModules: IJsomModule = {
   taxonomy: ['sp.taxonomy.debug.js'],
   userprofiles: ['sp.userprofiles.debug.js'],
   publishing: ['sp.publishing.debug.js'],
-  policy: ['sp.policy.debug.js']
+  policy: ['sp.policy.debug.js'],
+  project: ['PS.debug.js']
 };
