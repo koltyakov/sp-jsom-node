@@ -16,5 +16,6 @@ export const JsomModules: IJsomModule = {
   publishing: ['sp.publishing.debug.js'],
   policy: ['sp.policy.debug.js'],
   documentmanagement: ['sp.documentmanagement.debug.js'],
+  workmanagement: ['sp.workmanagement.debug.js'],
   project: ['PS.debug.js']
 };
