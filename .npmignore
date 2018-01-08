@@ -9,6 +9,7 @@ config/**/private.*.json
 /examples
 /scripts
 .vscode
+.github
 npm-debug.log
 gulpfile.json
 tsconfig.json
