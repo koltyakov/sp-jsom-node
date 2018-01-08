@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as sprequest from 'sp-request';
 import { Cpass } from 'cpass';
 
-import { JsomNode, IJsomNodeSettings } from '../../src';
+import { JsomNode, IJsomNodeInitSettings } from '../../src';
 import { Environments as TestsConfigs } from '../configs';
 
 const cpass = new Cpass();
@@ -28,7 +28,7 @@ for (let testConfig of TestsConfigs) {
       config = require(path.resolve(testConfig.configPath));
       config.password = config.password && cpass.decode(config.password);
 
-      let jsomNodeSettings: IJsomNodeSettings = {
+      let jsomNodeSettings: IJsomNodeInitSettings = {
         siteUrl: config.siteUrl,
         authOptions: config
       };
@@ -241,18 +241,18 @@ for (let testConfig of TestsConfigs) {
 
           const camlQuery = new SP.CamlQuery();
           camlQuery.set_viewXml(`
-                        <View>
-                            <Query>
-                                <OrderBy>
-                                    <FieldRef Name='Created' Ascending='True'></FieldRef>
-                                </OrderBy>
-                            </Query>
-                            <ViewFields>
-                                <FieldRef Name='ID'/>
-                                <FieldRef Name='Title'/>
-                            </ViewFields>
-                        </View>
-                    `);
+              <View>
+                  <Query>
+                      <OrderBy>
+                          <FieldRef Name='Created' Ascending='True'></FieldRef>
+                      </OrderBy>
+                  </Query>
+                  <ViewFields>
+                      <FieldRef Name='ID'/>
+                      <FieldRef Name='Title'/>
+                  </ViewFields>
+              </View>
+          `);
           let oItems = oList.getItems(camlQuery);
 
           ctx.load(oItems);

@@ -1,5 +1,3 @@
-/// <reference path="./../../../node_modules/@types/sharepoint/index.d.ts" />
-
 import * as deepAssign from 'deep-assign';
 import { JsomNode, IJsomNodeSettings } from './../../../src/index';
 
@@ -11,7 +9,7 @@ export const settings: IJsomNodeSettings = {
   }
 };
 
-export const initEnvironment = (adhoc: IJsomNodeSettings = {}): Promise<IJsomNodeSettings> => {
+export const initEnvironment = (adhoc: any = {}): Promise<IJsomNodeSettings> => {
   let config: IJsomNodeSettings = deepAssign(settings, adhoc);
   return (new JsomNode(config)).wizard();
 };
