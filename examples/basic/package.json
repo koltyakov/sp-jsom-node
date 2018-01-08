@@ -2,24 +2,31 @@
   "name": "basic",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "index": "ts-node ./index"
+    "exec:js": "node ./dist/index",
+    "exec:ts": "ts-node ./src/index",
+    "build": "rm -rf ./dist && webpack"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "sp-jsom-node": "^1.0.1"
+    "sp-jsom-node": "^1.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",
     "@types/mocha": "^2.2.41",
+    "awesome-typescript-loader": "^3.4.1",
     "chai": "^4.0.1",
+    "copy-webpack-plugin": "^4.3.1",
+    "imports-loader": "^0.7.1",
     "mocha": "^3.4.2",
     "ts-node": "^3.0.4",
     "tslint": "^5.4.2",
     "tslint-config-standard": "^7.0.0",
-    "typescript": "^2.3.4"
+    "typescript": "^2.3.4",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0"
   }
 }

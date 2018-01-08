@@ -7,7 +7,7 @@
 ### Global NPM modules
 
 ```bash
-npm install typescript@2.3.4 ts-lint ts-node -g
+npm install typescript ts-lint ts-node -g
 ```
 
 ## Restore dependencies
@@ -16,14 +16,26 @@ npm install typescript@2.3.4 ts-lint ts-node -g
 npm install
 ```
 
-## Run
+## Run (.ts directly)
 
 ```bash
-npm run index
+npm run exec:ts
 ```
 
 or
 
 ```bash
-ts-node ./index
+ts-node ./src/index
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Run (transpiled .js)
+
+```bash
+npm run exec:js
 ```

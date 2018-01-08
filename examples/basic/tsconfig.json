@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
-    "lib": ["es2015", "dom"],
-    "sourceMap": true,
-    "declaration": true,
     "moduleResolution": "node",
+    "sourceMap": false,
+    "declaration": true,
     "noImplicitAny": false,
-    "removeComments": true
-  }
+    "removeComments": true,
+    "skipLibCheck": true,
+    "lib": ["es2017"],
+    "types": ["node", "sharepoint"],
+    "outDir": "./tmp",
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
 }
