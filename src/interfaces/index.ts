@@ -1,5 +1,6 @@
 import { IAuthOptions } from 'node-sp-auth';
 import { IAuthConfigSettings } from 'node-sp-auth-config';
+import { ISPRequest } from 'sp-request';
 
 export interface IJsomNodeSettings {
   siteUrl?: string;
@@ -11,6 +12,10 @@ export interface IJsomNodeSettings {
 
 export interface IJsomModule {
   [name: string]: string[];
+}
+
+export interface IRequestsCache {
+  [siteUrl: string]: ISPRequest;
 }
 
 export interface IEnvironmentConfig {

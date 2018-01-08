@@ -1,4 +1,4 @@
-import * as spRequest from 'sp-request';
+import { create as createSPRequest, ISPRequest } from 'sp-request';
 import * as path from 'path';
 import * as https from 'https';
 import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
@@ -6,25 +6,21 @@ import { Cpass } from 'cpass';
 
 import utils from './utils';
 import { JsomModules, lcid } from './config';
-import { IJsomNodeSettings } from './interfaces';
+import { IJsomNodeSettings, IRequestsCache } from './interfaces';
 
 // Import JSOM ententions
+import './extensions/definitions';
 import { executeQueryPromise } from './extensions/executeQueryPromise';
-import './interfaces/extensions';
 // Import JSOM ententions
 
 declare let global: any;
 declare let sp_initialize: any;
 
-interface IRequestsCache {
-  [siteUrl: string]: spRequest.ISPRequest;
-}
-
 export class JsomNode {
 
   private settings: IJsomNodeSettings;
   private spAuthConfigirator: SPAuthConfigirator;
-  private request: spRequest.ISPRequest;
+  private request: ISPRequest;
   private requestCache: IRequestsCache = {};
   private agent: https.Agent;
 
@@ -63,7 +59,7 @@ export class JsomNode {
   public wizard (): Promise<IJsomNodeSettings> {
     return new Promise((resolve, reject) => {
       if (typeof this.settings.authOptions === 'undefined') {
-        this.spAuthConfigirator.getContext()
+        return this.spAuthConfigirator.getContext()
           .then((context) => {
             const cpass = new Cpass();
             (context.authOptions as any).password = (context.authOptions as any).password &&
@@ -73,13 +69,13 @@ export class JsomNode {
               ...context as any
             };
             this.init();
-            resolve(this.settings);
+            return resolve(this.settings);
           })
           .catch((error: any) => {
-            reject(error);
+            return reject(error);
           });
       } else {
-        resolve(this.settings);
+        return resolve(this.settings);
       }
     });
   }
@@ -87,10 +83,12 @@ export class JsomNode {
   // Mimic environment to pretend as a browser
   private mimicBrowser () {
 
+    // Navigator polyfil
     global.navigator = {
       userAgent: 'sp-jsom-node'
     };
 
+    // Window polyfil
     global.window = {
       location: {
         href: '',
@@ -113,6 +111,7 @@ export class JsomNode {
       }
     };
 
+    // Document polyfil
     global.document = {
       documentElement: {},
       URL: '',
@@ -122,20 +121,6 @@ export class JsomNode {
     };
 
     global.Type = Function;
-
-    const registerNamespace = (namespaceString: string): void => {
-      let curNs = global;
-      global.window = global.window || {};
-      namespaceString.split('.').forEach(function (nsName) {
-        if (typeof curNs[nsName] === 'undefined') {
-          curNs[nsName] = new Object();
-        }
-        curNs = curNs[nsName];
-        curNs.__namespace = true;
-      });
-      let nsName = namespaceString.split('.')[0];
-      global.window[nsName] = global[nsName];
-    };
 
     // tslint:disable-next-line:no-empty
     global.NotifyScriptLoadedAndExecuteWaitingJobs = (scriptFileName) => {};
@@ -154,45 +139,73 @@ export class JsomNode {
       }
     };
 
-    registerNamespace('Sys');
-    registerNamespace('SP.UI');
-    registerNamespace('Microsoft.SharePoint.Packaging');
-    registerNamespace('PS');
+    // Register namespaces fix
+    (() => {
 
-  }
+      const registerNamespace = (namespaceString: string): void => {
+        let curNs = global;
+        global.window = global.window || {};
+        namespaceString.split('.').forEach(nsName => {
+          if (typeof curNs[nsName] === 'undefined') {
+            curNs[nsName] = new Object();
+          }
+          curNs = curNs[nsName];
+          curNs.__namespace = true;
+        });
+        let nsName = namespaceString.split('.')[0];
+        global.window[nsName] = global[nsName];
+      };
 
-  // JSOM extensions
-  private extendContext () {
-    SP.ClientRuntimeContext.prototype.executeQueryPromise = function (): Promise<void> {
-      return executeQueryPromise(this);
-    };
+      registerNamespace('Sys');
+      registerNamespace('SP.UI');
+      registerNamespace('Microsoft.SharePoint.Packaging');
+      registerNamespace('PS');
+
+    })();
+
   }
 
   // Load JSOM scripts to global context
   private loadScripts (modules: string[] = ['core'], envCode: string = 'spo') {
+
     global.envCode = envCode;
     global.loadedJsomScripts = global.loadedJsomScripts || [];
     if (modules.indexOf('core') !== 0) { // Core module first
       modules = ['core'].concat(modules);
     }
+
     modules
-      .filter((value, index, self) => self.indexOf(value) === index) // Unique modules
+      .filter((value, index, self) => self.indexOf(value) === index) // Only unique modules
       .forEach((module: string) => {
         JsomModules[module].forEach(jsomScript => {
+          // Ignore already loaded
           if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
             let filePath: string = path.join(
               __dirname, '..', 'jsom', envCode,
               jsomScript.replace('{{lcid}}', lcid)
             );
-            require(filePath);
-            if (jsomScript === 'msajaxbundle.debug.js') {
-              this.patchMicrosoftAjax();
-            }
+
+            // ====>
+            require(filePath); // Load a JSOM script
+            // ====<
+
+            // Patch Microsoft Ajax library
+            jsomScript === 'msajaxbundle.debug.js' && this.patchMicrosoftAjax();
+            // Register script as loaded
             global.loadedJsomScripts.push(jsomScript.toLowerCase());
           }
         });
       });
-    this.extendContext(); // Extending ClientContext
+
+    // Apply JSOM extensions
+    (() => {
+
+      // Extending ClientContext
+      SP.ClientRuntimeContext.prototype.executeQueryPromise = function (): Promise<void> {
+        return executeQueryPromise(this);
+      };
+
+    })();
   }
 
   // Escape Microsoft Ajax issues
@@ -216,75 +229,74 @@ export class JsomNode {
   private proxyRequestManager () {
 
     this.request = this.getCachedRequest();
+    (Sys.Net as any)._WebRequestManager.prototype.executeRequest = (wReq: any) => {
 
-    (Sys.Net as any)._WebRequestManager.prototype
-      .executeRequest = (wReq: any) => {
+      let hostUrl = this.settings.siteUrl
+        .replace('://', '___')
+        .split('/')[0]
+        .replace('___', '://');
 
-        let hostUrl = this.settings.siteUrl
-          .replace('://', '___')
-          .split('/')[0]
-          .replace('___', '://');
+      let requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
 
-        let requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
+      let webAbsoluteUrl = requestUrl
+        .split('/_api')[0]
+        .split('/_vti_bin')[0];
 
-        let webAbsoluteUrl = requestUrl
-          .split('/_api')[0]
-          .split('/_vti_bin')[0];
+      this.request.requestDigest(webAbsoluteUrl)
+        .then(digest => {
 
-        this.request.requestDigest(webAbsoluteUrl)
-          .then(digest => {
+          let isJsom: boolean = wReq._url.indexOf('/_vti_bin/client.svc/ProcessQuery') !== -1;
 
-            let isJsom: boolean = wReq._url.indexOf('/_vti_bin/client.svc/ProcessQuery') !== -1;
+          let jsomHeaders = !isJsom ? {} : {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-RequestDigest': digest,
+            'Content-Length': wReq._body && wReq._body.length
+          };
 
-            let jsomHeaders = !isJsom ? {} : {
-              'X-Requested-With': 'XMLHttpRequest',
-              'X-RequestDigest': digest,
-              'Content-Length': wReq._body && wReq._body.length
-            };
-
-            if (wReq._httpVerb.toLowerCase() === 'post') {
-              return this.request.post({
-                url: requestUrl,
-                headers: {
-                  ...wReq._headers,
-                  ...jsomHeaders
+          if (wReq._httpVerb.toLowerCase() === 'post') {
+            return this.request.post({
+              url: requestUrl,
+              headers: {
+                ...wReq._headers,
+                ...jsomHeaders
+              },
+              body: wReq._body,
+              json: !isJsom,
+              agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
+            }).then(response => {
+              let responseData = isJsom ? response.body : JSON.stringify(response.body);
+              wReq._events._list.completed[0]({
+                _xmlHttpRequest: {
+                  status: response.statusCode,
+                  responseText: responseData
                 },
-                body: wReq._body,
-                json: !isJsom,
-                agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
-              }).then(response => {
-                let responseData = isJsom ? response.body : JSON.stringify(response.body);
-                wReq._events._list.completed[0]({
-                  _xmlHttpRequest: {
-                    status: response.statusCode,
-                    responseText: responseData
-                  },
-                  get_statusCode: () => {
-                    return response.statusCode;
-                  },
-                  get_responseData: () => {
-                    return responseData;
-                  },
-                  getResponseHeader: (header) => {
-                    return response.headers[header.toLowerCase()];
-                  },
-                  get_aborted: () => { return false; },
-                  get_timedOut: () => { return false; },
-                  get_responseAvailable: () => { return true; }
-                });
+                get_statusCode: () => {
+                  return response.statusCode;
+                },
+                get_responseData: () => {
+                  return responseData;
+                },
+                getResponseHeader: (header) => {
+                  return response.headers[header.toLowerCase()];
+                },
+                get_aborted: () => { return false; },
+                get_timedOut: () => { return false; },
+                get_responseAvailable: () => { return true; }
               });
-            }
-          })
-          .catch((err: any) => {
-            throw new Error(err);
-          });
+            });
+          }
 
-      };
+        })
+        .catch((err: any) => {
+          throw new Error(err);
+        });
+
+    };
   }
 
   // Cache request client
-  private getCachedRequest = (): spRequest.ISPRequest => {
-    this.request = this.requestCache[this.settings.siteUrl] || spRequest.create(this.settings.authOptions);
+  private getCachedRequest = (): ISPRequest => {
+    this.request = this.requestCache[this.settings.siteUrl] || createSPRequest(this.settings.authOptions);
     this.requestCache[this.settings.siteUrl] = this.request;
     return this.request;
   }
