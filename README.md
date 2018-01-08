@@ -243,6 +243,11 @@ npm run test
 
 ![Integration tests](./docs/imgs/mocha.jpg)
 
+## Bundling scripts
+
+When creating automation scripts for production environment, e.g. Azure Job or Function or embedded application like Electron, it can be important to bundle and minify sources with positive performant effect as a result.
+Check [example](https://github.com/koltyakov/sp-jsom-node/tree/master/examples/basic) with bundling.
+
 ## Inspiration and references
 
 This project was mostly inspired by [Vadim Gremyachev](https://github.com/vgrem)'s project - [CSOMNode](https://github.com/vgrem/CSOMNode), but implements JSOM in node in a bit different way, in TypeScript and supports different auth scenarious implemented in [node-sp-auth](https://github.com/s-KaiNet/node-sp-auth) by [Sergei Sergeev](https://github.com/s-KaiNet).

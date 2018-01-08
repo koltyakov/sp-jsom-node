@@ -28,7 +28,7 @@ or
 ts-node ./src/index
 ```
 
-## Build
+## Build / Bundle
 
 ```bash
 npm run build
