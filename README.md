@@ -12,9 +12,20 @@
 
 ## Supported SharePoint versions
 
-- SharePoint Online
+- SharePoint Online, Project Online
+- SharePoint 2016, Project Server
 - SharePoint 2013
-- SharePoint 2016
+
+## APIs list
+
+- `core` - core JSOM module (loaded by default at first place)
+- `publishing` - [sp.publishing.js](https://msdn.microsoft.com/en-us/library/office/jj607192.aspx)
+- `taxonomy` - [sp.taxonomy.js](https://msdn.microsoft.com/en-us/library/office/jj857114.aspx)
+- `userprofiles` - [sp.userprofiles.js](https://msdn.microsoft.com/en-us/library/office/jj642927.aspx)
+- `documentmanagement` - [sp.documentmanagement.js](https://msdn.microsoft.com/en-us/library/office/jj607384.aspx)
+- `workmanagement` - [sp.workmanagement.js](https://msdn.microsoft.com/en-us/library/office/jj607384.aspx)
+- `policy` - sp.policy.js
+- `project` - [PS.js](https://msdn.microsoft.com/en-us/library/office/jj669820.aspx) (Project Server API)
 
 ## Supported authentication scenarios
 
@@ -50,15 +61,18 @@ yarn add sp-jsom-node
 ### Minimal setup (TypeScript)
 
 ```javascript
-import { JsomNode } from 'sp-jsom-node';
+import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
 
-(new JsomNode()).wizard().then((settings) => {
+let jsomNodeOptions: IJsomNodeSettings = {
+  // ...
+};
+
+(new JsomNode(jsomNodeOptions)).wizard().then((settings) => {
 
   /// ... <<< JSOM can be used here
 
   let ctx = SP.ClientContext.get_current();
   // let ctx = SP.ClientContext(webRelativeUrl);
-  ...
 
 }).catch(console.log);
 
@@ -77,7 +91,6 @@ const JsomNode = require('sp-jsom-node').JsomNode;
   /// ... <<< JSOM can be used here
 
   let ctx = SP.ClientContext.get_current();
-  ...
 
 }).catch(console.log);
 ```
@@ -88,7 +101,7 @@ const JsomNode = require('sp-jsom-node').JsomNode;
 import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
 
 let settings: any = require('./config/private.json');
-let jsomNodeOptions: IJsomNodeSettings = {
+let jsomNodeOptions: IJsomNodeInitSettings = {
   siteUrl: settings.siteUrl,
   authOptions: {
     ...(settings as any)
@@ -117,35 +130,100 @@ ctx.executeQueryAsync(() => {
 
 ```
 
+### Async/Await usage
+
+Client context runtime is extended with `executeQueryPromise` - promisified version of `executeQueryAsync`. Which allows coding with async/await in a "synchronous" handy style, having elegant and easily maintainable code.
+
+```javascript
+import { JsomNode, IJsomNodeInitSettings } from 'sp-jsom-node';
+let jsomNodeOptions: IJsomNodeInitSettings = {
+  siteUrl: settings.siteUrl,
+  authOptions: {
+    ...(settings as any)
+  }
+};
+(new JsomNode(jsomNodeOptions)).init();
+(async () => {
+
+  const clientContex = SP.ClientContext.get_current();
+  let oListsCollection = clientContext.get_web().get_lists();
+
+  clientContext.load(oListsCollection, 'Include(Title)');
+  await clientContext.executeQueryPromise(); // Using JSOM extension
+
+  let listsTitlesArr = oListsCollection.get_data()
+    .map(l => l.get_title());
+
+  console.log('Lists', listsTitlesArr);
+
+})();
+```
+
 ### Modules
 
 By default, only core modules are loaded.
 Additional CSOM features can be requested in `modules` setting.
 
+[Modules list](#apis-list).
+
 ```javascript
-import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
+import { JsomNode, IJsomNodeInitSettings } from 'sp-jsom-node';
 
 let settings: any = require('./config/private.json');
-let jsomNodeOptions: IJsomNodeSettings = {
-  modules: [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
+let jsomNodeOptions: IJsomNodeInitSettings = {
+  siteUrl: settings.siteUrl,
+  authOptions: {
+    ...(settings as any)
+  },
+  modules: [ 'taxonomy', 'userprofiles' ]
 };
 
 (new JsomNode(jsomNodeOptions)).init();
 
 /// ... <<< JSOM can be used here
-...
+```
+
+### Project server (PM.js)
+
+```javascript
+import { JsomNode, IJsomNodeInitSettings } from 'sp-jsom-node';
+
+let settings: any = require('./config/private.json');
+let jsomNodeOptions: IJsomNodeInitSettings = {
+  siteUrl: settings.siteUrl,
+  authOptions: {
+    ...(settings as any)
+  },
+  modules: [ 'project' ]
+};
+
+(new JsomNode(jsomNodeOptions)).init();
+
+(async () => {
+
+  // API Reference - https://msdn.microsoft.com/en-us/library/office/jj669820.aspx
+  const projCtx = PS.ProjectContext.get_current();
+  let projects = projCtx.get_projects();
+  projCtx.load(projects, 'Include(Name, Id)');
+  await projCtx.executeQueryPromise();
+
+  console.log(projects.get_data().map(p => p.get_name()));
+
+})();
 ```
 
 #### JSOM Node Settings options
 
-- siteUrl?: string; // Optional SPWeb url
-- authOptions?: IAuthOptions; `node-sp-auth` [credentials options](https://github.com/s-KaiNet/node-sp-auth)
-- config?: IAuthConf; `node-sp-auth-config` [options](https://github.com/koltyakov/node-sp-auth-config)
-  - configPath?: string; // Path to auth config .json | Default is './config/private.json'
-  - encryptPassword?: boolean; // Encrypts password to a machine-bind hash | Default is 'true'
-  - saveConfigOnDisk?: boolean; // Saves config .json to disk | Default is 'true'
-- modules?: string[]; // On demand modules load, [ 'core', 'taxonomy', 'userprofiles', 'publishing', 'policy' ]
-- envCode?: 'spo' | '16' | '15'; // Loads different version of JSOM javascripts
+- `siteUrl`: string; // Optional SPWeb url
+- `authOptions`: IAuthOptions; `node-sp-auth` [credentials options](https://github.com/s-KaiNet/node-sp-auth)
+
+- `config`?: IAuthConf; `node-sp-auth-config` [options](https://github.com/koltyakov/node-sp-auth-config)
+  - `configPath`?: string; // Path to auth config .json | Default is './config/private.json'
+  - `encryptPassword`?: boolean; // Encrypts password to a machine-bind hash | Default is 'true'
+  - `saveConfigOnDisk`?: boolean; // Saves config .json to disk | Default is 'true'
+
+- `modules`?: JsomModules[]; // On demand modules load | Default is ['core']
+- `envCode`?: 'spo' | '16' | '15'; // Loads different version of JSOM javascripts | Default is 'spo'
 
 Settings can be left blank. Auth options in such a case will be asked by `node-sp-auth-config` [options](https://github.com/koltyakov/node-sp-auth-config) in a wizard like approach.
 
@@ -156,23 +234,6 @@ Settings can be left blank. Auth options in such a case will be asked by `node-s
   - external tools is in charge for preparing auth credentials in `node-sp-auth` format
   - credentials should not be dumped on disc
 - Config file with prepopulated credentials: schedule, job automation, continues integration
-
-## Async/Await usage
-
-```javascript
-(async () => {
-  // Initiation lines are ommited here
-  const clientContext: SP.ClientContext = SP.ClientContext.get_current();
-  let oWeb: SP.Web = clientContext.get_web();
-  let oLists: SP.ListCollection = oWeb.get_lists();
-
-  clientContext.load(oLists, 'Include(Title)');
-  await clientContext.executeQueryPromise(); // Using JSOM extension
-
-  let listsTitlesArr = oLists.get_data().map(l => l.get_title());
-  console.log('Lists', listsTitlesArr);
-})();
-```
 
 ## Integration tests
 
