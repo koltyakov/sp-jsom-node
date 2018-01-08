@@ -6,7 +6,7 @@ import { Cpass } from 'cpass';
 
 import utils from './utils';
 import { JsomModules, lcid } from './config';
-import { IJsomNodeSettings, IRequestsCache } from './interfaces';
+import { IJsomNodeSettings, IJsomNodeInitSettings, IRequestsCache } from './interfaces';
 
 // Import JSOM ententions
 import './extensions/definitions';
@@ -18,13 +18,13 @@ declare let sp_initialize: any;
 
 export class JsomNode {
 
-  private settings: IJsomNodeSettings;
+  private settings: IJsomNodeSettings | IJsomNodeInitSettings;
   private spAuthConfigirator: SPAuthConfigirator;
   private request: ISPRequest;
   private requestCache: IRequestsCache = {};
   private agent: https.Agent;
 
-  constructor (settings: IJsomNodeSettings = {}) {
+  constructor (settings: IJsomNodeSettings | IJsomNodeInitSettings = {}) {
     let config = settings.config || {};
     this.settings = {
       ...settings,
