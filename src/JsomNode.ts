@@ -1,7 +1,9 @@
-import { create as createSPRequest, ISPRequest } from 'sp-request';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
+
 import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
+import { create as createSPRequest, ISPRequest } from 'sp-request';
 import { Cpass } from 'cpass';
 
 import utils from './utils';
@@ -24,7 +26,7 @@ export class JsomNode {
   private requestCache: IRequestsCache = {};
   private agent: https.Agent;
 
-  constructor (settings: IJsomNodeSettings | IJsomNodeInitSettings = {}) {
+  constructor(settings: IJsomNodeSettings | IJsomNodeInitSettings = {}) {
     let config = settings.config || {};
     this.settings = {
       ...settings,
@@ -49,14 +51,14 @@ export class JsomNode {
   }
 
   // Init JsomNode environment
-  public init () {
+  public init() {
     this.mimicBrowser();
     this.loadScripts(this.settings.modules, this.settings.envCode);
     this.proxyRequestManager();
   }
 
   // Trigger wizard and init JsomNode environment
-  public wizard (): Promise<IJsomNodeSettings> {
+  public wizard(): Promise<IJsomNodeSettings> {
     return new Promise((resolve, reject) => {
       if (typeof this.settings.authOptions === 'undefined') {
         return this.spAuthConfigirator.getContext()
@@ -81,7 +83,7 @@ export class JsomNode {
   }
 
   // Mimic environment to pretend as a browser
-  private mimicBrowser () {
+  private mimicBrowser() {
 
     // Navigator polyfil
     global.navigator = {
@@ -166,7 +168,7 @@ export class JsomNode {
   }
 
   // Load JSOM scripts to global context
-  private loadScripts (modules: string[] = ['core'], envCode: string = 'spo') {
+  private loadScripts(modules: string[] = ['core'], envCode: string = 'spo') {
 
     global.envCode = envCode;
     global.loadedJsomScripts = global.loadedJsomScripts || [];
@@ -185,8 +187,18 @@ export class JsomNode {
               jsomScript.replace('{{lcid}}', lcid)
             );
 
+            if (!fs.existsSync(filePath)) {
+              filePath = path.join(
+                __dirname, 'jsom', envCode,
+                jsomScript.replace('{{lcid}}', lcid)
+              );
+            }
+
             // ====>
-            require(filePath); // Load a JSOM script
+            if (filePath.substring(0, 1) === '\\') {
+              filePath = '.' + filePath.replace(/\\/g, '/');
+            }
+            utils.require(filePath); // Load a JSOM script
             // ====<
 
             // Patch Microsoft Ajax library
@@ -209,7 +221,7 @@ export class JsomNode {
   }
 
   // Escape Microsoft Ajax issues
-  private patchMicrosoftAjax () {
+  private patchMicrosoftAjax() {
     let origRegisterInterface = Type.prototype.registerInterface;
     Type.prototype.registerInterface = function (typeName) {
       if (['IEnumerator', 'IEnumerable', 'IDisposable'].indexOf(typeName) !== -1) {
@@ -226,7 +238,7 @@ export class JsomNode {
   }
 
   // Proxy JSOM XmlHttpRequest through sp-request
-  private proxyRequestManager () {
+  private proxyRequestManager() {
 
     this.request = this.getCachedRequest();
     (Sys.Net as any)._WebRequestManager.prototype.executeRequest = (wReq: any) => {
