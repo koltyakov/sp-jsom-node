@@ -26,7 +26,7 @@ export class JsomNode {
   private requestCache: IRequestsCache = {};
   private agent: https.Agent;
 
-  constructor(settings: IJsomNodeSettings | IJsomNodeInitSettings = {}) {
+  constructor(settings: (IJsomNodeSettings | IJsomNodeInitSettings) = {}) {
     let config = settings.config || {};
     this.settings = {
       ...settings,

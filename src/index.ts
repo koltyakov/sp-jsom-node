@@ -1,4 +1,4 @@
-/// <reference path="./../node_modules/@types/sharepoint/index.d.ts" />
+import '@types/sharepoint';
 
 export { JsomNode } from './JsomNode';
 export { IJsomNodeSettings, IJsomNodeInitSettings, IJsomModule } from './interfaces';
