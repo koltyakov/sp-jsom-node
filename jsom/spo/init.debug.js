@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7213,
-                "rpr": 1209
+                "rup": 7303,
+                "rpr": 1208
             }
         };
     }
@@ -9552,7 +9552,7 @@ function _registerCssLink(cssLink, head, callback, loadCompletedCallback, bUnthe
         if (null != linkContent) {
             originalUrl = linkContent["data-original-href"];
         }
-        newElement = (Theming.GetPageManager()).AddCssLink(cssLink, originalUrl, null, loadCompletedCallback, SPThemeUtils.UseCdnForCss() && null != originalUrl ? Theming.Utilities.MakeFixupCallbackForCssFile(originalUrl) : null);
+        newElement = (Theming.GetPageManager()).AddCssLink(cssLink, originalUrl, null, loadCompletedCallback, null);
         if (null != callback) {
             callback(newElement);
         }
@@ -15237,7 +15237,6 @@ function SPThemeUtils_module_def() {
     SPThemeUtils.ReplaceCssTextForElement = ReplaceCssTextForElement;
     SPThemeUtils.SetThemeRetriever = SetThemeRetriever;
     SPThemeUtils.Suspend = SuspendTheming;
-    SPThemeUtils.UseCdnForCss = UseCdnForCss;
     SPThemeUtils.UseClientSideTheming = UseClientSideTheming;
     SPThemeUtils.UseShellThemes = UseShellThemes;
     SPThemeUtils.WhenThemeReady = WhenThemeReady;
@@ -15265,9 +15264,6 @@ function SPThemeUtils_module_def() {
         var useCST = featureEnabled && typeof Theming !== strUndefined;
 
         return useCST;
-    }
-    function UseCdnForCss() {
-        return UseClientSideTheming() && Flighting.VariantConfiguration.IsExpFeatureClientEnabled(433);
     }
     function UseShellThemes() {
         return UseClientSideTheming() && Flighting.VariantConfiguration.IsExpFeatureClientEnabled(107);
@@ -15596,7 +15592,7 @@ function SPThemeUtils_module_def() {
         return Theming.Utilities.MakeFixupCallbackForCssFile(originalUrl);
     }
     function RegisterCssReferences(cssRefs) {
-        (GetPageManager()).RegisterCssReferences(cssRefs, UseCdnForCss() ? MakeCSSRelativeUrl : null);
+        (GetPageManager()).RegisterCssReferences(cssRefs, null);
     }
     function RestoreCssLinksToOriginalUrls() {
         var linkElements = document.getElementsByTagName("link");
@@ -15699,9 +15695,6 @@ function SPThemeUtils_module_def() {
             _withTheme(function ApplyThemeInfo(themeInfo) {
                 if (themeInfo == null) {
                     themeInfo = new Theming.ThemeInfo(null);
-                }
-                if (UseCdnForCss()) {
-                    themeInfo.IsDefault = false;
                 }
                 if (!Theming.Utilities.CanRecolorImages()) {
                     themeInfo.NoImageRecoloring = true;
