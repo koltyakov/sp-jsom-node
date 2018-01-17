@@ -2,9 +2,9 @@ import { initEnvironment as init } from './utils/init';
 
 init().then(async settings => {
 
-  const clientContext: SP.ClientContext = SP.ClientContext.get_current();
-  let oWeb: SP.Web = clientContext.get_web();
-  let oLists: SP.ListCollection = oWeb.get_lists();
+  const clientContext = SP.ClientContext.get_current();
+  let oWeb = clientContext.get_web();
+  let oLists = oWeb.get_lists();
 
   clientContext.load(oLists, 'Include(Id,Title)');
 
@@ -15,7 +15,7 @@ init().then(async settings => {
   console.log('Lists', listsTitlesArr);
 
   // Just an items from a random list
-  let oItems: SP.ListItemCollection = (oLists.getByTitle('TestList') as any).getItems('');
+  let oItems = oLists.getByTitle('TestList').getItems(new SP.CamlQuery());
 
   clientContext.load(oItems, 'Include(Title)');
 
