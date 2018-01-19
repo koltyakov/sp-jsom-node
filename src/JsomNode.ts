@@ -1,3 +1,5 @@
+/// <reference path="./../node_modules/@types/sharepoint/index.d.ts" />
+
 import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
@@ -16,6 +18,7 @@ import { executeQueryPromise } from './extensions/executeQueryPromise';
 // Import JSOM ententions
 
 declare let global: any;
+
 declare let sp_initialize: any;
 
 export class JsomNode {
@@ -213,7 +216,7 @@ export class JsomNode {
     (() => {
 
       // Extending ClientContext
-      SP.ClientRuntimeContext.prototype.executeQueryPromise = function (): Promise<void> {
+      (SP as any).ClientRuntimeContext.prototype.executeQueryPromise = function (): Promise<void> {
         return executeQueryPromise(this);
       };
 
