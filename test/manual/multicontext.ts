@@ -30,7 +30,7 @@ const jsom2 = new JsomNode(jsomConf2); // Environment 2
 
   await ctx1.executeQueryPromise();
 
-  console.log(`Web 1: `, oWeb1.get_title());
+  console.log(`Web 1: `, oWeb1.get_title().length + ' chars');
 
   // Switching to env2
 
@@ -43,7 +43,7 @@ const jsom2 = new JsomNode(jsomConf2); // Environment 2
 
   await ctx2.executeQueryPromise();
 
-  console.log(`Web 2: `, oWeb2.get_title());
+  console.log(`Web 2: `, oWeb2.get_title().length + ' chars');
 
   // Switching to env1
 

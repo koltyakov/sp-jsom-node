@@ -264,8 +264,8 @@ export class JsomNode {
 
           let jsomHeaders = !isJsom ? {} : {
             'X-Requested-With': 'XMLHttpRequest',
-            'X-RequestDigest': digest,
-            'Content-Length': wReq._body && wReq._body.length
+            'X-RequestDigest': digest
+            // 'Content-Length': wReq._body && wReq._body.length
           };
 
           if (wReq._httpVerb.toLowerCase() === 'post') {
