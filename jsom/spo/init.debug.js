@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7303,
-                "rpr": 1208
+                "rup": 7407,
+                "rpr": 1206
             }
         };
     }
@@ -6673,20 +6673,11 @@ function UpdateUrlWhenServerRedirects() {
     }
 }
 function OnePageNavigationHandler(evt) {
-    var registerFunc;
+    var registerFunc = function registerOnePageNavigationFunc() {
+        performModernOnePageNavigationForFasterOnePage(evt);
+    };
 
-    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(77)) {
-        registerFunc = function registerOnePageNavigationFunc() {
-            performModernOnePageNavigationForFasterOnePage(evt);
-        };
-        EnsureScriptFunc('SP.core.js', "performModernOnePageNavigationForFasterOnePage", registerFunc);
-    }
-    else {
-        registerFunc = function registerOnePageNavigationFunc() {
-            performModernOnePageNavigation(evt);
-        };
-        EnsureScriptFunc('SP.core.js', "performModernOnePageNavigation", registerFunc);
-    }
+    EnsureScriptFunc('SP.core.js', "performModernOnePageNavigationForFasterOnePage", registerFunc);
 }
 function isBrowserSupportedModernApp() {
     var browserSupported = true;
@@ -6707,8 +6698,21 @@ function isBrowserSupportedModernApp() {
     catch (e) { }
     return browserSupported;
 }
+function UserHasPermissionHigh(permissionLevel) {
+    var pageContextInfo = window['_spPageContextInfo'];
+    var webPermMasks = pageContextInfo['webPermMasks'];
+    var webPermMasksHigh = webPermMasks != null ? Number(webPermMasks["High"]) : 0;
+    var hasPerm = (webPermMasksHigh & permissionLevel) == permissionLevel;
+
+    return hasPerm;
+}
+function ModernUXOptOutCookieIsOn() {
+    return GetCookie('splnu') === '0';
+}
 function PrepareForModernOnePageNavigation() {
-    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(1) && !(window["OffSwitch"] == null || OffSwitch.IsActive("79D8320F-D4AA-45D1-A83F-9B7AF522EE5C")) && isBrowserSupportedModernApp()) {
+    var SPBasePermissions_UseRemoteAPIs = 0x20;
+
+    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(1) && !(window["OffSwitch"] == null || OffSwitch.IsActive("79D8320F-D4AA-45D1-A83F-9B7AF522EE5C")) && isBrowserSupportedModernApp() && (window["OffSwitch"] == null || OffSwitch.IsActive("32012162-C12F-453D-A7EF-E00E74140C44") || UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn())) {
         var docLibLinks = document.querySelectorAll('[onepagenavigationaction="1"]');
 
         for (var index = 0; index < docLibLinks.length; index++) {
@@ -14431,6 +14435,14 @@ function PerformanceLogger_module_def() {
             }
             dataState = collected ? PerformanceDataState.ReadyToUpload : PerformanceDataState.Incomplete;
             if (dataState === PerformanceDataState.Incomplete) {
+                if (!(window["OffSwitch"] == null || OffSwitch.IsActive("5DB2EE36-96C7-495F-877E-79DCAFC6ED72"))) {
+                    that.WriteServerCorrelationId();
+                    WriteServerUrl();
+                    that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
+                    if (ReadyToComputeEUPL()) {
+                        SetEUPLAndControlData();
+                    }
+                }
                 if (Number((new Date()).getTime()) - Number(dataStartTime) > errorTimeOut) {
                     dataState = PerformanceDataState.TimeOut;
                     UploadPerfData();
@@ -14439,11 +14451,13 @@ function PerformanceLogger_module_def() {
                     });
                 }
                 else {
-                    that.WriteServerCorrelationId();
-                    WriteServerUrl();
-                    that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
-                    if (ReadyToComputeEUPL()) {
-                        SetEUPLAndControlData();
+                    if (window["OffSwitch"] == null || OffSwitch.IsActive("5DB2EE36-96C7-495F-877E-79DCAFC6ED72")) {
+                        that.WriteServerCorrelationId();
+                        WriteServerUrl();
+                        that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
+                        if (ReadyToComputeEUPL()) {
+                            SetEUPLAndControlData();
+                        }
                     }
                 }
             }
@@ -14611,7 +14625,7 @@ function PerformanceLogger_module_def() {
         function ReadyToComputeEUPL() {
             var ready = true;
 
-            if (IsNullOrUndefined(expectedControls) || IsNullOrUndefined(controls)) {
+            if (IsNullOrUndefined(expectedControls) || IsNullOrUndefined(controls) || expectedControls.length === 0 || controls.length === 0) {
                 return false;
             }
             for (var index = 0; index < expectedControls.length; index++) {
@@ -14643,7 +14657,7 @@ function PerformanceLogger_module_def() {
             }
             var eupl = 0;
 
-            if (IsNullOrUndefined(controls)) {
+            if (IsNullOrUndefined(controls) || controls.length === 0) {
                 return;
             }
             for (var index = 0; index < controls.length; index++) {
@@ -15259,8 +15273,10 @@ function SPThemeUtils_module_def() {
     function UseClientSideTheming() {
         var wtGroup = 64;
         var wtCommSite = 68;
+        var wtSTS3 = "STS#3";
         var wt;
-        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(157) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite));
+        var wtConfiguration;
+        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(157) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite || (wtConfiguration = GetWebTemplateConfiguration()) == wtSTS3));
         var useCST = featureEnabled && typeof Theming !== strUndefined;
 
         return useCST;
@@ -15434,6 +15450,15 @@ function SPThemeUtils_module_def() {
             webTemplate = parseInt(strWebTemplate);
         }
         return webTemplate;
+    }
+    function GetWebTemplateConfiguration() {
+        var webTemplateConfiguration = null;
+        var strWebTemplateConfiguration = GetPageContextInfoProperty("webTemplateConfiguration");
+
+        if (strWebTemplateConfiguration != null) {
+            webTemplateConfiguration = strWebTemplateConfiguration;
+        }
+        return webTemplateConfiguration;
     }
     function UserCannotFetchTheme() {
         var SPBasePermissions_Open = 0x10000;

@@ -139,6 +139,7 @@ Strings.STS.L_ViewPivots_View_alt='View';
 Strings.STS.L_SPDiscSortMyPosts='My discussions';
 Strings.STS.L_MyDocsSharedWithMeNoDocuments='No one is sharing a document with you at this time.';
 Strings.STS.L_SPClientNew='new';
+Strings.STS.L_OldPanel_CloseText='Close panel';
 Strings.STS.L_SPClientAddToOneDrive='add to my OneDrive';
 Strings.STS.L_Loading_Text='Working on it...';
 Strings.STS.L_SaveThisViewButton='Save This View';

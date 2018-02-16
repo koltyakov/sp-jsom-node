@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 7303,
-            "rpr": 1208
+            "rup": 7407,
+            "rpr": 1206
         }
     };
 }
@@ -13279,6 +13279,16 @@ SP.List.prototype = {
             delete parentNode.WriteSecurity;
         }
     },
+    getWebDavUrl: function SP_List$getWebDavUrl(sourceUrl) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetWebDavUrl', [sourceUrl]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.StringResult();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
     getBloomFilter: function SP_List$getBloomFilter(startItemId) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -13432,16 +13442,6 @@ SP.List.prototype = {
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetSpecialFolderUrl', [type, bForceCreate, existingFolderGuid]);
-
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.StringResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    getWebDavUrl: function SP_List$getWebDavUrl(sourceUrl) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetWebDavUrl', [sourceUrl]);
 
         $v_0.addQuery($v_2);
         $v_1 = new SP.StringResult();
@@ -23464,12 +23464,6 @@ SP.Site.prototype = {
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
-    extendUpgradeReminderDate: function SP_Site$extendUpgradeReminderDate() {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'ExtendUpgradeReminderDate', null);
-
-        $v_0.addQuery($v_1);
-    },
     getWebTemplates: function SP_Site$getWebTemplates(LCID, overrideCompatLevel) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -23502,6 +23496,12 @@ SP.Site.prototype = {
             $v_2[typeCatalog] = $v_1;
         }
         return $v_1;
+    },
+    extendUpgradeReminderDate: function SP_Site$extendUpgradeReminderDate() {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'ExtendUpgradeReminderDate', null);
+
+        $v_0.addQuery($v_1);
     },
     invalidate: function SP_Site$invalidate() {
         var $v_0 = this.get_context();
@@ -27912,6 +27912,13 @@ SP.Web.prototype = {
 
         $v_0.addQuery($v_1);
     },
+    getPushNotificationSubscriber: function SP_Web$getPushNotificationSubscriber(deviceAppInstanceId) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.PushNotificationSubscriber($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetPushNotificationSubscriber', [deviceAppInstanceId]));
+        return $v_1;
+    },
     getUserById: function SP_Web$getUserById(userId) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -28027,13 +28034,6 @@ SP.Web.prototype = {
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
-    getPushNotificationSubscriber: function SP_Web$getPushNotificationSubscriber(deviceAppInstanceId) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.PushNotificationSubscriber($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetPushNotificationSubscriber', [deviceAppInstanceId]));
-        return $v_1;
-    },
     getAvailableWebTemplates: function SP_Web$getAvailableWebTemplates(lcid, doIncludeCrossLanguage) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -28079,6 +28079,48 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.ChangeCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetChanges', [query]));
+        return $v_1;
+    },
+    getFileById: function SP_Web$getFileById(uniqueId) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileById', [uniqueId]));
+        return $v_1;
+    },
+    getFolderById: function SP_Web$getFolderById(uniqueId) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.Folder($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFolderById', [uniqueId]));
+        return $v_1;
+    },
+    getFileByLinkingUrl: function SP_Web$getFileByLinkingUrl(linkingUrl) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByLinkingUrl', [linkingUrl]));
+        return $v_1;
+    },
+    getFileByGuestUrl: function SP_Web$getFileByGuestUrl(guestUrl) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByGuestUrl', [guestUrl]));
+        return $v_1;
+    },
+    getFileByGuestUrlEnsureAccess: function SP_Web$getFileByGuestUrlEnsureAccess(guestUrl, ensureAccess) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByGuestUrlEnsureAccess', [guestUrl, ensureAccess]));
+        return $v_1;
+    },
+    getFileByWOPIFrameUrl: function SP_Web$getFileByWOPIFrameUrl(wopiFrameUrl) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByWOPIFrameUrl', [wopiFrameUrl]));
         return $v_1;
     },
     getFileByUrl: function SP_Web$getFileByUrl(fileUrl) {
@@ -28271,48 +28313,6 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.List($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'DefaultDocumentLibrary', null));
-        return $v_1;
-    },
-    getFileById: function SP_Web$getFileById(uniqueId) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileById', [uniqueId]));
-        return $v_1;
-    },
-    getFolderById: function SP_Web$getFolderById(uniqueId) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.Folder($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFolderById', [uniqueId]));
-        return $v_1;
-    },
-    getFileByLinkingUrl: function SP_Web$getFileByLinkingUrl(linkingUrl) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByLinkingUrl', [linkingUrl]));
-        return $v_1;
-    },
-    getFileByGuestUrl: function SP_Web$getFileByGuestUrl(guestUrl) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByGuestUrl', [guestUrl]));
-        return $v_1;
-    },
-    getFileByGuestUrlEnsureAccess: function SP_Web$getFileByGuestUrlEnsureAccess(guestUrl, ensureAccess) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByGuestUrlEnsureAccess', [guestUrl, ensureAccess]));
-        return $v_1;
-    },
-    getFileByWOPIFrameUrl: function SP_Web$getFileByWOPIFrameUrl(wopiFrameUrl) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByWOPIFrameUrl', [wopiFrameUrl]));
         return $v_1;
     },
     incrementSiteClientTag: function SP_Web$incrementSiteClientTag() {
