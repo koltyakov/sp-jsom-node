@@ -1,5 +1,3 @@
-/// <reference path="./../node_modules/@types/sharepoint/index.d.ts" />
-
 import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';

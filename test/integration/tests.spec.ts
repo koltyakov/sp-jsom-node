@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import * as mocha from 'mocha';
 import * as path from 'path';
 import * as sprequest from 'sp-request';
 import { Cpass } from 'cpass';
