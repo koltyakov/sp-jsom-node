@@ -107,10 +107,7 @@ export class JsomNode {
         //
       },
       _spPageContextInfo: {
-        webServerRelativeUrl: `/${
-        this.settings.siteUrl
-          .replace('://', '___').split('/').slice(1, 100).join('/')
-        }`
+        webServerRelativeUrl: `/${this.settings.siteUrl.split('/').splice(3, 100).join('/')}`
       }
     };
 
@@ -244,10 +241,7 @@ export class JsomNode {
     this.request = this.getCachedRequest();
     (Sys.Net as any)._WebRequestManager.prototype.executeRequest = (wReq: any) => {
 
-      let hostUrl = this.settings.siteUrl
-        .replace('://', '___')
-        .split('/')[0]
-        .replace('___', '://');
+      let hostUrl = this.settings.siteUrl.split('/').splice(0, 3).join('/');
 
       let requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
 
