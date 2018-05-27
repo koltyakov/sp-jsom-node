@@ -7,7 +7,7 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7407,
+                "rup": 7716,
                 "rpr": 1206
             }
         };
@@ -1756,6 +1756,12 @@ function $_global_init() {
         "3": "ms-status-yellow",
         "2": "ms-status-green",
         "1": "ms-status-blue"
+    };
+    ColorMap = {
+        red: 4,
+        yellow: 3,
+        green: 2,
+        blue: 1
     };
     g_uniqueIndex = 0;
     g_dlgWndTop = null;
@@ -9817,7 +9823,10 @@ function GoToModern(bReturn) {
     if (typeof SP != "undefined" && SP != null && SP.QoS != null)
         SP.QoS.WriteUserEngagement(bReturn ? "Return_To_Modern_UX" : "Go_To_Modern_UX");
     document.cookie = "splnu=1;path=/";
-    window.location.reload();
+    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("9AC29D85-49C4-41FC-B1E2-5BB42628DC6C")) && browseris.ie && !browseris.ie11up)
+        window.open(window.location.href, '_blank');
+    else
+        window.location.reload();
 }
 function IsXhrAborted(xhr) {
     try {
@@ -12292,6 +12301,7 @@ var StatusIdWithTopPriority;
 var StatusColorWithTopPriority;
 var StatusPriority;
 var StatusBarClassNames;
+var ColorMap;
 
 function getStatusTitle(statusId) {
     switch (statusId) {
@@ -12340,6 +12350,26 @@ function addStatus(strTitle, strHtml, atBegining, isVanilla, bIsDismissible, dis
         return st.id;
     }
     return null;
+}
+function addHybridTooltipDiv(strTitle, strHtml, strColor, isVanilla, bIsDismissible, dismissAltText) {
+    var hybridTooltipDiv = document.createElement("div");
+
+    if (Boolean(hybridTooltipDiv)) {
+        hybridTooltipDiv.id = "hybridTooltipStatusBar";
+        hybridTooltipDiv.setAttribute("aria-live", "polite");
+        hybridTooltipDiv.setAttribute("aria-relevant", "all");
+        hybridTooltipDiv.style.display = "block";
+        if (typeof strColor == 'string' && strColor in ColorMap) {
+            hybridTooltipDiv.className = StatusBarClassNames[ColorMap[strColor]];
+        }
+        var deltaPageStatusBar = document.getElementById("DeltaPageStatusBar");
+
+        deltaPageStatusBar.appendChild(hybridTooltipDiv);
+        var st = _createStatusMarkup(strTitle, strHtml, true, isVanilla, bIsDismissible, dismissAltText);
+
+        hybridTooltipDiv.appendChild(st);
+    }
+    return hybridTooltipDiv;
 }
 function appendStatus(sid, strTitle, strHtml) {
     var sb = document.getElementById("pageStatusBar");
@@ -15617,6 +15647,32 @@ function SPThemeUtils_module_def() {
         return Theming.Utilities.MakeFixupCallbackForCssFile(originalUrl);
     }
     function RegisterCssReferences(cssRefs) {
+        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("B11B9DA7-DAFA-4237-B593-ECBA1E3B888D")) && cssRefs != null) {
+            var tmpLink = document.createElement("a");
+
+            for (var i = 0; i < cssRefs.length; i++) {
+                var cssRef = cssRefs[i];
+
+                if (cssRef == null)
+                    continue;
+                var url = cssRef.Url;
+                var originalUrl = cssRef.OriginalUrl;
+                var id = cssRef.Id;
+
+                if (Boolean(url) && Boolean(id)) {
+                    tmpLink.href = url;
+                    var normalizedUrl = tmpLink.href;
+                    var element = document.getElementById(id);
+
+                    if (element != null && element.href != normalizedUrl) {
+                        cssRef.Url = element.href;
+                        if (originalUrl == url) {
+                            cssRef.OriginalUrl = element.href;
+                        }
+                    }
+                }
+            }
+        }
         (GetPageManager()).RegisterCssReferences(cssRefs, null);
     }
     function RestoreCssLinksToOriginalUrls() {
@@ -15837,7 +15893,7 @@ function SuiteNavRendering_module_def() {
         var suiteNavThemingModuleDefined = window["SuiteNavTheming"] != null;
         var suiteIsThemed = SPThemeUtils.IsSiteThemed() || suiteNavThemingModuleDefined && SuiteNavTheming.GetSuiteNavThemeColorsOverride() != null;
 
-        if (suiteIsThemed && suiteNavThemingModuleDefined) {
+        if (suiteNavThemingModuleDefined) {
             SuiteNavTheming.WithSuiteThemingCss(function(suiteThemingCss) {
                 additionalCssText = suiteThemingCss;
                 if (suiteDataObject != null)
@@ -15879,6 +15935,7 @@ function SuiteNavRendering_module_def() {
             linksData.ClientData = JSON.stringify({
                 "IsRTL": document.documentElement.getAttribute('dir') == "rtl",
                 "IsFallbackShell": true,
+                "ShowAppLauncherV3": true,
                 "SignInLink": objSignInLink
             });
             RemoveEmtpyArraysFromSuiteNavData(linksData);
@@ -16139,15 +16196,8 @@ function SuiteNavRendering_module_def() {
         if (linksData.UserDisplayName == null) {
             var userNameDiv = document.getElementById("SuiteNavUserName");
 
-            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("13D9D3F9-5EDF-41A0-8178-A7C87C2EF82F"))) {
-                if (userNameDiv != null && Boolean(userNameDiv.textContent)) {
-                    linksData.UserDisplayName = userNameDiv.textContent;
-                }
-            }
-            else {
-                if (userNameDiv != null && Boolean(userNameDiv.innerHTML)) {
-                    linksData.UserDisplayName = userNameDiv.innerHTML;
-                }
+            if (userNameDiv != null && Boolean(userNameDiv.textContent)) {
+                linksData.UserDisplayName = userNameDiv.textContent;
             }
         }
         var scriptEncodedSlashUppercase = "\\U002F";

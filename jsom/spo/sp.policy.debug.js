@@ -77,16 +77,17 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
     $8_1: false,
     $9_1: false,
     $A_1: null,
-    $B_1: false,
+    $B_1: null,
     $C_1: false,
-    $D_1: null,
-    $E_1: false,
-    $F_1: null,
+    $D_1: false,
+    $E_1: null,
+    $F_1: false,
     $G_1: null,
-    $H_1: 0,
-    $I_1: null,
+    $H_1: null,
+    $I_1: 0,
     $J_1: null,
     $K_1: null,
+    $L_1: null,
     
     get_acceptMessagesOnlyFromSendersOrMembers: function SP_CompliancePolicy_ComplianceTag$get_acceptMessagesOnlyFromSendersOrMembers() {
         return this.$3_1;
@@ -120,44 +121,48 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         return this.$A_1;
     },
     
-    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
+    get_encryptionRMSTemplateId: function SP_CompliancePolicy_ComplianceTag$get_encryptionRMSTemplateId() {
         return this.$B_1;
     },
     
-    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
+    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
         return this.$C_1;
     },
     
-    get_notes: function SP_CompliancePolicy_ComplianceTag$get_notes() {
+    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
         return this.$D_1;
     },
     
-    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
+    get_notes: function SP_CompliancePolicy_ComplianceTag$get_notes() {
         return this.$E_1;
     },
     
-    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
+    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
         return this.$F_1;
     },
     
-    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
+    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
         return this.$G_1;
     },
     
-    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
         return this.$H_1;
     },
     
-    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
         return this.$I_1;
     },
     
-    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
         return this.$J_1;
     },
     
-    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
         return this.$K_1;
+    },
+    
+    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+        return this.$L_1;
     },
     
     get_typeId: function SP_CompliancePolicy_ComplianceTag$get_typeId() {
@@ -171,7 +176,7 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'HasRetentionAction', 'IsEventTag', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
+        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -219,54 +224,59 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
             this.$A_1 = ($v_0);
             delete parentNode.DisplayName;
         }
-        $v_0 = parentNode.HasRetentionAction;
+        $v_0 = parentNode.EncryptionRMSTemplateId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$B_1 = ($v_0);
+            delete parentNode.EncryptionRMSTemplateId;
+        }
+        $v_0 = parentNode.HasRetentionAction;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$C_1 = ($v_0);
             delete parentNode.HasRetentionAction;
         }
         $v_0 = parentNode.IsEventTag;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$C_1 = ($v_0);
+            this.$D_1 = ($v_0);
             delete parentNode.IsEventTag;
         }
         $v_0 = parentNode.Notes;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$D_1 = ($v_0);
+            this.$E_1 = ($v_0);
             delete parentNode.Notes;
         }
         $v_0 = parentNode.RequireSenderAuthenticationEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$E_1 = ($v_0);
+            this.$F_1 = ($v_0);
             delete parentNode.RequireSenderAuthenticationEnabled;
         }
         $v_0 = parentNode.ReviewerEmail;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$F_1 = ($v_0);
+            this.$G_1 = ($v_0);
             delete parentNode.ReviewerEmail;
         }
         $v_0 = parentNode.SharingCapabilities;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$G_1 = ($v_0);
+            this.$H_1 = ($v_0);
             delete parentNode.SharingCapabilities;
         }
         $v_0 = parentNode.TagDuration;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$H_1 = ($v_0);
+            this.$I_1 = ($v_0);
             delete parentNode.TagDuration;
         }
         $v_0 = parentNode.TagId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$I_1 = ($v_0);
+            this.$J_1 = ($v_0);
             delete parentNode.TagId;
         }
         $v_0 = parentNode.TagName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$J_1 = ($v_0);
+            this.$K_1 = ($v_0);
             delete parentNode.TagName;
         }
         $v_0 = parentNode.TagRetentionBasedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$K_1 = ($v_0);
+            this.$L_1 = ($v_0);
             delete parentNode.TagRetentionBasedOn;
         }
     }
@@ -1316,6 +1326,19 @@ SP.CompliancePolicy.SPPolicyDefinition.prototype = {
         return value;
     },
     
+    get_policyBlob: function SP_CompliancePolicy_SPPolicyDefinition$get_policyBlob() {
+        this.checkUninitializedProperty('PolicyBlob');
+        return ((this.get_objectData().get_properties()['PolicyBlob']));
+    },
+    
+    set_policyBlob: function SP_CompliancePolicy_SPPolicyDefinition$set_policyBlob(value) {
+        this.get_objectData().get_properties()['PolicyBlob'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'PolicyBlob', value));
+        }
+        return value;
+    },
+    
     get_priority: function SP_CompliancePolicy_SPPolicyDefinition$get_priority() {
         this.checkUninitializedProperty('Priority');
         return ((this.get_objectData().get_properties()['Priority']));
@@ -1441,6 +1464,11 @@ SP.CompliancePolicy.SPPolicyDefinition.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['Name'] = ($v_0);
             delete parentNode.Name;
+        }
+        $v_0 = parentNode.PolicyBlob;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['PolicyBlob'] = ($v_0);
+            delete parentNode.PolicyBlob;
         }
         $v_0 = parentNode.Priority;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -2220,6 +2248,31 @@ SP.CompliancePolicy.SPPolicyStoreProxy.getAvailableTagsForSiteLabel = function S
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
     return $v_0;
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.getListComplianceTag = function SP_CompliancePolicy_SPPolicyStoreProxy$getListComplianceTag(context, listUrl) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetListComplianceTag', [ listUrl ]);
+    context.addQuery($v_1);
+    $v_0 = new SP.CompliancePolicy.ComplianceTag();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setListComplianceTag = function SP_CompliancePolicy_SPPolicyStoreProxy$setListComplianceTag(context, listUrl, complianceTagValue, blockDelete, blockEdit, syncToItems) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetListComplianceTag', [ listUrl, complianceTagValue, blockDelete, blockEdit, syncToItems ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setListComplianceTagWithMetaInfo = function SP_CompliancePolicy_SPPolicyStoreProxy$setListComplianceTagWithMetaInfo(context, listUrl, complianceTagValue, blockDelete, blockEdit, complianceTagWrittenTime, userEmailAddress, syncToItems) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetListComplianceTagWithMetaInfo', [ listUrl, complianceTagValue, blockDelete, blockEdit, complianceTagWrittenTime, userEmailAddress, syncToItems ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     
     get_policyStoreUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_policyStoreUrl() {
@@ -2230,6 +2283,19 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     get_reviewCenterUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_reviewCenterUrl() {
         this.checkUninitializedProperty('ReviewCenterUrl');
         return ((this.get_objectData().get_properties()['ReviewCenterUrl']));
+    },
+    
+    get_supportContentTypeRetention: function SP_CompliancePolicy_SPPolicyStoreProxy$get_supportContentTypeRetention() {
+        this.checkUninitializedProperty('SupportContentTypeRetention');
+        return ((this.get_objectData().get_properties()['SupportContentTypeRetention']));
+    },
+    
+    set_supportContentTypeRetention: function SP_CompliancePolicy_SPPolicyStoreProxy$set_supportContentTypeRetention(value) {
+        this.get_objectData().get_properties()['SupportContentTypeRetention'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'SupportContentTypeRetention', value));
+        }
+        return value;
     },
     
     initPropertiesFromJson: function SP_CompliancePolicy_SPPolicyStoreProxy$initPropertiesFromJson(parentNode) {
@@ -2244,6 +2310,11 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['ReviewCenterUrl'] = ($v_0);
             delete parentNode.ReviewCenterUrl;
+        }
+        $v_0 = parentNode.SupportContentTypeRetention;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['SupportContentTypeRetention'] = ($v_0);
+            delete parentNode.SupportContentTypeRetention;
         }
     },
     
@@ -2870,6 +2941,7 @@ SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.identity = 'Identity';
 SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.lastModifiedBy = 'LastModifiedBy';
 SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.mode = 'Mode';
 SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.name = 'Name';
+SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.policyBlob = 'PolicyBlob';
 SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.priority = 'Priority';
 SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.scenario = 'Scenario';
 SP.CompliancePolicy.SPPolicyDefinitionPropertyNames.source = 'Source';
@@ -2902,6 +2974,7 @@ SP.CompliancePolicy.SPPolicyRulePropertyNames.whenChangedUTC = 'WhenChangedUTC';
 SP.CompliancePolicy.SPPolicyRulePropertyNames.whenCreatedUTC = 'WhenCreatedUTC';
 SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames.policyStoreUrl = 'PolicyStoreUrl';
 SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames.reviewCenterUrl = 'ReviewCenterUrl';
+SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames.supportContentTypeRetention = 'SupportContentTypeRetention';
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.farmLabel = 'FarmLabel';
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.scsEndPointUrl = 'ScsEndPointUrl';
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.searchFarmId = 'SearchFarmId';

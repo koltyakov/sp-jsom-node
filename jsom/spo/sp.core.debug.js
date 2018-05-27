@@ -6,7 +6,7 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 7407,
+            "rup": 7716,
             "rpr": 1206
         }
     };
@@ -3840,7 +3840,7 @@ SP.SlapiInternal.InsertedSignals.prototype = {
     SignalsSource: null,
     NumberOfDifferentUsers: 0
 };
-SP.SlapiInternal.SpoSignalToOls = function SP_SlapiInternal_SpoSignalToOls(pOlsCorrelationId, pSignalActionType, pSignalSuccessfullySent, pAppTokenDispatchTime, pSignalConversionTime, pAppTokenWaitTime, pMintTokenCreationTime, pPostTime, pTotalTime, pNumberOfAttempts, pErrorCode, pLogicalIdConstructedInSpo, pTokenReadFromCache, pHttpStatusCode, pOlsServerName, pTenantId, pActionToBatchTime, pBatchToSignalTime, pTotalTimeUserView, pSiteId, pEntitySet, pCorrelationId, pActorId, pUserAgent) {
+SP.SlapiInternal.SpoSignalToOls = function SP_SlapiInternal_SpoSignalToOls(pOlsCorrelationId, pSignalActionType, pSignalSuccessfullySent, pAppTokenDispatchTime, pSignalConversionTime, pAppTokenWaitTime, pMintTokenCreationTime, pPostTime, pTotalTime, pNumberOfAttempts, pErrorCode, pLogicalIdConstructedInSpo, pTokenReadFromCache, pHttpStatusCode, pOlsServerName, pTenantId, pActionToBatchTime, pBatchToSignalTime, pTotalTimeUserView, pSiteId, pEntitySet, pCorrelationId, pActorId, pUserAgent, pListId, pWebId, pUniqueId) {
     this.OlsCorrelationId = pOlsCorrelationId;
     this.SignalActionType = pSignalActionType;
     this.SignalSuccessfullySent = pSignalSuccessfullySent;
@@ -3865,6 +3865,9 @@ SP.SlapiInternal.SpoSignalToOls = function SP_SlapiInternal_SpoSignalToOls(pOlsC
     this.CorrelationId = pCorrelationId;
     this.ActorId = pActorId;
     this.UserAgent = pUserAgent;
+    this.ListId = pListId;
+    this.WebId = pWebId;
+    this.UniqueId = pUniqueId;
 };
 SP.SlapiInternal.SpoSignalToOls.prototype = {
     OlsCorrelationId: null,
@@ -3890,7 +3893,10 @@ SP.SlapiInternal.SpoSignalToOls.prototype = {
     EntitySet: null,
     CorrelationId: null,
     ActorId: null,
-    UserAgent: null
+    UserAgent: null,
+    ListId: null,
+    WebId: null,
+    UniqueId: null
 };
 SP.SlapiInternal.PSCacheLog = function SP_SlapiInternal_PSCacheLog(pLoggingKey, pCacheContainer, pIsCacheHit, pDurationMilliseconds) {
     this.LoggingKey = pLoggingKey;
@@ -3980,7 +3986,7 @@ SP.SlapiInternal.RUMUsage.prototype = {
     ParallelDownloadStart: 0,
     ParallelDownloadEnd: 0
 };
-SP.SlapiInternal.RUMOne = function SP_SlapiInternal_RUMOne(pServerCorrelationId, pScenarioId, pEUPL, pServerUrl, pBrowser, pClientIP, pUserAgent, pFlights, pPageTransitionType, pAppCache, pFolderNav, pInitiationTimeOffset, pServerRequestDuration, pIISLatency, pTTFB, pTTLB, pParseTime, pRenderTime, pControl1Id, pControl1RenderTime, pControl2Id, pControl2RenderTime, pControl3Id, pControl3RenderTime, pControl4Id, pControl4RenderTime, pSharePointRequestCountTotal, pSharePointRequestCountASPX, pSharePointRequestCountJS, pSharePointRequestCountCSS, pSharePointRequestCountIMG, pSharePointRequestCountNoneCached, pSharePointRequestBytes, pSharePointRequestDownloadTime, pCDNRequestCountTotal, pCDNRequestCountASPX, pCDNRequestCountJS, pCDNRequestCountCSS, pCDNRequestCountIMG, pCDNRequestCountNoneCached, pCDNRequestBytes, pCDNRequestDownloadTime, pThirdPartyRequestCountTotal, pThirdPartyRequestCountASPX, pThirdPartyRequestCountJS, pThirdPartyRequestCountCSS, pThirdPartyRequestCountIMG, pThirdPartyRequestCountNoneCached, pThirdPartyRequestBytes, pThirdPartyRequestDownloadTime, pFromEdge, pAPICallCount, pAPICallDurationSum, pPreRender, pDataFetch, pPostRender, pW3cNavigationStart, pW3cUnloadEventStart, pW3cUnloadEventEnd, pW3cFetchStart, pW3cRedirectStart, pW3cRedirectEnd, pW3cDomainLookupStart, pW3cDomainLookupEnd, pW3cConnectStart, pW3cSecureConnectStart, pW3cConnectEnd, pW3cRequestStart, pW3cResponseStart, pW3cResponseEnd, pW3cDomLoading, pW3cDomLoadEnd, pW3cLoadEventStart, pW3cLoadEventEnd, pMDSDownloadStart, pMDSParseDeltaStart, pMDSParseDeltaEnd, pMDSGCStart, pMDSGCEnd, pMDSCSSStart, pMDSCSSEnd, pMDSInnerHTMLStart, pMDSScriptLoaderStart, pMDSScriptLoaderEnd, pMDSAnimationStart, pMDSAnimationEnd, pMDSParallelDownloadStart, pMDSParallelDownloadEnd, pAPICalls, pSharePointRequestNames, pCDNRequestNames, pThirdPartyRequestNames, pEUPLBreakdown, pControl5Id, pControl5RenderTime, pControl6Id, pControl6RenderTime, pControl7Id, pControl7RenderTime, pControl8Id, pControl8RenderTime, pControl9Id, pControl9RenderTime, pControl10Id, pControl10RenderTime, pServerMetrics, pReferrer, pBrowserIsMobile, pSharePointServerVersion, pRUMOneError) {
+SP.SlapiInternal.RUMOne = function SP_SlapiInternal_RUMOne(pServerCorrelationId, pScenarioId, pEUPL, pServerUrl, pBrowser, pClientIP, pUserAgent, pFlights, pPageTransitionType, pAppCache, pFolderNav, pInitiationTimeOffset, pServerRequestDuration, pIISLatency, pTTFB, pTTLB, pParseTime, pRenderTime, pControl1Id, pControl1RenderTime, pControl2Id, pControl2RenderTime, pControl3Id, pControl3RenderTime, pControl4Id, pControl4RenderTime, pSharePointRequestCountTotal, pSharePointRequestCountASPX, pSharePointRequestCountJS, pSharePointRequestCountCSS, pSharePointRequestCountIMG, pSharePointRequestCountNoneCached, pSharePointRequestBytes, pSharePointRequestDownloadTime, pCDNRequestCountTotal, pCDNRequestCountASPX, pCDNRequestCountJS, pCDNRequestCountCSS, pCDNRequestCountIMG, pCDNRequestCountNoneCached, pCDNRequestBytes, pCDNRequestDownloadTime, pThirdPartyRequestCountTotal, pThirdPartyRequestCountASPX, pThirdPartyRequestCountJS, pThirdPartyRequestCountCSS, pThirdPartyRequestCountIMG, pThirdPartyRequestCountNoneCached, pThirdPartyRequestBytes, pThirdPartyRequestDownloadTime, pFromEdge, pAPICallCount, pAPICallDurationSum, pPreRender, pDataFetch, pPostRender, pW3cNavigationStart, pW3cUnloadEventStart, pW3cUnloadEventEnd, pW3cFetchStart, pW3cRedirectStart, pW3cRedirectEnd, pW3cDomainLookupStart, pW3cDomainLookupEnd, pW3cConnectStart, pW3cSecureConnectStart, pW3cConnectEnd, pW3cRequestStart, pW3cResponseStart, pW3cResponseEnd, pW3cDomLoading, pW3cDomLoadEnd, pW3cLoadEventStart, pW3cLoadEventEnd, pMDSDownloadStart, pMDSParseDeltaStart, pMDSParseDeltaEnd, pMDSGCStart, pMDSGCEnd, pMDSCSSStart, pMDSCSSEnd, pMDSInnerHTMLStart, pMDSScriptLoaderStart, pMDSScriptLoaderEnd, pMDSAnimationStart, pMDSAnimationEnd, pMDSParallelDownloadStart, pMDSParallelDownloadEnd, pAPICalls, pSharePointRequestNames, pCDNRequestNames, pThirdPartyRequestNames, pEUPLBreakdown, pControl5Id, pControl5RenderTime, pControl6Id, pControl6RenderTime, pControl7Id, pControl7RenderTime, pControl8Id, pControl8RenderTime, pControl9Id, pControl9RenderTime, pControl10Id, pControl10RenderTime, pServerMetrics, pReferrer, pBrowserIsMobile, pSharePointServerVersion, pRUMOneError, pPUID, pUserLoginName) {
     this.ServerCorrelationId = pServerCorrelationId;
     this.ScenarioId = pScenarioId;
     this.EUPL = pEUPL;
@@ -4091,6 +4097,8 @@ SP.SlapiInternal.RUMOne = function SP_SlapiInternal_RUMOne(pServerCorrelationId,
     this.BrowserIsMobile = pBrowserIsMobile;
     this.SharePointServerVersion = pSharePointServerVersion;
     this.RUMOneError = pRUMOneError;
+    this.PUID = pPUID;
+    this.UserLoginName = pUserLoginName;
 };
 SP.SlapiInternal.RUMOne.prototype = {
     ServerCorrelationId: null,
@@ -4202,7 +4210,9 @@ SP.SlapiInternal.RUMOne.prototype = {
     Referrer: null,
     BrowserIsMobile: false,
     SharePointServerVersion: null,
-    RUMOneError: null
+    RUMOneError: null,
+    PUID: null,
+    UserLoginName: null
 };
 SP.SlapiInternal.RUMOneErrors = function SP_SlapiInternal_RUMOneErrors(pReason, pMessage) {
     this.Reason = pReason;
