@@ -84,10 +84,11 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
     $F_1: false,
     $G_1: null,
     $H_1: null,
-    $I_1: 0,
-    $J_1: null,
+    $I_1: false,
+    $J_1: 0,
     $K_1: null,
     $L_1: null,
+    $M_1: null,
     
     get_acceptMessagesOnlyFromSendersOrMembers: function SP_CompliancePolicy_ComplianceTag$get_acceptMessagesOnlyFromSendersOrMembers() {
         return this.$3_1;
@@ -149,20 +150,24 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         return this.$H_1;
     },
     
-    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+    get_superLock: function SP_CompliancePolicy_ComplianceTag$get_superLock() {
         return this.$I_1;
     },
     
-    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
         return this.$J_1;
     },
     
-    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
         return this.$K_1;
     },
     
-    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
         return this.$L_1;
+    },
+    
+    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+        return this.$M_1;
     },
     
     get_typeId: function SP_CompliancePolicy_ComplianceTag$get_typeId() {
@@ -176,7 +181,7 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
+        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'SuperLock', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -259,24 +264,29 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
             this.$H_1 = ($v_0);
             delete parentNode.SharingCapabilities;
         }
-        $v_0 = parentNode.TagDuration;
+        $v_0 = parentNode.SuperLock;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$I_1 = ($v_0);
+            delete parentNode.SuperLock;
+        }
+        $v_0 = parentNode.TagDuration;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$J_1 = ($v_0);
             delete parentNode.TagDuration;
         }
         $v_0 = parentNode.TagId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$J_1 = ($v_0);
+            this.$K_1 = ($v_0);
             delete parentNode.TagId;
         }
         $v_0 = parentNode.TagName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$K_1 = ($v_0);
+            this.$L_1 = ($v_0);
             delete parentNode.TagName;
         }
         $v_0 = parentNode.TagRetentionBasedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$L_1 = ($v_0);
+            this.$M_1 = ($v_0);
             delete parentNode.TagRetentionBasedOn;
         }
     }
@@ -2362,6 +2372,28 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'OpenBinaryStreamForOriginalItem', [ itemId ]);
+        $v_0.addQuery($v_2);
+        $v_1 = (([]));
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    
+    addDynamicScopeBinding: function SP_CompliancePolicy_SPPolicyStoreProxy$addDynamicScopeBinding(identity, siteId) {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'AddDynamicScopeBinding', [ identity, siteId ]);
+        $v_0.addQuery($v_1);
+    },
+    
+    deleteDynamicScopeBinding: function SP_CompliancePolicy_SPPolicyStoreProxy$deleteDynamicScopeBinding(identity, siteId) {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteDynamicScopeBinding', [ identity, siteId ]);
+        $v_0.addQuery($v_1);
+    },
+    
+    getDynamicScopeBindingBySiteId: function SP_CompliancePolicy_SPPolicyStoreProxy$getDynamicScopeBindingBySiteId(siteId) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetDynamicScopeBindingBySiteId', [ siteId ]);
         $v_0.addQuery($v_2);
         $v_1 = (([]));
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);

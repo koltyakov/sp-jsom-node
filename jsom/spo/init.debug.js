@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7716,
-                "rpr": 1206
+                "rup": 7820,
+                "rpr": 1204
             }
         };
     }
@@ -9975,7 +9975,7 @@ function EnsureIMNControl() {
                     IMNControlObj.OnStatusChange = IMNOnStatusChange;
             }
             else if (browseris.ie5up) {
-                if (Boolean(window.ActiveXObject)) {
+                if (Boolean(window.ActiveXObject) || "ActiveXObject" in window) {
                     IMNControlObj = new ActiveXObject("Name.NameCtrl.1");
                     if (IMNControlObj && serverPresenceEnabled) {
                         var onStatusChange;
@@ -13934,10 +13934,8 @@ function CacheLogger_module_def() {
             storageSize = getStorageSize(storageSize);
             var haveData = false;
 
-            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("D6FA4689-03B2-493E-A113-C03B78D9DA53"))) {
-                if (!Boolean(ariaLogger) || typeof ariaLogger.isInitialized != "function") {
-                    ensureAriaLogger();
-                }
+            if (!Boolean(ariaLogger) || typeof ariaLogger.isInitialized != "function") {
+                ensureAriaLogger();
             }
             for (var i = 0; i < storageSize; i++) {
                 var dataItemStr = BrowserStorage.session.getItem(storagePrefix + i.toString());
@@ -13947,15 +13945,13 @@ function CacheLogger_module_def() {
 
                     logger.WriteLog(String(dataItem.name), dataItem.props);
                     haveData = true;
-                    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("D6FA4689-03B2-493E-A113-C03B78D9DA53"))) {
-                        var ev = setAriaEvent(String(dataItem.name), dataItem.props);
+                    var ev = setAriaEvent(String(dataItem.name), dataItem.props);
 
-                        if (Boolean(ariaLogger) && typeof ariaLogger.isInitialized == "function") {
-                            ariaLogger.safeLogEvent(ev);
-                        }
-                        else {
-                            ensureAriaLogger(ev);
-                        }
+                    if (Boolean(ariaLogger) && typeof ariaLogger.isInitialized == "function") {
+                        ariaLogger.safeLogEvent(ev);
+                    }
+                    else {
+                        ensureAriaLogger(ev);
                     }
                 }
                 catch (e) {
@@ -13964,19 +13960,7 @@ function CacheLogger_module_def() {
             }
             if (!haveData)
                 return;
-            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("D6FA4689-03B2-493E-A113-C03B78D9DA53"))) {
-                ensureSessionID();
-            }
-            else {
-                if (typeof window[SessionID] == "undefined") {
-                    if (typeof g_correlationId == "string" && g_correlationId != null) {
-                        window[SessionID] = g_correlationId;
-                    }
-                    else {
-                        window[SessionID] = generateGuid();
-                    }
-                }
-            }
+            ensureSessionID();
             logger.SetCorrelationId(window[SessionID]);
             logger.UploadData();
             storageSize = 0;

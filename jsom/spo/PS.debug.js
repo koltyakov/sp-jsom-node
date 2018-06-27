@@ -5377,6 +5377,19 @@ PS.DraftTask.prototype = {
         return value;
     },
     
+    get_isEffortDriven: function PS_DraftTask$get_isEffortDriven() {ULSyTi:;
+        this.checkUninitializedProperty('IsEffortDriven');
+        return ((this.get_objectData().get_properties()['IsEffortDriven']));
+    },
+    
+    set_isEffortDriven: function PS_DraftTask$set_isEffortDriven(value) {ULSyTi:;
+        this.get_objectData().get_properties()['IsEffortDriven'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IsEffortDriven', value));
+        }
+        return value;
+    },
+    
     get_isLockedByManager: function PS_DraftTask$get_isLockedByManager() {ULSyTi:;
         this.checkUninitializedProperty('IsLockedByManager');
         return ((this.get_objectData().get_properties()['IsLockedByManager']));
@@ -5777,6 +5790,11 @@ PS.DraftTask.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['IsActive'] = ($v_0);
             delete parentNode.IsActive;
+        }
+        $v_0 = parentNode.IsEffortDriven;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['IsEffortDriven'] = ($v_0);
+            delete parentNode.IsEffortDriven;
         }
         $v_0 = parentNode.IsLockedByManager;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -15142,6 +15160,11 @@ PS.PublishedTask.prototype = {
         return ((this.get_objectData().get_properties()['IsActive']));
     },
     
+    get_isEffortDriven: function PS_PublishedTask$get_isEffortDriven() {ULSyTi:;
+        this.checkUninitializedProperty('IsEffortDriven');
+        return ((this.get_objectData().get_properties()['IsEffortDriven']));
+    },
+    
     get_isLockedByManager: function PS_PublishedTask$get_isLockedByManager() {ULSyTi:;
         this.checkUninitializedProperty('IsLockedByManager');
         return ((this.get_objectData().get_properties()['IsLockedByManager']));
@@ -15382,6 +15405,11 @@ PS.PublishedTask.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['IsActive'] = ($v_0);
             delete parentNode.IsActive;
+        }
+        $v_0 = parentNode.IsEffortDriven;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['IsEffortDriven'] = ($v_0);
+            delete parentNode.IsEffortDriven;
         }
         $v_0 = parentNode.IsLockedByManager;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -19090,11 +19118,6 @@ PS.Task.prototype = {
         return ((this.get_objectData().get_properties()['IsCritical']));
     },
     
-    get_isEffortDriven: function PS_Task$get_isEffortDriven() {ULSyTi:;
-        this.checkUninitializedProperty('IsEffortDriven');
-        return ((this.get_objectData().get_properties()['IsEffortDriven']));
-    },
-    
     get_isExternalTask: function PS_Task$get_isExternalTask() {ULSyTi:;
         this.checkUninitializedProperty('IsExternalTask');
         return ((this.get_objectData().get_properties()['IsExternalTask']));
@@ -19547,11 +19570,6 @@ PS.Task.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['IsCritical'] = ($v_0);
             delete parentNode.IsCritical;
-        }
-        $v_0 = parentNode.IsEffortDriven;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.get_objectData().get_properties()['IsEffortDriven'] = ($v_0);
-            delete parentNode.IsEffortDriven;
         }
         $v_0 = parentNode.IsExternalTask;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -22360,6 +22378,7 @@ PS.DraftTaskPropertyNames.finish = 'Finish';
 PS.DraftTaskPropertyNames.finishText = 'FinishText';
 PS.DraftTaskPropertyNames.fixedCost = 'FixedCost';
 PS.DraftTaskPropertyNames.isActive = 'IsActive';
+PS.DraftTaskPropertyNames.isEffortDriven = 'IsEffortDriven';
 PS.DraftTaskPropertyNames.isLockedByManager = 'IsLockedByManager';
 PS.DraftTaskPropertyNames.isManual = 'IsManual';
 PS.DraftTaskPropertyNames.isMarked = 'IsMarked';
@@ -22793,6 +22812,7 @@ PS.PublishedTaskPropertyNames.finish = 'Finish';
 PS.PublishedTaskPropertyNames.finishText = 'FinishText';
 PS.PublishedTaskPropertyNames.fixedCost = 'FixedCost';
 PS.PublishedTaskPropertyNames.isActive = 'IsActive';
+PS.PublishedTaskPropertyNames.isEffortDriven = 'IsEffortDriven';
 PS.PublishedTaskPropertyNames.isLockedByManager = 'IsLockedByManager';
 PS.PublishedTaskPropertyNames.isManual = 'IsManual';
 PS.PublishedTaskPropertyNames.isMarked = 'IsMarked';
@@ -22969,7 +22989,6 @@ PS.TaskPropertyNames.freeSlackMilliseconds = 'FreeSlackMilliseconds';
 PS.TaskPropertyNames.id = 'Id';
 PS.TaskPropertyNames.ignoreResourceCalendar = 'IgnoreResourceCalendar';
 PS.TaskPropertyNames.isCritical = 'IsCritical';
-PS.TaskPropertyNames.isEffortDriven = 'IsEffortDriven';
 PS.TaskPropertyNames.isExternalTask = 'IsExternalTask';
 PS.TaskPropertyNames.isOverAllocated = 'IsOverAllocated';
 PS.TaskPropertyNames.isRecurring = 'IsRecurring';
