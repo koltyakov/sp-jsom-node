@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 7820,
-                "rpr": 1204
+                "rup": 8112,
+                "rpr": 1217
             }
         };
     }
@@ -4009,6 +4009,7 @@ function PageContextInfo_InitializePrototype() {
     PageContextInfo.prototype.currentUICultureName = null;
     PageContextInfo.prototype.currentLanguage = 0;
     PageContextInfo.prototype.crossDomainPhotosEnabled = false;
+    PageContextInfo.prototype.AllowCustomMarkupInCalculatedField = false;
     PageContextInfo.prototype.webUIVersion = 0;
     PageContextInfo.prototype.pageListId = "";
     PageContextInfo.prototype.pageItemId = 0;
@@ -9203,7 +9204,7 @@ function StsOpenEnsureEx2(szProgId) {
         v_strStsOpenDoc2 = null;
         var plugin;
 
-        if (Boolean(window.ActiveXObject)) {
+        if (Boolean(window.ActiveXObject) || "ActiveXObject" in window) {
             try {
                 v_stsOpenDoc2 = new ActiveXObject(szProgId);
                 v_strStsOpenDoc2 = szProgId;
@@ -9825,8 +9826,17 @@ function GoToModern(bReturn) {
     document.cookie = "splnu=1;path=/";
     if (!(window["OffSwitch"] == null || OffSwitch.IsActive("9AC29D85-49C4-41FC-B1E2-5BB42628DC6C")) && browseris.ie && !browseris.ie11up)
         window.open(window.location.href, '_blank');
-    else
+    else if (!(window["OffSwitch"] == null || OffSwitch.IsActive("85F1BC5C-67AB-472B-AFD2-904A4DD4F487"))) {
+        var cUrl = window.location.href;
+
+        if (cUrl.endsWith('#')) {
+            cUrl = cUrl.substring(0, cUrl.length - 1);
+        }
+        window.location.href = cUrl;
+    }
+    else {
         window.location.reload();
+    }
 }
 function IsXhrAborted(xhr) {
     try {
@@ -12681,7 +12691,7 @@ function setModalDialogReturnValue(wnd, returnValue) {
     else {
         setModalDialogObjectReturnValue(wnd, returnValue);
     }
-    if (browseris.safari125up) {
+    if (browseris.safari125up || browseris.msEdge) {
         if (wnd.opener != null && wnd.opener.fndlgClose != null)
             wnd.opener.fndlgClose(returnValue);
     }

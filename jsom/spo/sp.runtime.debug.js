@@ -6,15 +6,15 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 7820,
-            "rpr": 1204
+            "rup": 8112,
+            "rpr": 1217
         }
     };
 }
 if (typeof spWriteProfilerMark == 'function')
     spWriteProfilerMark("perfMarkBegin_" + "sp.runtime.js");
-if (window.SP && typeof SP.ClientRuntimeContext == "function" && window.console && window.console.error)
-    window.console.error("Error: SP.Runtime.js is already loaded");
+if (window.SP && typeof SP.ClientRuntimeContext == "function")
+    throw "Error: SP.Runtime.js is already loaded";
 if (window.Type && window.Type.registerNamespace) {
 Type.registerNamespace('SP');} else {
 if(typeof(window['SP']) == 'undefined') {
