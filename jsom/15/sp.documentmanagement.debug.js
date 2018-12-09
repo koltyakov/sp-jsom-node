@@ -1,34 +1,6 @@
 // JScript File
 
 
-Type.registerNamespace('SP.DocumentManagement');
-
-SP.DocumentManagement.MetadataDefaults = function SP_DocumentManagement_MetadataDefaults(context, list) {
-    SP.DocumentManagement.MetadataDefaults.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{9410c048-d7df-4e86-b218-be5b4f4c427f}', arguments) ]);
-}
-SP.DocumentManagement.MetadataDefaults.newObject = function SP_DocumentManagement_MetadataDefaults$newObject(context, list) {
-    return new SP.DocumentManagement.MetadataDefaults(context, new SP.ObjectPathConstructor(context, '{9410c048-d7df-4e86-b218-be5b4f4c427f}', [ list ]));
-}
-SP.DocumentManagement.MetadataDefaults.prototype = {
-    
-    setFieldDefault: function SP_DocumentManagement_MetadataDefaults$setFieldDefault(folder, fieldName, value) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'SetFieldDefault', [ folder, fieldName, value ]);
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.BooleanResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    
-    update: function SP_DocumentManagement_MetadataDefaults$update() {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'Update', null);
-        $v_0.addQuery($v_1);
-    }
-}
-
-
 Type.registerNamespace('SP.DocumentSet');
 
 SP.DocumentSet.AllowedContentTypeCollection = function SP_DocumentSet_AllowedContentTypeCollection(context, objectPath) {
@@ -71,18 +43,12 @@ SP.DocumentSet.DefaultDocument.prototype = {
         this.checkUninitializedProperty('ContentTypeId');
         return ((this.get_objectData().get_properties()['ContentTypeId']));
     },
-    
     set_contentTypeId: function SP_DocumentSet_DefaultDocument$set_contentTypeId(value) {
         this.get_objectData().get_properties()['ContentTypeId'] = value;
         if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ContentTypeId', value));
         }
         return value;
-    },
-    
-    get_documentPath: function SP_DocumentSet_DefaultDocument$get_documentPath() {
-        this.checkUninitializedProperty('DocumentPath');
-        return ((this.get_objectData().get_properties()['DocumentPath']));
     },
     
     get_name: function SP_DocumentSet_DefaultDocument$get_name() {
@@ -97,11 +63,6 @@ SP.DocumentSet.DefaultDocument.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['ContentTypeId'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
             delete parentNode.ContentTypeId;
-        }
-        $v_0 = parentNode.DocumentPath;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.get_objectData().get_properties()['DocumentPath'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
-            delete parentNode.DocumentPath;
         }
         $v_0 = parentNode.Name;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -161,16 +122,8 @@ SP.DocumentSet.DefaultDocumentCollection.prototype = {
 SP.DocumentSet.DocumentSet = function SP_DocumentSet_DocumentSet(context, objectPath) {
     SP.DocumentSet.DocumentSet.initializeBase(this, [ context, objectPath ]);
 }
-SP.DocumentSet.DocumentSet.getDocumentSet = function SP_DocumentSet_DocumentSet$getDocumentSet(context, folder) {
-    if ((!context)) {
-        throw Error.argumentNull('context');
-    }
-    var $v_0;
-    $v_0 = new SP.DocumentSet.DocumentSet(context, new SP.ObjectPathStaticMethod(context, '{e32a87f7-b866-407d-971d-027ed940d50f}', 'GetDocumentSet', [ folder ]));
-    return $v_0;
-}
 SP.DocumentSet.DocumentSet.create = function SP_DocumentSet_DocumentSet$create(context, parentFolder, name, ctid) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -180,33 +133,13 @@ SP.DocumentSet.DocumentSet.create = function SP_DocumentSet_DocumentSet$create(c
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
     return $v_0;
 }
-SP.DocumentSet.DocumentSet.importDocumentSet = function SP_DocumentSet_DocumentSet$importDocumentSet(context, archiveStream, archiveName, parentFolder, docsetContentTypeId) {
-    if ((!context)) {
-        throw Error.argumentNull('context');
-    }
-    var $v_0;
-    $v_0 = new SP.DocumentSet.DocumentSet(context, new SP.ObjectPathStaticMethod(context, '{e32a87f7-b866-407d-971d-027ed940d50f}', 'ImportDocumentSet', [ archiveStream, archiveName, parentFolder, docsetContentTypeId ]));
-    return $v_0;
-}
-SP.DocumentSet.DocumentSet.prototype = {
-    
-    exportDocumentSet: function SP_DocumentSet_DocumentSet$exportDocumentSet() {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'ExportDocumentSet', null);
-        $v_0.addQuery($v_2);
-        $v_1 = (([]));
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    }
-}
 
 
 SP.DocumentSet.DocumentSetTemplate = function SP_DocumentSet_DocumentSetTemplate(context, objectPath) {
     SP.DocumentSet.DocumentSetTemplate.initializeBase(this, [ context, objectPath ]);
 }
 SP.DocumentSet.DocumentSetTemplate.getContentTypeId = function SP_DocumentSet_DocumentSetTemplate$getContentTypeId(context) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -217,7 +150,7 @@ SP.DocumentSet.DocumentSetTemplate.getContentTypeId = function SP_DocumentSet_Do
     return $v_0;
 }
 SP.DocumentSet.DocumentSetTemplate.getDocumentSetTemplate = function SP_DocumentSet_DocumentSetTemplate$getDocumentSetTemplate(context, ct) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -225,7 +158,7 @@ SP.DocumentSet.DocumentSetTemplate.getDocumentSetTemplate = function SP_Document
     return $v_0;
 }
 SP.DocumentSet.DocumentSetTemplate.isChildOfDocumentSetContentType = function SP_DocumentSet_DocumentSetTemplate$isChildOfDocumentSetContentType(context, ct) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -376,161 +309,6 @@ SP.DocumentSet.WelcomePageFieldCollection.prototype = {
 }
 
 
-Type.registerNamespace('SP.MetadataNavigation');
-
-SP.MetadataNavigation.ConfiguredMetadataNavigationItem = function SP_MetadataNavigation_ConfiguredMetadataNavigationItem() {
-    SP.MetadataNavigation.ConfiguredMetadataNavigationItem.initializeBase(this);
-}
-SP.MetadataNavigation.ConfiguredMetadataNavigationItem.prototype = {
-    $9_1: null,
-    $A_1: null,
-    $B_1: null,
-    $C_1: false,
-    $D_1: false,
-    $E_1: false,
-    $F_1: false,
-    $G_1: false,
-    
-    get_fieldDisplayName: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_fieldDisplayName() {
-        return this.$9_1;
-    },
-    
-    get_fieldTitle: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_fieldTitle() {
-        return this.$A_1;
-    },
-    
-    get_fieldTypeAsString: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_fieldTypeAsString() {
-        return this.$B_1;
-    },
-    
-    get_isContentTypeField: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isContentTypeField() {
-        return this.$C_1;
-    },
-    
-    get_isFolderHierarchy: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isFolderHierarchy() {
-        return this.$D_1;
-    },
-    
-    get_isHierarchy: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isHierarchy() {
-        return this.$E_1;
-    },
-    
-    get_isMultiValueLookup: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isMultiValueLookup() {
-        return this.$F_1;
-    },
-    
-    get_isTaxonomyField: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isTaxonomyField() {
-        return this.$G_1;
-    },
-    
-    get_typeId: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_typeId() {
-        return '{e7bcb1cf-a8d0-48bc-a0b6-1fb6f84ef297}';
-    },
-    
-    writeToXml: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$writeToXml(writer, serializationContext) {
-        if (!writer) {
-            throw Error.argumentNull('writer');
-        }
-        if (!serializationContext) {
-            throw Error.argumentNull('serializationContext');
-        }
-        var $v_0 = [ 'FieldDisplayName', 'FieldTitle', 'FieldTypeAsString', 'IsContentTypeField', 'IsFolderHierarchy', 'IsHierarchy', 'IsMultiValueLookup', 'IsTaxonomyField' ];
-        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
-        SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
-    },
-    
-    initPropertiesFromJson: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$initPropertiesFromJson(parentNode) {
-        SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
-        var $v_0;
-        $v_0 = parentNode.FieldDisplayName;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9_1 = ($v_0);
-            delete parentNode.FieldDisplayName;
-        }
-        $v_0 = parentNode.FieldTitle;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A_1 = ($v_0);
-            delete parentNode.FieldTitle;
-        }
-        $v_0 = parentNode.FieldTypeAsString;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$B_1 = ($v_0);
-            delete parentNode.FieldTypeAsString;
-        }
-        $v_0 = parentNode.IsContentTypeField;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$C_1 = ($v_0);
-            delete parentNode.IsContentTypeField;
-        }
-        $v_0 = parentNode.IsFolderHierarchy;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$D_1 = ($v_0);
-            delete parentNode.IsFolderHierarchy;
-        }
-        $v_0 = parentNode.IsHierarchy;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$E_1 = ($v_0);
-            delete parentNode.IsHierarchy;
-        }
-        $v_0 = parentNode.IsMultiValueLookup;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$F_1 = ($v_0);
-            delete parentNode.IsMultiValueLookup;
-        }
-        $v_0 = parentNode.IsTaxonomyField;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$G_1 = ($v_0);
-            delete parentNode.IsTaxonomyField;
-        }
-    }
-}
-
-
-SP.MetadataNavigation.ConfiguredMetadataNavigationItemCollection = function SP_MetadataNavigation_ConfiguredMetadataNavigationItemCollection() {
-    SP.MetadataNavigation.ConfiguredMetadataNavigationItemCollection.initializeBase(this);
-}
-SP.MetadataNavigation.ConfiguredMetadataNavigationItemCollection.prototype = {
-    
-    add: function SP_MetadataNavigation_ConfiguredMetadataNavigationItemCollection$add(item) {
-        this.addChild(item);
-    },
-    
-    get_item: function SP_MetadataNavigation_ConfiguredMetadataNavigationItemCollection$get_item(index) {
-        return this.getItemAtIndex(index);
-    },
-    
-    get_typeId: function SP_MetadataNavigation_ConfiguredMetadataNavigationItemCollection$get_typeId() {
-        return '{37d7c927-279a-4cd0-bfb8-def3dfdf4415}';
-    },
-    
-    writeToXml: function SP_MetadataNavigation_ConfiguredMetadataNavigationItemCollection$writeToXml(writer, serializationContext) {
-        if (!writer) {
-            throw Error.argumentNull('writer');
-        }
-        if (!serializationContext) {
-            throw Error.argumentNull('serializationContext');
-        }
-        SP.ClientValueObjectCollection.prototype.writeToXml.call(this, writer, serializationContext);
-    }
-}
-
-
-SP.MetadataNavigation.MetadataNavigationSettings = function SP_MetadataNavigation_MetadataNavigationSettings(context, objectPath) {
-    SP.MetadataNavigation.MetadataNavigationSettings.initializeBase(this, [ context, objectPath ]);
-}
-SP.MetadataNavigation.MetadataNavigationSettings.getConfiguredSettings = function SP_MetadataNavigation_MetadataNavigationSettings$getConfiguredSettings(context, listPath) {
-    if ((!context)) {
-        throw Error.argumentNull('context');
-    }
-    var $v_0;
-    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{85827e8a-d57d-445c-8ac4-1be62bf8a987}', 'GetConfiguredSettings', [ listPath ]);
-    context.addQuery($v_1);
-    $v_0 = new SP.MetadataNavigation.ConfiguredMetadataNavigationItemCollection();
-    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
-    return $v_0;
-}
-
-
 Type.registerNamespace('SP.Video');
 
 SP.Video.EmbedCodeConfiguration = function SP_Video_EmbedCodeConfiguration() {
@@ -550,7 +328,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_autoPlay: function SP_Video_EmbedCodeConfiguration$get_autoPlay() {
         return this.$0_1;
     },
-    
     set_autoPlay: function SP_Video_EmbedCodeConfiguration$set_autoPlay(value) {
         this.$0_1 = value;
         return value;
@@ -559,7 +336,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_displayTitle: function SP_Video_EmbedCodeConfiguration$get_displayTitle() {
         return this.$1_1;
     },
-    
     set_displayTitle: function SP_Video_EmbedCodeConfiguration$set_displayTitle(value) {
         this.$1_1 = value;
         return value;
@@ -568,7 +344,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_linkToOwnerProfilePage: function SP_Video_EmbedCodeConfiguration$get_linkToOwnerProfilePage() {
         return this.$2_1;
     },
-    
     set_linkToOwnerProfilePage: function SP_Video_EmbedCodeConfiguration$set_linkToOwnerProfilePage(value) {
         this.$2_1 = value;
         return value;
@@ -577,7 +352,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_linkToVideoHomePage: function SP_Video_EmbedCodeConfiguration$get_linkToVideoHomePage() {
         return this.$3_1;
     },
-    
     set_linkToVideoHomePage: function SP_Video_EmbedCodeConfiguration$set_linkToVideoHomePage(value) {
         this.$3_1 = value;
         return value;
@@ -586,7 +360,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_loop: function SP_Video_EmbedCodeConfiguration$get_loop() {
         return this.$4_1;
     },
-    
     set_loop: function SP_Video_EmbedCodeConfiguration$set_loop(value) {
         this.$4_1 = value;
         return value;
@@ -595,7 +368,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_pixelHeight: function SP_Video_EmbedCodeConfiguration$get_pixelHeight() {
         return this.$5_1;
     },
-    
     set_pixelHeight: function SP_Video_EmbedCodeConfiguration$set_pixelHeight(value) {
         this.$5_1 = value;
         return value;
@@ -604,7 +376,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_pixelWidth: function SP_Video_EmbedCodeConfiguration$get_pixelWidth() {
         return this.$6_1;
     },
-    
     set_pixelWidth: function SP_Video_EmbedCodeConfiguration$set_pixelWidth(value) {
         this.$6_1 = value;
         return value;
@@ -613,7 +384,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_previewImagePath: function SP_Video_EmbedCodeConfiguration$get_previewImagePath() {
         return this.$7_1;
     },
-    
     set_previewImagePath: function SP_Video_EmbedCodeConfiguration$set_previewImagePath(value) {
         this.$7_1 = value;
         return value;
@@ -622,7 +392,6 @@ SP.Video.EmbedCodeConfiguration.prototype = {
     get_startTime: function SP_Video_EmbedCodeConfiguration$get_startTime() {
         return this.$8_1;
     },
-    
     set_startTime: function SP_Video_EmbedCodeConfiguration$set_startTime(value) {
         this.$8_1 = value;
         return value;
@@ -700,7 +469,7 @@ SP.Video.VideoSet = function SP_Video_VideoSet(context, objectPath) {
     SP.Video.VideoSet.initializeBase(this, [ context, objectPath ]);
 }
 SP.Video.VideoSet.createVideo = function SP_Video_VideoSet$createVideo(context, parentFolder, name, ctid) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -711,7 +480,7 @@ SP.Video.VideoSet.createVideo = function SP_Video_VideoSet$createVideo(context, 
     return $v_0;
 }
 SP.Video.VideoSet.uploadVideo = function SP_Video_VideoSet$uploadVideo(context, list, fileName, file, overwriteIfExists, parentFolderPath) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -722,7 +491,7 @@ SP.Video.VideoSet.uploadVideo = function SP_Video_VideoSet$uploadVideo(context, 
     return $v_0;
 }
 SP.Video.VideoSet.getEmbedCode = function SP_Video_VideoSet$getEmbedCode(context, videoPath, properties) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -733,7 +502,7 @@ SP.Video.VideoSet.getEmbedCode = function SP_Video_VideoSet$getEmbedCode(context
     return $v_0;
 }
 SP.Video.VideoSet.migrateVideo = function SP_Video_VideoSet$migrateVideo(context, videoFile) {
-    if ((!context)) {
+    if (!context) {
         throw Error.argumentNull('context');
     }
     var $v_0;
@@ -742,7 +511,6 @@ SP.Video.VideoSet.migrateVideo = function SP_Video_VideoSet$migrateVideo(context
 }
 
 
-SP.DocumentManagement.MetadataDefaults.registerClass('SP.DocumentManagement.MetadataDefaults', SP.ClientObject);
 SP.DocumentSet.AllowedContentTypeCollection.registerClass('SP.DocumentSet.AllowedContentTypeCollection', SP.ClientObjectCollection);
 SP.DocumentSet.DefaultDocument.registerClass('SP.DocumentSet.DefaultDocument', SP.ClientObject);
 SP.DocumentSet.DefaultDocumentPropertyNames.registerClass('SP.DocumentSet.DefaultDocumentPropertyNames');
@@ -752,14 +520,10 @@ SP.DocumentSet.DocumentSetTemplate.registerClass('SP.DocumentSet.DocumentSetTemp
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.registerClass('SP.DocumentSet.DocumentSetTemplateObjectPropertyNames');
 SP.DocumentSet.SharedFieldCollection.registerClass('SP.DocumentSet.SharedFieldCollection', SP.ClientObjectCollection);
 SP.DocumentSet.WelcomePageFieldCollection.registerClass('SP.DocumentSet.WelcomePageFieldCollection', SP.ClientObjectCollection);
-SP.MetadataNavigation.ConfiguredMetadataNavigationItem.registerClass('SP.MetadataNavigation.ConfiguredMetadataNavigationItem', SP.ClientValueObject);
-SP.MetadataNavigation.ConfiguredMetadataNavigationItemCollection.registerClass('SP.MetadataNavigation.ConfiguredMetadataNavigationItemCollection', SP.ClientValueObjectCollection);
-SP.MetadataNavigation.MetadataNavigationSettings.registerClass('SP.MetadataNavigation.MetadataNavigationSettings', SP.ClientObject);
 SP.Video.EmbedCodeConfiguration.registerClass('SP.Video.EmbedCodeConfiguration', SP.ClientValueObject);
 SP.Video.VideoSet.registerClass('SP.Video.VideoSet', SP.DocumentSet.DocumentSet);
 function sp_documentmanagement_initialize() {
 SP.DocumentSet.DefaultDocumentPropertyNames.contentTypeId = 'ContentTypeId';
-SP.DocumentSet.DefaultDocumentPropertyNames.documentPath = 'DocumentPath';
 SP.DocumentSet.DefaultDocumentPropertyNames.name = 'Name';
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.allowedContentTypes = 'AllowedContentTypes';
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.defaultDocuments = 'DefaultDocuments';

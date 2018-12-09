@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index",
   "scripts": {
-    "build": "rm -rf ./dist && tsc -p .",
+    "build": "rimraf ./dist && tsc -p .",
     "test": "ts-node ./test/init && mocha --opts test/mocha.opts || ECHO.",
     "update-assets": "ts-node ./scripts/downloadAssets.ts"
   },
@@ -44,6 +44,7 @@
     "deep-assign": "^3.0.0",
     "mkdirp": "^0.5.1",
     "mocha": "^5.2.0",
+    "rimraf": "^2.6.2",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1",

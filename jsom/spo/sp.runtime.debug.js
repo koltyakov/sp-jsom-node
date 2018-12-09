@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 8112,
-            "rpr": 1217
+            "rup": 8328,
+            "rpr": 1219
         }
     };
 }
@@ -244,18 +244,18 @@ if (SP.DateTimeKind.registerEnum) SP.DateTimeKind.registerEnum('SP.DateTimeKind'
 SP.ArrayListEnumerator = function SP_ArrayListEnumerator($p0) {
     this.$8_0 = $p0;
     this.$M_0 = -1;
-    this.$2I_0 = $p0.length;
+    this.$2J_0 = $p0.length;
     this.current = null;
 };
 SP.ArrayListEnumerator.prototype = {
     $8_0: null,
     $M_0: 0,
-    $2I_0: 0,
+    $2J_0: 0,
     get_current: function SP_ArrayListEnumerator$get_current() {
         return this.$8_0[this.$M_0];
     },
     moveNext: function SP_ArrayListEnumerator$moveNext() {
-        if (this.$2I_0 !== this.$8_0.length) {
+        if (this.$2J_0 !== this.$8_0.length) {
             throw Error.invalidOperation(SP.ResResources.getString('CollectionModified'));
         }
         this.$M_0++;
@@ -281,30 +281,30 @@ SP.BaseCollection.prototype = {
     }
 };
 SP.BaseCollectionEnumerator = function SP_BaseCollectionEnumerator($p0) {
-    this.$1a_0 = $p0;
+    this.$1b_0 = $p0;
     this.$M_0 = -1;
 };
 SP.BaseCollectionEnumerator.prototype = {
-    $1a_0: null,
+    $1b_0: null,
     $M_0: 0,
     get_current: function SP_BaseCollectionEnumerator$get_current() {
-        return this.$1a_0.itemAtIndex(this.$M_0);
+        return this.$1b_0.itemAtIndex(this.$M_0);
     },
     moveNext: function SP_BaseCollectionEnumerator$moveNext() {
         this.$M_0++;
-        return this.$M_0 < this.$1a_0.get_count();
+        return this.$M_0 < this.$1b_0.get_count();
     },
     reset: function SP_BaseCollectionEnumerator$reset() {
         this.$M_0 = -1;
     }
 };
 SP.Base64EncodedByteArray = function SP_Base64EncodedByteArray() {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
     if (arguments.length > 0 && !SP.ScriptUtility.isNullOrEmptyString(arguments[0])) {
         var $v_0 = arguments[0];
 
-        this.$3K_0($v_0);
+        this.$3M_0($v_0);
     }
     else {
         this.$8_0 = [];
@@ -317,7 +317,7 @@ SP.Base64EncodedByteArray.prototype = {
     get_length: function SP_Base64EncodedByteArray$get_length() {
         return this.$F_0;
     },
-    $3K_0: function SP_Base64EncodedByteArray$$3K_0($p0) {
+    $3M_0: function SP_Base64EncodedByteArray$$3M_0($p0) {
         $p0 = $p0.replace('\\u002f', '/');
         $p0 = $p0.replace('\\u002F', '/');
         var $v_0 = new RegExp('[^A-Za-z0-9+/=]', 'g');
@@ -336,22 +336,22 @@ SP.Base64EncodedByteArray.prototype = {
             var $v_6 = $p0.charAt($v_4 + 1);
             var $v_7 = $p0.charAt($v_4 + 2);
             var $v_8 = $p0.charAt($v_4 + 3);
-            var $v_9 = SP.Base64EncodedByteArray.$1R.indexOf($v_5);
-            var $v_A = SP.Base64EncodedByteArray.$1R.indexOf($v_6);
-            var $v_B = SP.Base64EncodedByteArray.$1R.indexOf($v_7);
-            var $v_C = SP.Base64EncodedByteArray.$1R.indexOf($v_8);
+            var $v_9 = SP.Base64EncodedByteArray.$1S.indexOf($v_5);
+            var $v_A = SP.Base64EncodedByteArray.$1S.indexOf($v_6);
+            var $v_B = SP.Base64EncodedByteArray.$1S.indexOf($v_7);
+            var $v_C = SP.Base64EncodedByteArray.$1S.indexOf($v_8);
             var $v_D = $v_9 << 2 | $v_A >> 4;
             var $v_E = ($v_A & 15) << 4 | $v_B >> 2;
             var $v_F = ($v_B & 3) << 6 | $v_C;
 
-            this.$1S_0(this.$F_0, $v_D);
+            this.$1T_0(this.$F_0, $v_D);
             this.$F_0++;
             if ($v_B !== 64) {
-                this.$1S_0(this.$F_0, $v_E);
+                this.$1T_0(this.$F_0, $v_E);
                 this.$F_0++;
             }
             if ($v_C !== 64) {
-                this.$1S_0(this.$F_0, $v_F);
+                this.$1T_0(this.$F_0, $v_F);
                 this.$F_0++;
             }
         }
@@ -408,7 +408,7 @@ SP.Base64EncodedByteArray.prototype = {
         if (!(this.$F_0 % 2)) {
             this.$8_0[this.$F_0 / 2 + 1] = 0;
         }
-        this.$1S_0(this.$F_0, b);
+        this.$1T_0(this.$F_0, b);
         this.$F_0++;
     },
     getByteAt: function SP_Base64EncodedByteArray$getByteAt(index) {
@@ -430,9 +430,9 @@ SP.Base64EncodedByteArray.prototype = {
         if (index >= this.$F_0) {
             throw Error.argumentOutOfRange('index');
         }
-        this.$1S_0(index, b);
+        this.$1T_0(index, b);
     },
-    $1S_0: function SP_Base64EncodedByteArray$$1S_0($p0, $p1) {
+    $1T_0: function SP_Base64EncodedByteArray$$1T_0($p0, $p1) {
         var $v_0 = Math.floor($p0 / 2);
         var $v_1 = this.$8_0[$v_0];
         var $v_2 = $p0 % 2;
@@ -445,7 +445,7 @@ SP.Base64EncodedByteArray.prototype = {
         }
         this.$8_0[$v_0] = $v_1;
     },
-    $3g_0: function SP_Base64EncodedByteArray$$3g_0($p0) {
+    $3i_0: function SP_Base64EncodedByteArray$$3i_0($p0) {
         if (SP.ScriptUtility.isNullOrUndefined($p0)) {
             return;
         }
@@ -456,7 +456,7 @@ SP.Base64EncodedByteArray.prototype = {
             this.$8_0 = $v_0.$8_0;
         }
     },
-    $3h_0: function SP_Base64EncodedByteArray$$3h_0($p0) {
+    $3j_0: function SP_Base64EncodedByteArray$$3j_0($p0) {
         return false;
     }
 };
@@ -471,51 +471,51 @@ SP.ClientObjectPropertyConditionalScope = function SP_ClientObjectPropertyCondit
     if (SP.ScriptUtility.isNullOrEmptyString(propertyName)) {
         throw Error.argumentNull('propertyName');
     }
-    this.$1D_1 = clientObject;
+    this.$1F_1 = clientObject;
     this.$S_1 = propertyName;
-    this.$2A_1 = comparisonOperator;
-    this.$2T_1 = valueToCompare;
+    this.$2B_1 = comparisonOperator;
+    this.$2U_1 = valueToCompare;
 };
 SP.ClientObjectPropertyConditionalScope.prototype = {
-    $1D_1: null,
+    $1F_1: null,
     $S_1: null,
-    $2A_1: null,
-    $2T_1: null,
-    $3B_0: function SP_ClientObjectPropertyConditionalScope$$3B_0($p0) {
-        if (!this.$1D_1) {
-            throw SP.ConditionalScopeBase.$9();
+    $2B_1: null,
+    $2U_1: null,
+    $3C_0: function SP_ClientObjectPropertyConditionalScope$$3C_0($p0) {
+        if (!this.$1F_1) {
+            throw SP.ConditionalScopeBase.$A();
         }
         var $v_0 = new Sys.StringBuilder();
         var $v_1 = SP.XmlWriter.create($v_0);
 
         $v_1.writeStartElement('Test');
         $v_1.writeStartElement('Body');
-        $v_1.writeStartElement(this.$2A_1);
+        $v_1.writeStartElement(this.$2B_1);
         $v_1.writeStartElement('ExpressionProperty');
         $v_1.writeAttributeString('Name', this.$S_1);
         $v_1.writeStartElement('ExpressionConstant');
-        SP.DataConvert.writeValueToXmlElement($v_1, this.$1D_1, $p0);
+        SP.DataConvert.writeValueToXmlElement($v_1, this.$1F_1, $p0);
         $v_1.writeEndElement();
         $v_1.writeEndElement();
         $v_1.writeStartElement('ExpressionConstant');
-        SP.DataConvert.writeValueToXmlElement($v_1, this.$2T_1, $p0);
+        SP.DataConvert.writeValueToXmlElement($v_1, this.$2U_1, $p0);
         $v_1.writeEndElement();
         $v_1.writeEndElement();
         $v_1.writeEndElement();
         $v_1.writeEndElement();
         $v_1.close();
-        this.$1D_1 = null;
+        this.$1F_1 = null;
         return $v_0;
     }
 };
 SP.ClientDictionaryResultHandler = function SP_ClientDictionaryResultHandler(dict) {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
-    this.$2B_0 = dict;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
+    this.$2C_0 = dict;
 };
 SP.ClientDictionaryResultHandler.prototype = {
-    $2B_0: null,
-    $3g_0: function SP_ClientDictionaryResultHandler$$3g_0($p0) {
+    $2C_0: null,
+    $3i_0: function SP_ClientDictionaryResultHandler$$3i_0($p0) {
         if (SP.ScriptUtility.isNullOrUndefined($p0)) {
             return;
         }
@@ -534,64 +534,64 @@ SP.ClientDictionaryResultHandler.prototype = {
             }
         }
         SP.DataConvert.fixupTypes(null, $v_1);
-        this.$2B_0.setValue($v_1);
+        this.$2C_0.setValue($v_1);
     },
-    $3h_0: function SP_ClientDictionaryResultHandler$$3h_0($p0) {
+    $3j_0: function SP_ClientDictionaryResultHandler$$3j_0($p0) {
         return false;
     }
 };
 SP.ClientActionInstantiateObjectPathResult = function SP_ClientActionInstantiateObjectPathResult($p0) {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
     this.$Z_0 = $p0;
 };
 SP.ClientActionInstantiateObjectPathResult.prototype = {
     $Z_0: null,
-    $3g_0: function SP_ClientActionInstantiateObjectPathResult$$3g_0($p0) {
+    $3i_0: function SP_ClientActionInstantiateObjectPathResult$$3i_0($p0) {
         if (!SP.ScriptUtility.isNullOrUndefined($p0) && typeof $p0 === 'object') {
             var $v_0 = false;
 
             if (typeof $p0.IsNull === 'boolean') {
                 $v_0 = $p0.IsNull;
             }
-            this.$Z_0.$1N_0 = $v_0;
+            this.$Z_0.$1O_0 = $v_0;
         }
     },
-    $3h_0: function SP_ClientActionInstantiateObjectPathResult$$3h_0($p0) {
+    $3j_0: function SP_ClientActionInstantiateObjectPathResult$$3j_0($p0) {
         return false;
     }
 };
 SP.ClientObjectCollectionResult = function SP_ClientObjectCollectionResult($p0, $p1) {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
     this.$0_0 = $p0;
-    this.$1k_0 = $p1;
+    this.$1l_0 = $p1;
 };
 SP.ClientObjectCollectionResult.prototype = {
-    $1k_0: null,
+    $1l_0: null,
     $0_0: null,
-    $3g_0: function SP_ClientObjectCollectionResult$$3g_0($p0) {
+    $3i_0: function SP_ClientObjectCollectionResult$$3i_0($p0) {
         if (!SP.ScriptUtility.isNullOrUndefined($p0) && typeof $p0 === 'object') {
             if (Array.isInstanceOfType($p0)) {
-                SP.DataConvert.populateArray(this.$0_0, this.$1k_0, $p0);
+                SP.DataConvert.populateArray(this.$0_0, this.$1l_0, $p0);
             }
             else {
                 var $v_0 = $p0._Child_Items_;
 
                 if ($v_0) {
-                    SP.DataConvert.populateArray(this.$0_0, this.$1k_0, $v_0);
+                    SP.DataConvert.populateArray(this.$0_0, this.$1l_0, $v_0);
                 }
             }
         }
     },
-    $3h_0: function SP_ClientObjectCollectionResult$$3h_0($p0) {
+    $3j_0: function SP_ClientObjectCollectionResult$$3j_0($p0) {
         return false;
     }
 };
 SP.ClientUtility = function SP_ClientUtility() {
 };
 SP.ClientUtility.urlPathEncodeForXmlHttpRequest = function SP_ClientUtility$urlPathEncodeForXmlHttpRequest(url) {
-    return SP.ClientHttpUtility.$34(url, true, true);
+    return SP.ClientHttpUtility.$35(url, true, true);
 };
 SP.ClientUtility.getOrCreateObjectPathForConstructor = function SP_ClientUtility$getOrCreateObjectPathForConstructor(context, typeId, args) {
     if (!args || args.length < 1) {
@@ -612,7 +612,7 @@ SP.ClientUtility.getOrCreateObjectPathForConstructor = function SP_ClientUtility
     }
     return new SP.ObjectPathConstructor(context, typeId, $v_1);
 };
-SP.ClientUtility.$3Q = function SP_ClientUtility$$3Q($p0) {
+SP.ClientUtility.$3S = function SP_ClientUtility$$3S($p0) {
     var $v_0 = $p0.toLowerCase();
     var $v_1 = 0;
 
@@ -628,15 +628,15 @@ SP.ClientUtility.$3Q = function SP_ClientUtility$$3Q($p0) {
     return $p0.substr($v_1);
 };
 SP.ClientXElement = function SP_ClientXElement() {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
 };
 SP.ClientXElement.prototype = {
     $g_0: null,
-    $3g_0: function SP_ClientXElement$$3g_0($p0) {
+    $3i_0: function SP_ClientXElement$$3i_0($p0) {
         this.$g_0 = $p0;
     },
-    $3h_0: function SP_ClientXElement$$3h_0($p0) {
+    $3j_0: function SP_ClientXElement$$3j_0($p0) {
         return false;
     },
     get_element: function SP_ClientXElement$get_element() {
@@ -648,15 +648,15 @@ SP.ClientXElement.prototype = {
     }
 };
 SP.ClientXDocument = function SP_ClientXDocument() {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
 };
 SP.ClientXDocument.prototype = {
     $g_0: null,
-    $3g_0: function SP_ClientXDocument$$3g_0($p0) {
+    $3i_0: function SP_ClientXDocument$$3i_0($p0) {
         this.$g_0 = $p0;
     },
-    $3h_0: function SP_ClientXDocument$$3h_0($p0) {
+    $3j_0: function SP_ClientXDocument$$3j_0($p0) {
         return false;
     },
     get_root: function SP_ClientXDocument$get_root() {
@@ -714,9 +714,9 @@ SP.DataConvert.fixupTypes = function SP_DataConvert$fixupTypes(context, dict) {
     }
 };
 SP.DataConvert.populateArray = function SP_DataConvert$populateArray(context, dest, jsonArrayFromServer) {
-    SP.DataConvert.$2U(context, dest, jsonArrayFromServer, null);
+    SP.DataConvert.$2V(context, dest, jsonArrayFromServer, null);
 };
-SP.DataConvert.$2U = function SP_DataConvert$$2U($p0, $p1, $p2, $p3) {
+SP.DataConvert.$2V = function SP_DataConvert$$2V($p0, $p1, $p2, $p3) {
     if (SP.ScriptUtility.isNullOrUndefined($p2)) {
         return;
     }
@@ -727,16 +727,16 @@ SP.DataConvert.$2U = function SP_DataConvert$$2U($p0, $p1, $p2, $p3) {
             Array.add($p1, $v_1);
             continue;
         }
-        var $v_2 = SP.DataConvert.$2d($p0, $v_1, $p3);
+        var $v_2 = SP.DataConvert.$2e($p0, $v_1, $p3);
 
         Array.add($p1, $v_2);
     }
 };
 SP.DataConvert.fixupType = function SP_DataConvert$fixupType(context, obj) {
-    return SP.DataConvert.$2d(context, obj, null);
+    return SP.DataConvert.$2e(context, obj, null);
 };
-SP.DataConvert.$3T = function SP_DataConvert$$3T($p0) {
-    var $v_0 = SP.DataConvert.$1z[$p0];
+SP.DataConvert.$3V = function SP_DataConvert$$3V($p0) {
+    var $v_0 = SP.DataConvert.$20[$p0];
 
     if ($v_0 === 2) {
         return true;
@@ -750,14 +750,14 @@ SP.DataConvert.$3T = function SP_DataConvert$$3T($p0) {
     for (var $v_3 = 0; $v_3 < $v_1.length; $v_3++) {
         $v_2 = $v_2[$v_1[$v_3]];
         if (!$v_2) {
-            SP.DataConvert.$1z[$p0] = 1;
+            SP.DataConvert.$20[$p0] = 1;
             return false;
         }
     }
-    SP.DataConvert.$1z[$p0] = 2;
+    SP.DataConvert.$20[$p0] = 2;
     return true;
 };
-SP.DataConvert.$2d = function SP_DataConvert$$2d($p0, $p1, $p2) {
+SP.DataConvert.$2e = function SP_DataConvert$$2e($p0, $p1, $p2) {
     var $v_0 = $p1;
 
     if (!SP.ScriptUtility.isNullOrUndefined($p1) && typeof $p1 === 'object') {
@@ -766,7 +766,7 @@ SP.DataConvert.$2d = function SP_DataConvert$$2d($p0, $p1, $p2) {
         if (!SP.ScriptUtility.isNullOrUndefined($v_1)) {
             var $v_2;
 
-            if (SP.DataConvert.$3T($v_1)) {
+            if (SP.DataConvert.$3V($v_1)) {
                 $v_2 = Type.parse($v_1);
             }
             else {
@@ -907,7 +907,7 @@ SP.DataConvert.writeValueToXmlElement = function SP_DataConvert$writeValueToXmlE
                 };
                 var $v_F = $v_E.value;
 
-                if (SP.DataConvert.$3E($v_F)) {
+                if (SP.DataConvert.$3F($v_F)) {
                     writer.writeStartElement('Property');
                     writer.writeAttributeString('Name', $v_E.key);
                     SP.DataConvert.writeValueToXmlElement(writer, $v_E.value, serializationContext);
@@ -925,7 +925,7 @@ SP.DataConvert.writeValueToXmlElement = function SP_DataConvert$writeValueToXmlE
         }
     }
 };
-SP.DataConvert.$3E = function SP_DataConvert$$3E($p0) {
+SP.DataConvert.$3F = function SP_DataConvert$$3F($p0) {
     if (SP.ScriptUtility.isNullOrUndefined($p0)) {
         return true;
     }
@@ -948,12 +948,12 @@ SP.DataConvert.$C = function SP_DataConvert$$C($p0, $p1) {
     if ($p0.length >= $p1) {
         return $p0;
     }
-    if ($p1 - $p0.length >= SP.DataConvert.$2X.length) {
+    if ($p1 - $p0.length >= SP.DataConvert.$2Y.length) {
         throw Error.argumentOutOfRange('len');
     }
-    return SP.DataConvert.$2X[$p1 - $p0.length] + $p0;
+    return SP.DataConvert.$2Y[$p1 - $p0.length] + $p0;
 };
-SP.DataConvert.$1x = function SP_DataConvert$$1x($p0) {
+SP.DataConvert.$1y = function SP_DataConvert$$1y($p0) {
     var $v_0;
     var $v_1 = 0;
 
@@ -971,31 +971,31 @@ SP.DataConvert.$1x = function SP_DataConvert$$1x($p0) {
     }
     return $v_0;
 };
-SP.DataConvert.$2k = function SP_DataConvert$$2k($p0) {
+SP.DataConvert.$2l = function SP_DataConvert$$2l($p0) {
     var $v_0 = ($p0.substr(0, 1)).toLowerCase() + $p0.substr(1);
 
     return $v_0;
 };
 SP.DataConvert.invokeSetProperty = function SP_DataConvert$invokeSetProperty(obj, propName, propValue) {
-    var $v_0 = SP.DataConvert.$1x(propName);
+    var $v_0 = SP.DataConvert.$1y(propName);
 
     if (obj['set_' + $v_0]) {
         obj['set_' + $v_0](propValue);
     }
     else {
-        $v_0 = SP.DataConvert.$2k(propName);
+        $v_0 = SP.DataConvert.$2l(propName);
         obj['set_' + $v_0](propValue);
     }
 };
 SP.DataConvert.invokeGetProperty = function SP_DataConvert$invokeGetProperty(obj, propName) {
-    var $v_0 = SP.DataConvert.$1x(propName);
+    var $v_0 = SP.DataConvert.$1y(propName);
     var $v_1;
 
     if (obj['get_' + $v_0]) {
         $v_1 = obj['get_' + $v_0]();
     }
     else {
-        $v_0 = SP.DataConvert.$2k(propName);
+        $v_0 = SP.DataConvert.$2l(propName);
         $v_1 = obj['get_' + $v_0]();
     }
     return $v_1;
@@ -1055,7 +1055,7 @@ SP.PageRequestSucceededEventArgs.prototype = {
     }
 };
 SP.PageRequest = function SP_PageRequest() {
-    this.$$d_$3X_0 = Function.createDelegate(this, this.$3X_0);
+    this.$$d_$3Z_0 = Function.createDelegate(this, this.$3Z_0);
 };
 SP.PageRequest.doPost = function SP_PageRequest$doPost(url, body, expectedContentType, succeededHandler, failedHandler) {
     var $v_0 = new SP.PageRequest();
@@ -1084,12 +1084,12 @@ SP.PageRequest.doGet = function SP_PageRequest$doGet(url, expectedContentType, s
     $v_0.get();
 };
 SP.PageRequest.prototype = {
-    $7_0: null,
+    $6_0: null,
     get_request: function SP_PageRequest$get_request() {
-        if (!this.$7_0) {
-            this.$7_0 = new Sys.Net.WebRequest();
+        if (!this.$6_0) {
+            this.$6_0 = new Sys.Net.WebRequest();
         }
-        return this.$7_0;
+        return this.$6_0;
     },
     get_url: function SP_PageRequest$get_url() {
         return (this.get_request()).get_url();
@@ -1098,28 +1098,28 @@ SP.PageRequest.prototype = {
         (this.get_request()).set_url(value);
         return value;
     },
-    $1d_0: null,
+    $1e_0: null,
     get_expectedContentType: function SP_PageRequest$get_expectedContentType() {
-        if (SP.ScriptUtility.isNullOrEmptyString(this.$1d_0)) {
+        if (SP.ScriptUtility.isNullOrEmptyString(this.$1e_0)) {
             return 'html';
         }
-        return this.$1d_0;
+        return this.$1e_0;
     },
     set_expectedContentType: function SP_PageRequest$set_expectedContentType(value) {
-        this.$1d_0 = value;
+        this.$1e_0 = value;
         return value;
     },
     post: function SP_PageRequest$post(body) {
         (this.get_request()).set_httpVerb('POST');
         (this.get_request()).set_body(body);
-        SP.ClientRequest.$2z(this.get_request());
-        (this.get_request()).add_completed(this.$$d_$3X_0);
+        SP.ClientRequest.$30(this.get_request());
+        (this.get_request()).add_completed(this.$$d_$3Z_0);
         (this.get_request()).invoke();
     },
     get: function SP_PageRequest$get() {
         (this.get_request()).set_httpVerb('GET');
-        SP.ClientRequest.$2z(this.get_request());
-        (this.get_request()).add_completed(this.$$d_$3X_0);
+        SP.ClientRequest.$30(this.get_request());
+        (this.get_request()).add_completed(this.$$d_$3Z_0);
         (this.get_request()).invoke();
     },
     $E_0: null,
@@ -1141,7 +1141,7 @@ SP.PageRequest.prototype = {
     remove_failed: function SP_PageRequest$remove_failed(value) {
         (this.get_$G_0()).removeHandler('failed', value);
     },
-    $3X_0: function SP_PageRequest$$3X_0($p0) {
+    $3Z_0: function SP_PageRequest$$3Z_0($p0) {
         var $v_0 = null;
         var $v_1 = null;
 
@@ -1149,7 +1149,7 @@ SP.PageRequest.prototype = {
             $v_1 = this.$E_0.getHandler('succeeded');
             $v_0 = this.$E_0.getHandler('failed');
         }
-        var $v_2 = SP.ClientRequest.$2j($p0, this.get_expectedContentType());
+        var $v_2 = SP.ClientRequest.$2k($p0, this.get_expectedContentType());
 
         if ($v_2) {
             if ($v_0) {
@@ -1175,11 +1175,11 @@ SP.ResResources.getString = function SP_ResResources$getString(resourceId) {
     var $v_0 = '';
 
     if (window.SP && window.SP.Res) {
-        resourceId = SP.DataConvert.$1x(resourceId);
+        resourceId = SP.DataConvert.$1y(resourceId);
         $v_0 = window.SP.Res[resourceId];
     }
     if (SP.ScriptUtility.isNullOrEmptyString($v_0) && window.SP && window.SP.RuntimeRes) {
-        resourceId = SP.DataConvert.$1x(resourceId);
+        resourceId = SP.DataConvert.$1y(resourceId);
         $v_0 = window.SP.RuntimeRes[resourceId];
     }
     if (SP.ScriptUtility.isNullOrEmptyString($v_0)) {
@@ -1188,7 +1188,7 @@ SP.ResResources.getString = function SP_ResResources$getString(resourceId) {
     return String.format.apply(null, [$v_0].concat(args));
 };
 SP.XmlWriter = function SP_XmlWriter($p0) {
-    this.$s_0 = [];
+    this.$t_0 = [];
     this.$1_0 = $p0;
     this.$X_0 = true;
 };
@@ -1197,29 +1197,29 @@ SP.XmlWriter.create = function SP_XmlWriter$create(sb) {
 };
 SP.XmlWriter.prototype = {
     $1_0: null,
-    $13_0: null,
+    $15_0: null,
     $X_0: false,
     $n_0: false,
     writeStartElement: function SP_XmlWriter$writeStartElement(tagName) {
-        this.$21_0();
-        this.$1T_0();
-        Array.add(this.$s_0, tagName);
-        this.$13_0 = tagName;
+        this.$22_0();
+        this.$1U_0();
+        Array.add(this.$t_0, tagName);
+        this.$15_0 = tagName;
         this.$1_0.append('<');
         this.$1_0.append(tagName);
         this.$X_0 = false;
         this.$n_0 = false;
     },
     writeElementString: function SP_XmlWriter$writeElementString(tagName, value) {
-        this.$21_0();
-        this.$1T_0();
+        this.$22_0();
+        this.$1U_0();
         this.writeStartElement(tagName);
         this.writeString(value);
         this.writeEndElement();
     },
     writeEndElement: function SP_XmlWriter$writeEndElement() {
-        this.$21_0();
-        if (SP.ScriptUtility.isNullOrEmptyString(this.$13_0)) {
+        this.$22_0();
+        if (SP.ScriptUtility.isNullOrEmptyString(this.$15_0)) {
             throw Error.invalidOperation();
         }
         if (!this.$X_0) {
@@ -1228,18 +1228,18 @@ SP.XmlWriter.prototype = {
         }
         else {
             this.$1_0.append('</');
-            this.$1_0.append(this.$13_0);
+            this.$1_0.append(this.$15_0);
             this.$1_0.append('>');
         }
-        Array.removeAt(this.$s_0, this.$s_0.length - 1);
-        if (this.$s_0.length > 0) {
-            this.$13_0 = this.$s_0[this.$s_0.length - 1];
+        Array.removeAt(this.$t_0, this.$t_0.length - 1);
+        if (this.$t_0.length > 0) {
+            this.$15_0 = this.$t_0[this.$t_0.length - 1];
         }
         else {
-            this.$13_0 = null;
+            this.$15_0 = null;
         }
     },
-    $1T_0: function SP_XmlWriter$$1T_0() {
+    $1U_0: function SP_XmlWriter$$1U_0() {
         if (!this.$X_0) {
             this.$1_0.append('>');
             this.$X_0 = true;
@@ -1252,7 +1252,7 @@ SP.XmlWriter.prototype = {
         this.$1_0.append(' ');
         this.$1_0.append(localName);
         this.$1_0.append('=\"');
-        this.$23_0(value, true);
+        this.$24_0(value, true);
         this.$1_0.append('\"');
     },
     writeStartAttribute: function SP_XmlWriter$writeStartAttribute(localName) {
@@ -1273,25 +1273,25 @@ SP.XmlWriter.prototype = {
     },
     writeString: function SP_XmlWriter$writeString(value) {
         if (this.$n_0) {
-            this.$23_0(value, true);
+            this.$24_0(value, true);
             this.$1_0.append(value);
         }
         else {
-            this.$1T_0();
-            this.$23_0(value, false);
+            this.$1U_0();
+            this.$24_0(value, false);
         }
     },
     writeRaw: function SP_XmlWriter$writeRaw(xml) {
-        this.$21_0();
-        this.$1T_0();
+        this.$22_0();
+        this.$1U_0();
         this.$1_0.append(xml);
     },
-    $21_0: function SP_XmlWriter$$21_0() {
+    $22_0: function SP_XmlWriter$$22_0() {
         if (this.$n_0) {
             throw Error.invalidOperation();
         }
     },
-    $23_0: function SP_XmlWriter$$23_0($p0, $p1) {
+    $24_0: function SP_XmlWriter$$24_0($p0, $p1) {
         if (SP.ScriptUtility.isNullOrEmptyString($p0)) {
             return;
         }
@@ -1332,7 +1332,7 @@ SP.XmlWriter.prototype = {
 };
 SP.ClientHttpUtility = function SP_ClientHttpUtility() {
 };
-SP.ClientHttpUtility.$34 = function SP_ClientHttpUtility$$34($p0, $p1, $p2) {
+SP.ClientHttpUtility.$35 = function SP_ClientHttpUtility$$35($p0, $p1, $p2) {
     var $v_0 = '';
     var $v_1;
     var $v_2 = 0;
@@ -1411,9 +1411,9 @@ SP.ClientAction = function SP_ClientAction($p0, $p1, $p2) {
     }
     this.$I_0 = $p1;
     this.$B_0 = $p2;
-    this.$4_0 = $p0.get_$1w_0();
+    this.$4_0 = $p0.get_$1x_0();
 };
-SP.ClientAction.$z = function SP_ClientAction$$z($p0, $p1) {
+SP.ClientAction.$11 = function SP_ClientAction$$11($p0, $p1) {
     if ($p0 && $p1) {
         if (SP.ClientObject.isInstanceOfType($p1)) {
             var $v_0 = $p1;
@@ -1424,10 +1424,10 @@ SP.ClientAction.$z = function SP_ClientAction$$z($p0, $p1) {
         }
     }
 };
-SP.ClientAction.$1A = function SP_ClientAction$$1A($p0, $p1) {
+SP.ClientAction.$1C = function SP_ClientAction$$1C($p0, $p1) {
     if ($p0 && $p1 && $p1.length > 0) {
         for (var $v_0 = 0; $v_0 < $p1.length; $v_0++) {
-            SP.ClientAction.$z($p0, $p1[$v_0]);
+            SP.ClientAction.$11($p0, $p1[$v_0]);
         }
     }
 };
@@ -1446,39 +1446,39 @@ SP.ClientAction.prototype = {
     }
 };
 SP.ClientActionSetProperty = function SP_ClientActionSetProperty(obj, propName, propValue) {
-    SP.ClientActionSetProperty.initializeBase(this, [SP.ClientRuntimeContext.$2h(obj), !obj ? null : obj.get_path(), propName]);
+    SP.ClientActionSetProperty.initializeBase(this, [SP.ClientRuntimeContext.$2i(obj), !obj ? null : obj.get_path(), propName]);
     if (!obj) {
         throw Error.argumentNull('obj');
     }
     if (!obj.get_path() || !(obj.get_path()).$j_0) {
         throw Error.create(SP.ResResources.getString('NoObjectPathAssociatedWithObject'));
     }
-    SP.ClientAction.$z(obj.$0_0, propValue);
-    this.$2K_1 = propName;
+    SP.ClientAction.$11(obj.$0_0, propValue);
+    this.$2L_1 = propName;
     this.$l_1 = propValue;
-    this.$6_1 = new SP.SerializationContext(obj.$0_0);
+    this.$7_1 = new SP.SerializationContext(obj.$0_0);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$l_1 = null;
 };
 SP.ClientActionSetProperty.prototype = {
-    $2K_1: null,
+    $2L_1: null,
     $l_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
-    $39_0: function SP_ClientActionSetProperty$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionSetProperty$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ClientActionSetProperty$$y_1($p0, $p1) {
+    $z_1: function SP_ClientActionSetProperty$$z_1($p0, $p1) {
         $p0.writeStartElement('SetProperty');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('ObjectPathId', this.$I_0.$4_0.toString());
-        $p0.writeAttributeString('Name', this.$2K_1);
+        $p0.writeAttributeString('Name', this.$2L_1);
         $p1.addObjectPath(this.$I_0);
         $p0.writeStartElement('Parameter');
         SP.DataConvert.writeValueToXmlElement($p0, this.$l_1, $p1);
@@ -1491,28 +1491,28 @@ SP.ClientActionSetStaticProperty = function SP_ClientActionSetStaticProperty(con
     if (!context) {
         throw Error.argumentNull('context');
     }
-    SP.ClientAction.$z(context, propValue);
+    SP.ClientAction.$11(context, propValue);
     this.$J_1 = typeId;
     this.$l_1 = propValue;
-    this.$6_1 = new SP.SerializationContext(context);
+    this.$7_1 = new SP.SerializationContext(context);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$l_1 = null;
 };
 SP.ClientActionSetStaticProperty.prototype = {
     $J_1: null,
     $l_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
-    $39_0: function SP_ClientActionSetStaticProperty$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionSetStaticProperty$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ClientActionSetStaticProperty$$y_1($p0, $p1) {
+    $z_1: function SP_ClientActionSetStaticProperty$$z_1($p0, $p1) {
         $p0.writeStartElement('SetStaticProperty');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('TypeId', this.$J_1);
@@ -1524,35 +1524,35 @@ SP.ClientActionSetStaticProperty.prototype = {
     }
 };
 SP.ClientActionInvokeMethod = function SP_ClientActionInvokeMethod(obj, methodName, parameters) {
-    SP.ClientActionInvokeMethod.initializeBase(this, [SP.ClientRuntimeContext.$2h(obj), !obj ? null : obj.get_path(), methodName]);
+    SP.ClientActionInvokeMethod.initializeBase(this, [SP.ClientRuntimeContext.$2i(obj), !obj ? null : obj.get_path(), methodName]);
     if (!obj) {
         throw Error.argumentNull('obj');
     }
-    SP.ClientAction.$1A(obj.$0_0, parameters);
+    SP.ClientAction.$1C(obj.$0_0, parameters);
     this.$5_1 = parameters;
     if (!obj.get_path() || !(obj.get_path()).$j_0) {
         throw Error.create(SP.ResResources.getString('NoObjectPathAssociatedWithObject'));
     }
     this.$c_1 = obj.$2_0.$c_0;
-    this.$6_1 = new SP.SerializationContext(obj.$0_0);
+    this.$7_1 = new SP.SerializationContext(obj.$0_0);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$5_1 = null;
 };
 SP.ClientActionInvokeMethod.prototype = {
     $5_1: null,
     $c_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
-    $39_0: function SP_ClientActionInvokeMethod$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionInvokeMethod$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ClientActionInvokeMethod$$y_1($p0, $p1) {
+    $z_1: function SP_ClientActionInvokeMethod$$z_1($p0, $p1) {
         $p0.writeStartElement('Method');
         $p0.writeAttributeString('Name', this.$B_0);
         $p0.writeAttributeString('Id', this.$4_0.toString());
@@ -1580,28 +1580,28 @@ SP.ClientActionInvokeStaticMethod = function SP_ClientActionInvokeStaticMethod(c
     if (!context) {
         throw Error.argumentNull('context');
     }
-    SP.ClientAction.$1A(context, parameters);
+    SP.ClientAction.$1C(context, parameters);
     this.$J_1 = typeId;
     this.$5_1 = parameters;
-    this.$6_1 = new SP.SerializationContext(context);
+    this.$7_1 = new SP.SerializationContext(context);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$5_1 = null;
 };
 SP.ClientActionInvokeStaticMethod.prototype = {
     $5_1: null,
     $J_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
-    $39_0: function SP_ClientActionInvokeStaticMethod$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionInvokeStaticMethod$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ClientActionInvokeStaticMethod$$y_1($p0, $p1) {
+    $z_1: function SP_ClientActionInvokeStaticMethod$$z_1($p0, $p1) {
         $p0.writeStartElement('StaticMethod');
         $p0.writeAttributeString('TypeId', this.$J_1);
         $p0.writeAttributeString('Name', this.$B_0);
@@ -1621,10 +1621,10 @@ SP.ClientActionInvokeStaticMethod.prototype = {
     }
 };
 SP.ClientActionInstantiateObjectPath = function SP_ClientActionInstantiateObjectPath($p0) {
-    SP.ClientActionInstantiateObjectPath.initializeBase(this, [SP.ClientRuntimeContext.$2i($p0), $p0, null]);
+    SP.ClientActionInstantiateObjectPath.initializeBase(this, [SP.ClientRuntimeContext.$2j($p0), $p0, null]);
 };
 SP.ClientActionInstantiateObjectPath.prototype = {
-    $39_0: function SP_ClientActionInstantiateObjectPath$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionInstantiateObjectPath$$3A_0($p0, $p1) {
         $p0.writeStartElement('ObjectPath');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('ObjectPathId', this.$I_0.$4_0.toString());
@@ -1661,8 +1661,8 @@ SP.ClientObject.prototype = {
     },
     checkUninitializedProperty: function SP_ClientObject$checkUninitializedProperty(propName) {
         if (this.get_serverObjectIsNull()) {
-            if (this.get_path() && !SP.ScriptUtility.isNullOrEmptyString((this.get_path()).get_$2l_0())) {
-                throw Error.create(SP.ResResources.getString('NamedServerObjectIsNull', (this.get_path()).get_$2l_0()));
+            if (this.get_path() && !SP.ScriptUtility.isNullOrEmptyString((this.get_path()).get_$2m_0())) {
+                throw Error.create(SP.ResResources.getString('NamedServerObjectIsNull', (this.get_path()).get_$2m_0()));
             }
             else {
                 throw Error.create(SP.ResResources.getString('ServerObjectIsNull'));
@@ -1674,12 +1674,12 @@ SP.ClientObject.prototype = {
             throw Error.create(SP.ResResources.getString('NamedPropertyHasNotBeenInitialized', propName));
         }
     },
-    $20_0: function SP_ClientObject$$20_0($p0) {
+    $21_0: function SP_ClientObject$$21_0($p0) {
         this.$2_0 = $p0.$2_0;
     },
     fromJson: function SP_ClientObject$fromJson(initValue) {
         if (SP.ScriptUtility.isNullOrUndefined(initValue)) {
-            this.$2y_0();
+            this.$2z_0();
             return;
         }
         this.initPropertiesFromJson(initValue);
@@ -1698,8 +1698,8 @@ SP.ClientObject.prototype = {
                     $v_2.$4_0 = this.$2_0.$Z_0.$4_0;
                 }
                 this.$2_0.$Z_0 = $v_2;
-                $v_2.$1N_0 = false;
-                this.$0_0.$2Z_0($v_2);
+                $v_2.$1O_0 = false;
+                this.$0_0.$2a_0($v_2);
             }
             delete initValue._ObjectIdentity_;
         }
@@ -1720,7 +1720,7 @@ SP.ClientObject.prototype = {
         return false;
     },
     retrieve: function SP_ClientObject$retrieve() {
-        var $v_0 = this.get_$19_0();
+        var $v_0 = this.get_$1B_0();
 
         if (!arguments.length) {
             $v_0.selectAllProperties();
@@ -1745,9 +1745,9 @@ SP.ClientObject.prototype = {
         }
     },
     refreshLoad: function SP_ClientObject$refreshLoad() {
-        var $v_0 = this.get_$19_0();
+        var $v_0 = this.get_$1B_0();
 
-        this.$2x_0($v_0);
+        this.$2y_0($v_0);
     },
     isPropertyAvailable: function SP_ClientObject$isPropertyAvailable(propertyName) {
         var $v_0 = (this.$2_0.get_properties())[propertyName];
@@ -1759,7 +1759,7 @@ SP.ClientObject.prototype = {
 
         return !SP.ScriptUtility.isUndefined($v_0);
     },
-    get_$19_0: function SP_ClientObject$get_$19_0() {
+    get_$1B_0: function SP_ClientObject$get_$1B_0() {
         var $v_0 = this.$2_0.$D_0;
 
         if (!$v_0 || $v_0 !== (this.$0_0.get_pendingRequest()).$P_0) {
@@ -1767,13 +1767,13 @@ SP.ClientObject.prototype = {
             this.$2_0.$D_0 = $v_0;
             this.$0_0.addQueryIdAndResultObject($v_0.$4_0, this);
             this.$0_0.addQuery($v_0);
-            this.$0_0.$2a_0(this);
-            this.$2x_0($v_0);
+            this.$0_0.$2b_0(this);
+            this.$2y_0($v_0);
             this.loadExpandoFields();
         }
         return $v_0;
     },
-    $2x_0: function SP_ClientObject$$2x_0($p0) {
+    $2y_0: function SP_ClientObject$$2y_0($p0) {
         var $$dict_1 = this.$2_0.get_properties();
 
         for (var $$key_2 in $$dict_1) {
@@ -1787,7 +1787,7 @@ SP.ClientObject.prototype = {
     },
     loadExpandoFields: function SP_ClientObject$loadExpandoFields() {
     },
-    $24_0: function SP_ClientObject$$24_0() {
+    $25_0: function SP_ClientObject$$25_0() {
         this.$2_0.$D_0 = null;
     },
     $U_0: null,
@@ -1796,12 +1796,12 @@ SP.ClientObject.prototype = {
             this.$U_0.removeChild(this);
         }
     },
-    $2O_0: false,
-    $2y_0: function SP_ClientObject$$2y_0() {
-        this.$2O_0 = true;
+    $2P_0: false,
+    $2z_0: function SP_ClientObject$$2z_0() {
+        this.$2P_0 = true;
     },
     get_serverObjectIsNull: function SP_ClientObject$get_serverObjectIsNull() {
-        if (this.$2O_0) {
+        if (this.$2P_0) {
             return true;
         }
         var $v_0 = this.get_path();
@@ -1809,7 +1809,7 @@ SP.ClientObject.prototype = {
         if (!$v_0) {
             return false;
         }
-        return $v_0.$1N_0;
+        return $v_0.$1O_0;
     },
     updateClientObjectPropertyType: function SP_ClientObject$updateClientObjectPropertyType(propertyName, propertyValue, json) {
         if (SP.ScriptUtility.isNullOrEmptyString(propertyName)) {
@@ -1837,23 +1837,23 @@ SP.ClientObject.prototype = {
             if ($v_2 && $v_2 !== Object.getType(propertyValue)) {
                 var $v_3 = new $v_2(this.$0_0);
 
-                $v_0.$30_0($v_3);
+                $v_0.$31_0($v_3);
                 (this.$2_0.get_clientObjectProperties())[propertyName] = $v_3;
             }
         }
     },
-    $30_0: function SP_ClientObject$$30_0($p0) {
-        this.$2_0.$1u_0 = $p0;
+    $31_0: function SP_ClientObject$$31_0($p0) {
+        this.$2_0.$1v_0 = $p0;
         if (this.$2_0.$O_0) {
             this.$2_0.$O_0 = $p0;
         }
-        $p0.$20_0(this);
+        $p0.$21_0(this);
     },
     get_typedObject: function SP_ClientObject$get_typedObject() {
-        if (!this.$2_0.$1u_0) {
+        if (!this.$2_0.$1v_0) {
             return this;
         }
-        return this.$2_0.$1u_0;
+        return this.$2_0.$1v_0;
     }
 };
 SP.ClientObjectData = function SP_ClientObjectData() {
@@ -1867,58 +1867,58 @@ SP.ClientObjectData.prototype = {
         }
         return this.$K_0;
     },
-    $1Z_0: null,
+    $1a_0: null,
     get_clientObjectProperties: function SP_ClientObjectData$get_clientObjectProperties() {
-        if (!this.$1Z_0) {
-            this.$1Z_0 = {};
+        if (!this.$1a_0) {
+            this.$1a_0 = {};
         }
-        return this.$1Z_0;
+        return this.$1a_0;
     },
-    $1g_0: null,
+    $1h_0: null,
     get_methodReturnObjects: function SP_ClientObjectData$get_methodReturnObjects() {
-        if (!this.$1g_0) {
-            this.$1g_0 = {};
+        if (!this.$1h_0) {
+            this.$1h_0 = {};
         }
-        return this.$1g_0;
+        return this.$1h_0;
     },
     $D_0: null,
-    $1u_0: null,
+    $1v_0: null,
     $O_0: null,
     $Z_0: null,
-    $12_0: false,
-    $1E_0: null,
-    get_$10_0: function SP_ClientObjectData$get_$10_0() {
-        if (!this.$1E_0) {
-            this.$1E_0 = [];
+    $14_0: false,
+    $1G_0: null,
+    get_$12_0: function SP_ClientObjectData$get_$12_0() {
+        if (!this.$1G_0) {
+            this.$1G_0 = [];
         }
-        return this.$1E_0;
+        return this.$1G_0;
     },
-    set_$10_0: function SP_ClientObjectData$set_$10_0($p0) {
-        this.$1E_0 = $p0;
+    set_$12_0: function SP_ClientObjectData$set_$12_0($p0) {
+        this.$1G_0 = $p0;
         return $p0;
     }
 };
 SP.ClientObjectCollection = function SP_ClientObjectCollection(context, objectPath) {
-    this.getEnumerator = this.$3i_1;
+    this.getEnumerator = this.$3k_1;
     SP.ClientObjectCollection.initializeBase(this, [context, objectPath]);
 };
 SP.ClientObjectCollection.prototype = {
     get_areItemsAvailable: function SP_ClientObjectCollection$get_areItemsAvailable() {
-        return this.$2_0.$12_0;
+        return this.$2_0.$14_0;
     },
-    $1J_1: null,
+    $1L_1: null,
     retrieveItems: function SP_ClientObjectCollection$retrieveItems() {
-        if (!this.$1J_1) {
-            this.$1J_1 = new SP.ClientObjectPrototype(this.get_$19_0(), true);
+        if (!this.$1L_1) {
+            this.$1L_1 = new SP.ClientObjectPrototype(this.get_$1B_0(), true);
         }
-        return this.$1J_1;
+        return this.$1L_1;
     },
-    $24_0: function SP_ClientObjectCollection$$24_0() {
-        SP.ClientObject.prototype.$24_0.call(this);
-        this.$1J_1 = null;
+    $25_0: function SP_ClientObjectCollection$$25_0() {
+        SP.ClientObject.prototype.$25_0.call(this);
+        this.$1L_1 = null;
     },
-    $3i_1: function SP_ClientObjectCollection$$3i_1() {
-        this.$33_1();
+    $3k_1: function SP_ClientObjectCollection$$3k_1() {
+        this.$34_1();
         return new SP.ArrayListEnumerator(this.get_data());
     },
     getItemAtIndex: function SP_ClientObjectCollection$getItemAtIndex(i) {
@@ -1927,22 +1927,22 @@ SP.ClientObjectCollection.prototype = {
         return $v_0;
     },
     get_count: function SP_ClientObjectCollection$get_count() {
-        this.$33_1();
+        this.$34_1();
         return (this.get_data()).length;
     },
-    get_$3F_1: function SP_ClientObjectCollection$get_$3F_1() {
-        return this.$2_0.$12_0;
+    get_$3H_1: function SP_ClientObjectCollection$get_$3H_1() {
+        return this.$2_0.$14_0;
     },
-    $3a_1: function SP_ClientObjectCollection$$3a_1() {
-        this.$2_0.$12_0 = true;
+    $3c_1: function SP_ClientObjectCollection$$3c_1() {
+        this.$2_0.$14_0 = true;
     },
-    $33_1: function SP_ClientObjectCollection$$33_1() {
-        if (!this.get_$3F_1()) {
+    $34_1: function SP_ClientObjectCollection$$34_1() {
+        if (!this.get_$3H_1()) {
             throw Error.create(SP.ResResources.getString('CollectionHasNotBeenInitialized'));
         }
     },
     get_data: function SP_ClientObjectCollection$get_data() {
-        return this.$2_0.get_$10_0();
+        return this.$2_0.get_$12_0();
     },
     fromJson: function SP_ClientObjectCollection$fromJson(obj) {
         SP.ClientObject.prototype.fromJson.call(this, obj);
@@ -1950,10 +1950,10 @@ SP.ClientObjectCollection.prototype = {
 
         $v_0 = obj._Child_Items_;
         if ($v_0) {
-            this.$2_0.set_$10_0([]);
-            this.$2_0.$12_0 = true;
-            SP.DataConvert.$2U(this.$0_0, this.$2_0.get_$10_0(), $v_0, this.get_childItemType());
-            var $v_1 = this.$2_0.get_$10_0();
+            this.$2_0.set_$12_0([]);
+            this.$2_0.$14_0 = true;
+            SP.DataConvert.$2V(this.$0_0, this.$2_0.get_$12_0(), $v_0, this.get_childItemType());
+            var $v_1 = this.$2_0.get_$12_0();
 
             for (var $v_2 = 0; $v_2 < $v_1.length; $v_2++) {
                 if (SP.ClientObject.isInstanceOfType($v_1[$v_2])) {
@@ -1969,10 +1969,10 @@ SP.ClientObjectCollection.prototype = {
         if (!obj.$U_0) {
             obj.$U_0 = this;
         }
-        this.$2_0.$12_0 = true;
+        this.$2_0.$14_0 = true;
     },
     removeChild: function SP_ClientObjectCollection$removeChild(obj) {
-        if (!this.$2_0.get_$10_0()) {
+        if (!this.$2_0.get_$12_0()) {
             return;
         }
         var $v_0 = null;
@@ -1980,7 +1980,7 @@ SP.ClientObjectCollection.prototype = {
         if (SP.ObjectPathIdentity.isInstanceOfType(obj.get_path())) {
             $v_0 = obj.get_path();
         }
-        var $v_1 = this.$2_0.get_$10_0();
+        var $v_1 = this.$2_0.get_$12_0();
 
         for (var $v_2 = $v_1.length - 1; $v_2 >= 0; $v_2--) {
             if ($v_1[$v_2] === obj) {
@@ -2000,13 +2000,13 @@ SP.ClientObjectCollection.prototype = {
 };
 SP.ClientObjectList = function SP_ClientObjectList(context, objectPath, childItemType) {
     SP.ClientObjectList.initializeBase(this, [context, objectPath]);
-    this.$1X_2 = childItemType;
+    this.$1Y_2 = childItemType;
 };
 SP.ClientObjectList.prototype = {
-    $1X_2: null,
+    $1Y_2: null,
     fromJson: function SP_ClientObjectList$fromJson(initValue) {
         if (SP.ScriptUtility.isNullOrUndefined(initValue)) {
-            this.$2y_0();
+            this.$2z_0();
             return;
         }
         Array.clear(this.get_data());
@@ -2021,7 +2021,7 @@ SP.ClientObjectList.prototype = {
             }
             var $v_1 = [];
 
-            SP.DataConvert.$2U(this.$0_0, $v_1, $v_0, this.$1X_2);
+            SP.DataConvert.$2V(this.$0_0, $v_1, $v_0, this.$1Y_2);
             for (var $v_2 = 0; $v_2 < $v_1.length; $v_2++) {
                 var $v_3 = $v_1[$v_2];
 
@@ -2030,10 +2030,10 @@ SP.ClientObjectList.prototype = {
                 }
             }
         }
-        this.$3a_1();
+        this.$3c_1();
     },
     get_childItemType: function SP_ClientObjectList$get_childItemType() {
-        return this.$1X_2;
+        return this.$1Y_2;
     },
     customFromJson: function SP_ClientObjectList$customFromJson(initValue) {
         return false;
@@ -2094,12 +2094,12 @@ SP.ClientObjectPrototype.prototype = {
             }
         }
     },
-    $1P_0: null,
+    $1Q_0: null,
     retrieveObject: function SP_ClientObjectPrototype$retrieveObject(propertyName) {
-        if (!this.$1P_0) {
-            this.$1P_0 = {};
+        if (!this.$1Q_0) {
+            this.$1Q_0 = {};
         }
-        var $v_0 = this.$1P_0[propertyName];
+        var $v_0 = this.$1Q_0[propertyName];
 
         if (!SP.ScriptUtility.isNullOrUndefined($v_0)) {
             return $v_0;
@@ -2108,10 +2108,10 @@ SP.ClientObjectPrototype.prototype = {
         var $v_2;
 
         if (this.$p_0) {
-            $v_2 = (this.$D_0.get_childItemQuery()).$1C_1(propertyName);
+            $v_2 = (this.$D_0.get_childItemQuery()).$1E_1(propertyName);
         }
         else {
-            $v_2 = this.$D_0.$1C_1(propertyName);
+            $v_2 = this.$D_0.$1E_1(propertyName);
         }
         if (!$v_2) {
             $v_2 = new SP.ClientQueryInternal(null, propertyName, true, this.$D_0);
@@ -2126,15 +2126,15 @@ SP.ClientObjectPrototype.prototype = {
                 this.$D_0.selectSubQuery($v_2);
             }
         }
-        this.$1P_0[propertyName] = $v_0;
+        this.$1Q_0[propertyName] = $v_0;
         return $v_0;
     },
-    $1O_0: null,
+    $1P_0: null,
     retrieveCollectionObject: function SP_ClientObjectPrototype$retrieveCollectionObject(propertyName) {
-        if (!this.$1O_0) {
-            this.$1O_0 = {};
+        if (!this.$1P_0) {
+            this.$1P_0 = {};
         }
-        var $v_0 = this.$1O_0[propertyName];
+        var $v_0 = this.$1P_0[propertyName];
 
         if (!SP.ScriptUtility.isNullOrUndefined($v_0)) {
             return $v_0;
@@ -2143,10 +2143,10 @@ SP.ClientObjectPrototype.prototype = {
         var $v_2;
 
         if (this.$p_0) {
-            $v_2 = (this.$D_0.get_childItemQuery()).$1C_1(propertyName);
+            $v_2 = (this.$D_0.get_childItemQuery()).$1E_1(propertyName);
         }
         else {
-            $v_2 = this.$D_0.$1C_1(propertyName);
+            $v_2 = this.$D_0.$1E_1(propertyName);
         }
         if (!$v_2) {
             $v_2 = new SP.ClientQueryInternal(null, propertyName, true, this.$D_0);
@@ -2161,7 +2161,7 @@ SP.ClientObjectPrototype.prototype = {
                 this.$D_0.selectSubQuery($v_2);
             }
         }
-        this.$1O_0[propertyName] = $v_0;
+        this.$1P_0[propertyName] = $v_0;
         return $v_0;
     }
 };
@@ -2169,12 +2169,12 @@ SP.ClientObjectCollectionPrototype = function SP_ClientObjectCollectionPrototype
     SP.ClientObjectCollectionPrototype.initializeBase(this, [$p0, $p1]);
 };
 SP.ClientObjectCollectionPrototype.prototype = {
-    $1f_1: null,
+    $1g_1: null,
     retrieveItems: function SP_ClientObjectCollectionPrototype$retrieveItems() {
-        if (!this.$1f_1) {
-            this.$1f_1 = new SP.ClientObjectPrototype(this.$D_0, true);
+        if (!this.$1g_1) {
+            this.$1g_1 = new SP.ClientObjectPrototype(this.$D_0, true);
         }
-        return this.$1f_1;
+        return this.$1g_1;
     }
 };
 SP.ClientQueryProperty = function SP_ClientQueryProperty() {
@@ -2188,8 +2188,8 @@ SP.ClientQueryProperty.prototype = {
 };
 SP.ClientQueryInternal = function SP_ClientQueryInternal($p0, $p1, $p2, $p3) {
     this.$K_1 = {};
-    this.$3U_1 = [];
-    SP.ClientQueryInternal.initializeBase(this, [SP.ClientQueryInternal.$3O($p0, $p3), $p2 ? null : $p0.get_path(), $p1]);
+    this.$3W_1 = [];
+    SP.ClientQueryInternal.initializeBase(this, [SP.ClientQueryInternal.$3Q($p0, $p3), $p2 ? null : $p0.get_path(), $p1]);
     if (!$p2 && (!$p0.get_path() || !($p0.get_path()).$j_0)) {
         throw Error.create(SP.ResResources.getString('NoObjectPathAssociatedWithObject'));
     }
@@ -2197,18 +2197,18 @@ SP.ClientQueryInternal = function SP_ClientQueryInternal($p0, $p1, $p2, $p3) {
         if (!$p3) {
             throw Error.argumentNull('parentQuery');
         }
-        this.$1l_1 = $p3.$1l_1;
+        this.$1m_1 = $p3.$1m_1;
         this.$0_1 = $p3.$0_1;
     }
     else {
         if (!$p0) {
             throw Error.argumentNull('obj');
         }
-        this.$1l_1 = this;
+        this.$1m_1 = this;
         this.$0_1 = $p0.$0_0;
     }
 };
-SP.ClientQueryInternal.$3O = function SP_ClientQueryInternal$$3O($p0, $p1) {
+SP.ClientQueryInternal.$3Q = function SP_ClientQueryInternal$$3Q($p0, $p1) {
     if ($p0) {
         return $p0.$0_0;
     }
@@ -2218,15 +2218,15 @@ SP.ClientQueryInternal.$3O = function SP_ClientQueryInternal$$3O($p0, $p1) {
     throw Error.argumentNull('parentQuery');
 };
 SP.ClientQueryInternal.prototype = {
-    $1l_1: null,
+    $1m_1: null,
     $0_1: null,
     $q_1: null,
-    $1I_1: false,
+    $1K_1: false,
     get_isChildItemQuery: function SP_ClientQueryInternal$get_isChildItemQuery() {
-        return this.$1I_1;
+        return this.$1K_1;
     },
-    $3b_1: function SP_ClientQueryInternal$$3b_1() {
-        this.$1I_1 = true;
+    $3d_1: function SP_ClientQueryInternal$$3d_1() {
+        this.$1K_1 = true;
     },
     select: function SP_ClientQueryInternal$select($p0) {
         if (SP.ScriptUtility.isNullOrEmptyString($p0)) {
@@ -2261,9 +2261,9 @@ SP.ClientQueryInternal.prototype = {
         $v_0.selectAll = true;
         return this;
     },
-    $2M_1: false,
+    $2N_1: false,
     selectAllProperties: function SP_ClientQueryInternal$selectAllProperties() {
-        this.$2M_1 = true;
+        this.$2N_1 = true;
         return this;
     },
     selectSubQuery: function SP_ClientQueryInternal$selectSubQuery($p0) {
@@ -2288,7 +2288,7 @@ SP.ClientQueryInternal.prototype = {
         }
         return this;
     },
-    $1C_1: function SP_ClientQueryInternal$$1C_1($p0) {
+    $1E_1: function SP_ClientQueryInternal$$1E_1($p0) {
         if (SP.ScriptUtility.isNullOrEmptyString($p0)) {
             throw Error.argumentNull('name');
         }
@@ -2302,22 +2302,22 @@ SP.ClientQueryInternal.prototype = {
     get_childItemQuery: function SP_ClientQueryInternal$get_childItemQuery() {
         if (!this.$q_1) {
             this.$q_1 = new SP.ClientQueryInternal(null, '_Child_Items_', true, this);
-            this.$q_1.$3b_1();
+            this.$q_1.$3d_1();
         }
         return this.$q_1;
     },
-    $38_1: function SP_ClientQueryInternal$$38_1($p0, $p1) {
+    $39_1: function SP_ClientQueryInternal$$39_1($p0, $p1) {
         $p0.writeStartElement('Query');
-        this.$37_1($p0, $p1);
+        this.$38_1($p0, $p1);
         $p0.writeEndElement();
         if (this.$q_1) {
             $p0.writeStartElement('ChildItemQuery');
-            this.$q_1.$37_1($p0, $p1);
+            this.$q_1.$38_1($p0, $p1);
             $p0.writeEndElement();
         }
     },
-    $37_1: function SP_ClientQueryInternal$$37_1($p0, $p1) {
-        $p0.writeAttributeString('SelectAllProperties', this.$2M_1 ? 'true' : 'false');
+    $38_1: function SP_ClientQueryInternal$$38_1($p0, $p1) {
+        $p0.writeAttributeString('SelectAllProperties', this.$2N_1 ? 'true' : 'false');
         $p0.writeStartElement('Properties');
         var $$dict_2 = this.$K_1;
 
@@ -2338,19 +2338,19 @@ SP.ClientQueryInternal.prototype = {
                 $p0.writeAttributeString('SelectAll', $v_2.selectAll ? 'true' : 'false');
             }
             if ($v_2.query) {
-                $v_2.query.$38_1($p0, $p1);
+                $v_2.query.$39_1($p0, $p1);
             }
             $p0.writeEndElement();
         }
         $p0.writeEndElement();
-        if (this.$1I_1) { }
+        if (this.$1K_1) { }
     },
-    $39_0: function SP_ClientQueryInternal$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientQueryInternal$$3A_0($p0, $p1) {
         $p0.writeStartElement('Query');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('ObjectPathId', this.$I_0.$4_0.toString());
         $p1.addObjectPath(this.$I_0);
-        this.$38_1($p0, $p1);
+        this.$39_1($p0, $p1);
         $p0.writeEndElement();
     }
 };
@@ -2359,30 +2359,30 @@ SP.WebRequestEventArgs = function SP_WebRequestEventArgs(webRequest) {
     if (!webRequest) {
         throw Error.argumentNull('webRequest');
     }
-    this.$18_1 = webRequest;
+    this.$1A_1 = webRequest;
 };
 SP.WebRequestEventArgs.prototype = {
-    $18_1: null,
+    $1A_1: null,
     get_webRequest: function SP_WebRequestEventArgs$get_webRequest() {
-        return this.$18_1;
+        return this.$1A_1;
     }
 };
 SP.ClientRequest = function SP_ClientRequest($p0) {
-    this.$$d_$3I_0 = Function.createDelegate(this, this.$3I_0);
-    this.$16_0 = [];
-    this.$1L_0 = {};
+    this.$$d_$3K_0 = Function.createDelegate(this, this.$3K_0);
+    this.$18_0 = [];
+    this.$s_0 = {};
     if (!$p0) {
         throw Error.argumentNull('context');
     }
     this.$0_0 = $p0;
 };
 SP.ClientRequest.get_nextSequenceId = function SP_ClientRequest$get_nextSequenceId() {
-    var $v_0 = SP.ClientRequest.$2W;
+    var $v_0 = SP.ClientRequest.$2X;
 
-    SP.ClientRequest.$2W++;
+    SP.ClientRequest.$2X++;
     return $v_0 + 1073741824;
 };
-SP.ClientRequest.$2z = function SP_ClientRequest$$2z($p0) {
+SP.ClientRequest.$30 = function SP_ClientRequest$$30($p0) {
     if (!SP.ScriptUtility.isUndefined(window._spPageContextInfo) && !SP.ScriptUtility.isUndefined(window._spFormDigestRefreshInterval) && !SP.ScriptUtility.isUndefined(window.UpdateFormDigest)) {
         var $v_2 = window._spPageContextInfo;
         var $v_3 = $v_2.webServerRelativeUrl;
@@ -2402,7 +2402,7 @@ SP.ClientRequest.$2z = function SP_ClientRequest$$2z($p0) {
         ($p0.get_headers())['X-RequestDigest'] = $v_0;
     }
 };
-SP.ClientRequest.$3P = function SP_ClientRequest$$3P($p0, $p1) {
+SP.ClientRequest.$3R = function SP_ClientRequest$$3R($p0, $p1) {
     if (!$p0) {
         return $p1;
     }
@@ -2411,7 +2411,7 @@ SP.ClientRequest.$3P = function SP_ClientRequest$$3P($p0, $p1) {
     }
     return $p1;
 };
-SP.ClientRequest.$2j = function SP_ClientRequest$$2j($p0, $p1) {
+SP.ClientRequest.$2k = function SP_ClientRequest$$2k($p0, $p1) {
     var $v_0;
 
     if (!$p0.get_statusCode()) {
@@ -2457,28 +2457,28 @@ SP.ClientRequest.$2j = function SP_ClientRequest$$2j($p0, $p1) {
 };
 SP.ClientRequest.prototype = {
     $0_0: null,
-    $7_0: null,
+    $6_0: null,
     get_webRequest: function SP_ClientRequest$get_webRequest() {
-        if (!this.$7_0) {
-            this.$7_0 = new Sys.Net.WebRequest();
-            this.$7_0.set_httpVerb('POST');
-            (this.$7_0.get_headers())['Content-Type'] = 'text/xml';
-            var $v_0 = this.get_$32_0();
+        if (!this.$6_0) {
+            this.$6_0 = new Sys.Net.WebRequest();
+            this.$6_0.set_httpVerb('POST');
+            (this.$6_0.get_headers())['Content-Type'] = 'text/xml';
+            var $v_0 = this.get_$33_0();
 
-            this.$7_0.set_url($v_0);
-            this.$7_0.set_timeout(this.$0_0.get_requestTimeout());
-            if (this.$0_0.$w_0) {
-                var $v_1 = this.$0_0.$w_0.createWebRequestExecutor();
+            this.$6_0.set_url($v_0);
+            this.$6_0.set_timeout(this.$0_0.get_requestTimeout());
+            if (this.$0_0.$x_0) {
+                var $v_1 = this.$0_0.$x_0.createWebRequestExecutor();
 
-                this.$7_0.set_executor($v_1);
+                this.$6_0.set_executor($v_1);
             }
         }
-        return this.$7_0;
+        return this.$6_0;
     },
     $V_0: null,
-    get_$32_0: function SP_ClientRequest$get_$32_0() {
+    get_$33_0: function SP_ClientRequest$get_$33_0() {
         if (SP.ScriptUtility.isNullOrEmptyString(this.$V_0)) {
-            this.$V_0 = this.$0_0.$u_0;
+            this.$V_0 = this.$0_0.$v_0;
             if (!this.$V_0.endsWith('/')) {
                 this.$V_0 += '/';
             }
@@ -2487,12 +2487,12 @@ SP.ClientRequest.prototype = {
         }
         return this.$V_0;
     },
-    $2n_0: function SP_ClientRequest$$2n_0() {
+    $2o_0: function SP_ClientRequest$$2o_0() {
         this.$V_0 = null;
-        var $v_0 = this.get_$32_0();
+        var $v_0 = this.get_$33_0();
 
-        if (this.$7_0) {
-            this.$7_0.set_url($v_0);
+        if (this.$6_0) {
+            this.$6_0.set_url($v_0);
         }
     },
     $a_0: 0,
@@ -2515,41 +2515,42 @@ SP.ClientRequest.prototype = {
     remove_requestFailed: function SP_ClientRequest$remove_requestFailed(value) {
         (this.get_$G_0()).removeHandler('failed', value);
     },
+    $10_0: null,
     $P_0: null,
-    $22_0: function SP_ClientRequest$$22_0($p0) {
+    $23_0: function SP_ClientRequest$$23_0($p0) {
         if (this.$a_0) {
             throw Error.create(SP.ResResources.getString('RequestHasBeenExecuted'));
         }
-        Array.add(this.$16_0, $p0);
+        Array.add(this.$18_0, $p0);
         this.$P_0 = $p0;
     },
     $d_0: null,
-    $2a_0: function SP_ClientRequest$$2a_0($p0) {
+    $2b_0: function SP_ClientRequest$$2b_0($p0) {
         if (!this.$d_0) {
             this.$d_0 = [];
         }
         Array.add(this.$d_0, $p0);
     },
     $e_0: null,
-    $3A_0: function SP_ClientRequest$$3A_0($p0) {
+    $3B_0: function SP_ClientRequest$$3B_0($p0) {
         if (!this.$e_0) {
             this.$e_0 = [];
         }
         Array.add(this.$e_0, $p0);
     },
-    $1c_0: null,
-    get_$25_0: function SP_ClientRequest$get_$25_0() {
-        if (!this.$1c_0) {
-            this.$1c_0 = [];
+    $1d_0: null,
+    get_$26_0: function SP_ClientRequest$get_$26_0() {
+        if (!this.$1d_0) {
+            this.$1d_0 = [];
         }
-        return this.$1c_0;
+        return this.$1d_0;
     },
-    $24_0: function SP_ClientRequest$$24_0() {
+    $25_0: function SP_ClientRequest$$25_0() {
         if (this.$d_0) {
             for (var $v_0 = 0; $v_0 < this.$d_0.length; $v_0++) {
                 var $v_1 = this.$d_0[$v_0];
 
-                $v_1.$24_0();
+                $v_1.$25_0();
             }
             this.$d_0 = null;
         }
@@ -2557,33 +2558,34 @@ SP.ClientRequest.prototype = {
             for (var $v_2 = 0; $v_2 < this.$e_0.length; $v_2++) {
                 var $v_3 = this.$e_0[$v_2];
 
-                $v_3.$3R_0();
+                $v_3.$3T_0();
             }
             this.$e_0 = null;
         }
     },
-    $3H_0: function SP_ClientRequest$$3H_0() {
+    $3J_0: function SP_ClientRequest$$3J_0() {
         if (this.$a_0) {
             throw Error.create(SP.ResResources.getString('RequestHasBeenExecuted'));
         }
         this.$a_0 = 1;
-        var $v_0 = this.$3C_0();
-
-        this.$24_0();
-        this.$0_0.$2c_0(new SP.WebRequestEventArgs(this.get_webRequest()));
-        (this.get_webRequest()).add_completed(this.$$d_$3I_0);
-        (this.get_webRequest()).set_body($v_0.toString());
+        if (!this.$10_0) {
+            this.$10_0 = this.$3D_0();
+            this.$25_0();
+        }
+        this.$0_0.$2d_0(new SP.WebRequestEventArgs(this.get_webRequest()));
+        (this.get_webRequest()).add_completed(this.$$d_$3K_0);
+        (this.get_webRequest()).set_body(this.$10_0.toString());
         (this.get_webRequest()).invoke();
     },
-    $6_0: null,
-    get_$3Y_0: function SP_ClientRequest$get_$3Y_0() {
-        if (!this.$6_0) {
-            this.$6_0 = new SP.SerializationContext(this.$0_0);
+    $7_0: null,
+    get_$3a_0: function SP_ClientRequest$get_$3a_0() {
+        if (!this.$7_0) {
+            this.$7_0 = new SP.SerializationContext(this.$0_0);
         }
-        return this.$6_0;
+        return this.$7_0;
     },
-    $3C_0: function SP_ClientRequest$$3C_0() {
-        var $v_0 = this.get_$3Y_0();
+    $3D_0: function SP_ClientRequest$$3D_0() {
+        var $v_0 = this.get_$3a_0();
         var $v_1 = new Sys.StringBuilder();
         var $v_2 = SP.XmlWriter.create($v_1);
 
@@ -2597,29 +2599,29 @@ SP.ClientRequest.prototype = {
         $v_2.writeStartElement('Actions');
         var $v_3 = [];
 
-        for (var $v_5 = 0; $v_5 < this.$16_0.length; $v_5++) {
-            var $v_6 = this.$16_0[$v_5];
+        for (var $v_5 = 0; $v_5 < this.$18_0.length; $v_5++) {
+            var $v_6 = this.$18_0[$v_5];
 
             if (SP.ClientActionExecutionScopeStart.isInstanceOfType($v_6)) {
                 var $v_7 = $v_6;
 
-                $v_7.$3_1.$2Y_0($v_2, $v_0);
+                $v_7.$3_1.$2Z_0($v_2, $v_0);
                 $v_3.push($v_7.$3_1);
             }
             else if (SP.ClientActionExecutionScopeEnd.isInstanceOfType($v_6)) {
                 var $v_8 = $v_6;
 
                 if (!$v_3.length || $v_3.pop() !== $v_8.$3_1) {
-                    throw SP.ExceptionHandlingScope.$9();
+                    throw SP.ExceptionHandlingScope.$A();
                 }
-                $v_8.$3_1.$36_0($v_2, $v_0);
+                $v_8.$3_1.$37_0($v_2, $v_0);
             }
             else {
-                $v_6.$39_0($v_2, $v_0);
+                $v_6.$3A_0($v_2, $v_0);
             }
         }
         if ($v_3.length > 0) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         $v_2.writeEndElement();
         $v_2.writeStartElement('ObjectPaths');
@@ -2627,7 +2629,7 @@ SP.ClientRequest.prototype = {
 
         do {
             var $v_9 = [];
-            var $$dict_A = $v_0.$1j_0;
+            var $$dict_A = $v_0.$1k_0;
 
             for (var $$key_B in $$dict_A) {
                 var $v_A = {
@@ -2643,9 +2645,9 @@ SP.ClientRequest.prototype = {
                 break;
             }
             for (var $v_B = 0; $v_B < $v_9.length; $v_B++) {
-                var $v_C = this.$0_0.$1i_0[$v_9[$v_B].toString()];
+                var $v_C = this.$0_0.$1j_0[$v_9[$v_B].toString()];
 
-                $v_C.$39_0($v_2, $v_0);
+                $v_C.$3A_0($v_2, $v_0);
                 $v_4[$v_9[$v_B].toString()] = $v_C;
             }
         } while (true);
@@ -2653,38 +2655,38 @@ SP.ClientRequest.prototype = {
         $v_2.writeEndElement();
         return $v_1;
     },
-    $1h_0: false,
+    $1i_0: false,
     get_navigateWhenServerRedirect: function SP_ClientRequest$get_navigateWhenServerRedirect() {
-        return this.$1h_0;
+        return this.$1i_0;
     },
     set_navigateWhenServerRedirect: function SP_ClientRequest$set_navigateWhenServerRedirect(value) {
-        this.$1h_0 = value;
+        this.$1i_0 = value;
         return value;
     },
-    $3D_0: function SP_ClientRequest$$3D_0($p0) {
-        var $v_0 = SP.ClientRequest.$2j($p0, 'application/json');
+    $3E_0: function SP_ClientRequest$$3E_0($p0) {
+        var $v_0 = SP.ClientRequest.$2k($p0, 'application/json');
 
         if ($v_0) {
-            this.$x_0($v_0, null, 0, null, null, null, null);
+            this.$y_0($v_0, null, 0, null, null, null, null);
             return true;
         }
         return false;
     },
-    $x_0: function SP_ClientRequest$$x_0($p0, $p1, $p2, $p3, $p4, $p5, $p6) {
+    $y_0: function SP_ClientRequest$$y_0($p0, $p1, $p2, $p3, $p4, $p5, $p6) {
         var $v_0 = (this.get_$G_0()).getHandler('failed');
 
         if ($v_0) {
             var $v_1 = new SP.ClientRequestFailedEventArgs(this, $p0, $p1, $p2, $p3, $p4, $p5, $p6);
 
-            if (this.$7_0) {
-                $v_1.$31_2(this.$7_0.get_executor());
+            if (this.$6_0) {
+                $v_1.$32_2(this.$6_0.get_executor());
             }
             $v_0(this, $v_1);
         }
     },
-    $3I_0: function SP_ClientRequest$$3I_0($p0) {
-        if (this.$3D_0($p0)) {
-            this.$7_0 = null;
+    $3K_0: function SP_ClientRequest$$3K_0($p0) {
+        if (this.$3E_0($p0)) {
+            this.$6_0 = null;
             return;
         }
         var $v_0 = $p0.get_responseData();
@@ -2694,11 +2696,11 @@ SP.ClientRequest.prototype = {
             var $v_7 = SP.ResResources.getString('RequestUnexpectedResponse');
 
             this.$a_0 = 3;
-            this.$x_0($v_7, null, 0, null, null, null, null);
-            this.$7_0 = null;
+            this.$y_0($v_7, null, 0, null, null, null, null);
+            this.$6_0 = null;
             return;
         }
-        $v_0 = SP.ParseJSONUtil.$2m($v_0);
+        $v_0 = SP.ParseJSONUtil.$2n($v_0);
         var $v_2 = eval($v_0);
         var $v_3 = false;
 
@@ -2716,16 +2718,16 @@ SP.ClientRequest.prototype = {
             var $v_9 = SP.ResResources.getString('RequestUnexpectedResponse');
 
             this.$a_0 = 3;
-            this.$x_0($v_9, null, 0, null, null, null, null);
-            this.$7_0 = null;
+            this.$y_0($v_9, null, 0, null, null, null, null);
+            this.$6_0 = null;
             return;
         }
         var $v_4 = $v_2[0];
 
-        this.$0_0.$3d_0($v_4.SchemaVersion);
-        this.$0_0.$3c_0($v_4.LibraryVersion);
+        this.$0_0.$3f_0($v_4.SchemaVersion);
+        this.$0_0.$3e_0($v_4.LibraryVersion);
         if (!SP.ScriptUtility.isNullOrEmptyString($v_4.TraceCorrelationId)) {
-            this.$0_0.$3e_0($v_4.TraceCorrelationId);
+            this.$0_0.$3g_0($v_4.TraceCorrelationId);
         }
         var $v_5 = $v_4.ErrorInfo;
 
@@ -2740,20 +2742,20 @@ SP.ClientRequest.prototype = {
 
             $v_F = SP.DataConvert.fixupType(this.$0_0, $v_F);
             this.$a_0 = 3;
-            if ($v_C === -2130575152 && !SP.ScriptUtility.isNullOrEmptyString($v_E) && this.$1h_0) {
+            if ($v_C === -2130575152 && !SP.ScriptUtility.isNullOrEmptyString($v_E) && this.$1i_0) {
                 window.navigate($v_E);
             }
             else {
-                this.$x_0($v_A, $v_B, $v_C, $v_E, $v_D, $v_F, $v_G);
+                this.$y_0($v_A, $v_B, $v_C, $v_E, $v_D, $v_F, $v_G);
             }
-            this.$7_0 = null;
+            this.$6_0 = null;
             return;
         }
-        this.$0_0.$1W_0 = true;
+        this.$0_0.$1X_0 = true;
         try {
             for (var $v_H = 1; $v_H < $v_2.length; $v_H += 2) {
                 var $v_I = $v_2[$v_H];
-                var $v_J = this.$1L_0[$v_I.toString()];
+                var $v_J = this.$s_0[$v_I.toString()];
                 var $v_K = $v_2;
                 var $v_L = $v_K[$v_H + 1];
 
@@ -2767,7 +2769,7 @@ SP.ClientRequest.prototype = {
                             if ($v_N && $v_N !== Object.getType($v_J)) {
                                 var $v_O = new $v_N(this.$0_0);
 
-                                $v_J.$30_0($v_O);
+                                $v_J.$31_0($v_O);
                                 $v_J = $v_O;
                             }
                         }
@@ -2786,7 +2788,7 @@ SP.ClientRequest.prototype = {
             }
         }
         finally {
-            this.$0_0.$1W_0 = false;
+            this.$0_0.$1X_0 = false;
         }
         this.$a_0 = 2;
         var $v_6 = (this.get_$G_0()).getHandler('succeeded');
@@ -2794,80 +2796,80 @@ SP.ClientRequest.prototype = {
         if ($v_6) {
             $v_6(this, new SP.ClientRequestSucceededEventArgs(this));
         }
-        this.$7_0 = null;
+        this.$6_0 = null;
     },
-    $2b_0: function SP_ClientRequest$$2b_0($p0, $p1) {
+    $2c_0: function SP_ClientRequest$$2c_0($p0, $p1) {
         if (this.$a_0) {
             throw Error.create(SP.ResResources.getString('RequestHasBeenExecuted'));
         }
-        this.$1L_0[$p0.toString()] = $p1;
+        this.$s_0[$p0.toString()] = $p1;
         if (SP.ClientObject.isInstanceOfType($p1)) {
             if ($p1.$2_0.$O_0) {
-                this.$1L_0[$p0.toString()] = $p1.$2_0.$O_0;
+                this.$s_0[$p0.toString()] = $p1.$2_0.$O_0;
             }
         }
     }
 };
 SP.ClientRequestEventArgs = function SP_ClientRequestEventArgs($p0) {
     SP.ClientRequestEventArgs.initializeBase(this);
-    this.$7_1 = $p0;
+    this.$6_1 = $p0;
 };
 SP.ClientRequestEventArgs.prototype = {
-    $7_1: null,
+    $6_1: null,
     get_request: function SP_ClientRequestEventArgs$get_request() {
-        return this.$7_1;
+        return this.$6_1;
     }
 };
 SP.ClientRequestFailedEventArgs = function SP_ClientRequestFailedEventArgs(request, message, stackTrace, errorCode, errorValue, errorTypeName, errorDetails, errorTraceCorrelationId) {
     SP.ClientRequestFailedEventArgs.initializeBase(this, [request]);
-    this.$2H_2 = message;
-    this.$2P_2 = stackTrace;
-    this.$1F_2 = errorCode;
-    this.$2F_2 = errorValue;
-    this.$2E_2 = errorTypeName;
-    this.$2D_2 = errorDetails;
-    this.$1G_2 = errorTraceCorrelationId;
+    this.$2I_2 = message;
+    this.$2Q_2 = stackTrace;
+    this.$1H_2 = errorCode;
+    this.$2G_2 = errorValue;
+    this.$2F_2 = errorTypeName;
+    this.$2E_2 = errorDetails;
+    this.$1I_2 = errorTraceCorrelationId;
 };
 SP.ClientRequestFailedEventArgs.prototype = {
-    $2H_2: null,
-    $2P_2: null,
-    $1F_2: 0,
+    $2I_2: null,
+    $2Q_2: null,
+    $1H_2: 0,
+    $2G_2: null,
     $2F_2: null,
     $2E_2: null,
-    $2D_2: null,
-    $1G_2: null,
-    $v_2: null,
+    $1I_2: null,
+    $w_2: null,
     get_message: function SP_ClientRequestFailedEventArgs$get_message() {
-        return this.$2H_2;
+        return this.$2I_2;
     },
     get_stackTrace: function SP_ClientRequestFailedEventArgs$get_stackTrace() {
-        return this.$2P_2;
+        return this.$2Q_2;
     },
     get_errorCode: function SP_ClientRequestFailedEventArgs$get_errorCode() {
-        return this.$1F_2;
+        return this.$1H_2;
     },
     get_errorValue: function SP_ClientRequestFailedEventArgs$get_errorValue() {
-        return this.$2F_2;
+        return this.$2G_2;
     },
     get_errorTypeName: function SP_ClientRequestFailedEventArgs$get_errorTypeName() {
-        return this.$2E_2;
+        return this.$2F_2;
     },
     get_errorDetails: function SP_ClientRequestFailedEventArgs$get_errorDetails() {
-        return this.$2D_2;
+        return this.$2E_2;
     },
     get_errorTraceCorrelationId: function SP_ClientRequestFailedEventArgs$get_errorTraceCorrelationId() {
-        return this.$1G_2;
+        return this.$1I_2;
     },
     get_webRequestExecutor: function SP_ClientRequestFailedEventArgs$get_webRequestExecutor() {
-        return this.$v_2;
+        return this.$w_2;
     },
-    $31_2: function SP_ClientRequestFailedEventArgs$$31_2($p0) {
-        this.$v_2 = $p0;
-        if (this.$v_2) {
-            if (SP.ScriptUtility.isNullOrEmptyString(this.$1G_2) && this.$v_2.get_responseAvailable()) {
-                this.$1G_2 = this.$v_2.getResponseHeader('SPRequestGuid');
+    $32_2: function SP_ClientRequestFailedEventArgs$$32_2($p0) {
+        this.$w_2 = $p0;
+        if (this.$w_2) {
+            if (SP.ScriptUtility.isNullOrEmptyString(this.$1I_2) && this.$w_2.get_responseAvailable()) {
+                this.$1I_2 = this.$w_2.getResponseHeader('SPRequestGuid');
             }
-            this.$1F_2 = SP.ClientRequest.$3P(this.$v_2, this.$1F_2);
+            this.$1H_2 = SP.ClientRequest.$3R(this.$w_2, this.$1H_2);
         }
     }
 };
@@ -2885,81 +2887,81 @@ SP.FormDigestInfo.prototype = {
         this.$f_0 = $p0;
         return $p0;
     },
-    $14_0: 0,
+    $16_0: 0,
     get_expiration: function SP_FormDigestInfo$get_expiration() {
-        return this.$14_0;
+        return this.$16_0;
     },
     set_expiration: function SP_FormDigestInfo$set_expiration($p0) {
-        this.$14_0 = $p0;
+        this.$16_0 = $p0;
         return $p0;
     },
-    $1Q_0: null,
+    $1R_0: null,
     get_webServerRelativeUrl: function SP_FormDigestInfo$get_webServerRelativeUrl() {
-        return this.$1Q_0;
+        return this.$1R_0;
     },
     set_webServerRelativeUrl: function SP_FormDigestInfo$set_webServerRelativeUrl($p0) {
-        this.$1Q_0 = $p0;
+        this.$1R_0 = $p0;
         return $p0;
     }
 };
 SP.ClientRuntimeContext = function SP_ClientRuntimeContext(serverRelativeUrlOrFullUrl) {
-    this.$1i_0 = {};
+    this.$1j_0 = {};
     if (!serverRelativeUrlOrFullUrl) {
         throw Error.argumentNull('serverRelativeUrlOrFullUrl');
     }
     if (!serverRelativeUrlOrFullUrl.startsWith('/') && !(serverRelativeUrlOrFullUrl.toLowerCase()).startsWith('http://') && !(serverRelativeUrlOrFullUrl.toLowerCase()).startsWith('https://')) {
         throw Error.argument('serverRelativeUrlOrFullUrl');
     }
-    this.$u_0 = serverRelativeUrlOrFullUrl;
+    this.$v_0 = serverRelativeUrlOrFullUrl;
 };
-SP.ClientRuntimeContext.$2h = function SP_ClientRuntimeContext$$2h($p0) {
+SP.ClientRuntimeContext.$2i = function SP_ClientRuntimeContext$$2i($p0) {
     if (!$p0) {
         throw Error.argumentNull('obj');
     }
     return $p0.$0_0;
 };
-SP.ClientRuntimeContext.$2i = function SP_ClientRuntimeContext$$2i($p0) {
+SP.ClientRuntimeContext.$2j = function SP_ClientRuntimeContext$$2j($p0) {
     if (!$p0) {
         throw Error.argumentNull('objectPath');
     }
     return $p0.$0_0;
 };
 SP.ClientRuntimeContext.prototype = {
-    $u_0: null,
-    $2N_0: 0,
-    $2G_0: false,
+    $v_0: null,
+    $2O_0: 0,
+    $2H_0: false,
     get_isPageUrl: function SP_ClientRuntimeContext$get_isPageUrl() {
-        return this.$2G_0;
+        return this.$2H_0;
     },
     set_isPageUrl: function SP_ClientRuntimeContext$set_isPageUrl(value) {
-        if (value && !this.$1H_0) {
+        if (value && !this.$1J_0) {
             throw Error.invalidOperation();
         }
-        this.$2G_0 = value;
+        this.$2H_0 = value;
         return value;
     },
-    get_$1w_0: function SP_ClientRuntimeContext$get_$1w_0() {
-        var $v_0 = this.$2N_0;
+    get_$1x_0: function SP_ClientRuntimeContext$get_$1x_0() {
+        var $v_0 = this.$2O_0;
 
-        this.$2N_0++;
+        this.$2O_0++;
         return $v_0;
     },
     get_serviceRelativeUrl: function SP_ClientRuntimeContext$get_serviceRelativeUrl() {
         return '_vti_bin/client.svc/ProcessQuery';
     },
     get_url: function SP_ClientRuntimeContext$get_url() {
-        return this.$u_0;
+        return this.$v_0;
     },
-    $1v_0: null,
+    $1w_0: null,
     get_viaUrl: function SP_ClientRuntimeContext$get_viaUrl() {
-        return this.$1v_0;
+        return this.$1w_0;
     },
     set_viaUrl: function SP_ClientRuntimeContext$set_viaUrl(value) {
-        this.$1v_0 = value;
+        this.$1w_0 = value;
         return value;
     },
     getRequestUrl: function SP_ClientRuntimeContext$getRequestUrl(url) {
-        var $v_0 = this.$1v_0;
+        var $v_0 = this.$1w_0;
 
         if (!SP.ScriptUtility.isNullOrEmptyString($v_0)) {
             if ($v_0.indexOf('?') < 0) {
@@ -2968,21 +2970,21 @@ SP.ClientRuntimeContext.prototype = {
             if (!$v_0.endsWith('?') && !$v_0.endsWith('&')) {
                 $v_0 += '&';
             }
-            $v_0 += 'MS.SP.url=' + SP.ClientHttpUtility.$34(url, false, false);
+            $v_0 += 'MS.SP.url=' + SP.ClientHttpUtility.$35(url, false, false);
             url = $v_0;
         }
         return url;
     },
-    $1H_0: false,
+    $1J_0: false,
     get_formDigestHandlingEnabled: function SP_ClientRuntimeContext$get_formDigestHandlingEnabled() {
-        return this.$1H_0;
+        return this.$1J_0;
     },
     set_formDigestHandlingEnabled: function SP_ClientRuntimeContext$set_formDigestHandlingEnabled(value) {
-        this.$1H_0 = value;
+        this.$1J_0 = value;
         return value;
     },
-    $2g_0: function SP_ClientRuntimeContext$$2g_0() {
-        var $v_0 = this.$u_0;
+    $2h_0: function SP_ClientRuntimeContext$$2h_0() {
+        var $v_0 = this.$v_0;
 
         if (!$v_0.endsWith('/')) {
             $v_0 += '/';
@@ -2991,7 +2993,7 @@ SP.ClientRuntimeContext.prototype = {
         $v_0 = this.getRequestUrl($v_0);
         return $v_0;
     },
-    $3W_0: function SP_ClientRuntimeContext$$3W_0($p0) {
+    $3Y_0: function SP_ClientRuntimeContext$$3Y_0($p0) {
         if (SP.ScriptUtility.isNullOrEmptyString($p0) || $p0.indexOf('GetContextWebInformation') < 0 || $p0.indexOf('FormDigestTimeoutSeconds') < 0) {
             return null;
         }
@@ -3002,59 +3004,59 @@ SP.ClientRuntimeContext.prototype = {
         var $v_4 = new SP.FormDigestInfo();
 
         $v_4.$f_0 = $v_1;
-        $v_4.$14_0 = (new Date()).getTime() + $v_2 * 750;
-        $v_4.$1Q_0 = SP.ClientUtility.$3Q($v_3);
+        $v_4.$16_0 = (new Date()).getTime() + $v_2 * 750;
+        $v_4.$1R_0 = SP.ClientUtility.$3S($v_3);
         return $v_4;
     },
-    $28_0: 'Javascript Library',
+    $29_0: 'Javascript Library',
     get_applicationName: function SP_ClientRuntimeContext$get_applicationName() {
-        return this.$28_0;
+        return this.$29_0;
     },
     set_applicationName: function SP_ClientRuntimeContext$set_applicationName(value) {
         if (SP.ScriptUtility.isNullOrEmptyString(value) || value.length > 128) {
             throw Error.argumentOutOfRange('value');
         }
-        this.$28_0 = value;
+        this.$29_0 = value;
         return value;
     },
-    $29_0: null,
+    $2A_0: null,
     get_clientTag: function SP_ClientRuntimeContext$get_clientTag() {
-        return this.$29_0;
+        return this.$2A_0;
     },
     set_clientTag: function SP_ClientRuntimeContext$set_clientTag(value) {
         if (!SP.ScriptUtility.isNullOrEmptyString(value) && value.length > 32) {
             throw Error.argumentOutOfRange('value');
         }
-        this.$29_0 = value;
+        this.$2A_0 = value;
         return value;
     },
-    $2C_0: false,
+    $2D_0: false,
     get_disableReturnValueCache: function SP_ClientRuntimeContext$get_disableReturnValueCache() {
-        return this.$2C_0;
+        return this.$2D_0;
     },
     set_disableReturnValueCache: function SP_ClientRuntimeContext$set_disableReturnValueCache(value) {
-        this.$2C_0 = value;
+        this.$2D_0 = value;
         return value;
     },
-    $w_0: null,
+    $x_0: null,
     get_webRequestExecutorFactory: function SP_ClientRuntimeContext$get_webRequestExecutorFactory() {
-        return this.$w_0;
+        return this.$x_0;
     },
     set_webRequestExecutorFactory: function SP_ClientRuntimeContext$set_webRequestExecutorFactory(value) {
-        this.$w_0 = value;
+        this.$x_0 = value;
         return value;
     },
-    $7_0: null,
+    $6_0: null,
     get_pendingRequest: function SP_ClientRuntimeContext$get_pendingRequest() {
-        if (!this.$7_0) {
-            this.$7_0 = new SP.ClientRequest(this);
+        if (!this.$6_0) {
+            this.$6_0 = new SP.ClientRequest(this);
         }
-        return this.$7_0;
+        return this.$6_0;
     },
     get_hasPendingRequest: function SP_ClientRuntimeContext$get_hasPendingRequest() {
-        return !!this.$7_0 && !!this.$7_0.$P_0;
+        return !!this.$6_0 && !!this.$6_0.$P_0;
     },
-    $1W_0: false,
+    $1X_0: false,
     add_executingWebRequest: function SP_ClientRuntimeContext$add_executingWebRequest(value) {
         (this.get_$G_0()).addHandler('executingwebrequest', value);
     },
@@ -3062,12 +3064,12 @@ SP.ClientRuntimeContext.prototype = {
         (this.get_$G_0()).removeHandler('executingwebrequest', value);
     },
     onExecutingWebRequest: function SP_ClientRuntimeContext$onExecutingWebRequest(args) {
-        if (args && args.$18_1) {
-            if (!SP.ScriptUtility.isNullOrEmptyString(this.$t_0)) {
-                (args.$18_1.get_headers())['SPResponseGuid'] = this.$t_0;
+        if (args && args.$1A_1) {
+            if (!SP.ScriptUtility.isNullOrEmptyString(this.$u_0)) {
+                (args.$1A_1.get_headers())['SPResponseGuid'] = this.$u_0;
             }
             if (!SP.ScriptUtility.isNullOrEmptyString(this.get_clientTag())) {
-                (args.$18_1.get_headers())['X-ClientService-ClientTag'] = this.get_clientTag();
+                (args.$1A_1.get_headers())['X-ClientService-ClientTag'] = this.get_clientTag();
             }
         }
         var $v_0 = (this.get_$G_0()).getHandler('executingwebrequest');
@@ -3076,7 +3078,7 @@ SP.ClientRuntimeContext.prototype = {
             $v_0(this, args);
         }
     },
-    $2c_0: function SP_ClientRuntimeContext$$2c_0($p0) {
+    $2d_0: function SP_ClientRuntimeContext$$2d_0($p0) {
         this.onExecutingWebRequest($p0);
     },
     $E_0: null,
@@ -3104,24 +3106,24 @@ SP.ClientRuntimeContext.prototype = {
     remove_beginningRequest: function SP_ClientRuntimeContext$remove_beginningRequest(value) {
         (this.get_$G_0()).removeHandler('beginningrequest', value);
     },
-    $2L_0: 180000,
+    $2M_0: 180000,
     get_requestTimeout: function SP_ClientRuntimeContext$get_requestTimeout() {
-        return this.$2L_0;
+        return this.$2M_0;
     },
     set_requestTimeout: function SP_ClientRuntimeContext$set_requestTimeout(value) {
         if (value >= 0) {
-            this.$2L_0 = value;
+            this.$2M_0 = value;
         }
         else {
             throw Error.argumentOutOfRange('value');
         }
         return value;
     },
-    $35_0: function SP_ClientRuntimeContext$$35_0() {
+    $36_0: function SP_ClientRuntimeContext$$36_0() {
         var $v_0 = null;
         var $v_1 = window._spPageContextInfo;
 
-        if ($v_1 && $v_1.webServerRelativeUrl === this.$u_0 && !SP.ScriptUtility.isUndefined(window._spFormDigestRefreshInterval) && !SP.ScriptUtility.isUndefined($v_1.updateFormDigestPageLoaded)) {
+        if ($v_1 && $v_1.webServerRelativeUrl === this.$v_0 && !SP.ScriptUtility.isUndefined(window._spFormDigestRefreshInterval) && !SP.ScriptUtility.isUndefined($v_1.updateFormDigestPageLoaded)) {
             var $v_2 = document.getElementsByName('__REQUESTDIGEST');
 
             if ($v_2 && $v_2.length > 0 && $v_2[0].tagName === 'INPUT') {
@@ -3133,17 +3135,17 @@ SP.ClientRuntimeContext.prototype = {
     executeQueryAsync: function SP_ClientRuntimeContext$executeQueryAsync(succeededCallback, failedCallback) {
         var $v_0 = this.setPendingRequestToBeExecuted();
 
-        if (!this.$1H_0) {
+        if (!this.$1J_0) {
             this.executeClientRequestAsync($v_0, succeededCallback, failedCallback);
             return;
         }
         if (!SP.ClientRuntimeContext.$Q) {
             SP.ClientRuntimeContext.$Q = {};
         }
-        var $v_1 = this.$2g_0();
+        var $v_1 = this.$2h_0();
 
         if (SP.ScriptUtility.isNullOrUndefined(SP.ClientRuntimeContext.$Q[$v_1])) {
-            var $v_3 = this.$35_0();
+            var $v_3 = this.$36_0();
 
             if ($v_3) {
                 var $v_4 = window._spPageContextInfo;
@@ -3151,13 +3153,13 @@ SP.ClientRuntimeContext.prototype = {
                 if (!SP.ScriptUtility.isNullOrUndefined($v_4)) {
                     SP.ClientRuntimeContext.$Q[$v_1] = new SP.FormDigestInfo();
                     SP.ClientRuntimeContext.$Q[$v_1].$f_0 = $v_3.value;
-                    SP.ClientRuntimeContext.$Q[$v_1].$14_0 = $v_4.updateFormDigestPageLoaded.getTime() + _spFormDigestRefreshInterval * 0.75;
+                    SP.ClientRuntimeContext.$Q[$v_1].$16_0 = $v_4.updateFormDigestPageLoaded.getTime() + _spFormDigestRefreshInterval * 0.75;
                 }
             }
         }
         var $v_2 = new Date();
 
-        if (SP.ClientRuntimeContext.$Q[$v_1] && SP.ClientRuntimeContext.$Q[$v_1].$14_0 > $v_2.getTime()) {
+        if (SP.ClientRuntimeContext.$Q[$v_1] && SP.ClientRuntimeContext.$Q[$v_1].$16_0 > $v_2.getTime()) {
             (($v_0.get_webRequest()).get_headers())['X-RequestDigest'] = SP.ClientRuntimeContext.$Q[$v_1].$f_0;
             this.executeClientRequestAsync($v_0, succeededCallback, failedCallback);
         }
@@ -3168,9 +3170,9 @@ SP.ClientRuntimeContext.prototype = {
             $v_5.set_httpVerb('POST');
             ($v_5.get_headers())['ACCEPT'] = 'application/json;odata=verbose';
             $v_5.set_timeout(this.get_requestTimeout());
-            this.$2c_0(new SP.WebRequestEventArgs($v_5));
-            if (this.$w_0) {
-                var $v_6 = this.$w_0.createWebRequestExecutor();
+            this.$2d_0(new SP.WebRequestEventArgs($v_5));
+            if (this.$x_0) {
+                var $v_6 = this.$x_0.createWebRequestExecutor();
 
                 $v_5.set_executor($v_6);
             }
@@ -3186,7 +3188,7 @@ SP.ClientRuntimeContext.prototype = {
                     else {
                         $v_7 = SP.ResResources.getString('RequestAbortedOrTimedOut');
                     }
-                    $$t_F.$x_0($v_0, $p1_0, $v_7, failedCallback);
+                    $$t_F.$y_0($v_0, $p1_0, $v_7, failedCallback);
                 }
                 else if (!$p1_0.get_responseAvailable() || $p1_0.get_statusCode() !== 200 || SP.ScriptUtility.isNullOrEmptyString($p1_0.getResponseHeader('content-type')) || (($p1_0.getResponseHeader('content-type')).toLowerCase()).indexOf('json') < 0) {
                     var $v_8;
@@ -3197,16 +3199,16 @@ SP.ClientRuntimeContext.prototype = {
                     else {
                         $v_8 = SP.ResResources.getString('UnknownResponseData');
                     }
-                    $$t_F.$x_0($v_0, $p1_0, $v_8, failedCallback);
+                    $$t_F.$y_0($v_0, $p1_0, $v_8, failedCallback);
                 }
                 else {
-                    var $v_9 = $$t_F.$3W_0($p1_0.get_responseData());
+                    var $v_9 = $$t_F.$3Y_0($p1_0.get_responseData());
 
                     if (!$v_9) {
-                        $$t_F.$x_0($v_0, $p1_0, SP.ResResources.getString('UnknownResponseData'), failedCallback);
+                        $$t_F.$y_0($v_0, $p1_0, SP.ResResources.getString('UnknownResponseData'), failedCallback);
                     }
                     else {
-                        var $v_A = $$t_F.$35_0();
+                        var $v_A = $$t_F.$36_0();
 
                         if ($v_A) {
                             $v_A.value = $v_9.$f_0;
@@ -3219,12 +3221,12 @@ SP.ClientRuntimeContext.prototype = {
                         SP.ClientRuntimeContext.$Q[$v_1] = $v_9;
                         (($v_0.get_webRequest()).get_headers())['X-RequestDigest'] = $v_9.$f_0;
                         if ($$t_F.get_isPageUrl()) {
-                            $$t_F.$u_0 = $v_9.$1Q_0;
-                            $v_1 = $$t_F.$2g_0();
+                            $$t_F.$v_0 = $v_9.$1R_0;
+                            $v_1 = $$t_F.$2h_0();
                             SP.ClientRuntimeContext.$Q[$v_1] = $v_9;
-                            $v_0.$2n_0();
-                            if ($$t_F.$7_0) {
-                                $$t_F.$7_0.$2n_0();
+                            $v_0.$2o_0();
+                            if ($$t_F.$6_0) {
+                                $$t_F.$6_0.$2o_0();
                             }
                         }
                         $$t_F.executeClientRequestAsync($v_0, succeededCallback, failedCallback);
@@ -3234,21 +3236,25 @@ SP.ClientRuntimeContext.prototype = {
             $v_5.invoke();
         }
     },
-    $x_0: function SP_ClientRuntimeContext$$x_0($p0, $p1, $p2, $p3) {
+    retryQueryAsync: function SP_ClientRuntimeContext$retryQueryAsync(request, succeededCallback, failedCallback) {
+        this.$3G_0(request);
+        this.executeQueryAsync(succeededCallback, failedCallback);
+    },
+    $y_0: function SP_ClientRuntimeContext$$y_0($p0, $p1, $p2, $p3) {
         if ($p3) {
             if (SP.ScriptUtility.isNullOrEmptyString($p2)) {
                 $p2 = SP.ResResources.getString('UnknownResponseData');
             }
             var $v_0 = new SP.ClientRequestFailedEventArgs($p0, $p2, null, 0, null, null, null, null);
 
-            $v_0.$31_2($p1);
+            $v_0.$32_2($p1);
             $p3(this, $v_0);
         }
     },
     setPendingRequestToBeExecuted: function SP_ClientRuntimeContext$setPendingRequestToBeExecuted() {
         var $v_0 = this.get_pendingRequest();
 
-        this.$7_0 = null;
+        this.$6_0 = null;
         return $v_0;
     },
     executeClientRequestAsync: function SP_ClientRuntimeContext$executeClientRequestAsync(req, succeededCallback, failedCallback) {
@@ -3277,20 +3283,25 @@ SP.ClientRuntimeContext.prototype = {
                 req.add_requestFailed($v_2);
             }
         }
-        req.$3H_0();
+        req.$3J_0();
     },
-    $1s_0: null,
+    $3G_0: function SP_ClientRuntimeContext$$3G_0($p0) {
+        this.$6_0 = new SP.ClientRequest(this);
+        this.$6_0.$10_0 = $p0.$10_0;
+        this.$6_0.$s_0 = $p0.$s_0;
+    },
+    $1t_0: null,
     get_staticObjects: function SP_ClientRuntimeContext$get_staticObjects() {
-        if (!this.$1s_0) {
-            this.$1s_0 = {};
+        if (!this.$1t_0) {
+            this.$1t_0 = {};
         }
-        return this.$1s_0;
+        return this.$1t_0;
     },
     castTo: function SP_ClientRuntimeContext$castTo(obj, type) {
         if (!obj) {
             throw Error.argumentNull('obj');
         }
-        SP.ClientAction.$z(this, obj);
+        SP.ClientAction.$11(this, obj);
         var $v_0;
 
         if (!type.inheritsFrom(SP.ClientObject)) {
@@ -3301,12 +3312,12 @@ SP.ClientRuntimeContext.prototype = {
         }
         if (type.isInstanceOfType(obj)) {
             $v_0 = new type(this, obj.get_path());
-            $v_0.$20_0(obj);
+            $v_0.$21_0(obj);
             return $v_0;
         }
         if (obj.$2_0.$O_0 && type.isInstanceOfType(obj.$2_0.$O_0)) {
             $v_0 = new type(this, obj.get_path());
-            $v_0.$20_0(obj);
+            $v_0.$21_0(obj);
             return $v_0;
         }
         if (!type.inheritsFrom(Object.getType(obj))) {
@@ -3316,7 +3327,7 @@ SP.ClientRuntimeContext.prototype = {
             throw Error.argument('type');
         }
         $v_0 = new type(this, obj.get_path());
-        $v_0.$20_0(obj);
+        $v_0.$21_0(obj);
         var $v_1 = null;
 
         if (!obj.$2_0.$O_0) {
@@ -3327,7 +3338,7 @@ SP.ClientRuntimeContext.prototype = {
         }
         if ($v_1) {
             var $v_2 = [];
-            var $v_3 = (this.get_pendingRequest()).$1L_0;
+            var $v_3 = (this.get_pendingRequest()).$s_0;
             var $$dict_6 = $v_3;
 
             for (var $$key_7 in $$dict_6) {
@@ -3353,19 +3364,19 @@ SP.ClientRuntimeContext.prototype = {
         if (!query) {
             throw Error.argumentNull('query');
         }
-        (this.get_pendingRequest()).$22_0(query);
+        (this.get_pendingRequest()).$23_0(query);
+    },
+    $2b_0: function SP_ClientRuntimeContext$$2b_0($p0) {
+        (this.get_pendingRequest()).$2b_0($p0);
     },
     $2a_0: function SP_ClientRuntimeContext$$2a_0($p0) {
-        (this.get_pendingRequest()).$2a_0($p0);
-    },
-    $2Z_0: function SP_ClientRuntimeContext$$2Z_0($p0) {
-        this.$1i_0[$p0.$4_0.toString()] = $p0;
+        this.$1j_0[$p0.$4_0.toString()] = $p0;
     },
     addQueryIdAndResultObject: function SP_ClientRuntimeContext$addQueryIdAndResultObject(id, obj) {
         if (!obj) {
             throw Error.argumentNull('obj');
         }
-        (this.get_pendingRequest()).$2b_0(id, obj);
+        (this.get_pendingRequest()).$2c_0(id, obj);
     },
     parseObjectFromJsonString: function SP_ClientRuntimeContext$parseObjectFromJsonString(json, skipTypeFixup) {
         if (SP.ScriptUtility.isNullOrEmptyString(json)) {
@@ -3394,7 +3405,7 @@ SP.ClientRuntimeContext.prototype = {
         if (!clientObject) {
             throw Error.argumentNull('clientObject');
         }
-        SP.ClientAction.$z(this, clientObject);
+        SP.ClientAction.$11(this, clientObject);
         var $v_0 = null;
 
         if (arguments.length === 2 && Array.isInstanceOfType(arguments[1])) {
@@ -3414,36 +3425,36 @@ SP.ClientRuntimeContext.prototype = {
         if (!clientObjectCollection) {
             throw Error.argumentNull('clientObjectCollection');
         }
-        SP.ClientAction.$z(this, clientObjectCollection);
+        SP.ClientAction.$11(this, clientObjectCollection);
         return SP.DataRetrievalWithExpressionString.loadQuery(clientObjectCollection, exp);
     },
-    $1q_0: null,
+    $1r_0: null,
     get_serverSchemaVersion: function SP_ClientRuntimeContext$get_serverSchemaVersion() {
+        if (SP.ScriptUtility.isNullOrUndefined(this.$1r_0)) {
+            throw Error.create(SP.ResResources.getString('NamedPropertyHasNotBeenInitialized', 'ServerLibraryVersion'));
+        }
+        return this.$1r_0;
+    },
+    $3f_0: function SP_ClientRuntimeContext$$3f_0($p0) {
+        this.$1r_0 = $p0;
+    },
+    $1q_0: null,
+    get_serverLibraryVersion: function SP_ClientRuntimeContext$get_serverLibraryVersion() {
         if (SP.ScriptUtility.isNullOrUndefined(this.$1q_0)) {
             throw Error.create(SP.ResResources.getString('NamedPropertyHasNotBeenInitialized', 'ServerLibraryVersion'));
         }
         return this.$1q_0;
     },
-    $3d_0: function SP_ClientRuntimeContext$$3d_0($p0) {
+    $3e_0: function SP_ClientRuntimeContext$$3e_0($p0) {
         this.$1q_0 = $p0;
     },
-    $1p_0: null,
-    get_serverLibraryVersion: function SP_ClientRuntimeContext$get_serverLibraryVersion() {
-        if (SP.ScriptUtility.isNullOrUndefined(this.$1p_0)) {
-            throw Error.create(SP.ResResources.getString('NamedPropertyHasNotBeenInitialized', 'ServerLibraryVersion'));
-        }
-        return this.$1p_0;
-    },
-    $3c_0: function SP_ClientRuntimeContext$$3c_0($p0) {
-        this.$1p_0 = $p0;
-    },
-    $2S_0: null,
-    $t_0: null,
+    $2T_0: null,
+    $u_0: null,
     get_traceCorrelationId: function SP_ClientRuntimeContext$get_traceCorrelationId() {
-        if (!SP.ScriptUtility.isNullOrEmptyString(this.$t_0)) {
-            return this.$t_0;
+        if (!SP.ScriptUtility.isNullOrEmptyString(this.$u_0)) {
+            return this.$u_0;
         }
-        return this.$2S_0;
+        return this.$2T_0;
     },
     set_traceCorrelationId: function SP_ClientRuntimeContext$set_traceCorrelationId(value) {
         if (!SP.ScriptUtility.isNullOrEmptyString(value)) {
@@ -3452,36 +3463,36 @@ SP.ClientRuntimeContext.prototype = {
             }
             var $v_0 = new SP.Guid(value);
 
-            this.$t_0 = $v_0.toString('D');
+            this.$u_0 = $v_0.toString('D');
         }
         else {
-            this.$t_0 = value;
+            this.$u_0 = value;
         }
         return value;
     },
     dispose: function SP_ClientRuntimeContext$dispose() {
     },
-    $3e_0: function SP_ClientRuntimeContext$$3e_0($p0) {
-        this.$2S_0 = $p0;
+    $3g_0: function SP_ClientRuntimeContext$$3g_0($p0) {
+        this.$2T_0 = $p0;
     }
 };
 SP.SimpleDataTable = function SP_SimpleDataTable() {
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
 };
 SP.SimpleDataTable.prototype = {
-    $17_0: null,
+    $19_0: null,
     get_rows: function SP_SimpleDataTable$get_rows() {
-        if (!this.$17_0) {
-            this.$17_0 = [];
+        if (!this.$19_0) {
+            this.$19_0 = [];
         }
-        return this.$17_0;
+        return this.$19_0;
     },
-    $3g_0: function SP_SimpleDataTable$$3g_0($p0) {
-        this.$17_0 = [];
-        SP.DataConvert.populateArray(null, this.$17_0, $p0.Rows);
+    $3i_0: function SP_SimpleDataTable$$3i_0($p0) {
+        this.$19_0 = [];
+        SP.DataConvert.populateArray(null, this.$19_0, $p0.Rows);
     },
-    $3h_0: function SP_SimpleDataTable$$3h_0($p0) {
+    $3j_0: function SP_SimpleDataTable$$3j_0($p0) {
         return false;
     }
 };
@@ -3503,7 +3514,7 @@ SP.ClientValueObject.prototype = {
     }
 };
 SP.ClientValueObjectCollection = function SP_ClientValueObjectCollection() {
-    this.getEnumerator = this.$3i_1;
+    this.getEnumerator = this.$3k_1;
     SP.ClientValueObjectCollection.initializeBase(this);
 };
 SP.ClientValueObjectCollection.prototype = {
@@ -3543,7 +3554,7 @@ SP.ClientValueObjectCollection.prototype = {
         }
         return this.$8_1[index];
     },
-    $3i_1: function SP_ClientValueObjectCollection$$3i_1() {
+    $3k_1: function SP_ClientValueObjectCollection$$3k_1() {
         var $v_0 = this.$8_1;
 
         if (!$v_0) {
@@ -3567,41 +3578,41 @@ SP.ClientValueObjectCollection.prototype = {
     }
 };
 SP.ConditionalScopeBase = function SP_ConditionalScopeBase(context, allowAllActions) {
-    this.$$d_$3V_0 = Function.createDelegate(this, this.$3V_0);
+    this.$$d_$3X_0 = Function.createDelegate(this, this.$3X_0);
     if (!context) {
         throw Error.argumentNull('context');
     }
     this.$0_0 = context;
-    this.$27_0 = allowAllActions;
+    this.$28_0 = allowAllActions;
 };
-SP.ConditionalScopeBase.$9 = function SP_ConditionalScopeBase$$9() {
+SP.ConditionalScopeBase.$A = function SP_ConditionalScopeBase$$A() {
     return Error.create(SP.ResResources.getString('InvalidUsageOfConditionalScope'));
 };
 SP.ConditionalScopeBase.prototype = {
     $0_0: null,
-    $2Q_0: false,
-    $2R_0: null,
-    $1t_0: null,
-    $27_0: false,
+    $2R_0: false,
+    $2S_0: null,
+    $1u_0: null,
+    $28_0: false,
     $b_0: null,
     $Y_0: null,
     $3_0: null,
     startScope: function SP_ConditionalScopeBase$startScope() {
         if (this.$3_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
-        this.$1t_0 = new SP.SerializationContext(this.$0_0);
-        this.$2R_0 = this.$3B_0(this.$1t_0);
-        this.$3_0 = new SP.ConditionalExecutionScope(this.$0_0, this, this.$$d_$3V_0);
+        this.$1u_0 = new SP.SerializationContext(this.$0_0);
+        this.$2S_0 = this.$3C_0(this.$1u_0);
+        this.$3_0 = new SP.ConditionalExecutionScope(this.$0_0, this, this.$$d_$3X_0);
         this.$0_0.addQueryIdAndResultObject(this.$3_0.$4_0, this);
         return this.$3_0;
     },
-    $3V_0: function SP_ConditionalScopeBase$$3V_0() {
+    $3X_0: function SP_ConditionalScopeBase$$3X_0() {
         if (this.$b_0 && !this.$b_0.$L_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
         if (this.$Y_0 && !this.$Y_0.$L_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
         if (this.$b_0 || this.$Y_0) {
             var $v_0 = null;
@@ -3610,19 +3621,19 @@ SP.ConditionalScopeBase.prototype = {
                 $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
             }
             if (!$v_0) {
-                throw SP.ConditionalScopeBase.$9();
+                throw SP.ConditionalScopeBase.$A();
             }
             if ($v_0.$3_1.$B_0 !== 'IfTrueScope' && $v_0.$3_1.$B_0 !== 'IfFalseScope') {
-                throw SP.ConditionalScopeBase.$9();
+                throw SP.ConditionalScopeBase.$A();
             }
         }
-        if (!this.$27_0) {
-            var $v_1 = (this.$0_0.get_pendingRequest()).$16_0.length;
+        if (!this.$28_0) {
+            var $v_1 = (this.$0_0.get_pendingRequest()).$18_0.length;
 
             for (var $v_2 = $v_1 - 1; $v_2 >= 0; $v_2--) {
-                var $v_3 = (this.$0_0.get_pendingRequest()).$16_0[$v_2];
+                var $v_3 = (this.$0_0.get_pendingRequest()).$18_0[$v_2];
 
-                if ($v_3 === this.$3_0.$1Y_0) {
+                if ($v_3 === this.$3_0.$1Z_0) {
                     break;
                 }
                 var $v_4 = false;
@@ -3653,36 +3664,36 @@ SP.ConditionalScopeBase.prototype = {
     },
     startIfTrue: function SP_ConditionalScopeBase$startIfTrue() {
         if (!this.$3_0 || this.$3_0.$L_0 || this.$b_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
         var $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
 
         if (!$v_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
         if (SP.ClientActionExecutionScopeStart.isInstanceOfType($v_0) && $v_0.$3_1.$B_0 === 'ConditionalScope' || SP.ClientActionExecutionScopeEnd.isInstanceOfType($v_0) && $v_0.$3_1.$B_0 === 'IfFalseScope') {
             this.$b_0 = new SP.ExecutionScope(this.$0_0, 'IfTrueScope', null);
             return this.$b_0;
         }
-        throw SP.ConditionalScopeBase.$9();
+        throw SP.ConditionalScopeBase.$A();
     },
     startIfFalse: function SP_ConditionalScopeBase$startIfFalse() {
         if (!this.$3_0 || this.$3_0.$L_0 || this.$Y_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
         var $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
 
         if (!$v_0) {
-            throw SP.ConditionalScopeBase.$9();
+            throw SP.ConditionalScopeBase.$A();
         }
         if (SP.ClientActionExecutionScopeStart.isInstanceOfType($v_0) && $v_0.$3_1.$B_0 === 'ConditionalScope' || SP.ClientActionExecutionScopeEnd.isInstanceOfType($v_0) && $v_0.$3_1.$B_0 === 'IfTrueScope') {
             this.$Y_0 = new SP.ExecutionScope(this.$0_0, 'IfFalseScope', null);
             return this.$Y_0;
         }
-        throw SP.ConditionalScopeBase.$9();
+        throw SP.ConditionalScopeBase.$A();
     },
     get_testResult: function SP_ConditionalScopeBase$get_testResult() {
-        return this.$2Q_0;
+        return this.$2R_0;
     },
     fromJson: function SP_ConditionalScopeBase$fromJson(initValue) {
         var $v_0 = initValue;
@@ -3696,7 +3707,7 @@ SP.ConditionalScopeBase.prototype = {
         if (SP.ScriptUtility.isUndefined($v_1)) {
             throw Error.create(SP.ResResources.getString('UnknownResponseData'));
         }
-        this.$2Q_0 = $v_1;
+        this.$2R_0 = $v_1;
     },
     customFromJson: function SP_ConditionalScopeBase$customFromJson(initValue) {
         return false;
@@ -3711,36 +3722,36 @@ SP.ConditionalExecutionScope = function SP_ConditionalExecutionScope($p0, $p1, $
 };
 SP.ConditionalExecutionScope.prototype = {
     $3_1: null,
-    $2Y_0: function SP_ConditionalExecutionScope$$2Y_0($p0, $p1) {
-        SP.ExecutionScope.prototype.$2Y_0.call(this, $p0, $p1);
-        $p0.writeRaw(this.$3_1.$2R_0.toString());
-        $p1.$m_0(this.$3_1.$1t_0);
+    $2Z_0: function SP_ConditionalExecutionScope$$2Z_0($p0, $p1) {
+        SP.ExecutionScope.prototype.$2Z_0.call(this, $p0, $p1);
+        $p0.writeRaw(this.$3_1.$2S_0.toString());
+        $p1.$m_0(this.$3_1.$1u_0);
         if (!this.$3_1.$b_0 && !this.$3_1.$Y_0) {
             $p0.writeStartElement('IfTrueScope');
-            $p0.writeAttributeString('Id', ($p1.$0_0.get_$1w_0()).toString());
+            $p0.writeAttributeString('Id', ($p1.$0_0.get_$1x_0()).toString());
         }
     },
-    $36_0: function SP_ConditionalExecutionScope$$36_0($p0, $p1) {
+    $37_0: function SP_ConditionalExecutionScope$$37_0($p0, $p1) {
         if (!this.$3_1.$b_0 && !this.$3_1.$Y_0) {
             $p0.writeEndElement();
         }
-        SP.ExecutionScope.prototype.$36_0.call(this, $p0, $p1);
+        SP.ExecutionScope.prototype.$37_0.call(this, $p0, $p1);
     }
 };
 SP.DataRetrievalWithExpressionString = function SP_DataRetrievalWithExpressionString() {
 };
 SP.DataRetrievalWithExpressionString.load = function SP_DataRetrievalWithExpressionString$load($p0, $p1) {
     if (!$p1 || !$p1.length) {
-        ($p0.get_$19_0()).selectAllProperties();
+        ($p0.get_$1B_0()).selectAllProperties();
         if (SP.ClientObjectCollection.isInstanceOfType($p0)) {
-            (($p0.get_$19_0()).get_childItemQuery()).selectAllProperties();
+            (($p0.get_$1B_0()).get_childItemQuery()).selectAllProperties();
         }
     }
     else {
         for (var $v_0 = 0; $v_0 < $p1.length; $v_0++) {
             var $v_1 = $p1[$v_0];
 
-            SP.DataRetrievalWithExpressionString.$2V($p0.get_$19_0(), $v_1);
+            SP.DataRetrievalWithExpressionString.$2W($p0.get_$1B_0(), $v_1);
         }
     }
 };
@@ -3755,11 +3766,11 @@ SP.DataRetrievalWithExpressionString.loadQuery = function SP_DataRetrievalWithEx
         ($v_2.get_childItemQuery()).selectAllProperties();
     }
     else {
-        SP.DataRetrievalWithExpressionString.$2V($v_2, $p1);
+        SP.DataRetrievalWithExpressionString.$2W($v_2, $p1);
     }
     return $v_0;
 };
-SP.DataRetrievalWithExpressionString.$2V = function SP_DataRetrievalWithExpressionString$$2V($p0, $p1) {
+SP.DataRetrievalWithExpressionString.$2W = function SP_DataRetrievalWithExpressionString$$2W($p0, $p1) {
     if (SP.ScriptUtility.isNullOrEmptyString($p1)) {
         throw Error.argumentOutOfRange('exp');
     }
@@ -3789,10 +3800,10 @@ SP.DataRetrievalWithExpressionString.$2V = function SP_DataRetrievalWithExpressi
                 if ($v_3 !== 'Include' && $v_3 !== 'IncludeWithDefaultProperties') {
                     throw SP.DataRetrievalWithExpressionString.$T($p1);
                 }
-                if ($v_1.$1I_1) {
+                if ($v_1.$1K_1) {
                     throw SP.DataRetrievalWithExpressionString.$T($p1);
                 }
-                var $v_9 = SP.DataRetrievalWithExpressionString.$3J($p1, $v_7);
+                var $v_9 = SP.DataRetrievalWithExpressionString.$3L($p1, $v_7);
 
                 if ($v_9 < 0) {
                     throw SP.DataRetrievalWithExpressionString.$T($p1);
@@ -3803,12 +3814,12 @@ SP.DataRetrievalWithExpressionString.$2V = function SP_DataRetrievalWithExpressi
                 if ($v_3 === 'IncludeWithDefaultProperties') {
                     $v_B.selectAllProperties();
                 }
-                var $v_C = SP.DataRetrievalWithExpressionString.$3f($v_A);
+                var $v_C = SP.DataRetrievalWithExpressionString.$3h($v_A);
 
                 for (var $v_D = 0; $v_D < $v_C.length; $v_D++) {
                     var $v_E = $v_C[$v_D];
 
-                    SP.DataRetrievalWithExpressionString.$2V($v_B, $v_E);
+                    SP.DataRetrievalWithExpressionString.$2W($v_B, $v_E);
                 }
                 $v_7 = $v_9;
                 $v_6 = true;
@@ -3817,7 +3828,7 @@ SP.DataRetrievalWithExpressionString.$2V = function SP_DataRetrievalWithExpressi
                 if ($v_6 || !$v_3.length) {
                     throw SP.DataRetrievalWithExpressionString.$T($p1);
                 }
-                var $v_F = $v_1.$1C_1($v_3);
+                var $v_F = $v_1.$1E_1($v_3);
 
                 if (!$v_F) {
                     $v_F = new SP.ClientQueryInternal(null, $v_3, true, $v_1);
@@ -3840,7 +3851,7 @@ SP.DataRetrievalWithExpressionString.$2V = function SP_DataRetrievalWithExpressi
         }
     }
 };
-SP.DataRetrievalWithExpressionString.$3J = function SP_DataRetrievalWithExpressionString$$3J($p0, $p1) {
+SP.DataRetrievalWithExpressionString.$3L = function SP_DataRetrievalWithExpressionString$$3L($p0, $p1) {
     var $v_0 = $p0.length;
     var $v_1 = 1;
     var $v_2 = -1;
@@ -3861,7 +3872,7 @@ SP.DataRetrievalWithExpressionString.$3J = function SP_DataRetrievalWithExpressi
     }
     return $v_2;
 };
-SP.DataRetrievalWithExpressionString.$3f = function SP_DataRetrievalWithExpressionString$$3f($p0) {
+SP.DataRetrievalWithExpressionString.$3h = function SP_DataRetrievalWithExpressionString$$3h($p0) {
     $p0 = $p0.trim();
     var $v_0 = [];
     var $v_1 = 0;
@@ -3921,7 +3932,7 @@ SP.ClientActionExecutionScopeStart.prototype = {
     get_scope: function SP_ClientActionExecutionScopeStart$get_scope() {
         return this.$3_1;
     },
-    $39_0: function SP_ClientActionExecutionScopeStart$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionExecutionScopeStart$$3A_0($p0, $p1) {
     }
 };
 SP.ClientActionExecutionScopeEnd = function SP_ClientActionExecutionScopeEnd($p0, $p1) {
@@ -3933,7 +3944,7 @@ SP.ClientActionExecutionScopeEnd.prototype = {
     get_scope: function SP_ClientActionExecutionScopeEnd$get_scope() {
         return this.$3_1;
     },
-    $39_0: function SP_ClientActionExecutionScopeEnd$$39_0($p0, $p1) {
+    $3A_0: function SP_ClientActionExecutionScopeEnd$$3A_0($p0, $p1) {
     }
 };
 SP.ExecutionScope = function SP_ExecutionScope($p0, $p1, $p2) {
@@ -3942,19 +3953,19 @@ SP.ExecutionScope = function SP_ExecutionScope($p0, $p1, $p2) {
     }
     this.$0_0 = $p0;
     this.$B_0 = $p1;
-    this.$4_0 = this.$0_0.get_$1w_0();
-    ((this.$0_0.get_pendingRequest()).get_$25_0()).push(this);
-    this.$1Y_0 = new SP.ClientActionExecutionScopeStart(this, this.$B_0);
-    (this.$0_0.get_pendingRequest()).$22_0(this.$1Y_0);
-    this.$1b_0 = $p2;
+    this.$4_0 = this.$0_0.get_$1x_0();
+    ((this.$0_0.get_pendingRequest()).get_$26_0()).push(this);
+    this.$1Z_0 = new SP.ClientActionExecutionScopeStart(this, this.$B_0);
+    (this.$0_0.get_pendingRequest()).$23_0(this.$1Z_0);
+    this.$1c_0 = $p2;
 };
 SP.ExecutionScope.prototype = {
     $0_0: null,
     $L_0: false,
     $B_0: null,
     $4_0: 0,
-    $1b_0: null,
-    $1Y_0: null,
+    $1c_0: null,
+    $1Z_0: null,
     get_id: function SP_ExecutionScope$get_id() {
         return this.$4_0;
     },
@@ -3963,52 +3974,52 @@ SP.ExecutionScope.prototype = {
     },
     dispose: function SP_ExecutionScope$dispose() {
         if (this.$L_0) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
-        if (this.$1b_0) {
-            this.$1b_0();
+        if (this.$1c_0) {
+            this.$1c_0();
         }
-        if (((this.$0_0.get_pendingRequest()).get_$25_0()).length > 0 && ((this.$0_0.get_pendingRequest()).get_$25_0()).pop() === this) {
-            (this.$0_0.get_pendingRequest()).$22_0(new SP.ClientActionExecutionScopeEnd(this, this.$B_0));
+        if (((this.$0_0.get_pendingRequest()).get_$26_0()).length > 0 && ((this.$0_0.get_pendingRequest()).get_$26_0()).pop() === this) {
+            (this.$0_0.get_pendingRequest()).$23_0(new SP.ClientActionExecutionScopeEnd(this, this.$B_0));
         }
         else {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         this.$L_0 = true;
     },
-    $2Y_0: function SP_ExecutionScope$$2Y_0($p0, $p1) {
+    $2Z_0: function SP_ExecutionScope$$2Z_0($p0, $p1) {
         $p0.writeStartElement(this.$B_0);
         $p0.writeAttributeString('Id', this.$4_0.toString());
     },
-    $36_0: function SP_ExecutionScope$$36_0($p0, $p1) {
+    $37_0: function SP_ExecutionScope$$37_0($p0, $p1) {
         $p0.writeEndElement();
     }
 };
 SP.ExceptionHandlingScope = function SP_ExceptionHandlingScope(context) {
-    this.$$d_$3G_0 = Function.createDelegate(this, this.$3G_0);
-    this.fromJson = this.$3g_0;
-    this.customFromJson = this.$3h_0;
+    this.$$d_$3I_0 = Function.createDelegate(this, this.$3I_0);
+    this.fromJson = this.$3i_0;
+    this.customFromJson = this.$3j_0;
     if (!context) {
         throw Error.argumentNull('context');
     }
     this.$0_0 = context;
-    this.$1m_0 = -1;
+    this.$1n_0 = -1;
 };
-SP.ExceptionHandlingScope.$9 = function SP_ExceptionHandlingScope$$9() {
+SP.ExceptionHandlingScope.$A = function SP_ExceptionHandlingScope$$A() {
     return Error.create(SP.ResResources.getString('InvalidUsageOfExceptionHandlingScope'));
 };
 SP.ExceptionHandlingScope.prototype = {
     $0_0: null,
-    $2J_0: false,
-    $1e_0: false,
+    $2K_0: false,
+    $1f_0: false,
     $h_0: null,
-    $1r_0: null,
-    $1m_0: 0,
+    $1s_0: null,
+    $1n_0: 0,
+    $1p_0: null,
     $1o_0: null,
-    $1n_0: null,
-    $1M_0: null,
+    $1N_0: null,
     $R_0: null,
-    get_$3S_0: function SP_ExceptionHandlingScope$get_$3S_0() {
+    get_$3U_0: function SP_ExceptionHandlingScope$get_$3U_0() {
         if (!this.$W_0) {
             return true;
         }
@@ -4016,102 +4027,102 @@ SP.ExceptionHandlingScope.prototype = {
     },
     startScope: function SP_ExceptionHandlingScope$startScope() {
         if (this.$R_0) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
-        this.$R_0 = new SP.ExceptionHandlingExecutionScope(this.$0_0, this, this.$$d_$3G_0);
-        (this.$0_0.get_pendingRequest()).$2b_0(this.$R_0.$4_0, this);
+        this.$R_0 = new SP.ExceptionHandlingExecutionScope(this.$0_0, this, this.$$d_$3I_0);
+        (this.$0_0.get_pendingRequest()).$2c_0(this.$R_0.$4_0, this);
         return this.$R_0;
     },
-    $3G_0: function SP_ExceptionHandlingScope$$3G_0() {
+    $3I_0: function SP_ExceptionHandlingScope$$3I_0() {
         if (this.$W_0) {
-            if (!this.$o_0 && !this.$15_0) {
-                throw SP.ExceptionHandlingScope.$9();
+            if (!this.$o_0 && !this.$17_0) {
+                throw SP.ExceptionHandlingScope.$A();
             }
             var $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
 
             if (!$v_0 || !SP.ClientActionExecutionScopeEnd.isInstanceOfType($v_0)) {
-                throw SP.ExceptionHandlingScope.$9();
+                throw SP.ExceptionHandlingScope.$A();
             }
             var $v_1 = $v_0;
 
             if ($v_1.$3_1.$B_0 !== 'CatchScope' && $v_1.$3_1.$B_0 !== 'FinallyScope') {
-                throw SP.ExceptionHandlingScope.$9();
+                throw SP.ExceptionHandlingScope.$A();
             }
         }
     },
     $W_0: null,
     startTry: function SP_ExceptionHandlingScope$startTry() {
         if (!this.$R_0 || this.$R_0.$L_0 || this.$W_0) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         var $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
 
         if (!$v_0 || !SP.ClientActionExecutionScopeStart.isInstanceOfType($v_0)) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         if ($v_0.$3_1.$B_0 !== 'ExceptionHandlingScope') {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         this.$W_0 = new SP.ExecutionScope(this.$0_0, 'TryScope', null);
         return this.$W_0;
     },
     $o_0: null,
     startCatch: function SP_ExceptionHandlingScope$startCatch() {
-        if (!this.$R_0 || this.$R_0.$L_0 || !this.$W_0 || !this.$W_0.$L_0 || this.$o_0 || this.$15_0) {
-            throw SP.ExceptionHandlingScope.$9();
+        if (!this.$R_0 || this.$R_0.$L_0 || !this.$W_0 || !this.$W_0.$L_0 || this.$o_0 || this.$17_0) {
+            throw SP.ExceptionHandlingScope.$A();
         }
         var $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
 
         if (!$v_0 || !SP.ClientActionExecutionScopeEnd.isInstanceOfType($v_0)) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         if ($v_0.$3_1.$B_0 !== 'TryScope') {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         this.$o_0 = new SP.ExecutionScope(this.$0_0, 'CatchScope', null);
         return this.$o_0;
     },
-    $15_0: null,
+    $17_0: null,
     startFinally: function SP_ExceptionHandlingScope$startFinally() {
-        if (!this.$R_0 || this.$R_0.$L_0 || !this.$W_0 || !this.$W_0.$L_0 || this.$o_0 && !this.$o_0.$L_0 || this.$15_0) {
-            throw SP.ExceptionHandlingScope.$9();
+        if (!this.$R_0 || this.$R_0.$L_0 || !this.$W_0 || !this.$W_0.$L_0 || this.$o_0 && !this.$o_0.$L_0 || this.$17_0) {
+            throw SP.ExceptionHandlingScope.$A();
         }
         var $v_0 = (this.$0_0.get_pendingRequest()).$P_0;
 
         if (!$v_0 || !SP.ClientActionExecutionScopeEnd.isInstanceOfType($v_0)) {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
         if ($v_0.$3_1.$B_0 !== 'TryScope' && $v_0.$3_1.$B_0 !== 'CatchScope') {
-            throw SP.ExceptionHandlingScope.$9();
+            throw SP.ExceptionHandlingScope.$A();
         }
-        this.$15_0 = new SP.ExecutionScope(this.$0_0, 'FinallyScope', null);
-        return this.$15_0;
+        this.$17_0 = new SP.ExecutionScope(this.$0_0, 'FinallyScope', null);
+        return this.$17_0;
     },
     get_processed: function SP_ExceptionHandlingScope$get_processed() {
-        return this.$2J_0;
+        return this.$2K_0;
     },
     get_hasException: function SP_ExceptionHandlingScope$get_hasException() {
-        return this.$1e_0;
+        return this.$1f_0;
     },
     get_errorMessage: function SP_ExceptionHandlingScope$get_errorMessage() {
         return this.$h_0;
     },
     get_serverStackTrace: function SP_ExceptionHandlingScope$get_serverStackTrace() {
-        return this.$1r_0;
+        return this.$1s_0;
     },
     get_serverErrorCode: function SP_ExceptionHandlingScope$get_serverErrorCode() {
-        return this.$1m_0;
-    },
-    get_serverErrorValue: function SP_ExceptionHandlingScope$get_serverErrorValue() {
-        return this.$1o_0;
-    },
-    get_serverErrorTypeName: function SP_ExceptionHandlingScope$get_serverErrorTypeName() {
         return this.$1n_0;
     },
-    get_serverErrorDetails: function SP_ExceptionHandlingScope$get_serverErrorDetails() {
-        return this.$1M_0;
+    get_serverErrorValue: function SP_ExceptionHandlingScope$get_serverErrorValue() {
+        return this.$1p_0;
     },
-    $3g_0: function SP_ExceptionHandlingScope$$3g_0($p0) {
+    get_serverErrorTypeName: function SP_ExceptionHandlingScope$get_serverErrorTypeName() {
+        return this.$1o_0;
+    },
+    get_serverErrorDetails: function SP_ExceptionHandlingScope$get_serverErrorDetails() {
+        return this.$1N_0;
+    },
+    $3i_0: function SP_ExceptionHandlingScope$$3i_0($p0) {
         var $v_0 = $p0;
 
         if (SP.ScriptUtility.isNullOrUndefined($v_0)) {
@@ -4123,8 +4134,8 @@ SP.ExceptionHandlingScope.prototype = {
         if (SP.ScriptUtility.isUndefined($v_1)) {
             throw Error.create(SP.ResResources.getString('UnknownResponseData'));
         }
-        this.$1e_0 = $v_1;
-        if (this.$1e_0) {
+        this.$1f_0 = $v_1;
+        if (this.$1f_0) {
             var $v_2 = $v_0.ErrorInfo;
 
             if (SP.ScriptUtility.isNullOrUndefined($v_2)) {
@@ -4139,38 +4150,38 @@ SP.ExceptionHandlingScope.prototype = {
             }
             $v_1 = $v_2.ErrorStackTrace;
             if (!SP.ScriptUtility.isUndefined($v_1)) {
-                this.$1r_0 = $v_1;
+                this.$1s_0 = $v_1;
             }
             else {
-                this.$1r_0 = '';
+                this.$1s_0 = '';
             }
             $v_1 = $v_2.ErrorCode;
             if (!SP.ScriptUtility.isUndefined($v_1)) {
-                this.$1m_0 = $v_1;
+                this.$1n_0 = $v_1;
             }
             $v_1 = $v_2.ErrorValue;
+            if (!SP.ScriptUtility.isUndefined($v_1)) {
+                this.$1p_0 = $v_1;
+            }
+            else {
+                this.$1p_0 = '';
+            }
+            $v_1 = $v_2.ErrorTypeName;
             if (!SP.ScriptUtility.isUndefined($v_1)) {
                 this.$1o_0 = $v_1;
             }
             else {
                 this.$1o_0 = '';
             }
-            $v_1 = $v_2.ErrorTypeName;
-            if (!SP.ScriptUtility.isUndefined($v_1)) {
-                this.$1n_0 = $v_1;
-            }
-            else {
-                this.$1n_0 = '';
-            }
             $v_1 = $v_2.ErrorDetails;
             if (!SP.ScriptUtility.isUndefined($v_1)) {
-                this.$1M_0 = $v_1;
-                this.$1M_0 = SP.DataConvert.fixupType(this.$0_0, this.$1M_0);
+                this.$1N_0 = $v_1;
+                this.$1N_0 = SP.DataConvert.fixupType(this.$0_0, this.$1N_0);
             }
         }
-        this.$2J_0 = true;
+        this.$2K_0 = true;
     },
-    $3h_0: function SP_ExceptionHandlingScope$$3h_0($p0) {
+    $3j_0: function SP_ExceptionHandlingScope$$3j_0($p0) {
         return false;
     }
 };
@@ -4180,21 +4191,21 @@ SP.ExceptionHandlingExecutionScope = function SP_ExceptionHandlingExecutionScope
 };
 SP.ExceptionHandlingExecutionScope.prototype = {
     $3_1: null,
-    $2Y_0: function SP_ExceptionHandlingExecutionScope$$2Y_0($p0, $p1) {
-        if (this.$3_1.get_$3S_0()) {
+    $2Z_0: function SP_ExceptionHandlingExecutionScope$$2Z_0($p0, $p1) {
+        if (this.$3_1.get_$3U_0()) {
             $p0.writeStartElement('ExceptionHandlingScopeSimple');
             $p0.writeAttributeString('Id', this.$4_0.toString());
         }
         else {
-            SP.ExecutionScope.prototype.$2Y_0.call(this, $p0, $p1);
+            SP.ExecutionScope.prototype.$2Z_0.call(this, $p0, $p1);
         }
     }
 };
 SP.ObjectIdentityQuery = function SP_ObjectIdentityQuery(objectPath) {
-    SP.ObjectIdentityQuery.initializeBase(this, [SP.ClientRuntimeContext.$2i(objectPath), objectPath, null]);
+    SP.ObjectIdentityQuery.initializeBase(this, [SP.ClientRuntimeContext.$2j(objectPath), objectPath, null]);
 };
 SP.ObjectIdentityQuery.prototype = {
-    $39_0: function SP_ObjectIdentityQuery$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectIdentityQuery$$3A_0($p0, $p1) {
         $p0.writeStartElement('ObjectIdentityQuery');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('ObjectPathId', this.$I_0.$4_0.toString());
@@ -4208,15 +4219,15 @@ SP.ObjectPath = function SP_ObjectPath($p0, $p1, $p2) {
     }
     this.$0_0 = $p0;
     if (!$p1) {
-        this.$1K_0 = -1;
+        this.$1M_0 = -1;
     }
     else {
-        this.$1K_0 = $p1.$4_0;
+        this.$1M_0 = $p1.$4_0;
     }
-    this.$4_0 = $p0.get_$1w_0();
+    this.$4_0 = $p0.get_$1x_0();
     if ($p2) {
-        $p0.$2Z_0(this);
-        if (!$p0.$1W_0) {
+        $p0.$2a_0(this);
+        if (!$p0.$1X_0) {
             var $v_0 = new SP.ClientActionInstantiateObjectPath(this);
 
             $p0.addQuery($v_0);
@@ -4225,28 +4236,28 @@ SP.ObjectPath = function SP_ObjectPath($p0, $p1, $p2) {
             $p0.addQueryIdAndResultObject($v_0.$4_0, $v_1);
         }
     }
-    this.$1N_0 = false;
+    this.$1O_0 = false;
     this.$j_0 = true;
 };
 SP.ObjectPath.prototype = {
-    $1K_0: 0,
+    $1M_0: 0,
     $4_0: 0,
     $0_0: null,
-    $1N_0: false,
-    get_$1y_0: function SP_ObjectPath$get_$1y_0() {
-        if (this.$1K_0 === -1) {
+    $1O_0: false,
+    get_$1z_0: function SP_ObjectPath$get_$1z_0() {
+        if (this.$1M_0 === -1) {
             return null;
         }
-        return this.$0_0.$1i_0[this.$1K_0.toString()];
+        return this.$0_0.$1j_0[this.$1M_0.toString()];
     },
     $j_0: false,
-    $3R_0: function SP_ObjectPath$$3R_0() {
+    $3T_0: function SP_ObjectPath$$3T_0() {
     },
-    get_$2l_0: function SP_ObjectPath$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPath$get_$2m_0() {
         return null;
     },
     setPendingReplace: function SP_ObjectPath$setPendingReplace() {
-        (this.$0_0.get_pendingRequest()).$3A_0(this);
+        (this.$0_0.get_pendingRequest()).$3B_0(this);
     }
 };
 SP.ObjectPathProperty = function SP_ObjectPathProperty(context, parent, propertyName) {
@@ -4255,15 +4266,15 @@ SP.ObjectPathProperty = function SP_ObjectPathProperty(context, parent, property
 };
 SP.ObjectPathProperty.prototype = {
     $S_1: null,
-    $39_0: function SP_ObjectPathProperty$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectPathProperty$$3A_0($p0, $p1) {
         $p0.writeStartElement('Property');
         $p0.writeAttributeString('Id', this.$4_0.toString());
-        $p0.writeAttributeString('ParentId', (this.get_$1y_0()).$4_0.toString());
-        $p1.addObjectPath(this.get_$1y_0());
+        $p0.writeAttributeString('ParentId', (this.get_$1z_0()).$4_0.toString());
+        $p1.addObjectPath(this.get_$1z_0());
         $p0.writeAttributeString('Name', this.$S_1);
         $p0.writeEndElement();
     },
-    get_$2l_0: function SP_ObjectPathProperty$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPathProperty$get_$2m_0() {
         return SP.ResResources.getString('ObjectNameProperty', this.$S_1);
     }
 };
@@ -4275,45 +4286,45 @@ SP.ObjectPathStaticProperty = function SP_ObjectPathStaticProperty(context, type
 SP.ObjectPathStaticProperty.prototype = {
     $S_1: null,
     $J_1: null,
-    $39_0: function SP_ObjectPathStaticProperty$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectPathStaticProperty$$3A_0($p0, $p1) {
         $p0.writeStartElement('StaticProperty');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('TypeId', this.$J_1);
         $p0.writeAttributeString('Name', this.$S_1);
         $p0.writeEndElement();
     },
-    get_$2l_0: function SP_ObjectPathStaticProperty$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPathStaticProperty$get_$2m_0() {
         return SP.ResResources.getString('ObjectNameProperty', this.$S_1);
     }
 };
 SP.ObjectPathMethod = function SP_ObjectPathMethod(context, parent, methodName, parameters) {
     SP.ObjectPathMethod.initializeBase(this, [context, parent, true]);
-    SP.ClientAction.$1A(context, parameters);
+    SP.ClientAction.$1C(context, parameters);
     this.$k_1 = methodName;
     this.$5_1 = parameters;
-    this.$6_1 = new SP.SerializationContext(context);
+    this.$7_1 = new SP.SerializationContext(context);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$5_1 = null;
 };
 SP.ObjectPathMethod.prototype = {
     $k_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
     $5_1: null,
-    $39_0: function SP_ObjectPathMethod$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectPathMethod$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ObjectPathMethod$$y_1($p0, $p1) {
+    $z_1: function SP_ObjectPathMethod$$z_1($p0, $p1) {
         $p0.writeStartElement('Method');
         $p0.writeAttributeString('Id', this.$4_0.toString());
-        $p0.writeAttributeString('ParentId', (this.get_$1y_0()).$4_0.toString());
-        $p1.addObjectPath(this.get_$1y_0());
+        $p0.writeAttributeString('ParentId', (this.get_$1z_0()).$4_0.toString());
+        $p1.addObjectPath(this.get_$1z_0());
         $p0.writeAttributeString('Name', this.$k_1);
         if (this.$5_1 && this.$5_1.length > 0) {
             $p0.writeStartElement('Parameters');
@@ -4328,28 +4339,28 @@ SP.ObjectPathMethod.prototype = {
         }
         $p0.writeEndElement();
     },
-    $3R_0: function SP_ObjectPathMethod$$3R_0() {
+    $3T_0: function SP_ObjectPathMethod$$3T_0() {
         this.$5_1 = null;
         this.$1_1 = null;
-        this.$6_1 = null;
+        this.$7_1 = null;
         this.$j_0 = false;
     },
-    get_$2l_0: function SP_ObjectPathMethod$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPathMethod$get_$2m_0() {
         return SP.ResResources.getString('ObjectNameMethod', this.$k_1);
     }
 };
 SP.ObjectPathStaticMethod = function SP_ObjectPathStaticMethod(context, typeId, methodName, parameters) {
     SP.ObjectPathStaticMethod.initializeBase(this, [context, null, true]);
-    SP.ClientAction.$1A(context, parameters);
+    SP.ClientAction.$1C(context, parameters);
     this.$J_1 = typeId;
     this.$k_1 = methodName;
     this.$5_1 = parameters;
-    this.$6_1 = new SP.SerializationContext(context);
+    this.$7_1 = new SP.SerializationContext(context);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$5_1 = null;
 };
@@ -4357,13 +4368,13 @@ SP.ObjectPathStaticMethod.prototype = {
     $J_1: null,
     $k_1: null,
     $5_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
-    $39_0: function SP_ObjectPathStaticMethod$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectPathStaticMethod$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ObjectPathStaticMethod$$y_1($p0, $p1) {
+    $z_1: function SP_ObjectPathStaticMethod$$z_1($p0, $p1) {
         $p0.writeStartElement('StaticMethod');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('Name', this.$k_1);
@@ -4381,40 +4392,40 @@ SP.ObjectPathStaticMethod.prototype = {
         }
         $p0.writeEndElement();
     },
-    $3R_0: function SP_ObjectPathStaticMethod$$3R_0() {
+    $3T_0: function SP_ObjectPathStaticMethod$$3T_0() {
         this.$5_1 = null;
         this.$1_1 = null;
-        this.$6_1 = null;
+        this.$7_1 = null;
         this.$j_0 = false;
     },
-    get_$2l_0: function SP_ObjectPathStaticMethod$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPathStaticMethod$get_$2m_0() {
         return SP.ResResources.getString('ObjectNameMethod', this.$k_1);
     }
 };
 SP.ObjectPathConstructor = function SP_ObjectPathConstructor(context, typeId, parameters) {
     SP.ObjectPathConstructor.initializeBase(this, [context, null, true]);
-    SP.ClientAction.$1A(context, parameters);
+    SP.ClientAction.$1C(context, parameters);
     this.$J_1 = typeId;
     this.$5_1 = parameters;
-    this.$6_1 = new SP.SerializationContext(context);
+    this.$7_1 = new SP.SerializationContext(context);
     var $v_0;
 
     this.$1_1 = new Sys.StringBuilder();
     $v_0 = SP.XmlWriter.create(this.$1_1);
-    this.$y_1($v_0, this.$6_1);
+    this.$z_1($v_0, this.$7_1);
     $v_0.close();
     this.$5_1 = null;
 };
 SP.ObjectPathConstructor.prototype = {
     $J_1: null,
     $5_1: null,
-    $6_1: null,
+    $7_1: null,
     $1_1: null,
-    $39_0: function SP_ObjectPathConstructor$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectPathConstructor$$3A_0($p0, $p1) {
         $p0.writeRaw(this.$1_1.toString());
-        $p1.$m_0(this.$6_1);
+        $p1.$m_0(this.$7_1);
     },
-    $y_1: function SP_ObjectPathConstructor$$y_1($p0, $p1) {
+    $z_1: function SP_ObjectPathConstructor$$z_1($p0, $p1) {
         $p0.writeStartElement('Constructor');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('TypeId', this.$J_1);
@@ -4431,13 +4442,13 @@ SP.ObjectPathConstructor.prototype = {
         }
         $p0.writeEndElement();
     },
-    $3R_0: function SP_ObjectPathConstructor$$3R_0() {
+    $3T_0: function SP_ObjectPathConstructor$$3T_0() {
         this.$5_1 = null;
         this.$1_1 = null;
-        this.$6_1 = null;
+        this.$7_1 = null;
         this.$j_0 = false;
     },
-    get_$2l_0: function SP_ObjectPathConstructor$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPathConstructor$get_$2m_0() {
         return SP.ResResources.getString('ObjectNameType', this.$J_1);
     }
 };
@@ -4450,18 +4461,18 @@ SP.ObjectPathIdentity.prototype = {
     get_identity: function SP_ObjectPathIdentity$get_identity() {
         return this.$r_1;
     },
-    $39_0: function SP_ObjectPathIdentity$$39_0($p0, $p1) {
+    $3A_0: function SP_ObjectPathIdentity$$3A_0($p0, $p1) {
         $p0.writeStartElement('Identity');
         $p0.writeAttributeString('Id', this.$4_0.toString());
         $p0.writeAttributeString('Name', this.$r_1);
         $p0.writeEndElement();
     },
-    get_$2l_0: function SP_ObjectPathIdentity$get_$2l_0() {
+    get_$2m_0: function SP_ObjectPathIdentity$get_$2m_0() {
         return SP.ResResources.getString('ObjectNameIdentity', this.$r_1);
     }
 };
 SP.SerializationContext = function SP_SerializationContext($p0) {
-    this.$1j_0 = {};
+    this.$1k_0 = {};
     if (!$p0) {
         throw Error.argumentNull('context');
     }
@@ -4475,10 +4486,10 @@ SP.SerializationContext.prototype = {
         }
     },
     addObjectPath: function SP_SerializationContext$addObjectPath(path) {
-        this.$1j_0[path.$4_0.toString()] = path;
+        this.$1k_0[path.$4_0.toString()] = path;
     },
     $m_0: function SP_SerializationContext$$m_0($p0) {
-        var $$dict_1 = $p0.$1j_0;
+        var $$dict_1 = $p0.$1k_0;
 
         for (var $$key_2 in $$dict_1) {
             var $v_0 = {
@@ -4496,12 +4507,12 @@ SP.RuntimeRes = function SP_RuntimeRes() {
 };
 SP.ParseJSONUtil = function SP_ParseJSONUtil() {
 };
-SP.ParseJSONUtil.$2m = function SP_ParseJSONUtil$$2m($p0) {
-    $p0 = $p0.replace(SP.ParseJSONUtil.$2s, '$1new SP.Guid(\"$2\")');
-    $p0 = $p0.replace(SP.ParseJSONUtil.$2r, '$1SP.DataConvert.createUtcDateTime($2)');
-    $p0 = $p0.replace(SP.ParseJSONUtil.$2p, '$1SP.DataConvert.createLocalDateTime($2)');
-    $p0 = $p0.replace(SP.ParseJSONUtil.$2q, '$1SP.DataConvert.createUnspecifiedDateTime($2)');
-    $p0 = $p0.replace(SP.ParseJSONUtil.$2o, '$1new SP.Base64EncodedByteArray(\"$2\")');
+SP.ParseJSONUtil.$2n = function SP_ParseJSONUtil$$2n($p0) {
+    $p0 = $p0.replace(SP.ParseJSONUtil.$2t, '$1new SP.Guid(\"$2\")');
+    $p0 = $p0.replace(SP.ParseJSONUtil.$2s, '$1SP.DataConvert.createUtcDateTime($2)');
+    $p0 = $p0.replace(SP.ParseJSONUtil.$2q, '$1SP.DataConvert.createLocalDateTime($2)');
+    $p0 = $p0.replace(SP.ParseJSONUtil.$2r, '$1SP.DataConvert.createUnspecifiedDateTime($2)');
+    $p0 = $p0.replace(SP.ParseJSONUtil.$2p, '$1new SP.Base64EncodedByteArray(\"$2\")');
     return $p0;
 };
 SP.ParseJSONUtil.parseObjectFromJsonString = function SP_ParseJSONUtil$parseObjectFromJsonString(json) {
@@ -4513,13 +4524,13 @@ SP.ParseJSONUtil.parseObjectFromJsonString = function SP_ParseJSONUtil$parseObje
     if (!$v_0) {
         throw Error.argument('json');
     }
-    json = SP.ParseJSONUtil.$2m(json);
+    json = SP.ParseJSONUtil.$2n(json);
     var $v_1 = eval('(' + json + ')');
 
     return $v_1;
 };
 SP.ParseJSONUtil.validateJson = function SP_ParseJSONUtil$validateJson(text) {
-    return SP.ParseJSONUtil.$2u.test(((text.replace(SP.ParseJSONUtil.$2v, '@')).replace(SP.ParseJSONUtil.$2w, ']')).replace(SP.ParseJSONUtil.$2t, ''));
+    return SP.ParseJSONUtil.$2v.test(((text.replace(SP.ParseJSONUtil.$2w, '@')).replace(SP.ParseJSONUtil.$2x, ']')).replace(SP.ParseJSONUtil.$2u, ''));
 };
 SP.DataConvertUtil = function SP_DataConvertUtil() {
 };
@@ -4622,10 +4633,10 @@ if (SP.ParseJSONUtil.registerClass) SP.ParseJSONUtil.registerClass('SP.ParseJSON
 if (SP.DataConvertUtil.registerClass) SP.DataConvertUtil.registerClass('SP.DataConvertUtil');
 if (SP.OfficeVersion.registerClass) SP.OfficeVersion.registerClass('SP.OfficeVersion');
 function sp_runtime_initialize() {
-    SP.Base64EncodedByteArray.$1R = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    SP.Base64EncodedByteArray.$1S = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
     SP.Base64EncodedByteArray.$N = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/', '='];
-    SP.DataConvert.$1z = {};
-    SP.DataConvert.$2X = ['', '0', '00', '000', '0000', '00000', '000000', '0000000', '00000000', '000000000'];
+    SP.DataConvert.$20 = {};
+    SP.DataConvert.$2Y = ['', '0', '00', '000', '0000', '00000', '000000', '0000000', '00000000', '000000000'];
     SP.ClientConstants.AddExpandoFieldTypeSuffix = 'AddExpandoFieldTypeSuffix';
     SP.ClientConstants.Actions = 'Actions';
     SP.ClientConstants.ApplicationName = 'ApplicationName';
@@ -4764,7 +4775,7 @@ function sp_runtime_initialize() {
     SP.ClientErrorCodes.notSupportedRequestVersion = -2130575151;
     SP.ClientErrorCodes.fieldValueFailedValidation = -2130575163;
     SP.ClientErrorCodes.itemValueFailedValidation = -2130575162;
-    SP.ClientRequest.$2W = 0;
+    SP.ClientRequest.$2X = 0;
     SP.ClientRuntimeContext.$Q = null;
     SP.ResourceStrings.argumentExceptionMessage = 'ArgumentExceptionMessage';
     SP.ResourceStrings.argumentNullExceptionMessage = 'ArgumentNullExceptionMessage';
@@ -4916,15 +4927,15 @@ function sp_runtime_initialize() {
     SP.RuntimeRes.rE_BrowserBinaryDataNotSupported = 'Your browser doesn\'t support some HTML5 features like the File API operations. Please use a browser that does support these features.';
     SP.RuntimeRes.collectionHasNotBeenInitialized = 'The collection has not been initialized. It has not been requested or the request has not been executed. It may need to be explicitly requested.';
     SP.RuntimeRes.requestHasBeenExecuted = 'The request has been executed.';
-    SP.ParseJSONUtil.$2q = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\(([0-9]+(?:,[0-9]+){2,6})\\)\\\\/\\\"', 'g');
-    SP.ParseJSONUtil.$2p = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\((-?[0-9]+)(?:[a-zA-Z]|(?:\\+|-)[0-9]{4})\\)\\\\/\\\"', 'g');
-    SP.ParseJSONUtil.$2r = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\((-?[0-9]+)\\)\\\\/\\\"', 'g');
-    SP.ParseJSONUtil.$2s = new RegExp('(^|[^\\\\])\\\"\\\\/Guid\\(([0-9a-fA-F\\-]+)\\)\\\\/\\\"', 'g');
-    SP.ParseJSONUtil.$2u = new RegExp('^[\\],:{}\\s]*$');
-    SP.ParseJSONUtil.$2v = new RegExp('\\\\(?:[\"\\\\\\/bfnrt]|u[0-9a-fA-F]{4})', 'g');
-    SP.ParseJSONUtil.$2w = new RegExp('\"[^\"\\\\\\n\\r]*\"|true|false|null|-?\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?', 'g');
-    SP.ParseJSONUtil.$2t = new RegExp('(?:^|:|,)(?:\\s*\\[)+', 'g');
-    SP.ParseJSONUtil.$2o = new RegExp('(^|[^\\\\])\\\"\\\\/Base64Binary\\(([^\\)]*)\\)\\\\/\\\"', 'g');
+    SP.ParseJSONUtil.$2r = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\(([0-9]+(?:,[0-9]+){2,6})\\)\\\\/\\\"', 'g');
+    SP.ParseJSONUtil.$2q = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\((-?[0-9]+)(?:[a-zA-Z]|(?:\\+|-)[0-9]{4})\\)\\\\/\\\"', 'g');
+    SP.ParseJSONUtil.$2s = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\((-?[0-9]+)\\)\\\\/\\\"', 'g');
+    SP.ParseJSONUtil.$2t = new RegExp('(^|[^\\\\])\\\"\\\\/Guid\\(([0-9a-fA-F\\-]+)\\)\\\\/\\\"', 'g');
+    SP.ParseJSONUtil.$2v = new RegExp('^[\\],:{}\\s]*$');
+    SP.ParseJSONUtil.$2w = new RegExp('\\\\(?:[\"\\\\\\/bfnrt]|u[0-9a-fA-F]{4})', 'g');
+    SP.ParseJSONUtil.$2x = new RegExp('\"[^\"\\\\\\n\\r]*\"|true|false|null|-?\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?', 'g');
+    SP.ParseJSONUtil.$2u = new RegExp('(?:^|:|,)(?:\\s*\\[)+', 'g');
+    SP.ParseJSONUtil.$2p = new RegExp('(^|[^\\\\])\\\"\\\\/Base64Binary\\(([^\\)]*)\\)\\\\/\\\"', 'g');
     SP.OfficeVersion.majorBuildVersion = 16;
     SP.OfficeVersion.previousMajorBuildVersion = 14;
     SP.OfficeVersion.maxCompatibilityLevel = 15;

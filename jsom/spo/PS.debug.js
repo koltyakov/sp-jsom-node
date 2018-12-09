@@ -517,6 +517,17 @@ PS.StatusApprovalType.prototype = {
 PS.StatusApprovalType.registerEnum('PS.StatusApprovalType', false);
 
 
+PS.StatusTransactionState = function() {}
+PS.StatusTransactionState.prototype = {
+    saved: 0, 
+    submitted: 1, 
+    inProcess: 2, 
+    applySuccessful: 3, 
+    applyFailed: 4
+}
+PS.StatusTransactionState.registerEnum('PS.StatusTransactionState', false);
+
+
 PS.StatusUpdateType = function() {}
 PS.StatusUpdateType.prototype = {
     update: 0, 
@@ -673,23 +684,23 @@ PS.WorkFormat.registerEnum('PS.WorkFormat', false);
 PS.ProjectContext = function PS_ProjectContext(url) {ULSyTi:;
     PS.ProjectContext.initializeBase(this, [ url ]);
     this.$4_2 = PS.ProjectServer.newObject(this);
-    this.$20_2 = PS.ServiceStatus.newObject(this, this.$4_2);
-    this.$1z_2 = PS.PageSizes.newObject(this, this.$4_2);
+    this.$25_2 = PS.ServiceStatus.newObject(this, this.$4_2);
+    this.$24_2 = PS.PageSizes.newObject(this, this.$4_2);
 }
 PS.ProjectContext.get_current = function PS_ProjectContext$get_current() {ULSyTi:;
-    if (!PS.ProjectContext.$1y) {
+    if (!PS.ProjectContext.$23) {
         if (SP.ClientContext.get_current()) {
             var $v_0 = new PS.ProjectContext(SP.ClientContext.get_current().get_url());
             $v_0.set_isPageUrl(SP.ClientContext.get_current().get_isPageUrl());
-            PS.ProjectContext.$1y = $v_0;
+            PS.ProjectContext.$23 = $v_0;
         }
     }
-    return PS.ProjectContext.$1y;
+    return PS.ProjectContext.$23;
 }
 PS.ProjectContext.prototype = {
     $4_2: null,
-    $20_2: null,
-    $1z_2: null,
+    $25_2: null,
+    $24_2: null,
     
     get_workflowActivities: function PS_ProjectContext$get_workflowActivities() {ULSyTi:;
         return this.$4_2.get_workflowActivities();
@@ -752,11 +763,11 @@ PS.ProjectContext.prototype = {
     },
     
     get_serviceStatus: function PS_ProjectContext$get_serviceStatus() {ULSyTi:;
-        return this.$20_2;
+        return this.$25_2;
     },
     
     get_pageSizes: function PS_ProjectContext$get_pageSizes() {ULSyTi:;
-        return this.$1z_2;
+        return this.$24_2;
     },
     
     getDeletedPublishedAssignments: function PS_ProjectContext$getDeletedPublishedAssignments(deletedDate) {ULSyTi:;
@@ -773,9 +784,9 @@ PS.ProjectContext.prototype = {
 
 
 PS.ProjectContext.QueueJobPoll = function PS_ProjectContext_QueueJobPoll($p0, $p1, $p2, $p3) {
-    this.$$d_$26_0 = Function.createDelegate(this, this.$26_0);
-    this.$$d_$27_0 = Function.createDelegate(this, this.$27_0);
-    this.$$d_$29_0 = Function.createDelegate(this, this.$29_0);
+    this.$$d_$2B_0 = Function.createDelegate(this, this.$2B_0);
+    this.$$d_$2C_0 = Function.createDelegate(this, this.$2C_0);
+    this.$$d_$2E_0 = Function.createDelegate(this, this.$2E_0);
     this.$S_0 = $p0;
     this.$L_0 = $p1;
     this.$T_0 = $p2;
@@ -788,10 +799,10 @@ PS.ProjectContext.QueueJobPoll.prototype = {
     $R_0: null,
     
     run: function PS_ProjectContext_QueueJobPoll$run() {ULSyTi:;
-        this.$26_0();
+        this.$2B_0();
     },
     
-    $28_0: function PS_ProjectContext_QueueJobPoll$$28_0($p0) {
+    $2D_0: function PS_ProjectContext_QueueJobPoll$$2D_0($p0) {
         $p0.val = 0;
         if (!this.$L_0.get_serverObjectIsNull()) {
             $p0.val = this.$L_0.get_jobState();
@@ -811,24 +822,24 @@ PS.ProjectContext.QueueJobPoll.prototype = {
         return false;
     },
     
-    $26_0: function PS_ProjectContext_QueueJobPoll$$26_0() {ULSyTi:;
+    $2B_0: function PS_ProjectContext_QueueJobPoll$$2B_0() {ULSyTi:;
         this.$T_0 -= 2;
         this.$S_0.load(this.$L_0);
-        this.$S_0.executeQueryAsync(this.$$d_$29_0, this.$$d_$27_0);
+        this.$S_0.executeQueryAsync(this.$$d_$2E_0, this.$$d_$2C_0);
     },
     
-    $29_0: function PS_ProjectContext_QueueJobPoll$$29_0($p0, $p1) {
+    $2E_0: function PS_ProjectContext_QueueJobPoll$$2E_0($p0, $p1) {
         var $v_0;
         var $$t_3, $$t_4;
-        if ((($$t_4 = this.$28_0(($$t_3 = {'val': $v_0}))), $v_0 = $$t_3.val, $$t_4) && this.$T_0 > 0) {
-            window.setTimeout(this.$$d_$26_0, 2000);
+        if ((($$t_4 = this.$2D_0(($$t_3 = {'val': $v_0}))), $v_0 = $$t_3.val, $$t_4) && this.$T_0 > 0) {
+            window.setTimeout(this.$$d_$2B_0, 2000);
         }
         else {
             this.$R_0($v_0);
         }
     },
     
-    $27_0: function PS_ProjectContext_QueueJobPoll$$27_0($p0, $p1) {
+    $2C_0: function PS_ProjectContext_QueueJobPoll$$2C_0($p0, $p1) {
         this.$R_0(0);
     }
 }
@@ -1268,7 +1279,7 @@ PS.AssignmentCreationInformation.prototype = {
     $8_1: null,
     $I_1: null,
     $3_1: null,
-    $1n_1: null,
+    $1s_1: null,
     
     get_finish: function PS_AssignmentCreationInformation$get_finish() {ULSyTi:;
         return this.$5_1;
@@ -1316,11 +1327,11 @@ PS.AssignmentCreationInformation.prototype = {
     },
     
     get_taskId: function PS_AssignmentCreationInformation$get_taskId() {ULSyTi:;
-        return this.$1n_1;
+        return this.$1s_1;
     },
     
     set_taskId: function PS_AssignmentCreationInformation$set_taskId(value) {ULSyTi:;
-        this.$1n_1 = value;
+        this.$1s_1 = value;
         return value;
     },
     
@@ -1370,7 +1381,7 @@ PS.AssignmentCreationInformation.prototype = {
         }
         $v_0 = parentNode.TaskId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1n_1 = ($v_0);
+            this.$1s_1 = ($v_0);
             delete parentNode.TaskId;
         }
     }
@@ -1577,7 +1588,7 @@ PS.CalendarCreationInformation = function PS_CalendarCreationInformation() {ULSy
 PS.CalendarCreationInformation.prototype = {
     $0_1: null,
     $1_1: null,
-    $1D_1: null,
+    $1H_1: null,
     
     get_id: function PS_CalendarCreationInformation$get_id() {ULSyTi:;
         return this.$0_1;
@@ -1598,11 +1609,11 @@ PS.CalendarCreationInformation.prototype = {
     },
     
     get_originalId: function PS_CalendarCreationInformation$get_originalId() {ULSyTi:;
-        return this.$1D_1;
+        return this.$1H_1;
     },
     
     set_originalId: function PS_CalendarCreationInformation$set_originalId(value) {ULSyTi:;
-        this.$1D_1 = value;
+        this.$1H_1 = value;
         return value;
     },
     
@@ -1637,7 +1648,7 @@ PS.CalendarCreationInformation.prototype = {
         }
         $v_0 = parentNode.OriginalId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1D_1 = ($v_0);
+            this.$1H_1 = ($v_0);
             delete parentNode.OriginalId;
         }
     }
@@ -1957,22 +1968,22 @@ PS.CalendarExceptionCreationInformation = function PS_CalendarExceptionCreationI
 PS.CalendarExceptionCreationInformation.prototype = {
     $5_1: null,
     $1_1: null,
-    $1L_1: 0,
-    $1M_1: 0,
-    $1N_1: 0,
-    $1O_1: 0,
     $1P_1: 0,
     $1Q_1: 0,
-    $1V_1: 0,
-    $1W_1: 0,
-    $1X_1: 0,
-    $1Y_1: 0,
+    $1R_1: 0,
+    $1S_1: 0,
+    $1T_1: 0,
+    $1U_1: 0,
     $1Z_1: 0,
     $1a_1: 0,
     $1b_1: 0,
     $1c_1: 0,
     $1d_1: 0,
     $1e_1: 0,
+    $1f_1: 0,
+    $1g_1: 0,
+    $1h_1: 0,
+    $1i_1: 0,
     $3_1: null,
     
     get_finish: function PS_CalendarExceptionCreationInformation$get_finish() {ULSyTi:;
@@ -1994,146 +2005,146 @@ PS.CalendarExceptionCreationInformation.prototype = {
     },
     
     get_recurrenceDays: function PS_CalendarExceptionCreationInformation$get_recurrenceDays() {ULSyTi:;
-        return this.$1L_1;
-    },
-    
-    set_recurrenceDays: function PS_CalendarExceptionCreationInformation$set_recurrenceDays(value) {ULSyTi:;
-        this.$1L_1 = value;
-        return value;
-    },
-    
-    get_recurrenceFrequency: function PS_CalendarExceptionCreationInformation$get_recurrenceFrequency() {ULSyTi:;
-        return this.$1M_1;
-    },
-    
-    set_recurrenceFrequency: function PS_CalendarExceptionCreationInformation$set_recurrenceFrequency(value) {ULSyTi:;
-        this.$1M_1 = value;
-        return value;
-    },
-    
-    get_recurrenceMonth: function PS_CalendarExceptionCreationInformation$get_recurrenceMonth() {ULSyTi:;
-        return this.$1N_1;
-    },
-    
-    set_recurrenceMonth: function PS_CalendarExceptionCreationInformation$set_recurrenceMonth(value) {ULSyTi:;
-        this.$1N_1 = value;
-        return value;
-    },
-    
-    get_recurrenceMonthDay: function PS_CalendarExceptionCreationInformation$get_recurrenceMonthDay() {ULSyTi:;
-        return this.$1O_1;
-    },
-    
-    set_recurrenceMonthDay: function PS_CalendarExceptionCreationInformation$set_recurrenceMonthDay(value) {ULSyTi:;
-        this.$1O_1 = value;
-        return value;
-    },
-    
-    get_recurrenceType: function PS_CalendarExceptionCreationInformation$get_recurrenceType() {ULSyTi:;
         return this.$1P_1;
     },
     
-    set_recurrenceType: function PS_CalendarExceptionCreationInformation$set_recurrenceType(value) {ULSyTi:;
+    set_recurrenceDays: function PS_CalendarExceptionCreationInformation$set_recurrenceDays(value) {ULSyTi:;
         this.$1P_1 = value;
         return value;
     },
     
-    get_recurrenceWeek: function PS_CalendarExceptionCreationInformation$get_recurrenceWeek() {ULSyTi:;
+    get_recurrenceFrequency: function PS_CalendarExceptionCreationInformation$get_recurrenceFrequency() {ULSyTi:;
         return this.$1Q_1;
     },
     
-    set_recurrenceWeek: function PS_CalendarExceptionCreationInformation$set_recurrenceWeek(value) {ULSyTi:;
+    set_recurrenceFrequency: function PS_CalendarExceptionCreationInformation$set_recurrenceFrequency(value) {ULSyTi:;
         this.$1Q_1 = value;
         return value;
     },
     
+    get_recurrenceMonth: function PS_CalendarExceptionCreationInformation$get_recurrenceMonth() {ULSyTi:;
+        return this.$1R_1;
+    },
+    
+    set_recurrenceMonth: function PS_CalendarExceptionCreationInformation$set_recurrenceMonth(value) {ULSyTi:;
+        this.$1R_1 = value;
+        return value;
+    },
+    
+    get_recurrenceMonthDay: function PS_CalendarExceptionCreationInformation$get_recurrenceMonthDay() {ULSyTi:;
+        return this.$1S_1;
+    },
+    
+    set_recurrenceMonthDay: function PS_CalendarExceptionCreationInformation$set_recurrenceMonthDay(value) {ULSyTi:;
+        this.$1S_1 = value;
+        return value;
+    },
+    
+    get_recurrenceType: function PS_CalendarExceptionCreationInformation$get_recurrenceType() {ULSyTi:;
+        return this.$1T_1;
+    },
+    
+    set_recurrenceType: function PS_CalendarExceptionCreationInformation$set_recurrenceType(value) {ULSyTi:;
+        this.$1T_1 = value;
+        return value;
+    },
+    
+    get_recurrenceWeek: function PS_CalendarExceptionCreationInformation$get_recurrenceWeek() {ULSyTi:;
+        return this.$1U_1;
+    },
+    
+    set_recurrenceWeek: function PS_CalendarExceptionCreationInformation$set_recurrenceWeek(value) {ULSyTi:;
+        this.$1U_1 = value;
+        return value;
+    },
+    
     get_shift1Finish: function PS_CalendarExceptionCreationInformation$get_shift1Finish() {ULSyTi:;
-        return this.$1V_1;
-    },
-    
-    set_shift1Finish: function PS_CalendarExceptionCreationInformation$set_shift1Finish(value) {ULSyTi:;
-        this.$1V_1 = value;
-        return value;
-    },
-    
-    get_shift1Start: function PS_CalendarExceptionCreationInformation$get_shift1Start() {ULSyTi:;
-        return this.$1W_1;
-    },
-    
-    set_shift1Start: function PS_CalendarExceptionCreationInformation$set_shift1Start(value) {ULSyTi:;
-        this.$1W_1 = value;
-        return value;
-    },
-    
-    get_shift2Finish: function PS_CalendarExceptionCreationInformation$get_shift2Finish() {ULSyTi:;
-        return this.$1X_1;
-    },
-    
-    set_shift2Finish: function PS_CalendarExceptionCreationInformation$set_shift2Finish(value) {ULSyTi:;
-        this.$1X_1 = value;
-        return value;
-    },
-    
-    get_shift2Start: function PS_CalendarExceptionCreationInformation$get_shift2Start() {ULSyTi:;
-        return this.$1Y_1;
-    },
-    
-    set_shift2Start: function PS_CalendarExceptionCreationInformation$set_shift2Start(value) {ULSyTi:;
-        this.$1Y_1 = value;
-        return value;
-    },
-    
-    get_shift3Finish: function PS_CalendarExceptionCreationInformation$get_shift3Finish() {ULSyTi:;
         return this.$1Z_1;
     },
     
-    set_shift3Finish: function PS_CalendarExceptionCreationInformation$set_shift3Finish(value) {ULSyTi:;
+    set_shift1Finish: function PS_CalendarExceptionCreationInformation$set_shift1Finish(value) {ULSyTi:;
         this.$1Z_1 = value;
         return value;
     },
     
-    get_shift3Start: function PS_CalendarExceptionCreationInformation$get_shift3Start() {ULSyTi:;
+    get_shift1Start: function PS_CalendarExceptionCreationInformation$get_shift1Start() {ULSyTi:;
         return this.$1a_1;
     },
     
-    set_shift3Start: function PS_CalendarExceptionCreationInformation$set_shift3Start(value) {ULSyTi:;
+    set_shift1Start: function PS_CalendarExceptionCreationInformation$set_shift1Start(value) {ULSyTi:;
         this.$1a_1 = value;
         return value;
     },
     
-    get_shift4Finish: function PS_CalendarExceptionCreationInformation$get_shift4Finish() {ULSyTi:;
+    get_shift2Finish: function PS_CalendarExceptionCreationInformation$get_shift2Finish() {ULSyTi:;
         return this.$1b_1;
     },
     
-    set_shift4Finish: function PS_CalendarExceptionCreationInformation$set_shift4Finish(value) {ULSyTi:;
+    set_shift2Finish: function PS_CalendarExceptionCreationInformation$set_shift2Finish(value) {ULSyTi:;
         this.$1b_1 = value;
         return value;
     },
     
-    get_shift4Start: function PS_CalendarExceptionCreationInformation$get_shift4Start() {ULSyTi:;
+    get_shift2Start: function PS_CalendarExceptionCreationInformation$get_shift2Start() {ULSyTi:;
         return this.$1c_1;
     },
     
-    set_shift4Start: function PS_CalendarExceptionCreationInformation$set_shift4Start(value) {ULSyTi:;
+    set_shift2Start: function PS_CalendarExceptionCreationInformation$set_shift2Start(value) {ULSyTi:;
         this.$1c_1 = value;
         return value;
     },
     
-    get_shift5Finish: function PS_CalendarExceptionCreationInformation$get_shift5Finish() {ULSyTi:;
+    get_shift3Finish: function PS_CalendarExceptionCreationInformation$get_shift3Finish() {ULSyTi:;
         return this.$1d_1;
     },
     
-    set_shift5Finish: function PS_CalendarExceptionCreationInformation$set_shift5Finish(value) {ULSyTi:;
+    set_shift3Finish: function PS_CalendarExceptionCreationInformation$set_shift3Finish(value) {ULSyTi:;
         this.$1d_1 = value;
         return value;
     },
     
-    get_shift5Start: function PS_CalendarExceptionCreationInformation$get_shift5Start() {ULSyTi:;
+    get_shift3Start: function PS_CalendarExceptionCreationInformation$get_shift3Start() {ULSyTi:;
         return this.$1e_1;
     },
     
-    set_shift5Start: function PS_CalendarExceptionCreationInformation$set_shift5Start(value) {ULSyTi:;
+    set_shift3Start: function PS_CalendarExceptionCreationInformation$set_shift3Start(value) {ULSyTi:;
         this.$1e_1 = value;
+        return value;
+    },
+    
+    get_shift4Finish: function PS_CalendarExceptionCreationInformation$get_shift4Finish() {ULSyTi:;
+        return this.$1f_1;
+    },
+    
+    set_shift4Finish: function PS_CalendarExceptionCreationInformation$set_shift4Finish(value) {ULSyTi:;
+        this.$1f_1 = value;
+        return value;
+    },
+    
+    get_shift4Start: function PS_CalendarExceptionCreationInformation$get_shift4Start() {ULSyTi:;
+        return this.$1g_1;
+    },
+    
+    set_shift4Start: function PS_CalendarExceptionCreationInformation$set_shift4Start(value) {ULSyTi:;
+        this.$1g_1 = value;
+        return value;
+    },
+    
+    get_shift5Finish: function PS_CalendarExceptionCreationInformation$get_shift5Finish() {ULSyTi:;
+        return this.$1h_1;
+    },
+    
+    set_shift5Finish: function PS_CalendarExceptionCreationInformation$set_shift5Finish(value) {ULSyTi:;
+        this.$1h_1 = value;
+        return value;
+    },
+    
+    get_shift5Start: function PS_CalendarExceptionCreationInformation$get_shift5Start() {ULSyTi:;
+        return this.$1i_1;
+    },
+    
+    set_shift5Start: function PS_CalendarExceptionCreationInformation$set_shift5Start(value) {ULSyTi:;
+        this.$1i_1 = value;
         return value;
     },
     
@@ -2177,82 +2188,82 @@ PS.CalendarExceptionCreationInformation.prototype = {
         }
         $v_0 = parentNode.RecurrenceDays;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1L_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1P_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.RecurrenceDays;
         }
         $v_0 = parentNode.RecurrenceFrequency;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1M_1 = ($v_0);
+            this.$1Q_1 = ($v_0);
             delete parentNode.RecurrenceFrequency;
         }
         $v_0 = parentNode.RecurrenceMonth;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1N_1 = ($v_0);
+            this.$1R_1 = ($v_0);
             delete parentNode.RecurrenceMonth;
         }
         $v_0 = parentNode.RecurrenceMonthDay;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1O_1 = ($v_0);
+            this.$1S_1 = ($v_0);
             delete parentNode.RecurrenceMonthDay;
         }
         $v_0 = parentNode.RecurrenceType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1P_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1T_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.RecurrenceType;
         }
         $v_0 = parentNode.RecurrenceWeek;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1Q_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1U_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.RecurrenceWeek;
         }
         $v_0 = parentNode.Shift1Finish;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1V_1 = ($v_0);
+            this.$1Z_1 = ($v_0);
             delete parentNode.Shift1Finish;
         }
         $v_0 = parentNode.Shift1Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1W_1 = ($v_0);
+            this.$1a_1 = ($v_0);
             delete parentNode.Shift1Start;
         }
         $v_0 = parentNode.Shift2Finish;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1X_1 = ($v_0);
+            this.$1b_1 = ($v_0);
             delete parentNode.Shift2Finish;
         }
         $v_0 = parentNode.Shift2Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1Y_1 = ($v_0);
+            this.$1c_1 = ($v_0);
             delete parentNode.Shift2Start;
         }
         $v_0 = parentNode.Shift3Finish;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1Z_1 = ($v_0);
+            this.$1d_1 = ($v_0);
             delete parentNode.Shift3Finish;
         }
         $v_0 = parentNode.Shift3Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1a_1 = ($v_0);
+            this.$1e_1 = ($v_0);
             delete parentNode.Shift3Start;
         }
         $v_0 = parentNode.Shift4Finish;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1b_1 = ($v_0);
+            this.$1f_1 = ($v_0);
             delete parentNode.Shift4Finish;
         }
         $v_0 = parentNode.Shift4Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1c_1 = ($v_0);
+            this.$1g_1 = ($v_0);
             delete parentNode.Shift4Start;
         }
         $v_0 = parentNode.Shift5Finish;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1d_1 = ($v_0);
+            this.$1h_1 = ($v_0);
             delete parentNode.Shift5Finish;
         }
         $v_0 = parentNode.Shift5Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1e_1 = ($v_0);
+            this.$1i_1 = ($v_0);
             delete parentNode.Shift5Start;
         }
         $v_0 = parentNode.Start;
@@ -2269,9 +2280,9 @@ PS.CostRateCreationInformation = function PS_CostRateCreationInformation() {ULSy
 }
 PS.CostRateCreationInformation.prototype = {
     $d_1: 0,
-    $h_1: null,
-    $1E_1: 0,
-    $1j_1: 0,
+    $i_1: null,
+    $1I_1: 0,
+    $1o_1: 0,
     
     get_costPerUse: function PS_CostRateCreationInformation$get_costPerUse() {ULSyTi:;
         return this.$d_1;
@@ -2283,29 +2294,29 @@ PS.CostRateCreationInformation.prototype = {
     },
     
     get_effectiveDate: function PS_CostRateCreationInformation$get_effectiveDate() {ULSyTi:;
-        return this.$h_1;
+        return this.$i_1;
     },
     
     set_effectiveDate: function PS_CostRateCreationInformation$set_effectiveDate(value) {ULSyTi:;
-        this.$h_1 = value;
+        this.$i_1 = value;
         return value;
     },
     
     get_overtimeRate: function PS_CostRateCreationInformation$get_overtimeRate() {ULSyTi:;
-        return this.$1E_1;
+        return this.$1I_1;
     },
     
     set_overtimeRate: function PS_CostRateCreationInformation$set_overtimeRate(value) {ULSyTi:;
-        this.$1E_1 = value;
+        this.$1I_1 = value;
         return value;
     },
     
     get_standardRate: function PS_CostRateCreationInformation$get_standardRate() {ULSyTi:;
-        return this.$1j_1;
+        return this.$1o_1;
     },
     
     set_standardRate: function PS_CostRateCreationInformation$set_standardRate(value) {ULSyTi:;
-        this.$1j_1 = value;
+        this.$1o_1 = value;
         return value;
     },
     
@@ -2335,17 +2346,17 @@ PS.CostRateCreationInformation.prototype = {
         }
         $v_0 = parentNode.EffectiveDate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$h_1 = ($v_0);
+            this.$i_1 = ($v_0);
             delete parentNode.EffectiveDate;
         }
         $v_0 = parentNode.OvertimeRate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1E_1 = ($v_0);
+            this.$1I_1 = ($v_0);
             delete parentNode.OvertimeRate;
         }
         $v_0 = parentNode.StandardRate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1j_1 = ($v_0);
+            this.$1o_1 = ($v_0);
             delete parentNode.StandardRate;
         }
     }
@@ -2403,6 +2414,45 @@ PS.CustomField.prototype = {
         this.get_objectData().get_properties()['Formula'] = value;
         if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Formula', value));
+        }
+        return value;
+    },
+    
+    get_graphicalIndicatorNonSummary: function PS_CustomField$get_graphicalIndicatorNonSummary() {ULSyTi:;
+        this.checkUninitializedProperty('GraphicalIndicatorNonSummary');
+        return ((this.get_objectData().get_properties()['GraphicalIndicatorNonSummary']));
+    },
+    
+    set_graphicalIndicatorNonSummary: function PS_CustomField$set_graphicalIndicatorNonSummary(value) {ULSyTi:;
+        this.get_objectData().get_properties()['GraphicalIndicatorNonSummary'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'GraphicalIndicatorNonSummary', value));
+        }
+        return value;
+    },
+    
+    get_graphicalIndicatorProjectSummary: function PS_CustomField$get_graphicalIndicatorProjectSummary() {ULSyTi:;
+        this.checkUninitializedProperty('GraphicalIndicatorProjectSummary');
+        return ((this.get_objectData().get_properties()['GraphicalIndicatorProjectSummary']));
+    },
+    
+    set_graphicalIndicatorProjectSummary: function PS_CustomField$set_graphicalIndicatorProjectSummary(value) {ULSyTi:;
+        this.get_objectData().get_properties()['GraphicalIndicatorProjectSummary'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'GraphicalIndicatorProjectSummary', value));
+        }
+        return value;
+    },
+    
+    get_graphicalIndicatorSummary: function PS_CustomField$get_graphicalIndicatorSummary() {ULSyTi:;
+        this.checkUninitializedProperty('GraphicalIndicatorSummary');
+        return ((this.get_objectData().get_properties()['GraphicalIndicatorSummary']));
+    },
+    
+    set_graphicalIndicatorSummary: function PS_CustomField$set_graphicalIndicatorSummary(value) {ULSyTi:;
+        this.get_objectData().get_properties()['GraphicalIndicatorSummary'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'GraphicalIndicatorSummary', value));
         }
         return value;
     },
@@ -2573,6 +2623,19 @@ PS.CustomField.prototype = {
         return value;
     },
     
+    get_showToolTip: function PS_CustomField$get_showToolTip() {ULSyTi:;
+        this.checkUninitializedProperty('ShowToolTip');
+        return ((this.get_objectData().get_properties()['ShowToolTip']));
+    },
+    
+    set_showToolTip: function PS_CustomField$set_showToolTip(value) {ULSyTi:;
+        this.get_objectData().get_properties()['ShowToolTip'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ShowToolTip', value));
+        }
+        return value;
+    },
+    
     get_useFieldForMatching: function PS_CustomField$get_useFieldForMatching() {ULSyTi:;
         this.checkUninitializedProperty('UseFieldForMatching');
         return ((this.get_objectData().get_properties()['UseFieldForMatching']));
@@ -2619,6 +2682,21 @@ PS.CustomField.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['Formula'] = ($v_0);
             delete parentNode.Formula;
+        }
+        $v_0 = parentNode.GraphicalIndicatorNonSummary;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['GraphicalIndicatorNonSummary'] = ($v_0);
+            delete parentNode.GraphicalIndicatorNonSummary;
+        }
+        $v_0 = parentNode.GraphicalIndicatorProjectSummary;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['GraphicalIndicatorProjectSummary'] = ($v_0);
+            delete parentNode.GraphicalIndicatorProjectSummary;
+        }
+        $v_0 = parentNode.GraphicalIndicatorSummary;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['GraphicalIndicatorSummary'] = ($v_0);
+            delete parentNode.GraphicalIndicatorSummary;
         }
         $v_0 = parentNode.Id;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -2691,6 +2769,11 @@ PS.CustomField.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['RollupType'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
             delete parentNode.RollupType;
+        }
+        $v_0 = parentNode.ShowToolTip;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ShowToolTip'] = ($v_0);
+            delete parentNode.ShowToolTip;
         }
         $v_0 = parentNode.UseFieldForMatching;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -2826,20 +2909,24 @@ PS.CustomFieldCreationInformation = function PS_CustomFieldCreationInformation()
 }
 PS.CustomFieldCreationInformation.prototype = {
     $2_1: null,
-    $21_1: null,
-    $n_1: 0,
-    $o_1: null,
+    $26_1: null,
+    $o_1: 0,
+    $p_1: null,
+    $q_1: null,
+    $r_1: null,
+    $s_1: null,
     $0_1: null,
-    $w_1: false,
-    $z_1: false,
-    $12_1: false,
+    $10_1: false,
     $13_1: false,
-    $14_1: false,
+    $16_1: false,
     $17_1: false,
-    $18_1: null,
-    $22_1: null,
+    $18_1: false,
+    $1B_1: false,
+    $1C_1: null,
+    $27_1: null,
     $1_1: null,
-    $1r_1: false,
+    $1j_1: false,
+    $1w_1: false,
     
     get_description: function PS_CustomFieldCreationInformation$get_description() {ULSyTi:;
         return this.$2_1;
@@ -2851,29 +2938,56 @@ PS.CustomFieldCreationInformation.prototype = {
     },
     
     get_entityType: function PS_CustomFieldCreationInformation$get_entityType() {ULSyTi:;
-        return this.$21_1;
+        return this.$26_1;
     },
     
     set_entityType: function PS_CustomFieldCreationInformation$set_entityType(value) {ULSyTi:;
-        this.$21_1 = value;
+        this.$26_1 = value;
         return value;
     },
     
     get_fieldType: function PS_CustomFieldCreationInformation$get_fieldType() {ULSyTi:;
-        return this.$n_1;
+        return this.$o_1;
     },
     
     set_fieldType: function PS_CustomFieldCreationInformation$set_fieldType(value) {ULSyTi:;
-        this.$n_1 = value;
+        this.$o_1 = value;
         return value;
     },
     
     get_formula: function PS_CustomFieldCreationInformation$get_formula() {ULSyTi:;
-        return this.$o_1;
+        return this.$p_1;
     },
     
     set_formula: function PS_CustomFieldCreationInformation$set_formula(value) {ULSyTi:;
-        this.$o_1 = value;
+        this.$p_1 = value;
+        return value;
+    },
+    
+    get_graphicalIndicatorNonSummary: function PS_CustomFieldCreationInformation$get_graphicalIndicatorNonSummary() {ULSyTi:;
+        return this.$q_1;
+    },
+    
+    set_graphicalIndicatorNonSummary: function PS_CustomFieldCreationInformation$set_graphicalIndicatorNonSummary(value) {ULSyTi:;
+        this.$q_1 = value;
+        return value;
+    },
+    
+    get_graphicalIndicatorProjectSummary: function PS_CustomFieldCreationInformation$get_graphicalIndicatorProjectSummary() {ULSyTi:;
+        return this.$r_1;
+    },
+    
+    set_graphicalIndicatorProjectSummary: function PS_CustomFieldCreationInformation$set_graphicalIndicatorProjectSummary(value) {ULSyTi:;
+        this.$r_1 = value;
+        return value;
+    },
+    
+    get_graphicalIndicatorSummary: function PS_CustomFieldCreationInformation$get_graphicalIndicatorSummary() {ULSyTi:;
+        return this.$s_1;
+    },
+    
+    set_graphicalIndicatorSummary: function PS_CustomFieldCreationInformation$set_graphicalIndicatorSummary(value) {ULSyTi:;
+        this.$s_1 = value;
         return value;
     },
     
@@ -2887,74 +3001,74 @@ PS.CustomFieldCreationInformation.prototype = {
     },
     
     get_isEditableInVisibility: function PS_CustomFieldCreationInformation$get_isEditableInVisibility() {ULSyTi:;
-        return this.$w_1;
+        return this.$10_1;
     },
     
     set_isEditableInVisibility: function PS_CustomFieldCreationInformation$set_isEditableInVisibility(value) {ULSyTi:;
-        this.$w_1 = value;
+        this.$10_1 = value;
         return value;
     },
     
     get_isLeafOnly: function PS_CustomFieldCreationInformation$get_isLeafOnly() {ULSyTi:;
-        return this.$z_1;
-    },
-    
-    set_isLeafOnly: function PS_CustomFieldCreationInformation$set_isLeafOnly(value) {ULSyTi:;
-        this.$z_1 = value;
-        return value;
-    },
-    
-    get_isMultilineText: function PS_CustomFieldCreationInformation$get_isMultilineText() {ULSyTi:;
-        return this.$12_1;
-    },
-    
-    set_isMultilineText: function PS_CustomFieldCreationInformation$set_isMultilineText(value) {ULSyTi:;
-        this.$12_1 = value;
-        return value;
-    },
-    
-    get_isRequired: function PS_CustomFieldCreationInformation$get_isRequired() {ULSyTi:;
         return this.$13_1;
     },
     
-    set_isRequired: function PS_CustomFieldCreationInformation$set_isRequired(value) {ULSyTi:;
+    set_isLeafOnly: function PS_CustomFieldCreationInformation$set_isLeafOnly(value) {ULSyTi:;
         this.$13_1 = value;
         return value;
     },
     
-    get_isWorkflowControlled: function PS_CustomFieldCreationInformation$get_isWorkflowControlled() {ULSyTi:;
-        return this.$14_1;
+    get_isMultilineText: function PS_CustomFieldCreationInformation$get_isMultilineText() {ULSyTi:;
+        return this.$16_1;
     },
     
-    set_isWorkflowControlled: function PS_CustomFieldCreationInformation$set_isWorkflowControlled(value) {ULSyTi:;
-        this.$14_1 = value;
+    set_isMultilineText: function PS_CustomFieldCreationInformation$set_isMultilineText(value) {ULSyTi:;
+        this.$16_1 = value;
         return value;
     },
     
-    get_lookupAllowMultiSelect: function PS_CustomFieldCreationInformation$get_lookupAllowMultiSelect() {ULSyTi:;
+    get_isRequired: function PS_CustomFieldCreationInformation$get_isRequired() {ULSyTi:;
         return this.$17_1;
     },
     
-    set_lookupAllowMultiSelect: function PS_CustomFieldCreationInformation$set_lookupAllowMultiSelect(value) {ULSyTi:;
+    set_isRequired: function PS_CustomFieldCreationInformation$set_isRequired(value) {ULSyTi:;
         this.$17_1 = value;
         return value;
     },
     
-    get_lookupDefaultValue: function PS_CustomFieldCreationInformation$get_lookupDefaultValue() {ULSyTi:;
+    get_isWorkflowControlled: function PS_CustomFieldCreationInformation$get_isWorkflowControlled() {ULSyTi:;
         return this.$18_1;
     },
     
-    set_lookupDefaultValue: function PS_CustomFieldCreationInformation$set_lookupDefaultValue(value) {ULSyTi:;
+    set_isWorkflowControlled: function PS_CustomFieldCreationInformation$set_isWorkflowControlled(value) {ULSyTi:;
         this.$18_1 = value;
         return value;
     },
     
+    get_lookupAllowMultiSelect: function PS_CustomFieldCreationInformation$get_lookupAllowMultiSelect() {ULSyTi:;
+        return this.$1B_1;
+    },
+    
+    set_lookupAllowMultiSelect: function PS_CustomFieldCreationInformation$set_lookupAllowMultiSelect(value) {ULSyTi:;
+        this.$1B_1 = value;
+        return value;
+    },
+    
+    get_lookupDefaultValue: function PS_CustomFieldCreationInformation$get_lookupDefaultValue() {ULSyTi:;
+        return this.$1C_1;
+    },
+    
+    set_lookupDefaultValue: function PS_CustomFieldCreationInformation$set_lookupDefaultValue(value) {ULSyTi:;
+        this.$1C_1 = value;
+        return value;
+    },
+    
     get_lookupTable: function PS_CustomFieldCreationInformation$get_lookupTable() {ULSyTi:;
-        return this.$22_1;
+        return this.$27_1;
     },
     
     set_lookupTable: function PS_CustomFieldCreationInformation$set_lookupTable(value) {ULSyTi:;
-        this.$22_1 = value;
+        this.$27_1 = value;
         return value;
     },
     
@@ -2967,12 +3081,21 @@ PS.CustomFieldCreationInformation.prototype = {
         return value;
     },
     
+    get_showToolTip: function PS_CustomFieldCreationInformation$get_showToolTip() {ULSyTi:;
+        return this.$1j_1;
+    },
+    
+    set_showToolTip: function PS_CustomFieldCreationInformation$set_showToolTip(value) {ULSyTi:;
+        this.$1j_1 = value;
+        return value;
+    },
+    
     get_useFieldForMatching: function PS_CustomFieldCreationInformation$get_useFieldForMatching() {ULSyTi:;
-        return this.$1r_1;
+        return this.$1w_1;
     },
     
     set_useFieldForMatching: function PS_CustomFieldCreationInformation$set_useFieldForMatching(value) {ULSyTi:;
-        this.$1r_1 = value;
+        this.$1w_1 = value;
         return value;
     },
     
@@ -2987,7 +3110,7 @@ PS.CustomFieldCreationInformation.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'Description', 'EntityType', 'FieldType', 'Formula', 'Id', 'IsEditableInVisibility', 'IsLeafOnly', 'IsMultilineText', 'IsRequired', 'IsWorkflowControlled', 'LookupAllowMultiSelect', 'LookupDefaultValue', 'LookupTable', 'Name', 'UseFieldForMatching' ];
+        var $v_0 = [ 'Description', 'EntityType', 'FieldType', 'Formula', 'GraphicalIndicatorNonSummary', 'GraphicalIndicatorProjectSummary', 'GraphicalIndicatorSummary', 'Id', 'IsEditableInVisibility', 'IsLeafOnly', 'IsMultilineText', 'IsRequired', 'IsWorkflowControlled', 'LookupAllowMultiSelect', 'LookupDefaultValue', 'LookupTable', 'Name', 'ShowToolTip', 'UseFieldForMatching' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -3006,13 +3129,28 @@ PS.CustomFieldCreationInformation.prototype = {
         }
         $v_0 = parentNode.FieldType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$n_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$o_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.FieldType;
         }
         $v_0 = parentNode.Formula;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$o_1 = ($v_0);
+            this.$p_1 = ($v_0);
             delete parentNode.Formula;
+        }
+        $v_0 = parentNode.GraphicalIndicatorNonSummary;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$q_1 = ($v_0);
+            delete parentNode.GraphicalIndicatorNonSummary;
+        }
+        $v_0 = parentNode.GraphicalIndicatorProjectSummary;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$r_1 = ($v_0);
+            delete parentNode.GraphicalIndicatorProjectSummary;
+        }
+        $v_0 = parentNode.GraphicalIndicatorSummary;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$s_1 = ($v_0);
+            delete parentNode.GraphicalIndicatorSummary;
         }
         $v_0 = parentNode.Id;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -3021,37 +3159,37 @@ PS.CustomFieldCreationInformation.prototype = {
         }
         $v_0 = parentNode.IsEditableInVisibility;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$w_1 = ($v_0);
+            this.$10_1 = ($v_0);
             delete parentNode.IsEditableInVisibility;
         }
         $v_0 = parentNode.IsLeafOnly;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$z_1 = ($v_0);
+            this.$13_1 = ($v_0);
             delete parentNode.IsLeafOnly;
         }
         $v_0 = parentNode.IsMultilineText;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$12_1 = ($v_0);
+            this.$16_1 = ($v_0);
             delete parentNode.IsMultilineText;
         }
         $v_0 = parentNode.IsRequired;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$13_1 = ($v_0);
+            this.$17_1 = ($v_0);
             delete parentNode.IsRequired;
         }
         $v_0 = parentNode.IsWorkflowControlled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$14_1 = ($v_0);
+            this.$18_1 = ($v_0);
             delete parentNode.IsWorkflowControlled;
         }
         $v_0 = parentNode.LookupAllowMultiSelect;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$17_1 = ($v_0);
+            this.$1B_1 = ($v_0);
             delete parentNode.LookupAllowMultiSelect;
         }
         $v_0 = parentNode.LookupDefaultValue;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$18_1 = ($v_0);
+            this.$1C_1 = ($v_0);
             delete parentNode.LookupDefaultValue;
         }
         $v_0 = parentNode.LookupTable;
@@ -3063,9 +3201,14 @@ PS.CustomFieldCreationInformation.prototype = {
             this.$1_1 = ($v_0);
             delete parentNode.Name;
         }
+        $v_0 = parentNode.ShowToolTip;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$1j_1 = ($v_0);
+            delete parentNode.ShowToolTip;
+        }
         $v_0 = parentNode.UseFieldForMatching;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1r_1 = ($v_0);
+            this.$1w_1 = ($v_0);
             delete parentNode.UseFieldForMatching;
         }
     }
@@ -4270,6 +4413,19 @@ PS.DraftProject.prototype = {
         return value;
     },
     
+    get_scheduledFromStart: function PS_DraftProject$get_scheduledFromStart() {ULSyTi:;
+        this.checkUninitializedProperty('ScheduledFromStart');
+        return ((this.get_objectData().get_properties()['ScheduledFromStart']));
+    },
+    
+    set_scheduledFromStart: function PS_DraftProject$set_scheduledFromStart(value) {ULSyTi:;
+        this.get_objectData().get_properties()['ScheduledFromStart'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ScheduledFromStart', value));
+        }
+        return value;
+    },
+    
     get_showEstimatedDurations: function PS_DraftProject$get_showEstimatedDurations() {ULSyTi:;
         this.checkUninitializedProperty('ShowEstimatedDurations');
         return ((this.get_objectData().get_properties()['ShowEstimatedDurations']));
@@ -4544,6 +4700,11 @@ PS.DraftProject.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['ProtectedActualsSynch'] = ($v_0);
             delete parentNode.ProtectedActualsSynch;
+        }
+        $v_0 = parentNode.ScheduledFromStart;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ScheduledFromStart'] = ($v_0);
+            delete parentNode.ScheduledFromStart;
         }
         $v_0 = parentNode.ShowEstimatedDurations;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -6957,6 +7118,11 @@ PS.EnterpriseProjectType = function PS_EnterpriseProjectType(context, objectPath
 }
 PS.EnterpriseProjectType.prototype = {
     
+    get_departments: function PS_EnterpriseProjectType$get_departments() {ULSyTi:;
+        this.checkUninitializedProperty('Departments');
+        return ((this.get_objectData().get_properties()['Departments']));
+    },
+    
     get_description: function PS_EnterpriseProjectType$get_description() {ULSyTi:;
         this.checkUninitializedProperty('Description');
         return ((this.get_objectData().get_properties()['Description']));
@@ -7169,6 +7335,11 @@ PS.EnterpriseProjectType.prototype = {
     initPropertiesFromJson: function PS_EnterpriseProjectType$initPropertiesFromJson(parentNode) {ULSyTi:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
+        $v_0 = parentNode.Departments;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['Departments'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.Departments;
+        }
         $v_0 = parentNode.Description;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['Description'] = ($v_0);
@@ -7257,11 +7428,29 @@ PS.EnterpriseProjectType.prototype = {
         }
     },
     
+    addDepartment: function PS_EnterpriseProjectType$addDepartment(departmentValueGuid) {ULSyTi:;
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'AddDepartment', [ departmentValueGuid ]);
+        $v_0.addQuery($v_1);
+    },
+    
+    removeDepartment: function PS_EnterpriseProjectType$removeDepartment(departmentValueGuid) {ULSyTi:;
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'RemoveDepartment', [ departmentValueGuid ]);
+        $v_0.addQuery($v_1);
+    },
+    
     deleteObject: function PS_EnterpriseProjectType$deleteObject() {ULSyTi:;
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteObject', null);
         $v_0.addQuery($v_1);
         this.removeFromParentCollection();
+    },
+    
+    updateCreatePDP: function PS_EnterpriseProjectType$updateCreatePDP(pdp) {ULSyTi:;
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'UpdateCreatePDP', [ pdp ]);
+        $v_0.addQuery($v_1);
     }
 }
 
@@ -7364,23 +7553,33 @@ PS.EnterpriseProjectTypeCreationInformation = function PS_EnterpriseProjectTypeC
     PS.EnterpriseProjectTypeCreationInformation.initializeBase(this);
 }
 PS.EnterpriseProjectTypeCreationInformation.prototype = {
+    $f_1: null,
     $2_1: null,
     $0_1: null,
-    $r_1: null,
-    $v_1: false,
-    $10_1: false,
+    $v_1: null,
+    $z_1: false,
+    $14_1: false,
     $1_1: null,
     $F_1: 0,
-    $1G_1: false,
+    $1K_1: false,
     $B_1: null,
-    $1J_1: null,
-    $1f_1: 0,
-    $1g_1: null,
-    $1o_1: false,
-    $1t_1: null,
-    $1u_1: null,
-    $1w_1: 0,
-    $1x_1: null,
+    $1N_1: null,
+    $1k_1: 0,
+    $1l_1: null,
+    $1t_1: false,
+    $1y_1: null,
+    $1z_1: null,
+    $21_1: 0,
+    $22_1: null,
+    
+    get_departmentIds: function PS_EnterpriseProjectTypeCreationInformation$get_departmentIds() {ULSyTi:;
+        return this.$f_1;
+    },
+    
+    set_departmentIds: function PS_EnterpriseProjectTypeCreationInformation$set_departmentIds(value) {ULSyTi:;
+        this.$f_1 = value;
+        return value;
+    },
     
     get_description: function PS_EnterpriseProjectTypeCreationInformation$get_description() {ULSyTi:;
         return this.$2_1;
@@ -7401,29 +7600,29 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
     },
     
     get_imageUrl: function PS_EnterpriseProjectTypeCreationInformation$get_imageUrl() {ULSyTi:;
-        return this.$r_1;
-    },
-    
-    set_imageUrl: function PS_EnterpriseProjectTypeCreationInformation$set_imageUrl(value) {ULSyTi:;
-        this.$r_1 = value;
-        return value;
-    },
-    
-    get_isDefault: function PS_EnterpriseProjectTypeCreationInformation$get_isDefault() {ULSyTi:;
         return this.$v_1;
     },
     
-    set_isDefault: function PS_EnterpriseProjectTypeCreationInformation$set_isDefault(value) {ULSyTi:;
+    set_imageUrl: function PS_EnterpriseProjectTypeCreationInformation$set_imageUrl(value) {ULSyTi:;
         this.$v_1 = value;
         return value;
     },
     
+    get_isDefault: function PS_EnterpriseProjectTypeCreationInformation$get_isDefault() {ULSyTi:;
+        return this.$z_1;
+    },
+    
+    set_isDefault: function PS_EnterpriseProjectTypeCreationInformation$set_isDefault(value) {ULSyTi:;
+        this.$z_1 = value;
+        return value;
+    },
+    
     get_isManaged: function PS_EnterpriseProjectTypeCreationInformation$get_isManaged() {ULSyTi:;
-        return this.$10_1;
+        return this.$14_1;
     },
     
     set_isManaged: function PS_EnterpriseProjectTypeCreationInformation$set_isManaged(value) {ULSyTi:;
-        this.$10_1 = value;
+        this.$14_1 = value;
         return value;
     },
     
@@ -7446,11 +7645,11 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
     },
     
     get_permissionSyncEnable: function PS_EnterpriseProjectTypeCreationInformation$get_permissionSyncEnable() {ULSyTi:;
-        return this.$1G_1;
+        return this.$1K_1;
     },
     
     set_permissionSyncEnable: function PS_EnterpriseProjectTypeCreationInformation$set_permissionSyncEnable(value) {ULSyTi:;
-        this.$1G_1 = value;
+        this.$1K_1 = value;
         return value;
     },
     
@@ -7464,74 +7663,74 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
     },
     
     get_projectPlanTemplateId: function PS_EnterpriseProjectTypeCreationInformation$get_projectPlanTemplateId() {ULSyTi:;
-        return this.$1J_1;
+        return this.$1N_1;
     },
     
     set_projectPlanTemplateId: function PS_EnterpriseProjectTypeCreationInformation$set_projectPlanTemplateId(value) {ULSyTi:;
-        this.$1J_1 = value;
+        this.$1N_1 = value;
         return value;
     },
     
     get_siteCreationOption: function PS_EnterpriseProjectTypeCreationInformation$get_siteCreationOption() {ULSyTi:;
-        return this.$1f_1;
+        return this.$1k_1;
     },
     
     set_siteCreationOption: function PS_EnterpriseProjectTypeCreationInformation$set_siteCreationOption(value) {ULSyTi:;
-        this.$1f_1 = value;
+        this.$1k_1 = value;
         return value;
     },
     
     get_siteCreationURL: function PS_EnterpriseProjectTypeCreationInformation$get_siteCreationURL() {ULSyTi:;
-        return this.$1g_1;
+        return this.$1l_1;
     },
     
     set_siteCreationURL: function PS_EnterpriseProjectTypeCreationInformation$set_siteCreationURL(value) {ULSyTi:;
-        this.$1g_1 = value;
+        this.$1l_1 = value;
         return value;
     },
     
     get_taskListSyncEnable: function PS_EnterpriseProjectTypeCreationInformation$get_taskListSyncEnable() {ULSyTi:;
-        return this.$1o_1;
-    },
-    
-    set_taskListSyncEnable: function PS_EnterpriseProjectTypeCreationInformation$set_taskListSyncEnable(value) {ULSyTi:;
-        this.$1o_1 = value;
-        return value;
-    },
-    
-    get_workflowAssociationId: function PS_EnterpriseProjectTypeCreationInformation$get_workflowAssociationId() {ULSyTi:;
         return this.$1t_1;
     },
     
-    set_workflowAssociationId: function PS_EnterpriseProjectTypeCreationInformation$set_workflowAssociationId(value) {ULSyTi:;
+    set_taskListSyncEnable: function PS_EnterpriseProjectTypeCreationInformation$set_taskListSyncEnable(value) {ULSyTi:;
         this.$1t_1 = value;
         return value;
     },
     
+    get_workflowAssociationId: function PS_EnterpriseProjectTypeCreationInformation$get_workflowAssociationId() {ULSyTi:;
+        return this.$1y_1;
+    },
+    
+    set_workflowAssociationId: function PS_EnterpriseProjectTypeCreationInformation$set_workflowAssociationId(value) {ULSyTi:;
+        this.$1y_1 = value;
+        return value;
+    },
+    
     get_workflowAssociationName: function PS_EnterpriseProjectTypeCreationInformation$get_workflowAssociationName() {ULSyTi:;
-        return this.$1u_1;
+        return this.$1z_1;
     },
     
     set_workflowAssociationName: function PS_EnterpriseProjectTypeCreationInformation$set_workflowAssociationName(value) {ULSyTi:;
-        this.$1u_1 = value;
+        this.$1z_1 = value;
         return value;
     },
     
     get_workspaceTemplateLCID: function PS_EnterpriseProjectTypeCreationInformation$get_workspaceTemplateLCID() {ULSyTi:;
-        return this.$1w_1;
+        return this.$21_1;
     },
     
     set_workspaceTemplateLCID: function PS_EnterpriseProjectTypeCreationInformation$set_workspaceTemplateLCID(value) {ULSyTi:;
-        this.$1w_1 = value;
+        this.$21_1 = value;
         return value;
     },
     
     get_workspaceTemplateName: function PS_EnterpriseProjectTypeCreationInformation$get_workspaceTemplateName() {ULSyTi:;
-        return this.$1x_1;
+        return this.$22_1;
     },
     
     set_workspaceTemplateName: function PS_EnterpriseProjectTypeCreationInformation$set_workspaceTemplateName(value) {ULSyTi:;
-        this.$1x_1 = value;
+        this.$22_1 = value;
         return value;
     },
     
@@ -7546,7 +7745,7 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'Description', 'Id', 'ImageUrl', 'IsDefault', 'IsManaged', 'Name', 'Order', 'PermissionSyncEnable', 'ProjectDetailPages', 'ProjectPlanTemplateId', 'SiteCreationOption', 'SiteCreationURL', 'TaskListSyncEnable', 'WorkflowAssociationId', 'WorkflowAssociationName', 'WorkspaceTemplateLCID', 'WorkspaceTemplateName' ];
+        var $v_0 = [ 'DepartmentIds', 'Description', 'Id', 'ImageUrl', 'IsDefault', 'IsManaged', 'Name', 'Order', 'PermissionSyncEnable', 'ProjectDetailPages', 'ProjectPlanTemplateId', 'SiteCreationOption', 'SiteCreationURL', 'TaskListSyncEnable', 'WorkflowAssociationId', 'WorkflowAssociationName', 'WorkspaceTemplateLCID', 'WorkspaceTemplateName' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -7554,6 +7753,11 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
     initPropertiesFromJson: function PS_EnterpriseProjectTypeCreationInformation$initPropertiesFromJson(parentNode) {ULSyTi:;
         SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
+        $v_0 = parentNode.DepartmentIds;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$f_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.DepartmentIds;
+        }
         $v_0 = parentNode.Description;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$2_1 = ($v_0);
@@ -7566,17 +7770,17 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
         }
         $v_0 = parentNode.ImageUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$r_1 = ($v_0);
+            this.$v_1 = ($v_0);
             delete parentNode.ImageUrl;
         }
         $v_0 = parentNode.IsDefault;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$v_1 = ($v_0);
+            this.$z_1 = ($v_0);
             delete parentNode.IsDefault;
         }
         $v_0 = parentNode.IsManaged;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$10_1 = ($v_0);
+            this.$14_1 = ($v_0);
             delete parentNode.IsManaged;
         }
         $v_0 = parentNode.Name;
@@ -7591,7 +7795,7 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
         }
         $v_0 = parentNode.PermissionSyncEnable;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1G_1 = ($v_0);
+            this.$1K_1 = ($v_0);
             delete parentNode.PermissionSyncEnable;
         }
         $v_0 = parentNode.ProjectDetailPages;
@@ -7602,42 +7806,42 @@ PS.EnterpriseProjectTypeCreationInformation.prototype = {
         }
         $v_0 = parentNode.ProjectPlanTemplateId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1J_1 = ($v_0);
+            this.$1N_1 = ($v_0);
             delete parentNode.ProjectPlanTemplateId;
         }
         $v_0 = parentNode.SiteCreationOption;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1f_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1k_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.SiteCreationOption;
         }
         $v_0 = parentNode.SiteCreationURL;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1g_1 = ($v_0);
+            this.$1l_1 = ($v_0);
             delete parentNode.SiteCreationURL;
         }
         $v_0 = parentNode.TaskListSyncEnable;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1o_1 = ($v_0);
+            this.$1t_1 = ($v_0);
             delete parentNode.TaskListSyncEnable;
         }
         $v_0 = parentNode.WorkflowAssociationId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1t_1 = ($v_0);
+            this.$1y_1 = ($v_0);
             delete parentNode.WorkflowAssociationId;
         }
         $v_0 = parentNode.WorkflowAssociationName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1u_1 = ($v_0);
+            this.$1z_1 = ($v_0);
             delete parentNode.WorkflowAssociationName;
         }
         $v_0 = parentNode.WorkspaceTemplateLCID;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1w_1 = ($v_0);
+            this.$21_1 = ($v_0);
             delete parentNode.WorkspaceTemplateLCID;
         }
         $v_0 = parentNode.WorkspaceTemplateName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1x_1 = ($v_0);
+            this.$22_1 = ($v_0);
             delete parentNode.WorkspaceTemplateName;
         }
     }
@@ -8287,6 +8491,12 @@ PS.EnterpriseResource.prototype = {
         }
     },
     
+    updateClaimsAccount: function PS_EnterpriseResource$updateClaimsAccount(newClaimsAccount) {ULSyTi:;
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'UpdateClaimsAccount', [ newClaimsAccount ]);
+        $v_0.addQuery($v_1);
+    },
+    
     $K_1: function PS_EnterpriseResource$$K_1($p0, $p1) {
         var $v_0 = this.get_context();
         this.get_fieldValues()[$p0] = $p1;
@@ -8623,30 +8833,30 @@ PS.EnterpriseResourceCreationInformation = function PS_EnterpriseResourceCreatio
     PS.EnterpriseResourceCreationInformation.initializeBase(this);
 }
 PS.EnterpriseResourceCreationInformation.prototype = {
-    $p_1: null,
-    $q_1: null,
+    $t_1: null,
+    $u_1: null,
     $0_1: null,
-    $t_1: false,
     $x_1: false,
-    $y_1: false,
+    $11_1: false,
+    $12_1: false,
     $1_1: null,
-    $1T_1: 0,
+    $1X_1: 0,
     
     get_hyperlinkName: function PS_EnterpriseResourceCreationInformation$get_hyperlinkName() {ULSyTi:;
-        return this.$p_1;
+        return this.$t_1;
     },
     
     set_hyperlinkName: function PS_EnterpriseResourceCreationInformation$set_hyperlinkName(value) {ULSyTi:;
-        this.$p_1 = value;
+        this.$t_1 = value;
         return value;
     },
     
     get_hyperlinkUrl: function PS_EnterpriseResourceCreationInformation$get_hyperlinkUrl() {ULSyTi:;
-        return this.$q_1;
+        return this.$u_1;
     },
     
     set_hyperlinkUrl: function PS_EnterpriseResourceCreationInformation$set_hyperlinkUrl(value) {ULSyTi:;
-        this.$q_1 = value;
+        this.$u_1 = value;
         return value;
     },
     
@@ -8660,29 +8870,29 @@ PS.EnterpriseResourceCreationInformation.prototype = {
     },
     
     get_isBudget: function PS_EnterpriseResourceCreationInformation$get_isBudget() {ULSyTi:;
-        return this.$t_1;
-    },
-    
-    set_isBudget: function PS_EnterpriseResourceCreationInformation$set_isBudget(value) {ULSyTi:;
-        this.$t_1 = value;
-        return value;
-    },
-    
-    get_isGeneric: function PS_EnterpriseResourceCreationInformation$get_isGeneric() {ULSyTi:;
         return this.$x_1;
     },
     
-    set_isGeneric: function PS_EnterpriseResourceCreationInformation$set_isGeneric(value) {ULSyTi:;
+    set_isBudget: function PS_EnterpriseResourceCreationInformation$set_isBudget(value) {ULSyTi:;
         this.$x_1 = value;
         return value;
     },
     
+    get_isGeneric: function PS_EnterpriseResourceCreationInformation$get_isGeneric() {ULSyTi:;
+        return this.$11_1;
+    },
+    
+    set_isGeneric: function PS_EnterpriseResourceCreationInformation$set_isGeneric(value) {ULSyTi:;
+        this.$11_1 = value;
+        return value;
+    },
+    
     get_isInactive: function PS_EnterpriseResourceCreationInformation$get_isInactive() {ULSyTi:;
-        return this.$y_1;
+        return this.$12_1;
     },
     
     set_isInactive: function PS_EnterpriseResourceCreationInformation$set_isInactive(value) {ULSyTi:;
-        this.$y_1 = value;
+        this.$12_1 = value;
         return value;
     },
     
@@ -8696,11 +8906,11 @@ PS.EnterpriseResourceCreationInformation.prototype = {
     },
     
     get_resourceType: function PS_EnterpriseResourceCreationInformation$get_resourceType() {ULSyTi:;
-        return this.$1T_1;
+        return this.$1X_1;
     },
     
     set_resourceType: function PS_EnterpriseResourceCreationInformation$set_resourceType(value) {ULSyTi:;
-        this.$1T_1 = value;
+        this.$1X_1 = value;
         return value;
     },
     
@@ -8725,12 +8935,12 @@ PS.EnterpriseResourceCreationInformation.prototype = {
         var $v_0;
         $v_0 = parentNode.HyperlinkName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$p_1 = ($v_0);
+            this.$t_1 = ($v_0);
             delete parentNode.HyperlinkName;
         }
         $v_0 = parentNode.HyperlinkUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$q_1 = ($v_0);
+            this.$u_1 = ($v_0);
             delete parentNode.HyperlinkUrl;
         }
         $v_0 = parentNode.Id;
@@ -8740,17 +8950,17 @@ PS.EnterpriseResourceCreationInformation.prototype = {
         }
         $v_0 = parentNode.IsBudget;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$t_1 = ($v_0);
+            this.$x_1 = ($v_0);
             delete parentNode.IsBudget;
         }
         $v_0 = parentNode.IsGeneric;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$x_1 = ($v_0);
+            this.$11_1 = ($v_0);
             delete parentNode.IsGeneric;
         }
         $v_0 = parentNode.IsInactive;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$y_1 = ($v_0);
+            this.$12_1 = ($v_0);
             delete parentNode.IsInactive;
         }
         $v_0 = parentNode.Name;
@@ -8760,7 +8970,7 @@ PS.EnterpriseResourceCreationInformation.prototype = {
         }
         $v_0 = parentNode.ResourceType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1T_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1X_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.ResourceType;
         }
     }
@@ -9251,8 +9461,8 @@ PS.EventHandlerCreationInformation.prototype = {
     $X_1: null,
     $c_1: null,
     $2_1: null,
-    $k_1: null,
-    $m_1: 0,
+    $l_1: null,
+    $n_1: 0,
     $0_1: null,
     $1_1: null,
     $F_1: 0,
@@ -9285,20 +9495,20 @@ PS.EventHandlerCreationInformation.prototype = {
     },
     
     get_endpointUrl: function PS_EventHandlerCreationInformation$get_endpointUrl() {ULSyTi:;
-        return this.$k_1;
+        return this.$l_1;
     },
     
     set_endpointUrl: function PS_EventHandlerCreationInformation$set_endpointUrl(value) {ULSyTi:;
-        this.$k_1 = value;
+        this.$l_1 = value;
         return value;
     },
     
     get_eventId: function PS_EventHandlerCreationInformation$get_eventId() {ULSyTi:;
-        return this.$m_1;
+        return this.$n_1;
     },
     
     set_eventId: function PS_EventHandlerCreationInformation$set_eventId(value) {ULSyTi:;
-        this.$m_1 = value;
+        this.$n_1 = value;
         return value;
     },
     
@@ -9365,12 +9575,12 @@ PS.EventHandlerCreationInformation.prototype = {
         }
         $v_0 = parentNode.EndpointUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$k_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$l_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.EndpointUrl;
         }
         $v_0 = parentNode.EventId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$m_1 = ($v_0);
+            this.$n_1 = ($v_0);
             delete parentNode.EventId;
         }
         $v_0 = parentNode.Id;
@@ -9717,8 +9927,8 @@ PS.LookupEntryCreationInformation.prototype = {
     $2_1: null,
     $0_1: null,
     $9_1: null,
-    $1h_1: null,
-    $1s_1: null,
+    $1m_1: null,
+    $1x_1: null,
     
     get_description: function PS_LookupEntryCreationInformation$get_description() {ULSyTi:;
         return this.$2_1;
@@ -9748,20 +9958,20 @@ PS.LookupEntryCreationInformation.prototype = {
     },
     
     get_sortIndex: function PS_LookupEntryCreationInformation$get_sortIndex() {ULSyTi:;
-        return this.$1h_1;
+        return this.$1m_1;
     },
     
     set_sortIndex: function PS_LookupEntryCreationInformation$set_sortIndex(value) {ULSyTi:;
-        this.$1h_1 = value;
+        this.$1m_1 = value;
         return value;
     },
     
     get_value: function PS_LookupEntryCreationInformation$get_value() {ULSyTi:;
-        return this.$1s_1;
+        return this.$1x_1;
     },
     
     set_value: function PS_LookupEntryCreationInformation$set_value(value) {ULSyTi:;
-        this.$1s_1 = value;
+        this.$1x_1 = value;
         return value;
     },
     
@@ -9801,12 +10011,12 @@ PS.LookupEntryCreationInformation.prototype = {
         }
         $v_0 = parentNode.SortIndex;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1h_1 = ($v_0);
+            this.$1m_1 = ($v_0);
             delete parentNode.SortIndex;
         }
         $v_0 = parentNode.Value;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1s_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1x_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.Value;
         }
     }
@@ -9818,9 +10028,9 @@ PS.LookupEntryValue = function PS_LookupEntryValue() {ULSyTi:;
 }
 PS.LookupEntryValue.prototype = {
     $e_1: null,
-    $g_1: null,
-    $1C_1: null,
-    $1q_1: null,
+    $h_1: null,
+    $1G_1: null,
+    $1v_1: null,
     
     get_dateValue: function PS_LookupEntryValue$get_dateValue() {ULSyTi:;
         return this.$e_1;
@@ -9832,29 +10042,29 @@ PS.LookupEntryValue.prototype = {
     },
     
     get_durationValue: function PS_LookupEntryValue$get_durationValue() {ULSyTi:;
-        return this.$g_1;
+        return this.$h_1;
     },
     
     set_durationValue: function PS_LookupEntryValue$set_durationValue(value) {ULSyTi:;
-        this.$g_1 = value;
+        this.$h_1 = value;
         return value;
     },
     
     get_numberValue: function PS_LookupEntryValue$get_numberValue() {ULSyTi:;
-        return this.$1C_1;
+        return this.$1G_1;
     },
     
     set_numberValue: function PS_LookupEntryValue$set_numberValue(value) {ULSyTi:;
-        this.$1C_1 = value;
+        this.$1G_1 = value;
         return value;
     },
     
     get_textValue: function PS_LookupEntryValue$get_textValue() {ULSyTi:;
-        return this.$1q_1;
+        return this.$1v_1;
     },
     
     set_textValue: function PS_LookupEntryValue$set_textValue(value) {ULSyTi:;
-        this.$1q_1 = value;
+        this.$1v_1 = value;
         return value;
     },
     
@@ -9884,17 +10094,17 @@ PS.LookupEntryValue.prototype = {
         }
         $v_0 = parentNode.DurationValue;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$g_1 = ($v_0);
+            this.$h_1 = ($v_0);
             delete parentNode.DurationValue;
         }
         $v_0 = parentNode.NumberValue;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1C_1 = ($v_0);
+            this.$1G_1 = ($v_0);
             delete parentNode.NumberValue;
         }
         $v_0 = parentNode.TextValue;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1q_1 = ($v_0);
+            this.$1v_1 = ($v_0);
             delete parentNode.TextValue;
         }
     }
@@ -9905,34 +10115,34 @@ PS.LookupMask = function PS_LookupMask() {ULSyTi:;
     PS.LookupMask.initializeBase(this);
 }
 PS.LookupMask.prototype = {
-    $15_1: 0,
     $19_1: 0,
-    $1U_1: null,
+    $1D_1: 0,
+    $1Y_1: null,
     
     get_length: function PS_LookupMask$get_length() {ULSyTi:;
-        return this.$15_1;
-    },
-    
-    set_length: function PS_LookupMask$set_length(value) {ULSyTi:;
-        this.$15_1 = value;
-        return value;
-    },
-    
-    get_maskType: function PS_LookupMask$get_maskType() {ULSyTi:;
         return this.$19_1;
     },
     
-    set_maskType: function PS_LookupMask$set_maskType(value) {ULSyTi:;
+    set_length: function PS_LookupMask$set_length(value) {ULSyTi:;
         this.$19_1 = value;
         return value;
     },
     
+    get_maskType: function PS_LookupMask$get_maskType() {ULSyTi:;
+        return this.$1D_1;
+    },
+    
+    set_maskType: function PS_LookupMask$set_maskType(value) {ULSyTi:;
+        this.$1D_1 = value;
+        return value;
+    },
+    
     get_separator: function PS_LookupMask$get_separator() {ULSyTi:;
-        return this.$1U_1;
+        return this.$1Y_1;
     },
     
     set_separator: function PS_LookupMask$set_separator(value) {ULSyTi:;
-        this.$1U_1 = value;
+        this.$1Y_1 = value;
         return value;
     },
     
@@ -9957,17 +10167,17 @@ PS.LookupMask.prototype = {
         var $v_0;
         $v_0 = parentNode.Length;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$15_1 = ($v_0);
+            this.$19_1 = ($v_0);
             delete parentNode.Length;
         }
         $v_0 = parentNode.MaskType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$19_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1D_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.MaskType;
         }
         $v_0 = parentNode.Separator;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1U_1 = ($v_0);
+            this.$1Y_1 = ($v_0);
             delete parentNode.Separator;
         }
     }
@@ -10252,7 +10462,7 @@ PS.LookupTableCreationInformation.prototype = {
     $0_1: null,
     $P_1: null,
     $1_1: null,
-    $1i_1: 0,
+    $1n_1: 0,
     
     get_entries: function PS_LookupTableCreationInformation$get_entries() {ULSyTi:;
         return this.$N_1;
@@ -10291,11 +10501,11 @@ PS.LookupTableCreationInformation.prototype = {
     },
     
     get_sortOrder: function PS_LookupTableCreationInformation$get_sortOrder() {ULSyTi:;
-        return this.$1i_1;
+        return this.$1n_1;
     },
     
     set_sortOrder: function PS_LookupTableCreationInformation$set_sortOrder(value) {ULSyTi:;
-        this.$1i_1 = value;
+        this.$1n_1 = value;
         return value;
     },
     
@@ -10342,7 +10552,7 @@ PS.LookupTableCreationInformation.prototype = {
         }
         $v_0 = parentNode.SortOrder;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1i_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1n_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.SortOrder;
         }
     }
@@ -11306,7 +11516,7 @@ PS.PlanAssignmentIntervalCreationInformation = function PS_PlanAssignmentInterva
 }
 PS.PlanAssignmentIntervalCreationInformation.prototype = {
     $C_1: null,
-    $s_1: null,
+    $w_1: null,
     
     get_duration: function PS_PlanAssignmentIntervalCreationInformation$get_duration() {ULSyTi:;
         return this.$C_1;
@@ -11318,11 +11528,11 @@ PS.PlanAssignmentIntervalCreationInformation.prototype = {
     },
     
     get_interval: function PS_PlanAssignmentIntervalCreationInformation$get_interval() {ULSyTi:;
-        return this.$s_1;
+        return this.$w_1;
     },
     
     set_interval: function PS_PlanAssignmentIntervalCreationInformation$set_interval(value) {ULSyTi:;
-        this.$s_1 = value;
+        this.$w_1 = value;
         return value;
     },
     
@@ -11352,7 +11562,7 @@ PS.PlanAssignmentIntervalCreationInformation.prototype = {
         }
         $v_0 = parentNode.Interval;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$s_1 = ($v_0);
+            this.$w_1 = ($v_0);
             delete parentNode.Interval;
         }
     }
@@ -11570,11 +11780,6 @@ PS.Project.prototype = {
             this.get_objectData().get_clientObjectProperties()['QueueJobs'] = $v_0;
         }
         return $v_0;
-    },
-    
-    get_scheduledFromStart: function PS_Project$get_scheduledFromStart() {ULSyTi:;
-        this.checkUninitializedProperty('ScheduledFromStart');
-        return ((this.get_objectData().get_properties()['ScheduledFromStart']));
     },
     
     get_splitInProgress: function PS_Project$get_splitInProgress() {ULSyTi:;
@@ -11801,11 +12006,6 @@ PS.Project.prototype = {
             this.get_queueJobs().fromJson($v_0);
             delete parentNode.QueueJobs;
         }
-        $v_0 = parentNode.ScheduledFromStart;
-        if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.get_objectData().get_properties()['ScheduledFromStart'] = ($v_0);
-            delete parentNode.ScheduledFromStart;
-        }
         $v_0 = parentNode.SplitInProgress;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['SplitInProgress'] = ($v_0);
@@ -11994,11 +12194,11 @@ PS.ProjectCreationInformation = function PS_ProjectCreationInformation() {ULSyTi
 }
 PS.ProjectCreationInformation.prototype = {
     $2_1: null,
-    $l_1: null,
+    $m_1: null,
     $0_1: null,
     $1_1: null,
     $3_1: null,
-    $25_1: null,
+    $2A_1: null,
     
     get_description: function PS_ProjectCreationInformation$get_description() {ULSyTi:;
         return this.$2_1;
@@ -12010,11 +12210,11 @@ PS.ProjectCreationInformation.prototype = {
     },
     
     get_enterpriseProjectTypeId: function PS_ProjectCreationInformation$get_enterpriseProjectTypeId() {ULSyTi:;
-        return this.$l_1;
+        return this.$m_1;
     },
     
     set_enterpriseProjectTypeId: function PS_ProjectCreationInformation$set_enterpriseProjectTypeId(value) {ULSyTi:;
-        this.$l_1 = value;
+        this.$m_1 = value;
         return value;
     },
     
@@ -12046,11 +12246,11 @@ PS.ProjectCreationInformation.prototype = {
     },
     
     get_taskList: function PS_ProjectCreationInformation$get_taskList() {ULSyTi:;
-        return this.$25_1;
+        return this.$2A_1;
     },
     
     set_taskList: function PS_ProjectCreationInformation$set_taskList(value) {ULSyTi:;
-        this.$25_1 = value;
+        this.$2A_1 = value;
         return value;
     },
     
@@ -12080,7 +12280,7 @@ PS.ProjectCreationInformation.prototype = {
         }
         $v_0 = parentNode.EnterpriseProjectTypeId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$l_1 = ($v_0);
+            this.$m_1 = ($v_0);
             delete parentNode.EnterpriseProjectTypeId;
         }
         $v_0 = parentNode.Id;
@@ -12257,7 +12457,7 @@ PS.ProjectDetailPageCreationInformation = function PS_ProjectDetailPageCreationI
 }
 PS.ProjectDetailPageCreationInformation.prototype = {
     $0_1: null,
-    $u_1: false,
+    $y_1: false,
     $G_1: 0,
     
     get_id: function PS_ProjectDetailPageCreationInformation$get_id() {ULSyTi:;
@@ -12270,11 +12470,11 @@ PS.ProjectDetailPageCreationInformation.prototype = {
     },
     
     get_isCreate: function PS_ProjectDetailPageCreationInformation$get_isCreate() {ULSyTi:;
-        return this.$u_1;
+        return this.$y_1;
     },
     
     set_isCreate: function PS_ProjectDetailPageCreationInformation$set_isCreate(value) {ULSyTi:;
-        this.$u_1 = value;
+        this.$y_1 = value;
         return value;
     },
     
@@ -12313,7 +12513,7 @@ PS.ProjectDetailPageCreationInformation.prototype = {
         }
         $v_0 = parentNode.IsCreate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$u_1 = ($v_0);
+            this.$y_1 = ($v_0);
             delete parentNode.IsCreate;
         }
         $v_0 = parentNode.Position;
@@ -12598,14 +12798,14 @@ PS.ProjectEngagementCreationInformation = function PS_ProjectEngagementCreationI
     PS.ProjectEngagementCreationInformation.initializeBase(this);
 }
 PS.ProjectEngagementCreationInformation.prototype = {
-    $23_2: null,
+    $28_2: null,
     
     get_resource: function PS_ProjectEngagementCreationInformation$get_resource() {ULSyTi:;
-        return this.$23_2;
+        return this.$28_2;
     },
     
     set_resource: function PS_ProjectEngagementCreationInformation$set_resource(value) {ULSyTi:;
-        this.$23_2 = value;
+        this.$28_2 = value;
         return value;
     },
     
@@ -13222,7 +13422,7 @@ PS.ProjectResourceCreationInformation = function PS_ProjectResourceCreationInfor
 }
 PS.ProjectResourceCreationInformation.prototype = {
     $U_1: null,
-    $i_1: null,
+    $j_1: null,
     $0_1: null,
     $1_1: null,
     $8_1: null,
@@ -13237,11 +13437,11 @@ PS.ProjectResourceCreationInformation.prototype = {
     },
     
     get_email: function PS_ProjectResourceCreationInformation$get_email() {ULSyTi:;
-        return this.$i_1;
+        return this.$j_1;
     },
     
     set_email: function PS_ProjectResourceCreationInformation$set_email(value) {ULSyTi:;
-        this.$i_1 = value;
+        this.$j_1 = value;
         return value;
     },
     
@@ -13298,7 +13498,7 @@ PS.ProjectResourceCreationInformation.prototype = {
         }
         $v_0 = parentNode.Email;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$i_1 = ($v_0);
+            this.$j_1 = ($v_0);
             delete parentNode.Email;
         }
         $v_0 = parentNode.Id;
@@ -14543,6 +14743,11 @@ PS.PublishedProject.prototype = {
         return ((this.get_objectData().get_properties()['ProtectedActualsSynch']));
     },
     
+    get_scheduledFromStart: function PS_PublishedProject$get_scheduledFromStart() {ULSyTi:;
+        this.checkUninitializedProperty('ScheduledFromStart');
+        return ((this.get_objectData().get_properties()['ScheduledFromStart']));
+    },
+    
     get_showEstimatedDurations: function PS_PublishedProject$get_showEstimatedDurations() {ULSyTi:;
         this.checkUninitializedProperty('ShowEstimatedDurations');
         return ((this.get_objectData().get_properties()['ShowEstimatedDurations']));
@@ -14764,6 +14969,11 @@ PS.PublishedProject.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['ProtectedActualsSynch'] = ($v_0);
             delete parentNode.ProtectedActualsSynch;
+        }
+        $v_0 = parentNode.ScheduledFromStart;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ScheduledFromStart'] = ($v_0);
+            delete parentNode.ScheduledFromStart;
         }
         $v_0 = parentNode.ShowEstimatedDurations;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -16829,10 +17039,10 @@ PS.StageCreationInformation.prototype = {
     $2_1: null,
     $0_1: null,
     $1_1: null,
-    $1H_1: null,
+    $1L_1: null,
     $B_1: null,
-    $1l_1: null,
-    $1v_1: null,
+    $1q_1: null,
+    $20_1: null,
     
     get_behavior: function PS_StageCreationInformation$get_behavior() {ULSyTi:;
         return this.$Z_1;
@@ -16889,11 +17099,11 @@ PS.StageCreationInformation.prototype = {
     },
     
     get_phaseId: function PS_StageCreationInformation$get_phaseId() {ULSyTi:;
-        return this.$1H_1;
+        return this.$1L_1;
     },
     
     set_phaseId: function PS_StageCreationInformation$set_phaseId(value) {ULSyTi:;
-        this.$1H_1 = value;
+        this.$1L_1 = value;
         return value;
     },
     
@@ -16907,20 +17117,20 @@ PS.StageCreationInformation.prototype = {
     },
     
     get_submitDescription: function PS_StageCreationInformation$get_submitDescription() {ULSyTi:;
-        return this.$1l_1;
+        return this.$1q_1;
     },
     
     set_submitDescription: function PS_StageCreationInformation$set_submitDescription(value) {ULSyTi:;
-        this.$1l_1 = value;
+        this.$1q_1 = value;
         return value;
     },
     
     get_workflowStatusPageId: function PS_StageCreationInformation$get_workflowStatusPageId() {ULSyTi:;
-        return this.$1v_1;
+        return this.$20_1;
     },
     
     set_workflowStatusPageId: function PS_StageCreationInformation$set_workflowStatusPageId(value) {ULSyTi:;
-        this.$1v_1 = value;
+        this.$20_1 = value;
         return value;
     },
     
@@ -16976,7 +17186,7 @@ PS.StageCreationInformation.prototype = {
         }
         $v_0 = parentNode.PhaseId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1H_1 = ($v_0);
+            this.$1L_1 = ($v_0);
             delete parentNode.PhaseId;
         }
         $v_0 = parentNode.ProjectDetailPages;
@@ -16987,12 +17197,12 @@ PS.StageCreationInformation.prototype = {
         }
         $v_0 = parentNode.SubmitDescription;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1l_1 = ($v_0);
+            this.$1q_1 = ($v_0);
             delete parentNode.SubmitDescription;
         }
         $v_0 = parentNode.WorkflowStatusPageId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1v_1 = ($v_0);
+            this.$20_1 = ($v_0);
             delete parentNode.WorkflowStatusPageId;
         }
     }
@@ -17166,8 +17376,8 @@ PS.StageCustomFieldCreationInformation = function PS_StageCustomFieldCreationInf
 }
 PS.StageCustomFieldCreationInformation.prototype = {
     $0_1: null,
-    $1K_1: false,
-    $1R_1: false,
+    $1O_1: false,
+    $1V_1: false,
     
     get_id: function PS_StageCustomFieldCreationInformation$get_id() {ULSyTi:;
         return this.$0_1;
@@ -17179,20 +17389,20 @@ PS.StageCustomFieldCreationInformation.prototype = {
     },
     
     get_readOnly: function PS_StageCustomFieldCreationInformation$get_readOnly() {ULSyTi:;
-        return this.$1K_1;
+        return this.$1O_1;
     },
     
     set_readOnly: function PS_StageCustomFieldCreationInformation$set_readOnly(value) {ULSyTi:;
-        this.$1K_1 = value;
+        this.$1O_1 = value;
         return value;
     },
     
     get_required: function PS_StageCustomFieldCreationInformation$get_required() {ULSyTi:;
-        return this.$1R_1;
+        return this.$1V_1;
     },
     
     set_required: function PS_StageCustomFieldCreationInformation$set_required(value) {ULSyTi:;
-        this.$1R_1 = value;
+        this.$1V_1 = value;
         return value;
     },
     
@@ -17222,12 +17432,12 @@ PS.StageCustomFieldCreationInformation.prototype = {
         }
         $v_0 = parentNode.ReadOnly;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1K_1 = ($v_0);
+            this.$1O_1 = ($v_0);
             delete parentNode.ReadOnly;
         }
         $v_0 = parentNode.Required;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1R_1 = ($v_0);
+            this.$1V_1 = ($v_0);
             delete parentNode.Required;
         }
     }
@@ -17450,7 +17660,7 @@ PS.StageDetailPageCreationInformation.prototype = {
     $2_1: null,
     $0_1: null,
     $G_1: 0,
-    $1S_1: false,
+    $1W_1: false,
     
     get_description: function PS_StageDetailPageCreationInformation$get_description() {ULSyTi:;
         return this.$2_1;
@@ -17480,11 +17690,11 @@ PS.StageDetailPageCreationInformation.prototype = {
     },
     
     get_requiresAttention: function PS_StageDetailPageCreationInformation$get_requiresAttention() {ULSyTi:;
-        return this.$1S_1;
+        return this.$1W_1;
     },
     
     set_requiresAttention: function PS_StageDetailPageCreationInformation$set_requiresAttention(value) {ULSyTi:;
-        this.$1S_1 = value;
+        this.$1W_1 = value;
         return value;
     },
     
@@ -17524,7 +17734,7 @@ PS.StageDetailPageCreationInformation.prototype = {
         }
         $v_0 = parentNode.RequiresAttention;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1S_1 = ($v_0);
+            this.$1W_1 = ($v_0);
             delete parentNode.RequiresAttention;
         }
     }
@@ -18224,7 +18434,7 @@ PS.StatusAssignmentCreationInformation.prototype = {
     $7_1: null,
     $0_1: null,
     $H_1: null,
-    $1m_1: null,
+    $1r_1: null,
     
     get_comment: function PS_StatusAssignmentCreationInformation$get_comment() {ULSyTi:;
         return this.$7_1;
@@ -18254,11 +18464,11 @@ PS.StatusAssignmentCreationInformation.prototype = {
     },
     
     get_task: function PS_StatusAssignmentCreationInformation$get_task() {ULSyTi:;
-        return this.$1m_1;
+        return this.$1r_1;
     },
     
     set_task: function PS_StatusAssignmentCreationInformation$set_task(value) {ULSyTi:;
-        this.$1m_1 = value;
+        this.$1r_1 = value;
         return value;
     },
     
@@ -18298,7 +18508,7 @@ PS.StatusAssignmentCreationInformation.prototype = {
         }
         $v_0 = parentNode.Task;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1m_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1r_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.Task;
         }
     }
@@ -18309,6 +18519,11 @@ PS.StatusAssignmentHistoryLine = function PS_StatusAssignmentHistoryLine(context
     PS.StatusAssignmentHistoryLine.initializeBase(this, [ context, objectPath ]);
 }
 PS.StatusAssignmentHistoryLine.prototype = {
+    
+    get_approverId: function PS_StatusAssignmentHistoryLine$get_approverId() {ULSyTi:;
+        this.checkUninitializedProperty('ApproverId');
+        return ((this.get_objectData().get_properties()['ApproverId']));
+    },
     
     get_author: function PS_StatusAssignmentHistoryLine$get_author() {ULSyTi:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Author']));
@@ -18329,14 +18544,39 @@ PS.StatusAssignmentHistoryLine.prototype = {
         return ((this.get_objectData().get_properties()['Decision']));
     },
     
+    get_decisionDate: function PS_StatusAssignmentHistoryLine$get_decisionDate() {ULSyTi:;
+        this.checkUninitializedProperty('DecisionDate');
+        return ((this.get_objectData().get_properties()['DecisionDate']));
+    },
+    
     get_id: function PS_StatusAssignmentHistoryLine$get_id() {ULSyTi:;
         this.checkUninitializedProperty('Id');
         return ((this.get_objectData().get_properties()['Id']));
     },
     
+    get_reassignedResourceId: function PS_StatusAssignmentHistoryLine$get_reassignedResourceId() {ULSyTi:;
+        this.checkUninitializedProperty('ReassignedResourceId');
+        return ((this.get_objectData().get_properties()['ReassignedResourceId']));
+    },
+    
+    get_reassignmentDate: function PS_StatusAssignmentHistoryLine$get_reassignmentDate() {ULSyTi:;
+        this.checkUninitializedProperty('ReassignmentDate');
+        return ((this.get_objectData().get_properties()['ReassignmentDate']));
+    },
+    
+    get_state: function PS_StatusAssignmentHistoryLine$get_state() {ULSyTi:;
+        this.checkUninitializedProperty('State');
+        return ((this.get_objectData().get_properties()['State']));
+    },
+    
     get_submitted: function PS_StatusAssignmentHistoryLine$get_submitted() {ULSyTi:;
         this.checkUninitializedProperty('Submitted');
         return ((this.get_objectData().get_properties()['Submitted']));
+    },
+    
+    get_submitterId: function PS_StatusAssignmentHistoryLine$get_submitterId() {ULSyTi:;
+        this.checkUninitializedProperty('SubmitterId');
+        return ((this.get_objectData().get_properties()['SubmitterId']));
     },
     
     get_updateType: function PS_StatusAssignmentHistoryLine$get_updateType() {ULSyTi:;
@@ -18347,6 +18587,11 @@ PS.StatusAssignmentHistoryLine.prototype = {
     initPropertiesFromJson: function PS_StatusAssignmentHistoryLine$initPropertiesFromJson(parentNode) {ULSyTi:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
+        $v_0 = parentNode.ApproverId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ApproverId'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.ApproverId;
+        }
         $v_0 = parentNode.Author;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.updateClientObjectPropertyType('Author', this.get_author(), $v_0);
@@ -18363,15 +18608,40 @@ PS.StatusAssignmentHistoryLine.prototype = {
             this.get_objectData().get_properties()['Decision'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
             delete parentNode.Decision;
         }
+        $v_0 = parentNode.DecisionDate;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['DecisionDate'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.DecisionDate;
+        }
         $v_0 = parentNode.Id;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['Id'] = ($v_0);
             delete parentNode.Id;
         }
+        $v_0 = parentNode.ReassignedResourceId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ReassignedResourceId'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.ReassignedResourceId;
+        }
+        $v_0 = parentNode.ReassignmentDate;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ReassignmentDate'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.ReassignmentDate;
+        }
+        $v_0 = parentNode.State;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['State'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.State;
+        }
         $v_0 = parentNode.Submitted;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['Submitted'] = ($v_0);
             delete parentNode.Submitted;
+        }
+        $v_0 = parentNode.SubmitterId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['SubmitterId'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.SubmitterId;
         }
         $v_0 = parentNode.UpdateType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -20015,12 +20285,12 @@ PS.TaskCreationInformation.prototype = {
     $C_1: null,
     $5_1: null,
     $0_1: null,
-    $11_1: false,
+    $15_1: false,
     $1_1: null,
     $8_1: null,
     $9_1: null,
     $3_1: null,
-    $24_1: null,
+    $29_1: null,
     
     get_addAfterId: function PS_TaskCreationInformation$get_addAfterId() {ULSyTi:;
         return this.$W_1;
@@ -20059,11 +20329,11 @@ PS.TaskCreationInformation.prototype = {
     },
     
     get_isManual: function PS_TaskCreationInformation$get_isManual() {ULSyTi:;
-        return this.$11_1;
+        return this.$15_1;
     },
     
     set_isManual: function PS_TaskCreationInformation$set_isManual(value) {ULSyTi:;
-        this.$11_1 = value;
+        this.$15_1 = value;
         return value;
     },
     
@@ -20104,11 +20374,11 @@ PS.TaskCreationInformation.prototype = {
     },
     
     get_statusManager: function PS_TaskCreationInformation$get_statusManager() {ULSyTi:;
-        return this.$24_1;
+        return this.$29_1;
     },
     
     set_statusManager: function PS_TaskCreationInformation$set_statusManager(value) {ULSyTi:;
-        this.$24_1 = value;
+        this.$29_1 = value;
         return value;
     },
     
@@ -20153,7 +20423,7 @@ PS.TaskCreationInformation.prototype = {
         }
         $v_0 = parentNode.IsManual;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$11_1 = ($v_0);
+            this.$15_1 = ($v_0);
             delete parentNode.IsManual;
         }
         $v_0 = parentNode.Name;
@@ -20214,26 +20484,26 @@ PS.TaskLinkCreationInformation = function PS_TaskLinkCreationInformation() {ULSy
     PS.TaskLinkCreationInformation.initializeBase(this);
 }
 PS.TaskLinkCreationInformation.prototype = {
-    $f_1: 0,
-    $j_1: null,
+    $g_1: 0,
+    $k_1: null,
     $0_1: null,
-    $1k_1: null,
+    $1p_1: null,
     
     get_dependencyType: function PS_TaskLinkCreationInformation$get_dependencyType() {ULSyTi:;
-        return this.$f_1;
+        return this.$g_1;
     },
     
     set_dependencyType: function PS_TaskLinkCreationInformation$set_dependencyType(value) {ULSyTi:;
-        this.$f_1 = value;
+        this.$g_1 = value;
         return value;
     },
     
     get_endId: function PS_TaskLinkCreationInformation$get_endId() {ULSyTi:;
-        return this.$j_1;
+        return this.$k_1;
     },
     
     set_endId: function PS_TaskLinkCreationInformation$set_endId(value) {ULSyTi:;
-        this.$j_1 = value;
+        this.$k_1 = value;
         return value;
     },
     
@@ -20247,11 +20517,11 @@ PS.TaskLinkCreationInformation.prototype = {
     },
     
     get_startId: function PS_TaskLinkCreationInformation$get_startId() {ULSyTi:;
-        return this.$1k_1;
+        return this.$1p_1;
     },
     
     set_startId: function PS_TaskLinkCreationInformation$set_startId(value) {ULSyTi:;
-        this.$1k_1 = value;
+        this.$1p_1 = value;
         return value;
     },
     
@@ -20276,12 +20546,12 @@ PS.TaskLinkCreationInformation.prototype = {
         var $v_0;
         $v_0 = parentNode.DependencyType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$f_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$g_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.DependencyType;
         }
         $v_0 = parentNode.EndId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$j_1 = ($v_0);
+            this.$k_1 = ($v_0);
             delete parentNode.EndId;
         }
         $v_0 = parentNode.Id;
@@ -20291,7 +20561,7 @@ PS.TaskLinkCreationInformation.prototype = {
         }
         $v_0 = parentNode.StartId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1k_1 = ($v_0);
+            this.$1p_1 = ($v_0);
             delete parentNode.StartId;
         }
     }
@@ -21045,9 +21315,9 @@ PS.TimeSheetLineCreationInformation.prototype = {
     $Y_1: null,
     $7_1: null,
     $0_1: null,
-    $16_1: 0,
+    $1A_1: 0,
     $H_1: null,
-    $1p_1: null,
+    $1u_1: null,
     
     get_assignmentId: function PS_TimeSheetLineCreationInformation$get_assignmentId() {ULSyTi:;
         return this.$Y_1;
@@ -21077,11 +21347,11 @@ PS.TimeSheetLineCreationInformation.prototype = {
     },
     
     get_lineClass: function PS_TimeSheetLineCreationInformation$get_lineClass() {ULSyTi:;
-        return this.$16_1;
+        return this.$1A_1;
     },
     
     set_lineClass: function PS_TimeSheetLineCreationInformation$set_lineClass(value) {ULSyTi:;
-        this.$16_1 = value;
+        this.$1A_1 = value;
         return value;
     },
     
@@ -21095,11 +21365,11 @@ PS.TimeSheetLineCreationInformation.prototype = {
     },
     
     get_taskName: function PS_TimeSheetLineCreationInformation$get_taskName() {ULSyTi:;
-        return this.$1p_1;
+        return this.$1u_1;
     },
     
     set_taskName: function PS_TimeSheetLineCreationInformation$set_taskName(value) {ULSyTi:;
-        this.$1p_1 = value;
+        this.$1u_1 = value;
         return value;
     },
     
@@ -21139,7 +21409,7 @@ PS.TimeSheetLineCreationInformation.prototype = {
         }
         $v_0 = parentNode.LineClass;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$16_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1A_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.LineClass;
         }
         $v_0 = parentNode.ProjectId;
@@ -21149,7 +21419,7 @@ PS.TimeSheetLineCreationInformation.prototype = {
         }
         $v_0 = parentNode.TaskName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1p_1 = ($v_0);
+            this.$1u_1 = ($v_0);
             delete parentNode.TaskName;
         }
     }
@@ -21637,10 +21907,10 @@ PS.TimeSheetWorkCreationInformation.prototype = {
     $V_1: null,
     $7_1: null,
     $D_1: null,
-    $1A_1: null,
-    $1B_1: null,
+    $1E_1: null,
     $1F_1: null,
-    $1I_1: null,
+    $1J_1: null,
+    $1M_1: null,
     $3_1: null,
     
     get_actualWork: function PS_TimeSheetWorkCreationInformation$get_actualWork() {ULSyTi:;
@@ -21671,38 +21941,38 @@ PS.TimeSheetWorkCreationInformation.prototype = {
     },
     
     get_nonBillableOvertimeWork: function PS_TimeSheetWorkCreationInformation$get_nonBillableOvertimeWork() {ULSyTi:;
-        return this.$1A_1;
+        return this.$1E_1;
     },
     
     set_nonBillableOvertimeWork: function PS_TimeSheetWorkCreationInformation$set_nonBillableOvertimeWork(value) {ULSyTi:;
-        this.$1A_1 = value;
+        this.$1E_1 = value;
         return value;
     },
     
     get_nonBillableWork: function PS_TimeSheetWorkCreationInformation$get_nonBillableWork() {ULSyTi:;
-        return this.$1B_1;
-    },
-    
-    set_nonBillableWork: function PS_TimeSheetWorkCreationInformation$set_nonBillableWork(value) {ULSyTi:;
-        this.$1B_1 = value;
-        return value;
-    },
-    
-    get_overtimeWork: function PS_TimeSheetWorkCreationInformation$get_overtimeWork() {ULSyTi:;
         return this.$1F_1;
     },
     
-    set_overtimeWork: function PS_TimeSheetWorkCreationInformation$set_overtimeWork(value) {ULSyTi:;
+    set_nonBillableWork: function PS_TimeSheetWorkCreationInformation$set_nonBillableWork(value) {ULSyTi:;
         this.$1F_1 = value;
         return value;
     },
     
+    get_overtimeWork: function PS_TimeSheetWorkCreationInformation$get_overtimeWork() {ULSyTi:;
+        return this.$1J_1;
+    },
+    
+    set_overtimeWork: function PS_TimeSheetWorkCreationInformation$set_overtimeWork(value) {ULSyTi:;
+        this.$1J_1 = value;
+        return value;
+    },
+    
     get_plannedWork: function PS_TimeSheetWorkCreationInformation$get_plannedWork() {ULSyTi:;
-        return this.$1I_1;
+        return this.$1M_1;
     },
     
     set_plannedWork: function PS_TimeSheetWorkCreationInformation$set_plannedWork(value) {ULSyTi:;
-        this.$1I_1 = value;
+        this.$1M_1 = value;
         return value;
     },
     
@@ -21751,22 +22021,22 @@ PS.TimeSheetWorkCreationInformation.prototype = {
         }
         $v_0 = parentNode.NonBillableOvertimeWork;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1A_1 = ($v_0);
+            this.$1E_1 = ($v_0);
             delete parentNode.NonBillableOvertimeWork;
         }
         $v_0 = parentNode.NonBillableWork;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1B_1 = ($v_0);
+            this.$1F_1 = ($v_0);
             delete parentNode.NonBillableWork;
         }
         $v_0 = parentNode.OvertimeWork;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1F_1 = ($v_0);
+            this.$1J_1 = ($v_0);
             delete parentNode.OvertimeWork;
         }
         $v_0 = parentNode.PlannedWork;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1I_1 = ($v_0);
+            this.$1M_1 = ($v_0);
             delete parentNode.PlannedWork;
         }
         $v_0 = parentNode.Start;
@@ -22354,7 +22624,7 @@ PS.WorkflowDesignerField.registerClass('PS.WorkflowDesignerField', SP.ClientObje
 PS.WorkflowDesignerFieldPropertyNames.registerClass('PS.WorkflowDesignerFieldPropertyNames');
 PS.WorkflowDesignerFieldObjectPropertyNames.registerClass('PS.WorkflowDesignerFieldObjectPropertyNames');
 PS.WorkflowDesignerFieldCollection.registerClass('PS.WorkflowDesignerFieldCollection', SP.ClientObjectCollection);
-PS.ProjectContext.$1y = null;
+PS.ProjectContext.$23 = null;
 PS.AssignmentPropertyNames.actualCostWorkPerformed = 'ActualCostWorkPerformed';
 PS.AssignmentPropertyNames.actualOvertimeCost = 'ActualOvertimeCost';
 PS.AssignmentPropertyNames.baselineCost = 'BaselineCost';
@@ -22427,6 +22697,9 @@ PS.CustomFieldPropertyNames.departmentId = 'DepartmentId';
 PS.CustomFieldPropertyNames.description = 'Description';
 PS.CustomFieldPropertyNames.fieldType = 'FieldType';
 PS.CustomFieldPropertyNames.formula = 'Formula';
+PS.CustomFieldPropertyNames.graphicalIndicatorNonSummary = 'GraphicalIndicatorNonSummary';
+PS.CustomFieldPropertyNames.graphicalIndicatorProjectSummary = 'GraphicalIndicatorProjectSummary';
+PS.CustomFieldPropertyNames.graphicalIndicatorSummary = 'GraphicalIndicatorSummary';
 PS.CustomFieldPropertyNames.id = 'Id';
 PS.CustomFieldPropertyNames.internalName = 'InternalName';
 PS.CustomFieldPropertyNames.isEditableInVisibility = 'IsEditableInVisibility';
@@ -22439,6 +22712,7 @@ PS.CustomFieldPropertyNames.lookupDefaultValue = 'LookupDefaultValue';
 PS.CustomFieldPropertyNames.name = 'Name';
 PS.CustomFieldPropertyNames.rollsDownToAssignments = 'RollsDownToAssignments';
 PS.CustomFieldPropertyNames.rollupType = 'RollupType';
+PS.CustomFieldPropertyNames.showToolTip = 'ShowToolTip';
 PS.CustomFieldPropertyNames.useFieldForMatching = 'UseFieldForMatching';
 PS.CustomFieldObjectPropertyNames.entityType = 'EntityType';
 PS.CustomFieldObjectPropertyNames.lookupEntries = 'LookupEntries';
@@ -22502,6 +22776,7 @@ PS.DraftProjectPropertyNames.newTasksAreManual = 'NewTasksAreManual';
 PS.DraftProjectPropertyNames.numberFiscalYearFromStart = 'NumberFiscalYearFromStart';
 PS.DraftProjectPropertyNames.projectIdentifier = 'ProjectIdentifier';
 PS.DraftProjectPropertyNames.protectedActualsSynch = 'ProtectedActualsSynch';
+PS.DraftProjectPropertyNames.scheduledFromStart = 'ScheduledFromStart';
 PS.DraftProjectPropertyNames.showEstimatedDurations = 'ShowEstimatedDurations';
 PS.DraftProjectPropertyNames.startDate = 'StartDate';
 PS.DraftProjectPropertyNames.statusDate = 'StatusDate';
@@ -22606,6 +22881,7 @@ PS.EngagementTimephasedPeriodPropertyNames.maxUnits = 'MaxUnits';
 PS.EngagementTimephasedPeriodPropertyNames.start = 'Start';
 PS.EngagementTimephasedPeriodPropertyNames.work = 'Work';
 PS.EngagementTimephasedPeriodPropertyNames.workMilliseconds = 'WorkMilliseconds';
+PS.EnterpriseProjectTypePropertyNames.departments = 'Departments';
 PS.EnterpriseProjectTypePropertyNames.description = 'Description';
 PS.EnterpriseProjectTypePropertyNames.id = 'Id';
 PS.EnterpriseProjectTypePropertyNames.imageUrl = 'ImageUrl';
@@ -22762,7 +23038,6 @@ PS.ProjectPropertyNames.percentComplete = 'PercentComplete';
 PS.ProjectPropertyNames.plannerDecision = 'PlannerDecision';
 PS.ProjectPropertyNames.projectSiteUrl = 'ProjectSiteUrl';
 PS.ProjectPropertyNames.projectType = 'ProjectType';
-PS.ProjectPropertyNames.scheduledFromStart = 'ScheduledFromStart';
 PS.ProjectPropertyNames.splitInProgress = 'SplitInProgress';
 PS.ProjectPropertyNames.spreadActualCostsToStatus = 'SpreadActualCostsToStatus';
 PS.ProjectPropertyNames.spreadPercentCompleteToStatus = 'SpreadPercentCompleteToStatus';
@@ -22938,6 +23213,7 @@ PS.PublishedProjectPropertyNames.newTasksAreManual = 'NewTasksAreManual';
 PS.PublishedProjectPropertyNames.numberFiscalYearFromStart = 'NumberFiscalYearFromStart';
 PS.PublishedProjectPropertyNames.projectIdentifier = 'ProjectIdentifier';
 PS.PublishedProjectPropertyNames.protectedActualsSynch = 'ProtectedActualsSynch';
+PS.PublishedProjectPropertyNames.scheduledFromStart = 'ScheduledFromStart';
 PS.PublishedProjectPropertyNames.showEstimatedDurations = 'ShowEstimatedDurations';
 PS.PublishedProjectPropertyNames.startDate = 'StartDate';
 PS.PublishedProjectPropertyNames.statusDate = 'StatusDate';
@@ -23096,10 +23372,16 @@ PS.StatusAssignmentObjectPropertyNames.history = 'History';
 PS.StatusAssignmentObjectPropertyNames.project = 'Project';
 PS.StatusAssignmentObjectPropertyNames.resource = 'Resource';
 PS.StatusAssignmentObjectPropertyNames.task = 'Task';
+PS.StatusAssignmentHistoryLinePropertyNames.approverId = 'ApproverId';
 PS.StatusAssignmentHistoryLinePropertyNames.comment = 'Comment';
 PS.StatusAssignmentHistoryLinePropertyNames.decision = 'Decision';
+PS.StatusAssignmentHistoryLinePropertyNames.decisionDate = 'DecisionDate';
 PS.StatusAssignmentHistoryLinePropertyNames.id = 'Id';
+PS.StatusAssignmentHistoryLinePropertyNames.reassignedResourceId = 'ReassignedResourceId';
+PS.StatusAssignmentHistoryLinePropertyNames.reassignmentDate = 'ReassignmentDate';
+PS.StatusAssignmentHistoryLinePropertyNames.state = 'State';
 PS.StatusAssignmentHistoryLinePropertyNames.submitted = 'Submitted';
+PS.StatusAssignmentHistoryLinePropertyNames.submitterId = 'SubmitterId';
 PS.StatusAssignmentHistoryLinePropertyNames.updateType = 'UpdateType';
 PS.StatusAssignmentHistoryLineObjectPropertyNames.author = 'Author';
 PS.StatusTaskPropertyNames.actualWork = 'ActualWork';

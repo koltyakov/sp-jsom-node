@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 8112,
-                "rpr": 1217
+                "rup": 8328,
+                "rpr": 1219
             }
         };
     }
@@ -2659,22 +2659,20 @@ function OffSwitch_module_def() {
     function OffSwitch_IsActive(guidOffSwitchKey) {
         var offSwitches = window["g_SPOffSwitches"];
         var contextOffSwitches = null;
-        var defaultResultWhenDataMissing = true;
 
         if (offSwitches == null) {
             var pageContextInfo = window["_spPageContextInfo"];
 
             contextOffSwitches = pageContextInfo == null ? null : pageContextInfo["killSwitches"];
-            if (contextOffSwitches != null && !contextOffSwitches.hasOwnProperty("2625010B-67AA-49D2-B302-A12D0281E865")) {
-                offSwitches = contextOffSwitches;
+            offSwitches = contextOffSwitches;
+        }
+        if (offSwitches != null && !offSwitches.hasOwnProperty("C1AF433B-A979-4DD9-8C60-56024438168A")) {
+            if (guidOffSwitchKey) {
+                guidOffSwitchKey = (guidOffSwitchKey.toUpperCase()).replace(/[{}]/g, '');
             }
         }
-        if (offSwitches != null && !offSwitches.hasOwnProperty("DA1F7C1B-A819-4265-BD85-6D15C304CFDC")) {
-            defaultResultWhenDataMissing = false;
-        }
-        var offSwitchActivated;
+        var offSwitchActivated = offSwitches == null ? false : offSwitches.hasOwnProperty(guidOffSwitchKey);
 
-        offSwitchActivated = offSwitches == null ? defaultResultWhenDataMissing : offSwitches.hasOwnProperty(guidOffSwitchKey);
         return offSwitchActivated;
     }
 }
@@ -7315,7 +7313,7 @@ function GetThemedImageUrl_Core(FileName, FallbackImagePath) {
     return themedImageUrl;
 }
 function GetImageUrlWithRevision(imageUrl) {
-    return imageUrl.search(/[?]/) > -1 ? imageUrl : imageUrl + "?" + "rev=44";
+    return imageUrl.search(/[?]/) > -1 ? imageUrl : imageUrl + "?" + "rev=45";
 }
 function ShowHideSection(sectionid, imgid) {
     var group = document.getElementById(sectionid);
@@ -7454,7 +7452,7 @@ function ProcessPNGImages() {
 
             if (img != null && g_PNGImageSources[i] != null) {
                 img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + g_PNGImageSources[i] + "),sizingMethod=scale);";
-                img.src = "/_layouts/15/images/blank.gif?rev=44";
+                img.src = "/_layouts/15/images/blank.gif?rev=45";
             }
         }
     }
@@ -9698,7 +9696,7 @@ function _AddTrySPListNextBanner(isList) {
     var bannerHtml = '\
 <div class="ms-fullWidth" style="background-color:#F8F8F8;position:relative;">\
   <div class="ms-tableCell ms-verticalAlignMiddle" style="width:256px;background-color:#24BBED;">\
-    <img src=' + StAttrQuote("/_layouts/15/images/PaintRoller.215x90x32.png?rev=44") + ' style="height:90px;width:215px;margin:auto 20px;">\
+    <img src=' + StAttrQuote("/_layouts/15/images/PaintRoller.215x90x32.png?rev=45") + ' style="height:90px;width:215px;margin:auto 20px;">\
   </div>\
   <div class="ms-tableCell ms-verticalAlignTop ms-fullWidth" style="padding:16px">\
 	<h2 style="color:#444">' + STSHtmlEncode(Boolean(isList) ? Strings.STS.L_ListNewLookHeading : Strings.STS.L_DocLibNewLookHeading) + '\
@@ -9706,7 +9704,7 @@ function _AddTrySPListNextBanner(isList) {
         <a title=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' class="ms-dlgCloseBtn" id="doclibNewLookClose" href="javascript:;">\
           <span style="padding: 8px; width: 16px; height: 16px; display: inline-block;">\
             <span class="s4-clust" style="width: 16px; height: 16px; overflow: hidden; display: inline-block; position: relative;">\
-              <img class="ms-dlgCloseBtnImg" style="left: 0px !important; top: -645px !important; position: absolute;" alt=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' src=' + StAttrQuote("/_layouts/15/images/fgimg.png?rev=44") + '>\
+              <img class="ms-dlgCloseBtnImg" style="left: 0px !important; top: -645px !important; position: absolute;" alt=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' src=' + StAttrQuote("/_layouts/15/images/fgimg.png?rev=45") + '>\
             </span>\
           </span>\
         </a>\
@@ -10258,7 +10256,7 @@ function IMNUpdateImage(id, imgInfo) {
         if (useFilter) {
             if (isPng) {
                 obj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + newImg + "),sizingMethod=scale,enabled=true);";
-                obj.src = "/_layouts/15/images/blank.gif?rev=44";
+                obj.src = "/_layouts/15/images/blank.gif?rev=45";
             }
             else {
                 obj.style.filter = "";
@@ -10977,7 +10975,7 @@ function CreateSpinningWheelContainer() {
     spinningWheel.style.visibility = "hidden";
     var waitingImg = document.createElement("img");
 
-    waitingImg.src = "/_layouts/15/images/gears_anv4.gif?rev=44";
+    waitingImg.src = "/_layouts/15/images/gears_anv4.gif?rev=45";
     spinningWheel.appendChild(waitingImg);
     return spinningWheel;
 }
@@ -12300,7 +12298,7 @@ function _ribbonOnStartInit(ribbonInfo) {
 
             _elmBlankTab.id = "Ribbon.BlankTab";
             _elmBlankTab.className = "ms-cui-tabBody";
-            _elmBlankTab.innerHTML = "<span class=\"ms-ribbontabswitchloading\"><img src=\"" + "/_layouts/15/images/loadingcirclests16.gif?rev=44" + "\" alt=\"\"/><span>" + Strings.STS.L_Loading_Text + "</span></span>";
+            _elmBlankTab.innerHTML = "<span class=\"ms-ribbontabswitchloading\"><img src=\"" + "/_layouts/15/images/loadingcirclests16.gif?rev=45" + "\" alt=\"\"/><span>" + Strings.STS.L_Loading_Text + "</span></span>";
             _elmTabCont.appendChild(_elmBlankTab);
             _elmRibbon.appendChild(_elmTabCont);
             AnimateRibbonMinimizedChanged(false);
@@ -13636,7 +13634,7 @@ function RenderShortcutLinkIcon(renderCtx, ret, content, listItem, listSchema) {
     ret.push("\" title=\"");
     ret.push(Encoding.HtmlEncode(Strings.STS.L_FieldType_File_Shortcut));
     ret.push("\" src=\"");
-    ret.push(ListView.ImageBasePath + "/_layouts/15/images/icspgen.gif?rev=44");
+    ret.push(ListView.ImageBasePath + "/_layouts/15/images/icspgen.gif?rev=45");
     ret.push("\" />");
     ret.push("</a>");
 }

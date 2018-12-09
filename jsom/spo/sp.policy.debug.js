@@ -2574,6 +2574,17 @@ SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames = function SP_Complianc
 }
 
 
+SP.CompliancePolicy.SPSitePreservationUtility = function SP_CompliancePolicy_SPSitePreservationUtility() {
+}
+SP.CompliancePolicy.SPSitePreservationUtility.placeOnHold = function SP_CompliancePolicy_SPSitePreservationUtility$placeOnHold(context, siteId, holdId, durationInDays, holdPeriodSource) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{51fdd9ea-5a32-4b6c-aed4-6283b187b69b}', 'PlaceOnHold', [ siteId, holdId, durationInDays, holdPeriodSource ]);
+    context.addQuery($v_0);
+}
+
+
 SP.CompliancePolicy.SPSyncNotificationEndpointInfo = function SP_CompliancePolicy_SPSyncNotificationEndpointInfo(context, objectPath) {
     SP.CompliancePolicy.SPSyncNotificationEndpointInfo.initializeBase(this, [ context, objectPath ]);
 }
@@ -3011,6 +3022,7 @@ SP.CompliancePolicy.SPPolicyStoreProxy.registerClass('SP.CompliancePolicy.SPPoli
 SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames.registerClass('SP.CompliancePolicy.SPPolicyStoreProxyPropertyNames');
 SP.CompliancePolicy.SPScsTenantEndPointInfo.registerClass('SP.CompliancePolicy.SPScsTenantEndPointInfo', SP.ClientObject);
 SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames.registerClass('SP.CompliancePolicy.SPScsTenantEndPointInfoPropertyNames');
+SP.CompliancePolicy.SPSitePreservationUtility.registerClass('SP.CompliancePolicy.SPSitePreservationUtility');
 SP.CompliancePolicy.SPSyncNotificationEndpointInfo.registerClass('SP.CompliancePolicy.SPSyncNotificationEndpointInfo', SP.ClientObject);
 SP.CompliancePolicy.SPSyncNotificationEndpointInfoPropertyNames.registerClass('SP.CompliancePolicy.SPSyncNotificationEndpointInfoPropertyNames');
 SP.Discovery.Case.registerClass('SP.Discovery.Case', SP.ClientObject);

@@ -167,105 +167,105 @@ SP.WorkManagement.OM.BaseSession = function SP_WorkManagement_OM_BaseSession(con
 }
 SP.WorkManagement.OM.BaseSession.prototype = {
     
-    createTask: function SP_WorkManagement_OM_BaseSession$createTask$in(taskName, description, localizedStartDate, localizedDueDate, completed, pinned, locationKey, editUrl) {ULS0Qc:;
+    createTask: function SP_WorkManagement_OM_BaseSession$createTask(taskName, description, localizedStartDate, localizedDueDate, completed, pinned, locationKey, editUrl) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'CreateTask', [ taskName, description, localizedStartDate, localizedDueDate, completed, pinned, locationKey, editUrl ]));
         return $v_1;
     },
     
-    createPersonalTaskAndPromoteToProviderTask: function SP_WorkManagement_OM_BaseSession$createPersonalTaskAndPromoteToProviderTask$in(taskName, description, localizedStartDate, localizedDueDate, completed, pinned, locationKey) {ULS0Qc:;
+    createPersonalTaskAndPromoteToProviderTask: function SP_WorkManagement_OM_BaseSession$createPersonalTaskAndPromoteToProviderTask(taskName, description, localizedStartDate, localizedDueDate, completed, pinned, locationKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'CreatePersonalTaskAndPromoteToProviderTask', [ taskName, description, localizedStartDate, localizedDueDate, completed, pinned, locationKey ]));
         return $v_1;
     },
     
-    deleteTask: function SP_WorkManagement_OM_BaseSession$deleteTask$in(taskKey) {ULS0Qc:;
+    deleteTask: function SP_WorkManagement_OM_BaseSession$deleteTask(taskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'DeleteTask', [ taskKey ]));
         return $v_1;
     },
     
-    pinTask: function SP_WorkManagement_OM_BaseSession$pinTask$in(taskKey) {ULS0Qc:;
+    pinTask: function SP_WorkManagement_OM_BaseSession$pinTask(taskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'PinTask', [ taskKey ]));
         return $v_1;
     },
     
-    promotePersonalTaskToProviderTaskInLocation: function SP_WorkManagement_OM_BaseSession$promotePersonalTaskToProviderTaskInLocation$in(taskKey, locationId) {ULS0Qc:;
+    promotePersonalTaskToProviderTaskInLocation: function SP_WorkManagement_OM_BaseSession$promotePersonalTaskToProviderTaskInLocation(taskKey, locationId) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'PromotePersonalTaskToProviderTaskInLocation', [ taskKey, locationId ]));
         return $v_1;
     },
     
-    removePinOnTask: function SP_WorkManagement_OM_BaseSession$removePinOnTask$in(taskKey) {ULS0Qc:;
+    removePinOnTask: function SP_WorkManagement_OM_BaseSession$removePinOnTask(taskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'RemovePinOnTask', [ taskKey ]));
         return $v_1;
     },
     
-    readAllNonTaskData: function SP_WorkManagement_OM_BaseSession$readAllNonTaskData$in() {ULS0Qc:;
+    readAllNonTaskData: function SP_WorkManagement_OM_BaseSession$readAllNonTaskData() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.NonTaskDataReadResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'ReadAllNonTaskData', null));
         return $v_1;
     },
     
-    beginCacheRefresh: function SP_WorkManagement_OM_BaseSession$beginCacheRefresh$in() {ULS0Qc:;
+    beginCacheRefresh: function SP_WorkManagement_OM_BaseSession$beginCacheRefresh() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.CreateRefreshJobResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'BeginCacheRefresh', null));
         return $v_1;
     },
     
-    updateTaskWithLocalizedValue: function SP_WorkManagement_OM_BaseSession$updateTaskWithLocalizedValue$in(taskKey, field, value) {ULS0Qc:;
+    updateTaskWithLocalizedValue: function SP_WorkManagement_OM_BaseSession$updateTaskWithLocalizedValue(taskKey, field, value) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'UpdateTaskWithLocalizedValue', [ taskKey, field, value ]));
         return $v_1;
     },
     
-    getCalloutInfo: function SP_WorkManagement_OM_BaseSession$getCalloutInfo$in(taskKey) {ULS0Qc:;
+    getCalloutInfo: function SP_WorkManagement_OM_BaseSession$getCalloutInfo(taskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.CalloutInfo($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetCalloutInfo', [ taskKey ]));
         return $v_1;
     },
     
-    refreshSingleTask: function SP_WorkManagement_OM_BaseSession$refreshSingleTask$in(taskKey) {ULS0Qc:;
+    refreshSingleTask: function SP_WorkManagement_OM_BaseSession$refreshSingleTask(taskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskRefreshResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'RefreshSingleTask', [ taskKey ]));
         return $v_1;
     },
     
-    getRefreshStatus: function SP_WorkManagement_OM_BaseSession$getRefreshStatus$in(refreshId) {ULS0Qc:;
+    getRefreshStatus: function SP_WorkManagement_OM_BaseSession$getRefreshStatus(refreshId) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.RefreshResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetRefreshStatus', [ refreshId ]));
         return $v_1;
     },
     
-    addAttributeToTask: function SP_WorkManagement_OM_BaseSession$addAttributeToTask$in(taskKey, attribute) {ULS0Qc:;
+    addAttributeToTask: function SP_WorkManagement_OM_BaseSession$addAttributeToTask(taskKey, attribute) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'AddAttributeToTask', [ taskKey, attribute ]));
         return $v_1;
     },
     
-    removeAttributeFromTask: function SP_WorkManagement_OM_BaseSession$removeAttributeFromTask$in(taskKey, attribute) {ULS0Qc:;
+    removeAttributeFromTask: function SP_WorkManagement_OM_BaseSession$removeAttributeFromTask(taskKey, attribute) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskWriteResult($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'RemoveAttributeFromTask', [ taskKey, attribute ]));
         return $v_1;
     },
     
-    beginExchangeSync: function SP_WorkManagement_OM_BaseSession$beginExchangeSync$in() {ULS0Qc:;
+    beginExchangeSync: function SP_WorkManagement_OM_BaseSession$beginExchangeSync() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'BeginExchangeSync', null);
@@ -275,7 +275,7 @@ SP.WorkManagement.OM.BaseSession.prototype = {
         return $v_1;
     },
     
-    isExchangeJobPending: function SP_WorkManagement_OM_BaseSession$isExchangeJobPending$in() {ULS0Qc:;
+    isExchangeJobPending: function SP_WorkManagement_OM_BaseSession$isExchangeJobPending() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'IsExchangeJobPending', null);
@@ -285,14 +285,14 @@ SP.WorkManagement.OM.BaseSession.prototype = {
         return $v_1;
     },
     
-    getRefreshHealthInfo: function SP_WorkManagement_OM_BaseSession$getRefreshHealthInfo$in() {ULS0Qc:;
+    getRefreshHealthInfo: function SP_WorkManagement_OM_BaseSession$getRefreshHealthInfo() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.RefreshHealthInfo($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetRefreshHealthInfo', null));
         return $v_1;
     },
     
-    getRefreshHistory: function SP_WorkManagement_OM_BaseSession$getRefreshHistory$in(since) {ULS0Qc:;
+    getRefreshHistory: function SP_WorkManagement_OM_BaseSession$getRefreshHistory(since) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.RefreshHistory($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetRefreshHistory', [ since ]));
@@ -304,25 +304,24 @@ SP.WorkManagement.OM.BaseSession.prototype = {
 SP.WorkManagement.OM.BooleanCriterion = function SP_WorkManagement_OM_BooleanCriterion(context) {ULS0Qc:;
     SP.WorkManagement.OM.BooleanCriterion.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{16d379b2-e752-405e-a05f-a8fe05aa0d07}', arguments) ]);
 }
-SP.WorkManagement.OM.BooleanCriterion.newObject = function SP_WorkManagement_OM_BooleanCriterion$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.BooleanCriterion.newObject = function SP_WorkManagement_OM_BooleanCriterion$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.BooleanCriterion(context, new SP.ObjectPathConstructor(context, '{16d379b2-e752-405e-a05f-a8fe05aa0d07}', null));
 }
 SP.WorkManagement.OM.BooleanCriterion.prototype = {
     
-    get_compareType: function SP_WorkManagement_OM_BooleanCriterion$get_compareType$in() {ULS0Qc:;
+    get_compareType: function SP_WorkManagement_OM_BooleanCriterion$get_compareType() {ULS0Qc:;
         this.checkUninitializedProperty('CompareType');
-        return (this.get_objectData().get_properties()['CompareType']);
+        return ((this.get_objectData().get_properties()['CompareType']));
     },
-    
-    set_compareType: function SP_WorkManagement_OM_BooleanCriterion$set_compareType$in(value) {ULS0Qc:;
+    set_compareType: function SP_WorkManagement_OM_BooleanCriterion$set_compareType(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CompareType'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CompareType', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_BooleanCriterion$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_BooleanCriterion$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CompareType;
@@ -343,111 +342,103 @@ SP.WorkManagement.OM.CalloutInfo = function SP_WorkManagement_OM_CalloutInfo(con
 }
 SP.WorkManagement.OM.CalloutInfo.prototype = {
     
-    get_contacts: function SP_WorkManagement_OM_CalloutInfo$get_contacts$in() {ULS0Qc:;
+    get_contacts: function SP_WorkManagement_OM_CalloutInfo$get_contacts() {ULS0Qc:;
         this.checkUninitializedProperty('Contacts');
-        return (this.get_objectData().get_properties()['Contacts']);
+        return ((this.get_objectData().get_properties()['Contacts']));
     },
-    
-    set_contacts: function SP_WorkManagement_OM_CalloutInfo$set_contacts$in(value) {ULS0Qc:;
+    set_contacts: function SP_WorkManagement_OM_CalloutInfo$set_contacts(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Contacts'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Contacts', value));
         }
         return value;
     },
     
-    get_directLinkTitle: function SP_WorkManagement_OM_CalloutInfo$get_directLinkTitle$in() {ULS0Qc:;
+    get_directLinkTitle: function SP_WorkManagement_OM_CalloutInfo$get_directLinkTitle() {ULS0Qc:;
         this.checkUninitializedProperty('DirectLinkTitle');
-        return (this.get_objectData().get_properties()['DirectLinkTitle']);
+        return ((this.get_objectData().get_properties()['DirectLinkTitle']));
     },
-    
-    set_directLinkTitle: function SP_WorkManagement_OM_CalloutInfo$set_directLinkTitle$in(value) {ULS0Qc:;
+    set_directLinkTitle: function SP_WorkManagement_OM_CalloutInfo$set_directLinkTitle(value) {ULS0Qc:;
         this.get_objectData().get_properties()['DirectLinkTitle'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DirectLinkTitle', value));
         }
         return value;
     },
     
-    get_directLinkUrl: function SP_WorkManagement_OM_CalloutInfo$get_directLinkUrl$in() {ULS0Qc:;
+    get_directLinkUrl: function SP_WorkManagement_OM_CalloutInfo$get_directLinkUrl() {ULS0Qc:;
         this.checkUninitializedProperty('DirectLinkUrl');
-        return (this.get_objectData().get_properties()['DirectLinkUrl']);
+        return ((this.get_objectData().get_properties()['DirectLinkUrl']));
     },
-    
-    set_directLinkUrl: function SP_WorkManagement_OM_CalloutInfo$set_directLinkUrl$in(value) {ULS0Qc:;
+    set_directLinkUrl: function SP_WorkManagement_OM_CalloutInfo$set_directLinkUrl(value) {ULS0Qc:;
         this.get_objectData().get_properties()['DirectLinkUrl'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DirectLinkUrl', value));
         }
         return value;
     },
     
-    get_hierarchy: function SP_WorkManagement_OM_CalloutInfo$get_hierarchy$in() {ULS0Qc:;
+    get_hierarchy: function SP_WorkManagement_OM_CalloutInfo$get_hierarchy() {ULS0Qc:;
         this.checkUninitializedProperty('Hierarchy');
-        return (this.get_objectData().get_properties()['Hierarchy']);
+        return ((this.get_objectData().get_properties()['Hierarchy']));
     },
-    
-    set_hierarchy: function SP_WorkManagement_OM_CalloutInfo$set_hierarchy$in(value) {ULS0Qc:;
+    set_hierarchy: function SP_WorkManagement_OM_CalloutInfo$set_hierarchy(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Hierarchy'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Hierarchy', value));
         }
         return value;
     },
     
-    get_predecessors: function SP_WorkManagement_OM_CalloutInfo$get_predecessors$in() {ULS0Qc:;
+    get_predecessors: function SP_WorkManagement_OM_CalloutInfo$get_predecessors() {ULS0Qc:;
         this.checkUninitializedProperty('Predecessors');
-        return (this.get_objectData().get_properties()['Predecessors']);
+        return ((this.get_objectData().get_properties()['Predecessors']));
     },
-    
-    set_predecessors: function SP_WorkManagement_OM_CalloutInfo$set_predecessors$in(value) {ULS0Qc:;
+    set_predecessors: function SP_WorkManagement_OM_CalloutInfo$set_predecessors(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Predecessors'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Predecessors', value));
         }
         return value;
     },
     
-    get_successors: function SP_WorkManagement_OM_CalloutInfo$get_successors$in() {ULS0Qc:;
+    get_successors: function SP_WorkManagement_OM_CalloutInfo$get_successors() {ULS0Qc:;
         this.checkUninitializedProperty('Successors');
-        return (this.get_objectData().get_properties()['Successors']);
+        return ((this.get_objectData().get_properties()['Successors']));
     },
-    
-    set_successors: function SP_WorkManagement_OM_CalloutInfo$set_successors$in(value) {ULS0Qc:;
+    set_successors: function SP_WorkManagement_OM_CalloutInfo$set_successors(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Successors'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Successors', value));
         }
         return value;
     },
     
-    get_title: function SP_WorkManagement_OM_CalloutInfo$get_title$in() {ULS0Qc:;
+    get_title: function SP_WorkManagement_OM_CalloutInfo$get_title() {ULS0Qc:;
         this.checkUninitializedProperty('Title');
-        return (this.get_objectData().get_properties()['Title']);
+        return ((this.get_objectData().get_properties()['Title']));
     },
-    
-    set_title: function SP_WorkManagement_OM_CalloutInfo$set_title$in(value) {ULS0Qc:;
+    set_title: function SP_WorkManagement_OM_CalloutInfo$set_title(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Title'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Title', value));
         }
         return value;
     },
     
-    get_url: function SP_WorkManagement_OM_CalloutInfo$get_url$in() {ULS0Qc:;
+    get_url: function SP_WorkManagement_OM_CalloutInfo$get_url() {ULS0Qc:;
         this.checkUninitializedProperty('Url');
-        return (this.get_objectData().get_properties()['Url']);
+        return ((this.get_objectData().get_properties()['Url']));
     },
-    
-    set_url: function SP_WorkManagement_OM_CalloutInfo$set_url$in(value) {ULS0Qc:;
+    set_url: function SP_WorkManagement_OM_CalloutInfo$set_url(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Url'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Url', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_CalloutInfo$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_CalloutInfo$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Contacts;
@@ -503,46 +494,43 @@ SP.WorkManagement.OM.CreateRefreshJobResult = function SP_WorkManagement_OM_Crea
 }
 SP.WorkManagement.OM.CreateRefreshJobResult.prototype = {
     
-    get_createdJob: function SP_WorkManagement_OM_CreateRefreshJobResult$get_createdJob$in() {ULS0Qc:;
+    get_createdJob: function SP_WorkManagement_OM_CreateRefreshJobResult$get_createdJob() {ULS0Qc:;
         this.checkUninitializedProperty('CreatedJob');
-        return (this.get_objectData().get_properties()['CreatedJob']);
+        return ((this.get_objectData().get_properties()['CreatedJob']));
     },
-    
-    set_createdJob: function SP_WorkManagement_OM_CreateRefreshJobResult$set_createdJob$in(value) {ULS0Qc:;
+    set_createdJob: function SP_WorkManagement_OM_CreateRefreshJobResult$set_createdJob(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CreatedJob'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CreatedJob', value));
         }
         return value;
     },
     
-    get_currentJobId: function SP_WorkManagement_OM_CreateRefreshJobResult$get_currentJobId$in() {ULS0Qc:;
+    get_currentJobId: function SP_WorkManagement_OM_CreateRefreshJobResult$get_currentJobId() {ULS0Qc:;
         this.checkUninitializedProperty('CurrentJobId');
-        return (this.get_objectData().get_properties()['CurrentJobId']);
+        return ((this.get_objectData().get_properties()['CurrentJobId']));
     },
-    
-    set_currentJobId: function SP_WorkManagement_OM_CreateRefreshJobResult$set_currentJobId$in(value) {ULS0Qc:;
+    set_currentJobId: function SP_WorkManagement_OM_CreateRefreshJobResult$set_currentJobId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CurrentJobId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CurrentJobId', value));
         }
         return value;
     },
     
-    get_encounteredError: function SP_WorkManagement_OM_CreateRefreshJobResult$get_encounteredError$in() {ULS0Qc:;
+    get_encounteredError: function SP_WorkManagement_OM_CreateRefreshJobResult$get_encounteredError() {ULS0Qc:;
         this.checkUninitializedProperty('EncounteredError');
-        return (this.get_objectData().get_properties()['EncounteredError']);
+        return ((this.get_objectData().get_properties()['EncounteredError']));
     },
-    
-    set_encounteredError: function SP_WorkManagement_OM_CreateRefreshJobResult$set_encounteredError$in(value) {ULS0Qc:;
+    set_encounteredError: function SP_WorkManagement_OM_CreateRefreshJobResult$set_encounteredError(value) {ULS0Qc:;
         this.get_objectData().get_properties()['EncounteredError'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'EncounteredError', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_CreateRefreshJobResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_CreateRefreshJobResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CreatedJob;
@@ -571,38 +559,36 @@ SP.WorkManagement.OM.CreateRefreshJobResultPropertyNames = function SP_WorkManag
 SP.WorkManagement.OM.CustomAttributeFilter = function SP_WorkManagement_OM_CustomAttributeFilter(context) {ULS0Qc:;
     SP.WorkManagement.OM.CustomAttributeFilter.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{0e21bb74-7473-48b1-9f7b-d1185ba1ca71}', arguments) ]);
 }
-SP.WorkManagement.OM.CustomAttributeFilter.newObject = function SP_WorkManagement_OM_CustomAttributeFilter$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.CustomAttributeFilter.newObject = function SP_WorkManagement_OM_CustomAttributeFilter$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.CustomAttributeFilter(context, new SP.ObjectPathConstructor(context, '{0e21bb74-7473-48b1-9f7b-d1185ba1ca71}', null));
 }
 SP.WorkManagement.OM.CustomAttributeFilter.prototype = {
     
-    get_attributes: function SP_WorkManagement_OM_CustomAttributeFilter$get_attributes$in() {ULS0Qc:;
+    get_attributes: function SP_WorkManagement_OM_CustomAttributeFilter$get_attributes() {ULS0Qc:;
         this.checkUninitializedProperty('Attributes');
-        return (this.get_objectData().get_properties()['Attributes']);
+        return ((this.get_objectData().get_properties()['Attributes']));
     },
-    
-    set_attributes: function SP_WorkManagement_OM_CustomAttributeFilter$set_attributes$in(value) {ULS0Qc:;
+    set_attributes: function SP_WorkManagement_OM_CustomAttributeFilter$set_attributes(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Attributes'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Attributes', value));
         }
         return value;
     },
     
-    get_concatType: function SP_WorkManagement_OM_CustomAttributeFilter$get_concatType$in() {ULS0Qc:;
+    get_concatType: function SP_WorkManagement_OM_CustomAttributeFilter$get_concatType() {ULS0Qc:;
         this.checkUninitializedProperty('ConcatType');
-        return (this.get_objectData().get_properties()['ConcatType']);
+        return ((this.get_objectData().get_properties()['ConcatType']));
     },
-    
-    set_concatType: function SP_WorkManagement_OM_CustomAttributeFilter$set_concatType$in(value) {ULS0Qc:;
+    set_concatType: function SP_WorkManagement_OM_CustomAttributeFilter$set_concatType(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ConcatType'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ConcatType', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_CustomAttributeFilter$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_CustomAttributeFilter$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Attributes;
@@ -628,59 +614,55 @@ SP.WorkManagement.OM.DashboardScriptExtensionInfo = function SP_WorkManagement_O
 }
 SP.WorkManagement.OM.DashboardScriptExtensionInfo.prototype = {
     
-    get_providerKey: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_providerKey$in() {ULS0Qc:;
+    get_providerKey: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_providerKey() {ULS0Qc:;
         this.checkUninitializedProperty('ProviderKey');
-        return (this.get_objectData().get_properties()['ProviderKey']);
+        return ((this.get_objectData().get_properties()['ProviderKey']));
     },
-    
-    set_providerKey: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_providerKey$in(value) {ULS0Qc:;
+    set_providerKey: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_providerKey(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ProviderKey'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ProviderKey', value));
         }
         return value;
     },
     
-    get_scriptClass: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_scriptClass$in() {ULS0Qc:;
+    get_scriptClass: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_scriptClass() {ULS0Qc:;
         this.checkUninitializedProperty('ScriptClass');
-        return (this.get_objectData().get_properties()['ScriptClass']);
+        return ((this.get_objectData().get_properties()['ScriptClass']));
     },
-    
-    set_scriptClass: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_scriptClass$in(value) {ULS0Qc:;
+    set_scriptClass: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_scriptClass(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ScriptClass'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ScriptClass', value));
         }
         return value;
     },
     
-    get_scriptData: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_scriptData$in() {ULS0Qc:;
+    get_scriptData: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_scriptData() {ULS0Qc:;
         this.checkUninitializedProperty('ScriptData');
-        return (this.get_objectData().get_properties()['ScriptData']);
+        return ((this.get_objectData().get_properties()['ScriptData']));
     },
-    
-    set_scriptData: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_scriptData$in(value) {ULS0Qc:;
+    set_scriptData: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_scriptData(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ScriptData'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ScriptData', value));
         }
         return value;
     },
     
-    get_scriptFiles: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_scriptFiles$in() {ULS0Qc:;
+    get_scriptFiles: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$get_scriptFiles() {ULS0Qc:;
         this.checkUninitializedProperty('ScriptFiles');
-        return (this.get_objectData().get_properties()['ScriptFiles']);
+        return ((this.get_objectData().get_properties()['ScriptFiles']));
     },
-    
-    set_scriptFiles: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_scriptFiles$in(value) {ULS0Qc:;
+    set_scriptFiles: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$set_scriptFiles(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ScriptFiles'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ScriptFiles', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_DashboardScriptExtensionInfo$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.ProviderKey;
@@ -716,15 +698,15 @@ SP.WorkManagement.OM.DashboardScriptExtensionInfoClientCollection = function SP_
 }
 SP.WorkManagement.OM.DashboardScriptExtensionInfoClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_DashboardScriptExtensionInfoClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_DashboardScriptExtensionInfoClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_DashboardScriptExtensionInfoClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_DashboardScriptExtensionInfoClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_DashboardScriptExtensionInfoClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_DashboardScriptExtensionInfoClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.DashboardScriptExtensionInfo;
     }
 }
@@ -733,38 +715,36 @@ SP.WorkManagement.OM.DashboardScriptExtensionInfoClientCollection.prototype = {
 SP.WorkManagement.OM.DateRangeCriterion = function SP_WorkManagement_OM_DateRangeCriterion(context) {ULS0Qc:;
     SP.WorkManagement.OM.DateRangeCriterion.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{c9c79001-8e9d-4f24-860b-55bd22c13eae}', arguments) ]);
 }
-SP.WorkManagement.OM.DateRangeCriterion.newObject = function SP_WorkManagement_OM_DateRangeCriterion$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.DateRangeCriterion.newObject = function SP_WorkManagement_OM_DateRangeCriterion$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.DateRangeCriterion(context, new SP.ObjectPathConstructor(context, '{c9c79001-8e9d-4f24-860b-55bd22c13eae}', null));
 }
 SP.WorkManagement.OM.DateRangeCriterion.prototype = {
     
-    get_rangeEndValue: function SP_WorkManagement_OM_DateRangeCriterion$get_rangeEndValue$in() {ULS0Qc:;
+    get_rangeEndValue: function SP_WorkManagement_OM_DateRangeCriterion$get_rangeEndValue() {ULS0Qc:;
         this.checkUninitializedProperty('RangeEndValue');
-        return (this.get_objectData().get_properties()['RangeEndValue']);
+        return ((this.get_objectData().get_properties()['RangeEndValue']));
     },
-    
-    set_rangeEndValue: function SP_WorkManagement_OM_DateRangeCriterion$set_rangeEndValue$in(value) {ULS0Qc:;
+    set_rangeEndValue: function SP_WorkManagement_OM_DateRangeCriterion$set_rangeEndValue(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RangeEndValue'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RangeEndValue', value));
         }
         return value;
     },
     
-    get_rangeStartValue: function SP_WorkManagement_OM_DateRangeCriterion$get_rangeStartValue$in() {ULS0Qc:;
+    get_rangeStartValue: function SP_WorkManagement_OM_DateRangeCriterion$get_rangeStartValue() {ULS0Qc:;
         this.checkUninitializedProperty('RangeStartValue');
-        return (this.get_objectData().get_properties()['RangeStartValue']);
+        return ((this.get_objectData().get_properties()['RangeStartValue']));
     },
-    
-    set_rangeStartValue: function SP_WorkManagement_OM_DateRangeCriterion$set_rangeStartValue$in(value) {ULS0Qc:;
+    set_rangeStartValue: function SP_WorkManagement_OM_DateRangeCriterion$set_rangeStartValue(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RangeStartValue'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RangeStartValue', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_DateRangeCriterion$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_DateRangeCriterion$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.RangeEndValue;
@@ -790,22 +770,22 @@ SP.WorkManagement.OM.ExchangeUserSyncState = function SP_WorkManagement_OM_Excha
 }
 SP.WorkManagement.OM.ExchangeUserSyncState.prototype = {
     
-    get_isOptedIn: function SP_WorkManagement_OM_ExchangeUserSyncState$get_isOptedIn$in() {ULS0Qc:;
+    get_isOptedIn: function SP_WorkManagement_OM_ExchangeUserSyncState$get_isOptedIn() {ULS0Qc:;
         this.checkUninitializedProperty('IsOptedIn');
-        return (this.get_objectData().get_properties()['IsOptedIn']);
+        return ((this.get_objectData().get_properties()['IsOptedIn']));
     },
     
-    get_lastEndTime: function SP_WorkManagement_OM_ExchangeUserSyncState$get_lastEndTime$in() {ULS0Qc:;
+    get_lastEndTime: function SP_WorkManagement_OM_ExchangeUserSyncState$get_lastEndTime() {ULS0Qc:;
         this.checkUninitializedProperty('LastEndTime');
-        return (this.get_objectData().get_properties()['LastEndTime']);
+        return ((this.get_objectData().get_properties()['LastEndTime']));
     },
     
-    get_lastSyncResult: function SP_WorkManagement_OM_ExchangeUserSyncState$get_lastSyncResult$in() {ULS0Qc:;
+    get_lastSyncResult: function SP_WorkManagement_OM_ExchangeUserSyncState$get_lastSyncResult() {ULS0Qc:;
         this.checkUninitializedProperty('LastSyncResult');
-        return (this.get_objectData().get_properties()['LastSyncResult']);
+        return ((this.get_objectData().get_properties()['LastSyncResult']));
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_ExchangeUserSyncState$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_ExchangeUserSyncState$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.IsOptedIn;
@@ -834,103 +814,96 @@ SP.WorkManagement.OM.ExchangeUserSyncStatePropertyNames = function SP_WorkManage
 SP.WorkManagement.OM.Location = function SP_WorkManagement_OM_Location(context) {ULS0Qc:;
     SP.WorkManagement.OM.Location.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{0280ffca-96c5-4c96-bbbb-759887950afd}', arguments) ]);
 }
-SP.WorkManagement.OM.Location.newObject = function SP_WorkManagement_OM_Location$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.Location.newObject = function SP_WorkManagement_OM_Location$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.Location(context, new SP.ObjectPathConstructor(context, '{0280ffca-96c5-4c96-bbbb-759887950afd}', null));
 }
 SP.WorkManagement.OM.Location.prototype = {
     
-    get_color: function SP_WorkManagement_OM_Location$get_color$in() {ULS0Qc:;
+    get_color: function SP_WorkManagement_OM_Location$get_color() {ULS0Qc:;
         this.checkUninitializedProperty('Color');
-        return (this.get_objectData().get_properties()['Color']);
+        return ((this.get_objectData().get_properties()['Color']));
     },
-    
-    set_color: function SP_WorkManagement_OM_Location$set_color$in(value) {ULS0Qc:;
+    set_color: function SP_WorkManagement_OM_Location$set_color(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Color'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Color', value));
         }
         return value;
     },
     
-    get_id: function SP_WorkManagement_OM_Location$get_id$in() {ULS0Qc:;
+    get_id: function SP_WorkManagement_OM_Location$get_id() {ULS0Qc:;
         this.checkUninitializedProperty('Id');
-        return (this.get_objectData().get_properties()['Id']);
+        return ((this.get_objectData().get_properties()['Id']));
     },
-    
-    set_id: function SP_WorkManagement_OM_Location$set_id$in(value) {ULS0Qc:;
+    set_id: function SP_WorkManagement_OM_Location$set_id(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Id'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Id', value));
         }
         return value;
     },
     
-    get_important: function SP_WorkManagement_OM_Location$get_important$in() {ULS0Qc:;
+    get_important: function SP_WorkManagement_OM_Location$get_important() {ULS0Qc:;
         this.checkUninitializedProperty('Important');
-        return (this.get_objectData().get_properties()['Important']);
+        return ((this.get_objectData().get_properties()['Important']));
     },
-    
-    set_important: function SP_WorkManagement_OM_Location$set_important$in(value) {ULS0Qc:;
+    set_important: function SP_WorkManagement_OM_Location$set_important(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Important'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Important', value));
         }
         return value;
     },
     
-    get_name: function SP_WorkManagement_OM_Location$get_name$in() {ULS0Qc:;
+    get_name: function SP_WorkManagement_OM_Location$get_name() {ULS0Qc:;
         this.checkUninitializedProperty('Name');
-        return (this.get_objectData().get_properties()['Name']);
+        return ((this.get_objectData().get_properties()['Name']));
     },
-    
-    set_name: function SP_WorkManagement_OM_Location$set_name$in(value) {ULS0Qc:;
+    set_name: function SP_WorkManagement_OM_Location$set_name(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Name'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Name', value));
         }
         return value;
     },
     
-    get_parentId: function SP_WorkManagement_OM_Location$get_parentId$in() {ULS0Qc:;
+    get_parentId: function SP_WorkManagement_OM_Location$get_parentId() {ULS0Qc:;
         this.checkUninitializedProperty('ParentId');
-        return (this.get_objectData().get_properties()['ParentId']);
+        return ((this.get_objectData().get_properties()['ParentId']));
     },
-    
-    set_parentId: function SP_WorkManagement_OM_Location$set_parentId$in(value) {ULS0Qc:;
+    set_parentId: function SP_WorkManagement_OM_Location$set_parentId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ParentId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ParentId', value));
         }
         return value;
     },
     
-    get_rootProviderKey: function SP_WorkManagement_OM_Location$get_rootProviderKey$in() {ULS0Qc:;
+    get_rootProviderKey: function SP_WorkManagement_OM_Location$get_rootProviderKey() {ULS0Qc:;
         this.checkUninitializedProperty('RootProviderKey');
-        return (this.get_objectData().get_properties()['RootProviderKey']);
+        return ((this.get_objectData().get_properties()['RootProviderKey']));
     },
-    
-    set_rootProviderKey: function SP_WorkManagement_OM_Location$set_rootProviderKey$in(value) {ULS0Qc:;
+    set_rootProviderKey: function SP_WorkManagement_OM_Location$set_rootProviderKey(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RootProviderKey'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RootProviderKey', value));
         }
         return value;
     },
     
-    get_url: function SP_WorkManagement_OM_Location$get_url$in() {ULS0Qc:;
+    get_url: function SP_WorkManagement_OM_Location$get_url() {ULS0Qc:;
         this.checkUninitializedProperty('Url');
-        return (this.get_objectData().get_properties()['Url']);
+        return ((this.get_objectData().get_properties()['Url']));
     },
-    
-    set_url: function SP_WorkManagement_OM_Location$set_url$in(value) {ULS0Qc:;
+    set_url: function SP_WorkManagement_OM_Location$set_url(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Url'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Url', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_Location$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_Location$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Color;
@@ -981,15 +954,15 @@ SP.WorkManagement.OM.LocationClientCollection = function SP_WorkManagement_OM_Lo
 }
 SP.WorkManagement.OM.LocationClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_LocationClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_LocationClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_LocationClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_LocationClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_LocationClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_LocationClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.Location;
     }
 }
@@ -1000,33 +973,31 @@ SP.WorkManagement.OM.LocationDisplaySetting = function SP_WorkManagement_OM_Loca
 }
 SP.WorkManagement.OM.LocationDisplaySetting.prototype = {
     
-    get_color: function SP_WorkManagement_OM_LocationDisplaySetting$get_color$in() {ULS0Qc:;
+    get_color: function SP_WorkManagement_OM_LocationDisplaySetting$get_color() {ULS0Qc:;
         this.checkUninitializedProperty('Color');
-        return (this.get_objectData().get_properties()['Color']);
+        return ((this.get_objectData().get_properties()['Color']));
     },
-    
-    set_color: function SP_WorkManagement_OM_LocationDisplaySetting$set_color$in(value) {ULS0Qc:;
+    set_color: function SP_WorkManagement_OM_LocationDisplaySetting$set_color(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Color'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Color', value));
         }
         return value;
     },
     
-    get_id: function SP_WorkManagement_OM_LocationDisplaySetting$get_id$in() {ULS0Qc:;
+    get_id: function SP_WorkManagement_OM_LocationDisplaySetting$get_id() {ULS0Qc:;
         this.checkUninitializedProperty('Id');
-        return (this.get_objectData().get_properties()['Id']);
+        return ((this.get_objectData().get_properties()['Id']));
     },
-    
-    set_id: function SP_WorkManagement_OM_LocationDisplaySetting$set_id$in(value) {ULS0Qc:;
+    set_id: function SP_WorkManagement_OM_LocationDisplaySetting$set_id(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Id'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Id', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_LocationDisplaySetting$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_LocationDisplaySetting$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Color;
@@ -1050,38 +1021,36 @@ SP.WorkManagement.OM.LocationDisplaySettingPropertyNames = function SP_WorkManag
 SP.WorkManagement.OM.LocationFilter = function SP_WorkManagement_OM_LocationFilter(context) {ULS0Qc:;
     SP.WorkManagement.OM.LocationFilter.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{d9ce752e-01ed-4872-b4da-fc362038fbf0}', arguments) ]);
 }
-SP.WorkManagement.OM.LocationFilter.newObject = function SP_WorkManagement_OM_LocationFilter$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.LocationFilter.newObject = function SP_WorkManagement_OM_LocationFilter$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.LocationFilter(context, new SP.ObjectPathConstructor(context, '{d9ce752e-01ed-4872-b4da-fc362038fbf0}', null));
 }
 SP.WorkManagement.OM.LocationFilter.prototype = {
     
-    get_includeUncategorizedTasks: function SP_WorkManagement_OM_LocationFilter$get_includeUncategorizedTasks$in() {ULS0Qc:;
+    get_includeUncategorizedTasks: function SP_WorkManagement_OM_LocationFilter$get_includeUncategorizedTasks() {ULS0Qc:;
         this.checkUninitializedProperty('IncludeUncategorizedTasks');
-        return (this.get_objectData().get_properties()['IncludeUncategorizedTasks']);
+        return ((this.get_objectData().get_properties()['IncludeUncategorizedTasks']));
     },
-    
-    set_includeUncategorizedTasks: function SP_WorkManagement_OM_LocationFilter$set_includeUncategorizedTasks$in(value) {ULS0Qc:;
+    set_includeUncategorizedTasks: function SP_WorkManagement_OM_LocationFilter$set_includeUncategorizedTasks(value) {ULS0Qc:;
         this.get_objectData().get_properties()['IncludeUncategorizedTasks'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IncludeUncategorizedTasks', value));
         }
         return value;
     },
     
-    get_locationKeys: function SP_WorkManagement_OM_LocationFilter$get_locationKeys$in() {ULS0Qc:;
+    get_locationKeys: function SP_WorkManagement_OM_LocationFilter$get_locationKeys() {ULS0Qc:;
         this.checkUninitializedProperty('LocationKeys');
-        return (this.get_objectData().get_properties()['LocationKeys']);
+        return ((this.get_objectData().get_properties()['LocationKeys']));
     },
-    
-    set_locationKeys: function SP_WorkManagement_OM_LocationFilter$set_locationKeys$in(value) {ULS0Qc:;
+    set_locationKeys: function SP_WorkManagement_OM_LocationFilter$set_locationKeys(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LocationKeys'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LocationKeys', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_LocationFilter$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_LocationFilter$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.IncludeUncategorizedTasks;
@@ -1105,20 +1074,20 @@ SP.WorkManagement.OM.LocationFilterPropertyNames = function SP_WorkManagement_OM
 SP.WorkManagement.OM.LocationGroupClientCollection = function SP_WorkManagement_OM_LocationGroupClientCollection(context) {ULS0Qc:;
     SP.WorkManagement.OM.LocationGroupClientCollection.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{25acd8c5-c100-45da-b4c5-2bf698f65649}', arguments) ]);
 }
-SP.WorkManagement.OM.LocationGroupClientCollection.newObject = function SP_WorkManagement_OM_LocationGroupClientCollection$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.LocationGroupClientCollection.newObject = function SP_WorkManagement_OM_LocationGroupClientCollection$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.LocationGroupClientCollection(context, new SP.ObjectPathConstructor(context, '{25acd8c5-c100-45da-b4c5-2bf698f65649}', null));
 }
 SP.WorkManagement.OM.LocationGroupClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_LocationGroupClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_LocationGroupClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_LocationGroupClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_LocationGroupClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_LocationGroupClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_LocationGroupClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.Task;
     }
 }
@@ -1129,7 +1098,7 @@ SP.WorkManagement.OM.LocationOrientedSortableSession = function SP_WorkManagemen
 }
 SP.WorkManagement.OM.LocationOrientedSortableSession.prototype = {
     
-    movePersonalTaskToLocation: function SP_WorkManagement_OM_LocationOrientedSortableSession$movePersonalTaskToLocation$in(taskKey, newLocationKey) {ULS0Qc:;
+    movePersonalTaskToLocation: function SP_WorkManagement_OM_LocationOrientedSortableSession$movePersonalTaskToLocation(taskKey, newLocationKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'MovePersonalTaskToLocation', [ taskKey, newLocationKey ]);
@@ -1139,7 +1108,7 @@ SP.WorkManagement.OM.LocationOrientedSortableSession.prototype = {
         return $v_1;
     },
     
-    readTasks: function SP_WorkManagement_OM_LocationOrientedSortableSession$readTasks$in(query) {ULS0Qc:;
+    readTasks: function SP_WorkManagement_OM_LocationOrientedSortableSession$readTasks(query) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationGroupClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'ReadTasks', [ query ]));
@@ -1153,13 +1122,13 @@ SP.WorkManagement.OM.LocationOrientedUserOrderedSession = function SP_WorkManage
 }
 SP.WorkManagement.OM.LocationOrientedUserOrderedSession.prototype = {
     
-    reorderTask: function SP_WorkManagement_OM_LocationOrientedUserOrderedSession$reorderTask$in(taskKey, newAfterTaskKey) {ULS0Qc:;
+    reorderTask: function SP_WorkManagement_OM_LocationOrientedUserOrderedSession$reorderTask(taskKey, newAfterTaskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'ReorderTask', [ taskKey, newAfterTaskKey ]);
         $v_0.addQuery($v_1);
     },
     
-    movePersonalTaskToLocation: function SP_WorkManagement_OM_LocationOrientedUserOrderedSession$movePersonalTaskToLocation$in(taskKey, newLocationKey) {ULS0Qc:;
+    movePersonalTaskToLocation: function SP_WorkManagement_OM_LocationOrientedUserOrderedSession$movePersonalTaskToLocation(taskKey, newLocationKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'MovePersonalTaskToLocation', [ taskKey, newLocationKey ]);
@@ -1169,7 +1138,7 @@ SP.WorkManagement.OM.LocationOrientedUserOrderedSession.prototype = {
         return $v_1;
     },
     
-    readTasks: function SP_WorkManagement_OM_LocationOrientedUserOrderedSession$readTasks$in(query) {ULS0Qc:;
+    readTasks: function SP_WorkManagement_OM_LocationOrientedUserOrderedSession$readTasks(query) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationGroupClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'ReadTasks', [ query ]));
@@ -1183,72 +1152,67 @@ SP.WorkManagement.OM.LocationUpdateResult = function SP_WorkManagement_OM_Locati
 }
 SP.WorkManagement.OM.LocationUpdateResult.prototype = {
     
-    get_activeAddedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_activeAddedCount$in() {ULS0Qc:;
+    get_activeAddedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_activeAddedCount() {ULS0Qc:;
         this.checkUninitializedProperty('ActiveAddedCount');
-        return (this.get_objectData().get_properties()['ActiveAddedCount']);
+        return ((this.get_objectData().get_properties()['ActiveAddedCount']));
     },
-    
-    set_activeAddedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_activeAddedCount$in(value) {ULS0Qc:;
+    set_activeAddedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_activeAddedCount(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ActiveAddedCount'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ActiveAddedCount', value));
         }
         return value;
     },
     
-    get_addedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_addedCount$in() {ULS0Qc:;
+    get_addedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_addedCount() {ULS0Qc:;
         this.checkUninitializedProperty('AddedCount');
-        return (this.get_objectData().get_properties()['AddedCount']);
+        return ((this.get_objectData().get_properties()['AddedCount']));
     },
-    
-    set_addedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_addedCount$in(value) {ULS0Qc:;
+    set_addedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_addedCount(value) {ULS0Qc:;
         this.get_objectData().get_properties()['AddedCount'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'AddedCount', value));
         }
         return value;
     },
     
-    get_removedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_removedCount$in() {ULS0Qc:;
+    get_removedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_removedCount() {ULS0Qc:;
         this.checkUninitializedProperty('RemovedCount');
-        return (this.get_objectData().get_properties()['RemovedCount']);
+        return ((this.get_objectData().get_properties()['RemovedCount']));
     },
-    
-    set_removedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_removedCount$in(value) {ULS0Qc:;
+    set_removedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_removedCount(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RemovedCount'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RemovedCount', value));
         }
         return value;
     },
     
-    get_rootLocationId: function SP_WorkManagement_OM_LocationUpdateResult$get_rootLocationId$in() {ULS0Qc:;
+    get_rootLocationId: function SP_WorkManagement_OM_LocationUpdateResult$get_rootLocationId() {ULS0Qc:;
         this.checkUninitializedProperty('RootLocationId');
-        return (this.get_objectData().get_properties()['RootLocationId']);
+        return ((this.get_objectData().get_properties()['RootLocationId']));
     },
-    
-    set_rootLocationId: function SP_WorkManagement_OM_LocationUpdateResult$set_rootLocationId$in(value) {ULS0Qc:;
+    set_rootLocationId: function SP_WorkManagement_OM_LocationUpdateResult$set_rootLocationId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RootLocationId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RootLocationId', value));
         }
         return value;
     },
     
-    get_updatedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_updatedCount$in() {ULS0Qc:;
+    get_updatedCount: function SP_WorkManagement_OM_LocationUpdateResult$get_updatedCount() {ULS0Qc:;
         this.checkUninitializedProperty('UpdatedCount');
-        return (this.get_objectData().get_properties()['UpdatedCount']);
+        return ((this.get_objectData().get_properties()['UpdatedCount']));
     },
-    
-    set_updatedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_updatedCount$in(value) {ULS0Qc:;
+    set_updatedCount: function SP_WorkManagement_OM_LocationUpdateResult$set_updatedCount(value) {ULS0Qc:;
         this.get_objectData().get_properties()['UpdatedCount'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'UpdatedCount', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_LocationUpdateResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_LocationUpdateResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.ActiveAddedCount;
@@ -1289,15 +1253,15 @@ SP.WorkManagement.OM.LocationUpdateResultClientCollection = function SP_WorkMana
 }
 SP.WorkManagement.OM.LocationUpdateResultClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_LocationUpdateResultClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_LocationUpdateResultClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_LocationUpdateResultClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_LocationUpdateResultClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_LocationUpdateResultClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_LocationUpdateResultClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.LocationUpdateResult;
     }
 }
@@ -1306,38 +1270,36 @@ SP.WorkManagement.OM.LocationUpdateResultClientCollection.prototype = {
 SP.WorkManagement.OM.NameCriterion = function SP_WorkManagement_OM_NameCriterion(context) {ULS0Qc:;
     SP.WorkManagement.OM.NameCriterion.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{1c2a7a53-2cdd-4c21-8dd6-1673656eca45}', arguments) ]);
 }
-SP.WorkManagement.OM.NameCriterion.newObject = function SP_WorkManagement_OM_NameCriterion$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.NameCriterion.newObject = function SP_WorkManagement_OM_NameCriterion$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.NameCriterion(context, new SP.ObjectPathConstructor(context, '{1c2a7a53-2cdd-4c21-8dd6-1673656eca45}', null));
 }
 SP.WorkManagement.OM.NameCriterion.prototype = {
     
-    get_compareType: function SP_WorkManagement_OM_NameCriterion$get_compareType$in() {ULS0Qc:;
+    get_compareType: function SP_WorkManagement_OM_NameCriterion$get_compareType() {ULS0Qc:;
         this.checkUninitializedProperty('CompareType');
-        return (this.get_objectData().get_properties()['CompareType']);
+        return ((this.get_objectData().get_properties()['CompareType']));
     },
-    
-    set_compareType: function SP_WorkManagement_OM_NameCriterion$set_compareType$in(value) {ULS0Qc:;
+    set_compareType: function SP_WorkManagement_OM_NameCriterion$set_compareType(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CompareType'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CompareType', value));
         }
         return value;
     },
     
-    get_compareValue: function SP_WorkManagement_OM_NameCriterion$get_compareValue$in() {ULS0Qc:;
+    get_compareValue: function SP_WorkManagement_OM_NameCriterion$get_compareValue() {ULS0Qc:;
         this.checkUninitializedProperty('CompareValue');
-        return (this.get_objectData().get_properties()['CompareValue']);
+        return ((this.get_objectData().get_properties()['CompareValue']));
     },
-    
-    set_compareValue: function SP_WorkManagement_OM_NameCriterion$set_compareValue$in(value) {ULS0Qc:;
+    set_compareValue: function SP_WorkManagement_OM_NameCriterion$set_compareValue(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CompareValue'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CompareValue', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_NameCriterion$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_NameCriterion$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CompareType;
@@ -1363,7 +1325,7 @@ SP.WorkManagement.OM.NonTaskDataReadResult = function SP_WorkManagement_OM_NonTa
 }
 SP.WorkManagement.OM.NonTaskDataReadResult.prototype = {
     
-    get_allLocatons: function SP_WorkManagement_OM_NonTaskDataReadResult$get_allLocatons$in() {ULS0Qc:;
+    get_allLocatons: function SP_WorkManagement_OM_NonTaskDataReadResult$get_allLocatons() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['AllLocatons']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.LocationClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'AllLocatons'));
@@ -1372,7 +1334,7 @@ SP.WorkManagement.OM.NonTaskDataReadResult.prototype = {
         return $v_0;
     },
     
-    get_persistedProperties: function SP_WorkManagement_OM_NonTaskDataReadResult$get_persistedProperties$in() {ULS0Qc:;
+    get_persistedProperties: function SP_WorkManagement_OM_NonTaskDataReadResult$get_persistedProperties() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['PersistedProperties']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.PersistedProperties(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'PersistedProperties'));
@@ -1381,7 +1343,7 @@ SP.WorkManagement.OM.NonTaskDataReadResult.prototype = {
         return $v_0;
     },
     
-    get_refreshHistory: function SP_WorkManagement_OM_NonTaskDataReadResult$get_refreshHistory$in() {ULS0Qc:;
+    get_refreshHistory: function SP_WorkManagement_OM_NonTaskDataReadResult$get_refreshHistory() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['RefreshHistory']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.RefreshHistory(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'RefreshHistory'));
@@ -1390,7 +1352,7 @@ SP.WorkManagement.OM.NonTaskDataReadResult.prototype = {
         return $v_0;
     },
     
-    get_scriptExtensions: function SP_WorkManagement_OM_NonTaskDataReadResult$get_scriptExtensions$in() {ULS0Qc:;
+    get_scriptExtensions: function SP_WorkManagement_OM_NonTaskDataReadResult$get_scriptExtensions() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['ScriptExtensions']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.DashboardScriptExtensionInfoClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'ScriptExtensions'));
@@ -1399,7 +1361,7 @@ SP.WorkManagement.OM.NonTaskDataReadResult.prototype = {
         return $v_0;
     },
     
-    get_userSettings: function SP_WorkManagement_OM_NonTaskDataReadResult$get_userSettings$in() {ULS0Qc:;
+    get_userSettings: function SP_WorkManagement_OM_NonTaskDataReadResult$get_userSettings() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['UserSettings']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.UserSettings(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'UserSettings'));
@@ -1408,7 +1370,7 @@ SP.WorkManagement.OM.NonTaskDataReadResult.prototype = {
         return $v_0;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_NonTaskDataReadResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_NonTaskDataReadResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.AllLocatons;
@@ -1452,38 +1414,36 @@ SP.WorkManagement.OM.NonTaskDataReadResultObjectPropertyNames = function SP_Work
 SP.WorkManagement.OM.OrderInfo = function SP_WorkManagement_OM_OrderInfo(context) {ULS0Qc:;
     SP.WorkManagement.OM.OrderInfo.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{8c385903-1e43-4256-8037-f7ff442154ec}', arguments) ]);
 }
-SP.WorkManagement.OM.OrderInfo.newObject = function SP_WorkManagement_OM_OrderInfo$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.OrderInfo.newObject = function SP_WorkManagement_OM_OrderInfo$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.OrderInfo(context, new SP.ObjectPathConstructor(context, '{8c385903-1e43-4256-8037-f7ff442154ec}', null));
 }
 SP.WorkManagement.OM.OrderInfo.prototype = {
     
-    get_field: function SP_WorkManagement_OM_OrderInfo$get_field$in() {ULS0Qc:;
+    get_field: function SP_WorkManagement_OM_OrderInfo$get_field() {ULS0Qc:;
         this.checkUninitializedProperty('Field');
-        return (this.get_objectData().get_properties()['Field']);
+        return ((this.get_objectData().get_properties()['Field']));
     },
-    
-    set_field: function SP_WorkManagement_OM_OrderInfo$set_field$in(value) {ULS0Qc:;
+    set_field: function SP_WorkManagement_OM_OrderInfo$set_field(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Field'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Field', value));
         }
         return value;
     },
     
-    get_isDescending: function SP_WorkManagement_OM_OrderInfo$get_isDescending$in() {ULS0Qc:;
+    get_isDescending: function SP_WorkManagement_OM_OrderInfo$get_isDescending() {ULS0Qc:;
         this.checkUninitializedProperty('IsDescending');
-        return (this.get_objectData().get_properties()['IsDescending']);
+        return ((this.get_objectData().get_properties()['IsDescending']));
     },
-    
-    set_isDescending: function SP_WorkManagement_OM_OrderInfo$set_isDescending$in(value) {ULS0Qc:;
+    set_isDescending: function SP_WorkManagement_OM_OrderInfo$set_isDescending(value) {ULS0Qc:;
         this.get_objectData().get_properties()['IsDescending'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IsDescending', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_OrderInfo$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_OrderInfo$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Field;
@@ -1507,77 +1467,72 @@ SP.WorkManagement.OM.OrderInfoPropertyNames = function SP_WorkManagement_OM_Orde
 SP.WorkManagement.OM.PersistedProperties = function SP_WorkManagement_OM_PersistedProperties(context) {ULS0Qc:;
     SP.WorkManagement.OM.PersistedProperties.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{c05ebf4c-f2c5-4167-9043-f21c4e1b682d}', arguments) ]);
 }
-SP.WorkManagement.OM.PersistedProperties.newObject = function SP_WorkManagement_OM_PersistedProperties$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.PersistedProperties.newObject = function SP_WorkManagement_OM_PersistedProperties$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.PersistedProperties(context, new SP.ObjectPathConstructor(context, '{c05ebf4c-f2c5-4167-9043-f21c4e1b682d}', null));
 }
 SP.WorkManagement.OM.PersistedProperties.prototype = {
     
-    get_filteredLocationIds: function SP_WorkManagement_OM_PersistedProperties$get_filteredLocationIds$in() {ULS0Qc:;
+    get_filteredLocationIds: function SP_WorkManagement_OM_PersistedProperties$get_filteredLocationIds() {ULS0Qc:;
         this.checkUninitializedProperty('FilteredLocationIds');
-        return (this.get_objectData().get_properties()['FilteredLocationIds']);
+        return ((this.get_objectData().get_properties()['FilteredLocationIds']));
     },
-    
-    set_filteredLocationIds: function SP_WorkManagement_OM_PersistedProperties$set_filteredLocationIds$in(value) {ULS0Qc:;
+    set_filteredLocationIds: function SP_WorkManagement_OM_PersistedProperties$set_filteredLocationIds(value) {ULS0Qc:;
         this.get_objectData().get_properties()['FilteredLocationIds'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'FilteredLocationIds', value));
         }
         return value;
     },
     
-    get_groupByProjects: function SP_WorkManagement_OM_PersistedProperties$get_groupByProjects$in() {ULS0Qc:;
+    get_groupByProjects: function SP_WorkManagement_OM_PersistedProperties$get_groupByProjects() {ULS0Qc:;
         this.checkUninitializedProperty('GroupByProjects');
-        return (this.get_objectData().get_properties()['GroupByProjects']);
+        return ((this.get_objectData().get_properties()['GroupByProjects']));
     },
-    
-    set_groupByProjects: function SP_WorkManagement_OM_PersistedProperties$set_groupByProjects$in(value) {ULS0Qc:;
+    set_groupByProjects: function SP_WorkManagement_OM_PersistedProperties$set_groupByProjects(value) {ULS0Qc:;
         this.get_objectData().get_properties()['GroupByProjects'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'GroupByProjects', value));
         }
         return value;
     },
     
-    get_hasShownMarkAsImportantCallout: function SP_WorkManagement_OM_PersistedProperties$get_hasShownMarkAsImportantCallout$in() {ULS0Qc:;
+    get_hasShownMarkAsImportantCallout: function SP_WorkManagement_OM_PersistedProperties$get_hasShownMarkAsImportantCallout() {ULS0Qc:;
         this.checkUninitializedProperty('HasShownMarkAsImportantCallout');
-        return (this.get_objectData().get_properties()['HasShownMarkAsImportantCallout']);
+        return ((this.get_objectData().get_properties()['HasShownMarkAsImportantCallout']));
     },
-    
-    set_hasShownMarkAsImportantCallout: function SP_WorkManagement_OM_PersistedProperties$set_hasShownMarkAsImportantCallout$in(value) {ULS0Qc:;
+    set_hasShownMarkAsImportantCallout: function SP_WorkManagement_OM_PersistedProperties$set_hasShownMarkAsImportantCallout(value) {ULS0Qc:;
         this.get_objectData().get_properties()['HasShownMarkAsImportantCallout'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'HasShownMarkAsImportantCallout', value));
         }
         return value;
     },
     
-    get_hasShownTaskListTooLongNotification: function SP_WorkManagement_OM_PersistedProperties$get_hasShownTaskListTooLongNotification$in() {ULS0Qc:;
+    get_hasShownTaskListTooLongNotification: function SP_WorkManagement_OM_PersistedProperties$get_hasShownTaskListTooLongNotification() {ULS0Qc:;
         this.checkUninitializedProperty('HasShownTaskListTooLongNotification');
-        return (this.get_objectData().get_properties()['HasShownTaskListTooLongNotification']);
+        return ((this.get_objectData().get_properties()['HasShownTaskListTooLongNotification']));
     },
-    
-    set_hasShownTaskListTooLongNotification: function SP_WorkManagement_OM_PersistedProperties$set_hasShownTaskListTooLongNotification$in(value) {ULS0Qc:;
+    set_hasShownTaskListTooLongNotification: function SP_WorkManagement_OM_PersistedProperties$set_hasShownTaskListTooLongNotification(value) {ULS0Qc:;
         this.get_objectData().get_properties()['HasShownTaskListTooLongNotification'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'HasShownTaskListTooLongNotification', value));
         }
         return value;
     },
     
-    get_quickLaunchLandingPage: function SP_WorkManagement_OM_PersistedProperties$get_quickLaunchLandingPage$in() {ULS0Qc:;
+    get_quickLaunchLandingPage: function SP_WorkManagement_OM_PersistedProperties$get_quickLaunchLandingPage() {ULS0Qc:;
         this.checkUninitializedProperty('QuickLaunchLandingPage');
-        return (this.get_objectData().get_properties()['QuickLaunchLandingPage']);
+        return ((this.get_objectData().get_properties()['QuickLaunchLandingPage']));
     },
-    
-    set_quickLaunchLandingPage: function SP_WorkManagement_OM_PersistedProperties$set_quickLaunchLandingPage$in(value) {ULS0Qc:;
+    set_quickLaunchLandingPage: function SP_WorkManagement_OM_PersistedProperties$set_quickLaunchLandingPage(value) {ULS0Qc:;
         this.get_objectData().get_properties()['QuickLaunchLandingPage'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'QuickLaunchLandingPage', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_PersistedProperties$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_PersistedProperties$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.FilteredLocationIds;
@@ -1618,46 +1573,43 @@ SP.WorkManagement.OM.ProviderErrorInfo = function SP_WorkManagement_OM_ProviderE
 }
 SP.WorkManagement.OM.ProviderErrorInfo.prototype = {
     
-    get_correlationId: function SP_WorkManagement_OM_ProviderErrorInfo$get_correlationId$in() {ULS0Qc:;
+    get_correlationId: function SP_WorkManagement_OM_ProviderErrorInfo$get_correlationId() {ULS0Qc:;
         this.checkUninitializedProperty('CorrelationId');
-        return (this.get_objectData().get_properties()['CorrelationId']);
+        return ((this.get_objectData().get_properties()['CorrelationId']));
     },
-    
-    set_correlationId: function SP_WorkManagement_OM_ProviderErrorInfo$set_correlationId$in(value) {ULS0Qc:;
+    set_correlationId: function SP_WorkManagement_OM_ProviderErrorInfo$set_correlationId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CorrelationId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CorrelationId', value));
         }
         return value;
     },
     
-    get_lastSuccessfulRefresh: function SP_WorkManagement_OM_ProviderErrorInfo$get_lastSuccessfulRefresh$in() {ULS0Qc:;
+    get_lastSuccessfulRefresh: function SP_WorkManagement_OM_ProviderErrorInfo$get_lastSuccessfulRefresh() {ULS0Qc:;
         this.checkUninitializedProperty('LastSuccessfulRefresh');
-        return (this.get_objectData().get_properties()['LastSuccessfulRefresh']);
+        return ((this.get_objectData().get_properties()['LastSuccessfulRefresh']));
     },
-    
-    set_lastSuccessfulRefresh: function SP_WorkManagement_OM_ProviderErrorInfo$set_lastSuccessfulRefresh$in(value) {ULS0Qc:;
+    set_lastSuccessfulRefresh: function SP_WorkManagement_OM_ProviderErrorInfo$set_lastSuccessfulRefresh(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LastSuccessfulRefresh'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LastSuccessfulRefresh', value));
         }
         return value;
     },
     
-    get_localizedName: function SP_WorkManagement_OM_ProviderErrorInfo$get_localizedName$in() {ULS0Qc:;
+    get_localizedName: function SP_WorkManagement_OM_ProviderErrorInfo$get_localizedName() {ULS0Qc:;
         this.checkUninitializedProperty('LocalizedName');
-        return (this.get_objectData().get_properties()['LocalizedName']);
+        return ((this.get_objectData().get_properties()['LocalizedName']));
     },
-    
-    set_localizedName: function SP_WorkManagement_OM_ProviderErrorInfo$set_localizedName$in(value) {ULS0Qc:;
+    set_localizedName: function SP_WorkManagement_OM_ProviderErrorInfo$set_localizedName(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LocalizedName'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LocalizedName', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_ProviderErrorInfo$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_ProviderErrorInfo$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CorrelationId;
@@ -1688,15 +1640,15 @@ SP.WorkManagement.OM.ProviderErrorInfoClientCollection = function SP_WorkManagem
 }
 SP.WorkManagement.OM.ProviderErrorInfoClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_ProviderErrorInfoClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_ProviderErrorInfoClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_ProviderErrorInfoClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_ProviderErrorInfoClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_ProviderErrorInfoClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_ProviderErrorInfoClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.ProviderErrorInfo;
     }
 }
@@ -1707,72 +1659,67 @@ SP.WorkManagement.OM.ProviderRefreshStatus = function SP_WorkManagement_OM_Provi
 }
 SP.WorkManagement.OM.ProviderRefreshStatus.prototype = {
     
-    get_providerKey: function SP_WorkManagement_OM_ProviderRefreshStatus$get_providerKey$in() {ULS0Qc:;
+    get_providerKey: function SP_WorkManagement_OM_ProviderRefreshStatus$get_providerKey() {ULS0Qc:;
         this.checkUninitializedProperty('ProviderKey');
-        return (this.get_objectData().get_properties()['ProviderKey']);
+        return ((this.get_objectData().get_properties()['ProviderKey']));
     },
-    
-    set_providerKey: function SP_WorkManagement_OM_ProviderRefreshStatus$set_providerKey$in(value) {ULS0Qc:;
+    set_providerKey: function SP_WorkManagement_OM_ProviderRefreshStatus$set_providerKey(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ProviderKey'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ProviderKey', value));
         }
         return value;
     },
     
-    get_providerLocalizedName: function SP_WorkManagement_OM_ProviderRefreshStatus$get_providerLocalizedName$in() {ULS0Qc:;
+    get_providerLocalizedName: function SP_WorkManagement_OM_ProviderRefreshStatus$get_providerLocalizedName() {ULS0Qc:;
         this.checkUninitializedProperty('ProviderLocalizedName');
-        return (this.get_objectData().get_properties()['ProviderLocalizedName']);
+        return ((this.get_objectData().get_properties()['ProviderLocalizedName']));
     },
-    
-    set_providerLocalizedName: function SP_WorkManagement_OM_ProviderRefreshStatus$set_providerLocalizedName$in(value) {ULS0Qc:;
+    set_providerLocalizedName: function SP_WorkManagement_OM_ProviderRefreshStatus$set_providerLocalizedName(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ProviderLocalizedName'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ProviderLocalizedName', value));
         }
         return value;
     },
     
-    get_refreshFinished: function SP_WorkManagement_OM_ProviderRefreshStatus$get_refreshFinished$in() {ULS0Qc:;
+    get_refreshFinished: function SP_WorkManagement_OM_ProviderRefreshStatus$get_refreshFinished() {ULS0Qc:;
         this.checkUninitializedProperty('RefreshFinished');
-        return (this.get_objectData().get_properties()['RefreshFinished']);
+        return ((this.get_objectData().get_properties()['RefreshFinished']));
     },
-    
-    set_refreshFinished: function SP_WorkManagement_OM_ProviderRefreshStatus$set_refreshFinished$in(value) {ULS0Qc:;
+    set_refreshFinished: function SP_WorkManagement_OM_ProviderRefreshStatus$set_refreshFinished(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RefreshFinished'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RefreshFinished', value));
         }
         return value;
     },
     
-    get_refreshStarted: function SP_WorkManagement_OM_ProviderRefreshStatus$get_refreshStarted$in() {ULS0Qc:;
+    get_refreshStarted: function SP_WorkManagement_OM_ProviderRefreshStatus$get_refreshStarted() {ULS0Qc:;
         this.checkUninitializedProperty('RefreshStarted');
-        return (this.get_objectData().get_properties()['RefreshStarted']);
+        return ((this.get_objectData().get_properties()['RefreshStarted']));
     },
-    
-    set_refreshStarted: function SP_WorkManagement_OM_ProviderRefreshStatus$set_refreshStarted$in(value) {ULS0Qc:;
+    set_refreshStarted: function SP_WorkManagement_OM_ProviderRefreshStatus$set_refreshStarted(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RefreshStarted'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RefreshStarted', value));
         }
         return value;
     },
     
-    get_rootLocationId: function SP_WorkManagement_OM_ProviderRefreshStatus$get_rootLocationId$in() {ULS0Qc:;
+    get_rootLocationId: function SP_WorkManagement_OM_ProviderRefreshStatus$get_rootLocationId() {ULS0Qc:;
         this.checkUninitializedProperty('RootLocationId');
-        return (this.get_objectData().get_properties()['RootLocationId']);
+        return ((this.get_objectData().get_properties()['RootLocationId']));
     },
-    
-    set_rootLocationId: function SP_WorkManagement_OM_ProviderRefreshStatus$set_rootLocationId$in(value) {ULS0Qc:;
+    set_rootLocationId: function SP_WorkManagement_OM_ProviderRefreshStatus$set_rootLocationId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RootLocationId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RootLocationId', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_ProviderRefreshStatus$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_ProviderRefreshStatus$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.ProviderKey;
@@ -1813,15 +1760,15 @@ SP.WorkManagement.OM.ProviderRefreshStatusClientCollection = function SP_WorkMan
 }
 SP.WorkManagement.OM.ProviderRefreshStatusClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_ProviderRefreshStatusClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_ProviderRefreshStatusClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_ProviderRefreshStatusClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_ProviderRefreshStatusClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_ProviderRefreshStatusClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_ProviderRefreshStatusClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.ProviderRefreshStatus;
     }
 }
@@ -1832,15 +1779,15 @@ SP.WorkManagement.OM.RefreshEventInfoClientCollection = function SP_WorkManageme
 }
 SP.WorkManagement.OM.RefreshEventInfoClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_RefreshEventInfoClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_RefreshEventInfoClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_RefreshEventInfoClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_RefreshEventInfoClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_RefreshEventInfoClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_RefreshEventInfoClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.RefreshResult;
     }
 }
@@ -1851,33 +1798,31 @@ SP.WorkManagement.OM.RefreshHealthInfo = function SP_WorkManagement_OM_RefreshHe
 }
 SP.WorkManagement.OM.RefreshHealthInfo.prototype = {
     
-    get_latestRefreshTime: function SP_WorkManagement_OM_RefreshHealthInfo$get_latestRefreshTime$in() {ULS0Qc:;
+    get_latestRefreshTime: function SP_WorkManagement_OM_RefreshHealthInfo$get_latestRefreshTime() {ULS0Qc:;
         this.checkUninitializedProperty('LatestRefreshTime');
-        return (this.get_objectData().get_properties()['LatestRefreshTime']);
+        return ((this.get_objectData().get_properties()['LatestRefreshTime']));
     },
-    
-    set_latestRefreshTime: function SP_WorkManagement_OM_RefreshHealthInfo$set_latestRefreshTime$in(value) {ULS0Qc:;
+    set_latestRefreshTime: function SP_WorkManagement_OM_RefreshHealthInfo$set_latestRefreshTime(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LatestRefreshTime'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LatestRefreshTime', value));
         }
         return value;
     },
     
-    get_newTasks: function SP_WorkManagement_OM_RefreshHealthInfo$get_newTasks$in() {ULS0Qc:;
+    get_newTasks: function SP_WorkManagement_OM_RefreshHealthInfo$get_newTasks() {ULS0Qc:;
         this.checkUninitializedProperty('NewTasks');
-        return (this.get_objectData().get_properties()['NewTasks']);
+        return ((this.get_objectData().get_properties()['NewTasks']));
     },
-    
-    set_newTasks: function SP_WorkManagement_OM_RefreshHealthInfo$set_newTasks$in(value) {ULS0Qc:;
+    set_newTasks: function SP_WorkManagement_OM_RefreshHealthInfo$set_newTasks(value) {ULS0Qc:;
         this.get_objectData().get_properties()['NewTasks'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'NewTasks', value));
         }
         return value;
     },
     
-    get_providerErrors: function SP_WorkManagement_OM_RefreshHealthInfo$get_providerErrors$in() {ULS0Qc:;
+    get_providerErrors: function SP_WorkManagement_OM_RefreshHealthInfo$get_providerErrors() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['ProviderErrors']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.ProviderErrorInfoClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'ProviderErrors'));
@@ -1885,29 +1830,27 @@ SP.WorkManagement.OM.RefreshHealthInfo.prototype = {
         }
         return $v_0;
     },
-    
-    set_providerErrors: function SP_WorkManagement_OM_RefreshHealthInfo$set_providerErrors$in(value) {ULS0Qc:;
+    set_providerErrors: function SP_WorkManagement_OM_RefreshHealthInfo$set_providerErrors(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['ProviderErrors'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ProviderErrors', value));
         }
         return value;
     },
     
-    get_succeeded: function SP_WorkManagement_OM_RefreshHealthInfo$get_succeeded$in() {ULS0Qc:;
+    get_succeeded: function SP_WorkManagement_OM_RefreshHealthInfo$get_succeeded() {ULS0Qc:;
         this.checkUninitializedProperty('Succeeded');
-        return (this.get_objectData().get_properties()['Succeeded']);
+        return ((this.get_objectData().get_properties()['Succeeded']));
     },
-    
-    set_succeeded: function SP_WorkManagement_OM_RefreshHealthInfo$set_succeeded$in(value) {ULS0Qc:;
+    set_succeeded: function SP_WorkManagement_OM_RefreshHealthInfo$set_succeeded(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Succeeded'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Succeeded', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_RefreshHealthInfo$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_RefreshHealthInfo$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.LatestRefreshTime;
@@ -1948,7 +1891,7 @@ SP.WorkManagement.OM.RefreshHistory = function SP_WorkManagement_OM_RefreshHisto
 }
 SP.WorkManagement.OM.RefreshHistory.prototype = {
     
-    get_refreshes: function SP_WorkManagement_OM_RefreshHistory$get_refreshes$in() {ULS0Qc:;
+    get_refreshes: function SP_WorkManagement_OM_RefreshHistory$get_refreshes() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Refreshes']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.RefreshEventInfoClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'Refreshes'));
@@ -1956,16 +1899,15 @@ SP.WorkManagement.OM.RefreshHistory.prototype = {
         }
         return $v_0;
     },
-    
-    set_refreshes: function SP_WorkManagement_OM_RefreshHistory$set_refreshes$in(value) {ULS0Qc:;
+    set_refreshes: function SP_WorkManagement_OM_RefreshHistory$set_refreshes(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['Refreshes'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Refreshes', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_RefreshHistory$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_RefreshHistory$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Refreshes;
@@ -1987,33 +1929,31 @@ SP.WorkManagement.OM.RefreshResult = function SP_WorkManagement_OM_RefreshResult
 }
 SP.WorkManagement.OM.RefreshResult.prototype = {
     
-    get_aggregatorRefreshState: function SP_WorkManagement_OM_RefreshResult$get_aggregatorRefreshState$in() {ULS0Qc:;
+    get_aggregatorRefreshState: function SP_WorkManagement_OM_RefreshResult$get_aggregatorRefreshState() {ULS0Qc:;
         this.checkUninitializedProperty('AggregatorRefreshState');
-        return (this.get_objectData().get_properties()['AggregatorRefreshState']);
+        return ((this.get_objectData().get_properties()['AggregatorRefreshState']));
     },
-    
-    set_aggregatorRefreshState: function SP_WorkManagement_OM_RefreshResult$set_aggregatorRefreshState$in(value) {ULS0Qc:;
+    set_aggregatorRefreshState: function SP_WorkManagement_OM_RefreshResult$set_aggregatorRefreshState(value) {ULS0Qc:;
         this.get_objectData().get_properties()['AggregatorRefreshState'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'AggregatorRefreshState', value));
         }
         return value;
     },
     
-    get_correlationId: function SP_WorkManagement_OM_RefreshResult$get_correlationId$in() {ULS0Qc:;
+    get_correlationId: function SP_WorkManagement_OM_RefreshResult$get_correlationId() {ULS0Qc:;
         this.checkUninitializedProperty('CorrelationId');
-        return (this.get_objectData().get_properties()['CorrelationId']);
+        return ((this.get_objectData().get_properties()['CorrelationId']));
     },
-    
-    set_correlationId: function SP_WorkManagement_OM_RefreshResult$set_correlationId$in(value) {ULS0Qc:;
+    set_correlationId: function SP_WorkManagement_OM_RefreshResult$set_correlationId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CorrelationId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CorrelationId', value));
         }
         return value;
     },
     
-    get_providerStatuses: function SP_WorkManagement_OM_RefreshResult$get_providerStatuses$in() {ULS0Qc:;
+    get_providerStatuses: function SP_WorkManagement_OM_RefreshResult$get_providerStatuses() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['ProviderStatuses']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.ProviderRefreshStatusClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'ProviderStatuses'));
@@ -2021,42 +1961,39 @@ SP.WorkManagement.OM.RefreshResult.prototype = {
         }
         return $v_0;
     },
-    
-    set_providerStatuses: function SP_WorkManagement_OM_RefreshResult$set_providerStatuses$in(value) {ULS0Qc:;
+    set_providerStatuses: function SP_WorkManagement_OM_RefreshResult$set_providerStatuses(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['ProviderStatuses'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ProviderStatuses', value));
         }
         return value;
     },
     
-    get_refreshFinished: function SP_WorkManagement_OM_RefreshResult$get_refreshFinished$in() {ULS0Qc:;
+    get_refreshFinished: function SP_WorkManagement_OM_RefreshResult$get_refreshFinished() {ULS0Qc:;
         this.checkUninitializedProperty('RefreshFinished');
-        return (this.get_objectData().get_properties()['RefreshFinished']);
+        return ((this.get_objectData().get_properties()['RefreshFinished']));
     },
-    
-    set_refreshFinished: function SP_WorkManagement_OM_RefreshResult$set_refreshFinished$in(value) {ULS0Qc:;
+    set_refreshFinished: function SP_WorkManagement_OM_RefreshResult$set_refreshFinished(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RefreshFinished'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RefreshFinished', value));
         }
         return value;
     },
     
-    get_refreshId: function SP_WorkManagement_OM_RefreshResult$get_refreshId$in() {ULS0Qc:;
+    get_refreshId: function SP_WorkManagement_OM_RefreshResult$get_refreshId() {ULS0Qc:;
         this.checkUninitializedProperty('RefreshId');
-        return (this.get_objectData().get_properties()['RefreshId']);
+        return ((this.get_objectData().get_properties()['RefreshId']));
     },
-    
-    set_refreshId: function SP_WorkManagement_OM_RefreshResult$set_refreshId$in(value) {ULS0Qc:;
+    set_refreshId: function SP_WorkManagement_OM_RefreshResult$set_refreshId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RefreshId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RefreshId', value));
         }
         return value;
     },
     
-    get_taskChangesByLocation: function SP_WorkManagement_OM_RefreshResult$get_taskChangesByLocation$in() {ULS0Qc:;
+    get_taskChangesByLocation: function SP_WorkManagement_OM_RefreshResult$get_taskChangesByLocation() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['TaskChangesByLocation']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.LocationUpdateResultClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'TaskChangesByLocation'));
@@ -2064,16 +2001,15 @@ SP.WorkManagement.OM.RefreshResult.prototype = {
         }
         return $v_0;
     },
-    
-    set_taskChangesByLocation: function SP_WorkManagement_OM_RefreshResult$set_taskChangesByLocation$in(value) {ULS0Qc:;
+    set_taskChangesByLocation: function SP_WorkManagement_OM_RefreshResult$set_taskChangesByLocation(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['TaskChangesByLocation'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'TaskChangesByLocation', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_RefreshResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_RefreshResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.AggregatorRefreshState;
@@ -2125,7 +2061,7 @@ SP.WorkManagement.OM.SortableSession = function SP_WorkManagement_OM_SortableSes
 }
 SP.WorkManagement.OM.SortableSession.prototype = {
     
-    readTasks: function SP_WorkManagement_OM_SortableSession$readTasks$in(query) {ULS0Qc:;
+    readTasks: function SP_WorkManagement_OM_SortableSession$readTasks(query) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'ReadTasks', [ query ]));
@@ -2137,19 +2073,19 @@ SP.WorkManagement.OM.SortableSession.prototype = {
 SP.WorkManagement.OM.SortableSessionManager = function SP_WorkManagement_OM_SortableSessionManager(context) {ULS0Qc:;
     SP.WorkManagement.OM.SortableSessionManager.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{924b1779-998e-4c60-a291-78edebc3c202}', arguments) ]);
 }
-SP.WorkManagement.OM.SortableSessionManager.newObject = function SP_WorkManagement_OM_SortableSessionManager$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.SortableSessionManager.newObject = function SP_WorkManagement_OM_SortableSessionManager$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.SortableSessionManager(context, new SP.ObjectPathConstructor(context, '{924b1779-998e-4c60-a291-78edebc3c202}', null));
 }
 SP.WorkManagement.OM.SortableSessionManager.prototype = {
     
-    createLocationOrientedSession: function SP_WorkManagement_OM_SortableSessionManager$createLocationOrientedSession$in() {ULS0Qc:;
+    createLocationOrientedSession: function SP_WorkManagement_OM_SortableSessionManager$createLocationOrientedSession() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationOrientedSortableSession($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'CreateLocationOrientedSession', null));
         return $v_1;
     },
     
-    createSession: function SP_WorkManagement_OM_SortableSessionManager$createSession$in() {ULS0Qc:;
+    createSession: function SP_WorkManagement_OM_SortableSessionManager$createSession() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.SortableSession($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'CreateSession', null));
@@ -2161,12 +2097,12 @@ SP.WorkManagement.OM.SortableSessionManager.prototype = {
 SP.WorkManagement.OM.SortableTaskQuery = function SP_WorkManagement_OM_SortableTaskQuery(context) {ULS0Qc:;
     SP.WorkManagement.OM.SortableTaskQuery.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{f43ab2f6-b0e1-46f7-8ff6-a96540f7f595}', arguments) ]);
 }
-SP.WorkManagement.OM.SortableTaskQuery.newObject = function SP_WorkManagement_OM_SortableTaskQuery$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.SortableTaskQuery.newObject = function SP_WorkManagement_OM_SortableTaskQuery$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.SortableTaskQuery(context, new SP.ObjectPathConstructor(context, '{f43ab2f6-b0e1-46f7-8ff6-a96540f7f595}', null));
 }
 SP.WorkManagement.OM.SortableTaskQuery.prototype = {
     
-    get_coreQuery: function SP_WorkManagement_OM_SortableTaskQuery$get_coreQuery$in() {ULS0Qc:;
+    get_coreQuery: function SP_WorkManagement_OM_SortableTaskQuery$get_coreQuery() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['CoreQuery']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.TaskQuery(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'CoreQuery'));
@@ -2174,16 +2110,15 @@ SP.WorkManagement.OM.SortableTaskQuery.prototype = {
         }
         return $v_0;
     },
-    
-    set_coreQuery: function SP_WorkManagement_OM_SortableTaskQuery$set_coreQuery$in(value) {ULS0Qc:;
+    set_coreQuery: function SP_WorkManagement_OM_SortableTaskQuery$set_coreQuery(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['CoreQuery'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CoreQuery', value));
         }
         return value;
     },
     
-    get_order: function SP_WorkManagement_OM_SortableTaskQuery$get_order$in() {ULS0Qc:;
+    get_order: function SP_WorkManagement_OM_SortableTaskQuery$get_order() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Order']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.OrderInfo(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'Order'));
@@ -2191,16 +2126,15 @@ SP.WorkManagement.OM.SortableTaskQuery.prototype = {
         }
         return $v_0;
     },
-    
-    set_order: function SP_WorkManagement_OM_SortableTaskQuery$set_order$in(value) {ULS0Qc:;
+    set_order: function SP_WorkManagement_OM_SortableTaskQuery$set_order(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['Order'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Order', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_SortableTaskQuery$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_SortableTaskQuery$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CoreQuery;
@@ -2226,194 +2160,180 @@ SP.WorkManagement.OM.SortableTaskQueryObjectPropertyNames = function SP_WorkMana
 SP.WorkManagement.OM.Task = function SP_WorkManagement_OM_Task(context) {ULS0Qc:;
     SP.WorkManagement.OM.Task.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{af0507b6-ef4f-4029-a48a-943afe14aea6}', arguments) ]);
 }
-SP.WorkManagement.OM.Task.newObject = function SP_WorkManagement_OM_Task$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.Task.newObject = function SP_WorkManagement_OM_Task$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.Task(context, new SP.ObjectPathConstructor(context, '{af0507b6-ef4f-4029-a48a-943afe14aea6}', null));
 }
 SP.WorkManagement.OM.Task.prototype = {
     
-    get_customAttributes: function SP_WorkManagement_OM_Task$get_customAttributes$in() {ULS0Qc:;
+    get_customAttributes: function SP_WorkManagement_OM_Task$get_customAttributes() {ULS0Qc:;
         this.checkUninitializedProperty('CustomAttributes');
-        return (this.get_objectData().get_properties()['CustomAttributes']);
+        return ((this.get_objectData().get_properties()['CustomAttributes']));
     },
-    
-    set_customAttributes: function SP_WorkManagement_OM_Task$set_customAttributes$in(value) {ULS0Qc:;
+    set_customAttributes: function SP_WorkManagement_OM_Task$set_customAttributes(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CustomAttributes'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CustomAttributes', value));
         }
         return value;
     },
     
-    get_description: function SP_WorkManagement_OM_Task$get_description$in() {ULS0Qc:;
+    get_description: function SP_WorkManagement_OM_Task$get_description() {ULS0Qc:;
         this.checkUninitializedProperty('Description');
-        return (this.get_objectData().get_properties()['Description']);
+        return ((this.get_objectData().get_properties()['Description']));
     },
-    
-    set_description: function SP_WorkManagement_OM_Task$set_description$in(value) {ULS0Qc:;
+    set_description: function SP_WorkManagement_OM_Task$set_description(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Description'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Description', value));
         }
         return value;
     },
     
-    get_dueDate: function SP_WorkManagement_OM_Task$get_dueDate$in() {ULS0Qc:;
+    get_dueDate: function SP_WorkManagement_OM_Task$get_dueDate() {ULS0Qc:;
         this.checkUninitializedProperty('DueDate');
-        return (this.get_objectData().get_properties()['DueDate']);
+        return ((this.get_objectData().get_properties()['DueDate']));
     },
-    
-    set_dueDate: function SP_WorkManagement_OM_Task$set_dueDate$in(value) {ULS0Qc:;
+    set_dueDate: function SP_WorkManagement_OM_Task$set_dueDate(value) {ULS0Qc:;
         this.get_objectData().get_properties()['DueDate'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DueDate', value));
         }
         return value;
     },
     
-    get_editUrl: function SP_WorkManagement_OM_Task$get_editUrl$in() {ULS0Qc:;
+    get_editUrl: function SP_WorkManagement_OM_Task$get_editUrl() {ULS0Qc:;
         this.checkUninitializedProperty('EditUrl');
-        return (this.get_objectData().get_properties()['EditUrl']);
+        return ((this.get_objectData().get_properties()['EditUrl']));
     },
-    
-    set_editUrl: function SP_WorkManagement_OM_Task$set_editUrl$in(value) {ULS0Qc:;
+    set_editUrl: function SP_WorkManagement_OM_Task$set_editUrl(value) {ULS0Qc:;
         this.get_objectData().get_properties()['EditUrl'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'EditUrl', value));
         }
         return value;
     },
     
-    get_id: function SP_WorkManagement_OM_Task$get_id$in() {ULS0Qc:;
+    get_id: function SP_WorkManagement_OM_Task$get_id() {ULS0Qc:;
         this.checkUninitializedProperty('Id');
-        return (this.get_objectData().get_properties()['Id']);
+        return ((this.get_objectData().get_properties()['Id']));
     },
-    
-    set_id: function SP_WorkManagement_OM_Task$set_id$in(value) {ULS0Qc:;
+    set_id: function SP_WorkManagement_OM_Task$set_id(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Id'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Id', value));
         }
         return value;
     },
     
-    get_isCompleted: function SP_WorkManagement_OM_Task$get_isCompleted$in() {ULS0Qc:;
+    get_isCompleted: function SP_WorkManagement_OM_Task$get_isCompleted() {ULS0Qc:;
         this.checkUninitializedProperty('IsCompleted');
-        return (this.get_objectData().get_properties()['IsCompleted']);
+        return ((this.get_objectData().get_properties()['IsCompleted']));
     },
-    
-    set_isCompleted: function SP_WorkManagement_OM_Task$set_isCompleted$in(value) {ULS0Qc:;
+    set_isCompleted: function SP_WorkManagement_OM_Task$set_isCompleted(value) {ULS0Qc:;
         this.get_objectData().get_properties()['IsCompleted'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IsCompleted', value));
         }
         return value;
     },
     
-    get_isPersonal: function SP_WorkManagement_OM_Task$get_isPersonal$in() {ULS0Qc:;
+    get_isPersonal: function SP_WorkManagement_OM_Task$get_isPersonal() {ULS0Qc:;
         this.checkUninitializedProperty('IsPersonal');
-        return (this.get_objectData().get_properties()['IsPersonal']);
+        return ((this.get_objectData().get_properties()['IsPersonal']));
     },
-    
-    set_isPersonal: function SP_WorkManagement_OM_Task$set_isPersonal$in(value) {ULS0Qc:;
+    set_isPersonal: function SP_WorkManagement_OM_Task$set_isPersonal(value) {ULS0Qc:;
         this.get_objectData().get_properties()['IsPersonal'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IsPersonal', value));
         }
         return value;
     },
     
-    get_isReadOnly: function SP_WorkManagement_OM_Task$get_isReadOnly$in() {ULS0Qc:;
+    get_isReadOnly: function SP_WorkManagement_OM_Task$get_isReadOnly() {ULS0Qc:;
         this.checkUninitializedProperty('IsReadOnly');
-        return (this.get_objectData().get_properties()['IsReadOnly']);
+        return ((this.get_objectData().get_properties()['IsReadOnly']));
     },
-    
-    set_isReadOnly: function SP_WorkManagement_OM_Task$set_isReadOnly$in(value) {ULS0Qc:;
+    set_isReadOnly: function SP_WorkManagement_OM_Task$set_isReadOnly(value) {ULS0Qc:;
         this.get_objectData().get_properties()['IsReadOnly'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IsReadOnly', value));
         }
         return value;
     },
     
-    get_lastModified: function SP_WorkManagement_OM_Task$get_lastModified$in() {ULS0Qc:;
+    get_lastModified: function SP_WorkManagement_OM_Task$get_lastModified() {ULS0Qc:;
         this.checkUninitializedProperty('LastModified');
-        return (this.get_objectData().get_properties()['LastModified']);
+        return ((this.get_objectData().get_properties()['LastModified']));
     },
-    
-    set_lastModified: function SP_WorkManagement_OM_Task$set_lastModified$in(value) {ULS0Qc:;
+    set_lastModified: function SP_WorkManagement_OM_Task$set_lastModified(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LastModified'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LastModified', value));
         }
         return value;
     },
     
-    get_locationId: function SP_WorkManagement_OM_Task$get_locationId$in() {ULS0Qc:;
+    get_locationId: function SP_WorkManagement_OM_Task$get_locationId() {ULS0Qc:;
         this.checkUninitializedProperty('LocationId');
-        return (this.get_objectData().get_properties()['LocationId']);
+        return ((this.get_objectData().get_properties()['LocationId']));
     },
-    
-    set_locationId: function SP_WorkManagement_OM_Task$set_locationId$in(value) {ULS0Qc:;
+    set_locationId: function SP_WorkManagement_OM_Task$set_locationId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LocationId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LocationId', value));
         }
         return value;
     },
     
-    get_name: function SP_WorkManagement_OM_Task$get_name$in() {ULS0Qc:;
+    get_name: function SP_WorkManagement_OM_Task$get_name() {ULS0Qc:;
         this.checkUninitializedProperty('Name');
-        return (this.get_objectData().get_properties()['Name']);
+        return ((this.get_objectData().get_properties()['Name']));
     },
-    
-    set_name: function SP_WorkManagement_OM_Task$set_name$in(value) {ULS0Qc:;
+    set_name: function SP_WorkManagement_OM_Task$set_name(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Name'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Name', value));
         }
         return value;
     },
     
-    get_pinAge: function SP_WorkManagement_OM_Task$get_pinAge$in() {ULS0Qc:;
+    get_pinAge: function SP_WorkManagement_OM_Task$get_pinAge() {ULS0Qc:;
         this.checkUninitializedProperty('PinAge');
-        return (this.get_objectData().get_properties()['PinAge']);
+        return ((this.get_objectData().get_properties()['PinAge']));
     },
-    
-    set_pinAge: function SP_WorkManagement_OM_Task$set_pinAge$in(value) {ULS0Qc:;
+    set_pinAge: function SP_WorkManagement_OM_Task$set_pinAge(value) {ULS0Qc:;
         this.get_objectData().get_properties()['PinAge'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'PinAge', value));
         }
         return value;
     },
     
-    get_serializedCustomDataForClient: function SP_WorkManagement_OM_Task$get_serializedCustomDataForClient$in() {ULS0Qc:;
+    get_serializedCustomDataForClient: function SP_WorkManagement_OM_Task$get_serializedCustomDataForClient() {ULS0Qc:;
         this.checkUninitializedProperty('SerializedCustomDataForClient');
-        return (this.get_objectData().get_properties()['SerializedCustomDataForClient']);
+        return ((this.get_objectData().get_properties()['SerializedCustomDataForClient']));
     },
-    
-    set_serializedCustomDataForClient: function SP_WorkManagement_OM_Task$set_serializedCustomDataForClient$in(value) {ULS0Qc:;
+    set_serializedCustomDataForClient: function SP_WorkManagement_OM_Task$set_serializedCustomDataForClient(value) {ULS0Qc:;
         this.get_objectData().get_properties()['SerializedCustomDataForClient'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'SerializedCustomDataForClient', value));
         }
         return value;
     },
     
-    get_startDate: function SP_WorkManagement_OM_Task$get_startDate$in() {ULS0Qc:;
+    get_startDate: function SP_WorkManagement_OM_Task$get_startDate() {ULS0Qc:;
         this.checkUninitializedProperty('StartDate');
-        return (this.get_objectData().get_properties()['StartDate']);
+        return ((this.get_objectData().get_properties()['StartDate']));
     },
-    
-    set_startDate: function SP_WorkManagement_OM_Task$set_startDate$in(value) {ULS0Qc:;
+    set_startDate: function SP_WorkManagement_OM_Task$set_startDate(value) {ULS0Qc:;
         this.get_objectData().get_properties()['StartDate'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'StartDate', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_Task$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_Task$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CustomAttributes;
@@ -2497,20 +2417,20 @@ SP.WorkManagement.OM.TaskPropertyNames = function SP_WorkManagement_OM_TaskPrope
 SP.WorkManagement.OM.TaskClientCollection = function SP_WorkManagement_OM_TaskClientCollection(context) {ULS0Qc:;
     SP.WorkManagement.OM.TaskClientCollection.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{1a855a95-ee52-4a94-b0ab-7020dda6972a}', arguments) ]);
 }
-SP.WorkManagement.OM.TaskClientCollection.newObject = function SP_WorkManagement_OM_TaskClientCollection$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.TaskClientCollection.newObject = function SP_WorkManagement_OM_TaskClientCollection$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.TaskClientCollection(context, new SP.ObjectPathConstructor(context, '{1a855a95-ee52-4a94-b0ab-7020dda6972a}', null));
 }
 SP.WorkManagement.OM.TaskClientCollection.prototype = {
     
-    itemAt: function SP_WorkManagement_OM_TaskClientCollection$itemAt$in(index) {ULS0Qc:;
+    itemAt: function SP_WorkManagement_OM_TaskClientCollection$itemAt(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_item: function SP_WorkManagement_OM_TaskClientCollection$get_item$in(index) {ULS0Qc:;
+    get_item: function SP_WorkManagement_OM_TaskClientCollection$get_item(index) {ULS0Qc:;
         return this.getItemAtIndex(index);
     },
     
-    get_childItemType: function SP_WorkManagement_OM_TaskClientCollection$get_childItemType$in() {ULS0Qc:;
+    get_childItemType: function SP_WorkManagement_OM_TaskClientCollection$get_childItemType() {ULS0Qc:;
         return SP.WorkManagement.OM.Task;
     }
 }
@@ -2519,12 +2439,12 @@ SP.WorkManagement.OM.TaskClientCollection.prototype = {
 SP.WorkManagement.OM.TaskFilter = function SP_WorkManagement_OM_TaskFilter(context) {ULS0Qc:;
     SP.WorkManagement.OM.TaskFilter.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{3188516d-d569-40f8-8c01-1d48fbf5243c}', arguments) ]);
 }
-SP.WorkManagement.OM.TaskFilter.newObject = function SP_WorkManagement_OM_TaskFilter$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.TaskFilter.newObject = function SP_WorkManagement_OM_TaskFilter$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.TaskFilter(context, new SP.ObjectPathConstructor(context, '{3188516d-d569-40f8-8c01-1d48fbf5243c}', null));
 }
 SP.WorkManagement.OM.TaskFilter.prototype = {
     
-    get_completedCriterion: function SP_WorkManagement_OM_TaskFilter$get_completedCriterion$in() {ULS0Qc:;
+    get_completedCriterion: function SP_WorkManagement_OM_TaskFilter$get_completedCriterion() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['CompletedCriterion']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.BooleanCriterion(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'CompletedCriterion'));
@@ -2532,29 +2452,27 @@ SP.WorkManagement.OM.TaskFilter.prototype = {
         }
         return $v_0;
     },
-    
-    set_completedCriterion: function SP_WorkManagement_OM_TaskFilter$set_completedCriterion$in(value) {ULS0Qc:;
+    set_completedCriterion: function SP_WorkManagement_OM_TaskFilter$set_completedCriterion(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['CompletedCriterion'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CompletedCriterion', value));
         }
         return value;
     },
     
-    get_criterionConcatType: function SP_WorkManagement_OM_TaskFilter$get_criterionConcatType$in() {ULS0Qc:;
+    get_criterionConcatType: function SP_WorkManagement_OM_TaskFilter$get_criterionConcatType() {ULS0Qc:;
         this.checkUninitializedProperty('CriterionConcatType');
-        return (this.get_objectData().get_properties()['CriterionConcatType']);
+        return ((this.get_objectData().get_properties()['CriterionConcatType']));
     },
-    
-    set_criterionConcatType: function SP_WorkManagement_OM_TaskFilter$set_criterionConcatType$in(value) {ULS0Qc:;
+    set_criterionConcatType: function SP_WorkManagement_OM_TaskFilter$set_criterionConcatType(value) {ULS0Qc:;
         this.get_objectData().get_properties()['CriterionConcatType'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CriterionConcatType', value));
         }
         return value;
     },
     
-    get_dueDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$get_dueDateRangeCriterion$in() {ULS0Qc:;
+    get_dueDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$get_dueDateRangeCriterion() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['DueDateRangeCriterion']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.DateRangeCriterion(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'DueDateRangeCriterion'));
@@ -2562,29 +2480,27 @@ SP.WorkManagement.OM.TaskFilter.prototype = {
         }
         return $v_0;
     },
-    
-    set_dueDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$set_dueDateRangeCriterion$in(value) {ULS0Qc:;
+    set_dueDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$set_dueDateRangeCriterion(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['DueDateRangeCriterion'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DueDateRangeCriterion', value));
         }
         return value;
     },
     
-    get_idsToFilterBy: function SP_WorkManagement_OM_TaskFilter$get_idsToFilterBy$in() {ULS0Qc:;
+    get_idsToFilterBy: function SP_WorkManagement_OM_TaskFilter$get_idsToFilterBy() {ULS0Qc:;
         this.checkUninitializedProperty('IdsToFilterBy');
-        return (this.get_objectData().get_properties()['IdsToFilterBy']);
+        return ((this.get_objectData().get_properties()['IdsToFilterBy']));
     },
-    
-    set_idsToFilterBy: function SP_WorkManagement_OM_TaskFilter$set_idsToFilterBy$in(value) {ULS0Qc:;
+    set_idsToFilterBy: function SP_WorkManagement_OM_TaskFilter$set_idsToFilterBy(value) {ULS0Qc:;
         this.get_objectData().get_properties()['IdsToFilterBy'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IdsToFilterBy', value));
         }
         return value;
     },
     
-    get_isNewCriterion: function SP_WorkManagement_OM_TaskFilter$get_isNewCriterion$in() {ULS0Qc:;
+    get_isNewCriterion: function SP_WorkManagement_OM_TaskFilter$get_isNewCriterion() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['IsNewCriterion']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.BooleanCriterion(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'IsNewCriterion'));
@@ -2592,16 +2508,15 @@ SP.WorkManagement.OM.TaskFilter.prototype = {
         }
         return $v_0;
     },
-    
-    set_isNewCriterion: function SP_WorkManagement_OM_TaskFilter$set_isNewCriterion$in(value) {ULS0Qc:;
+    set_isNewCriterion: function SP_WorkManagement_OM_TaskFilter$set_isNewCriterion(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['IsNewCriterion'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'IsNewCriterion', value));
         }
         return value;
     },
     
-    get_nameCriterion: function SP_WorkManagement_OM_TaskFilter$get_nameCriterion$in() {ULS0Qc:;
+    get_nameCriterion: function SP_WorkManagement_OM_TaskFilter$get_nameCriterion() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['NameCriterion']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.NameCriterion(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'NameCriterion'));
@@ -2609,16 +2524,15 @@ SP.WorkManagement.OM.TaskFilter.prototype = {
         }
         return $v_0;
     },
-    
-    set_nameCriterion: function SP_WorkManagement_OM_TaskFilter$set_nameCriterion$in(value) {ULS0Qc:;
+    set_nameCriterion: function SP_WorkManagement_OM_TaskFilter$set_nameCriterion(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['NameCriterion'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'NameCriterion', value));
         }
         return value;
     },
     
-    get_startDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$get_startDateRangeCriterion$in() {ULS0Qc:;
+    get_startDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$get_startDateRangeCriterion() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['StartDateRangeCriterion']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.DateRangeCriterion(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'StartDateRangeCriterion'));
@@ -2626,16 +2540,15 @@ SP.WorkManagement.OM.TaskFilter.prototype = {
         }
         return $v_0;
     },
-    
-    set_startDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$set_startDateRangeCriterion$in(value) {ULS0Qc:;
+    set_startDateRangeCriterion: function SP_WorkManagement_OM_TaskFilter$set_startDateRangeCriterion(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['StartDateRangeCriterion'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'StartDateRangeCriterion', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_TaskFilter$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_TaskFilter$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CompletedCriterion;
@@ -2693,12 +2606,12 @@ SP.WorkManagement.OM.TaskFilterObjectPropertyNames = function SP_WorkManagement_
 SP.WorkManagement.OM.TaskQuery = function SP_WorkManagement_OM_TaskQuery(context) {ULS0Qc:;
     SP.WorkManagement.OM.TaskQuery.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{70c9591d-9a78-404a-9fe8-b50b1e02cd93}', arguments) ]);
 }
-SP.WorkManagement.OM.TaskQuery.newObject = function SP_WorkManagement_OM_TaskQuery$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.TaskQuery.newObject = function SP_WorkManagement_OM_TaskQuery$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.TaskQuery(context, new SP.ObjectPathConstructor(context, '{70c9591d-9a78-404a-9fe8-b50b1e02cd93}', null));
 }
 SP.WorkManagement.OM.TaskQuery.prototype = {
     
-    get_customAttributeFilter: function SP_WorkManagement_OM_TaskQuery$get_customAttributeFilter$in() {ULS0Qc:;
+    get_customAttributeFilter: function SP_WorkManagement_OM_TaskQuery$get_customAttributeFilter() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['CustomAttributeFilter']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.CustomAttributeFilter(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'CustomAttributeFilter'));
@@ -2706,16 +2619,15 @@ SP.WorkManagement.OM.TaskQuery.prototype = {
         }
         return $v_0;
     },
-    
-    set_customAttributeFilter: function SP_WorkManagement_OM_TaskQuery$set_customAttributeFilter$in(value) {ULS0Qc:;
+    set_customAttributeFilter: function SP_WorkManagement_OM_TaskQuery$set_customAttributeFilter(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['CustomAttributeFilter'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CustomAttributeFilter', value));
         }
         return value;
     },
     
-    get_fieldFilter: function SP_WorkManagement_OM_TaskQuery$get_fieldFilter$in() {ULS0Qc:;
+    get_fieldFilter: function SP_WorkManagement_OM_TaskQuery$get_fieldFilter() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['FieldFilter']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.TaskFilter(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'FieldFilter'));
@@ -2723,29 +2635,27 @@ SP.WorkManagement.OM.TaskQuery.prototype = {
         }
         return $v_0;
     },
-    
-    set_fieldFilter: function SP_WorkManagement_OM_TaskQuery$set_fieldFilter$in(value) {ULS0Qc:;
+    set_fieldFilter: function SP_WorkManagement_OM_TaskQuery$set_fieldFilter(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['FieldFilter'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'FieldFilter', value));
         }
         return value;
     },
     
-    get_keywordFilter: function SP_WorkManagement_OM_TaskQuery$get_keywordFilter$in() {ULS0Qc:;
+    get_keywordFilter: function SP_WorkManagement_OM_TaskQuery$get_keywordFilter() {ULS0Qc:;
         this.checkUninitializedProperty('KeywordFilter');
-        return (this.get_objectData().get_properties()['KeywordFilter']);
+        return ((this.get_objectData().get_properties()['KeywordFilter']));
     },
-    
-    set_keywordFilter: function SP_WorkManagement_OM_TaskQuery$set_keywordFilter$in(value) {ULS0Qc:;
+    set_keywordFilter: function SP_WorkManagement_OM_TaskQuery$set_keywordFilter(value) {ULS0Qc:;
         this.get_objectData().get_properties()['KeywordFilter'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'KeywordFilter', value));
         }
         return value;
     },
     
-    get_lastModifiedDateRangeFilter: function SP_WorkManagement_OM_TaskQuery$get_lastModifiedDateRangeFilter$in() {ULS0Qc:;
+    get_lastModifiedDateRangeFilter: function SP_WorkManagement_OM_TaskQuery$get_lastModifiedDateRangeFilter() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['LastModifiedDateRangeFilter']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.DateRangeCriterion(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'LastModifiedDateRangeFilter'));
@@ -2753,29 +2663,27 @@ SP.WorkManagement.OM.TaskQuery.prototype = {
         }
         return $v_0;
     },
-    
-    set_lastModifiedDateRangeFilter: function SP_WorkManagement_OM_TaskQuery$set_lastModifiedDateRangeFilter$in(value) {ULS0Qc:;
+    set_lastModifiedDateRangeFilter: function SP_WorkManagement_OM_TaskQuery$set_lastModifiedDateRangeFilter(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['LastModifiedDateRangeFilter'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LastModifiedDateRangeFilter', value));
         }
         return value;
     },
     
-    get_lastQueryTime: function SP_WorkManagement_OM_TaskQuery$get_lastQueryTime$in() {ULS0Qc:;
+    get_lastQueryTime: function SP_WorkManagement_OM_TaskQuery$get_lastQueryTime() {ULS0Qc:;
         this.checkUninitializedProperty('LastQueryTime');
-        return (this.get_objectData().get_properties()['LastQueryTime']);
+        return ((this.get_objectData().get_properties()['LastQueryTime']));
     },
-    
-    set_lastQueryTime: function SP_WorkManagement_OM_TaskQuery$set_lastQueryTime$in(value) {ULS0Qc:;
+    set_lastQueryTime: function SP_WorkManagement_OM_TaskQuery$set_lastQueryTime(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LastQueryTime'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LastQueryTime', value));
         }
         return value;
     },
     
-    get_locationFilter: function SP_WorkManagement_OM_TaskQuery$get_locationFilter$in() {ULS0Qc:;
+    get_locationFilter: function SP_WorkManagement_OM_TaskQuery$get_locationFilter() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['LocationFilter']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.LocationFilter(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'LocationFilter'));
@@ -2783,29 +2691,27 @@ SP.WorkManagement.OM.TaskQuery.prototype = {
         }
         return $v_0;
     },
-    
-    set_locationFilter: function SP_WorkManagement_OM_TaskQuery$set_locationFilter$in(value) {ULS0Qc:;
+    set_locationFilter: function SP_WorkManagement_OM_TaskQuery$set_locationFilter(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['LocationFilter'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LocationFilter', value));
         }
         return value;
     },
     
-    get_pinnedFilter: function SP_WorkManagement_OM_TaskQuery$get_pinnedFilter$in() {ULS0Qc:;
+    get_pinnedFilter: function SP_WorkManagement_OM_TaskQuery$get_pinnedFilter() {ULS0Qc:;
         this.checkUninitializedProperty('PinnedFilter');
-        return (this.get_objectData().get_properties()['PinnedFilter']);
+        return ((this.get_objectData().get_properties()['PinnedFilter']));
     },
-    
-    set_pinnedFilter: function SP_WorkManagement_OM_TaskQuery$set_pinnedFilter$in(value) {ULS0Qc:;
+    set_pinnedFilter: function SP_WorkManagement_OM_TaskQuery$set_pinnedFilter(value) {ULS0Qc:;
         this.get_objectData().get_properties()['PinnedFilter'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'PinnedFilter', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_TaskQuery$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_TaskQuery$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.CustomAttributeFilter;
@@ -2864,33 +2770,31 @@ SP.WorkManagement.OM.TaskQueryByLocationResult = function SP_WorkManagement_OM_T
 }
 SP.WorkManagement.OM.TaskQueryByLocationResult.prototype = {
     
-    get_error: function SP_WorkManagement_OM_TaskQueryByLocationResult$get_error$in() {ULS0Qc:;
+    get_error: function SP_WorkManagement_OM_TaskQueryByLocationResult$get_error() {ULS0Qc:;
         this.checkUninitializedProperty('Error');
-        return (this.get_objectData().get_properties()['Error']);
+        return ((this.get_objectData().get_properties()['Error']));
     },
-    
-    set_error: function SP_WorkManagement_OM_TaskQueryByLocationResult$set_error$in(value) {ULS0Qc:;
+    set_error: function SP_WorkManagement_OM_TaskQueryByLocationResult$set_error(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Error'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Error', value));
         }
         return value;
     },
     
-    get_errorMessage: function SP_WorkManagement_OM_TaskQueryByLocationResult$get_errorMessage$in() {ULS0Qc:;
+    get_errorMessage: function SP_WorkManagement_OM_TaskQueryByLocationResult$get_errorMessage() {ULS0Qc:;
         this.checkUninitializedProperty('ErrorMessage');
-        return (this.get_objectData().get_properties()['ErrorMessage']);
+        return ((this.get_objectData().get_properties()['ErrorMessage']));
     },
-    
-    set_errorMessage: function SP_WorkManagement_OM_TaskQueryByLocationResult$set_errorMessage$in(value) {ULS0Qc:;
+    set_errorMessage: function SP_WorkManagement_OM_TaskQueryByLocationResult$set_errorMessage(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ErrorMessage'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ErrorMessage', value));
         }
         return value;
     },
     
-    get_results: function SP_WorkManagement_OM_TaskQueryByLocationResult$get_results$in() {ULS0Qc:;
+    get_results: function SP_WorkManagement_OM_TaskQueryByLocationResult$get_results() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Results']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.LocationGroupClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'Results'));
@@ -2898,16 +2802,15 @@ SP.WorkManagement.OM.TaskQueryByLocationResult.prototype = {
         }
         return $v_0;
     },
-    
-    set_results: function SP_WorkManagement_OM_TaskQueryByLocationResult$set_results$in(value) {ULS0Qc:;
+    set_results: function SP_WorkManagement_OM_TaskQueryByLocationResult$set_results(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['Results'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Results', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_TaskQueryByLocationResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_TaskQueryByLocationResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Error;
@@ -2943,33 +2846,31 @@ SP.WorkManagement.OM.TaskQueryResult = function SP_WorkManagement_OM_TaskQueryRe
 }
 SP.WorkManagement.OM.TaskQueryResult.prototype = {
     
-    get_error: function SP_WorkManagement_OM_TaskQueryResult$get_error$in() {ULS0Qc:;
+    get_error: function SP_WorkManagement_OM_TaskQueryResult$get_error() {ULS0Qc:;
         this.checkUninitializedProperty('Error');
-        return (this.get_objectData().get_properties()['Error']);
+        return ((this.get_objectData().get_properties()['Error']));
     },
-    
-    set_error: function SP_WorkManagement_OM_TaskQueryResult$set_error$in(value) {ULS0Qc:;
+    set_error: function SP_WorkManagement_OM_TaskQueryResult$set_error(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Error'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Error', value));
         }
         return value;
     },
     
-    get_errorMessage: function SP_WorkManagement_OM_TaskQueryResult$get_errorMessage$in() {ULS0Qc:;
+    get_errorMessage: function SP_WorkManagement_OM_TaskQueryResult$get_errorMessage() {ULS0Qc:;
         this.checkUninitializedProperty('ErrorMessage');
-        return (this.get_objectData().get_properties()['ErrorMessage']);
+        return ((this.get_objectData().get_properties()['ErrorMessage']));
     },
-    
-    set_errorMessage: function SP_WorkManagement_OM_TaskQueryResult$set_errorMessage$in(value) {ULS0Qc:;
+    set_errorMessage: function SP_WorkManagement_OM_TaskQueryResult$set_errorMessage(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ErrorMessage'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ErrorMessage', value));
         }
         return value;
     },
     
-    get_results: function SP_WorkManagement_OM_TaskQueryResult$get_results$in() {ULS0Qc:;
+    get_results: function SP_WorkManagement_OM_TaskQueryResult$get_results() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Results']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.TaskClientCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'Results'));
@@ -2977,16 +2878,15 @@ SP.WorkManagement.OM.TaskQueryResult.prototype = {
         }
         return $v_0;
     },
-    
-    set_results: function SP_WorkManagement_OM_TaskQueryResult$set_results$in(value) {ULS0Qc:;
+    set_results: function SP_WorkManagement_OM_TaskQueryResult$set_results(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['Results'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Results', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_TaskQueryResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_TaskQueryResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Error;
@@ -3022,33 +2922,31 @@ SP.WorkManagement.OM.TaskRefreshResult = function SP_WorkManagement_OM_TaskRefre
 }
 SP.WorkManagement.OM.TaskRefreshResult.prototype = {
     
-    get_errorCorrelationId: function SP_WorkManagement_OM_TaskRefreshResult$get_errorCorrelationId$in() {ULS0Qc:;
+    get_errorCorrelationId: function SP_WorkManagement_OM_TaskRefreshResult$get_errorCorrelationId() {ULS0Qc:;
         this.checkUninitializedProperty('ErrorCorrelationId');
-        return (this.get_objectData().get_properties()['ErrorCorrelationId']);
+        return ((this.get_objectData().get_properties()['ErrorCorrelationId']));
     },
-    
-    set_errorCorrelationId: function SP_WorkManagement_OM_TaskRefreshResult$set_errorCorrelationId$in(value) {ULS0Qc:;
+    set_errorCorrelationId: function SP_WorkManagement_OM_TaskRefreshResult$set_errorCorrelationId(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ErrorCorrelationId'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ErrorCorrelationId', value));
         }
         return value;
     },
     
-    get_refreshState: function SP_WorkManagement_OM_TaskRefreshResult$get_refreshState$in() {ULS0Qc:;
+    get_refreshState: function SP_WorkManagement_OM_TaskRefreshResult$get_refreshState() {ULS0Qc:;
         this.checkUninitializedProperty('RefreshState');
-        return (this.get_objectData().get_properties()['RefreshState']);
+        return ((this.get_objectData().get_properties()['RefreshState']));
     },
-    
-    set_refreshState: function SP_WorkManagement_OM_TaskRefreshResult$set_refreshState$in(value) {ULS0Qc:;
+    set_refreshState: function SP_WorkManagement_OM_TaskRefreshResult$set_refreshState(value) {ULS0Qc:;
         this.get_objectData().get_properties()['RefreshState'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'RefreshState', value));
         }
         return value;
     },
     
-    get_result: function SP_WorkManagement_OM_TaskRefreshResult$get_result$in() {ULS0Qc:;
+    get_result: function SP_WorkManagement_OM_TaskRefreshResult$get_result() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Result']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.Task(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'Result'));
@@ -3056,16 +2954,15 @@ SP.WorkManagement.OM.TaskRefreshResult.prototype = {
         }
         return $v_0;
     },
-    
-    set_result: function SP_WorkManagement_OM_TaskRefreshResult$set_result$in(value) {ULS0Qc:;
+    set_result: function SP_WorkManagement_OM_TaskRefreshResult$set_result(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['Result'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Result', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_TaskRefreshResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_TaskRefreshResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.ErrorCorrelationId;
@@ -3101,33 +2998,31 @@ SP.WorkManagement.OM.TaskWriteResult = function SP_WorkManagement_OM_TaskWriteRe
 }
 SP.WorkManagement.OM.TaskWriteResult.prototype = {
     
-    get_error: function SP_WorkManagement_OM_TaskWriteResult$get_error$in() {ULS0Qc:;
+    get_error: function SP_WorkManagement_OM_TaskWriteResult$get_error() {ULS0Qc:;
         this.checkUninitializedProperty('Error');
-        return (this.get_objectData().get_properties()['Error']);
+        return ((this.get_objectData().get_properties()['Error']));
     },
-    
-    set_error: function SP_WorkManagement_OM_TaskWriteResult$set_error$in(value) {ULS0Qc:;
+    set_error: function SP_WorkManagement_OM_TaskWriteResult$set_error(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Error'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Error', value));
         }
         return value;
     },
     
-    get_errorMessage: function SP_WorkManagement_OM_TaskWriteResult$get_errorMessage$in() {ULS0Qc:;
+    get_errorMessage: function SP_WorkManagement_OM_TaskWriteResult$get_errorMessage() {ULS0Qc:;
         this.checkUninitializedProperty('ErrorMessage');
-        return (this.get_objectData().get_properties()['ErrorMessage']);
+        return ((this.get_objectData().get_properties()['ErrorMessage']));
     },
-    
-    set_errorMessage: function SP_WorkManagement_OM_TaskWriteResult$set_errorMessage$in(value) {ULS0Qc:;
+    set_errorMessage: function SP_WorkManagement_OM_TaskWriteResult$set_errorMessage(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ErrorMessage'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ErrorMessage', value));
         }
         return value;
     },
     
-    get_result: function SP_WorkManagement_OM_TaskWriteResult$get_result$in() {ULS0Qc:;
+    get_result: function SP_WorkManagement_OM_TaskWriteResult$get_result() {ULS0Qc:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Result']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
             $v_0 = new SP.WorkManagement.OM.Task(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'Result'));
@@ -3135,16 +3030,15 @@ SP.WorkManagement.OM.TaskWriteResult.prototype = {
         }
         return $v_0;
     },
-    
-    set_result: function SP_WorkManagement_OM_TaskWriteResult$set_result$in(value) {ULS0Qc:;
+    set_result: function SP_WorkManagement_OM_TaskWriteResult$set_result(value) {ULS0Qc:;
         this.get_objectData().get_clientObjectProperties()['Result'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Result', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_TaskWriteResult$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_TaskWriteResult$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Error;
@@ -3180,13 +3074,13 @@ SP.WorkManagement.OM.UserOrderedSession = function SP_WorkManagement_OM_UserOrde
 }
 SP.WorkManagement.OM.UserOrderedSession.prototype = {
     
-    reorderTask: function SP_WorkManagement_OM_UserOrderedSession$reorderTask$in(taskKey, newAfterTaskKey) {ULS0Qc:;
+    reorderTask: function SP_WorkManagement_OM_UserOrderedSession$reorderTask(taskKey, newAfterTaskKey) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'ReorderTask', [ taskKey, newAfterTaskKey ]);
         $v_0.addQuery($v_1);
     },
     
-    readTasks: function SP_WorkManagement_OM_UserOrderedSession$readTasks$in(query) {ULS0Qc:;
+    readTasks: function SP_WorkManagement_OM_UserOrderedSession$readTasks(query) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.TaskClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'ReadTasks', [ query ]));
@@ -3198,19 +3092,19 @@ SP.WorkManagement.OM.UserOrderedSession.prototype = {
 SP.WorkManagement.OM.UserOrderedSessionManager = function SP_WorkManagement_OM_UserOrderedSessionManager(context) {ULS0Qc:;
     SP.WorkManagement.OM.UserOrderedSessionManager.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{d82117fb-e4aa-4ab8-b590-cb2be4b2f078}', arguments) ]);
 }
-SP.WorkManagement.OM.UserOrderedSessionManager.newObject = function SP_WorkManagement_OM_UserOrderedSessionManager$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.UserOrderedSessionManager.newObject = function SP_WorkManagement_OM_UserOrderedSessionManager$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.UserOrderedSessionManager(context, new SP.ObjectPathConstructor(context, '{d82117fb-e4aa-4ab8-b590-cb2be4b2f078}', null));
 }
 SP.WorkManagement.OM.UserOrderedSessionManager.prototype = {
     
-    createLocationOrientedSession: function SP_WorkManagement_OM_UserOrderedSessionManager$createLocationOrientedSession$in() {ULS0Qc:;
+    createLocationOrientedSession: function SP_WorkManagement_OM_UserOrderedSessionManager$createLocationOrientedSession() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationOrientedUserOrderedSession($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'CreateLocationOrientedSession', null));
         return $v_1;
     },
     
-    createSession: function SP_WorkManagement_OM_UserOrderedSessionManager$createSession$in() {ULS0Qc:;
+    createSession: function SP_WorkManagement_OM_UserOrderedSessionManager$createSession() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.UserOrderedSession($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'CreateSession', null));
@@ -3222,129 +3116,120 @@ SP.WorkManagement.OM.UserOrderedSessionManager.prototype = {
 SP.WorkManagement.OM.UserSettings = function SP_WorkManagement_OM_UserSettings(context) {ULS0Qc:;
     SP.WorkManagement.OM.UserSettings.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{bea67fb5-fb82-4388-b0e7-174baa0eb51a}', arguments) ]);
 }
-SP.WorkManagement.OM.UserSettings.newObject = function SP_WorkManagement_OM_UserSettings$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.UserSettings.newObject = function SP_WorkManagement_OM_UserSettings$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.UserSettings(context, new SP.ObjectPathConstructor(context, '{bea67fb5-fb82-4388-b0e7-174baa0eb51a}', null));
 }
 SP.WorkManagement.OM.UserSettings.prototype = {
     
-    get_daysAfterCurrentDateTimelineEnds: function SP_WorkManagement_OM_UserSettings$get_daysAfterCurrentDateTimelineEnds$in() {ULS0Qc:;
+    get_daysAfterCurrentDateTimelineEnds: function SP_WorkManagement_OM_UserSettings$get_daysAfterCurrentDateTimelineEnds() {ULS0Qc:;
         this.checkUninitializedProperty('DaysAfterCurrentDateTimelineEnds');
-        return (this.get_objectData().get_properties()['DaysAfterCurrentDateTimelineEnds']);
+        return ((this.get_objectData().get_properties()['DaysAfterCurrentDateTimelineEnds']));
     },
-    
-    set_daysAfterCurrentDateTimelineEnds: function SP_WorkManagement_OM_UserSettings$set_daysAfterCurrentDateTimelineEnds$in(value) {ULS0Qc:;
+    set_daysAfterCurrentDateTimelineEnds: function SP_WorkManagement_OM_UserSettings$set_daysAfterCurrentDateTimelineEnds(value) {ULS0Qc:;
         this.get_objectData().get_properties()['DaysAfterCurrentDateTimelineEnds'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DaysAfterCurrentDateTimelineEnds', value));
         }
         return value;
     },
     
-    get_daysATaskIsConsideredNewTask: function SP_WorkManagement_OM_UserSettings$get_daysATaskIsConsideredNewTask$in() {ULS0Qc:;
+    get_daysATaskIsConsideredNewTask: function SP_WorkManagement_OM_UserSettings$get_daysATaskIsConsideredNewTask() {ULS0Qc:;
         this.checkUninitializedProperty('DaysATaskIsConsideredNewTask');
-        return (this.get_objectData().get_properties()['DaysATaskIsConsideredNewTask']);
+        return ((this.get_objectData().get_properties()['DaysATaskIsConsideredNewTask']));
     },
-    
-    set_daysATaskIsConsideredNewTask: function SP_WorkManagement_OM_UserSettings$set_daysATaskIsConsideredNewTask$in(value) {ULS0Qc:;
+    set_daysATaskIsConsideredNewTask: function SP_WorkManagement_OM_UserSettings$set_daysATaskIsConsideredNewTask(value) {ULS0Qc:;
         this.get_objectData().get_properties()['DaysATaskIsConsideredNewTask'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DaysATaskIsConsideredNewTask', value));
         }
         return value;
     },
     
-    get_daysBeforeCurrentDateTimelineStarts: function SP_WorkManagement_OM_UserSettings$get_daysBeforeCurrentDateTimelineStarts$in() {ULS0Qc:;
+    get_daysBeforeCurrentDateTimelineStarts: function SP_WorkManagement_OM_UserSettings$get_daysBeforeCurrentDateTimelineStarts() {ULS0Qc:;
         this.checkUninitializedProperty('DaysBeforeCurrentDateTimelineStarts');
-        return (this.get_objectData().get_properties()['DaysBeforeCurrentDateTimelineStarts']);
+        return ((this.get_objectData().get_properties()['DaysBeforeCurrentDateTimelineStarts']));
     },
-    
-    set_daysBeforeCurrentDateTimelineStarts: function SP_WorkManagement_OM_UserSettings$set_daysBeforeCurrentDateTimelineStarts$in(value) {ULS0Qc:;
+    set_daysBeforeCurrentDateTimelineStarts: function SP_WorkManagement_OM_UserSettings$set_daysBeforeCurrentDateTimelineStarts(value) {ULS0Qc:;
         this.get_objectData().get_properties()['DaysBeforeCurrentDateTimelineStarts'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'DaysBeforeCurrentDateTimelineStarts', value));
         }
         return value;
     },
     
-    get_importantLocationIds: function SP_WorkManagement_OM_UserSettings$get_importantLocationIds$in() {ULS0Qc:;
+    get_importantLocationIds: function SP_WorkManagement_OM_UserSettings$get_importantLocationIds() {ULS0Qc:;
         this.checkUninitializedProperty('ImportantLocationIds');
-        return (this.get_objectData().get_properties()['ImportantLocationIds']);
+        return ((this.get_objectData().get_properties()['ImportantLocationIds']));
     },
-    
-    set_importantLocationIds: function SP_WorkManagement_OM_UserSettings$set_importantLocationIds$in(value) {ULS0Qc:;
+    set_importantLocationIds: function SP_WorkManagement_OM_UserSettings$set_importantLocationIds(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ImportantLocationIds'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ImportantLocationIds', value));
         }
         return value;
     },
     
-    get_importantTasksLimit: function SP_WorkManagement_OM_UserSettings$get_importantTasksLimit$in() {ULS0Qc:;
+    get_importantTasksLimit: function SP_WorkManagement_OM_UserSettings$get_importantTasksLimit() {ULS0Qc:;
         this.checkUninitializedProperty('ImportantTasksLimit');
-        return (this.get_objectData().get_properties()['ImportantTasksLimit']);
+        return ((this.get_objectData().get_properties()['ImportantTasksLimit']));
     },
-    
-    set_importantTasksLimit: function SP_WorkManagement_OM_UserSettings$set_importantTasksLimit$in(value) {ULS0Qc:;
+    set_importantTasksLimit: function SP_WorkManagement_OM_UserSettings$set_importantTasksLimit(value) {ULS0Qc:;
         this.get_objectData().get_properties()['ImportantTasksLimit'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'ImportantTasksLimit', value));
         }
         return value;
     },
     
-    get_inactiveMonthsBeforeLocationExpiration: function SP_WorkManagement_OM_UserSettings$get_inactiveMonthsBeforeLocationExpiration$in() {ULS0Qc:;
+    get_inactiveMonthsBeforeLocationExpiration: function SP_WorkManagement_OM_UserSettings$get_inactiveMonthsBeforeLocationExpiration() {ULS0Qc:;
         this.checkUninitializedProperty('InactiveMonthsBeforeLocationExpiration');
-        return (this.get_objectData().get_properties()['InactiveMonthsBeforeLocationExpiration']);
+        return ((this.get_objectData().get_properties()['InactiveMonthsBeforeLocationExpiration']));
     },
-    
-    set_inactiveMonthsBeforeLocationExpiration: function SP_WorkManagement_OM_UserSettings$set_inactiveMonthsBeforeLocationExpiration$in(value) {ULS0Qc:;
+    set_inactiveMonthsBeforeLocationExpiration: function SP_WorkManagement_OM_UserSettings$set_inactiveMonthsBeforeLocationExpiration(value) {ULS0Qc:;
         this.get_objectData().get_properties()['InactiveMonthsBeforeLocationExpiration'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'InactiveMonthsBeforeLocationExpiration', value));
         }
         return value;
     },
     
-    get_lateTasksLimit: function SP_WorkManagement_OM_UserSettings$get_lateTasksLimit$in() {ULS0Qc:;
+    get_lateTasksLimit: function SP_WorkManagement_OM_UserSettings$get_lateTasksLimit() {ULS0Qc:;
         this.checkUninitializedProperty('LateTasksLimit');
-        return (this.get_objectData().get_properties()['LateTasksLimit']);
+        return ((this.get_objectData().get_properties()['LateTasksLimit']));
     },
-    
-    set_lateTasksLimit: function SP_WorkManagement_OM_UserSettings$set_lateTasksLimit$in(value) {ULS0Qc:;
+    set_lateTasksLimit: function SP_WorkManagement_OM_UserSettings$set_lateTasksLimit(value) {ULS0Qc:;
         this.get_objectData().get_properties()['LateTasksLimit'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LateTasksLimit', value));
         }
         return value;
     },
     
-    get_oldTasksLimit: function SP_WorkManagement_OM_UserSettings$get_oldTasksLimit$in() {ULS0Qc:;
+    get_oldTasksLimit: function SP_WorkManagement_OM_UserSettings$get_oldTasksLimit() {ULS0Qc:;
         this.checkUninitializedProperty('OldTasksLimit');
-        return (this.get_objectData().get_properties()['OldTasksLimit']);
+        return ((this.get_objectData().get_properties()['OldTasksLimit']));
     },
-    
-    set_oldTasksLimit: function SP_WorkManagement_OM_UserSettings$set_oldTasksLimit$in(value) {ULS0Qc:;
+    set_oldTasksLimit: function SP_WorkManagement_OM_UserSettings$set_oldTasksLimit(value) {ULS0Qc:;
         this.get_objectData().get_properties()['OldTasksLimit'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'OldTasksLimit', value));
         }
         return value;
     },
     
-    get_upcomingTasksLimit: function SP_WorkManagement_OM_UserSettings$get_upcomingTasksLimit$in() {ULS0Qc:;
+    get_upcomingTasksLimit: function SP_WorkManagement_OM_UserSettings$get_upcomingTasksLimit() {ULS0Qc:;
         this.checkUninitializedProperty('UpcomingTasksLimit');
-        return (this.get_objectData().get_properties()['UpcomingTasksLimit']);
+        return ((this.get_objectData().get_properties()['UpcomingTasksLimit']));
     },
-    
-    set_upcomingTasksLimit: function SP_WorkManagement_OM_UserSettings$set_upcomingTasksLimit$in(value) {ULS0Qc:;
+    set_upcomingTasksLimit: function SP_WorkManagement_OM_UserSettings$set_upcomingTasksLimit(value) {ULS0Qc:;
         this.get_objectData().get_properties()['UpcomingTasksLimit'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'UpcomingTasksLimit', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_UserSettings$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_UserSettings$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.DaysAfterCurrentDateTimelineEnds;
@@ -3403,33 +3288,33 @@ SP.WorkManagement.OM.UserSettingsPropertyNames = function SP_WorkManagement_OM_U
 SP.WorkManagement.OM.UserSettingsManager = function SP_WorkManagement_OM_UserSettingsManager(context) {ULS0Qc:;
     SP.WorkManagement.OM.UserSettingsManager.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{73b6f1d6-c69c-4787-8413-2bb14d336410}', arguments) ]);
 }
-SP.WorkManagement.OM.UserSettingsManager.newObject = function SP_WorkManagement_OM_UserSettingsManager$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.UserSettingsManager.newObject = function SP_WorkManagement_OM_UserSettingsManager$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.UserSettingsManager(context, new SP.ObjectPathConstructor(context, '{73b6f1d6-c69c-4787-8413-2bb14d336410}', null));
 }
 SP.WorkManagement.OM.UserSettingsManager.prototype = {
     
-    getImportantLocations: function SP_WorkManagement_OM_UserSettingsManager$getImportantLocations$in() {ULS0Qc:;
+    getImportantLocations: function SP_WorkManagement_OM_UserSettingsManager$getImportantLocations() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetImportantLocations', null));
         return $v_1;
     },
     
-    getAllLocations: function SP_WorkManagement_OM_UserSettingsManager$getAllLocations$in() {ULS0Qc:;
+    getAllLocations: function SP_WorkManagement_OM_UserSettingsManager$getAllLocations() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetAllLocations', null));
         return $v_1;
     },
     
-    getLocations: function SP_WorkManagement_OM_UserSettingsManager$getLocations$in(locationsId) {ULS0Qc:;
+    getLocations: function SP_WorkManagement_OM_UserSettingsManager$getLocations(locationsId) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.LocationClientCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetLocations', [ locationsId ]));
         return $v_1;
     },
     
-    isExchangeJobPending: function SP_WorkManagement_OM_UserSettingsManager$isExchangeJobPending$in() {ULS0Qc:;
+    isExchangeJobPending: function SP_WorkManagement_OM_UserSettingsManager$isExchangeJobPending() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'IsExchangeJobPending', null);
@@ -3439,7 +3324,7 @@ SP.WorkManagement.OM.UserSettingsManager.prototype = {
         return $v_1;
     },
     
-    optIntoExchangeSync: function SP_WorkManagement_OM_UserSettingsManager$optIntoExchangeSync$in() {ULS0Qc:;
+    optIntoExchangeSync: function SP_WorkManagement_OM_UserSettingsManager$optIntoExchangeSync() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'OptIntoExchangeSync', null);
@@ -3449,7 +3334,7 @@ SP.WorkManagement.OM.UserSettingsManager.prototype = {
         return $v_1;
     },
     
-    optOutOfExchangeSync: function SP_WorkManagement_OM_UserSettingsManager$optOutOfExchangeSync$in() {ULS0Qc:;
+    optOutOfExchangeSync: function SP_WorkManagement_OM_UserSettingsManager$optOutOfExchangeSync() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'OptOutOfExchangeSync', null);
@@ -3459,34 +3344,34 @@ SP.WorkManagement.OM.UserSettingsManager.prototype = {
         return $v_1;
     },
     
-    getExchangeSyncInfo: function SP_WorkManagement_OM_UserSettingsManager$getExchangeSyncInfo$in() {ULS0Qc:;
+    getExchangeSyncInfo: function SP_WorkManagement_OM_UserSettingsManager$getExchangeSyncInfo() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.ExchangeUserSyncState($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetExchangeSyncInfo', null));
         return $v_1;
     },
     
-    getUserSettings: function SP_WorkManagement_OM_UserSettingsManager$getUserSettings$in() {ULS0Qc:;
+    getUserSettings: function SP_WorkManagement_OM_UserSettingsManager$getUserSettings() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.UserSettings($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetUserSettings', null));
         return $v_1;
     },
     
-    setUserSettings: function SP_WorkManagement_OM_UserSettingsManager$setUserSettings$in(settings, locationColorUpdates) {ULS0Qc:;
+    setUserSettings: function SP_WorkManagement_OM_UserSettingsManager$setUserSettings(settings, locationColorUpdates) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'SetUserSettings', [ settings, locationColorUpdates ]);
         $v_0.addQuery($v_1);
     },
     
-    getPersistedProperties: function SP_WorkManagement_OM_UserSettingsManager$getPersistedProperties$in() {ULS0Qc:;
+    getPersistedProperties: function SP_WorkManagement_OM_UserSettingsManager$getPersistedProperties() {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1;
         $v_1 = new SP.WorkManagement.OM.PersistedProperties($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetPersistedProperties', null));
         return $v_1;
     },
     
-    setPersistedProperties: function SP_WorkManagement_OM_UserSettingsManager$setPersistedProperties$in(persistedProperties) {ULS0Qc:;
+    setPersistedProperties: function SP_WorkManagement_OM_UserSettingsManager$setPersistedProperties(persistedProperties) {ULS0Qc:;
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'SetPersistedProperties', [ persistedProperties ]);
         $v_0.addQuery($v_1);
@@ -3497,51 +3382,48 @@ SP.WorkManagement.OM.UserSettingsManager.prototype = {
 SP.WorkManagement.OM.ViewSelectionInfo = function SP_WorkManagement_OM_ViewSelectionInfo(context) {ULS0Qc:;
     SP.WorkManagement.OM.ViewSelectionInfo.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{9c4b64c1-8722-45c0-9d9d-e61c2f36bb44}', arguments) ]);
 }
-SP.WorkManagement.OM.ViewSelectionInfo.newObject = function SP_WorkManagement_OM_ViewSelectionInfo$newObject$st(context) {ULS0Qc:;
+SP.WorkManagement.OM.ViewSelectionInfo.newObject = function SP_WorkManagement_OM_ViewSelectionInfo$newObject(context) {ULS0Qc:;
     return new SP.WorkManagement.OM.ViewSelectionInfo(context, new SP.ObjectPathConstructor(context, '{9c4b64c1-8722-45c0-9d9d-e61c2f36bb44}', null));
 }
 SP.WorkManagement.OM.ViewSelectionInfo.prototype = {
     
-    get_id: function SP_WorkManagement_OM_ViewSelectionInfo$get_id$in() {ULS0Qc:;
+    get_id: function SP_WorkManagement_OM_ViewSelectionInfo$get_id() {ULS0Qc:;
         this.checkUninitializedProperty('Id');
-        return (this.get_objectData().get_properties()['Id']);
+        return ((this.get_objectData().get_properties()['Id']));
     },
-    
-    set_id: function SP_WorkManagement_OM_ViewSelectionInfo$set_id$in(value) {ULS0Qc:;
+    set_id: function SP_WorkManagement_OM_ViewSelectionInfo$set_id(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Id'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Id', value));
         }
         return value;
     },
     
-    get_image: function SP_WorkManagement_OM_ViewSelectionInfo$get_image$in() {ULS0Qc:;
+    get_image: function SP_WorkManagement_OM_ViewSelectionInfo$get_image() {ULS0Qc:;
         this.checkUninitializedProperty('Image');
-        return (this.get_objectData().get_properties()['Image']);
+        return ((this.get_objectData().get_properties()['Image']));
     },
-    
-    set_image: function SP_WorkManagement_OM_ViewSelectionInfo$set_image$in(value) {ULS0Qc:;
+    set_image: function SP_WorkManagement_OM_ViewSelectionInfo$set_image(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Image'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Image', value));
         }
         return value;
     },
     
-    get_name: function SP_WorkManagement_OM_ViewSelectionInfo$get_name$in() {ULS0Qc:;
+    get_name: function SP_WorkManagement_OM_ViewSelectionInfo$get_name() {ULS0Qc:;
         this.checkUninitializedProperty('Name');
-        return (this.get_objectData().get_properties()['Name']);
+        return ((this.get_objectData().get_properties()['Name']));
     },
-    
-    set_name: function SP_WorkManagement_OM_ViewSelectionInfo$set_name$in(value) {ULS0Qc:;
+    set_name: function SP_WorkManagement_OM_ViewSelectionInfo$set_name(value) {ULS0Qc:;
         this.get_objectData().get_properties()['Name'] = value;
-        if (this.get_context()) {
+        if ((this.get_context())) {
             this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'Name', value));
         }
         return value;
     },
     
-    initPropertiesFromJson: function SP_WorkManagement_OM_ViewSelectionInfo$initPropertiesFromJson$in(parentNode) {ULS0Qc:;
+    initPropertiesFromJson: function SP_WorkManagement_OM_ViewSelectionInfo$initPropertiesFromJson(parentNode) {ULS0Qc:;
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
         $v_0 = parentNode.Id;
