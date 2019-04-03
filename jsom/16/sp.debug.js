@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 4600,
-            "rpr": 1002
+            "rup": 4810,
+            "rpr": 1000
         }
     };
 }
@@ -27019,6 +27019,10 @@ SP.WebParts.WebPartDefinition.prototype = {
         }
         return $v_0;
     },
+    get_zoneId: function SP_WebParts_WebPartDefinition$get_zoneId$in() {
+        this.checkUninitializedProperty('ZoneId');
+        return ((this.get_objectData()).get_properties())['ZoneId'];
+    },
     initPropertiesFromJson: function SP_WebParts_WebPartDefinition$initPropertiesFromJson$in(parentNode) {
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
@@ -27033,6 +27037,11 @@ SP.WebParts.WebPartDefinition.prototype = {
             this.updateClientObjectPropertyType('WebPart', this.get_webPart(), $v_0);
             (this.get_webPart()).fromJson($v_0);
             delete parentNode.WebPart;
+        }
+        $v_0 = parentNode.ZoneId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            ((this.get_objectData()).get_properties())['ZoneId'] = $v_0;
+            delete parentNode.ZoneId;
         }
     },
     saveWebPartChanges: function SP_WebParts_WebPartDefinition$saveWebPartChanges$in() {
@@ -29040,6 +29049,7 @@ function sp_initialize() {
     SP.WebParts.WebPartPropertyNames.zoneIndex = 'ZoneIndex';
     SP.WebParts.WebPartObjectPropertyNames.properties = 'Properties';
     SP.WebParts.WebPartDefinitionPropertyNames.id = 'Id';
+    SP.WebParts.WebPartDefinitionPropertyNames.zoneId = 'ZoneId';
     SP.WebParts.WebPartDefinitionObjectPropertyNames.webPart = 'WebPart';
     SP.Workflow.WorkflowAssociationPropertyNames.allowManual = 'AllowManual';
     SP.Workflow.WorkflowAssociationPropertyNames.associationData = 'AssociationData';

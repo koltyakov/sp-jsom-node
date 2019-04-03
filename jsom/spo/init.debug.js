@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 8328,
-                "rpr": 1219
+                "rup": 8727,
+                "rpr": 1209
             }
         };
     }
@@ -2100,7 +2100,7 @@ function $_global_init() {
                 var eName = ev.eventName.toString();
                 var eType = "Start";
                 var eResultType;
-                var eResultCode;
+                var eResultCode = "NA";
                 var eComponent;
                 var nName;
 
@@ -2112,11 +2112,36 @@ function $_global_init() {
                 else if (ev.eventName == "UserEngagement") {
                     eName = "qos";
                     if (Boolean(ev.data) && Boolean(ev.data.EngagementName)) {
-                        eType = ev.data.EngagementName.endsWith(".Start") ? "Start" : ev.data.EngagementName.endsWith(".Success") ? "End" : ev.data.EngagementName.endsWith(".Failure") ? "Failure" : "NA";
-                        eResultType = eType == "End" ? "Success" : eType == "Failure" ? "Failure" : "NA";
+                        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("F662C01B-429C-441A-8FE5-5D402E4B8DC9"))) {
+                            var engagementName = ev.data.EngagementName.toString();
+
+                            eType = engagementName.endsWith(".Start") ? "Start" : engagementName.endsWith(".Success") ? "End" : engagementName.endsWith(".Failure") ? "End" : engagementName.endsWith(".ExpectedFailure") ? "End" : engagementName.endsWith(".UnexpectedFailure") ? "End" : "NA";
+                            eResultType = engagementName.endsWith(".Success") ? "Success" : engagementName.endsWith(".Failure") ? "Failure" : engagementName.endsWith(".ExpectedFailure") ? "ExpectedFailure" : engagementName.endsWith(".UnexpectedFailure") ? "UnexpectedFailure" : "NA";
+                            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("8BA5B59D-4E8D-44E9-88A0-E64983174929")) && Boolean(ev.data.Properties)) {
+                                try {
+                                    var props = JSON.parse(ev.data.Properties.toString());
+
+                                    eResultCode = Boolean(props.ErrorCode) ? props.ErrorCode.toString() : "NA";
+                                }
+                                catch (exception) {
+                                    if (exception != null) {
+                                        if (typeof console != "undefined" && Boolean(console) && typeof console.log == "function") {
+                                            console.log("Aria error: " + exception.toString());
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                eResultCode = Boolean(ev.data.Properties) && Boolean(ev.data.Properties.ErrorCode) ? ev.data.Properties.ErrorCode.toString() : "NA";
+                            }
+                        }
+                        else {
+                            eType = ev.data.EngagementName.endsWith(".Start") ? "Start" : ev.data.EngagementName.endsWith(".Success") ? "End" : ev.data.EngagementName.endsWith(".Failure") ? "Failure" : "NA";
+                            eResultType = eType == "End" ? "Success" : eType == "Failure" ? "Failure" : "NA";
+                            eResultCode = Boolean(ev.data.Properties) && Boolean(ev.data.Properties.ErrorCode) ? ev.data.Properties.ErrorCode.toString() : "NA";
+                        }
                         eComponent = ev.data.EngagementName.substring(0, ev.data.EngagementName.indexOf('.'));
                         nName = ev.data.EngagementName.substring(0, ev.data.EngagementName.lastIndexOf('.'));
-                        eResultCode = Boolean(ev.data.Properties) && Boolean(ev.data.Properties.ErrorCode) ? ev.data.Properties.ErrorCode.toString() : "NA";
                     }
                 }
                 var eventProperties = new AWTEventProperties();
@@ -6663,7 +6688,7 @@ function UpdateUrlWhenServerRedirects() {
     if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(708) && !(window["OffSwitch"] == null || OffSwitch.IsActive("90329B12-2C48-4DBE-A1B9-08BC2BBA2C26")) && (window["OffSwitch"] == null || OffSwitch.IsActive("DC0DFB52-4F4C-479D-9D07-43DE94F3123F")) && (window["OffSwitch"] == null || OffSwitch.IsActive("3EDB0B41-115A-410E-9C6B-9390F1D1AD94") || !browserUpdatedWithServerRedirectedUrl) && Boolean(pageContextInfo) && Boolean(pageContextInfo.serverRedirectedUrl)) {
         var serverRedirectedUrl = pageContextInfo.serverRedirectedUrl;
 
-        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("F1754AB4-0FF5-4169-A2E1-7665F6FF4E9F")) && Boolean(pageContextInfo.isSPO) && window.location.protocol.toLowerCase() === 'https:') {
+        if (Boolean(pageContextInfo.isSPO) && window.location.protocol.toLowerCase() === 'https:') {
             serverRedirectedUrl = serverRedirectedUrl.replace(/^http:\/\//i, 'https://');
         }
         if (Boolean(window.history) && Boolean(window.history.replaceState)) {
@@ -6693,7 +6718,7 @@ function isBrowserSupportedModernApp() {
 
         if (-1 !== i) {
             var v = parseInt(a.substring(i + 5));
-            var supportedMode = !(window["OffSwitch"] == null || OffSwitch.IsActive("68B2E51A-1AC2-4ABF-924A-DFB7CD5C18E1")) ? 11 : 10;
+            var supportedMode = 11;
 
             if (v < supportedMode && Boolean(document.documentMode) && document.documentMode < supportedMode) {
                 browserSupported = false;
@@ -6705,6 +6730,9 @@ function isBrowserSupportedModernApp() {
 }
 function UserHasPermissionHigh(permissionLevel) {
     var pageContextInfo = window['_spPageContextInfo'];
+
+    if (!Boolean(pageContextInfo))
+        return false;
     var webPermMasks = pageContextInfo['webPermMasks'];
     var webPermMasksHigh = webPermMasks != null ? Number(webPermMasks["High"]) : 0;
     var hasPerm = (webPermMasksHigh & permissionLevel) == permissionLevel;
@@ -6717,7 +6745,7 @@ function ModernUXOptOutCookieIsOn() {
 function PrepareForModernOnePageNavigation() {
     var SPBasePermissions_UseRemoteAPIs = 0x20;
 
-    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(1) && !(window["OffSwitch"] == null || OffSwitch.IsActive("79D8320F-D4AA-45D1-A83F-9B7AF522EE5C")) && isBrowserSupportedModernApp() && (window["OffSwitch"] == null || OffSwitch.IsActive("32012162-C12F-453D-A7EF-E00E74140C44") || UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn())) {
+    if (isBrowserSupportedModernApp() && UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn()) {
         var docLibLinks = document.querySelectorAll('[onepagenavigationaction="1"]');
 
         for (var index = 0; index < docLibLinks.length; index++) {
@@ -6845,20 +6873,27 @@ function navigateMailToLinkWithMessage(strTo, strBody) {
     window.location.href = 'mailto:' + escapeProperly(strTo) + '?body=' + escapeProperly(escapeProperlyCoreCore(strBody, false, false, true));
 }
 function newBlogPostOnClient(strProviderId, strBlogUrl, strBlogName) {
-    var stsOpen;
-    var fRet;
+    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("4EB94FB3-0F95-49C5-AE5A-938DE52EAACD")) && !(Boolean(window.ActiveXObject) || "ActiveXObject" in window)) {
+        if (typeof phManager != "undefined" && phManager != null) {
+            window.location.href = phManager.CreateBlogPostProtocolHandlerUrl(strProviderId, strBlogUrl, strBlogName);
+        }
+    }
+    else {
+        var stsOpen;
+        var fRet;
 
-    stsOpen = StsOpenEnsureEx2("SharePoint.OpenDocuments.3");
-    if (stsOpen == null) {
-        alert(Strings.STS.L_NewBlogPost_Text);
-        return;
-    }
-    try {
-        if (typeof stsOpen.NewBlogPost != "undefined")
-            fRet = stsOpen.NewBlogPost(strProviderId, strBlogUrl, strBlogName);
-    }
-    catch (e) {
-        alert(Strings.STS.L_NewBlogPostFailed_Text);
+        stsOpen = StsOpenEnsureEx2("SharePoint.OpenDocuments.3");
+        if (stsOpen == null) {
+            alert(Strings.STS.L_NewBlogPost_Text);
+            return;
+        }
+        try {
+            if (typeof stsOpen.NewBlogPost != "undefined")
+                fRet = stsOpen.NewBlogPost(strProviderId, strBlogUrl, strBlogName);
+        }
+        catch (e) {
+            alert(Strings.STS.L_NewBlogPostFailed_Text);
+        }
     }
 }
 function GetUrlFromWebUrlAndWebRelativeUrl(webUrl, webRelativeUrl) {
@@ -11541,9 +11576,7 @@ function focusControl(targetControl) {
     }
 }
 function EscapeFormAction() {
-    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("3EDB0B41-115A-410E-9C6B-9390F1D1AD94"))) {
-        UpdateUrlWhenServerRedirects();
-    }
+    UpdateUrlWhenServerRedirects();
     if (document.forms.length > 0 && !Boolean(_spOriginalFormAction)) {
         _spOriginalFormAction = document.forms[0].action;
         var url = _spOriginalFormAction;
@@ -11557,6 +11590,11 @@ function EscapeFormAction() {
                 url = temp.substring(index);
             if (url.length > 2 && url.charAt(0) == '/' && url.charAt(1) == '/') {
                 url = url.substring(1);
+                if (!(window["OffSwitch"] == null || OffSwitch.IsActive("B4F09056-2C39-4EE4-B928-21F236B7DEA5"))) {
+                    while (url.charAt(1) === '/') {
+                        url = url.charAt(0) + url.substring(2);
+                    }
+                }
             }
         }
         if (url.length > 0) {
