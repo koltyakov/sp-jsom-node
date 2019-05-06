@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 8727,
-                "rpr": 1209
+                "rup": 8824,
+                "rpr": 1211
             }
         };
     }
@@ -7348,7 +7348,7 @@ function GetThemedImageUrl_Core(FileName, FallbackImagePath) {
     return themedImageUrl;
 }
 function GetImageUrlWithRevision(imageUrl) {
-    return imageUrl.search(/[?]/) > -1 ? imageUrl : imageUrl + "?" + "rev=45";
+    return imageUrl.search(/[?]/) > -1 ? imageUrl : imageUrl + "?" + "rev=46";
 }
 function ShowHideSection(sectionid, imgid) {
     var group = document.getElementById(sectionid);
@@ -7487,7 +7487,7 @@ function ProcessPNGImages() {
 
             if (img != null && g_PNGImageSources[i] != null) {
                 img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + g_PNGImageSources[i] + "),sizingMethod=scale);";
-                img.src = "/_layouts/15/images/blank.gif?rev=45";
+                img.src = "/_layouts/15/images/blank.gif?rev=46";
             }
         }
     }
@@ -9619,14 +9619,31 @@ function _registerCssLink(cssLink, head, callback, loadCompletedCallback, bUnthe
 
             setTimeout(bindArguments(function CssLinkCallback(timestart, myLink) {
                 if (myLink != null) {
-                    if (typeof myLink.sheet == "undefined" || myLink.sheet == null || typeof myLink.sheet.cssRules == "undefined" || myLink.sheet.cssRules == null) {
-                        if (Number(new Date()) - timestart < maxPollTime)
-                            setTimeout(bindArguments(CssLinkCallback, timestart, myLink), pollInterval);
-                        else if (typeof loadCompletedCallback == "function")
+                    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("BEB26041-0778-4A1D-835F-EB6629732BB3"))) {
+                        try {
+                            if (typeof myLink.sheet == "undefined" || myLink.sheet == null || typeof myLink.sheet.cssRules == "undefined" || myLink.sheet.cssRules == null) {
+                                if (Number(new Date()) - timestart < maxPollTime)
+                                    setTimeout(bindArguments(CssLinkCallback, timestart, myLink), pollInterval);
+                                else if (typeof loadCompletedCallback == "function")
+                                    loadCompletedCallback();
+                            }
+                            else if (myLink.sheet.cssRules && typeof loadCompletedCallback == "function")
+                                loadCompletedCallback();
+                        }
+                        catch (e) {
+                            console.log("Exception while trying to access stylesheet rules: " + e.toString());
+                        }
+                    }
+                    else {
+                        if (typeof myLink.sheet == "undefined" || myLink.sheet == null || typeof myLink.sheet.cssRules == "undefined" || myLink.sheet.cssRules == null) {
+                            if (Number(new Date()) - timestart < maxPollTime)
+                                setTimeout(bindArguments(CssLinkCallback, timestart, myLink), pollInterval);
+                            else if (typeof loadCompletedCallback == "function")
+                                loadCompletedCallback();
+                        }
+                        else if (myLink.sheet.cssRules && typeof loadCompletedCallback == "function")
                             loadCompletedCallback();
                     }
-                    else if (myLink.sheet.cssRules && typeof loadCompletedCallback == "function")
-                        loadCompletedCallback();
                 }
             }, startTime, aLink), pollInterval);
         }
@@ -9731,7 +9748,7 @@ function _AddTrySPListNextBanner(isList) {
     var bannerHtml = '\
 <div class="ms-fullWidth" style="background-color:#F8F8F8;position:relative;">\
   <div class="ms-tableCell ms-verticalAlignMiddle" style="width:256px;background-color:#24BBED;">\
-    <img src=' + StAttrQuote("/_layouts/15/images/PaintRoller.215x90x32.png?rev=45") + ' style="height:90px;width:215px;margin:auto 20px;">\
+    <img src=' + StAttrQuote("/_layouts/15/images/PaintRoller.215x90x32.png?rev=46") + ' style="height:90px;width:215px;margin:auto 20px;">\
   </div>\
   <div class="ms-tableCell ms-verticalAlignTop ms-fullWidth" style="padding:16px">\
 	<h2 style="color:#444">' + STSHtmlEncode(Boolean(isList) ? Strings.STS.L_ListNewLookHeading : Strings.STS.L_DocLibNewLookHeading) + '\
@@ -9739,7 +9756,7 @@ function _AddTrySPListNextBanner(isList) {
         <a title=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' class="ms-dlgCloseBtn" id="doclibNewLookClose" href="javascript:;">\
           <span style="padding: 8px; width: 16px; height: 16px; display: inline-block;">\
             <span class="s4-clust" style="width: 16px; height: 16px; overflow: hidden; display: inline-block; position: relative;">\
-              <img class="ms-dlgCloseBtnImg" style="left: 0px !important; top: -645px !important; position: absolute;" alt=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' src=' + StAttrQuote("/_layouts/15/images/fgimg.png?rev=45") + '>\
+              <img class="ms-dlgCloseBtnImg" style="left: 0px !important; top: -645px !important; position: absolute;" alt=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' src=' + StAttrQuote("/_layouts/15/images/fgimg.png?rev=46") + '>\
             </span>\
           </span>\
         </a>\
@@ -10291,7 +10308,7 @@ function IMNUpdateImage(id, imgInfo) {
         if (useFilter) {
             if (isPng) {
                 obj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + newImg + "),sizingMethod=scale,enabled=true);";
-                obj.src = "/_layouts/15/images/blank.gif?rev=45";
+                obj.src = "/_layouts/15/images/blank.gif?rev=46";
             }
             else {
                 obj.style.filter = "";
@@ -11010,7 +11027,7 @@ function CreateSpinningWheelContainer() {
     spinningWheel.style.visibility = "hidden";
     var waitingImg = document.createElement("img");
 
-    waitingImg.src = "/_layouts/15/images/gears_anv4.gif?rev=45";
+    waitingImg.src = "/_layouts/15/images/gears_anv4.gif?rev=46";
     spinningWheel.appendChild(waitingImg);
     return spinningWheel;
 }
@@ -12336,7 +12353,7 @@ function _ribbonOnStartInit(ribbonInfo) {
 
             _elmBlankTab.id = "Ribbon.BlankTab";
             _elmBlankTab.className = "ms-cui-tabBody";
-            _elmBlankTab.innerHTML = "<span class=\"ms-ribbontabswitchloading\"><img src=\"" + "/_layouts/15/images/loadingcirclests16.gif?rev=45" + "\" alt=\"\"/><span>" + Strings.STS.L_Loading_Text + "</span></span>";
+            _elmBlankTab.innerHTML = "<span class=\"ms-ribbontabswitchloading\"><img src=\"" + "/_layouts/15/images/loadingcirclests16.gif?rev=46" + "\" alt=\"\"/><span>" + Strings.STS.L_Loading_Text + "</span></span>";
             _elmTabCont.appendChild(_elmBlankTab);
             _elmRibbon.appendChild(_elmTabCont);
             AnimateRibbonMinimizedChanged(false);
@@ -13672,7 +13689,7 @@ function RenderShortcutLinkIcon(renderCtx, ret, content, listItem, listSchema) {
     ret.push("\" title=\"");
     ret.push(Encoding.HtmlEncode(Strings.STS.L_FieldType_File_Shortcut));
     ret.push("\" src=\"");
-    ret.push(ListView.ImageBasePath + "/_layouts/15/images/icspgen.gif?rev=45");
+    ret.push(ListView.ImageBasePath + "/_layouts/15/images/icspgen.gif?rev=46");
     ret.push("\" />");
     ret.push("</a>");
 }
@@ -14620,6 +14637,9 @@ function PerformanceLogger_module_def() {
             }
             if (!IsNullOrUndefined(correlationId)) {
                 that.LogPerformanceData('ServerCorrelationId', correlationId);
+                if (!(window["OffSwitch"] == null || OffSwitch.IsActive("B29C18fC-DA2B-4BAA-A30E-6AE01CC6C754"))) {
+                    isServerCorrelationIdCollected = true;
+                }
             }
             else if (typeof g_correlationId === "string" && !IsNullOrUndefined(g_correlationId)) {
                 that.LogPerformanceData('ServerCorrelationId', g_correlationId);
