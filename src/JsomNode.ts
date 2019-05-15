@@ -180,17 +180,13 @@ export class JsomNode {
         JsomModules[module].forEach(jsomScript => {
           // Ignore already loaded
           if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
-            let filePath: string = path.join(
-              __dirname, '..', 'jsom', envCode,
-              jsomScript.replace('{{lcid}}', lcid)
-            );
+            let filePath: string = process.env.JSOM_ASSETS_FOLDER
+              ? path.join(process.env.JSOM_ASSETS_FOLDER, envCode, jsomScript.replace('{{lcid}}', lcid))
+              : path.join(__dirname, '..', 'jsom', envCode, jsomScript.replace('{{lcid}}', lcid));
 
-            if (!fs.existsSync(filePath)) {
-              filePath = path.join(
-                __dirname, 'jsom', envCode,
-                jsomScript.replace('{{lcid}}', lcid)
-              );
-            }
+            // if (!fs.existsSync(filePath)) {
+            //   filePath = path.join(__dirname, 'jsom', envCode, jsomScript.replace('{{lcid}}', lcid));
+            // }
 
             // ====>
             if (filePath.substring(0, 1) === '\\') {
@@ -200,7 +196,9 @@ export class JsomNode {
             // ====<
 
             // Patch Microsoft Ajax library
-            jsomScript === 'msajaxbundle.debug.js' && this.patchMicrosoftAjax();
+            if (jsomScript === 'msajaxbundle.debug.js') {
+              this.patchMicrosoftAjax();
+            }
             // Register script as loaded
             global.loadedJsomScripts.push(jsomScript.toLowerCase());
           }
