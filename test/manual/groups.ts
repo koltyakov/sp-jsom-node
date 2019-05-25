@@ -1,6 +1,6 @@
 import { initEnvironment as init } from './utils/init';
 
-init().then(async settings => {
+init().then(async (_siteUrl) => {
 
   const clientContext = SP.ClientContext.get_current();
   let oWeb = clientContext.get_web();
@@ -10,10 +10,10 @@ init().then(async settings => {
 
   await clientContext.executeQueryPromise();
 
-  let users = oGroups.get_data().map(group => {
+  let users = oGroups.get_data().map((group) => {
     return {
       group: group.get_title(),
-      users: group.get_users().get_data().map(user => {
+      users: group.get_users().get_data().map((user) => {
         return {
           id: user.get_id(),
           title: user.get_title()

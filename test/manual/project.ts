@@ -7,7 +7,7 @@ const config = {
   modules: [ 'project' ]
 };
 
-init(config).then(async settings => {
+init(config).then(async (_siteUrl) => {
 
   // API Reference - https://msdn.microsoft.com/en-us/library/office/jj669820.aspx
   const projCtx = PS.ProjectContext.get_current();
@@ -15,6 +15,6 @@ init(config).then(async settings => {
   projCtx.load(projects, 'Include(Name, Id)');
   await projCtx.executeQueryPromise();
 
-  console.log(projects.get_data().map(p => p.get_name()));
+  console.log(projects.get_data().map((p) => p.get_name()));
 
 }).catch(console.log);

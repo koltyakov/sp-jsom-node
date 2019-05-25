@@ -1,2 +1,2 @@
 export { JsomNode } from './JsomNode';
-export { IJsomNodeSettings, IJsomNodeInitSettings, IJsomModule } from './interfaces';
+export { IJsomNodeSettings, IConfigSettings, IJsomNodeContext, IJsomModule } from './IJsomNode';

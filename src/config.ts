@@ -1,4 +1,4 @@
-import { IJsomModule } from '../interfaces';
+import { IJsomModule } from './IJsomNode';
 
 export const lcid: string = '1033';
 

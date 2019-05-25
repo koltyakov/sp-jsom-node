@@ -7,7 +7,7 @@ const config = {
   modules: [ 'project' ]
 };
 
-init(config).then(async settings => {
+init(config).then(async (_siteUrl) => {
 
   const projContext = PS.ProjectContext.get_current();
   const lookupTables = projContext.get_lookupTables();

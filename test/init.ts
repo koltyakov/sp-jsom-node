@@ -1,20 +1,23 @@
-import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
+import { resolve } from 'path';
+import { AuthConfig } from 'node-sp-auth-config';
 import * as colors from 'colors';
-import * as path from 'path';
 
-import { Environments } from './configs';
+import { Environments, IPrivateEnvironmentConfig } from './configs';
 
-export async function checkOrPromptForIntegrationConfigCreds (): Promise<void> {
+async function checkOrPromptForIntegrationConfigCreds (): Promise<void> {
 
-  for (let testConfig of Environments) {
-    console.log(`\n=== ${colors.bold.yellow(`${testConfig.environmentName} Credentials`)} ===\n`);
-    await (new SPAuthConfigirator({
-      configPath: testConfig.configPath
-    })).getContext();
-    console.log(colors.grey(`Gotcha ${path.resolve(testConfig.configPath)}`));
+  for (const conf of Environments) {
+    console.info(`\n=== ${colors.bold.yellow(`${conf.environmentName} Credentials`)} ===\n`);
+    const c = conf as IPrivateEnvironmentConfig;
+    if (typeof c.configPath !== 'undefined') {
+      await new AuthConfig({ configPath: c.configPath }).getContext();
+      console.info(colors.grey(`Gotcha ${resolve(c.configPath)}`));
+    } else {
+      console.info(colors.yellow(`CI configuration detected.`));
+    }
   }
 
-  console.log('\n');
+  console.info('\n');
 
 }
 

@@ -2,84 +2,71 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
 
-import { AuthConfig as SPAuthConfigirator } from 'node-sp-auth-config';
+import { AuthConfig } from 'node-sp-auth-config';
 import { create as createSPRequest, ISPRequest } from 'sp-request';
 import { Cpass } from 'cpass';
 
 import utils from './utils';
 import { JsomModules, lcid } from './config';
-import { IJsomNodeSettings, IJsomNodeInitSettings, IRequestsCache } from './interfaces';
+import { IJsomNodeSettings, IConfigSettings, IJsomNodeContext, IRequestsCache } from './IJsomNode';
 
 // Import JSOM ententions
 import './extensions/definitions';
 import { executeQueryPromise } from './extensions/executeQueryPromise';
 // Import JSOM ententions
 
-declare let global: any;
+declare const global: any;
 
-declare let sp_initialize: any;
+declare const sp_initialize: any;
 
 export class JsomNode {
 
-  private settings: IJsomNodeSettings | IJsomNodeInitSettings;
-  private spAuthConfigirator: SPAuthConfigirator;
+  private settings: IJsomNodeSettings;
+  private context: IJsomNodeContext;
   private request: ISPRequest;
   private requestCache: IRequestsCache = {};
-  private agent: https.Agent;
+  private agent: https.Agent = new https.Agent({
+    rejectUnauthorized: false,
+    keepAlive: true,
+    keepAliveMsecs: 10000
+  });
 
-  constructor(settings: (IJsomNodeSettings | IJsomNodeInitSettings) = {}) {
-    let config = settings.config || {};
-    this.settings = {
-      ...settings,
-      config: {
-        ...config,
-        configPath: path.resolve(config.configPath || path.join(process.cwd(), 'config/private.json')),
-        encryptPassword: typeof config.encryptPassword !== 'undefined' ? config.encryptPassword : true,
-        saveConfigOnDisk: typeof config.saveConfigOnDisk !== 'undefined' ? config.saveConfigOnDisk : true
-      }
-    };
-    if (typeof this.settings.authOptions !== 'undefined') {
-      const cpass = new Cpass();
-      (this.settings.authOptions as any).password = (this.settings.authOptions as any).password &&
-        cpass.decode((this.settings.authOptions as any).password);
-    }
-    this.agent = new https.Agent({
-      rejectUnauthorized: false,
-      keepAlive: true,
-      keepAliveMsecs: 10000
-    });
-    this.spAuthConfigirator = new SPAuthConfigirator(this.settings.config);
+  constructor(settings: IJsomNodeSettings = {}) {
+    this.settings = settings;
   }
 
   // Init JsomNode environment
-  public init() {
+  public init(context: IJsomNodeContext) {
+    const authOptions = context.authOptions;
+    const cpass = new Cpass();
+    const encodable = ['password', 'clientId', 'clientSecret'];
+    for (const prop of encodable) {
+      if (authOptions[prop]) {
+        authOptions[prop] = cpass.decode((authOptions[prop]));
+      }
+    }
+    this.context = { ...context, authOptions };
     this.mimicBrowser();
     this.loadScripts(this.settings.modules, this.settings.envCode);
     this.proxyRequestManager();
   }
 
   // Trigger wizard and init JsomNode environment
-  public wizard(): Promise<IJsomNodeSettings> {
-    return new Promise((resolve, reject) => {
-      if (typeof this.settings.authOptions === 'undefined') {
-        return this.spAuthConfigirator.getContext()
-          .then((context) => {
-            const cpass = new Cpass();
-            (context.authOptions as any).password = (context.authOptions as any).password &&
-              cpass.decode((context.authOptions as any).password);
-            this.settings = {
-              ...this.settings,
-              ...context as any
-            };
-            this.init();
-            return resolve(this.settings);
-          })
-          .catch((error: any) => {
-            return reject(error);
-          });
-      } else {
-        return resolve(this.settings);
-      }
+  public wizard(config?: IConfigSettings): Promise<string> {
+    return new AuthConfig(config).getContext().then((ctx) => {
+      this.context = {
+        siteUrl: ctx.siteUrl,
+        authOptions: ctx.authOptions
+      };
+      this.settings = {
+        ...this.settings,
+        ...{
+          envCode: config.envCode,
+          modules: config.modules
+        }
+      };
+      this.init(this.context);
+      return ctx.siteUrl;
     });
   }
 
@@ -99,15 +86,13 @@ export class JsomNode {
       },
       document: {
         cookie: '',
-        URL: this.settings.siteUrl
+        URL: this.context.siteUrl
       },
       setTimeout: global.setTimeout,
       clearTimeout: global.clearTimeout,
-      attachEvent: () => {
-        //
-      },
+      attachEvent: () => { /**/ },
       _spPageContextInfo: {
-        webServerRelativeUrl: `/${this.settings.siteUrl.split('/').splice(3, 100).join('/')}`
+        webServerRelativeUrl: `/${this.context.siteUrl.split('/').splice(3, 100).join('/')}`
       }
     };
 
@@ -115,9 +100,7 @@ export class JsomNode {
     global.document = {
       documentElement: {},
       URL: '',
-      getElementsByTagName: (name) => {
-        return [];
-      }
+      getElementsByTagName: (name) => []
     };
 
     global.Type = Function;
@@ -131,7 +114,7 @@ export class JsomNode {
     global.ExecuteOrDelayUntilScriptLoaded = (callback: () => void, jsomScript: string) => {
       jsomScript = jsomScript.replace('.debug.js', '').replace('.js', '') + '.debug.js';
       if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
-        let filePath = path.join(__dirname, '..', 'jsom', global.envCode || 'spo', jsomScript);
+        const filePath = path.join(__dirname, '..', 'jsom', global.envCode || 'spo', jsomScript);
         require(filePath);
         callback();
       } else {
@@ -152,7 +135,7 @@ export class JsomNode {
           curNs = curNs[nsName];
           curNs.__namespace = true;
         });
-        let nsName = namespaceString.split('.')[0];
+        const nsName = namespaceString.split('.')[0];
         global.window[nsName] = global[nsName];
       };
 
@@ -177,7 +160,7 @@ export class JsomNode {
     modules
       .filter((value, index, self) => self.indexOf(value) === index) // Only unique modules
       .forEach((module: string) => {
-        JsomModules[module].forEach(jsomScript => {
+        JsomModules[module].forEach((jsomScript) => {
           // Ignore already loaded
           if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
             let filePath: string = path.join(
@@ -220,7 +203,7 @@ export class JsomNode {
 
   // Escape Microsoft Ajax issues
   private patchMicrosoftAjax() {
-    let origRegisterInterface = Type.prototype.registerInterface;
+    const origRegisterInterface = Type.prototype.registerInterface;
     Type.prototype.registerInterface = function (typeName) {
       if (['IEnumerator', 'IEnumerable', 'IDisposable'].indexOf(typeName) !== -1) {
         if (global[typeName]) {
@@ -241,20 +224,16 @@ export class JsomNode {
     this.request = this.getCachedRequest();
     (Sys.Net as any)._WebRequestManager.prototype.executeRequest = (wReq: any) => {
 
-      let hostUrl = this.settings.siteUrl.split('/').splice(0, 3).join('/');
-
-      let requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
-
-      let webAbsoluteUrl = requestUrl
-        .split('/_api')[0]
-        .split('/_vti_bin')[0];
+      const hostUrl = this.context.siteUrl.split('/').splice(0, 3).join('/');
+      const requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
+      const webAbsoluteUrl = requestUrl.split('/_api')[0].split('/_vti_bin')[0];
 
       this.request.requestDigest(webAbsoluteUrl)
-        .then(digest => {
+        .then((digest) => {
 
-          let isJsom: boolean = wReq._url.indexOf('/_vti_bin/client.svc/ProcessQuery') !== -1;
+          const isJsom: boolean = wReq._url.indexOf('/_vti_bin/client.svc/ProcessQuery') !== -1;
 
-          let jsomHeaders = !isJsom ? {} : {
+          const jsomHeaders = !isJsom ? {} : {
             'X-Requested-With': 'XMLHttpRequest',
             'X-RequestDigest': digest
             // 'Content-Length': wReq._body && wReq._body.length
@@ -270,32 +249,26 @@ export class JsomNode {
               body: wReq._body,
               json: !isJsom,
               agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
-            }).then(response => {
-              let responseData = isJsom ? response.body : JSON.stringify(response.body);
+            }).then((response) => {
+              const responseData = isJsom ? response.body : JSON.stringify(response.body);
               wReq._events._list.completed[0]({
                 _xmlHttpRequest: {
                   status: response.statusCode,
                   responseText: responseData
                 },
-                get_statusCode: () => {
-                  return response.statusCode;
-                },
-                get_responseData: () => {
-                  return responseData;
-                },
-                getResponseHeader: (header) => {
-                  return response.headers[header.toLowerCase()];
-                },
-                get_aborted: () => { return false; },
-                get_timedOut: () => { return false; },
-                get_responseAvailable: () => { return true; }
+                get_statusCode: () => response.statusCode,
+                get_responseData: () => responseData,
+                getResponseHeader: (header) => response.headers[header.toLowerCase()],
+                get_aborted: () => false,
+                get_timedOut: () => false,
+                get_responseAvailable: () => true
               });
             });
           }
 
         })
-        .catch((err: any) => {
-          throw new Error(err);
+        .catch((error) => {
+          throw new Error(error);
         });
 
     };
@@ -303,8 +276,8 @@ export class JsomNode {
 
   // Cache request client
   private getCachedRequest = (): ISPRequest => {
-    this.request = this.requestCache[this.settings.siteUrl] || createSPRequest(this.settings.authOptions);
-    this.requestCache[this.settings.siteUrl] = this.request;
+    this.request = this.requestCache[this.context.siteUrl] || createSPRequest(this.context.authOptions);
+    this.requestCache[this.context.siteUrl] = this.request;
     return this.request;
   }
 
