@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
 
@@ -16,27 +15,29 @@ import { executeQueryPromise } from './extensions/executeQueryPromise';
 // Import JSOM ententions
 
 declare const global: any;
-
 declare const sp_initialize: any;
 
 export class JsomNode {
 
+  private static ctxs: { [ctx: string]: ISPRequest; } = {};
+
   private settings: IJsomNodeSettings;
   private context: IJsomNodeContext;
   private request: ISPRequest;
-  private requestCache: IRequestsCache = {};
   private agent: https.Agent = new https.Agent({
     rejectUnauthorized: false,
     keepAlive: true,
     keepAliveMsecs: 10000
   });
+  private instanceId: string;
 
   constructor(settings: IJsomNodeSettings = {}) {
     this.settings = settings;
+    this.instanceId = utils.getGuid();
   }
 
   // Init JsomNode environment
-  public init(context: IJsomNodeContext) {
+  public init(context: IJsomNodeContext): JsomNode {
     const authOptions = context.authOptions;
     const cpass = new Cpass();
     const encodable = ['password', 'clientId', 'clientSecret'];
@@ -46,9 +47,11 @@ export class JsomNode {
       }
     }
     this.context = { ...context, authOptions };
+    this.request = createSPRequest(this.context.authOptions);
     this.mimicBrowser();
     this.loadScripts(this.settings.modules, this.settings.envCode);
     this.proxyRequestManager();
+    return this;
   }
 
   // Trigger wizard and init JsomNode environment
@@ -68,6 +71,20 @@ export class JsomNode {
       this.init(this.context);
       return ctx.siteUrl;
     });
+  }
+
+  public getContext(siteUrl?: string): SP.ClientContext {
+    JsomNode.ctxs[this.instanceId] = this.request;
+    siteUrl = siteUrl || this.context.siteUrl;
+    const ctx = new SP.ClientContext(siteUrl);
+    ctx.add_executingWebRequest((_sender, args) => {
+      (args.get_webRequest() as any)._headers['X-JsomNode-InstanceID'] = this.instanceId;
+    });
+    return ctx;
+  }
+
+  public dropContext() {
+    delete JsomNode.ctxs[this.instanceId];
   }
 
   // Mimic environment to pretend as a browser
@@ -219,14 +236,18 @@ export class JsomNode {
   // Proxy JSOM XmlHttpRequest through sp-request
   private proxyRequestManager() {
 
-    this.request = this.getCachedRequest();
+    let request: ISPRequest = this.request;
+
     (Sys.Net as any)._WebRequestManager.prototype.executeRequest = (wReq: any) => {
 
+      const instanceId = wReq._headers['X-JsomNode-InstanceID'];
+      request = JsomNode.ctxs[instanceId] || request;
+
       const hostUrl = this.context.siteUrl.split('/').splice(0, 3).join('/');
-      const requestUrl = `${hostUrl}${wReq._url.replace(hostUrl, '')}`;
+      const requestUrl: string = utils.isUrlAbsolute(wReq._url) ? wReq._url : `${hostUrl}${wReq._url}`;
       const webAbsoluteUrl = requestUrl.split('/_api')[0].split('/_vti_bin')[0];
 
-      this.request.requestDigest(webAbsoluteUrl)
+      request.requestDigest(webAbsoluteUrl)
         .then((digest) => {
 
           const isJsom: boolean = wReq._url.indexOf('/_vti_bin/client.svc/ProcessQuery') !== -1;
@@ -238,7 +259,7 @@ export class JsomNode {
           };
 
           if (wReq._httpVerb.toLowerCase() === 'post') {
-            return this.request.post({
+            return request.post({
               url: requestUrl,
               headers: {
                 ...wReq._headers,
@@ -247,20 +268,21 @@ export class JsomNode {
               body: wReq._body,
               json: !isJsom,
               agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
-            }).then((response) => {
-              const responseData = isJsom ? response.body : JSON.stringify(response.body);
-              wReq._events._list.completed[0]({
-                _xmlHttpRequest: {
-                  status: response.statusCode,
-                  responseText: responseData
-                },
-                get_statusCode: () => response.statusCode,
-                get_responseData: () => responseData,
-                getResponseHeader: (header) => response.headers[header.toLowerCase()],
-                get_aborted: () => false,
-                get_timedOut: () => false,
-                get_responseAvailable: () => true
-              });
+            })
+              .then((response) => {
+                const responseData = isJsom ? response.body : JSON.stringify(response.body);
+                wReq._events._list.completed[0]({
+                  _xmlHttpRequest: {
+                    status: response.statusCode,
+                    responseText: responseData
+                  },
+                  get_statusCode: () => response.statusCode,
+                  get_responseData: () => responseData,
+                  getResponseHeader: (header) => response.headers[header.toLowerCase()],
+                  get_aborted: () => false,
+                  get_timedOut: () => false,
+                  get_responseAvailable: () => true
+                });
             });
           }
 
@@ -270,13 +292,6 @@ export class JsomNode {
         });
 
     };
-  }
-
-  // Cache request client
-  private getCachedRequest = (): ISPRequest => {
-    this.request = this.requestCache[this.context.siteUrl] || createSPRequest(this.context.authOptions);
-    this.requestCache[this.context.siteUrl] = this.request;
-    return this.request;
   }
 
 }

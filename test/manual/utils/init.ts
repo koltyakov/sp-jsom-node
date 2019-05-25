@@ -1,4 +1,3 @@
-import * as merge from 'lodash.merge';
 import { JsomNode, IConfigSettings } from './../../../src/index';
 
 export const setting: IConfigSettings = {
@@ -8,6 +7,6 @@ export const setting: IConfigSettings = {
 };
 
 export const initEnvironment = (adhoc: any = {}): Promise<string> => {
-  const config = merge(setting, adhoc);
+  const config = { ...setting, ...adhoc };
   return new JsomNode().wizard(config);
 };

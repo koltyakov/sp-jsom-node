@@ -96,11 +96,11 @@ const authContext: IJsomNodeContext = {
   authOptions
 };
 
-new JsomNode().init(authContext);
+const ctx = new JsomNode().init(authContext).getContext();
 
 /// ... <<< JSOM can be used here
 
-const ctx = SP.ClientContext.get_current();
+// const ctx = SP.ClientContext.get_current(); // works with single environment
 const oWeb = ctx.get_web();
 const oLists = oWeb.get_lists();
 
@@ -130,10 +130,10 @@ const authContext: IJsomNodeContext = {
   authOptions
 };
 
-new JsomNode().init(authOptions);
 (async () => {
 
-  const clientContex = SP.ClientContext.get_current();
+  const clientContex = new JsomNode().init(authOptions).getContext();
+  // const clientContex = SP.ClientContext.get_current();
   const oListsCollection = clientContext.get_web().get_lists();
 
   clientContext.load(oListsCollection, 'Include(Title)');

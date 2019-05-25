@@ -17,11 +17,12 @@ describe(`sp-jsom-node tests`, () => {
 
   for (const envConf of Environments) {
 
-    describe(`Run tests in ${envConf.environmentName}`, () => {
+    describe(`run tests in ${envConf.environmentName}`, () => {
 
       let request: sprequest.ISPRequest;
       let config: IAuthContext;
       let _spPageContextInfo: any;
+      let jsom: JsomNode;
 
       before('preauthenticate for fair timings', function(done: Mocha.Done): void {
         this.timeout(30 * 1000);
@@ -34,12 +35,21 @@ describe(`sp-jsom-node tests`, () => {
         getAuthCtx(envConf)
           .then((ctx) => {
             config = ctx;
-            new JsomNode().init(config);
+            jsom = new JsomNode().init(config);
             request = sprequest.create(config.authOptions);
             _spPageContextInfo = global.window._spPageContextInfo;
             done();
           })
           .catch(done);
+      });
+
+      it(`should get context from JsomNode`, function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
+
+        const ctx = jsom.getContext();
+        const oWeb = ctx.get_web();
+        ctx.load(oWeb);
+        ctx.executeQueryPromise().then(() => done()).catch(done);
       });
 
       it(`should get web's title`, function (done: Mocha.Done): void {
@@ -281,6 +291,25 @@ describe(`sp-jsom-node tests`, () => {
 
     });
 
+  }
+
+  // Need multiple environments to test this case
+  if (Environments.length > 1) {
+    it(`should support multiple contexts`, function (done: Mocha.Done): void {
+      this.timeout(30 * 1000);
+      Promise
+        .all(Environments.map((envConf) => getAuthCtx(envConf)))
+        .then((ctxs) => {
+          return Promise.all(ctxs.map((conf) => {
+            const ctx = new JsomNode().init(conf).getContext();
+            const oWeb = ctx.get_web();
+            ctx.load(oWeb);
+            return ctx.executeQueryPromise();
+          }));
+        })
+        .then(() => done())
+        .catch(done);
+    });
   }
 
 });
