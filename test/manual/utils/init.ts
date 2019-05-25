@@ -1,4 +1,4 @@
-import * as deepAssign from 'deep-assign';
+import * as merge from 'lodash.merge';
 import { JsomNode, IConfigSettings } from './../../../src/index';
 
 export const setting: IConfigSettings = {
@@ -8,6 +8,6 @@ export const setting: IConfigSettings = {
 };
 
 export const initEnvironment = (adhoc: any = {}): Promise<string> => {
-  const config = deepAssign(setting, adhoc);
+  const config = merge(setting, adhoc);
   return new JsomNode().wizard(config);
 };
