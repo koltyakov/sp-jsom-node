@@ -4,6 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/sp-jsom-node.svg)](https://badge.fury.io/js/sp-jsom-node)
 [![Downloads](https://img.shields.io/npm/dm/sp-jsom-node.svg)](https://www.npmjs.com/package/sp-jsom-node)
+[![Build Status](https://koltyakov.visualstudio.com/SPNode/_apis/build/status/sp-jsom-node?branchName=master)](https://koltyakov.visualstudio.com/SPNode/_build/latest?definitionId=8&branchName=master)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/sharepoint-node/Lobby)
 
 `sp-jsom-node` provides a feasibility of using JSOM (CSOM, SharePoint Client Object Model) in Node.js.
