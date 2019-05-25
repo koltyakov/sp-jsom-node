@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 8908,
-                "rpr": 1210
+                "rup": 8915,
+                "rpr": 1217
             }
         };
     }
@@ -6742,10 +6742,25 @@ function UserHasPermissionHigh(permissionLevel) {
 function ModernUXOptOutCookieIsOn() {
     return GetCookie('splnu') === '0';
 }
+function SanityCheckModernIsSupported() {
+    var supported = true;
+
+    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("E1113646-94A6-44D3-80CC-8E8DF6EC4F89"))) {
+        try {
+            var testingSet = new window.Set();
+
+            testingSet.add(1);
+        }
+        catch (ex) {
+            supported = false;
+        }
+    }
+    return supported;
+}
 function PrepareForModernOnePageNavigation() {
     var SPBasePermissions_UseRemoteAPIs = 0x20;
 
-    if (isBrowserSupportedModernApp() && UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn()) {
+    if (isBrowserSupportedModernApp() && UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn() && SanityCheckModernIsSupported()) {
         var docLibLinks = document.querySelectorAll('[onepagenavigationaction="1"]');
 
         for (var index = 0; index < docLibLinks.length; index++) {
