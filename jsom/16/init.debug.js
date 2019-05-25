@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 4600,
-                "rpr": 1002
+                "rup": 4810,
+                "rpr": 1000
             }
         };
     }
@@ -1546,6 +1546,7 @@ function $_global_init() {
         checkPermissionFunc: undefined
     };
     g_QuickLaunchControlIds = [];
+    PageMinimized();
     OverrideDefaultMethod("confirm", "LogConfirm", 1);
     OverrideDefaultMethod("alert", "LogAlert", 1);
     SupplementDefaultMethod("onerror", "LogOnError", 5);
@@ -9088,6 +9089,17 @@ function getCtx(webPartID) {
     }
     return undefined;
 }
+function PageMinimized() {
+    if (typeof PageMinimized.minimized === 'undefined') {
+        var url = new URI(ajaxNavigate.get_href());
+
+        PageMinimized.minimized = Boolean(url.getQueryParameter("Minimized"));
+        if (PageMinimized.minimized) {
+            AddCssClassToElement(document.body, "ms-fullscreenmode");
+        }
+    }
+    return PageMinimized.minimized;
+}
 function IsXhrAborted(xhr) {
     try {
         if (xhr.readyState == 4 && (typeof xhr.status == "undefined" || xhr.status == 0))
@@ -11577,13 +11589,13 @@ function getUniqueIndex() {
     g_uniqueIndex++;
     return g_uniqueIndex;
 }
-function addStatus(strTitle, strHtml, atBegining, isVanilla) {
+function addStatus(strTitle, strHtml, atBegining, isVanilla, bIsDismissible, dismissAltText) {
     var sb = document.getElementById("pageStatusBar");
 
     if (sb != null) {
         sb.setAttribute("aria-live", "polite");
         sb.setAttribute("aria-relevant", "all");
-        var st = _createStatusMarkup(strTitle, strHtml, true, isVanilla);
+        var st = _createStatusMarkup(strTitle, strHtml, true, isVanilla, bIsDismissible, dismissAltText);
 
         if (!atBegining)
             sb.appendChild(st);
@@ -11627,7 +11639,7 @@ function appendStatus(sid, strTitle, strHtml) {
     }
     return null;
 }
-function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla) {
+function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla, bIsDismissible, dismissAltText) {
     var st = document.createElement("SPAN");
 
     st.id = "status_" + String(getUniqueIndex());
@@ -11653,6 +11665,17 @@ function _createStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla) {
     rg.push("'>");
     rg.push(strHtml);
     rg.push("</span>");
+    if (bIsDismissible) {
+        rg.push("<a href=\"#\" class=\"ms-status-iconSpan\"><img class=\"ms-status-dismissIconImg\" alt=\"");
+        rg.push(dismissAltText);
+        rg.push("\" src=\"");
+        rg.push(GetThemedImageUrl("spcommon.png"));
+        rg.push("\" onclick=\"javascript:removeStatus('");
+        rg.push(st.id);
+        if (((String(strHtml)).toLowerCase()).indexOf("configssc.aspx") != -1) {
+            rg.push("');__doPostBack('DismissSiteCreationOnlineNotification');\"/></a>");
+        }
+    }
     if (bWithBR && !bIsVanilla)
         rg.push("<br/>");
     st.innerHTML = rg.join("");
@@ -11906,7 +11929,7 @@ function setModalDialogReturnValue(wnd, returnValue) {
     else {
         setModalDialogObjectReturnValue(wnd, returnValue);
     }
-    if (browseris.safari125up) {
+    if (browseris.safari125up || browseris.msEdge) {
         if (wnd.opener != null && wnd.opener.fndlgClose != null)
             wnd.opener.fndlgClose(returnValue);
     }
@@ -15028,8 +15051,8 @@ function SuiteNavRendering_module_def() {
         if (linksData.UserDisplayName == null) {
             var userNameDiv = document.getElementById("SuiteNavUserName");
 
-            if (userNameDiv != null && Boolean(userNameDiv.innerHTML)) {
-                linksData.UserDisplayName = userNameDiv.innerHTML;
+            if (userNameDiv != null && Boolean(userNameDiv.textContent)) {
+                linksData.UserDisplayName = userNameDiv.textContent;
             }
         }
         var scriptEncodedSlashUppercase = "\\U002F";

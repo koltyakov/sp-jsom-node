@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 4600,
-            "rpr": 1002
+            "rup": 4810,
+            "rpr": 1000
         }
     };
 }
@@ -158,7 +158,7 @@ SP.IBSQM = function() {
 };
 SP.IBSQM.registerInterface('SP.IBSQM');
 SP.BWsaConfig = function SP_BWsaConfig() {
-    this.$1N_0 = [60, 7982, 7993, 7994, 8047, 8048, 8049, 9411, 9412];
+    this.$1O_0 = [60, 7982, 7993, 7994, 8047, 8048, 8049, 9411, 9412];
     this.$f_0 = '';
     this.$8_0 = false;
     this.$D_0 = false;
@@ -166,8 +166,8 @@ SP.BWsaConfig = function SP_BWsaConfig() {
     this.$n_0 = 1800000;
     this.$m_0 = 65536;
     this.$o_0 = 2147483647;
-    this.$1S_0 = 9;
-    this.$1T_0 = 1000;
+    this.$1T_0 = 9;
+    this.$1U_0 = 1000;
     this.$14_0 = 1000;
 };
 SP.BWsaConfig.prototype = {
@@ -178,9 +178,9 @@ SP.BWsaConfig.prototype = {
     $n_0: 0,
     $m_0: 0,
     $o_0: 0,
-    $1T_0: 0,
+    $1U_0: 0,
     $14_0: 0,
-    $1S_0: 0,
+    $1T_0: 0,
     get_maxSessionMs: function SP_BWsaConfig$get_maxSessionMs$in() {
         return this.$n_0;
     },
@@ -296,10 +296,10 @@ SP.BWsaData.prototype = {
     m_wsaStreams: null
 };
 SP.BWsaClient = function SP_BWsaClient(uploadUrl, fIsOptedIn, sqmQosEnabled, qosDataPoints) {
-    this.$$d_$21_0 = Function.createDelegate(this, this.$21_0);
+    this.$$d_$22_0 = Function.createDelegate(this, this.$22_0);
     this.bWsaClientInit(uploadUrl, fIsOptedIn, sqmQosEnabled, qosDataPoints);
 };
-SP.BWsaClient.$26 = function SP_BWsaClient$$26$st() {
+SP.BWsaClient.$27 = function SP_BWsaClient$$27$st() {
     var $v_0 = 0;
     var $v_1 = window.navigator.userAgent;
     var $v_2 = -1;
@@ -333,7 +333,7 @@ SP.BWsaClient.$26 = function SP_BWsaClient$$26$st() {
         $v_2 = -1;
     }
     if ($v_2 >= 0) {
-        var $v_3 = SP.BWsaClient.$1i($v_1.substr($v_2));
+        var $v_3 = SP.BWsaClient.$1j($v_1.substr($v_2));
 
         if (Sys.Browser.agent === Sys.Browser.InternetExplorer && $v_3[0] === 7 && $v_1.indexOf('Trident/4.0') >= 0) {
             $v_3[0] = 8;
@@ -352,19 +352,19 @@ SP.BWsaClient.$26 = function SP_BWsaClient$$26$st() {
     $v_0 = $v_0;
     return $v_0;
 };
-SP.BWsaClient.$1i = function SP_BWsaClient$$1i$st($p0) {
+SP.BWsaClient.$1j = function SP_BWsaClient$$1j$st($p0) {
     var $v_0 = [0, 0];
 
-    if (SP.BWsaClient.$1R($p0.charAt(0))) {
+    if (SP.BWsaClient.$1S($p0.charAt(0))) {
         $v_0[0] = parseInt($p0);
     }
     for (var $v_1 = 0; $v_1 < $p0.length; $v_1++) {
-        if (!SP.BWsaClient.$1R($p0.charAt($v_1))) {
+        if (!SP.BWsaClient.$1S($p0.charAt($v_1))) {
             $p0 = $p0.substr($v_1 + 1);
             break;
         }
     }
-    if (SP.BWsaClient.$1R($p0.charAt(0))) {
+    if (SP.BWsaClient.$1S($p0.charAt(0))) {
         $v_0[1] = parseInt($p0);
     }
     if ($v_0[0] < 0 || $v_0[0] > 255 || $v_0[1] < 0 || $v_0[1] > 65535) {
@@ -373,7 +373,7 @@ SP.BWsaClient.$1i = function SP_BWsaClient$$1i$st($p0) {
     }
     return $v_0;
 };
-SP.BWsaClient.$2A = function SP_BWsaClient$$2A$st() {
+SP.BWsaClient.$2B = function SP_BWsaClient$$2B$st() {
     var $v_0 = 0;
     var $v_1 = 1;
     var $v_2 = window.navigator.userAgent;
@@ -409,7 +409,7 @@ SP.BWsaClient.$2A = function SP_BWsaClient$$2A$st() {
         $v_4 = $v_2.indexOf($v_3);
     }
     if ($v_4 >= 0) {
-        var $v_6 = SP.BWsaClient.$1i($v_2.substr($v_4 + $v_3.length));
+        var $v_6 = SP.BWsaClient.$1j($v_2.substr($v_4 + $v_3.length));
 
         $v_0 = $v_0 + (($v_6[0] << 16) + $v_6[1]);
     }
@@ -432,13 +432,13 @@ SP.BWsaClient.$2A = function SP_BWsaClient$$2A$st() {
     $v_0 = $v_0 | $v_5 << 29;
     return $v_0;
 };
-SP.BWsaClient.$2B = function SP_BWsaClient$$2B$st() {
+SP.BWsaClient.$2C = function SP_BWsaClient$$2C$st() {
     var $v_0 = window.screen.width & 65535;
     var $v_1 = window.screen.height & 65535;
 
     return ($v_1 << 16) + $v_0;
 };
-SP.BWsaClient.$27 = function SP_BWsaClient$$27$st() {
+SP.BWsaClient.$28 = function SP_BWsaClient$$28$st() {
     var $v_0 = window.navigator.userAgent;
     var $v_1 = 0;
 
@@ -458,7 +458,7 @@ SP.BWsaClient.isNullOrUndefined = function SP_BWsaClient$isNullOrUndefined$st(ob
 
     return obj === $v_0 || typeof obj === 'undefined';
 };
-SP.BWsaClient.$1R = function SP_BWsaClient$$1R$st($p0) {
+SP.BWsaClient.$1S = function SP_BWsaClient$$1S$st($p0) {
     return $p0 >= '0' && $p0 <= '9';
 };
 SP.BWsaClient.getSQMLocationFromCUICommandInfo = function SP_BWsaClient$getSQMLocationFromCUICommandInfo$st(commandInfo) {
@@ -519,8 +519,8 @@ SP.BWsaClient.prototype = {
         this.$Y_0 = 0;
         this.$e_0 = false;
         this.$d_0 = {};
-        for (var $v_0 = 0; $v_0 < this.$0_0.$1N_0.length; $v_0++) {
-            this.$d_0['' + this.$0_0.$1N_0[$v_0]] = true;
+        for (var $v_0 = 0; $v_0 < this.$0_0.$1O_0.length; $v_0++) {
+            this.$d_0['' + this.$0_0.$1O_0[$v_0]] = true;
         }
         this.$0_0.$f_0 = uploadUrl;
         this.$0_0.$8_0 = uploadUrl === '' ? false : fIsOptedIn;
@@ -538,7 +538,7 @@ SP.BWsaClient.prototype = {
     get_isContinuation: function SP_BWsaClient$get_isContinuation$in() {
         return this.$k_0;
     },
-    $2D_0: function SP_BWsaClient$$2D_0$in() {
+    $2E_0: function SP_BWsaClient$$2E_0$in() {
         var $v_0 = new SP.BWsaData();
         var $$dict_5 = this.$d_0;
 
@@ -579,7 +579,7 @@ SP.BWsaClient.prototype = {
         this.$1_0 = $v_0;
         this.$e_0 = false;
     },
-    $1U_0: function SP_BWsaClient$$1U_0$in() {
+    $1V_0: function SP_BWsaClient$$1V_0$in() {
         var $v_0 = this.$1_0.m_cDataPoints * 12 + this.$1_0.m_cbStreams;
 
         if ($v_0 >= this.$0_0.$m_0) {
@@ -589,21 +589,21 @@ SP.BWsaClient.prototype = {
         }
         return false;
     },
-    $1r_0: function SP_BWsaClient$$1r_0$in($p0) {
+    $1s_0: function SP_BWsaClient$$1s_0$in($p0) {
         try {
             if (this.$e_0 || this.$d_0['' + $p0]) {
                 return;
             }
             this.$e_0 = true;
-            this.$h_0(7982, SP.BWsaClient.$26());
-            this.$h_0(8049, SP.BWsaClient.$2A());
+            this.$h_0(7982, SP.BWsaClient.$27());
+            this.$h_0(8049, SP.BWsaClient.$2B());
             this.$h_0(8814, 3);
-            this.$h_0(9411, SP.BWsaClient.$2B());
-            this.$h_0(9412, SP.BWsaClient.$27());
+            this.$h_0(9411, SP.BWsaClient.$2C());
+            this.$h_0(9412, SP.BWsaClient.$28());
         }
         catch ($$e_1) { }
     },
-    $1n_0: function SP_BWsaClient$$1n_0$in($p0) {
+    $1o_0: function SP_BWsaClient$$1o_0$in($p0) {
         if (this.$0_0.$8_0) {
             return true;
         }
@@ -639,10 +639,10 @@ SP.BWsaClient.prototype = {
                 this.setDw(8763, dwDatapointId);
                 return;
             }
-            if (this.$1U_0()) {
+            if (this.$1V_0()) {
                 return;
             }
-            this.$1r_0(dwDatapointId);
+            this.$1s_0(dwDatapointId);
             this.$b_0();
             var $v_0 = this.$1_0.m_wsaDatapoints['' + dwDatapointId];
 
@@ -786,10 +786,10 @@ SP.BWsaClient.prototype = {
             if (dwStreamType !== 1 && dwStreamType !== 2) {
                 return;
             }
-            if (dwWidth < 1 || dwWidth > this.$0_0.$1S_0) {
+            if (dwWidth < 1 || dwWidth > this.$0_0.$1T_0) {
                 return;
             }
-            if (this.$1U_0()) {
+            if (this.$1V_0()) {
                 return;
             }
             if (dwMaxRows < 1 || dwMaxRows > this.$0_0.$14_0) {
@@ -808,7 +808,7 @@ SP.BWsaClient.prototype = {
     createStreamUnobfuscated: function SP_BWsaClient$createStreamUnobfuscated$in(WsaStreamEntryId, dwStreamType, dwWidth, dwMaxRows) {
         this.createStream(WsaStreamEntryId, dwStreamType, dwWidth, dwMaxRows);
     },
-    $2K_0: function SP_BWsaClient$$2K_0$in($p0) {
+    $2L_0: function SP_BWsaClient$$2L_0$in($p0) {
         delete $p0.m_Rows['' + $p0.m_RowsOverwritten];
         this.$1_0.m_cbStreams -= ($p0.m_Width + 1) * 4;
         $p0.m_RowCount--;
@@ -834,7 +834,7 @@ SP.BWsaClient.prototype = {
             for (var $v_1 = 0; $v_1 < values.length; $v_1++) {
                 $v_0.m_Values[$v_1] = values[$v_1];
             }
-            this.$1v_0(dwStreamId, $v_0);
+            this.$1w_0(dwStreamId, $v_0);
         }
         catch ($$e_4) { }
     },
@@ -846,23 +846,23 @@ SP.BWsaClient.prototype = {
         }
         this.addToStreamDw.apply(this, [dwStreamId].concat(values));
     },
-    $1v_0: function SP_BWsaClient$$1v_0$in($p0, $p1) {
+    $1w_0: function SP_BWsaClient$$1w_0$in($p0, $p1) {
         if (!this.$0_0.$8_0 && !this.$0_0.$D_0) {
             return;
         }
         if ($p0 < 1 || $p0 > this.$0_0.$o_0) {
             return;
         }
-        if (this.$1U_0()) {
+        if (this.$1V_0()) {
             return;
         }
-        this.$1r_0($p0);
+        this.$1s_0($p0);
         var $v_0 = this.$1_0.m_wsaStreams['' + $p0];
 
         if ($v_0) {
             this.$b_0();
             if ($v_0.m_RowCount >= $v_0.m_MaxRows && $v_0.m_StreamType === 2) {
-                this.$2K_0($v_0);
+                this.$2L_0($v_0);
             }
             if ($v_0.m_RowCount < $v_0.m_MaxRows) {
                 var $v_1 = $v_0.m_RowCount + $v_0.m_RowsOverwritten;
@@ -910,7 +910,7 @@ SP.BWsaClient.prototype = {
             }
             var $v_0 = SP.Ticks.getTicks64();
 
-            if (this.$l_0 > 0 && $v_0 <= this.$l_0 + this.$0_0.$1T_0) {
+            if (this.$l_0 > 0 && $v_0 <= this.$l_0 + this.$0_0.$1U_0) {
                 return;
             }
             this.$l_0 = $v_0;
@@ -924,9 +924,9 @@ SP.BWsaClient.prototype = {
                 }
                 this.writeDocIdStream();
                 this.$1_0.m_wsaHeader.m_EndTime = SP.Ticks.getTicks64();
-                var $v_1 = this.$2L_0(this.$1_0, this.$0_0);
+                var $v_1 = this.$2M_0(this.$1_0, this.$0_0);
 
-                this.$2D_0();
+                this.$2E_0();
                 if ($v_1 && $v_1.length > 0) {
                     this.uploadWsaDataRequest($v_1);
                 }
@@ -946,10 +946,10 @@ SP.BWsaClient.prototype = {
             this.$S_0.send(json);
         }
     },
-    $25_0: function SP_BWsaClient$$25_0$in($p0) {
+    $26_0: function SP_BWsaClient$$26_0$in($p0) {
         return ((((((($p0.replace(new RegExp('[\\\\]', 'g'), '\\\\')).replace(new RegExp('[\\\"]', 'g'), '\\\\\\\"')).replace(new RegExp('[\\/]', 'g'), '\\\\/')).replace(new RegExp('[\\b]', 'g'), '\\\\b')).replace(new RegExp('[\\f]', 'g'), '\\\\f')).replace(new RegExp('[\\n]', 'g'), '\\\\n')).replace(new RegExp('[\\r]', 'g'), '\\\\r')).replace(new RegExp('[\\t]', 'g'), '\\\\t');
     },
-    $2L_0: function SP_BWsaClient$$2L_0$in($p0, $p1) {
+    $2M_0: function SP_BWsaClient$$2M_0$in($p0, $p1) {
         var $v_0 = new Sys.StringBuilder();
         var $v_1 = true;
         var $v_2 = false;
@@ -981,7 +981,7 @@ SP.BWsaClient.prototype = {
             };
             var $v_5 = $v_4.value;
 
-            if (!this.$1n_0($v_5.m_WsaId)) {
+            if (!this.$1o_0($v_5.m_WsaId)) {
                 continue;
             }
             $v_2 = true;
@@ -1004,7 +1004,7 @@ SP.BWsaClient.prototype = {
             };
             var $v_7 = $v_6.value;
 
-            if (!this.$1n_0($v_7.m_WsaId)) {
+            if (!this.$1o_0($v_7.m_WsaId)) {
                 continue;
             }
             $v_2 = true;
@@ -1041,7 +1041,7 @@ SP.BWsaClient.prototype = {
                         $v_0.append('\"\"');
                     }
                     else if (Object.getType($v_A.m_Values[$v_B]) === String) {
-                        $v_0.append('\"' + this.$25_0($v_A.m_Values[$v_B]) + '\"');
+                        $v_0.append('\"' + this.$26_0($v_A.m_Values[$v_B]) + '\"');
                     }
                     else {
                         $v_0.append($v_A.m_Values[$v_B]);
@@ -1089,10 +1089,10 @@ SP.BWsaClient.prototype = {
     $b_0: function SP_BWsaClient$$b_0$in() {
         if (SP.TimerResetCheck.isTimerResetNeeded()) {
             this.$x_0();
-            this.$Y_0 = window.setTimeout(this.$$d_$21_0, this.$0_0.$n_0);
+            this.$Y_0 = window.setTimeout(this.$$d_$22_0, this.$0_0.$n_0);
         }
     },
-    $21_0: function SP_BWsaClient$$21_0$in() {
+    $22_0: function SP_BWsaClient$$22_0$in() {
         this.$Y_0 = 0;
         this.$x_0();
         this.uploadWsaData();
@@ -1173,7 +1173,7 @@ SP.RUMLogger.GetRUMLogger = function SP_RUMLogger$GetRUMLogger$st(wsa) {
     }
     return SP.RUMLogger.$P;
 };
-SP.RUMLogger.$28 = function SP_RUMLogger$$28$st($p0) {
+SP.RUMLogger.$29 = function SP_RUMLogger$$29$st($p0) {
     var $v_0 = 0;
 
     if ($p0) {
@@ -1198,7 +1198,7 @@ SP.RUMLogger.$10 = function SP_RUMLogger$$10$st() {
     }
     return $v_0;
 };
-SP.RUMLogger.$1Q = function SP_RUMLogger$$1Q$st() {
+SP.RUMLogger.$1R = function SP_RUMLogger$$1R$st() {
     var $v_0 = SP.RUMLogger.$10();
 
     if (null === $v_0) {
@@ -1211,21 +1211,21 @@ SP.RUMLogger.$1Q = function SP_RUMLogger$$1Q$st() {
     }
     return $v_1;
 };
-SP.RUMLogger.$2G = function SP_RUMLogger$$2G$st($p0) {
+SP.RUMLogger.$2H = function SP_RUMLogger$$2H$st($p0) {
     return typeof $p0 === 'undefined';
 };
 SP.RUMLogger.$2 = function SP_RUMLogger$$2$st($p0) {
     var $v_0 = null;
 
-    return $p0 === $v_0 || SP.RUMLogger.$2G($p0);
+    return $p0 === $v_0 || SP.RUMLogger.$2H($p0);
 };
 SP.RUMLogger.prototype = {
     $4_0: null,
     $K_0: null,
     $1E_0: false,
-    $1H_0: false,
-    $w_0: false,
     $1I_0: false,
+    $w_0: false,
+    $1J_0: false,
     $1F_0: false,
     $1D_0: false,
     $v_0: false,
@@ -1267,7 +1267,7 @@ SP.RUMLogger.prototype = {
         if (this.$1D_0) {
             return;
         }
-        var $v_0 = this.$1h_0(0);
+        var $v_0 = this.$1i_0(0);
 
         if ($v_0.length < 18) {
             return;
@@ -1275,7 +1275,7 @@ SP.RUMLogger.prototype = {
         var $v_1 = $v_0[18];
 
         if (this.$M_0 === 1) {
-            var $v_2 = this.$2C_0(0, 20);
+            var $v_2 = this.$2D_0(0, 20);
 
             if (SP.RUMLogger.$2($v_2)) {
                 return;
@@ -1283,7 +1283,7 @@ SP.RUMLogger.prototype = {
             this.$s_0 = $v_1 - $v_2;
         }
         else if (this.$M_0 === 3) {
-            var $v_3 = SP.RUMLogger.$1Q();
+            var $v_3 = SP.RUMLogger.$1R();
 
             if (SP.RUMLogger.$2($v_3)) {
                 return;
@@ -1308,7 +1308,7 @@ SP.RUMLogger.prototype = {
         this.CollectW3CPerformanceTimings();
         this.$U_0(groupId, tsId, (new Date()).getTime());
     },
-    $1p_0: function SP_RUMLogger$$1p_0$in($p0) {
+    $1q_0: function SP_RUMLogger$$1q_0$in($p0) {
         switch ($p0) {
         case 0:
         case 1:
@@ -1358,8 +1358,8 @@ SP.RUMLogger.prototype = {
         if (SP.RUMLogger.$2(this.$4_0) || SP.RUMLogger.$2(this.$K_0)) {
             return;
         }
-        tsId = this.$1f_0(tsId);
-        if (!this.$1p_0(tsId)) {
+        tsId = this.$1g_0(tsId);
+        if (!this.$1q_0(tsId)) {
             return;
         }
         if (this.$M_0 === 1 && tsId === 20) {
@@ -1367,7 +1367,7 @@ SP.RUMLogger.prototype = {
         }
         this.CollectW3CPerformanceTimings();
         this.$U_0(0, tsId, tsVal);
-        this.$1l_0(0, mdsTimeStamps);
+        this.$1m_0(0, mdsTimeStamps);
     },
     AddTTLB: function SP_RUMLogger$AddTTLB$in() {
         if (SP.RUMLogger.$2(this.$4_0) || SP.RUMLogger.$2(this.$K_0)) {
@@ -1377,13 +1377,13 @@ SP.RUMLogger.prototype = {
         this.CollectW3CResourceTimings();
         var $v_0 = (new Date()).getTime();
 
-        if (this.$1H_0) {
+        if (this.$1I_0) {
             this.$U_0(0, 19, $v_0);
         }
         else {
             this.$U_0(0, 18, $v_0);
             this.$U_0(0, 19, $v_0);
-            this.$1H_0 = true;
+            this.$1I_0 = true;
         }
         this.ComputePageLoadTime();
     },
@@ -1395,14 +1395,14 @@ SP.RUMLogger.prototype = {
             return;
         }
         this.CollectW3CPerformanceTimings();
-        this.$1l_0(0, mdsTimeStamps);
+        this.$1m_0(0, mdsTimeStamps);
         this.$1E_0 = true;
     },
     DisplayDevDash: function SP_RUMLogger$DisplayDevDash$in() {
         if (SP.RUMLogger.$2(this.$4_0) || SP.RUMLogger.$2(this.$K_0)) {
             return;
         }
-        var $v_0 = this.$1h_0(0);
+        var $v_0 = this.$1i_0(0);
         var $v_1 = window.self.DeveloperDashboard;
 
         if ($v_1 && $v_1.PostMsg) {
@@ -1732,12 +1732,12 @@ SP.RUMLogger.prototype = {
         if (SP.RUMLogger.$2(this.$4_0)) {
             return;
         }
-        var $v_I = SP.RUMLogger.$1Q();
+        var $v_I = SP.RUMLogger.$1R();
 
         if (SP.RUMLogger.$2($v_I)) {
             return;
         }
-        if (this.$1I_0) {
+        if (this.$1J_0) {
             return;
         }
         var $v_J = SP.SimpleLogger.GetSimpleLogger(this.$4_0);
@@ -1820,7 +1820,7 @@ SP.RUMLogger.prototype = {
         if ($v_O.length > 0) {
             $v_J.WriteLogForEvents('RUMUsage', $v_O);
         }
-        this.$1I_0 = true;
+        this.$1J_0 = true;
     },
     CollectW3CPerformanceTimings: function SP_RUMLogger$CollectW3CPerformanceTimings$in() {
         if (this.$w_0) {
@@ -1830,7 +1830,7 @@ SP.RUMLogger.prototype = {
             return;
         }
         var $v_0 = ['navigationStart', 'unloadEventStart', 'unloadEventEnd', 'fetchStart', 'redirectStart', 'redirectEnd', 'domainLookupStart', 'domainLookupEnd', 'connectStart', 'secureConnectStart', 'connectEnd', 'requestStart', 'responseStart', 'responseEnd', 'domLoading', 'domComplete', 'loadEventStart', 'loadEventEnd'];
-        var $v_1 = SP.RUMLogger.$1Q();
+        var $v_1 = SP.RUMLogger.$1R();
 
         if (SP.RUMLogger.$2($v_1)) {
             return;
@@ -1847,14 +1847,14 @@ SP.RUMLogger.prototype = {
             $v_2[$v_3++] = $v_4 + 0;
             $v_2[$v_3++] = $v_5;
         }
-        this.$1k_0(0, $v_2);
+        this.$1l_0(0, $v_2);
         this.$w_0 = true;
     },
     $U_0: function SP_RUMLogger$$U_0$in($p0, $p1, $p2) {
         var $v_0 = this.$4_0.$z_0(this.$K_0, $p0);
 
         if (!$v_0.length) {
-            var $v_1 = this.$1b_0($p0);
+            var $v_1 = this.$1c_0($p0);
 
             $v_1[1] = $p1;
             $v_1[2] = $p2;
@@ -1863,10 +1863,10 @@ SP.RUMLogger.prototype = {
             ($$t_5 = this.$4_0).addToStreamDw.apply($$t_5, [11016].concat($v_1));
         }
         else {
-            this.$1t_0($v_0, $p0, $p1, $p2);
+            this.$1u_0($v_0, $p0, $p1, $p2);
         }
     },
-    $1t_0: function SP_RUMLogger$$1t_0$in($p0, $p1, $p2, $p3) {
+    $1u_0: function SP_RUMLogger$$1u_0$in($p0, $p1, $p2, $p3) {
         var $v_0 = 1;
         var $v_1 = false;
 
@@ -1886,7 +1886,7 @@ SP.RUMLogger.prototype = {
             var $v_4 = $p0[$p0.length - 1];
 
             if ($v_0 === 9) {
-                var $v_5 = this.$1b_0($p1);
+                var $v_5 = this.$1c_0($p1);
                 var $$t_A;
 
                 ($$t_A = this.$4_0).addToStreamDw.apply($$t_A, [11016].concat($v_5));
@@ -1898,7 +1898,7 @@ SP.RUMLogger.prototype = {
             $v_4.m_Values[$v_0 + 1] = $p3;
         }
     },
-    $1l_0: function SP_RUMLogger$$1l_0$in($p0, $p1) {
+    $1m_0: function SP_RUMLogger$$1m_0$in($p0, $p1) {
         if ($p0 < 0 || $p0 > 0) {
             return;
         }
@@ -1908,14 +1908,14 @@ SP.RUMLogger.prototype = {
         var $v_0 = {};
 
         for (var $v_4 = 0; $v_4 < $p1.length; $v_4++) {
-            var $v_5 = this.$1f_0($v_4);
+            var $v_5 = this.$1g_0($v_4);
 
-            if (SP.RUMLogger.$2($p1[$v_4]) || !this.$1p_0($v_5)) {
+            if (SP.RUMLogger.$2($p1[$v_4]) || !this.$1q_0($v_5)) {
                 continue;
             }
             $v_0[$v_5.toString()] = $p1[$v_4];
         }
-        var $v_1 = SP.RUMLogger.$28($v_0);
+        var $v_1 = SP.RUMLogger.$29($v_0);
 
         if (!$v_1) {
             return;
@@ -1933,9 +1933,9 @@ SP.RUMLogger.prototype = {
             $v_3[$v_2++] = parseInt($v_6.key);
             $v_3[$v_2++] = $v_6.value;
         }
-        this.$1k_0($p0, $v_3);
+        this.$1l_0($p0, $v_3);
     },
-    $1k_0: function SP_RUMLogger$$1k_0$in($p0, $p1) {
+    $1l_0: function SP_RUMLogger$$1l_0$in($p0, $p1) {
         if ($p0 < 0 || $p0 > 0) {
             return;
         }
@@ -1946,7 +1946,7 @@ SP.RUMLogger.prototype = {
             this.$U_0($p0, $p1[$v_0], $p1[$v_0 + 1]);
         }
     },
-    $2C_0: function SP_RUMLogger$$2C_0$in($p0, $p1) {
+    $2D_0: function SP_RUMLogger$$2D_0$in($p0, $p1) {
         var $v_0 = this.$4_0.$z_0(this.$K_0, 0);
 
         if (!$v_0.length) {
@@ -1963,7 +1963,7 @@ SP.RUMLogger.prototype = {
         }
         return null;
     },
-    $1h_0: function SP_RUMLogger$$1h_0$in($p0) {
+    $1i_0: function SP_RUMLogger$$1i_0$in($p0) {
         var $v_0 = this.$4_0.$z_0(this.$K_0, 0);
 
         if (!$v_0.length) {
@@ -1982,7 +1982,7 @@ SP.RUMLogger.prototype = {
         }
         return $v_1;
     },
-    $1b_0: function SP_RUMLogger$$1b_0$in($p0) {
+    $1c_0: function SP_RUMLogger$$1c_0$in($p0) {
         if ($p0 < 0 || $p0 > 0) {
             return null;
         }
@@ -1995,7 +1995,7 @@ SP.RUMLogger.prototype = {
         }
         return $v_0;
     },
-    $1f_0: function SP_RUMLogger$$1f_0$in($p0) {
+    $1g_0: function SP_RUMLogger$$1g_0$in($p0) {
         switch ($p0) {
         case 0:
             return 20;
@@ -2038,7 +2038,7 @@ SP.SimpleLogger = function SP_SimpleLogger($p0) {
     this.$X_0 = $p0;
     this.$X_0.createStream(1234, 1, 1, 10000);
 };
-SP.SimpleLogger.$29 = function SP_SimpleLogger$$29$st($p0) {
+SP.SimpleLogger.$2A = function SP_SimpleLogger$$2A$st($p0) {
     var $v_0 = 0;
 
     if ($p0) {
@@ -2078,7 +2078,7 @@ SP.SimpleLogger.prototype = {
         this.$X_0.uploadData();
     },
     WriteLogForEvents: function SP_SimpleLogger$WriteLogForEvents$in(eventName, eventObjects) {
-        if (!this.$1o_0(eventName)) {
+        if (!this.$1p_0(eventName)) {
             return;
         }
         var $v_0 = new Array(2);
@@ -2095,7 +2095,7 @@ SP.SimpleLogger.prototype = {
                 for (var $v_2 = 0; $v_2 < eventObjects.length; $v_2++) {
                     var $v_3 = Sys.Serialization.JavaScriptSerializer.serialize(eventObjects[$v_2]);
 
-                    if (this.$1m_0($v_3)) {
+                    if (this.$1n_0($v_3)) {
                         continue;
                     }
                     $v_0[$v_1] = $v_3;
@@ -2105,7 +2105,7 @@ SP.SimpleLogger.prototype = {
             else {
                 var $v_4 = Sys.Serialization.JavaScriptSerializer.serialize(eventObjects);
 
-                if (this.$1m_0($v_4)) {
+                if (this.$1n_0($v_4)) {
                     return;
                 }
                 $v_0[2] = $v_4;
@@ -2116,13 +2116,13 @@ SP.SimpleLogger.prototype = {
         ($$t_7 = this.$X_0).addToStreamDw.apply($$t_7, [1234].concat($v_0));
     },
     WriteLog: function SP_SimpleLogger$WriteLog$in(eventName, customProperties) {
-        if (!this.$1o_0(eventName)) {
+        if (!this.$1p_0(eventName)) {
             return;
         }
         if (!customProperties) {
             customProperties = {};
         }
-        var $v_0 = SP.SimpleLogger.$29(customProperties);
+        var $v_0 = SP.SimpleLogger.$2A(customProperties);
 
         if ($v_0 > 40) {
             return;
@@ -2155,13 +2155,13 @@ SP.SimpleLogger.prototype = {
 
         ($$t_9 = this.$X_0).addToStreamDw.apply($$t_9, [1234].concat($v_1));
     },
-    $1o_0: function SP_SimpleLogger$$1o_0$in($p0) {
+    $1p_0: function SP_SimpleLogger$$1p_0$in($p0) {
         if (!$p0 || $p0 === '' || $p0 === 'undefined') {
             return false;
         }
         return true;
     },
-    $1m_0: function SP_SimpleLogger$$1m_0$in($p0) {
+    $1n_0: function SP_SimpleLogger$$1n_0$in($p0) {
         if ($p0.length > 15360) {
             return true;
         }
@@ -2214,7 +2214,7 @@ SP.UI.AspMenu = function SP_UI_AspMenu(e) {
     this.$j_2 = [];
     SP.UI.AspMenu.initializeBase(this, [e]);
 };
-SP.UI.AspMenu.$1g = function SP_UI_AspMenu$$1g$st($p0) {
+SP.UI.AspMenu.$1h = function SP_UI_AspMenu$$1h$st($p0) {
     var $v_0 = null;
 
     for (var $v_1 = 0, $v_2 = $p0.childNodes.length; $v_1 < $v_2; ++$v_1) {
@@ -2262,17 +2262,17 @@ SP.UI.AspMenu.prototype = {
     initialize: function SP_UI_AspMenu$initialize$in() {
         Sys.Component.prototype.initialize.call(this);
         this.$L_2 = ((this.get_element()).getElementsByTagName('ul'))[0];
-        this.$2E_2();
         this.$2F_2();
+        this.$2G_2();
     },
-    $2E_2: function SP_UI_AspMenu$$2E_2$in() {
+    $2F_2: function SP_UI_AspMenu$$2F_2$in() {
         var $v_0 = this.$L_2.getElementsByTagName('li');
 
         for (var $v_1 = 0, $v_2 = $v_0.length; $v_1 < $v_2; ++$v_1) {
             var $v_3 = $v_0[$v_1];
 
             $v_3.hoverDebouncer = 0;
-            this.$1y_2($v_3);
+            this.$1z_2($v_3);
         }
     },
     $11_2: function SP_UI_AspMenu$$11_2$in($p0, $p1) {
@@ -2283,7 +2283,7 @@ SP.UI.AspMenu.prototype = {
         }
         return false;
     },
-    $1y_2: function SP_UI_AspMenu$$1y_2$in($p0) {
+    $1z_2: function SP_UI_AspMenu$$1z_2$in($p0) {
         var $$t_C = this;
 
         $addHandler($p0, 'mouseover', function($p1_0) {
@@ -2312,12 +2312,12 @@ SP.UI.AspMenu.prototype = {
         var $$t_F = this;
 
         $addHandler($p0, 'focusout', function($p1_0) {
-            $$t_F.$1j_2($p0);
+            $$t_F.$1k_2($p0);
         });
         var $$t_G = this;
 
         $addHandler($p0, 'blur', function($p1_0) {
-            $$t_G.$1j_2($p0);
+            $$t_G.$1k_2($p0);
         });
         var $v_1 = $p0.querySelector('.additional-background');
 
@@ -2348,7 +2348,7 @@ SP.UI.AspMenu.prototype = {
             });
         }
     },
-    $1j_2: function SP_UI_AspMenu$$1j_2$in($p0) {
+    $1k_2: function SP_UI_AspMenu$$1k_2$in($p0) {
         if (!this.$11_2($p0, document.activeElement)) {
             var $v_0 = $p0.hoverDebouncer;
 
@@ -2358,7 +2358,7 @@ SP.UI.AspMenu.prototype = {
             this.hideSubMenu($p0);
         }
     },
-    $1P_2: function SP_UI_AspMenu$$1P_2$in($p0, $p1, $p2, $p3) {
+    $1Q_2: function SP_UI_AspMenu$$1Q_2$in($p0, $p1, $p2, $p3) {
         var $v_0 = 0;
         var $v_1 = document.documentElement.dir === 'rtl';
         var $v_2 = $p0.querySelector('.menu-item-text');
@@ -2416,10 +2416,10 @@ SP.UI.AspMenu.prototype = {
             this.hideSubMenuCore(this.$9_2, li);
         }
         var $v_0 = document.documentElement.dir === 'rtl';
-        var $v_1 = this.$1P_2(li, 1, li, true) + 6;
+        var $v_1 = this.$1Q_2(li, 1, li, true) + 6;
 
         Sys.UI.DomElement.addCssClass(li, 'hover');
-        var $v_2 = SP.UI.AspMenu.$1g(li);
+        var $v_2 = SP.UI.AspMenu.$1h(li);
 
         if ($v_2) {
             var $v_3 = window.innerWidth;
@@ -2443,7 +2443,7 @@ SP.UI.AspMenu.prototype = {
             if ($v_6) {
                 var $v_7 = $v_5 ? 0 : 1;
 
-                $v_4 = this.$1P_2(li, $v_7, li, false) - this.$1P_2($v_6, $v_7, $v_2, false);
+                $v_4 = this.$1Q_2(li, $v_7, li, false) - this.$1Q_2($v_6, $v_7, $v_2, false);
             }
             if ($v_5) {
                 var $v_8 = AbsLeft(li);
@@ -2470,7 +2470,7 @@ SP.UI.AspMenu.prototype = {
                 }
                 $v_2.style.top = $v_4 + yOffset + 'px';
             }
-            $v_2.style.zIndex = SP.UI.AspMenu.$1W;
+            $v_2.style.zIndex = SP.UI.AspMenu.$1X;
             if (li && !li.getAttribute('isVisible')) {
                 li.setAttribute('isVisible', 'true');
                 if (this.$9_2) {
@@ -2478,7 +2478,7 @@ SP.UI.AspMenu.prototype = {
                 }
                 this.$9_2 = li;
                 if (Sys.Browser.agent === Sys.Browser.InternetExplorer) {
-                    var $v_B = String.format(SP.UI.AspMenu.$1X, (this.get_element()).id, this.$j_2.length);
+                    var $v_B = String.format(SP.UI.AspMenu.$1Y, (this.get_element()).id, this.$j_2.length);
                     var $v_C = document.createElement('iframe');
 
                     $v_C.id = $v_B;
@@ -2491,7 +2491,7 @@ SP.UI.AspMenu.prototype = {
                     $v_C.style.right = $v_2.style.right;
                     $v_C.style.height = $v_2.offsetHeight + 'px';
                     $v_C.style.width = $v_2.offsetWidth + 'px';
-                    $v_C.style.zIndex = SP.UI.AspMenu.$1W - 2;
+                    $v_C.style.zIndex = SP.UI.AspMenu.$1X - 2;
                     li.appendChild($v_C);
                 }
             }
@@ -2519,7 +2519,7 @@ SP.UI.AspMenu.prototype = {
     hideSubMenuCore: function SP_UI_AspMenu$hideSubMenuCore$in(li, newLi) {
         do {
             var $v_0 = document.documentElement.dir === 'rtl';
-            var $v_1 = SP.UI.AspMenu.$1g(li);
+            var $v_1 = SP.UI.AspMenu.$1h(li);
 
             if ($v_1) {
                 $v_1.style.top = '';
@@ -2533,7 +2533,7 @@ SP.UI.AspMenu.prototype = {
                 this.hideSubMenuCore(this.$9_2, li);
             }
             if (li === this.$9_2) {
-                var $v_2 = String.format(SP.UI.AspMenu.$1X, (this.get_element()).id, this.$j_2.length);
+                var $v_2 = String.format(SP.UI.AspMenu.$1Y, (this.get_element()).id, this.$j_2.length);
                 var $v_3 = $get($v_2);
 
                 if ($v_3) {
@@ -2553,7 +2553,7 @@ SP.UI.AspMenu.prototype = {
             }
         } while (li);
     },
-    $2F_2: function SP_UI_AspMenu$$2F_2$in() {
+    $2G_2: function SP_UI_AspMenu$$2G_2$in() {
         if (!SP.ScriptUtility.isNullOrUndefined(this.$L_2.querySelectorAll)) {
             var $v_0 = this.$L_2.querySelectorAll('a.new-window');
 
@@ -2595,7 +2595,7 @@ SP.Utilities.TaskTelemetry.prototype = {
     cancelTime: 0,
     currentSlice: 0,
     times: null,
-    $1Z_0: function SP_Utilities_TaskTelemetry$$1Z_0$in($p0, $p1, $p2) {
+    $1a_0: function SP_Utilities_TaskTelemetry$$1a_0$in($p0, $p1, $p2) {
         var $v_0 = this.currentSlice++;
 
         this.sliceStart[$v_0] = $p0 - this.startTime;
@@ -2604,7 +2604,7 @@ SP.Utilities.TaskTelemetry.prototype = {
 };
 SP.Utilities.Task = function SP_Utilities_Task(elementIn, taskType, timeOut, cb, longFunction, cancelFunction, progressFunction) {
     this.$$d_onBeforeUnload = Function.createDelegate(this, this.onBeforeUnload);
-    this.$1s_0 = taskType;
+    this.$1t_0 = taskType;
     this.$3_0 = cb;
     this.$13_0 = longFunction;
     this.$c_0 = cancelFunction;
@@ -2629,22 +2629,22 @@ SP.Utilities.Task.prototype = {
     $g_0: null,
     $18_0: null,
     $3_0: null,
-    $1s_0: 0,
+    $1t_0: 0,
     $A_0: null,
-    $1V_0: '',
+    $1W_0: '',
     start: function SP_Utilities_Task$start$in() {
-        if (SP.Utilities.TaskCarousel.$2O(2)) {
+        if (SP.Utilities.TaskCarousel.$2P(2)) {
             SP.Utilities.TaskCarousel.$q = SP.Utilities.TaskCarousel.$Q;
             SP.Utilities.TaskCarousel.$G = (SP.Utilities.TaskCarousel.$6 = (this.$6_0 = new Date()));
             this.$A_0 = new SP.Utilities.TaskTelemetry(this.$6_0, this.$3_0.state);
-            this.$H_0 = this.$3_0.commandFunction(this.$3_0.state, SP.Utilities.TaskCarousel.$1q);
-            this.$A_0.$1Z_0(this.$6_0, SP.Utilities.TaskCarousel.$5, this.$3_0.state);
+            this.$H_0 = this.$3_0.commandFunction(this.$3_0.state, SP.Utilities.TaskCarousel.$1r);
+            this.$A_0.$1a_0(this.$6_0, SP.Utilities.TaskCarousel.$5, this.$3_0.state);
             if (this.$H_0 < 1) {
                 SP.Utilities.TaskCarousel.$q = SP.Utilities.TaskCarousel.$T;
                 if (!SP.Utilities.TaskCarousel.$J) {
-                    SP.Utilities.TaskCarousel.$2M();
+                    SP.Utilities.TaskCarousel.$2N();
                 }
-                SP.Utilities.TaskCarousel.$1u(this);
+                SP.Utilities.TaskCarousel.$1v(this);
             }
             else if (this.$3_0.finishFunction) {
                 this.$A_0.finishTime = new Date() - this.$A_0.startTime;
@@ -2665,7 +2665,7 @@ SP.Utilities.Task.prototype = {
         return this.$A_0.times[index];
     },
     setPageExitText: function SP_Utilities_Task$setPageExitText$in(pet) {
-        this.$1V_0 = pet;
+        this.$1W_0 = pet;
     },
     onBeforeUnload: function SP_Utilities_Task$onBeforeUnload$in() {
         var $v_0;
@@ -2679,7 +2679,7 @@ SP.Utilities.Task.prototype = {
         var $v_1 = SP.Utilities.TaskCarousel.$1A(this, 3);
 
         if (!$v_1) {
-            $v_0 = this.$1V_0;
+            $v_0 = this.$1W_0;
             return $v_0;
         }
         else if (this === SP.Utilities.TaskCarousel.currentCancellableTask) {
@@ -2718,7 +2718,7 @@ SP.Utilities.tcsaver.save = function SP_Utilities_tcsaver$save$st() {
     $v_0.$T_0 = SP.Utilities.TaskCarousel.$T;
     $v_0.$Q_0 = SP.Utilities.TaskCarousel.$Q;
     $v_0.$a_0 = SP.Utilities.TaskCarousel.$a;
-    $v_0.$1M_0 = SP.Utilities.TaskCarousel.currentCancellableTask;
+    $v_0.$1N_0 = SP.Utilities.TaskCarousel.currentCancellableTask;
     $v_0.$C_0 = SP.Utilities.TaskCarousel.$C;
     $v_0.$N_0 = SP.Utilities.TaskCarousel.$N;
     return $v_0;
@@ -2733,7 +2733,7 @@ SP.Utilities.tcsaver.restore = function SP_Utilities_tcsaver$restore$st(tcs) {
     SP.Utilities.TaskCarousel.$T = tcs.$T_0;
     SP.Utilities.TaskCarousel.$Q = tcs.$Q_0;
     SP.Utilities.TaskCarousel.$a = tcs.$a_0;
-    SP.Utilities.TaskCarousel.currentCancellableTask = tcs.$1M_0;
+    SP.Utilities.TaskCarousel.currentCancellableTask = tcs.$1N_0;
     SP.Utilities.TaskCarousel.$C = tcs.$C_0;
     SP.Utilities.TaskCarousel.$N = tcs.$N_0;
 };
@@ -2747,7 +2747,7 @@ SP.Utilities.tcsaver.prototype = {
     $T_0: 50,
     $Q_0: 500,
     $a_0: 1000,
-    $1M_0: null,
+    $1N_0: null,
     $C_0: null,
     $N_0: null,
     get_sharedTimer: function SP_Utilities_tcsaver$get_sharedTimer$in() {
@@ -2763,13 +2763,13 @@ SP.Utilities.TaskCarousel.resetSharedStopTimer = function SP_Utilities_TaskCarou
     if (SP.Utilities.TaskCarousel.$E) {
         window.clearTimeout(SP.Utilities.TaskCarousel.$E);
         if (newTimeout) {
-            SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Y, newTimeout);
+            SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Z, newTimeout);
         }
     }
 };
-SP.Utilities.TaskCarousel.$2M = function SP_Utilities_TaskCarousel$$2M$st() {
-    SP.Utilities.TaskCarousel.$J = window.setInterval(SP.Utilities.TaskCarousel.$2N, SP.Utilities.TaskCarousel.$T * 2);
-    SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Y, 3600000);
+SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N$st() {
+    SP.Utilities.TaskCarousel.$J = window.setInterval(SP.Utilities.TaskCarousel.$2O, SP.Utilities.TaskCarousel.$T * 2);
+    SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Z, 3600000);
     SP.Utilities.TaskCarousel.$F = 0;
 };
 SP.Utilities.TaskCarousel.$1A = function SP_Utilities_TaskCarousel$$1A$st($p0, $p1) {
@@ -2796,14 +2796,14 @@ SP.Utilities.TaskCarousel.$1A = function SP_Utilities_TaskCarousel$$1A$st($p0, $
                     SP.Utilities.TaskCarousel.$p(1, SP.Utilities.TaskCarousel.$5 - $p0.$6_0, $p0.$3_0.state);
                 }
             }
-            SP.Utilities.TaskCarousel.$1O($p0);
+            SP.Utilities.TaskCarousel.$1P($p0);
             SP.Utilities.TaskCarousel.$7[$v_1] = null;
             --SP.Utilities.TaskCarousel.$F;
         }
     }
     return true;
 };
-SP.Utilities.TaskCarousel.$2O = function SP_Utilities_TaskCarousel$$2O$st($p0) {
+SP.Utilities.TaskCarousel.$2P = function SP_Utilities_TaskCarousel$$2P$st($p0) {
     var $v_0 = true;
     var $v_1 = SP.Utilities.TaskCarousel.$7.length;
 
@@ -2829,7 +2829,7 @@ SP.Utilities.TaskCarousel.$2O = function SP_Utilities_TaskCarousel$$2O$st($p0) {
                     SP.Utilities.TaskCarousel.$p(1, SP.Utilities.TaskCarousel.$5 - $v_3.$6_0, $v_3.$3_0.state);
                 }
             }
-            SP.Utilities.TaskCarousel.$1O($v_3);
+            SP.Utilities.TaskCarousel.$1P($v_3);
             SP.Utilities.TaskCarousel.$7[$v_2] = null;
             --SP.Utilities.TaskCarousel.$F;
         }
@@ -2864,7 +2864,7 @@ SP.Utilities.TaskCarousel.$p = function SP_Utilities_TaskCarousel$$p$st($p0, $p1
         SP.Utilities.TaskCarousel.$N = window.document.title;
     }
 };
-SP.Utilities.TaskCarousel.$1q = function SP_Utilities_TaskCarousel$$1q$st() {
+SP.Utilities.TaskCarousel.$1r = function SP_Utilities_TaskCarousel$$1r$st() {
     SP.Utilities.TaskCarousel.$5 = new Date();
     var $v_0 = SP.Utilities.TaskCarousel.$5 - SP.Utilities.TaskCarousel.$G;
 
@@ -2876,7 +2876,7 @@ SP.Utilities.TaskCarousel.$1q = function SP_Utilities_TaskCarousel$$1q$st() {
     }
     return false;
 };
-SP.Utilities.TaskCarousel.$1u = function SP_Utilities_TaskCarousel$$1u$st($p0) {
+SP.Utilities.TaskCarousel.$1v = function SP_Utilities_TaskCarousel$$1v$st($p0) {
     var $v_0 = SP.Utilities.TaskCarousel.$7.length;
     var $v_1;
 
@@ -2888,7 +2888,7 @@ SP.Utilities.TaskCarousel.$1u = function SP_Utilities_TaskCarousel$$1u$st($p0) {
     SP.Utilities.TaskCarousel.$7[$v_1] = $p0;
     SP.Utilities.TaskCarousel.$F++;
 };
-SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N$st() {
+SP.Utilities.TaskCarousel.$2O = function SP_Utilities_TaskCarousel$$2O$st() {
     var $v_0 = false;
     var $v_1 = SP.Utilities.TaskCarousel.$7.length;
 
@@ -2913,8 +2913,8 @@ SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N$st() {
             else if (!$v_3.$Z_0 && SP.Utilities.TaskCarousel.$G - $v_3.$6_0 >= SP.Utilities.TaskCarousel.$a) {
                 $v_3.$Z_0 = true;
                 SP.Utilities.TaskCarousel.currentCancellableTask = $v_3;
-                SP.Utilities.TaskCarousel.$1x($v_3, SP.Utilities.TaskCarousel.$23);
-                SP.Utilities.TaskCarousel.$1z($v_3, $v_3.$$d_onBeforeUnload);
+                SP.Utilities.TaskCarousel.$1y($v_3, SP.Utilities.TaskCarousel.$24);
+                SP.Utilities.TaskCarousel.$20($v_3, $v_3.$$d_onBeforeUnload);
                 if ($v_3.$I_0) {
                     $v_3.$I_0($v_3.$H_0, SP.Utilities.TaskCarousel.$5 - $v_3.$6_0, $v_3.$3_0.state);
                 }
@@ -2922,8 +2922,8 @@ SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N$st() {
                     SP.Utilities.TaskCarousel.$p($v_3.$H_0, SP.Utilities.TaskCarousel.$5 - $v_3.$6_0, $v_3.$3_0.state);
                 }
             }
-            $v_3.$H_0 = $v_3.$3_0.commandFunction($v_3.$3_0.state, SP.Utilities.TaskCarousel.$1q);
-            $v_3.$A_0.$1Z_0(SP.Utilities.TaskCarousel.$G, SP.Utilities.TaskCarousel.$5, $v_3.$3_0.state);
+            $v_3.$H_0 = $v_3.$3_0.commandFunction($v_3.$3_0.state, SP.Utilities.TaskCarousel.$1r);
+            $v_3.$A_0.$1a_0(SP.Utilities.TaskCarousel.$G, SP.Utilities.TaskCarousel.$5, $v_3.$3_0.state);
             if ($v_3.$H_0 >= 1) {
                 if ($v_3.$r_0 && $v_3.$B_0) {
                     $v_3.$B_0.style.cursor = 'default';
@@ -2932,8 +2932,8 @@ SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N$st() {
                     $v_3.$A_0.finishTime = new Date() - $v_3.$A_0.startTime;
                     $v_3.$3_0.finishFunction($v_3.$B_0, $v_3.$3_0.state);
                 }
-                SP.Utilities.TaskCarousel.$24($v_3);
-                SP.Utilities.TaskCarousel.$1O($v_3);
+                SP.Utilities.TaskCarousel.$25($v_3);
+                SP.Utilities.TaskCarousel.$1P($v_3);
                 SP.Utilities.TaskCarousel.$7[$v_2] = null;
                 --SP.Utilities.TaskCarousel.$F;
                 if ($v_3.$I_0) {
@@ -2958,10 +2958,10 @@ SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N$st() {
         }
     }
     if (!$v_0) {
-        SP.Utilities.TaskCarousel.$1Y();
+        SP.Utilities.TaskCarousel.$1Z();
     }
 };
-SP.Utilities.TaskCarousel.$1Y = function SP_Utilities_TaskCarousel$$1Y$st() {
+SP.Utilities.TaskCarousel.$1Z = function SP_Utilities_TaskCarousel$$1Z$st() {
     if (SP.Utilities.TaskCarousel.$E) {
         window.clearTimeout(SP.Utilities.TaskCarousel.$E);
         SP.Utilities.TaskCarousel.$E = 0;
@@ -2972,33 +2972,33 @@ SP.Utilities.TaskCarousel.$1Y = function SP_Utilities_TaskCarousel$$1Y$st() {
     }
     SP.Utilities.TaskCarousel.$F = 0;
 };
-SP.Utilities.TaskCarousel.$23 = function SP_Utilities_TaskCarousel$$23$st() {
+SP.Utilities.TaskCarousel.$24 = function SP_Utilities_TaskCarousel$$24$st() {
     if (SP.Utilities.TaskCarousel.currentCancellableTask) {
         SP.Utilities.TaskCarousel.$1A(SP.Utilities.TaskCarousel.currentCancellableTask, 1);
         SP.Utilities.TaskCarousel.currentCancellableTask = null;
     }
 };
-SP.Utilities.TaskCarousel.$1x = function SP_Utilities_TaskCarousel$$1x$st($p0, $p1) {
+SP.Utilities.TaskCarousel.$1y = function SP_Utilities_TaskCarousel$$1y$st($p0, $p1) {
     $p0.$18_0 = window.document.onstop;
     window.document.onstop = $p1;
 };
-SP.Utilities.TaskCarousel.$24 = function SP_Utilities_TaskCarousel$$24$st($p0) {
+SP.Utilities.TaskCarousel.$25 = function SP_Utilities_TaskCarousel$$25$st($p0) {
     window.document.onstop = $p0.$18_0;
     $p0.$18_0 = null;
 };
-SP.Utilities.TaskCarousel.$1z = function SP_Utilities_TaskCarousel$$1z$st($p0, $p1) {
+SP.Utilities.TaskCarousel.$20 = function SP_Utilities_TaskCarousel$$20$st($p0, $p1) {
     $p0.$g_0 = window.onbeforeunload;
     window.onbeforeunload = $p1;
 };
-SP.Utilities.TaskCarousel.$1O = function SP_Utilities_TaskCarousel$$1O$st($p0) {
+SP.Utilities.TaskCarousel.$1P = function SP_Utilities_TaskCarousel$$1P$st($p0) {
     window.onbeforeunload = $p0.$g_0;
     $p0.$g_0 = null;
 };
 Type.registerNamespace('SP.Disposal');
 SP.Disposal.DisposalManager = function SP_Disposal_DisposalManager() {
-    this.$$d_$2I_0 = Function.createDelegate(this, this.$2I_0);
+    this.$$d_$2J_0 = Function.createDelegate(this, this.$2J_0);
     this.$t_0 = [];
-    $addHandler(window, 'unload', this.$$d_$2I_0);
+    $addHandler(window, 'unload', this.$$d_$2J_0);
 };
 SP.Disposal.DisposalManager.get_instance = function SP_Disposal_DisposalManager$get_instance$st() {
     if (!SP.Disposal.DisposalManager.$P) {
@@ -3010,8 +3010,8 @@ SP.Disposal.DisposalManager.prototype = {
     registerForDisposal: function SP_Disposal_DisposalManager$registerForDisposal$in(objectToDispose) {
         Array.add(this.$t_0, objectToDispose);
     },
-    $2I_0: function SP_Disposal_DisposalManager$$2I_0$in($p0) {
-        $removeHandler(window, 'unload', this.$$d_$2I_0);
+    $2J_0: function SP_Disposal_DisposalManager$$2J_0$in($p0) {
+        $removeHandler(window, 'unload', this.$$d_$2J_0);
         for (var $v_0 = 0; $v_0 < this.$t_0.length; $v_0++) {
             try {
                 var $v_1 = this.$t_0[$v_0];
@@ -3044,14 +3044,15 @@ SP.Utilities.Internal.ECBAdapter = function SP_Utilities_Internal_ECBAdapter(ctx
         throw Error.argumentNull('onECBDataRetrievedKey');
     }
     this.$O_0 = ctx;
-    this.$1J_0 = onECBDataRetrieved;
-    this.$1K_0 = onECBDataRetrievedKey;
+    this.$1K_0 = onECBDataRetrieved;
+    this.$1L_0 = onECBDataRetrievedKey;
 };
 SP.Utilities.Internal.ECBAdapter.prototype = {
     $u_0: false,
     $O_0: null,
-    $1J_0: null,
     $1K_0: null,
+    $1L_0: null,
+    $1H_0: false,
     setEcbStateDirty: function SP_Utilities_Internal_ECBAdapter$setEcbStateDirty$in() {
         this.$u_0 = true;
     },
@@ -3081,14 +3082,14 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
     getECBMenuItemForCommand: function SP_Utilities_Internal_ECBAdapter$getECBMenuItemForCommand$in(commandId) {
         var $v_0 = this.getSelectedItems();
 
-        if (!this.$1c_0($v_0)) {
+        if (!this.$1d_0($v_0)) {
             return null;
         }
-        var $v_1 = this.$1e_0($v_0);
+        var $v_1 = this.$1f_0($v_0);
 
-        return this.$1d_0($v_1, commandId);
+        return this.$1e_0($v_1, commandId);
     },
-    $1d_0: function SP_Utilities_Internal_ECBAdapter$$1d_0$in($p0, $p1) {
+    $1e_0: function SP_Utilities_Internal_ECBAdapter$$1e_0$in($p0, $p1) {
         for (var $v_0 = 0; $v_0 < $p0.childNodes.length; $v_0++) {
             var $v_1 = $p0.childNodes[$v_0];
 
@@ -3099,7 +3100,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
                     return $v_2;
                 }
                 else if ($v_2.IsSubMenu) {
-                    var $v_3 = this.$1d_0($v_2, $p1);
+                    var $v_3 = this.$1e_0($v_2, $p1);
 
                     if (!IsNullOrUndefined($v_3)) {
                         return $v_3;
@@ -3123,36 +3124,42 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             return 0;
         }
         var $v_1 = this.$O_0;
+        var $v_2 = CountSelectedItems($v_1);
+        var $v_3 = $v_2 === 1;
 
-        return CountSelectedItems($v_1);
+        if ($v_3 !== this.$1H_0) {
+            this.setEcbStateDirty();
+            this.$1H_0 = $v_3;
+        }
+        return $v_2;
     },
     canHandleECBCommand: function SP_Utilities_Internal_ECBAdapter$canHandleECBCommand$in(commandId) {
         if (!this.supportsECBCommands()) {
             return false;
         }
+        var $v_0 = this.getCountOfSelectedItems();
+
         if (this.$u_0) {
             (this.get_clvp()).CUIItemInfo = null;
             this.$u_0 = false;
         }
-        var $v_0 = this.getSelectedItems();
+        var $v_1 = this.getSelectedItems();
 
-        if (IsNullOrUndefined($v_0)) {
+        if (IsNullOrUndefined($v_1)) {
             return false;
         }
-        var $v_1 = this.getCountOfSelectedItems();
-
-        if ($v_1 === 1) {
-            if (!this.$1c_0($v_0)) {
+        if ($v_0 === 1) {
+            if (!this.$1d_0($v_1)) {
                 return false;
             }
-            var $v_2 = this.$1e_0($v_0);
+            var $v_2 = this.$1f_0($v_1);
 
-            if (this.$1L_0($v_2, commandId)) {
+            if (this.$1M_0($v_2, commandId)) {
                 return true;
             }
         }
-        else if ($v_1 > 1 && this.bulkOperationAvailableForCommand(commandId)) {
-            return this.$1w_0($v_0, commandId);
+        else if ($v_0 > 1 && this.bulkOperationAvailableForCommand(commandId)) {
+            return this.$1x_0($v_1, commandId);
         }
         return false;
     },
@@ -3172,7 +3179,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             return false;
         }
     },
-    $1w_0: function SP_Utilities_Internal_ECBAdapter$$1w_0$in($p0, $p1) {
+    $1x_0: function SP_Utilities_Internal_ECBAdapter$$1x_0$in($p0, $p1) {
         var $v_0 = this.get_clvp();
 
         if (IsNullOrUndefined($v_0)) {
@@ -3187,12 +3194,12 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             };
             var $v_2 = $v_1.key.split(',');
 
-            if (!this.$1a_0($v_0, $v_2[1])) {
+            if (!this.$1b_0($v_0, $v_2[1])) {
                 return false;
             }
             var $v_3 = (this.get_clvp()).CUIItemInfo[$v_2[1]];
 
-            if (!this.$1L_0($v_3, $p1)) {
+            if (!this.$1M_0($v_3, $p1)) {
                 return false;
             }
         }
@@ -3201,7 +3208,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
     bulkOperationAvailableForCommand: function SP_Utilities_Internal_ECBAdapter$bulkOperationAvailableForCommand$in(commandId) {
         return commandId === 'CheckOut' || commandId === 'CheckIn' || commandId === 'Delete' || commandId === 'DiscardCheckOut' || commandId === 'AddToTimeline' || commandId === 'Moderate' || commandId === 'MoveCopy';
     },
-    $1e_0: function SP_Utilities_Internal_ECBAdapter$$1e_0$in($p0) {
+    $1f_0: function SP_Utilities_Internal_ECBAdapter$$1f_0$in($p0) {
         var $$dict_4 = $p0;
 
         for (var $$key_5 in $$dict_4) {
@@ -3216,7 +3223,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         }
         return null;
     },
-    $1L_0: function SP_Utilities_Internal_ECBAdapter$$1L_0$in($p0, $p1) {
+    $1M_0: function SP_Utilities_Internal_ECBAdapter$$1M_0$in($p0, $p1) {
         var $v_0 = 'cacheVal_' + $p1;
         var $v_1 = $p0.getAttribute($v_0);
 
@@ -3229,12 +3236,12 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             if (($v_3.getAttributeNode('type')).value !== 'separator') {
                 var $v_4 = $v_3;
 
-                if (this.$2H_0($v_4, $p1)) {
+                if (this.$2I_0($v_4, $p1)) {
                     $p0.setAttribute($v_0, 'TRUE');
                     return true;
                 }
                 else if ($v_4.IsSubMenu) {
-                    var $v_5 = this.$1L_0($v_4, $p1);
+                    var $v_5 = this.$1M_0($v_4, $p1);
 
                     if ($v_5) {
                         $p0.setAttribute($v_0, 'TRUE');
@@ -3246,7 +3253,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         $p0.setAttribute($v_0, 'FALSE');
         return false;
     },
-    $2H_0: function SP_Utilities_Internal_ECBAdapter$$2H_0$in($p0, $p1) {
+    $2I_0: function SP_Utilities_Internal_ECBAdapter$$2I_0$in($p0, $p1) {
         if (IsNullOrUndefined($p0.CUIEnabledCommands)) {
             return false;
         }
@@ -3257,7 +3264,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         }
         return false;
     },
-    $1c_0: function SP_Utilities_Internal_ECBAdapter$$1c_0$in($p0) {
+    $1d_0: function SP_Utilities_Internal_ECBAdapter$$1d_0$in($p0) {
         var $v_0 = this.get_clvp();
 
         if (IsNullOrUndefined($v_0)) {
@@ -3272,13 +3279,13 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             };
             var $v_2 = $v_1.key.split(',');
 
-            if (!this.$1a_0($v_0, $v_2[1])) {
+            if (!this.$1b_0($v_0, $v_2[1])) {
                 return false;
             }
         }
         return true;
     },
-    $1a_0: function SP_Utilities_Internal_ECBAdapter$$1a_0$in($p0, $p1) {
+    $1b_0: function SP_Utilities_Internal_ECBAdapter$$1b_0$in($p0, $p1) {
         var $v_0 = $p0.CUIItemInfo;
 
         if (IsNullOrUndefined($v_0)) {
@@ -3288,7 +3295,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         var $v_1 = $v_0[$p1];
 
         if (IsNullOrUndefined($v_1)) {
-            $v_1 = this.$22_0($p0, $p1);
+            $v_1 = this.$23_0($p0, $p1);
             if (IsNullOrUndefined($v_1)) {
                 return false;
             }
@@ -3296,10 +3303,10 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         }
         return true;
     },
-    $22_0: function SP_Utilities_Internal_ECBAdapter$$22_0$in($p0, $p1) {
+    $23_0: function SP_Utilities_Internal_ECBAdapter$$23_0$in($p0, $p1) {
         var $v_0 = window.itemTable;
 
-        window.itemTable = $p0.GetEcbInfo($p1, this.$1J_0, this.$1K_0);
+        window.itemTable = $p0.GetEcbInfo($p1, this.$1K_0, this.$1L_0);
         if (IsNullOrUndefined(window.itemTable)) {
             return null;
         }
@@ -4237,8 +4244,8 @@ function sp_core_initialize() {
     SP.SimpleLoggerConstants.rowLengthForObject = 2;
     SP.SimpleLoggerConstants.defaulT_LOG_SESSION_MS = 30000;
     SP.SimpleLoggerConstants.defaulT_MAX_DATA_SIZE = 16384;
-    SP.UI.AspMenu.$1X = '{0}_FrameID_{1}';
-    SP.UI.AspMenu.$1W = 1100;
+    SP.UI.AspMenu.$1Y = '{0}_FrameID_{1}';
+    SP.UI.AspMenu.$1X = 1100;
     SP.Utilities.TaskCarousel.$7 = [null, null, null, null, null];
     SP.Utilities.TaskCarousel.$5 = null;
     SP.Utilities.TaskCarousel.$G = null;

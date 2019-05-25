@@ -15078,6 +15078,12 @@ PS.PublishedProject.prototype = {
         return $v_1;
     },
     
+    unlinkProjectSite: function PS_PublishedProject$unlinkProjectSite() {ULSyTi:;
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'UnlinkProjectSite', null);
+        $v_0.addQuery($v_1);
+    },
+    
     updateVisibilityCustomFields: function PS_PublishedProject$updateVisibilityCustomFields() {ULSyTi:;
         var $v_0 = this.get_context();
         var $v_1;
@@ -16022,6 +16028,21 @@ PS.PublishedTaskLink.prototype = {
         return $v_0;
     },
     
+    get_linkLag: function PS_PublishedTaskLink$get_linkLag() {ULSyTi:;
+        this.checkUninitializedProperty('LinkLag');
+        return ((this.get_objectData().get_properties()['LinkLag']));
+    },
+    
+    get_linkLagFmt: function PS_PublishedTaskLink$get_linkLagFmt() {ULSyTi:;
+        this.checkUninitializedProperty('LinkLagFmt');
+        return ((this.get_objectData().get_properties()['LinkLagFmt']));
+    },
+    
+    get_projUid: function PS_PublishedTaskLink$get_projUid() {ULSyTi:;
+        this.checkUninitializedProperty('ProjUid');
+        return ((this.get_objectData().get_properties()['ProjUid']));
+    },
+    
     get_start: function PS_PublishedTaskLink$get_start() {ULSyTi:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Start']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
@@ -16044,6 +16065,21 @@ PS.PublishedTaskLink.prototype = {
             this.updateClientObjectPropertyType('End', this.get_end(), $v_0);
             this.get_end().fromJson($v_0);
             delete parentNode.End;
+        }
+        $v_0 = parentNode.LinkLag;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['LinkLag'] = ($v_0);
+            delete parentNode.LinkLag;
+        }
+        $v_0 = parentNode.LinkLagFmt;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['LinkLagFmt'] = ($v_0);
+            delete parentNode.LinkLagFmt;
+        }
+        $v_0 = parentNode.ProjUid;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['ProjUid'] = ($v_0);
+            delete parentNode.ProjUid;
         }
         $v_0 = parentNode.Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -19561,6 +19597,11 @@ PS.Task.prototype = {
         return ((this.get_objectData().get_properties()['IsCritical']));
     },
     
+    get_isDurationEstimate: function PS_Task$get_isDurationEstimate() {ULSyTi:;
+        this.checkUninitializedProperty('IsDurationEstimate');
+        return ((this.get_objectData().get_properties()['IsDurationEstimate']));
+    },
+    
     get_isExternalTask: function PS_Task$get_isExternalTask() {ULSyTi:;
         this.checkUninitializedProperty('IsExternalTask');
         return ((this.get_objectData().get_properties()['IsExternalTask']));
@@ -20013,6 +20054,11 @@ PS.Task.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['IsCritical'] = ($v_0);
             delete parentNode.IsCritical;
+        }
+        $v_0 = parentNode.IsDurationEstimate;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['IsDurationEstimate'] = ($v_0);
+            delete parentNode.IsDurationEstimate;
         }
         $v_0 = parentNode.IsExternalTask;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -23294,6 +23340,9 @@ PS.PublishedTaskObjectPropertyNames.predecessors = 'Predecessors';
 PS.PublishedTaskObjectPropertyNames.statusManager = 'StatusManager';
 PS.PublishedTaskObjectPropertyNames.successors = 'Successors';
 PS.PublishedTaskLinkPropertyNames.dependencyType = 'DependencyType';
+PS.PublishedTaskLinkPropertyNames.linkLag = 'LinkLag';
+PS.PublishedTaskLinkPropertyNames.linkLagFmt = 'LinkLagFmt';
+PS.PublishedTaskLinkPropertyNames.projUid = 'ProjUid';
 PS.PublishedTaskLinkObjectPropertyNames.end = 'End';
 PS.PublishedTaskLinkObjectPropertyNames.start = 'Start';
 PS.QueueJobPropertyNames.id = 'Id';
@@ -23450,6 +23499,7 @@ PS.TaskPropertyNames.freeSlackMilliseconds = 'FreeSlackMilliseconds';
 PS.TaskPropertyNames.id = 'Id';
 PS.TaskPropertyNames.ignoreResourceCalendar = 'IgnoreResourceCalendar';
 PS.TaskPropertyNames.isCritical = 'IsCritical';
+PS.TaskPropertyNames.isDurationEstimate = 'IsDurationEstimate';
 PS.TaskPropertyNames.isExternalTask = 'IsExternalTask';
 PS.TaskPropertyNames.isOverAllocated = 'IsOverAllocated';
 PS.TaskPropertyNames.isRecurring = 'IsRecurring';
