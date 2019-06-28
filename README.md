@@ -21,6 +21,7 @@
 ## APIs list
 
 - `core` - core JSOM module (loaded by default at first place)
+- `search` - sp.search.js
 - `publishing` - [sp.publishing.js](https://msdn.microsoft.com/en-us/library/office/jj607192.aspx)
 - `taxonomy` - [sp.taxonomy.js](https://msdn.microsoft.com/en-us/library/office/jj857114.aspx)
 - `userprofiles` - [sp.userprofiles.js](https://msdn.microsoft.com/en-us/library/office/jj642927.aspx)

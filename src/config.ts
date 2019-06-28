@@ -13,7 +13,7 @@ export const JsomModules: IJsomModule = {
   ],
   search: [
     'sp.search.debug.js',
-    'search.clientcontrols.debug.js',
+    'search.clientcontrols.debug.js'
   ],
   taxonomy: [
     'sp.taxonomy.debug.js'
