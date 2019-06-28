@@ -21,4 +21,5 @@ async function checkOrPromptForIntegrationConfigCreds (): Promise<void> {
 
 }
 
-checkOrPromptForIntegrationConfigCreds();
+checkOrPromptForIntegrationConfigCreds()
+  .catch(console.warn);
