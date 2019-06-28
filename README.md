@@ -16,7 +16,7 @@
 - SharePoint Online, Project Online
 - SharePoint 2019, 2016, Project Server
 - SharePoint 2013
-- SharePOint 2010 [not officially supported]
+- SharePoint 2010 [not officially supported]
 
 ## APIs list
 
