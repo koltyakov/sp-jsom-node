@@ -3,14 +3,15 @@ import { IAuthConfigSettings } from 'node-sp-auth-config';
 import { ISPRequest } from 'sp-request';
 
 export type JsomModule =
-  'core' |
-  'publishing' |
-  'taxonomy' |
-  'userprofiles' |
-  'documentmanagement' |
-  'workmanagement' |
-  'policy' |
-  'project';
+  | 'core'
+  | 'search'
+  | 'publishing'
+  | 'taxonomy'
+  | 'userprofiles'
+  | 'documentmanagement'
+  | 'workmanagement'
+  | 'policy'
+  | 'project';
 
 export interface IJsomNodeSettings {
   modules?: JsomModule[];

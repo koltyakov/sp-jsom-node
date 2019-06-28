@@ -19,7 +19,9 @@ declare const sp_initialize: any;
 
 export class JsomNode {
 
-  private static ctxs: { [ctx: string]: ISPRequest; } = {};
+  private static ctxs: {
+    [ctx: string]: ISPRequest;
+  } = {};
 
   private settings: IJsomNodeSettings;
   private context: IJsomNodeContext;
@@ -145,7 +147,7 @@ export class JsomNode {
       const registerNamespace = (namespaceString: string): void => {
         let curNs = global;
         global.window = global.window || {};
-        namespaceString.split('.').forEach(nsName => {
+        namespaceString.split('.').forEach((nsName) => {
           if (typeof curNs[nsName] === 'undefined') {
             curNs[nsName] = new Object();
           }
@@ -157,9 +159,17 @@ export class JsomNode {
       };
 
       registerNamespace('Sys');
-      registerNamespace('SP.UI');
-      registerNamespace('Microsoft.SharePoint.Packaging');
+      registerNamespace('SP');
+      registerNamespace('Microsoft');
       registerNamespace('PS');
+      registerNamespace('Srch');
+
+      // For search.clientcontrols.debug.js
+      // ToDO: Verify if ever needed in Node.js app
+      try {
+        registerNamespace('SP.Utilities');
+        global.SP.Utilities.HttpUtility = SP.Utilities.HttpUtility || {};
+      } catch (ex) { /**/ }
 
     })();
 

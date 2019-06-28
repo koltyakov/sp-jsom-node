@@ -1,6 +1,6 @@
 import { initEnvironment as init } from './utils/init';
 
-init().then(async (_siteUrl) => {
+init().then(async () => {
 
   const clientContext = SP.ClientContext.get_current();
   let oWeb = clientContext.get_web();

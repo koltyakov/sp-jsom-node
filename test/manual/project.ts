@@ -7,7 +7,7 @@ const config = {
   modules: [ 'project' ]
 };
 
-init(config).then(async (_siteUrl) => {
+init(config).then(async () => {
 
   // API Reference - https://msdn.microsoft.com/en-us/library/office/jj669820.aspx
   const projCtx = PS.ProjectContext.get_current();

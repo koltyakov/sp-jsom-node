@@ -1,4 +1,4 @@
-import * as mocha from 'mocha';
+import * as Mocha from 'mocha';
 import { expect } from 'chai';
 import * as sprequest from 'sp-request';
 import { IAuthContext } from 'node-sp-auth-config';
@@ -13,7 +13,7 @@ const testVariables = {
 
 declare const global: any;
 
-describe(`sp-jsom-node tests`, () => {
+describe(`sp-jsom-node core tests`, () => {
 
   for (const envConf of Environments) {
 
@@ -55,7 +55,7 @@ describe(`sp-jsom-node tests`, () => {
       it(`should get web's title`, function (done: Mocha.Done): void {
         this.timeout(30 * 1000);
 
-        const _getWeb = (): Promise<any> => {
+        const getWeb = (): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -66,7 +66,7 @@ describe(`sp-jsom-node tests`, () => {
         request.get(`${config.siteUrl}/_api/web?$select=Title`)
           .then((response) => {
             return Promise.all([
-              _getWeb(),
+              getWeb(),
               response.body.d.Title
             ]);
           })
@@ -80,7 +80,7 @@ describe(`sp-jsom-node tests`, () => {
       it(`should get lists on web`, function (done: Mocha.Done): void {
         this.timeout(30 * 1000);
 
-        const _getLists = (): Promise<any> => {
+        const getLists = (): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -92,7 +92,7 @@ describe(`sp-jsom-node tests`, () => {
         request.get(`${config.siteUrl}/_api/web/lists?$select=Title`)
           .then((response) => {
             return Promise.all([
-              _getLists(),
+              getLists(),
               response.body.d.results
             ]);
           })
@@ -106,7 +106,7 @@ describe(`sp-jsom-node tests`, () => {
       it('should create a new list', function (done: Mocha.Done): void {
         this.timeout(30 * 1000);
 
-        const _createList = (title: string, description: string = '', listTemplateId: number = 100): Promise<any> => {
+        const createList = (title: string, description: string = '', listTemplateId: number = 100): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -120,7 +120,7 @@ describe(`sp-jsom-node tests`, () => {
           return ctx.executeQueryPromise().then(() => oList);
         };
 
-        const _getListByTitle = (title: string): Promise<any> => {
+        const getListByTitle = (title: string): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -130,9 +130,9 @@ describe(`sp-jsom-node tests`, () => {
           return ctx.executeQueryPromise().then(() => oList.get_title());
         };
 
-        _createList(testVariables.newListName, 'Test List created with JsomNode', SP.ListTemplateType.genericList)
+        createList(testVariables.newListName, 'Test List created with JsomNode', SP.ListTemplateType.genericList)
           .then((response) => {
-            return _getListByTitle(testVariables.newListName);
+            return getListByTitle(testVariables.newListName);
           })
           .then((response) => {
             expect(response).to.equal(testVariables.newListName);
@@ -144,7 +144,7 @@ describe(`sp-jsom-node tests`, () => {
       it('should create list item', function (done: Mocha.Done): void {
         this.timeout(30 * 1000);
 
-        const _createListItem = (listTitle: string, metadata: any): Promise<any> => {
+        const createListItem = (listTitle: string, metadata: any): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -163,7 +163,7 @@ describe(`sp-jsom-node tests`, () => {
           return ctx.executeQueryPromise().then(() => oListItem);
         };
 
-        const _getListItemsCount = (listTitle: string): Promise<any> => {
+        const getListItemsCount = (listTitle: string): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -173,9 +173,9 @@ describe(`sp-jsom-node tests`, () => {
           return ctx.executeQueryPromise().then(() => oList.get_itemCount());
         };
 
-        _createListItem(testVariables.newListName, { Title: 'New item' })
+        createListItem(testVariables.newListName, { Title: 'New item' })
           .then((response) => {
-            return _getListItemsCount(testVariables.newListName);
+            return getListItemsCount(testVariables.newListName);
           })
           .then((response) => {
             expect(response).to.equal(1);
@@ -187,7 +187,7 @@ describe(`sp-jsom-node tests`, () => {
       it('should delete list item', function (done: Mocha.Done): void {
         this.timeout(30 * 1000);
 
-        const _deleteItemById = (listTitle: string, itemId: number): Promise<any> => {
+        const deleteItemById = (listTitle: string, itemId: number): Promise<any> => {
           return new Promise((resolve, reject) => {
             // const ctx = SP.ClientContext.get_current();
             const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
@@ -205,7 +205,7 @@ describe(`sp-jsom-node tests`, () => {
           });
         };
 
-        const _deleteItemWithGreatesId = (listTitle: string): Promise<any> => {
+        const deleteItemWithGreatesId = (listTitle: string): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -234,11 +234,11 @@ describe(`sp-jsom-node tests`, () => {
             if (itemsData.length === 0) {
               return 'No items found in a list';
             }
-            return _deleteItemById(listTitle, itemsData[0].get_fieldValues().ID);
+            return deleteItemById(listTitle, itemsData[0].get_fieldValues().ID);
           });
         };
 
-        _deleteItemWithGreatesId(testVariables.newListName)
+        deleteItemWithGreatesId(testVariables.newListName)
           .then((response) => done())
           .catch(done);
       });
@@ -247,7 +247,6 @@ describe(`sp-jsom-node tests`, () => {
        * TBD:
        *  - Taxonomy
        *  - User profiles
-       *  - Search
        *  ...
        *
        */
