@@ -11,11 +11,29 @@ export const JsomModules: IJsomModule = {
     'sp.runtime.debug.js',
     'sp.debug.js'
   ],
-  taxonomy: ['sp.taxonomy.debug.js'],
-  userprofiles: ['sp.userprofiles.debug.js'],
-  publishing: ['sp.publishing.debug.js'],
-  policy: ['sp.policy.debug.js'],
-  documentmanagement: ['sp.documentmanagement.debug.js'],
-  workmanagement: ['sp.workmanagement.debug.js'],
-  project: ['PS.debug.js']
+  saerch: [
+    'sp.search.debug.js',
+    'sp.clientcontrols.debug.js',
+  ],
+  taxonomy: [
+    'sp.taxonomy.debug.js'
+  ],
+  userprofiles: [
+    'sp.userprofiles.debug.js'
+  ],
+  publishing: [
+    'sp.publishing.debug.js'
+  ],
+  policy: [
+    'sp.policy.debug.js'
+  ],
+  documentmanagement: [
+    'sp.documentmanagement.debug.js'
+  ],
+  workmanagement: [
+    'sp.workmanagement.debug.js'
+  ],
+  project: [
+    'PS.debug.js'
+  ]
 };
