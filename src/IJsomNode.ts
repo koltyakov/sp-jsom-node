@@ -13,17 +13,16 @@ export type JsomModule =
   'project';
 
 export interface IJsomNodeSettings {
-  siteUrl?: string;
-  authOptions?: IAuthOptions;
-  config?: IAuthConfigSettings;
   modules?: JsomModule[];
   envCode?: string;
 }
 
-export interface IJsomNodeInitSettings extends IJsomNodeSettings {
+export interface IJsomNodeContext extends IJsomNodeSettings {
   siteUrl: string;
   authOptions: IAuthOptions;
 }
+
+export interface IConfigSettings extends IJsomNodeSettings, IAuthConfigSettings {}
 
 export interface IJsomModule {
   [name: string]: string[];
@@ -31,11 +30,4 @@ export interface IJsomModule {
 
 export interface IRequestsCache {
   [siteUrl: string]: ISPRequest;
-}
-
-export interface IEnvironmentConfig {
-  environmentName: string;
-  configPath: string;
-  envCode: string;
-  legacy?: boolean;
 }

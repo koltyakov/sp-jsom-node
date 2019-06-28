@@ -1,6 +1,6 @@
 import { initEnvironment as init } from './utils/init';
 
-init().then(async settings => {
+init().then(async (_siteUrl) => {
 
   const clientContext = SP.ClientContext.get_current();
   let oWeb = clientContext.get_web();
@@ -11,7 +11,7 @@ init().then(async settings => {
   await clientContext.executeQueryPromise(); // Using JSOM extension
 
   let listsDataArr = oLists.get_data();
-  let listsTitlesArr = listsDataArr.map(l => l.get_title());
+  let listsTitlesArr = listsDataArr.map((l) => l.get_title());
   console.log('Lists', listsTitlesArr);
 
   // Just an items from a random list
@@ -21,6 +21,6 @@ init().then(async settings => {
 
   await clientContext.executeQueryPromise();
 
-  console.log(oItems.get_data().map(i => i.get_fieldValues()['Title']));
+  console.log(oItems.get_data().map((i) => i.get_fieldValues()['Title']));
 
 }).catch(console.log);

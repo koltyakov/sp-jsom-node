@@ -11,3 +11,4 @@ scripts/
 .github/
 tsconfig.json
 tslint.json
+.env

@@ -1,116 +1,112 @@
-import { expect } from 'chai';
 import * as mocha from 'mocha';
-import * as path from 'path';
+import { expect } from 'chai';
 import * as sprequest from 'sp-request';
-import { Cpass } from 'cpass';
+import { IAuthContext } from 'node-sp-auth-config';
 
-import { JsomNode, IJsomNodeInitSettings } from '../../src';
-import { Environments as TestsConfigs } from '../configs';
-
-const cpass = new Cpass();
+import { JsomNode } from '../../src';
+import { getAuthCtx, getAuth } from '../misc';
+import { Environments } from '../configs';
 
 const testVariables = {
   newListName: 'JsomNode Temporary List'
 };
 
-declare let global: any;
+declare const global: any;
 
-for (let testConfig of TestsConfigs) {
+describe(`sp-jsom-node tests`, () => {
 
-  describe(`Run tests in ${testConfig.environmentName}`, () => {
+  for (const envConf of Environments) {
 
-    let request: sprequest.ISPRequest;
-    let config: any;
-    let _spPageContextInfo: any;
+    describe(`run tests in ${envConf.environmentName}`, () => {
 
-    before('Configure JsomNode', function (done: any): void {
-      this.timeout(30 * 1000);
+      let request: sprequest.ISPRequest;
+      let config: IAuthContext;
+      let _spPageContextInfo: any;
+      let jsom: JsomNode;
 
-      config = require(path.resolve(testConfig.configPath));
-      config.password = config.password && cpass.decode(config.password);
+      before('preauthenticate for fair timings', function(done: Mocha.Done): void {
+        this.timeout(30 * 1000);
+        getAuth(Environments[0]).then(() => done()).catch(done);
+      });
 
-      let jsomNodeSettings: IJsomNodeInitSettings = {
-        siteUrl: config.siteUrl,
-        authOptions: config
-      };
+      before('configure JsomNode', function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
 
-      (new JsomNode(jsomNodeSettings)).init();
+        getAuthCtx(envConf)
+          .then((ctx) => {
+            config = ctx;
+            jsom = new JsomNode().init(config);
+            request = sprequest.create(config.authOptions);
+            _spPageContextInfo = global.window._spPageContextInfo;
+            done();
+          })
+          .catch(done);
+      });
 
-      request = sprequest.create(config);
+      it(`should get context from JsomNode`, function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
 
-      _spPageContextInfo = global.window._spPageContextInfo;
+        const ctx = jsom.getContext();
+        const oWeb = ctx.get_web();
+        ctx.load(oWeb);
+        ctx.executeQueryPromise().then(() => done()).catch(done);
+      });
 
-      done();
-    });
+      it(`should get web's title`, function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
 
-    it(`should get web's title`, function (done: MochaDone): void {
-      this.timeout(30 * 1000);
-
-      const _getWeb = (): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _getWeb = (): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
           ctx.load(oWeb);
-          ctx.executeQueryAsync(() => {
-            resolve(oWeb.get_title());
-          }, (sender, args) => {
-            reject(args.get_message());
-          });
-        });
-      };
+          return ctx.executeQueryPromise().then(() => oWeb.get_title());
+        };
 
-      request.get(`${config.siteUrl}/_api/web?$select=Title`)
-        .then(response => {
-          return Promise.all([
-            _getWeb(),
-            response.body.d.Title
-          ]);
-        })
-        .then(response => {
-          expect(response[0]).to.equal(response[1]);
-          done();
-        })
-        .catch(done);
-    });
+        request.get(`${config.siteUrl}/_api/web?$select=Title`)
+          .then((response) => {
+            return Promise.all([
+              _getWeb(),
+              response.body.d.Title
+            ]);
+          })
+          .then((response) => {
+            expect(response[0]).to.equal(response[1]);
+            done();
+          })
+          .catch(done);
+      });
 
-    it(`should get lists on web`, function (done: MochaDone): void {
-      this.timeout(30 * 1000);
+      it(`should get lists on web`, function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
 
-      const _getLists = (): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _getLists = (): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
           const oLists = oWeb.get_lists();
           ctx.load(oLists);
-          ctx.executeQueryAsync(() => {
-            resolve(oLists.get_data());
-          }, (sender, args) => {
-            reject(args.get_message());
-          });
-        });
-      };
+          return ctx.executeQueryPromise().then(() => oLists.get_data());
+        };
 
-      request.get(`${config.siteUrl}/_api/web/lists?$select=Title`)
-        .then(response => {
-          return Promise.all([
-            _getLists(),
-            response.body.d.results
-          ]);
-        })
-        .then(response => {
-          expect(response[0].length).to.equal(response[1].length);
-          done();
-        })
-        .catch(done);
-    });
+        request.get(`${config.siteUrl}/_api/web/lists?$select=Title`)
+          .then((response) => {
+            return Promise.all([
+              _getLists(),
+              response.body.d.results
+            ]);
+          })
+          .then((response) => {
+            expect(response[0].length).to.equal(response[1].length);
+            done();
+          })
+          .catch(done);
+      });
 
-    it('should create a new list', function (done: MochaDone): void {
-      this.timeout(30 * 1000);
+      it('should create a new list', function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
 
-      const _createList = (title: string, description: string = '', listTemplateId: number = 100): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _createList = (title: string, description: string = '', listTemplateId: number = 100): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -121,46 +117,34 @@ for (let testConfig of TestsConfigs) {
           listCreationInfo.set_templateType(listTemplateId);
           const oList = oLists.add(listCreationInfo);
           ctx.load(oList);
-          ctx.executeQueryAsync(() => {
-            resolve(oList);
-          }, (sender, args) => {
-            reject(args.get_message());
-          });
-        });
-      };
+          return ctx.executeQueryPromise().then(() => oList);
+        };
 
-      const _getListByTitle = (title: string): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _getListByTitle = (title: string): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
           const oLists = oWeb.get_lists();
           const oList = oLists.getByTitle(title);
           ctx.load(oList);
-          ctx.executeQueryAsync(() => {
-            resolve(oList.get_title());
-          }, (sender, args) => {
-            reject(args.get_message());
-          });
-        });
-      };
+          return ctx.executeQueryPromise().then(() => oList.get_title());
+        };
 
-      _createList(testVariables.newListName, 'Test List created with JsomNode', SP.ListTemplateType.genericList)
-        .then(response => {
-          return _getListByTitle(testVariables.newListName);
-        })
-        .then(response => {
-          expect(response).to.equal(testVariables.newListName);
-          done();
-        })
-        .catch(done);
-    });
+        _createList(testVariables.newListName, 'Test List created with JsomNode', SP.ListTemplateType.genericList)
+          .then((response) => {
+            return _getListByTitle(testVariables.newListName);
+          })
+          .then((response) => {
+            expect(response).to.equal(testVariables.newListName);
+            done();
+          })
+          .catch(done);
+      });
 
-    it('should create list item', function (done: MochaDone): void {
-      this.timeout(30 * 1000);
+      it('should create list item', function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
 
-      const _createListItem = (listTitle: string, metadata: any): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _createListItem = (listTitle: string, metadata: any): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -170,70 +154,58 @@ for (let testConfig of TestsConfigs) {
           const itemCreationInfo = new SP.ListItemCreationInformation();
           const oListItem = oList.addItem(itemCreationInfo);
 
-          for (let field of Object.keys(metadata)) {
+          for (const field of Object.keys(metadata)) {
             oListItem.set_item(field, metadata[field]);
           }
           oListItem.update();
 
           ctx.load(oListItem);
-          ctx.executeQueryAsync(() => {
-            resolve(oListItem);
-          }, (sender, args) => {
-            reject(args.get_message());
-          });
-        });
-      };
+          return ctx.executeQueryPromise().then(() => oListItem);
+        };
 
-      const _getListItemsCount = (listTitle: string): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _getListItemsCount = (listTitle: string): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
           const oLists = oWeb.get_lists();
           const oList = oLists.getByTitle(listTitle);
           ctx.load(oList);
-          ctx.executeQueryAsync(() => {
-            resolve(oList.get_itemCount());
-          }, (sender, args) => {
-            reject(args.get_message());
+          return ctx.executeQueryPromise().then(() => oList.get_itemCount());
+        };
+
+        _createListItem(testVariables.newListName, { Title: 'New item' })
+          .then((response) => {
+            return _getListItemsCount(testVariables.newListName);
+          })
+          .then((response) => {
+            expect(response).to.equal(1);
+            done();
+          })
+          .catch(done);
+      });
+
+      it('should delete list item', function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
+
+        const _deleteItemById = (listTitle: string, itemId: number): Promise<any> => {
+          return new Promise((resolve, reject) => {
+            // const ctx = SP.ClientContext.get_current();
+            const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
+            const oWeb = ctx.get_web();
+            const oLists = oWeb.get_lists();
+            const oList = oLists.getByTitle(listTitle);
+            const oItem = oList.getItemById(itemId);
+
+            oItem.deleteObject();
+            ctx.executeQueryAsync(() => {
+              resolve(oItem);
+            }, (sender, args) => {
+              reject(args.get_message());
+            });
           });
-        });
-      };
+        };
 
-      _createListItem(testVariables.newListName, { Title: 'New item' })
-        .then(response => {
-          return _getListItemsCount(testVariables.newListName);
-        })
-        .then(response => {
-          expect(response).to.equal(1);
-          done();
-        })
-        .catch(done);
-    });
-
-    it('should delete list item', function (done: MochaDone): void {
-      this.timeout(30 * 1000);
-
-      const _deleteItemById = (listTitle: string, itemId: number): Promise<any> => {
-        return new Promise((resolve, reject) => {
-          // const ctx = SP.ClientContext.get_current();
-          const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
-          const oWeb = ctx.get_web();
-          const oLists = oWeb.get_lists();
-          const oList = oLists.getByTitle(listTitle);
-          const oItem = oList.getItemById(itemId);
-
-          oItem.deleteObject();
-          ctx.executeQueryAsync(() => {
-            resolve(oItem);
-          }, (sender, args) => {
-            reject(args.get_message());
-          });
-        });
-      };
-
-      const _deleteItemWithGreatesId = (listTitle: string): Promise<any> => {
-        return new Promise((resolve, reject) => {
+        const _deleteItemWithGreatesId = (listTitle: string): Promise<any> => {
           // const ctx = SP.ClientContext.get_current();
           const ctx = new SP.ClientContext(_spPageContextInfo.webServerRelativeUrl);
           const oWeb = ctx.get_web();
@@ -242,89 +214,102 @@ for (let testConfig of TestsConfigs) {
 
           const camlQuery = new SP.CamlQuery();
           camlQuery.set_viewXml(`
-              <View>
-                  <Query>
-                      <OrderBy>
-                          <FieldRef Name='Created' Ascending='True'></FieldRef>
-                      </OrderBy>
-                  </Query>
-                  <ViewFields>
-                      <FieldRef Name='ID'/>
-                      <FieldRef Name='Title'/>
-                  </ViewFields>
-              </View>
+            <View>
+              <Query>
+                <OrderBy>
+                  <FieldRef Name='Created' Ascending='True'></FieldRef>
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name='ID'/>
+                <FieldRef Name='Title'/>
+              </ViewFields>
+            </View>
           `);
-          let oItems = oList.getItems(camlQuery);
+          const oItems = oList.getItems(camlQuery);
 
           ctx.load(oItems);
-          ctx.executeQueryAsync(() => {
-            let itemsData = oItems.get_data();
+          return ctx.executeQueryPromise().then(() => {
+            const itemsData = oItems.get_data();
             if (itemsData.length === 0) {
-              reject('No items found in a list');
+              return 'No items found in a list';
             }
-            resolve(_deleteItemById(listTitle, itemsData[0].get_fieldValues().ID));
-          }, (sender, args) => {
-            reject(args.get_message());
+            return _deleteItemById(listTitle, itemsData[0].get_fieldValues().ID);
           });
-        });
-      };
+        };
 
-      _deleteItemWithGreatesId(testVariables.newListName)
-        .then(response => {
-          done();
-        })
-        .catch(done);
-    });
+        _deleteItemWithGreatesId(testVariables.newListName)
+          .then((response) => done())
+          .catch(done);
+      });
 
-    after('Deleting test objects', function (done: MochaDone): void {
-      this.timeout(30 * 1000);
+      /**
+       * TBD:
+       *  - Taxonomy
+       *  - User profiles
+       *  - Search
+       *  ...
+       *
+       */
 
-      let digest: string;
-      request.requestDigest(config.siteUrl)
-        .then(response => {
-          digest = response;
-          return request.get(`${config.siteUrl}/_api/web/lists/getByTitle('${testVariables.newListName}')`)
-            .then(res => {
-              return 'can delete';
-            })
-            .catch(ex => {
-              if (ex.statusCode === 404) {
-                return ''; // Do not try to delete if wasn't created
-              } else {
+      after('deleting test objects', function (done: Mocha.Done): void {
+        this.timeout(30 * 1000);
+
+        let digest: string;
+        request.requestDigest(config.siteUrl)
+          .then((response) => {
+            digest = response;
+            return request.get(`${config.siteUrl}/_api/web/lists/getByTitle('${testVariables.newListName}')`)
+              .then((res) => {
+                return 'can delete';
+              })
+              .catch((ex) => {
+                if (ex.statusCode === 404) {
+                  return ''; // Do not try to delete if wasn't created
+                }
                 throw ex;
-              }
-            });
-        })
-        .then((response): any => {
-          if (response === 'can delete') {
-            // Delete created test list
-            return request.post(`${config.siteUrl}/_api/web/lists/getByTitle('${testVariables.newListName}')`, {
-              headers: {
-                'X-RequestDigest': digest,
-                'X-HTTP-Method': 'DELETE',
-                'IF-MATCH': '*'
-              }
-            });
-          } else {
-            return '';
-          }
-        })
-        .then(() => {
-          done();
-        })
-        .catch(done);
+              });
+          })
+          .then((response): any => {
+            if (response === 'can delete') {
+              // Delete created test list
+              return request.post(`${config.siteUrl}/_api/web/lists/getByTitle('${testVariables.newListName}')`, {
+                headers: {
+                  'X-RequestDigest': digest,
+                  'X-HTTP-Method': 'DELETE',
+                  'IF-MATCH': '*'
+                }
+              });
+            } else {
+              return '';
+            }
+          })
+          .then(() => done())
+          .catch(done);
+
+      });
 
     });
 
-    /**
-     * TBD:
-     *  - Taxonomy
-     *  - User profiles
-     *  - Search
-     *  ...
-     *
-     */
+  }
 
-  });
+  // Need multiple environments to test this case
+  if (Environments.length > 1) {
+    it(`should support multiple contexts`, function (done: Mocha.Done): void {
+      this.timeout(30 * 1000);
+      Promise
+        .all(Environments.map((envConf) => getAuthCtx(envConf)))
+        .then((ctxs) => {
+          return Promise.all(ctxs.map((conf) => {
+            const ctx = new JsomNode().init(conf).getContext();
+            const oWeb = ctx.get_web();
+            ctx.load(oWeb);
+            return ctx.executeQueryPromise();
+          }));
+        })
+        .then(() => done())
+        .catch(done);
+    });
+  }
 
-}
+});

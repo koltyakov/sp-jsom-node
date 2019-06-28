@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 8824,
-                "rpr": 1211
+                "rup": 8915,
+                "rpr": 1217
             }
         };
     }
@@ -6742,10 +6742,25 @@ function UserHasPermissionHigh(permissionLevel) {
 function ModernUXOptOutCookieIsOn() {
     return GetCookie('splnu') === '0';
 }
+function SanityCheckModernIsSupported() {
+    var supported = true;
+
+    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("E1113646-94A6-44D3-80CC-8E8DF6EC4F89"))) {
+        try {
+            var testingSet = new window.Set();
+
+            testingSet.add(1);
+        }
+        catch (ex) {
+            supported = false;
+        }
+    }
+    return supported;
+}
 function PrepareForModernOnePageNavigation() {
     var SPBasePermissions_UseRemoteAPIs = 0x20;
 
-    if (isBrowserSupportedModernApp() && UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn()) {
+    if (isBrowserSupportedModernApp() && UserHasPermissionHigh(SPBasePermissions_UseRemoteAPIs) && !ModernUXOptOutCookieIsOn() && SanityCheckModernIsSupported()) {
         var docLibLinks = document.querySelectorAll('[onepagenavigationaction="1"]');
 
         for (var index = 0; index < docLibLinks.length; index++) {
@@ -7348,7 +7363,7 @@ function GetThemedImageUrl_Core(FileName, FallbackImagePath) {
     return themedImageUrl;
 }
 function GetImageUrlWithRevision(imageUrl) {
-    return imageUrl.search(/[?]/) > -1 ? imageUrl : imageUrl + "?" + "rev=46";
+    return imageUrl.search(/[?]/) > -1 ? imageUrl : imageUrl + "?" + "rev=47";
 }
 function ShowHideSection(sectionid, imgid) {
     var group = document.getElementById(sectionid);
@@ -7487,7 +7502,7 @@ function ProcessPNGImages() {
 
             if (img != null && g_PNGImageSources[i] != null) {
                 img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + g_PNGImageSources[i] + "),sizingMethod=scale);";
-                img.src = "/_layouts/15/images/blank.gif?rev=46";
+                img.src = "/_layouts/15/images/blank.gif?rev=47";
             }
         }
     }
@@ -9748,7 +9763,7 @@ function _AddTrySPListNextBanner(isList) {
     var bannerHtml = '\
 <div class="ms-fullWidth" style="background-color:#F8F8F8;position:relative;">\
   <div class="ms-tableCell ms-verticalAlignMiddle" style="width:256px;background-color:#24BBED;">\
-    <img src=' + StAttrQuote("/_layouts/15/images/PaintRoller.215x90x32.png?rev=46") + ' style="height:90px;width:215px;margin:auto 20px;">\
+    <img src=' + StAttrQuote("/_layouts/15/images/PaintRoller.215x90x32.png?rev=47") + ' style="height:90px;width:215px;margin:auto 20px;">\
   </div>\
   <div class="ms-tableCell ms-verticalAlignTop ms-fullWidth" style="padding:16px">\
 	<h2 style="color:#444">' + STSHtmlEncode(Boolean(isList) ? Strings.STS.L_ListNewLookHeading : Strings.STS.L_DocLibNewLookHeading) + '\
@@ -9756,7 +9771,7 @@ function _AddTrySPListNextBanner(isList) {
         <a title=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' class="ms-dlgCloseBtn" id="doclibNewLookClose" href="javascript:;">\
           <span style="padding: 8px; width: 16px; height: 16px; display: inline-block;">\
             <span class="s4-clust" style="width: 16px; height: 16px; overflow: hidden; display: inline-block; position: relative;">\
-              <img class="ms-dlgCloseBtnImg" style="left: 0px !important; top: -645px !important; position: absolute;" alt=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' src=' + StAttrQuote("/_layouts/15/images/fgimg.png?rev=46") + '>\
+              <img class="ms-dlgCloseBtnImg" style="left: 0px !important; top: -645px !important; position: absolute;" alt=' + StAttrQuote(Strings.STS.L_DocLibNewLookDismiss) + ' src=' + StAttrQuote("/_layouts/15/images/fgimg.png?rev=47") + '>\
             </span>\
           </span>\
         </a>\
@@ -10308,7 +10323,7 @@ function IMNUpdateImage(id, imgInfo) {
         if (useFilter) {
             if (isPng) {
                 obj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + newImg + "),sizingMethod=scale,enabled=true);";
-                obj.src = "/_layouts/15/images/blank.gif?rev=46";
+                obj.src = "/_layouts/15/images/blank.gif?rev=47";
             }
             else {
                 obj.style.filter = "";
@@ -11027,7 +11042,7 @@ function CreateSpinningWheelContainer() {
     spinningWheel.style.visibility = "hidden";
     var waitingImg = document.createElement("img");
 
-    waitingImg.src = "/_layouts/15/images/gears_anv4.gif?rev=46";
+    waitingImg.src = "/_layouts/15/images/gears_anv4.gif?rev=47";
     spinningWheel.appendChild(waitingImg);
     return spinningWheel;
 }
@@ -12353,7 +12368,7 @@ function _ribbonOnStartInit(ribbonInfo) {
 
             _elmBlankTab.id = "Ribbon.BlankTab";
             _elmBlankTab.className = "ms-cui-tabBody";
-            _elmBlankTab.innerHTML = "<span class=\"ms-ribbontabswitchloading\"><img src=\"" + "/_layouts/15/images/loadingcirclests16.gif?rev=46" + "\" alt=\"\"/><span>" + Strings.STS.L_Loading_Text + "</span></span>";
+            _elmBlankTab.innerHTML = "<span class=\"ms-ribbontabswitchloading\"><img src=\"" + "/_layouts/15/images/loadingcirclests16.gif?rev=47" + "\" alt=\"\"/><span>" + Strings.STS.L_Loading_Text + "</span></span>";
             _elmTabCont.appendChild(_elmBlankTab);
             _elmRibbon.appendChild(_elmTabCont);
             AnimateRibbonMinimizedChanged(false);
@@ -13689,7 +13704,7 @@ function RenderShortcutLinkIcon(renderCtx, ret, content, listItem, listSchema) {
     ret.push("\" title=\"");
     ret.push(Encoding.HtmlEncode(Strings.STS.L_FieldType_File_Shortcut));
     ret.push("\" src=\"");
-    ret.push(ListView.ImageBasePath + "/_layouts/15/images/icspgen.gif?rev=46");
+    ret.push(ListView.ImageBasePath + "/_layouts/15/images/icspgen.gif?rev=47");
     ret.push("\" />");
     ret.push("</a>");
 }

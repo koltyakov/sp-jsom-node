@@ -3,3 +3,5 @@ config/**/private.*
 debug.log
 npm-debug.*
 dist/
+.env
+.DS_Store

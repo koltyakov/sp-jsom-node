@@ -1,4 +1,4 @@
 import { Environments } from '../test/configs';
-import { downloadJsomScripts } from '../src/utils/download';
+import { downloadJsomScripts } from './utils/download';
 
 downloadJsomScripts(Environments);
