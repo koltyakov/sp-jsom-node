@@ -11,9 +11,9 @@ export const JsomModules: IJsomModule = {
     'sp.runtime.debug.js',
     'sp.debug.js'
   ],
-  saerch: [
+  search: [
     'sp.search.debug.js',
-    'sp.clientcontrols.debug.js',
+    'search.clientcontrols.debug.js',
   ],
   taxonomy: [
     'sp.taxonomy.debug.js'
