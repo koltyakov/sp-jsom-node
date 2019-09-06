@@ -7,7 +7,7 @@ import { Cpass } from 'cpass';
 
 import utils from './utils';
 import { JsomModules, lcid } from './config';
-import { IJsomNodeSettings, IConfigSettings, IJsomNodeContext, IRequestsCache } from './IJsomNode';
+import { IJsomNodeSettings, IConfigSettings, IJsomNodeContext } from './IJsomNode';
 
 // Import JSOM ententions
 import './extensions/definitions';

@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 9019,
-                "rpr": 1216
+                "rup": 19228,
+                "rpr": 12011
             }
         };
     }
@@ -14478,6 +14478,7 @@ function PerformanceLogger_module_def() {
         var isW3cResourceTimingCollected = false;
         var isScenarioIdCollected = false;
         var isServerUrlCollected = false;
+        var isReferrerCollected = false;
         var euplBreakDown = {};
         var that = this;
 
@@ -14530,6 +14531,9 @@ function PerformanceLogger_module_def() {
                 if (!(window["OffSwitch"] == null || OffSwitch.IsActive("5DB2EE36-96C7-495F-877E-79DCAFC6ED72"))) {
                     that.WriteServerCorrelationId();
                     WriteServerUrl();
+                    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("6B00B27F-4B76-428A-B177-0825E60374E5"))) {
+                        WriteReferrer();
+                    }
                     that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
                     if (ReadyToComputeEUPL()) {
                         SetEUPLAndControlData();
@@ -14546,6 +14550,9 @@ function PerformanceLogger_module_def() {
                     if (window["OffSwitch"] == null || OffSwitch.IsActive("5DB2EE36-96C7-495F-877E-79DCAFC6ED72")) {
                         that.WriteServerCorrelationId();
                         WriteServerUrl();
+                        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("6B00B27F-4B76-428A-B177-0825E60374E5"))) {
+                            WriteReferrer();
+                        }
                         that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
                         if (ReadyToComputeEUPL()) {
                             SetEUPLAndControlData();
@@ -14596,6 +14603,7 @@ function PerformanceLogger_module_def() {
             isW3cResourceTimingCollected = false;
             isScenarioIdCollected = false;
             isServerUrlCollected = false;
+            isReferrerCollected = false;
             controls = new Array(0);
             expectedControls = new Array(0);
             that.PerformanceData = null;
@@ -14668,6 +14676,16 @@ function PerformanceLogger_module_def() {
             if (!IsNullOrUndefined(that.PerformanceData)) {
                 that.LogPerformanceData('ServerUrl', window.location.href);
                 isServerUrlCollected = true;
+            }
+        }
+        ;
+        function WriteReferrer() {
+            if (isReferrerCollected) {
+                return;
+            }
+            if (!IsNullOrUndefined(that.PerformanceData)) {
+                that.LogPerformanceData('Referrer', window.document && document.referrer);
+                isReferrerCollected = true;
             }
         }
         ;
