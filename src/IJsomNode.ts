@@ -15,7 +15,7 @@ export type JsomModule =
 
 export interface IJsomNodeSettings {
   modules?: JsomModule[];
-  envCode?: string;
+  envCode?: 'spo' | '16' | '15' | 'string';
 }
 
 export interface IJsomNodeContext extends IJsomNodeSettings {

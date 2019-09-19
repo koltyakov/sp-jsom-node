@@ -57,7 +57,7 @@ export class JsomNode {
   }
 
   // Trigger wizard and init JsomNode environment
-  public wizard(config?: IConfigSettings): Promise<string> {
+  public wizard(config: IConfigSettings = {}): Promise<string> {
     return new AuthConfig(config).getContext().then((ctx) => {
       this.context = {
         siteUrl: ctx.siteUrl,
