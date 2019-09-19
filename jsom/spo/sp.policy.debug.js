@@ -2341,6 +2341,24 @@ SP.CompliancePolicy.SPPolicyStoreProxy.setListComplianceTagWithMetaInfo = functi
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetListComplianceTagWithMetaInfo', [ listUrl, complianceTagValue, blockDelete, blockEdit, complianceTagWrittenTime, userEmailAddress, syncToItems ]);
     context.addQuery($v_0);
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.getHoldGracePeriodInDays = function SP_CompliancePolicy_SPPolicyStoreProxy$getHoldGracePeriodInDays(context) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetHoldGracePeriodInDays', null);
+    context.addQuery($v_1);
+    $v_0 = new SP.IntResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setHoldGracePeriodInDays = function SP_CompliancePolicy_SPPolicyStoreProxy$setHoldGracePeriodInDays(context, gracePeriodInDays) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetHoldGracePeriodInDays', [ gracePeriodInDays ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     
     get_policyStoreUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_policyStoreUrl() {
