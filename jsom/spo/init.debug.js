@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 19304,
-                "rpr": 12022
+                "rup": 19325,
+                "rpr": 12002
             }
         };
     }
@@ -15386,10 +15386,11 @@ function SPThemeUtils_module_def() {
     function UseClientSideTheming() {
         var wtGroup = 64;
         var wtCommSite = 68;
+        var wtContentCenterSite = 6001;
         var wtSTS3 = "STS#3";
         var wt;
         var wtConfiguration;
-        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(157) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite || (wtConfiguration = GetWebTemplateConfiguration()) == wtSTS3));
+        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(157) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite || wt == wtContentCenterSite || (wtConfiguration = GetWebTemplateConfiguration()) == wtSTS3));
         var useCST = featureEnabled && typeof Theming !== strUndefined;
 
         return useCST;

@@ -8882,11 +8882,16 @@ Srch.ValueInfo.Parsers.$2Q = function Srch_ValueInfo_Parsers$$2Q($p0) {
     var $v_1 = Date.parseInvariant($v_0);
     if (Srch.U.n($v_1)) {
         var $v_2 = new RegExp('(:[0-9][0-9])\\.?[0-9]*Z', 'g');
-        $v_0 = $v_0.replace($v_2, '$1Z').replace('T', ' ');
         if (!OffSwitch.IsActive(Srch.ValueInfo.$3t)) {
+            $v_0 = $v_0.replace($v_2, '$1Z');
             $v_1 = new Date($v_0);
+            $v_0 = $v_0.replace('T', ' ');
+            if (Srch.U.n($v_1) || (Date.isInstanceOfType($v_1) && isNaN($v_1.getTime()))) {
+                $v_1 = Date.parseInvariant($v_0);
+            }
         }
         else {
+            $v_0 = $v_0.replace($v_2, '$1Z').replace('T', ' ');
             $v_1 = Date.parseInvariant($v_0);
         }
         if (Srch.U.n($v_1)) {
@@ -9574,7 +9579,7 @@ Srch.ClickRecorder.$J = null;
 Srch.RefinementUtil.searchRefinementClientControls = {};
 Srch.RefinementUtil.searchRefinementControls = {};
 Srch.ValueInfo.$3Z = null;
-Srch.ValueInfo.$3t = '76CCADC4-84D1-41CD-B8EF-21E193E2BB03';
+Srch.ValueInfo.$3t = 'CAC101F7-CF4D-45B3-90A7-C883FAF3E210';
 Srch.ValueInfo.taxFacetInfoPropertyName = 'owsmetadatafacetinfo';
 Srch.ValueInfo.taxAllTagsPropertyName = 'owstaxidmetadataalltagsinfo';
 Srch.ValueInfo.hashTagsPropertyName = 'Tags';

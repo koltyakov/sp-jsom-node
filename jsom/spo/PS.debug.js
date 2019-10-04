@@ -16353,6 +16353,13 @@ PS.QueueJobCollection.prototype = {
             $v_2[uid.toString()] = $v_1;
         }
         return $v_1;
+    },
+    
+    getAll: function PS_QueueJobCollection$getAll() {ULSyTi:;
+        var $v_0 = this.get_context();
+        var $v_1;
+        $v_1 = new SP.ClientObjectList($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'getAll', null), PS.QueueJob);
+        return $v_1;
     }
 }
 

@@ -630,11 +630,11 @@ SP.Publishing.ImageRendition = function SP_Publishing_ImageRendition() {
 SP.Publishing.ImageRendition.prototype = {
     $F_1: null,
     $G_1: 0,
-    $Y_1: 0,
     $Z_1: 0,
+    $a_1: 0,
     $2_1: null,
-    $b_1: 0,
-    $W_1: 0,
+    $c_1: 0,
+    $X_1: 0,
     
     get_group: function SP_Publishing_ImageRendition$get_group() {
         return this.$F_1;
@@ -655,7 +655,7 @@ SP.Publishing.ImageRendition.prototype = {
     },
     
     get_id: function SP_Publishing_ImageRendition$get_id() {
-        return this.$Y_1;
+        return this.$Z_1;
     },
     
     get_name: function SP_Publishing_ImageRendition$get_name() {
@@ -668,15 +668,15 @@ SP.Publishing.ImageRendition.prototype = {
     },
     
     get_version: function SP_Publishing_ImageRendition$get_version() {
-        return this.$b_1;
+        return this.$c_1;
     },
     
     get_width: function SP_Publishing_ImageRendition$get_width() {
-        return this.$W_1;
+        return this.$X_1;
     },
     
     set_width: function SP_Publishing_ImageRendition$set_width(value) {
-        this.$W_1 = value;
+        this.$X_1 = value;
         return value;
     },
     
@@ -695,7 +695,7 @@ SP.Publishing.ImageRendition.prototype = {
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         writer.writeStartElement('Property');
         writer.writeAttributeString('Name', 'IdCsom');
-        SP.DataConvert.writeValueToXmlElement(writer, this.$Z_1, serializationContext);
+        SP.DataConvert.writeValueToXmlElement(writer, this.$a_1, serializationContext);
         writer.writeEndElement();
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -715,12 +715,12 @@ SP.Publishing.ImageRendition.prototype = {
         }
         $v_0 = parentNode.Id;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Y_1 = ($v_0);
+            this.$Z_1 = ($v_0);
             delete parentNode.Id;
         }
         $v_0 = parentNode.IdCsom;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Z_1 = ($v_0);
+            this.$a_1 = ($v_0);
             delete parentNode.IdCsom;
         }
         $v_0 = parentNode.Name;
@@ -730,12 +730,12 @@ SP.Publishing.ImageRendition.prototype = {
         }
         $v_0 = parentNode.Version;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$b_1 = ($v_0);
+            this.$c_1 = ($v_0);
             delete parentNode.Version;
         }
         $v_0 = parentNode.Width;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$W_1 = ($v_0);
+            this.$X_1 = ($v_0);
             delete parentNode.Width;
         }
     }
@@ -750,7 +750,7 @@ SP.Publishing.PageLayoutCreationInformation.prototype = {
     $L_1: null,
     $O_1: null,
     $P_1: null,
-    $c_1: null,
+    $d_1: null,
     
     get_associatedContentTypeId: function SP_Publishing_PageLayoutCreationInformation$get_associatedContentTypeId() {
         return this.$5_1;
@@ -789,11 +789,11 @@ SP.Publishing.PageLayoutCreationInformation.prototype = {
     },
     
     get_web: function SP_Publishing_PageLayoutCreationInformation$get_web() {
-        return this.$c_1;
+        return this.$d_1;
     },
     
     set_web: function SP_Publishing_PageLayoutCreationInformation$set_web(value) {
-        this.$c_1 = value;
+        this.$d_1 = value;
         return value;
     },
     
@@ -873,16 +873,16 @@ SP.Publishing.PublishingPageInformation = function SP_Publishing_PublishingPageI
     SP.Publishing.PublishingPageInformation.initializeBase(this);
 }
 SP.Publishing.PublishingPageInformation.prototype = {
-    $X_1: null,
+    $Y_1: null,
     $2_1: null,
-    $a_1: null,
+    $b_1: null,
     
     get_folder: function SP_Publishing_PublishingPageInformation$get_folder() {
-        return this.$X_1;
+        return this.$Y_1;
     },
     
     set_folder: function SP_Publishing_PublishingPageInformation$set_folder(value) {
-        this.$X_1 = value;
+        this.$Y_1 = value;
         return value;
     },
     
@@ -896,11 +896,11 @@ SP.Publishing.PublishingPageInformation.prototype = {
     },
     
     get_pageLayoutListItem: function SP_Publishing_PublishingPageInformation$get_pageLayoutListItem() {
-        return this.$a_1;
+        return this.$b_1;
     },
     
     set_pageLayoutListItem: function SP_Publishing_PublishingPageInformation$set_pageLayoutListItem(value) {
-        this.$a_1 = value;
+        this.$b_1 = value;
         return value;
     },
     
@@ -1206,6 +1206,49 @@ SP.Publishing.SiteImageRenditions.setRenditions = function SP_Publishing_SiteIma
 }
 
 
+SP.Publishing.SitePage3DFieldsData = function SP_Publishing_SitePage3DFieldsData() {
+    SP.Publishing.SitePage3DFieldsData.initializeBase(this);
+}
+SP.Publishing.SitePage3DFieldsData.prototype = {
+    $T_2: null,
+    
+    get_spaceContent: function SP_Publishing_SitePage3DFieldsData$get_spaceContent() {
+        return this.$T_2;
+    },
+    
+    set_spaceContent: function SP_Publishing_SitePage3DFieldsData$set_spaceContent(value) {
+        this.$T_2 = value;
+        return value;
+    },
+    
+    get_typeId: function SP_Publishing_SitePage3DFieldsData$get_typeId() {
+        return '{018b1874-645c-47f2-bb1b-3ecb4aff3e3a}';
+    },
+    
+    writeToXml: function SP_Publishing_SitePage3DFieldsData$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        var $v_0 = [ 'SpaceContent' ];
+        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
+        SP.Publishing.SitePageFieldsData.prototype.writeToXml.call(this, writer, serializationContext);
+    },
+    
+    initPropertiesFromJson: function SP_Publishing_SitePage3DFieldsData$initPropertiesFromJson(parentNode) {
+        SP.Publishing.SitePageFieldsData.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.SpaceContent;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$T_2 = ($v_0);
+            delete parentNode.SpaceContent;
+        }
+    }
+}
+
+
 SP.Publishing.SitePageFieldsData = function SP_Publishing_SitePageFieldsData() {
     SP.Publishing.SitePageFieldsData.initializeBase(this);
 }
@@ -1217,8 +1260,8 @@ SP.Publishing.SitePageFieldsData.prototype = {
     $E_1: null,
     $J_1: null,
     $N_1: null,
-    $T_1: null,
     $U_1: null,
+    $V_1: null,
     
     get_authorByline: function SP_Publishing_SitePageFieldsData$get_authorByline() {
         return this.$6_1;
@@ -1284,20 +1327,20 @@ SP.Publishing.SitePageFieldsData.prototype = {
     },
     
     get_title: function SP_Publishing_SitePageFieldsData$get_title() {
-        return this.$T_1;
+        return this.$U_1;
     },
     
     set_title: function SP_Publishing_SitePageFieldsData$set_title(value) {
-        this.$T_1 = value;
+        this.$U_1 = value;
         return value;
     },
     
     get_topicHeader: function SP_Publishing_SitePageFieldsData$get_topicHeader() {
-        return this.$U_1;
+        return this.$V_1;
     },
     
     set_topicHeader: function SP_Publishing_SitePageFieldsData$set_topicHeader(value) {
-        this.$U_1 = value;
+        this.$V_1 = value;
         return value;
     },
     
@@ -1357,12 +1400,12 @@ SP.Publishing.SitePageFieldsData.prototype = {
         }
         $v_0 = parentNode.Title;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$T_1 = ($v_0);
+            this.$U_1 = ($v_0);
             delete parentNode.Title;
         }
         $v_0 = parentNode.TopicHeader;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$U_1 = ($v_0);
+            this.$V_1 = ($v_0);
             delete parentNode.TopicHeader;
         }
     }
@@ -1482,7 +1525,7 @@ SP.Publishing.SiteSharingEmailContext.prototype = {
     $C_1: null,
     $D_1: null,
     $1_1: null,
-    $V_1: null,
+    $W_1: null,
     
     get_customDescription: function SP_Publishing_SiteSharingEmailContext$get_customDescription() {
         return this.$C_1;
@@ -1512,11 +1555,11 @@ SP.Publishing.SiteSharingEmailContext.prototype = {
     },
     
     get_url: function SP_Publishing_SiteSharingEmailContext$get_url() {
-        return this.$V_1;
+        return this.$W_1;
     },
     
     set_url: function SP_Publishing_SiteSharingEmailContext$set_url(value) {
-        this.$V_1 = value;
+        this.$W_1 = value;
         return value;
     },
     
@@ -1556,7 +1599,7 @@ SP.Publishing.SiteSharingEmailContext.prototype = {
         }
         $v_0 = parentNode.Url;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$V_1 = ($v_0);
+            this.$W_1 = ($v_0);
             delete parentNode.Url;
         }
     }
@@ -3027,18 +3070,18 @@ SP.Publishing.Navigation.NavigationTermProviderNameCollection = function SP_Publ
 }
 SP.Publishing.Navigation.NavigationTermProviderNameCollection.prototype = {
     
-    $d_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$d_2($p0) {
+    $e_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$e_2($p0) {
         Array.add(this.get_data(), $p0);
     },
     
-    $e_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$e_2() {
+    $f_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$f_2() {
         var $v_0 = this.get_data();
         while ($v_0.length > 0) {
             Array.removeAt($v_0, $v_0.length - 1);
         }
     },
     
-    $f_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$f_2($p0) {
+    $g_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$g_2($p0) {
         Array.remove(this.get_data(), $p0);
     },
     
@@ -3058,14 +3101,14 @@ SP.Publishing.Navigation.NavigationTermProviderNameCollection.prototype = {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'Add', [ item ]);
         $v_0.addQuery($v_1);
-        this.$d_2(item);
+        this.$e_2(item);
     },
     
     clear: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$clear() {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'Clear', null);
         $v_0.addQuery($v_1);
-        this.$e_2();
+        this.$f_2();
     },
     
     remove: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$remove(item) {
@@ -3075,7 +3118,7 @@ SP.Publishing.Navigation.NavigationTermProviderNameCollection.prototype = {
         $v_0.addQuery($v_2);
         $v_1 = new SP.BooleanResult();
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        this.$f_2(item);
+        this.$g_2(item);
         return $v_1;
     }
 }
@@ -4222,6 +4265,7 @@ SP.Publishing.Search.registerClass('SP.Publishing.Search', SP.ClientObject);
 SP.Publishing.SearchPropertyNames.registerClass('SP.Publishing.SearchPropertyNames');
 SP.Publishing.SharePagePreviewByEmailFieldsData.registerClass('SP.Publishing.SharePagePreviewByEmailFieldsData', SP.ClientValueObject);
 SP.Publishing.SiteImageRenditions.registerClass('SP.Publishing.SiteImageRenditions');
+SP.Publishing.SitePage3DFieldsData.registerClass('SP.Publishing.SitePage3DFieldsData', SP.Publishing.SitePageFieldsData);
 SP.Publishing.SitePageVersionInfo.registerClass('SP.Publishing.SitePageVersionInfo', SP.ClientValueObject);
 SP.Publishing.SiteServicesAddins.registerClass('SP.Publishing.SiteServicesAddins');
 SP.Publishing.SiteSharingEmailContext.registerClass('SP.Publishing.SiteSharingEmailContext', SP.ClientValueObject);
