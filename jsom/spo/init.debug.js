@@ -7,7 +7,11 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
+<<<<<<< HEAD
                 "rup": 19708,
+=======
+                "rup": 19520,
+>>>>>>> 5bb139830ff82ecee68f03e79cf077fa4c0fc3a6
                 "rpr": 12054
             }
         };
