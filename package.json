@@ -1,7 +1,7 @@
 {
   "name": "sp-jsom-node",
   "description": "SharePoint JavaScript Object Model for Node.js",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "main": "./dist/index.js",
   "typings": "./dist/index",
   "scripts": {
