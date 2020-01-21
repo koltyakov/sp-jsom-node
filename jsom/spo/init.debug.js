@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 19325,
-                "rpr": 12002
+                "rup": 19708,
+                "rpr": 12054
             }
         };
     }
@@ -2112,33 +2112,26 @@ function $_global_init() {
                 else if (ev.eventName == "UserEngagement") {
                     eName = "qos";
                     if (Boolean(ev.data) && Boolean(ev.data.EngagementName)) {
-                        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("F662C01B-429C-441A-8FE5-5D402E4B8DC9"))) {
-                            var engagementName = ev.data.EngagementName.toString();
+                        var engagementName = ev.data.EngagementName.toString();
 
-                            eType = engagementName.endsWith(".Start") ? "Start" : engagementName.endsWith(".Success") ? "End" : engagementName.endsWith(".Failure") ? "End" : engagementName.endsWith(".ExpectedFailure") ? "End" : engagementName.endsWith(".UnexpectedFailure") ? "End" : "NA";
-                            eResultType = engagementName.endsWith(".Success") ? "Success" : engagementName.endsWith(".Failure") ? "Failure" : engagementName.endsWith(".ExpectedFailure") ? "ExpectedFailure" : engagementName.endsWith(".UnexpectedFailure") ? "UnexpectedFailure" : "NA";
-                            if (!(window["OffSwitch"] == null || OffSwitch.IsActive("8BA5B59D-4E8D-44E9-88A0-E64983174929")) && Boolean(ev.data.Properties)) {
-                                try {
-                                    var props = JSON.parse(ev.data.Properties.toString());
+                        eType = engagementName.endsWith(".Start") ? "Start" : engagementName.endsWith(".Success") ? "End" : engagementName.endsWith(".Failure") ? "End" : engagementName.endsWith(".ExpectedFailure") ? "End" : engagementName.endsWith(".UnexpectedFailure") ? "End" : "NA";
+                        eResultType = engagementName.endsWith(".Success") ? "Success" : engagementName.endsWith(".Failure") ? "Failure" : engagementName.endsWith(".ExpectedFailure") ? "ExpectedFailure" : engagementName.endsWith(".UnexpectedFailure") ? "UnexpectedFailure" : "NA";
+                        if (Boolean(ev.data.Properties)) {
+                            try {
+                                var props = JSON.parse(ev.data.Properties.toString());
 
-                                    eResultCode = Boolean(props.ErrorCode) ? props.ErrorCode.toString() : "NA";
-                                }
-                                catch (exception) {
-                                    if (exception != null) {
-                                        if (typeof console != "undefined" && Boolean(console) && typeof console.log == "function") {
-                                            console.log("Aria error: " + exception.toString());
-                                        }
+                                eResultCode = Boolean(props.ErrorCode) ? props.ErrorCode.toString() : "NA";
+                            }
+                            catch (exception) {
+                                if (exception != null) {
+                                    if (typeof console != "undefined" && Boolean(console) && typeof console.log == "function") {
+                                        console.log("Aria error: " + exception.toString());
                                     }
                                 }
                             }
-                            else {
-                                eResultCode = Boolean(ev.data.Properties) && Boolean(ev.data.Properties.ErrorCode) ? ev.data.Properties.ErrorCode.toString() : "NA";
-                            }
                         }
                         else {
-                            eType = ev.data.EngagementName.endsWith(".Start") ? "Start" : ev.data.EngagementName.endsWith(".Success") ? "End" : ev.data.EngagementName.endsWith(".Failure") ? "Failure" : "NA";
-                            eResultType = eType == "End" ? "Success" : eType == "Failure" ? "Failure" : "NA";
-                            eResultCode = Boolean(ev.data.Properties) && Boolean(ev.data.Properties.ErrorCode) ? ev.data.Properties.ErrorCode.toString() : "NA";
+                            eResultCode = "NA";
                         }
                         eComponent = ev.data.EngagementName.substring(0, ev.data.EngagementName.indexOf('.'));
                         nName = ev.data.EngagementName.substring(0, ev.data.EngagementName.lastIndexOf('.'));
@@ -14660,9 +14653,7 @@ function PerformanceLogger_module_def() {
             }
             if (!IsNullOrUndefined(correlationId)) {
                 that.LogPerformanceData('ServerCorrelationId', correlationId);
-                if (!(window["OffSwitch"] == null || OffSwitch.IsActive("B29C18fC-DA2B-4BAA-A30E-6AE01CC6C754"))) {
-                    isServerCorrelationIdCollected = true;
-                }
+                isServerCorrelationIdCollected = true;
             }
             else if (typeof g_correlationId === "string" && !IsNullOrUndefined(g_correlationId)) {
                 that.LogPerformanceData('ServerCorrelationId', g_correlationId);
@@ -16464,7 +16455,7 @@ function SuiteNavRendering_module_def() {
                 navData.CurrentMainLinkElementID = _allDocumentsLinkId;
             }
             else {
-                navData.CurrentMainLinkElementID = _defaultLinkId;
+                navData.CurrentMainLinkElementID = _allSitesLinkId;
             }
             break;
         default:

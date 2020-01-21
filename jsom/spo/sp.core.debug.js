@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 19325,
-            "rpr": 12002
+            "rup": 19708,
+            "rpr": 12054
         }
     };
 }
@@ -2191,376 +2191,6 @@ SP.SimpleLogger.BSQMProxy.prototype = {
 };
 SP.SimpleLoggerConstants = function SP_SimpleLoggerConstants() {
 };
-Type.registerNamespace('SP.UI');
-SP.UI.Orientation = function() {
-};
-SP.UI.Orientation.prototype = {
-    horizontal: 0,
-    vertical: 1
-};
-SP.UI.Orientation.registerEnum('SP.UI.Orientation', false);
-SP.UI.AspMenu = function SP_UI_AspMenu(e) {
-    this.$i_2 = [];
-    SP.UI.AspMenu.initializeBase(this, [e]);
-};
-SP.UI.AspMenu.$1g = function SP_UI_AspMenu$$1g($p0) {
-    var $v_0 = null;
-
-    for (var $v_1 = 0, $v_2 = $p0.childNodes.length; $v_1 < $v_2; ++$v_1) {
-        var $v_3 = $p0.childNodes[$v_1];
-
-        if ($v_3 && $v_3.nodeType === 1 && $v_3.tagName.toLowerCase() === 'ul') {
-            $v_0 = $v_3;
-            break;
-        }
-    }
-    return $v_0;
-};
-SP.UI.AspMenu.prototype = {
-    $L_2: null,
-    $9_2: null,
-    $x_2: 500,
-    $16_2: 125,
-    $15_2: 250,
-    get_menuOrientation: function SP_UI_AspMenu$get_menuOrientation() {
-        if (Sys.UI.DomElement.containsCssClass(this.$L_2.parentNode, 'ms-core-listMenu-horizontalBox')) {
-            return 0;
-        }
-        else {
-            return 1;
-        }
-    },
-    set_menuOrientation: function SP_UI_AspMenu$set_menuOrientation(value) {
-        if (!value) {
-            Sys.UI.DomElement.removeCssClass(this.$L_2.parentNode, 'ms-core-listMenu-verticalBox');
-            Sys.UI.DomElement.addCssClass(this.$L_2.parentNode, 'ms-core-listMenu-horizontalBox');
-        }
-        else if (value === 1) {
-            Sys.UI.DomElement.removeCssClass(this.$L_2.parentNode, 'ms-core-listMenu-horizontalBox');
-            Sys.UI.DomElement.addCssClass(this.$L_2.parentNode, 'ms-core-listMenu-verticalBox');
-        }
-        return value;
-    },
-    get_disappearAfter: function SP_UI_AspMenu$get_disappearAfter() {
-        return this.$x_2;
-    },
-    set_disappearAfter: function SP_UI_AspMenu$set_disappearAfter(value) {
-        this.$x_2 = value;
-        return value;
-    },
-    initialize: function SP_UI_AspMenu$initialize() {
-        Sys.Component.prototype.initialize.call(this);
-        this.$L_2 = ((this.get_element()).getElementsByTagName('ul'))[0];
-        this.$2D_2();
-        this.$2E_2();
-    },
-    $2D_2: function SP_UI_AspMenu$$2D_2() {
-        var $v_0 = this.$L_2.getElementsByTagName('li');
-
-        for (var $v_1 = 0, $v_2 = $v_0.length; $v_1 < $v_2; ++$v_1) {
-            var $v_3 = $v_0[$v_1];
-
-            $v_3.hoverDebouncer = 0;
-            this.$1y_2($v_3);
-        }
-    },
-    $10_2: function SP_UI_AspMenu$$10_2($p0, $p1) {
-        for (var $v_0 = $p1; $v_0; $v_0 = $v_0.parentNode) {
-            if ($v_0 === $p0) {
-                return true;
-            }
-        }
-        return false;
-    },
-    $1y_2: function SP_UI_AspMenu$$1y_2($p0) {
-        var $$t_C = this;
-
-        $addHandler($p0, 'mouseover', function($p1_0) {
-            $$t_C.showSubMenu($p0);
-        });
-        var $$t_D = this;
-
-        $addHandler($p0, 'mouseout', function($p1_0) {
-            $$t_D.hideSubMenu($p0);
-        });
-        var $v_0 = $p0.querySelector('.menu-item');
-
-        if ($v_0) {
-            var $$t_E = this;
-
-            $addHandler($v_0, 'focus', function($p1_0) {
-                if ($p0.parentNode) {
-                    var $v_2 = $p0.parentNode.parentNode;
-
-                    if ($v_2 && $v_2.tagName && $v_2.tagName.toUpperCase() === 'LI') {
-                        $$t_E.showSubMenu($v_2);
-                    }
-                }
-            });
-        }
-        var $$t_F = this;
-
-        $addHandler($p0, 'focusout', function($p1_0) {
-            $$t_F.$1j_2($p0);
-        });
-        var $$t_G = this;
-
-        $addHandler($p0, 'blur', function($p1_0) {
-            $$t_G.$1j_2($p0);
-        });
-        var $v_1 = $p0.querySelector('.additional-background');
-
-        if ($v_1) {
-            var $$t_H = this;
-
-            $addHandler($v_1, 'click', function($p1_0) {
-                if (!$p1_0.target || !Sys.UI.DomElement.containsCssClass($p1_0.target, 'menu-item-text')) {
-                    var $v_3 = $p0.hoverDebouncer;
-                    var $v_4 = 0;
-
-                    if ($v_3 <= 1) {
-                        $v_4 = 999;
-                    }
-                    else {
-                        $v_4 = 1;
-                    }
-                    $p0.hoverDebouncer = $v_4;
-                    if ($v_4 > 1) {
-                        $$t_H.showSubMenu($p0);
-                    }
-                    else {
-                        $$t_H.hideSubMenu($p0);
-                    }
-                    SP.UI.UIUtility.cancelEvent($p1_0);
-                    return false;
-                }
-            });
-        }
-    },
-    $1j_2: function SP_UI_AspMenu$$1j_2($p0) {
-        if (!this.$10_2($p0, document.activeElement)) {
-            var $v_0 = $p0.hoverDebouncer;
-
-            if ($v_0 > 1) {
-                $p0.hoverDebouncer = 1;
-            }
-            this.hideSubMenu($p0);
-        }
-    },
-    $1P_2: function SP_UI_AspMenu$$1P_2($p0, $p1, $p2, $p3) {
-        var $v_0 = 0;
-        var $v_1 = document.documentElement.dir === 'rtl';
-        var $v_2 = $p0.querySelector('.menu-item-text');
-
-        if (!$v_2) {
-            $v_2 = $p0.querySelector('.menu-item');
-        }
-        if (!$p1) {
-            $v_0 = (Sys.UI.DomElement.getLocation($v_2)).x - (Sys.UI.DomElement.getLocation($p2)).x;
-        }
-        else {
-            $v_0 = (Sys.UI.DomElement.getLocation($v_2)).y - (Sys.UI.DomElement.getLocation($p2)).y;
-            if ($p3) {
-                $v_0 += $v_2.offsetHeight;
-            }
-        }
-        if ($v_1 && !$p1) {
-            $v_0 = $p2.offsetWidth - $v_0 - $v_2.offsetWidth;
-        }
-        return $v_0;
-    },
-    showSubMenu: function SP_UI_AspMenu$showSubMenu(flyoutItem) {
-        var $v_0 = Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover');
-        var $v_1 = Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover-off');
-
-        if (flyoutItem.hoverDebouncer > 0) {
-            return;
-        }
-        flyoutItem.hoverDebouncer = flyoutItem.hoverDebouncer + 1;
-        if (!$v_0 && !$v_1) {
-            if (Sys.UI.DomElement.containsCssClass(flyoutItem, 'dynamic-children')) {
-                if (Sys.UI.DomElement.containsCssClass(flyoutItem, 'static')) {
-                    var $v_2 = document.documentMode;
-                    var $v_3 = Sys.Browser.agent === Sys.Browser.InternetExplorer && Sys.Browser.version < 8 && (SP.ScriptUtility.isNullOrUndefined($v_2) || $v_2 < 8);
-                    var $v_4 = document.documentElement.dir === 'rtl';
-
-                    if ($v_4 && !this.get_menuOrientation() && $v_3) {
-                        this.showSubMenuCore(flyoutItem, -flyoutItem.offsetWidth, 0);
-                        return;
-                    }
-                }
-                this.showSubMenuCore(flyoutItem, 0, 0);
-            }
-        }
-        else if (!$v_0) {
-            Sys.UI.DomElement.addCssClass(flyoutItem, 'hover');
-            Sys.UI.DomElement.removeCssClass(flyoutItem, 'hover-off');
-        }
-    },
-    showSubMenuCore: function SP_UI_AspMenu$showSubMenuCore(li, xOffset, yOffset) {
-        if (li.childNodes.length < 1) {
-            return;
-        }
-        if (this.$9_2 && this.$9_2 !== li && !this.$10_2(this.$9_2, li)) {
-            this.hideSubMenuCore(this.$9_2, li);
-        }
-        var $v_0 = document.documentElement.dir === 'rtl';
-        var $v_1 = this.$1P_2(li, 1, li, true) + 6;
-
-        Sys.UI.DomElement.addCssClass(li, 'hover');
-        var $v_2 = SP.UI.AspMenu.$1g(li);
-
-        if ($v_2) {
-            var $v_3 = window.innerWidth;
-
-            if (typeof $v_3 === 'undefined' || $v_3 <= 0) {
-                $v_3 = window.document.body.clientWidth;
-            }
-            var $v_4 = -1;
-            var $v_5 = !this.get_menuOrientation() && Sys.UI.DomElement.containsCssClass(li.parentNode, 'static');
-            var $v_6 = $v_2.querySelector('li');
-
-            if ($v_5 && li.offsetWidth >= this.$16_2 && li.offsetWidth <= this.$15_2) {
-                $v_2.style.width = li.offsetWidth + 'px';
-            }
-            if ($v_2.offsetWidth < this.$16_2) {
-                $v_2.style.width = this.$16_2 + 'px';
-            }
-            else if ($v_2.offsetWidth > this.$15_2) {
-                $v_2.style.width = this.$15_2 + 'px';
-            }
-            if ($v_6) {
-                var $v_7 = $v_5 ? 0 : 1;
-
-                $v_4 = this.$1P_2(li, $v_7, li, false) - this.$1P_2($v_6, $v_7, $v_2, false);
-            }
-            if ($v_5) {
-                var $v_8 = AbsLeft(li);
-                var $v_9 = $v_4 + xOffset + $v_2.offsetWidth;
-
-                if (!$v_0 && $v_8 + $v_9 > $v_3 || $v_0 && $v_8 + li.offsetWidth - $v_9 < 0) {
-                    $v_4 = li.offsetWidth - $v_2.offsetWidth;
-                }
-                if (!$v_0) {
-                    $v_2.style.left = $v_4 + xOffset + 'px';
-                }
-                else {
-                    $v_2.style.right = $v_4 + xOffset + 'px';
-                }
-                $v_2.style.top = $v_1 + yOffset + 'px';
-                var $v_A = li.querySelector('.menu-item');
-            }
-            else {
-                if (!$v_0) {
-                    $v_2.style.left = li.offsetWidth + xOffset + 'px';
-                }
-                else {
-                    $v_2.style.right = li.offsetWidth + xOffset + 'px';
-                }
-                $v_2.style.top = $v_4 + yOffset + 'px';
-            }
-            $v_2.style.zIndex = SP.UI.AspMenu.$1W;
-            if (li && !li.getAttribute('isVisible')) {
-                li.setAttribute('isVisible', 'true');
-                if (this.$9_2) {
-                    this.$i_2.push(this.$9_2);
-                }
-                this.$9_2 = li;
-                if (Sys.Browser.agent === Sys.Browser.InternetExplorer) {
-                    var $v_B = String.format(SP.UI.AspMenu.$1X, (this.get_element()).id, this.$i_2.length);
-                    var $v_C = document.createElement('iframe');
-
-                    $v_C.id = $v_B;
-                    $v_C.setAttribute('frameBorder', '0');
-                    $v_C.setAttribute('scrolling', 'no');
-                    $v_C.style.border = 'none';
-                    $v_C.style.position = 'absolute';
-                    $v_C.style.top = $v_2.style.top;
-                    $v_C.style.left = $v_2.style.left;
-                    $v_C.style.right = $v_2.style.right;
-                    $v_C.style.height = $v_2.offsetHeight + 'px';
-                    $v_C.style.width = $v_2.offsetWidth + 'px';
-                    $v_C.style.zIndex = SP.UI.AspMenu.$1W - 2;
-                    li.appendChild($v_C);
-                }
-            }
-        }
-    },
-    hideSubMenu: function SP_UI_AspMenu$hideSubMenu(flyoutItem) {
-        var $v_0 = flyoutItem.hoverDebouncer;
-
-        if ($v_0 <= 0) {
-            return;
-        }
-        flyoutItem.hoverDebouncer = flyoutItem.hoverDebouncer - 1;
-        if (flyoutItem.hoverDebouncer <= 0 && Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover')) {
-            Sys.UI.DomElement.addCssClass(flyoutItem, 'hover-off');
-            Sys.UI.DomElement.removeCssClass(flyoutItem, 'hover');
-            var $$t_2 = this;
-
-            window.setTimeout(function() {
-                if (Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover-off')) {
-                    $$t_2.hideSubMenuCore(flyoutItem, null);
-                }
-            }, this.$x_2);
-        }
-    },
-    hideSubMenuCore: function SP_UI_AspMenu$hideSubMenuCore(li, newLi) {
-        do {
-            var $v_0 = document.documentElement.dir === 'rtl';
-            var $v_1 = SP.UI.AspMenu.$1g(li);
-
-            if ($v_1) {
-                $v_1.style.top = '';
-                $v_1.style.left = '';
-                $v_1.style.right = '';
-                $v_1.style.width = '';
-            }
-            Sys.UI.DomElement.removeCssClass(li, 'hover-off');
-            Sys.UI.DomElement.removeCssClass(li, 'hover');
-            if (this.$9_2 && li && li !== this.$9_2 && this.$10_2(li, this.$9_2)) {
-                this.hideSubMenuCore(this.$9_2, li);
-            }
-            if (li === this.$9_2) {
-                var $v_2 = String.format(SP.UI.AspMenu.$1X, (this.get_element()).id, this.$i_2.length);
-                var $v_3 = $get($v_2);
-
-                if ($v_3) {
-                    SP.UI.UIUtility.removeNode($v_3);
-                }
-                this.$9_2 = this.$i_2.pop();
-                if (li.getAttribute('isVisible')) {
-                    li.removeAttribute('isVisible');
-                }
-                if (newLi && this.$10_2(this.$9_2, newLi)) {
-                    break;
-                }
-                li = this.$9_2;
-            }
-            if (!newLi) {
-                break;
-            }
-        } while (li);
-    },
-    $2E_2: function SP_UI_AspMenu$$2E_2() {
-        if (!SP.ScriptUtility.isNullOrUndefined(this.$L_2.querySelectorAll)) {
-            var $v_0 = this.$L_2.querySelectorAll('a.new-window');
-
-            for (var $v_1 = 0; $v_1 < $v_0.length; ++$v_1) {
-                $v_0[$v_1].target = '_blank';
-            }
-        }
-        else {
-            var $v_2 = this.$L_2.getElementsByTagName('a');
-
-            for (var $v_3 = 0; $v_3 < $v_2.length; ++$v_3) {
-                if (Sys.UI.DomElement.containsCssClass($v_2[$v_3], 'new-window')) {
-                    $v_2[$v_3].target = '_blank';
-                }
-            }
-        }
-    }
-};
 Type.registerNamespace('SP.Utilities');
 SP.Utilities.CommandBlock = function SP_Utilities_CommandBlock(state, commandFunction, finishFunction) {
     this.state = state;
@@ -2982,6 +2612,376 @@ SP.Utilities.TaskCarousel.$1z = function SP_Utilities_TaskCarousel$$1z($p0, $p1)
 SP.Utilities.TaskCarousel.$1O = function SP_Utilities_TaskCarousel$$1O($p0) {
     window.onbeforeunload = $p0.$f_0;
     $p0.$f_0 = null;
+};
+Type.registerNamespace('SP.UI');
+SP.UI.Orientation = function() {
+};
+SP.UI.Orientation.prototype = {
+    horizontal: 0,
+    vertical: 1
+};
+SP.UI.Orientation.registerEnum('SP.UI.Orientation', false);
+SP.UI.AspMenu = function SP_UI_AspMenu(e) {
+    this.$i_2 = [];
+    SP.UI.AspMenu.initializeBase(this, [e]);
+};
+SP.UI.AspMenu.$1g = function SP_UI_AspMenu$$1g($p0) {
+    var $v_0 = null;
+
+    for (var $v_1 = 0, $v_2 = $p0.childNodes.length; $v_1 < $v_2; ++$v_1) {
+        var $v_3 = $p0.childNodes[$v_1];
+
+        if ($v_3 && $v_3.nodeType === 1 && $v_3.tagName.toLowerCase() === 'ul') {
+            $v_0 = $v_3;
+            break;
+        }
+    }
+    return $v_0;
+};
+SP.UI.AspMenu.prototype = {
+    $L_2: null,
+    $9_2: null,
+    $x_2: 500,
+    $16_2: 125,
+    $15_2: 250,
+    get_menuOrientation: function SP_UI_AspMenu$get_menuOrientation() {
+        if (Sys.UI.DomElement.containsCssClass(this.$L_2.parentNode, 'ms-core-listMenu-horizontalBox')) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+    },
+    set_menuOrientation: function SP_UI_AspMenu$set_menuOrientation(value) {
+        if (!value) {
+            Sys.UI.DomElement.removeCssClass(this.$L_2.parentNode, 'ms-core-listMenu-verticalBox');
+            Sys.UI.DomElement.addCssClass(this.$L_2.parentNode, 'ms-core-listMenu-horizontalBox');
+        }
+        else if (value === 1) {
+            Sys.UI.DomElement.removeCssClass(this.$L_2.parentNode, 'ms-core-listMenu-horizontalBox');
+            Sys.UI.DomElement.addCssClass(this.$L_2.parentNode, 'ms-core-listMenu-verticalBox');
+        }
+        return value;
+    },
+    get_disappearAfter: function SP_UI_AspMenu$get_disappearAfter() {
+        return this.$x_2;
+    },
+    set_disappearAfter: function SP_UI_AspMenu$set_disappearAfter(value) {
+        this.$x_2 = value;
+        return value;
+    },
+    initialize: function SP_UI_AspMenu$initialize() {
+        Sys.Component.prototype.initialize.call(this);
+        this.$L_2 = ((this.get_element()).getElementsByTagName('ul'))[0];
+        this.$2D_2();
+        this.$2E_2();
+    },
+    $2D_2: function SP_UI_AspMenu$$2D_2() {
+        var $v_0 = this.$L_2.getElementsByTagName('li');
+
+        for (var $v_1 = 0, $v_2 = $v_0.length; $v_1 < $v_2; ++$v_1) {
+            var $v_3 = $v_0[$v_1];
+
+            $v_3.hoverDebouncer = 0;
+            this.$1y_2($v_3);
+        }
+    },
+    $10_2: function SP_UI_AspMenu$$10_2($p0, $p1) {
+        for (var $v_0 = $p1; $v_0; $v_0 = $v_0.parentNode) {
+            if ($v_0 === $p0) {
+                return true;
+            }
+        }
+        return false;
+    },
+    $1y_2: function SP_UI_AspMenu$$1y_2($p0) {
+        var $$t_C = this;
+
+        $addHandler($p0, 'mouseover', function($p1_0) {
+            $$t_C.showSubMenu($p0);
+        });
+        var $$t_D = this;
+
+        $addHandler($p0, 'mouseout', function($p1_0) {
+            $$t_D.hideSubMenu($p0);
+        });
+        var $v_0 = $p0.querySelector('.menu-item');
+
+        if ($v_0) {
+            var $$t_E = this;
+
+            $addHandler($v_0, 'focus', function($p1_0) {
+                if ($p0.parentNode) {
+                    var $v_2 = $p0.parentNode.parentNode;
+
+                    if ($v_2 && $v_2.tagName && $v_2.tagName.toUpperCase() === 'LI') {
+                        $$t_E.showSubMenu($v_2);
+                    }
+                }
+            });
+        }
+        var $$t_F = this;
+
+        $addHandler($p0, 'focusout', function($p1_0) {
+            $$t_F.$1j_2($p0);
+        });
+        var $$t_G = this;
+
+        $addHandler($p0, 'blur', function($p1_0) {
+            $$t_G.$1j_2($p0);
+        });
+        var $v_1 = $p0.querySelector('.additional-background');
+
+        if ($v_1) {
+            var $$t_H = this;
+
+            $addHandler($v_1, 'click', function($p1_0) {
+                if (!$p1_0.target || !Sys.UI.DomElement.containsCssClass($p1_0.target, 'menu-item-text')) {
+                    var $v_3 = $p0.hoverDebouncer;
+                    var $v_4 = 0;
+
+                    if ($v_3 <= 1) {
+                        $v_4 = 999;
+                    }
+                    else {
+                        $v_4 = 1;
+                    }
+                    $p0.hoverDebouncer = $v_4;
+                    if ($v_4 > 1) {
+                        $$t_H.showSubMenu($p0);
+                    }
+                    else {
+                        $$t_H.hideSubMenu($p0);
+                    }
+                    SP.UI.UIUtility.cancelEvent($p1_0);
+                    return false;
+                }
+            });
+        }
+    },
+    $1j_2: function SP_UI_AspMenu$$1j_2($p0) {
+        if (!this.$10_2($p0, document.activeElement)) {
+            var $v_0 = $p0.hoverDebouncer;
+
+            if ($v_0 > 1) {
+                $p0.hoverDebouncer = 1;
+            }
+            this.hideSubMenu($p0);
+        }
+    },
+    $1P_2: function SP_UI_AspMenu$$1P_2($p0, $p1, $p2, $p3) {
+        var $v_0 = 0;
+        var $v_1 = document.documentElement.dir === 'rtl';
+        var $v_2 = $p0.querySelector('.menu-item-text');
+
+        if (!$v_2) {
+            $v_2 = $p0.querySelector('.menu-item');
+        }
+        if (!$p1) {
+            $v_0 = (Sys.UI.DomElement.getLocation($v_2)).x - (Sys.UI.DomElement.getLocation($p2)).x;
+        }
+        else {
+            $v_0 = (Sys.UI.DomElement.getLocation($v_2)).y - (Sys.UI.DomElement.getLocation($p2)).y;
+            if ($p3) {
+                $v_0 += $v_2.offsetHeight;
+            }
+        }
+        if ($v_1 && !$p1) {
+            $v_0 = $p2.offsetWidth - $v_0 - $v_2.offsetWidth;
+        }
+        return $v_0;
+    },
+    showSubMenu: function SP_UI_AspMenu$showSubMenu(flyoutItem) {
+        var $v_0 = Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover');
+        var $v_1 = Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover-off');
+
+        if (flyoutItem.hoverDebouncer > 0) {
+            return;
+        }
+        flyoutItem.hoverDebouncer = flyoutItem.hoverDebouncer + 1;
+        if (!$v_0 && !$v_1) {
+            if (Sys.UI.DomElement.containsCssClass(flyoutItem, 'dynamic-children')) {
+                if (Sys.UI.DomElement.containsCssClass(flyoutItem, 'static')) {
+                    var $v_2 = document.documentMode;
+                    var $v_3 = Sys.Browser.agent === Sys.Browser.InternetExplorer && Sys.Browser.version < 8 && (SP.ScriptUtility.isNullOrUndefined($v_2) || $v_2 < 8);
+                    var $v_4 = document.documentElement.dir === 'rtl';
+
+                    if ($v_4 && !this.get_menuOrientation() && $v_3) {
+                        this.showSubMenuCore(flyoutItem, -flyoutItem.offsetWidth, 0);
+                        return;
+                    }
+                }
+                this.showSubMenuCore(flyoutItem, 0, 0);
+            }
+        }
+        else if (!$v_0) {
+            Sys.UI.DomElement.addCssClass(flyoutItem, 'hover');
+            Sys.UI.DomElement.removeCssClass(flyoutItem, 'hover-off');
+        }
+    },
+    showSubMenuCore: function SP_UI_AspMenu$showSubMenuCore(li, xOffset, yOffset) {
+        if (li.childNodes.length < 1) {
+            return;
+        }
+        if (this.$9_2 && this.$9_2 !== li && !this.$10_2(this.$9_2, li)) {
+            this.hideSubMenuCore(this.$9_2, li);
+        }
+        var $v_0 = document.documentElement.dir === 'rtl';
+        var $v_1 = this.$1P_2(li, 1, li, true) + 6;
+
+        Sys.UI.DomElement.addCssClass(li, 'hover');
+        var $v_2 = SP.UI.AspMenu.$1g(li);
+
+        if ($v_2) {
+            var $v_3 = window.innerWidth;
+
+            if (typeof $v_3 === 'undefined' || $v_3 <= 0) {
+                $v_3 = window.document.body.clientWidth;
+            }
+            var $v_4 = -1;
+            var $v_5 = !this.get_menuOrientation() && Sys.UI.DomElement.containsCssClass(li.parentNode, 'static');
+            var $v_6 = $v_2.querySelector('li');
+
+            if ($v_5 && li.offsetWidth >= this.$16_2 && li.offsetWidth <= this.$15_2) {
+                $v_2.style.width = li.offsetWidth + 'px';
+            }
+            if ($v_2.offsetWidth < this.$16_2) {
+                $v_2.style.width = this.$16_2 + 'px';
+            }
+            else if ($v_2.offsetWidth > this.$15_2) {
+                $v_2.style.width = this.$15_2 + 'px';
+            }
+            if ($v_6) {
+                var $v_7 = $v_5 ? 0 : 1;
+
+                $v_4 = this.$1P_2(li, $v_7, li, false) - this.$1P_2($v_6, $v_7, $v_2, false);
+            }
+            if ($v_5) {
+                var $v_8 = AbsLeft(li);
+                var $v_9 = $v_4 + xOffset + $v_2.offsetWidth;
+
+                if (!$v_0 && $v_8 + $v_9 > $v_3 || $v_0 && $v_8 + li.offsetWidth - $v_9 < 0) {
+                    $v_4 = li.offsetWidth - $v_2.offsetWidth;
+                }
+                if (!$v_0) {
+                    $v_2.style.left = $v_4 + xOffset + 'px';
+                }
+                else {
+                    $v_2.style.right = $v_4 + xOffset + 'px';
+                }
+                $v_2.style.top = $v_1 + yOffset + 'px';
+                var $v_A = li.querySelector('.menu-item');
+            }
+            else {
+                if (!$v_0) {
+                    $v_2.style.left = li.offsetWidth + xOffset + 'px';
+                }
+                else {
+                    $v_2.style.right = li.offsetWidth + xOffset + 'px';
+                }
+                $v_2.style.top = $v_4 + yOffset + 'px';
+            }
+            $v_2.style.zIndex = SP.UI.AspMenu.$1W;
+            if (li && !li.getAttribute('isVisible')) {
+                li.setAttribute('isVisible', 'true');
+                if (this.$9_2) {
+                    this.$i_2.push(this.$9_2);
+                }
+                this.$9_2 = li;
+                if (Sys.Browser.agent === Sys.Browser.InternetExplorer) {
+                    var $v_B = String.format(SP.UI.AspMenu.$1X, (this.get_element()).id, this.$i_2.length);
+                    var $v_C = document.createElement('iframe');
+
+                    $v_C.id = $v_B;
+                    $v_C.setAttribute('frameBorder', '0');
+                    $v_C.setAttribute('scrolling', 'no');
+                    $v_C.style.border = 'none';
+                    $v_C.style.position = 'absolute';
+                    $v_C.style.top = $v_2.style.top;
+                    $v_C.style.left = $v_2.style.left;
+                    $v_C.style.right = $v_2.style.right;
+                    $v_C.style.height = $v_2.offsetHeight + 'px';
+                    $v_C.style.width = $v_2.offsetWidth + 'px';
+                    $v_C.style.zIndex = SP.UI.AspMenu.$1W - 2;
+                    li.appendChild($v_C);
+                }
+            }
+        }
+    },
+    hideSubMenu: function SP_UI_AspMenu$hideSubMenu(flyoutItem) {
+        var $v_0 = flyoutItem.hoverDebouncer;
+
+        if ($v_0 <= 0) {
+            return;
+        }
+        flyoutItem.hoverDebouncer = flyoutItem.hoverDebouncer - 1;
+        if (flyoutItem.hoverDebouncer <= 0 && Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover')) {
+            Sys.UI.DomElement.addCssClass(flyoutItem, 'hover-off');
+            Sys.UI.DomElement.removeCssClass(flyoutItem, 'hover');
+            var $$t_2 = this;
+
+            window.setTimeout(function() {
+                if (Sys.UI.DomElement.containsCssClass(flyoutItem, 'hover-off')) {
+                    $$t_2.hideSubMenuCore(flyoutItem, null);
+                }
+            }, this.$x_2);
+        }
+    },
+    hideSubMenuCore: function SP_UI_AspMenu$hideSubMenuCore(li, newLi) {
+        do {
+            var $v_0 = document.documentElement.dir === 'rtl';
+            var $v_1 = SP.UI.AspMenu.$1g(li);
+
+            if ($v_1) {
+                $v_1.style.top = '';
+                $v_1.style.left = '';
+                $v_1.style.right = '';
+                $v_1.style.width = '';
+            }
+            Sys.UI.DomElement.removeCssClass(li, 'hover-off');
+            Sys.UI.DomElement.removeCssClass(li, 'hover');
+            if (this.$9_2 && li && li !== this.$9_2 && this.$10_2(li, this.$9_2)) {
+                this.hideSubMenuCore(this.$9_2, li);
+            }
+            if (li === this.$9_2) {
+                var $v_2 = String.format(SP.UI.AspMenu.$1X, (this.get_element()).id, this.$i_2.length);
+                var $v_3 = $get($v_2);
+
+                if ($v_3) {
+                    SP.UI.UIUtility.removeNode($v_3);
+                }
+                this.$9_2 = this.$i_2.pop();
+                if (li.getAttribute('isVisible')) {
+                    li.removeAttribute('isVisible');
+                }
+                if (newLi && this.$10_2(this.$9_2, newLi)) {
+                    break;
+                }
+                li = this.$9_2;
+            }
+            if (!newLi) {
+                break;
+            }
+        } while (li);
+    },
+    $2E_2: function SP_UI_AspMenu$$2E_2() {
+        if (!SP.ScriptUtility.isNullOrUndefined(this.$L_2.querySelectorAll)) {
+            var $v_0 = this.$L_2.querySelectorAll('a.new-window');
+
+            for (var $v_1 = 0; $v_1 < $v_0.length; ++$v_1) {
+                $v_0[$v_1].target = '_blank';
+            }
+        }
+        else {
+            var $v_2 = this.$L_2.getElementsByTagName('a');
+
+            for (var $v_3 = 0; $v_3 < $v_2.length; ++$v_3) {
+                if (Sys.UI.DomElement.containsCssClass($v_2[$v_3], 'new-window')) {
+                    $v_2[$v_3].target = '_blank';
+                }
+            }
+        }
+    }
 };
 Type.registerNamespace('SP.Disposal');
 SP.Disposal.DisposalManager = function SP_Disposal_DisposalManager() {
@@ -4372,12 +4372,12 @@ SP.RUMLogger.registerClass('SP.RUMLogger');
 SP.SimpleLogger.registerClass('SP.SimpleLogger');
 SP.SimpleLogger.BSQMProxy.registerClass('SP.SimpleLogger.BSQMProxy', null, SP.IBSQM);
 SP.SimpleLoggerConstants.registerClass('SP.SimpleLoggerConstants');
-SP.UI.AspMenu.registerClass('SP.UI.AspMenu', Sys.UI.Control);
 SP.Utilities.CommandBlock.registerClass('SP.Utilities.CommandBlock');
 SP.Utilities.TaskTelemetry.registerClass('SP.Utilities.TaskTelemetry');
 SP.Utilities.Task.registerClass('SP.Utilities.Task');
 SP.Utilities.tcsaver.registerClass('SP.Utilities.tcsaver');
 SP.Utilities.TaskCarousel.registerClass('SP.Utilities.TaskCarousel');
+SP.UI.AspMenu.registerClass('SP.UI.AspMenu', Sys.UI.Control);
 SP.Disposal.DisposalManager.registerClass('SP.Disposal.DisposalManager');
 SP.Utilities.Internal.ECBMenuItem.registerClass('SP.Utilities.Internal.ECBMenuItem', Object);
 SP.Utilities.Internal.CLVP.registerClass('SP.Utilities.Internal.CLVP');
@@ -4438,8 +4438,6 @@ function sp_core_initialize() {
     SP.SimpleLoggerConstants.rowLengthForObject = 2;
     SP.SimpleLoggerConstants.defaulT_LOG_SESSION_MS = 30000;
     SP.SimpleLoggerConstants.defaulT_MAX_DATA_SIZE = 16384;
-    SP.UI.AspMenu.$1X = '{0}_FrameID_{1}';
-    SP.UI.AspMenu.$1W = 1100;
     SP.Utilities.TaskCarousel.$7 = [null, null, null, null, null];
     SP.Utilities.TaskCarousel.$5 = null;
     SP.Utilities.TaskCarousel.$G = null;
@@ -4454,6 +4452,8 @@ function sp_core_initialize() {
     SP.Utilities.TaskCarousel.$N = null;
     SP.Utilities.TaskCarousel.$6 = null;
     SP.Utilities.TaskCarousel.$p = SP.Utilities.TaskCarousel.$Q;
+    SP.UI.AspMenu.$1X = '{0}_FrameID_{1}';
+    SP.UI.AspMenu.$1W = 1100;
     SP.Disposal.DisposalManager.$P = null;
 }
 ;
