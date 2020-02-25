@@ -27,17 +27,23 @@ export const Environments: IEnvironmentConfig[] = ((headless: boolean) => {
       legacy: false,
       envCode: 'spo'
     },
+    // {
+    //   environmentName: 'On-Premise 2019',
+    //   configPath: './config/integration/private.2019.json',
+    //   legacy: false,
+    //   envCode: '2019'
+    // },
     {
       environmentName: 'On-Premise 2016',
       configPath: './config/integration/private.2016.json',
       legacy: false,
-      envCode: '16'
+      envCode: '2016'
     },
     {
       environmentName: 'On-Premise 2013',
       configPath: './config/integration/private.2013.json',
       legacy: true,
-      envCode: '15'
+      envCode: '2013'
     }
   ];
   return privateConf;

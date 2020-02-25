@@ -204,7 +204,7 @@ new JsomNode(jsomNodeOptions).init(authOptions);
 #### JSOM Node Settings options
 
 - `modules`?: JsomModules[]; // On demand modules load | Default is ['core']
-- `envCode`?: 'spo' | '16' | '15'; // Loads different version of JSOM javascripts | Default is 'spo'
+- `envCode`?: 'spo' | '2019' | '2016' | '2013'; // Loads different version of JSOM javascripts | Default is 'spo'
 
 #### Synchronous initiation `.init(context: IJsomNodeContext)`
 
