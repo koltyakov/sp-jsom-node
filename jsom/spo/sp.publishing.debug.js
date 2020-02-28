@@ -3143,6 +3143,17 @@ SP.Publishing.Navigation.NavigationLinkType.prototype = {
 SP.Publishing.Navigation.NavigationLinkType.registerEnum('SP.Publishing.Navigation.NavigationLinkType', false);
 
 
+SP.Publishing.Navigation.PortalNavigationCacheState = function() {}
+SP.Publishing.Navigation.PortalNavigationCacheState.prototype = {
+    enabled: 1, 
+    disabled: 2, 
+    refreshing: 3, 
+    pendingOptOut: 4, 
+    optedOut: 5
+}
+SP.Publishing.Navigation.PortalNavigationCacheState.registerEnum('SP.Publishing.Navigation.PortalNavigationCacheState', false);
+
+
 SP.Publishing.Navigation.StandardNavigationSource = function() {}
 SP.Publishing.Navigation.StandardNavigationSource.prototype = {
     unknown: 0, 
@@ -4322,6 +4333,45 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         return value;
     },
     
+    get_cachedHierarchyDepth: function SP_Publishing_Navigation_WebNavigationSettings$get_cachedHierarchyDepth() {
+        this.checkUninitializedProperty('CachedHierarchyDepth');
+        return ((this.get_objectData().get_properties()['CachedHierarchyDepth']));
+    },
+    
+    set_cachedHierarchyDepth: function SP_Publishing_Navigation_WebNavigationSettings$set_cachedHierarchyDepth(value) {
+        this.get_objectData().get_properties()['CachedHierarchyDepth'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CachedHierarchyDepth', value));
+        }
+        return value;
+    },
+    
+    get_cachingRetryAttemptLeft: function SP_Publishing_Navigation_WebNavigationSettings$get_cachingRetryAttemptLeft() {
+        this.checkUninitializedProperty('CachingRetryAttemptLeft');
+        return ((this.get_objectData().get_properties()['CachingRetryAttemptLeft']));
+    },
+    
+    set_cachingRetryAttemptLeft: function SP_Publishing_Navigation_WebNavigationSettings$set_cachingRetryAttemptLeft(value) {
+        this.get_objectData().get_properties()['CachingRetryAttemptLeft'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CachingRetryAttemptLeft', value));
+        }
+        return value;
+    },
+    
+    get_cachingState: function SP_Publishing_Navigation_WebNavigationSettings$get_cachingState() {
+        this.checkUninitializedProperty('CachingState');
+        return ((this.get_objectData().get_properties()['CachingState']));
+    },
+    
+    set_cachingState: function SP_Publishing_Navigation_WebNavigationSettings$set_cachingState(value) {
+        this.get_objectData().get_properties()['CachingState'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CachingState', value));
+        }
+        return value;
+    },
+    
     get_createFriendlyUrlsForNewPages: function SP_Publishing_Navigation_WebNavigationSettings$get_createFriendlyUrlsForNewPages() {
         this.checkUninitializedProperty('CreateFriendlyUrlsForNewPages');
         return ((this.get_objectData().get_properties()['CreateFriendlyUrlsForNewPages']));
@@ -4353,6 +4403,19 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         return $v_0;
     },
     
+    get_lastCachingRefreshAttempted: function SP_Publishing_Navigation_WebNavigationSettings$get_lastCachingRefreshAttempted() {
+        this.checkUninitializedProperty('LastCachingRefreshAttempted');
+        return ((this.get_objectData().get_properties()['LastCachingRefreshAttempted']));
+    },
+    
+    set_lastCachingRefreshAttempted: function SP_Publishing_Navigation_WebNavigationSettings$set_lastCachingRefreshAttempted(value) {
+        this.get_objectData().get_properties()['LastCachingRefreshAttempted'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'LastCachingRefreshAttempted', value));
+        }
+        return value;
+    },
+    
     initPropertiesFromJson: function SP_Publishing_Navigation_WebNavigationSettings$initPropertiesFromJson(parentNode) {
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
@@ -4360,6 +4423,21 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['AddNewPagesToNavigation'] = ($v_0);
             delete parentNode.AddNewPagesToNavigation;
+        }
+        $v_0 = parentNode.CachedHierarchyDepth;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['CachedHierarchyDepth'] = ($v_0);
+            delete parentNode.CachedHierarchyDepth;
+        }
+        $v_0 = parentNode.CachingRetryAttemptLeft;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['CachingRetryAttemptLeft'] = ($v_0);
+            delete parentNode.CachingRetryAttemptLeft;
+        }
+        $v_0 = parentNode.CachingState;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['CachingState'] = ((SP.DataConvert.fixupType(this.get_context(), $v_0)));
+            delete parentNode.CachingState;
         }
         $v_0 = parentNode.CreateFriendlyUrlsForNewPages;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -4377,6 +4455,11 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
             this.updateClientObjectPropertyType('GlobalNavigation', this.get_globalNavigation(), $v_0);
             this.get_globalNavigation().fromJson($v_0);
             delete parentNode.GlobalNavigation;
+        }
+        $v_0 = parentNode.LastCachingRefreshAttempted;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['LastCachingRefreshAttempted'] = ($v_0);
+            delete parentNode.LastCachingRefreshAttempted;
         }
     },
     
@@ -4615,7 +4698,11 @@ SP.Publishing.Navigation.StandardNavigationSettingsPropertyNames.source = 'Sourc
 SP.Publishing.Navigation.StandardNavigationSettingsPropertyNames.termSetId = 'TermSetId';
 SP.Publishing.Navigation.StandardNavigationSettingsPropertyNames.termStoreId = 'TermStoreId';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.addNewPagesToNavigation = 'AddNewPagesToNavigation';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachedHierarchyDepth = 'CachedHierarchyDepth';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachingRetryAttemptLeft = 'CachingRetryAttemptLeft';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachingState = 'CachingState';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.createFriendlyUrlsForNewPages = 'CreateFriendlyUrlsForNewPages';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.lastCachingRefreshAttempted = 'LastCachingRefreshAttempted';
 SP.Publishing.Navigation.WebNavigationSettingsObjectPropertyNames.currentNavigation = 'CurrentNavigation';
 SP.Publishing.Navigation.WebNavigationSettingsObjectPropertyNames.globalNavigation = 'GlobalNavigation';
 
