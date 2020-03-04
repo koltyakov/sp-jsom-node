@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 19812,
-                "rpr": 12021
+                "rup": 19819,
+                "rpr": 12022
             }
         };
     }
@@ -1745,6 +1745,8 @@ function $_global_init() {
     SPRibbonInfo.prototype.initialTabId = undefined;
     StatusIdWithTopPriority = null;
     StatusColorWithTopPriority = null;
+    CollapsibleStatusIdWithTopPriority = null;
+    CollapsibleStatusColorWithTopPriority = null;
     StatusPriority = {
         red: 4,
         yellow: 3,
@@ -12370,6 +12372,8 @@ function _ribbonOnStartInit(ribbonInfo) {
 }
 var StatusIdWithTopPriority;
 var StatusColorWithTopPriority;
+var CollapsibleStatusIdWithTopPriority;
+var CollapsibleStatusColorWithTopPriority;
 var StatusPriority;
 var StatusBarClassNames;
 var ColorMap;
@@ -12608,6 +12612,275 @@ function removeStatus(sid) {
                     _selectStatusWithTopPriority();
                     sb.className = StatusBarClassNames[StatusColorWithTopPriority];
                 }
+            }
+        }
+    }
+}
+function createCollapsibleStatusBar(strSummaryTitle, strSummaryBody) {
+    var sb = document.getElementById("pageCollapsibleStatusBar");
+
+    if (sb != null) {
+        sb.className = StatusBarClassNames[1];
+        sb.setAttribute("aria-live", "polite");
+        sb.setAttribute("aria-relevant", "all");
+        sb.setAttribute("aria-expanded", "false");
+        var psb = document.getElementById("pageStatusBar");
+
+        if (psb != null) {
+            psb.style.marginBottom = "8px";
+        }
+        var rg = [];
+
+        rg.push("<div id=\"pageCollapsibleStatusBarHeader\" class=\"ms-status-status\" role=\"alert\" tabindex=\"0\">");
+        rg.push("<span id='pageCollapsibleStatusBar_hiddenPriMsg' class='ms-accessible'>");
+        rg.push(getStatusTitle(1) + Strings.STS.L_Status_Text);
+        rg.push("</span>");
+        rg.push("<span class=\"ms-status-iconSpan\"><img class=\"ms-status-iconImg\" src=\"/_layouts/15/images/spcommon.png\" alt=\"" + getStatusTitle(1) + Strings.STS.L_Status_Text + "\"/></span>");
+        if (strSummaryTitle.length != 0) {
+            rg.push("<span class=\"ms-bold ms-status-title\">");
+            rg.push(strSummaryTitle);
+            rg.push("</span>");
+        }
+        if (strSummaryBody.length != 0) {
+            rg.push("<span class=\"ms-status-body\">");
+            rg.push(strSummaryBody);
+            rg.push("</span>");
+        }
+        var dismissButtonText = Strings.STS.L_DismissButtonCaption;
+        var expandButtonText = Strings.STS.L_strExpand_Text;
+        var collapseButtonText = Strings.STS.L_strCollapse_Text;
+
+        rg.push("<span id=\"pageCollapsibleStatusBarButtonGroup\" style=\"float:right\">");
+        rg.push("<button tabindex=\"0\" title=\"" + expandButtonText + "\" aria-label=\"" + expandButtonText + "\" type=\"button\" onclick=\"javascript:toggleCollapsibleStatusBar()\" id=\"pageCollapsibleStatusBarChevronDown\"class=\"ms-collapsibleStatusChevronDown-iconSpan\" style=\"display: inline-block\"><img class=\"ms-collapsibleStatusChevronDown-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
+        rg.push("<button tabindex=\"0\" title=\"" + collapseButtonText + "\" aria-label=\"" + collapseButtonText + "\" type=\"button\" onclick=\"javascript:toggleCollapsibleStatusBar()\" id=\"pageCollapsibleStatusBarChevronUp\"class=\"ms-collapsibleStatusChevronUp-iconSpan\" style=\"display: none\"><img class=\"ms-collapsibleStatusChevronUp-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
+        rg.push("<button tabindex=\"0\" title=\"" + dismissButtonText + "\" aria-label=\"" + dismissButtonText + "\" type=\"button\" onclick=\"javascript:");
+        rg.push("var mgr = SP.Ribbon.PageManager.get_instance(); if(mgr && (mgr.get_commandDispatcher()).isCommandEnabled('DismissCollapsibleStatusBar')) (mgr.get_commandDispatcher()).executeCommand('DismissCollapsibleStatusBar', null);");
+        rg.push("\" class=\"ms-collapsibleStatusDismiss-iconSpan\" style=\"display: inline-block\"><input type=\"hidden\" id=\"dismissCollapsibleStatusBarInput\"><img class=\"ms-collapsibleStatusDismiss-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
+        rg.push("</span>");
+        rg.push("</div>");
+        rg.push("<div id=\"pageCollapsibleStatusBarContent\" style=\"display: none\"></div>");
+        sb.style.display = "block";
+        sb.innerHTML = rg.join("");
+    }
+}
+function addCollapsibleStatus(strTitle, strHtml, atBegining, isVanilla) {
+    var content = document.getElementById("pageCollapsibleStatusBarContent");
+
+    if (content != null) {
+        content.setAttribute("aria-live", "polite");
+        content.setAttribute("aria-relevant", "all");
+        var st = _createCollapsibleStatusMarkup(strTitle, strHtml, true, isVanilla);
+
+        if (!atBegining)
+            content.appendChild(st);
+        else {
+            var refs = content.getElementsByTagName("SPAN");
+            var ref = refs.length > 0 ? refs[0] : null;
+
+            if (ref != null)
+                content.insertBefore(st, ref);
+            else
+                content.appendChild(st);
+        }
+        if (content.childNodes.length == 1) {
+            CollapsibleStatusIdWithTopPriority = st.id;
+            CollapsibleStatusColorWithTopPriority = 1;
+        }
+        return st.id;
+    }
+    return null;
+}
+function appendCollapsibleStatus(sid, strTitle, strHtml) {
+    var sb = document.getElementById("pageCollapsibleStatusBarContent");
+    var stRef = document.getElementById(sid);
+
+    if (sb != null && stRef != null) {
+        var st = null;
+
+        if (Boolean(stRef.lastChild) && stRef.lastChild.tagName == "BR") {
+            stRef.removeChild(stRef.lastChild);
+            st = _createCollapsibleStatusMarkup(strTitle, strHtml, true);
+        }
+        else {
+            st = _createCollapsibleStatusMarkup(strTitle, strHtml, false);
+        }
+        if (stRef.nextSibling != null)
+            sb.insertBefore(st, stRef.nextSibling);
+        else
+            sb.appendChild(st);
+        return st.id;
+    }
+    return null;
+}
+function _createCollapsibleStatusMarkup(strTitle, strHtml, bWithBR, bIsVanilla) {
+    var st = document.createElement("SPAN");
+
+    st.id = "collapsibleStatus_" + String(getUniqueIndex());
+    st.className = "ms-status-status";
+    var rg = [];
+
+    if (bWithBR && !bIsVanilla)
+        rg.push("<br/>");
+    rg.push("<span class=\"ms-collapsibleStatus-body\" id='");
+    rg.push(st.id);
+    rg.push("_body");
+    rg.push("'>");
+    rg.push(strHtml);
+    rg.push("</span>");
+    st.innerHTML = rg.join("");
+    st.setAttribute("role", "alert");
+    st.priorityColor = 1;
+    st.tabIndex = 0;
+    return st;
+}
+function removeAllCollapsibleStatus(hide) {
+    var sb = document.getElementById("pageCollapsibleStatusBarContent");
+
+    if (sb != null) {
+        sb.innerHTML = "";
+        sb.className = StatusBarClassNames[1];
+        CollapsibleStatusColorWithTopPriority = null;
+        CollapsibleStatusIdWithTopPriority = null;
+        if (hide)
+            sb.style.display = "none";
+    }
+}
+function setCollapsibleStatusPriColor(sid, strColor) {
+    var st = document.getElementById(sid);
+
+    if (st != null && typeof strColor == 'string') {
+        if (strColor in StatusPriority) {
+            st.priorityColor = StatusPriority[strColor];
+        }
+        else {
+            st.priorityColor = 1;
+        }
+        var hiddenSpan = st.firstChild;
+
+        if (hiddenSpan != null && hiddenSpan.id == sid + "_hiddenPriMsg") {
+            hiddenSpan.innerHTML = getStatusTitle(st.priorityColor) + Strings.STS.L_Status_Text;
+        }
+        if (sid == CollapsibleStatusIdWithTopPriority) {
+            if (st.priorityColor >= CollapsibleStatusColorWithTopPriority)
+                CollapsibleStatusColorWithTopPriority = st.priorityColor;
+            else
+                _selectCollapsibleStatusWithTopPriority();
+        }
+        else {
+            if (st.priorityColor > CollapsibleStatusColorWithTopPriority) {
+                CollapsibleStatusIdWithTopPriority = sid;
+                CollapsibleStatusColorWithTopPriority = st.priorityColor;
+            }
+        }
+        var sb = document.getElementById("pageCollapsibleStatusBar");
+
+        if (Boolean(sb)) {
+            sb.className = StatusBarClassNames[CollapsibleStatusColorWithTopPriority];
+        }
+        var sbContent = document.getElementById("pageCollapsibleStatusBarContent");
+
+        if (Boolean(sbContent)) {
+            sbContent.className = StatusBarClassNames[CollapsibleStatusColorWithTopPriority];
+        }
+    }
+}
+function _selectCollapsibleStatusWithTopPriority() {
+    var sb = document.getElementById("pageCollapsibleStatusBarContent");
+
+    if (sb != null) {
+        var statusId = null;
+        var statusColor = 1;
+        var statuses = sb.childNodes;
+        var statusesLen = statuses.length;
+        var stat = null;
+
+        for (var i = 0; i < statusesLen; i++) {
+            stat = statuses[i];
+            if (typeof stat.priorityColor != 'undefined' && stat.priorityColor > statusColor) {
+                statusColor = stat.priorityColor;
+                statusId = stat.id;
+            }
+        }
+        CollapsibleStatusIdWithTopPriority = statusId;
+        CollapsibleStatusColorWithTopPriority = statusColor;
+    }
+}
+function updateCollapsibleStatus(sid, strHtml) {
+    var bid = sid + "_body";
+    var b = document.getElementById(bid);
+
+    if (Boolean(b))
+        b.innerHTML = strHtml;
+}
+function removeCollapsibleStatus(sid) {
+    var st = document.getElementById(sid);
+
+    if (st != null) {
+        if (Boolean(st.lastChild) && st.lastChild.tagName == "BR") {
+            var prevSt = st.previousSibling;
+
+            if (Boolean(prevSt) && Boolean(prevSt.lastChild) && prevSt.lastChild.tagName != "BR") {
+                var br = document.createElement("BR");
+
+                prevSt.appendChild(br);
+            }
+        }
+        st.parentNode.removeChild(st);
+        var sb = document.getElementById("pageCollapsibleStatusBar");
+        var sbContent = document.getElementById("pageCollapsibleStatusBarContent");
+
+        if (Boolean(sbContent) && Boolean(sb)) {
+            if ((sbContent.getElementsByTagName("SPAN")).length == 0) {
+                sbContent.className = StatusBarClassNames[1];
+                sb.className = StatusBarClassNames[CollapsibleStatusColorWithTopPriority];
+                CollapsibleStatusColorWithTopPriority = null;
+                CollapsibleStatusIdWithTopPriority = null;
+                sbContent.style.display = "none";
+                sb.style.display = "none";
+            }
+            else {
+                if (sid == CollapsibleStatusIdWithTopPriority) {
+                    _selectCollapsibleStatusWithTopPriority();
+                    sb.className = StatusBarClassNames[CollapsibleStatusColorWithTopPriority];
+                    sbContent.className = StatusBarClassNames[CollapsibleStatusColorWithTopPriority];
+                }
+            }
+        }
+    }
+}
+function toggleCollapsibleStatusBar() {
+    var collapsibleStatusBar = document.getElementById("pageCollapsibleStatusBar");
+    var collapsibleStatusBarContent = document.getElementById("pageCollapsibleStatusBarContent");
+
+    if (collapsibleStatusBarContent !== null) {
+        var chevronUp = document.getElementById("pageCollapsibleStatusBarChevronUp");
+        var chevronDown = document.getElementById("pageCollapsibleStatusBarChevronDown");
+        var currentDisplay = collapsibleStatusBarContent.style.display;
+
+        if (currentDisplay == "none" || currentDisplay == null) {
+            collapsibleStatusBarContent.style.display = "inline-block";
+            if (chevronUp !== null) {
+                chevronUp.style.display = "inline-block";
+                chevronUp.focus();
+            }
+            if (chevronDown !== null) {
+                chevronDown.style.display = "none";
+            }
+            if (collapsibleStatusBar !== null) {
+                collapsibleStatusBar.setAttribute("aria-expanded", "true");
+            }
+        }
+        else {
+            collapsibleStatusBarContent.style.display = "none";
+            if (chevronUp !== null) {
+                chevronUp.style.display = "none";
+            }
+            if (chevronDown !== null) {
+                chevronDown.style.display = "inline-block";
+                chevronDown.focus();
+            }
+            if (collapsibleStatusBar !== null) {
+                collapsibleStatusBar.setAttribute("aria-expanded", "false");
             }
         }
     }

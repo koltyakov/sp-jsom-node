@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 19812,
-            "rpr": 12021
+            "rup": 19819,
+            "rpr": 12022
         }
     };
 }
@@ -34114,6 +34114,27 @@ SP.UI.Status.removeStatus = function SP_UI_Status$removeStatus(sid) {
 };
 SP.UI.Status.removeAllStatus = function SP_UI_Status$removeAllStatus(hide) {
     removeAllStatus(hide);
+};
+SP.UI.Status.createCollapsibleStatusBar = function SP_UI_Status$createCollapsibleStatusBar(strSummaryTitle, strSummaryBody) {
+    createCollapsibleStatusBar(strSummaryTitle, strSummaryBody);
+};
+SP.UI.Status.addCollapsibleStatus = function SP_UI_Status$addCollapsibleStatus(strTitle, strHtml, atBeginning) {
+    return addCollapsibleStatus(strTitle, strHtml, atBeginning);
+};
+SP.UI.Status.appendCollapsibleStatus = function SP_UI_Status$appendCollapsibleStatus(sid, strTitle, strHtml) {
+    return appendCollapsibleStatus(sid, strTitle, strHtml);
+};
+SP.UI.Status.updateCollapsibleStatus = function SP_UI_Status$updateCollapsibleStatus(sid, strHtml) {
+    updateCollapsibleStatus(sid, strHtml);
+};
+SP.UI.Status.setCollapsibleStatusPriColor = function SP_UI_Status$setCollapsibleStatusPriColor(sid, strColor) {
+    setCollapsibleStatusPriColor(sid, strColor);
+};
+SP.UI.Status.removeCollapsibleStatus = function SP_UI_Status$removeCollapsibleStatus(sid) {
+    removeCollapsibleStatus(sid);
+};
+SP.UI.Status.removeAllCollapsibleStatus = function SP_UI_Status$removeAllCollapsibleStatus(hide) {
+    removeAllCollapsibleStatus(hide);
 };
 SP.UI.Menu = function SP_UI_Menu($p0) {
     this.$f_0 = $p0;
