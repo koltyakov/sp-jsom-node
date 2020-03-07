@@ -8,7 +8,7 @@ function $_global_init() {
                 "rmj": 16,
                 "rmm": 0,
                 "rup": 19819,
-                "rpr": 12022
+                "rpr": 12027
             }
         };
     }
