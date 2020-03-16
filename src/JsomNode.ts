@@ -66,8 +66,8 @@ export class JsomNode {
       this.settings = {
         ...this.settings,
         ...{
-          envCode: config.envCode,
-          modules: config.modules
+          envCode: config.envCode || this.settings.envCode,
+          modules: config.modules || this.settings.modules
         }
       };
       this.init(this.context);
@@ -134,7 +134,7 @@ export class JsomNode {
       jsomScript = jsomScript.replace('.debug.js', '').replace('.js', '') + '.debug.js';
       if (global.loadedJsomScripts.indexOf(jsomScript.toLowerCase()) === -1) {
         const filePath = path.join(__dirname, '..', 'jsom', global.envCode || 'spo', jsomScript);
-        require(filePath);
+        utils.require(filePath);
         callback();
       } else {
         callback();
