@@ -1,16 +1,16 @@
 import * as path from 'path';
-import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
+import { JsomNode, IJsomNodeContext } from 'sp-jsom-node';
 
 const creds = require(path.join(__dirname, '../config/private.json'));
 
-const settings: IJsomNodeSettings = {
+const x: IJsomNodeContext = {
   siteUrl: creds.siteUrl, // I.e. site collection url
   authOptions: { ...creds }
 };
 
 (async () => {
 
-  new JsomNode(settings).init();
+  new JsomNode().init(x);
 
   // Creating contexts for webs under the same creds' context
   const ctx1 = new SP.ClientContext(`${creds.siteUrl}/1`);

@@ -1,10 +1,10 @@
-import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
+import { JsomNode } from 'sp-jsom-node';
 
 const jsom = new JsomNode({
   modules: ['taxonomy', 'userprofiles']
-} as IJsomNodeSettings);
+});
 
-jsom.wizard().then(async settings => {
+jsom.wizard().then(async () => {
 
   const ctx = SP.ClientContext.get_current();
   const oWeb = ctx.get_web();
