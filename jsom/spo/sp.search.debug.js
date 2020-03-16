@@ -78,7 +78,7 @@ Microsoft.SharePoint.Client.Search.Query.QueryUtility.create = function Microsof
         var $v_0 = new Microsoft.SharePoint.Client.Search.Query.QueryPropertyValue();
         if (val) {
             var $v_1 = Object.getType(val);
-            switch (Array.indexOf(Microsoft.SharePoint.Client.Search.Query.QueryUtility.$1j, $v_1)) {
+            switch (Array.indexOf(Microsoft.SharePoint.Client.Search.Query.QueryUtility.$1k, $v_1)) {
                 case 1:
                     $v_0.$N_1 = val;
                     $v_0.$2_1 = 1;
@@ -638,7 +638,7 @@ Microsoft.SharePoint.Client.Search.Query.PopularTenantQuery.prototype = {
     $C_1: null,
     $E_1: null,
     $F_1: null,
-    $1J_1: null,
+    $1K_1: null,
     
     get_alwaysSuggest: function Microsoft_SharePoint_Client_Search_Query_PopularTenantQuery$get_alwaysSuggest() {
         return this.$4_1;
@@ -704,11 +704,11 @@ Microsoft.SharePoint.Client.Search.Query.PopularTenantQuery.prototype = {
     },
     
     get_webId: function Microsoft_SharePoint_Client_Search_Query_PopularTenantQuery$get_webId() {
-        return this.$1J_1;
+        return this.$1K_1;
     },
     
     set_webId: function Microsoft_SharePoint_Client_Search_Query_PopularTenantQuery$set_webId(value) {
-        this.$1J_1 = value;
+        this.$1K_1 = value;
         return value;
     },
     
@@ -768,7 +768,7 @@ Microsoft.SharePoint.Client.Search.Query.PopularTenantQuery.prototype = {
         }
         $v_0 = parentNode.WebId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1J_1 = ($v_0);
+            this.$1K_1 = ($v_0);
             delete parentNode.WebId;
         }
     }
@@ -1630,7 +1630,7 @@ Microsoft.SharePoint.Client.Search.Query.QueryAutoCompletionMatch.prototype = {
     $D_1: 0,
     $1B_1: null,
     $G_1: 0,
-    $1I_1: null,
+    $1J_1: null,
     
     get_alternation: function Microsoft_SharePoint_Client_Search_Query_QueryAutoCompletionMatch$get_alternation() {
         return this.$Y_1;
@@ -1696,11 +1696,11 @@ Microsoft.SharePoint.Client.Search.Query.QueryAutoCompletionMatch.prototype = {
     },
     
     get_value: function Microsoft_SharePoint_Client_Search_Query_QueryAutoCompletionMatch$get_value() {
-        return this.$1I_1;
+        return this.$1J_1;
     },
     
     set_value: function Microsoft_SharePoint_Client_Search_Query_QueryAutoCompletionMatch$set_value(value) {
-        this.$1I_1 = value;
+        this.$1J_1 = value;
         return value;
     },
     
@@ -1760,7 +1760,7 @@ Microsoft.SharePoint.Client.Search.Query.QueryAutoCompletionMatch.prototype = {
         }
         $v_0 = parentNode.Value;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1I_1 = ($v_0);
+            this.$1J_1 = ($v_0);
             delete parentNode.Value;
         }
     }
@@ -2303,25 +2303,25 @@ Microsoft.SharePoint.Client.Search.Query.ResultTable = function Microsoft_ShareP
     Microsoft.SharePoint.Client.Search.Query.ResultTable.initializeBase(this);
 }
 Microsoft.SharePoint.Client.Search.Query.ResultTable.prototype = {
-    $1N_1: null,
-    $1P_1: null,
+    $1O_1: null,
+    $1Q_1: null,
     $3_1: null,
     $L_1: null,
-    $1U_1: null,
     $1V_1: null,
     $1W_1: null,
     $1X_1: null,
-    $1Y_1: 0,
-    $1e_1: null,
-    $1f_1: 0,
+    $1Y_1: null,
+    $1Z_1: 0,
+    $1f_1: null,
     $1g_1: 0,
+    $1h_1: 0,
     
     get_groupTemplateId: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_groupTemplateId() {
-        return this.$1N_1;
+        return this.$1O_1;
     },
     
     get_itemTemplateId: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_itemTemplateId() {
-        return this.$1P_1;
+        return this.$1Q_1;
     },
     
     get_properties: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_properties() {
@@ -2333,35 +2333,35 @@ Microsoft.SharePoint.Client.Search.Query.ResultTable.prototype = {
     },
     
     get_queryRuleId: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_queryRuleId() {
-        return this.$1U_1;
-    },
-    
-    get_resultRows: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_resultRows() {
         return this.$1V_1;
     },
     
-    get_resultTitle: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_resultTitle() {
+    get_resultRows: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_resultRows() {
         return this.$1W_1;
     },
     
-    get_resultTitleUrl: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_resultTitleUrl() {
+    get_resultTitle: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_resultTitle() {
         return this.$1X_1;
     },
     
-    get_rowCount: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_rowCount() {
+    get_resultTitleUrl: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_resultTitleUrl() {
         return this.$1Y_1;
     },
     
-    get_tableType: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_tableType() {
-        return this.$1e_1;
+    get_rowCount: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_rowCount() {
+        return this.$1Z_1;
     },
     
-    get_totalRows: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_totalRows() {
+    get_tableType: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_tableType() {
         return this.$1f_1;
     },
     
-    get_totalRowsIncludingDuplicates: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_totalRowsIncludingDuplicates() {
+    get_totalRows: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_totalRows() {
         return this.$1g_1;
+    },
+    
+    get_totalRowsIncludingDuplicates: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_totalRowsIncludingDuplicates() {
+        return this.$1h_1;
     },
     
     get_typeId: function Microsoft_SharePoint_Client_Search_Query_ResultTable$get_typeId() {
@@ -2385,12 +2385,12 @@ Microsoft.SharePoint.Client.Search.Query.ResultTable.prototype = {
         var $v_0;
         $v_0 = parentNode.GroupTemplateId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1N_1 = ($v_0);
+            this.$1O_1 = ($v_0);
             delete parentNode.GroupTemplateId;
         }
         $v_0 = parentNode.ItemTemplateId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1P_1 = ($v_0);
+            this.$1Q_1 = ($v_0);
             delete parentNode.ItemTemplateId;
         }
         $v_0 = parentNode.Properties;
@@ -2405,42 +2405,42 @@ Microsoft.SharePoint.Client.Search.Query.ResultTable.prototype = {
         }
         $v_0 = parentNode.QueryRuleId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1U_1 = ($v_0);
+            this.$1V_1 = ($v_0);
             delete parentNode.QueryRuleId;
         }
         $v_0 = parentNode.ResultRows;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1V_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1W_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.ResultRows;
         }
         $v_0 = parentNode.ResultTitle;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1W_1 = ($v_0);
+            this.$1X_1 = ($v_0);
             delete parentNode.ResultTitle;
         }
         $v_0 = parentNode.ResultTitleUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1X_1 = ($v_0);
+            this.$1Y_1 = ($v_0);
             delete parentNode.ResultTitleUrl;
         }
         $v_0 = parentNode.RowCount;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1Y_1 = ($v_0);
+            this.$1Z_1 = ($v_0);
             delete parentNode.RowCount;
         }
         $v_0 = parentNode.TableType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1e_1 = ($v_0);
+            this.$1f_1 = ($v_0);
             delete parentNode.TableType;
         }
         $v_0 = parentNode.TotalRows;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1f_1 = ($v_0);
+            this.$1g_1 = ($v_0);
             delete parentNode.TotalRows;
         }
         $v_0 = parentNode.TotalRowsIncludingDuplicates;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1g_1 = ($v_0);
+            this.$1h_1 = ($v_0);
             delete parentNode.TotalRowsIncludingDuplicates;
         }
     }
@@ -2453,10 +2453,10 @@ Microsoft.SharePoint.Client.Search.Query.ResultTableCollection = function Micros
 Microsoft.SharePoint.Client.Search.Query.ResultTableCollection.prototype = {
     $i_2: 0,
     $3_2: null,
-    $1T_2: null,
+    $1U_2: null,
     $L_2: null,
-    $1c_2: null,
-    $1h_2: null,
+    $1d_2: null,
+    $1i_2: null,
     
     add: function Microsoft_SharePoint_Client_Search_Query_ResultTableCollection$add(item) {
         this.addChild(item);
@@ -2480,7 +2480,7 @@ Microsoft.SharePoint.Client.Search.Query.ResultTableCollection.prototype = {
     },
     
     get_queryErrors: function Microsoft_SharePoint_Client_Search_Query_ResultTableCollection$get_queryErrors() {
-        return this.$1T_2;
+        return this.$1U_2;
     },
     
     get_queryId: function Microsoft_SharePoint_Client_Search_Query_ResultTableCollection$get_queryId() {
@@ -2488,11 +2488,11 @@ Microsoft.SharePoint.Client.Search.Query.ResultTableCollection.prototype = {
     },
     
     get_spellingSuggestion: function Microsoft_SharePoint_Client_Search_Query_ResultTableCollection$get_spellingSuggestion() {
-        return this.$1c_2;
+        return this.$1d_2;
     },
     
     get_triggeredRules: function Microsoft_SharePoint_Client_Search_Query_ResultTableCollection$get_triggeredRules() {
-        return this.$1h_2;
+        return this.$1i_2;
     },
     
     get_typeId: function Microsoft_SharePoint_Client_Search_Query_ResultTableCollection$get_typeId() {
@@ -2530,7 +2530,7 @@ Microsoft.SharePoint.Client.Search.Query.ResultTableCollection.prototype = {
         }
         $v_0 = parentNode.QueryErrors;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1T_2 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1U_2 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.QueryErrors;
         }
         $v_0 = parentNode.QueryId;
@@ -2540,12 +2540,12 @@ Microsoft.SharePoint.Client.Search.Query.ResultTableCollection.prototype = {
         }
         $v_0 = parentNode.SpellingSuggestion;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1c_2 = ($v_0);
+            this.$1d_2 = ($v_0);
             delete parentNode.SpellingSuggestion;
         }
         $v_0 = parentNode.TriggeredRules;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1h_2 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1i_2 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.TriggeredRules;
         }
     }
@@ -3337,7 +3337,7 @@ Microsoft.Office.Server.Search.REST.QueryCondition.prototype = {
     $v_1: null,
     $11_1: null,
     $1F_1: null,
-    $1H_1: null,
+    $1I_1: null,
     
     get_LCID: function Microsoft_Office_Server_Search_REST_QueryCondition$get_LCID() {
         return this.$0_1;
@@ -3376,11 +3376,11 @@ Microsoft.Office.Server.Search.REST.QueryCondition.prototype = {
     },
     
     get_terms: function Microsoft_Office_Server_Search_REST_QueryCondition$get_terms() {
-        return this.$1H_1;
+        return this.$1I_1;
     },
     
     set_terms: function Microsoft_Office_Server_Search_REST_QueryCondition$set_terms(value) {
-        this.$1H_1 = value;
+        this.$1I_1 = value;
         return value;
     },
     
@@ -3425,7 +3425,7 @@ Microsoft.Office.Server.Search.REST.QueryCondition.prototype = {
         }
         $v_0 = parentNode.Terms;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1H_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1I_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.Terms;
         }
     }
@@ -3529,6 +3529,7 @@ Microsoft.Office.Server.Search.REST.QueryContext.prototype = {
     $17_1: null,
     $1C_1: null,
     $1D_1: null,
+    $1H_1: null,
     
     get_groupObjectIds: function Microsoft_Office_Server_Search_REST_QueryContext$get_groupObjectIds() {
         return this.$m_1;
@@ -3575,6 +3576,15 @@ Microsoft.Office.Server.Search.REST.QueryContext.prototype = {
         return value;
     },
     
+    get_tenantInstanceId: function Microsoft_Office_Server_Search_REST_QueryContext$get_tenantInstanceId() {
+        return this.$1H_1;
+    },
+    
+    set_tenantInstanceId: function Microsoft_Office_Server_Search_REST_QueryContext$set_tenantInstanceId(value) {
+        this.$1H_1 = value;
+        return value;
+    },
+    
     get_typeId: function Microsoft_Office_Server_Search_REST_QueryContext$get_typeId() {
         return '{98ab242f-d338-4d4d-9578-a4d6851873b4}';
     },
@@ -3586,7 +3596,7 @@ Microsoft.Office.Server.Search.REST.QueryContext.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'GroupObjectIds', 'PortalUrl', 'RoleIds', 'SpSiteId', 'SpWebId' ];
+        var $v_0 = [ 'GroupObjectIds', 'PortalUrl', 'RoleIds', 'SpSiteId', 'SpWebId', 'TenantInstanceId' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -3618,6 +3628,11 @@ Microsoft.Office.Server.Search.REST.QueryContext.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$1D_1 = ($v_0);
             delete parentNode.SpWebId;
+        }
+        $v_0 = parentNode.TenantInstanceId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$1H_1 = ($v_0);
+            delete parentNode.TenantInstanceId;
         }
     }
 }
@@ -3931,65 +3946,65 @@ Microsoft.Office.Server.Search.WebControls.ControlMessage = function Microsoft_O
     Microsoft.Office.Server.Search.WebControls.ControlMessage.initializeBase(this);
 }
 Microsoft.Office.Server.Search.WebControls.ControlMessage.prototype = {
-    $1K_1: 0,
-    $1L_1: null,
-    $1M_1: false,
-    $1O_1: null,
-    $1Q_1: 0,
-    $1R_1: null,
+    $1L_1: 0,
+    $1M_1: null,
+    $1N_1: false,
+    $1P_1: null,
+    $1R_1: 0,
     $1S_1: null,
-    $1Z_1: null,
-    $1a_1: false,
+    $1T_1: null,
+    $1a_1: null,
     $1b_1: false,
-    $1d_1: null,
-    $1i_1: null,
+    $1c_1: false,
+    $1e_1: null,
+    $1j_1: null,
     
     get_code: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_code() {
-        return this.$1K_1;
-    },
-    
-    get_correlationID: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_correlationID() {
         return this.$1L_1;
     },
     
-    get_encodeDetails: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_encodeDetails() {
+    get_correlationID: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_correlationID() {
         return this.$1M_1;
     },
     
+    get_encodeDetails: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_encodeDetails() {
+        return this.$1N_1;
+    },
+    
     get_header: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_header() {
-        return this.$1O_1;
+        return this.$1P_1;
     },
     
     get_level: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_level() {
-        return this.$1Q_1;
-    },
-    
-    get_messageDetails: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_messageDetails() {
         return this.$1R_1;
     },
     
-    get_messageDetailsForViewers: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_messageDetailsForViewers() {
+    get_messageDetails: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_messageDetails() {
         return this.$1S_1;
     },
     
-    get_serverTypeId: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_serverTypeId() {
-        return this.$1Z_1;
+    get_messageDetailsForViewers: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_messageDetailsForViewers() {
+        return this.$1T_1;
     },
     
-    get_showForViewerUsers: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_showForViewerUsers() {
+    get_serverTypeId: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_serverTypeId() {
         return this.$1a_1;
     },
     
-    get_showInEditModeOnly: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_showInEditModeOnly() {
+    get_showForViewerUsers: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_showForViewerUsers() {
         return this.$1b_1;
     },
     
+    get_showInEditModeOnly: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_showInEditModeOnly() {
+        return this.$1c_1;
+    },
+    
     get_stackTrace: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_stackTrace() {
-        return this.$1d_1;
+        return this.$1e_1;
     },
     
     get_type: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_type() {
-        return this.$1i_1;
+        return this.$1j_1;
     },
     
     get_typeId: function Microsoft_Office_Server_Search_WebControls_ControlMessage$get_typeId() {
@@ -4013,62 +4028,62 @@ Microsoft.Office.Server.Search.WebControls.ControlMessage.prototype = {
         var $v_0;
         $v_0 = parentNode.code;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1K_1 = ($v_0);
+            this.$1L_1 = ($v_0);
             delete parentNode.code;
         }
         $v_0 = parentNode.correlationID;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1L_1 = ($v_0);
+            this.$1M_1 = ($v_0);
             delete parentNode.correlationID;
         }
         $v_0 = parentNode.encodeDetails;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1M_1 = ($v_0);
+            this.$1N_1 = ($v_0);
             delete parentNode.encodeDetails;
         }
         $v_0 = parentNode.header;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1O_1 = ($v_0);
+            this.$1P_1 = ($v_0);
             delete parentNode.header;
         }
         $v_0 = parentNode.level;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1Q_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$1R_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.level;
         }
         $v_0 = parentNode.messageDetails;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1R_1 = ($v_0);
+            this.$1S_1 = ($v_0);
             delete parentNode.messageDetails;
         }
         $v_0 = parentNode.messageDetailsForViewers;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1S_1 = ($v_0);
+            this.$1T_1 = ($v_0);
             delete parentNode.messageDetailsForViewers;
         }
         $v_0 = parentNode.serverTypeId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1Z_1 = ($v_0);
+            this.$1a_1 = ($v_0);
             delete parentNode.serverTypeId;
         }
         $v_0 = parentNode.showForViewerUsers;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1a_1 = ($v_0);
+            this.$1b_1 = ($v_0);
             delete parentNode.showForViewerUsers;
         }
         $v_0 = parentNode.showInEditModeOnly;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1b_1 = ($v_0);
+            this.$1c_1 = ($v_0);
             delete parentNode.showInEditModeOnly;
         }
         $v_0 = parentNode.stackTrace;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1d_1 = ($v_0);
+            this.$1e_1 = ($v_0);
             delete parentNode.stackTrace;
         }
         $v_0 = parentNode.type;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1i_1 = ($v_0);
+            this.$1j_1 = ($v_0);
             delete parentNode.type;
         }
     }
@@ -4384,7 +4399,7 @@ Microsoft.SharePoint.Client.Search.ContentPush.PushTenantServiceInfo.registerCla
 Microsoft.SharePoint.Client.Search.ContentPush.PushTenantServiceInfoPropertyNames.registerClass('Microsoft.SharePoint.Client.Search.ContentPush.PushTenantServiceInfoPropertyNames');
 Microsoft.SharePoint.Client.Search.Portability.SearchConfigurationPortability.registerClass('Microsoft.SharePoint.Client.Search.Portability.SearchConfigurationPortability', SP.ClientObject);
 Microsoft.SharePoint.Client.Search.Portability.SearchConfigurationPortabilityPropertyNames.registerClass('Microsoft.SharePoint.Client.Search.Portability.SearchConfigurationPortabilityPropertyNames');
-Microsoft.SharePoint.Client.Search.Query.QueryUtility.$1j = [ null, String, Number, Boolean, Array ];
+Microsoft.SharePoint.Client.Search.Query.QueryUtility.$1k = [ null, String, Number, Boolean, Array ];
 Microsoft.SharePoint.Client.Search.Query.KeywordQueryPropertyNames.collapseSpecification = 'CollapseSpecification';
 Microsoft.SharePoint.Client.Search.Query.KeywordQueryPropertyNames.enableSorting = 'EnableSorting';
 Microsoft.SharePoint.Client.Search.Query.KeywordQueryPropertyNames.hiddenConstraints = 'HiddenConstraints';

@@ -3146,7 +3146,7 @@ SP.Publishing.Navigation.NavigationLinkType.registerEnum('SP.Publishing.Navigati
 SP.Publishing.Navigation.PortalNavigationCacheState = function() {}
 SP.Publishing.Navigation.PortalNavigationCacheState.prototype = {
     enabled: 1, 
-    disabled: 2, 
+    pendingEnable: 2, 
     refreshing: 3, 
     pendingOptOut: 4, 
     optedOut: 5
