@@ -2359,6 +2359,24 @@ SP.CompliancePolicy.SPPolicyStoreProxy.setHoldGracePeriodInDays = function SP_Co
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetHoldGracePeriodInDays', [ gracePeriodInDays ]);
     context.addQuery($v_0);
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.getSiteCompliancePolicyProperty = function SP_CompliancePolicy_SPPolicyStoreProxy$getSiteCompliancePolicyProperty(context, siteUrl, siteId, propertyName) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetSiteCompliancePolicyProperty', [ siteUrl, siteId, propertyName ]);
+    context.addQuery($v_1);
+    $v_0 = new SP.StringResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setSiteCompliancePolicyProperty = function SP_CompliancePolicy_SPPolicyStoreProxy$setSiteCompliancePolicyProperty(context, siteUrl, siteId, propertyName, propertyValue) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetSiteCompliancePolicyProperty', [ siteUrl, siteId, propertyName, propertyValue ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     
     get_policyStoreUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_policyStoreUrl() {

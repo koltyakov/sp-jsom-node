@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 19904,
-            "rpr": 12015
+            "rup": 19918,
+            "rpr": 12024
         }
     };
 }
@@ -846,7 +846,8 @@ SP.RenderListDataOptions.prototype = {
     listAvailableContentTypes: 65536,
     folderContentTypeOrder: 131072,
     gridInitInfo: 262144,
-    siteUrlAsMediaTASPItemHost: 524288
+    siteUrlAsMediaTASPItemHost: 524288,
+    addToOneDrive: 1048576
 };
 SP.RenderListDataOptions.registerEnum('SP.RenderListDataOptions', false);
 SP.RenderListFormDataOptions = function() {
@@ -1195,10 +1196,10 @@ SP.VisualizationType.prototype = {
 };
 SP.VisualizationType.registerEnum('SP.VisualizationType', false);
 SP.ClientContext = function SP_ClientContext(serverRelativeUrlOrFullUrl) {
-    SP.ClientContext.initializeBase(this, [SP.ScriptUtility.isNullOrUndefined(serverRelativeUrlOrFullUrl) ? SP.ClientContext.$BE() : serverRelativeUrlOrFullUrl]);
+    SP.ClientContext.initializeBase(this, [SP.ScriptUtility.isNullOrUndefined(serverRelativeUrlOrFullUrl) ? SP.ClientContext.$BG() : serverRelativeUrlOrFullUrl]);
     this.set_formDigestHandlingEnabled(true);
 };
-SP.ClientContext.$BE = function SP_ClientContext$$BE() {
+SP.ClientContext.$BG = function SP_ClientContext$$BG() {
     var $v_0 = window._spPageContextInfo;
 
     if ($v_0) {
@@ -1277,17 +1278,17 @@ SP.ClientContext.prototype = {
         }
         return this.$1b_1;
     },
-    get_$Bc_1: function SP_ClientContext$get_$Bc_1() {
+    get_$Be_1: function SP_ClientContext$get_$Be_1() {
         if (!this.$1b_1) {
             return null;
         }
-        return this.$1b_1.$Bf_0();
+        return this.$1b_1.$Bh_0();
     },
     get_serverVersion: function SP_ClientContext$get_serverVersion() {
         return this.get_serverLibraryVersion();
     },
     executeClientRequestAsync: function SP_ClientContext$executeClientRequestAsync(request, succeededCallback, failedCallback) {
-        var $v_0 = this.get_$Bc_1();
+        var $v_0 = this.get_$Be_1();
 
         if (!SP.ScriptUtility.isNullOrEmptyString($v_0)) {
             ((request.get_webRequest()).get_headers())['X-SP-REQUESTRESOURCES'] = $v_0;
@@ -1346,7 +1347,7 @@ SP.RequestResources.prototype = {
         this.$B_0 = value;
         return value;
     },
-    $Bf_0: function SP_RequestResources$$Bf_0() {
+    $Bh_0: function SP_RequestResources$$Bh_0() {
         var $v_0 = new Sys.StringBuilder();
 
         if (this.$8A_0) {
@@ -1391,8 +1392,8 @@ SP.RequestResources.prototype = {
 };
 SP.ULS = function SP_ULS() {
 };
-SP.ULS.$An = function SP_ULS$$An() {
-    if (SP.ULS.$Ah) {
+SP.ULS.$Ap = function SP_ULS$$Ap() {
+    if (SP.ULS.$Aj) {
         return null;
     }
     var $v_0 = window.top.s_sp_debugWindow;
@@ -1402,16 +1403,16 @@ SP.ULS.$An = function SP_ULS$$An() {
             $v_0 = window.open('/_layouts/' + 15 + '/blank.htm', null, 'width=400,height=200,scrollbars=yes,resizable=yes,status=no,location=no,menubar=no,toolbar=no');
         }
         catch ($$e_1) {
-            SP.ULS.$Ah = true;
+            SP.ULS.$Aj = true;
         }
         if ($v_0) {
-            window.setTimeout(SP.ULS.$BF, 100);
+            window.setTimeout(SP.ULS.$BH, 100);
         }
         window.top.s_sp_debugWindow = $v_0;
     }
     return $v_0;
 };
-SP.ULS.$BF = function SP_ULS$$BF() {
+SP.ULS.$BH = function SP_ULS$$BH() {
     var $v_0 = window.top.s_sp_debugWindow;
 
     if (!$v_0) {
@@ -1434,8 +1435,8 @@ SP.ULS.$BF = function SP_ULS$$BF() {
         $v_1.body.appendChild($v_2);
         $v_2 = $v_1.getElementById('UlsLogs');
         $v_2.appendChild($v_1.createTextNode('Use double-click to clear the entries.'));
-        $addHandler($v_1.body, 'dblclick', SP.ULS.$Az);
-        $addHandler($v_3, 'click', SP.ULS.$Bg);
+        $addHandler($v_1.body, 'dblclick', SP.ULS.$B1);
+        $addHandler($v_3, 'click', SP.ULS.$Bi);
         $v_1.title = 'Debug Output';
     }
     catch ($$e_4) { }
@@ -1457,22 +1458,22 @@ SP.ULS.log = function SP_ULS$log(debugMessage) {
     if (SP.ULS.$g) {
         for (var $v_3 = 0; $v_3 < SP.ULS.$g.length; $v_3++) {
             var $v_4 = SP.ULS.$g[$v_3];
-            var $v_5 = SP.ULS.$Ar($v_4['time'], $v_4['msg']);
+            var $v_5 = SP.ULS.$At($v_4['time'], $v_4['msg']);
 
             if (!$v_5) {
-                SP.ULS.$Av($v_0, $v_1);
+                SP.ULS.$Ax($v_0, $v_1);
                 return;
             }
         }
         SP.ULS.$g = null;
     }
-    var $v_2 = SP.ULS.$Ar($v_0, $v_1);
+    var $v_2 = SP.ULS.$At($v_0, $v_1);
 
     if (!$v_2) {
-        SP.ULS.$Av($v_0, $v_1);
+        SP.ULS.$Ax($v_0, $v_1);
     }
 };
-SP.ULS.$Av = function SP_ULS$$Av($p0, $p1) {
+SP.ULS.$Ax = function SP_ULS$$Ax($p0, $p1) {
     if (!SP.ULS.$g) {
         SP.ULS.$g = new Array(0);
     }
@@ -1482,8 +1483,8 @@ SP.ULS.$Av = function SP_ULS$$Av($p0, $p1) {
     $v_0['msg'] = $p1;
     SP.ULS.$g[SP.ULS.$g.length] = $v_0;
 };
-SP.ULS.$Ar = function SP_ULS$$Ar($p0, $p1) {
-    var $v_0 = SP.ULS.$An();
+SP.ULS.$At = function SP_ULS$$At($p0, $p1) {
+    var $v_0 = SP.ULS.$Ap();
 
     if ($v_0) {
         try {
@@ -1515,22 +1516,22 @@ SP.ULS.$Ar = function SP_ULS$$Ar($p0, $p1) {
     }
     return false;
 };
-SP.ULS.$Az = function SP_ULS$$Az($p0) {
-    var $v_0 = SP.ULS.$An();
+SP.ULS.$B1 = function SP_ULS$$B1($p0) {
+    var $v_0 = SP.ULS.$Ap();
 
     if ($v_0 && $v_0.document) {
         ($v_0.document.getElementById('UlsLogs')).innerHTML = '';
     }
 };
-SP.ULS.$Bg = function SP_ULS$$Bg($p0) {
+SP.ULS.$Bi = function SP_ULS$$Bi($p0) {
     SP.ULS.$8V = $p0.target.checked;
 };
 SP.ULS.increaseIndent = function SP_ULS$increaseIndent() {
-    SP.ULS.$Ai++;
+    SP.ULS.$Ak++;
     SP.ULS.$1A = SP.ULS.$1A + String.fromCharCode(160);
 };
 SP.ULS.decreaseIndent = function SP_ULS$decreaseIndent() {
-    SP.ULS.$Ai--;
+    SP.ULS.$Ak--;
     if (SP.ULS.$1A.length > 0) {
         SP.ULS.$1A = SP.ULS.$1A.substr(0, SP.ULS.$1A.length - 1);
     }
@@ -1542,7 +1543,7 @@ SP.ULS.traceApiEnter = function SP_ULS$traceApiEnter(functionName) {
     if (!SP.ULS.$8V) {
         return;
     }
-    SP.ULS.$Aj.push(functionName);
+    SP.ULS.$Al.push(functionName);
     var $v_0 = 'Enter ' + functionName + '(';
 
     for (var $v_1 = 1; $v_1 < arguments.length; $v_1++) {
@@ -1581,7 +1582,7 @@ SP.ULS.traceApiLeave = function SP_ULS$traceApiLeave() {
         return;
     }
     SP.ULS.decreaseIndent();
-    var $v_0 = SP.ULS.$Aj.pop();
+    var $v_0 = SP.ULS.$Al.pop();
     var $v_1 = 'Leave ' + $v_0;
 
     SP.ULS.log($v_1);
@@ -2692,9 +2693,9 @@ SP.AppLicense = function SP_AppLicense() {
     SP.AppLicense.initializeBase(this);
 };
 SP.AppLicense.prototype = {
-    $A5_1: null,
+    $A7_1: null,
     get_rawXMLLicenseToken: function SP_AppLicense$get_rawXMLLicenseToken() {
-        return this.$A5_1;
+        return this.$A7_1;
     },
     get_typeId: function SP_AppLicense$get_typeId() {
         return '{d3425bf9-fe82-4957-afda-5fbd21dabb85}';
@@ -2717,7 +2718,7 @@ SP.AppLicense.prototype = {
 
         $v_0 = parentNode.RawXMLLicenseToken;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A5_1 = $v_0;
+            this.$A7_1 = $v_0;
             delete parentNode.RawXMLLicenseToken;
         }
     }
@@ -2751,18 +2752,18 @@ SP.AppProperties = function SP_AppProperties() {
 SP.AppProperties.prototype = {
     $8q_1: false,
     $2_1: null,
-    $9F_1: null,
+    $9G_1: null,
     $1I_1: false,
-    $9U_1: false,
-    $9l_1: false,
+    $9V_1: false,
     $9m_1: false,
     $9n_1: false,
-    $9s_1: false,
-    $A4_1: null,
-    $AA_1: false,
-    $AJ_1: false,
-    $AR_1: null,
-    $AZ_1: false,
+    $9o_1: false,
+    $9t_1: false,
+    $A6_1: null,
+    $AC_1: false,
+    $AL_1: false,
+    $AT_1: null,
+    $Ab_1: false,
     get_appSettingsEnabled: function SP_AppProperties$get_appSettingsEnabled() {
         return this.$8q_1;
     },
@@ -2770,40 +2771,40 @@ SP.AppProperties.prototype = {
         return this.$2_1;
     },
     get_eulaUrl: function SP_AppProperties$get_eulaUrl() {
-        return this.$9F_1;
+        return this.$9G_1;
     },
     get_isAnonymous: function SP_AppProperties$get_isAnonymous() {
         return this.$1I_1;
     },
     get_isDisabled: function SP_AppProperties$get_isDisabled() {
-        return this.$9U_1;
+        return this.$9V_1;
     },
     get_managedDeploymentEnabled: function SP_AppProperties$get_managedDeploymentEnabled() {
-        return this.$9l_1;
-    },
-    get_managePermissionsEnabled: function SP_AppProperties$get_managePermissionsEnabled() {
         return this.$9m_1;
     },
-    get_manageSeatsEnabled: function SP_AppProperties$get_manageSeatsEnabled() {
+    get_managePermissionsEnabled: function SP_AppProperties$get_managePermissionsEnabled() {
         return this.$9n_1;
     },
+    get_manageSeatsEnabled: function SP_AppProperties$get_manageSeatsEnabled() {
+        return this.$9o_1;
+    },
     get_monitoringEnabled: function SP_AppProperties$get_monitoringEnabled() {
-        return this.$9s_1;
+        return this.$9t_1;
     },
     get_publisher: function SP_AppProperties$get_publisher() {
-        return this.$A4_1;
+        return this.$A6_1;
     },
     get_removeEnabled: function SP_AppProperties$get_removeEnabled() {
-        return this.$AA_1;
+        return this.$AC_1;
     },
     get_sideLoadEnabled: function SP_AppProperties$get_sideLoadEnabled() {
-        return this.$AJ_1;
+        return this.$AL_1;
     },
     get_supportUrl: function SP_AppProperties$get_supportUrl() {
-        return this.$AR_1;
+        return this.$AT_1;
     },
     get_viewInMarketPlaceEnabled: function SP_AppProperties$get_viewInMarketPlaceEnabled() {
-        return this.$AZ_1;
+        return this.$Ab_1;
     },
     get_typeId: function SP_AppProperties$get_typeId() {
         return '{45493869-65a1-4b1e-a159-c7b32eb57794}';
@@ -2836,7 +2837,7 @@ SP.AppProperties.prototype = {
         }
         $v_0 = parentNode.EulaUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9F_1 = $v_0;
+            this.$9G_1 = $v_0;
             delete parentNode.EulaUrl;
         }
         $v_0 = parentNode.IsAnonymous;
@@ -2846,52 +2847,52 @@ SP.AppProperties.prototype = {
         }
         $v_0 = parentNode.IsDisabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9U_1 = $v_0;
+            this.$9V_1 = $v_0;
             delete parentNode.IsDisabled;
         }
         $v_0 = parentNode.ManagedDeploymentEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9l_1 = $v_0;
+            this.$9m_1 = $v_0;
             delete parentNode.ManagedDeploymentEnabled;
         }
         $v_0 = parentNode.ManagePermissionsEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9m_1 = $v_0;
+            this.$9n_1 = $v_0;
             delete parentNode.ManagePermissionsEnabled;
         }
         $v_0 = parentNode.ManageSeatsEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9n_1 = $v_0;
+            this.$9o_1 = $v_0;
             delete parentNode.ManageSeatsEnabled;
         }
         $v_0 = parentNode.MonitoringEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9s_1 = $v_0;
+            this.$9t_1 = $v_0;
             delete parentNode.MonitoringEnabled;
         }
         $v_0 = parentNode.Publisher;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A4_1 = $v_0;
+            this.$A6_1 = $v_0;
             delete parentNode.Publisher;
         }
         $v_0 = parentNode.RemoveEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AA_1 = $v_0;
+            this.$AC_1 = $v_0;
             delete parentNode.RemoveEnabled;
         }
         $v_0 = parentNode.SideLoadEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AJ_1 = $v_0;
+            this.$AL_1 = $v_0;
             delete parentNode.SideLoadEnabled;
         }
         $v_0 = parentNode.SupportUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AR_1 = $v_0;
+            this.$AT_1 = $v_0;
             delete parentNode.SupportUrl;
         }
         $v_0 = parentNode.ViewInMarketPlaceEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AZ_1 = $v_0;
+            this.$Ab_1 = $v_0;
             delete parentNode.ViewInMarketPlaceEnabled;
         }
     }
@@ -4409,7 +4410,7 @@ SP.ChangeQuery = function SP_ChangeQuery(allChangeObjectTypes, allChangeTypes) {
         allChangeObjectTypes = false;
         allChangeTypes = false;
     }
-    this.$BK_1(allChangeObjectTypes, allChangeTypes);
+    this.$BM_1(allChangeObjectTypes, allChangeTypes);
 };
 SP.ChangeQuery.prototype = {
     $2b_1: false,
@@ -4447,7 +4448,7 @@ SP.ChangeQuery.prototype = {
     $Y_1: false,
     $O_1: false,
     $U_1: false,
-    $BK_1: function SP_ChangeQuery$$BK_1($p0, $p1) {
+    $BM_1: function SP_ChangeQuery$$BM_1($p0, $p1) {
         if ($p0) {
             this.$x_1 = true;
             this.$M_1 = true;
@@ -5993,7 +5994,7 @@ SP.ContentTypeCreationInformation.prototype = {
     $b_1: null,
     $C_1: null,
     $4_1: null,
-    $9z_1: null,
+    $A1_1: null,
     get_description: function SP_ContentTypeCreationInformation$get_description() {
         return this.$2_1;
     },
@@ -6023,10 +6024,10 @@ SP.ContentTypeCreationInformation.prototype = {
         return value;
     },
     get_parentContentType: function SP_ContentTypeCreationInformation$get_parentContentType() {
-        return this.$9z_1;
+        return this.$A1_1;
     },
     set_parentContentType: function SP_ContentTypeCreationInformation$set_parentContentType(value) {
-        this.$9z_1 = value;
+        this.$A1_1 = value;
         return value;
     },
     get_typeId: function SP_ContentTypeCreationInformation$get_typeId() {
@@ -6246,10 +6247,12 @@ SP.CopyMigrationOptions.prototype = {
     $2p_1: false,
     $2q_1: false,
     $8_1: false,
+    $8x_1: null,
     $5a_1: false,
-    $9Q_1: false,
+    $9R_1: false,
     $5n_1: false,
-    $9t_1: null,
+    $9u_1: null,
+    $9v_1: false,
     $6Y_1: 0,
     get_allowSchemaMismatch: function SP_CopyMigrationOptions$get_allowSchemaMismatch() {
         return this.$2p_1;
@@ -6304,12 +6307,20 @@ SP.CopyMigrationOptions.prototype = {
         SP.DataConvert.writeValueToXmlElement(writer, this.$8_1, serializationContext);
         writer.writeEndElement();
         writer.writeStartElement('Property');
+        writer.writeAttributeString('Name', 'ClientEtags');
+        SP.DataConvert.writeValueToXmlElement(writer, this.$8x_1, serializationContext);
+        writer.writeEndElement();
+        writer.writeStartElement('Property');
         writer.writeAttributeString('Name', 'IncludeItemPermissions');
-        SP.DataConvert.writeValueToXmlElement(writer, this.$9Q_1, serializationContext);
+        SP.DataConvert.writeValueToXmlElement(writer, this.$9R_1, serializationContext);
         writer.writeEndElement();
         writer.writeStartElement('Property');
         writer.writeAttributeString('Name', 'MoveAndShareFileInfo');
-        SP.DataConvert.writeValueToXmlElement(writer, this.$9t_1, serializationContext);
+        SP.DataConvert.writeValueToXmlElement(writer, this.$9u_1, serializationContext);
+        writer.writeEndElement();
+        writer.writeStartElement('Property');
+        writer.writeAttributeString('Name', 'MoveButKeepSource');
+        SP.DataConvert.writeValueToXmlElement(writer, this.$9v_1, serializationContext);
         writer.writeEndElement();
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -6332,6 +6343,11 @@ SP.CopyMigrationOptions.prototype = {
             this.$8_1 = $v_0;
             delete parentNode.BypassSharedLock;
         }
+        $v_0 = parentNode.ClientEtags;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$8x_1 = SP.DataConvert.fixupType(null, $v_0);
+            delete parentNode.ClientEtags;
+        }
         $v_0 = parentNode.IgnoreVersionHistory;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$5a_1 = $v_0;
@@ -6339,7 +6355,7 @@ SP.CopyMigrationOptions.prototype = {
         }
         $v_0 = parentNode.IncludeItemPermissions;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9Q_1 = $v_0;
+            this.$9R_1 = $v_0;
             delete parentNode.IncludeItemPermissions;
         }
         $v_0 = parentNode.IsMoveMode;
@@ -6349,8 +6365,13 @@ SP.CopyMigrationOptions.prototype = {
         }
         $v_0 = parentNode.MoveAndShareFileInfo;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9t_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$9u_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.MoveAndShareFileInfo;
+        }
+        $v_0 = parentNode.MoveButKeepSource;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$9v_1 = $v_0;
+            delete parentNode.MoveButKeepSource;
         }
         $v_0 = parentNode.NameConflictBehavior;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -6414,17 +6435,17 @@ SP.CreatableItemInfo = function SP_CreatableItemInfo() {
     SP.CreatableItemInfo.initializeBase(this);
 };
 SP.CreatableItemInfo.prototype = {
-    $99_1: 0,
-    $9G_1: null,
-    $9Z_1: null,
+    $9A_1: 0,
+    $9H_1: null,
+    $9a_1: null,
     get_documentTemplate: function SP_CreatableItemInfo$get_documentTemplate() {
-        return this.$99_1;
+        return this.$9A_1;
     },
     get_fileExtension: function SP_CreatableItemInfo$get_fileExtension() {
-        return this.$9G_1;
+        return this.$9H_1;
     },
     get_itemType: function SP_CreatableItemInfo$get_itemType() {
-        return this.$9Z_1;
+        return this.$9a_1;
     },
     get_typeId: function SP_CreatableItemInfo$get_typeId() {
         return '{e9797d9d-2304-4c12-bc6b-4a4e9d7a0ea6}';
@@ -6447,17 +6468,17 @@ SP.CreatableItemInfo.prototype = {
 
         $v_0 = parentNode.DocumentTemplate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$99_1 = $v_0;
+            this.$9A_1 = $v_0;
             delete parentNode.DocumentTemplate;
         }
         $v_0 = parentNode.FileExtension;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9G_1 = $v_0;
+            this.$9H_1 = $v_0;
             delete parentNode.FileExtension;
         }
         $v_0 = parentNode.ItemType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9Z_1 = $v_0;
+            this.$9a_1 = $v_0;
             delete parentNode.ItemType;
         }
     }
@@ -6537,13 +6558,13 @@ SP.CurrencyInformation = function SP_CurrencyInformation() {
     SP.CurrencyInformation.initializeBase(this);
 };
 SP.CurrencyInformation.prototype = {
-    $98_1: null,
-    $9g_1: null,
+    $99_1: null,
+    $9h_1: null,
     get_displayString: function SP_CurrencyInformation$get_displayString() {
-        return this.$98_1;
+        return this.$99_1;
     },
     get_LCID: function SP_CurrencyInformation$get_LCID() {
-        return this.$9g_1;
+        return this.$9h_1;
     },
     get_typeId: function SP_CurrencyInformation$get_typeId() {
         return '{80ffc784-b438-41fb-a239-3ca1382c80df}';
@@ -6566,12 +6587,12 @@ SP.CurrencyInformation.prototype = {
 
         $v_0 = parentNode.DisplayString;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$98_1 = $v_0;
+            this.$99_1 = $v_0;
             delete parentNode.DisplayString;
         }
         $v_0 = parentNode.LCID;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9g_1 = $v_0;
+            this.$9h_1 = $v_0;
             delete parentNode.LCID;
         }
     }
@@ -6618,61 +6639,61 @@ SP.CustomActionElement = function SP_CustomActionElement() {
     SP.CustomActionElement.initializeBase(this);
 };
 SP.CustomActionElement.prototype = {
-    $8y_1: null,
     $8z_1: null,
     $90_1: null,
+    $91_1: null,
     $C_1: null,
-    $9A_1: null,
-    $9L_1: null,
-    $9P_1: null,
-    $9j_1: null,
-    $A7_1: null,
-    $A8_1: 0,
-    $AC_1: false,
-    $AD_1: null,
+    $9B_1: null,
+    $9M_1: null,
+    $9Q_1: null,
+    $9k_1: null,
+    $A9_1: null,
+    $AA_1: 0,
+    $AE_1: false,
+    $AF_1: null,
     $0_1: null,
-    $AX_1: null,
+    $AZ_1: null,
     get_clientSideComponentId: function SP_CustomActionElement$get_clientSideComponentId() {
-        return this.$8y_1;
-    },
-    get_clientSideComponentProperties: function SP_CustomActionElement$get_clientSideComponentProperties() {
         return this.$8z_1;
     },
-    get_commandUIExtension: function SP_CustomActionElement$get_commandUIExtension() {
+    get_clientSideComponentProperties: function SP_CustomActionElement$get_clientSideComponentProperties() {
         return this.$90_1;
+    },
+    get_commandUIExtension: function SP_CustomActionElement$get_commandUIExtension() {
+        return this.$91_1;
     },
     get_id: function SP_CustomActionElement$get_id() {
         return this.$C_1;
     },
     get_enabledScript: function SP_CustomActionElement$get_enabledScript() {
-        return this.$9A_1;
+        return this.$9B_1;
     },
     get_hostProperties: function SP_CustomActionElement$get_hostProperties() {
-        return this.$9L_1;
+        return this.$9M_1;
     },
     get_imageUrl: function SP_CustomActionElement$get_imageUrl() {
-        return this.$9P_1;
+        return this.$9Q_1;
     },
     get_location: function SP_CustomActionElement$get_location() {
-        return this.$9j_1;
+        return this.$9k_1;
     },
     get_registrationId: function SP_CustomActionElement$get_registrationId() {
-        return this.$A7_1;
+        return this.$A9_1;
     },
     get_registrationType: function SP_CustomActionElement$get_registrationType() {
-        return this.$A8_1;
+        return this.$AA_1;
     },
     get_requireSiteAdministrator: function SP_CustomActionElement$get_requireSiteAdministrator() {
-        return this.$AC_1;
+        return this.$AE_1;
     },
     get_rights: function SP_CustomActionElement$get_rights() {
-        return this.$AD_1;
+        return this.$AF_1;
     },
     get_title: function SP_CustomActionElement$get_title() {
         return this.$0_1;
     },
     get_urlAction: function SP_CustomActionElement$get_urlAction() {
-        return this.$AX_1;
+        return this.$AZ_1;
     },
     get_typeId: function SP_CustomActionElement$get_typeId() {
         return '{7295eb25-e721-42b6-aac9-cbb6c39afc54}';
@@ -6695,17 +6716,17 @@ SP.CustomActionElement.prototype = {
 
         $v_0 = parentNode.ClientSideComponentId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$8y_1 = $v_0;
+            this.$8z_1 = $v_0;
             delete parentNode.ClientSideComponentId;
         }
         $v_0 = parentNode.ClientSideComponentProperties;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$8z_1 = $v_0;
+            this.$90_1 = $v_0;
             delete parentNode.ClientSideComponentProperties;
         }
         $v_0 = parentNode.CommandUIExtension;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$90_1 = $v_0;
+            this.$91_1 = $v_0;
             delete parentNode.CommandUIExtension;
         }
         $v_0 = parentNode.Id;
@@ -6715,42 +6736,42 @@ SP.CustomActionElement.prototype = {
         }
         $v_0 = parentNode.EnabledScript;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9A_1 = $v_0;
+            this.$9B_1 = $v_0;
             delete parentNode.EnabledScript;
         }
         $v_0 = parentNode.HostProperties;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9L_1 = $v_0;
+            this.$9M_1 = $v_0;
             delete parentNode.HostProperties;
         }
         $v_0 = parentNode.ImageUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9P_1 = $v_0;
+            this.$9Q_1 = $v_0;
             delete parentNode.ImageUrl;
         }
         $v_0 = parentNode.Location;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9j_1 = $v_0;
+            this.$9k_1 = $v_0;
             delete parentNode.Location;
         }
         $v_0 = parentNode.RegistrationId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A7_1 = $v_0;
+            this.$A9_1 = $v_0;
             delete parentNode.RegistrationId;
         }
         $v_0 = parentNode.RegistrationType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A8_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$AA_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.RegistrationType;
         }
         $v_0 = parentNode.RequireSiteAdministrator;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AC_1 = $v_0;
+            this.$AE_1 = $v_0;
             delete parentNode.RequireSiteAdministrator;
         }
         $v_0 = parentNode.Rights;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AD_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$AF_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.Rights;
         }
         $v_0 = parentNode.Title;
@@ -6760,7 +6781,7 @@ SP.CustomActionElement.prototype = {
         }
         $v_0 = parentNode.UrlAction;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AX_1 = $v_0;
+            this.$AZ_1 = $v_0;
             delete parentNode.UrlAction;
         }
     }
@@ -7060,22 +7081,22 @@ SP.DocumentLibraryInformation = function SP_DocumentLibraryInformation() {
 };
 SP.DocumentLibraryInformation.prototype = {
     $8l_1: null,
-    $9H_1: false,
-    $9q_1: null,
+    $9I_1: false,
     $9r_1: null,
+    $9s_1: null,
     $L_1: null,
     $0_1: null,
     get_absoluteUrl: function SP_DocumentLibraryInformation$get_absoluteUrl() {
         return this.$8l_1;
     },
     get_fromCrossFarm: function SP_DocumentLibraryInformation$get_fromCrossFarm() {
-        return this.$9H_1;
+        return this.$9I_1;
     },
     get_modified: function SP_DocumentLibraryInformation$get_modified() {
-        return this.$9q_1;
+        return this.$9r_1;
     },
     get_modifiedFriendlyDisplay: function SP_DocumentLibraryInformation$get_modifiedFriendlyDisplay() {
-        return this.$9r_1;
+        return this.$9s_1;
     },
     get_serverRelativeUrl: function SP_DocumentLibraryInformation$get_serverRelativeUrl() {
         return this.$L_1;
@@ -7109,17 +7130,17 @@ SP.DocumentLibraryInformation.prototype = {
         }
         $v_0 = parentNode.FromCrossFarm;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9H_1 = $v_0;
+            this.$9I_1 = $v_0;
             delete parentNode.FromCrossFarm;
         }
         $v_0 = parentNode.Modified;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9q_1 = $v_0;
+            this.$9r_1 = $v_0;
             delete parentNode.Modified;
         }
         $v_0 = parentNode.ModifiedFriendlyDisplay;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9r_1 = $v_0;
+            this.$9s_1 = $v_0;
             delete parentNode.ModifiedFriendlyDisplay;
         }
         $v_0 = parentNode.ServerRelativeUrl;
@@ -9280,7 +9301,7 @@ SP.FieldLookupValue = function SP_FieldLookupValue() {
 SP.FieldLookupValue.prototype = {
     $1y_1: 0,
     $6A_1: null,
-    $Bd_1: function SP_FieldLookupValue$$Bd_1($p0) {
+    $Bf_1: function SP_FieldLookupValue$$Bf_1($p0) {
         this.$6A_1 = $p0;
     },
     get_lookupId: function SP_FieldLookupValue$get_lookupId() {
@@ -9969,7 +9990,7 @@ SP.FieldUserValue.fromUser = function SP_FieldUserValue$fromUser(userName) {
     var $v_0 = new SP.FieldUserValue();
 
     $v_0.$1y_1 = -1;
-    $v_0.$Bd_1(userName);
+    $v_0.$Bf_1(userName);
     return $v_0;
 };
 SP.FieldUserValue.prototype = {
@@ -10036,7 +10057,7 @@ SP.File.prototype = {
             }
         }
     },
-    $B1_1: function SP_File$$B1_1($p0) {
+    $B3_1: function SP_File$$B3_1($p0) {
         if (typeof $p0 === 'undefined') {
             throw Error.argument();
         }
@@ -10511,6 +10532,28 @@ SP.File.prototype = {
         $v_1 = new SP.Utilities.UploadStatus($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetUploadStatus', [uploadId]));
         return $v_1;
     },
+    recycle: function SP_File$recycle() {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'Recycle', null);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.GuidResult();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        this.removeFromParentCollection();
+        return $v_1;
+    },
+    recycleWithETag: function SP_File$recycleWithETag(etagMatch) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'RecycleWithETag', [etagMatch]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.GuidResult();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        this.removeFromParentCollection();
+        return $v_1;
+    },
     recycleWithParameters: function SP_File$recycleWithParameters(parameters) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -10591,7 +10634,7 @@ SP.File.prototype = {
         if (!$v_0.get_disableReturnValueCache()) {
             $v_2[scope] = $v_1;
         }
-        this.$B1_1(scope);
+        this.$B3_1(scope);
         return $v_1;
     },
     getPreAuthorizedAccessUrl: function SP_File$getPreAuthorizedAccessUrl(expirationHours) {
@@ -10672,28 +10715,6 @@ SP.File.prototype = {
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteWithParameters', [parameters]);
 
         $v_0.addQuery($v_1);
-    },
-    recycle: function SP_File$recycle() {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'Recycle', null);
-
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.GuidResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        this.removeFromParentCollection();
-        return $v_1;
-    },
-    recycleWithETag: function SP_File$recycleWithETag(etagMatch) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'RecycleWithETag', [etagMatch]);
-
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.GuidResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        this.removeFromParentCollection();
-        return $v_1;
     },
     getWOPIFrameUrl: function SP_File$getWOPIFrameUrl(action) {
         var $v_0 = this.get_context();
@@ -13319,16 +13340,16 @@ SP.Language = function SP_Language() {
 };
 SP.Language.prototype = {
     $9_1: null,
-    $9b_1: null,
-    $9f_1: 0,
+    $9c_1: null,
+    $9g_1: 0,
     get_displayName: function SP_Language$get_displayName() {
         return this.$9_1;
     },
     get_languageTag: function SP_Language$get_languageTag() {
-        return this.$9b_1;
+        return this.$9c_1;
     },
     get_lcid: function SP_Language$get_lcid() {
-        return this.$9f_1;
+        return this.$9g_1;
     },
     get_typeId: function SP_Language$get_typeId() {
         return '{eae9f1b5-1ae9-417b-9a8b-04a1b4c05a4b}';
@@ -13356,12 +13377,12 @@ SP.Language.prototype = {
         }
         $v_0 = parentNode.LanguageTag;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9b_1 = $v_0;
+            this.$9c_1 = $v_0;
             delete parentNode.LanguageTag;
         }
         $v_0 = parentNode.Lcid;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9f_1 = $v_0;
+            this.$9g_1 = $v_0;
             delete parentNode.Lcid;
         }
     }
@@ -13428,7 +13449,7 @@ SP.List.prototype = {
     },
     getItemById: function SP_List$getItemById(id) {
         if (typeof id === 'string') {
-            return this.$BD_2(id.toString());
+            return this.$BF_2(id.toString());
         }
         else {
             id = parseInt(id.toString());
@@ -14693,6 +14714,16 @@ SP.List.prototype = {
             delete parentNode.WriteSecurity;
         }
     },
+    getWebDavUrl: function SP_List$getWebDavUrl(sourceUrl) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetWebDavUrl', [sourceUrl]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.StringResult();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
     getCheckedOutFiles: function SP_List$getCheckedOutFiles() {
         var $v_0 = this.get_context();
         var $v_1;
@@ -14859,15 +14890,11 @@ SP.List.prototype = {
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
-    getWebDavUrl: function SP_List$getWebDavUrl(sourceUrl) {
+    saveAsTemplate: function SP_List$saveAsTemplate(strFileName, strName, strDescription, bSaveData) {
         var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetWebDavUrl', [sourceUrl]);
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'SaveAsTemplate', [strFileName, strName, strDescription, bSaveData]);
 
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.StringResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
+        $v_0.addQuery($v_1);
     },
     reserveListItemId: function SP_List$reserveListItemId() {
         var $v_0 = this.get_context();
@@ -14959,12 +14986,6 @@ SP.List.prototype = {
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
-    saveAsTemplate: function SP_List$saveAsTemplate(strFileName, strName, strDescription, bSaveData) {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'SaveAsTemplate', [strFileName, strName, strDescription, bSaveData]);
-
-        $v_0.addQuery($v_1);
-    },
     getRelatedFields: function SP_List$getRelatedFields() {
         var $v_0 = this.get_context();
         var $v_1;
@@ -15026,7 +15047,7 @@ SP.List.prototype = {
         $v_1 = new SP.ListItemCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetItems', [query]));
         return $v_1;
     },
-    $BD_2: function SP_List$$BD_2($p0) {
+    $BF_2: function SP_List$$BF_2($p0) {
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = ((this.get_objectData()).get_methodReturnObjects())['GetItemByStringId'];
@@ -15064,7 +15085,7 @@ SP.List.prototype = {
         var $v_1;
 
         $v_1 = new SP.ListItem($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'AddItemUsingPath', [parameters]));
-        $v_1.$BG_2(parameters);
+        $v_1.$BI_2(parameters);
         return $v_1;
     }
 };
@@ -15270,7 +15291,7 @@ SP.ListCreationInformation.prototype = {
     $3a_1: null,
     $2_1: null,
     $3i_1: 0,
-    $9i_1: null,
+    $9j_1: null,
     $6w_1: 0,
     $2E_1: null,
     $7y_1: 0,
@@ -15305,10 +15326,10 @@ SP.ListCreationInformation.prototype = {
         return value;
     },
     get_listTemplate: function SP_ListCreationInformation$get_listTemplate() {
-        return this.$9i_1;
+        return this.$9j_1;
     },
     set_listTemplate: function SP_ListCreationInformation$set_listTemplate(value) {
-        this.$9i_1 = value;
+        this.$9j_1 = value;
         return value;
     },
     get_quickLaunchOption: function SP_ListCreationInformation$get_quickLaunchOption() {
@@ -15455,12 +15476,12 @@ SP.ListDataValidationExceptionValue = function SP_ListDataValidationExceptionVal
 };
 SP.ListDataValidationExceptionValue.prototype = {
     $40_1: null,
-    $9Y_1: null,
+    $9Z_1: null,
     get_fieldFailures: function SP_ListDataValidationExceptionValue$get_fieldFailures() {
         return this.$40_1;
     },
     get_itemFailure: function SP_ListDataValidationExceptionValue$get_itemFailure() {
-        return this.$9Y_1;
+        return this.$9Z_1;
     },
     get_typeId: function SP_ListDataValidationExceptionValue$get_typeId() {
         return '{356fe248-721a-4adf-af96-20822bc5476e}';
@@ -15489,7 +15510,7 @@ SP.ListDataValidationExceptionValue.prototype = {
         }
         $v_0 = parentNode.ItemFailure;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9Y_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$9Z_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.ItemFailure;
         }
     }
@@ -15501,8 +15522,8 @@ SP.ListDataValidationFailure.prototype = {
     $9_1: null,
     $1a_1: null,
     $4_1: null,
-    $A6_1: 0,
-    $AY_1: 0,
+    $A8_1: 0,
+    $Aa_1: 0,
     get_displayName: function SP_ListDataValidationFailure$get_displayName() {
         return this.$9_1;
     },
@@ -15513,10 +15534,10 @@ SP.ListDataValidationFailure.prototype = {
         return this.$4_1;
     },
     get_reason: function SP_ListDataValidationFailure$get_reason() {
-        return this.$A6_1;
+        return this.$A8_1;
     },
     get_validationType: function SP_ListDataValidationFailure$get_validationType() {
-        return this.$AY_1;
+        return this.$Aa_1;
     },
     get_typeId: function SP_ListDataValidationFailure$get_typeId() {
         return '{6e0bc783-53a2-4506-827f-135040524794}';
@@ -15554,12 +15575,12 @@ SP.ListDataValidationFailure.prototype = {
         }
         $v_0 = parentNode.Reason;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A6_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$A8_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.Reason;
         }
         $v_0 = parentNode.ValidationType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AY_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$Aa_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.ValidationType;
         }
     }
@@ -15861,7 +15882,7 @@ SP.ListItem.prototype = {
             ((this.get_objectData()).get_properties())['Id'] = -1;
         }
     },
-    $BG_2: function SP_ListItem$$BG_2($p0) {
+    $BI_2: function SP_ListItem$$BI_2($p0) {
         if ($p0) {
             ((this.get_objectData()).get_properties())['FileSystemObjectType'] = $p0.$c_1;
             ((this.get_objectData()).get_properties())['Id'] = -1;
@@ -16406,7 +16427,7 @@ SP.ListItemCollection.prototype = {
     },
     getById: function SP_ListItemCollection$getById(id) {
         if (typeof id === 'string') {
-            return this.$BB_2(id.toString());
+            return this.$BD_2(id.toString());
         }
         else {
             id = parseInt(id.toString());
@@ -16440,7 +16461,7 @@ SP.ListItemCollection.prototype = {
             delete parentNode.ListItemCollectionPosition;
         }
     },
-    $BB_2: function SP_ListItemCollection$$BB_2($p0) {
+    $BD_2: function SP_ListItemCollection$$BD_2($p0) {
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = ((this.get_objectData()).get_methodReturnObjects())['GetByStringId'];
@@ -18103,7 +18124,7 @@ SP.NavigationNodeCreationInformation = function SP_NavigationNodeCreationInforma
 SP.NavigationNodeCreationInformation.prototype = {
     $2z_1: false,
     $5l_1: false,
-    $A1_1: null,
+    $A3_1: null,
     $0_1: null,
     $1_1: null,
     get_asLastNode: function SP_NavigationNodeCreationInformation$get_asLastNode() {
@@ -18121,10 +18142,10 @@ SP.NavigationNodeCreationInformation.prototype = {
         return value;
     },
     get_previousNode: function SP_NavigationNodeCreationInformation$get_previousNode() {
-        return this.$A1_1;
+        return this.$A3_1;
     },
     set_previousNode: function SP_NavigationNodeCreationInformation$set_previousNode(value) {
-        this.$A1_1 = value;
+        this.$A3_1 = value;
         return value;
     },
     get_title: function SP_NavigationNodeCreationInformation$get_title() {
@@ -19634,6 +19655,17 @@ SP.RecentList.prototype = {
         }
         return value;
     },
+    get_lastviewDateTime: function SP_RecentList$get_lastviewDateTime() {
+        this.checkUninitializedProperty('lastviewDateTime');
+        return ((this.get_objectData()).get_properties())['lastviewDateTime'];
+    },
+    set_lastviewDateTime: function SP_RecentList$set_lastviewDateTime(value) {
+        ((this.get_objectData()).get_properties())['lastviewDateTime'] = value;
+        if (this.get_context()) {
+            (this.get_context()).addQuery(new SP.ClientActionSetProperty(this, 'lastviewDateTime', value));
+        }
+        return value;
+    },
     get_listId: function SP_RecentList$get_listId() {
         this.checkUninitializedProperty('listId');
         return ((this.get_objectData()).get_properties())['listId'];
@@ -19760,6 +19792,11 @@ SP.RecentList.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             ((this.get_objectData()).get_properties())['lastViewDate'] = $v_0;
             delete parentNode.lastViewDate;
+        }
+        $v_0 = parentNode.lastviewDateTime;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            ((this.get_objectData()).get_properties())['lastviewDateTime'] = $v_0;
+            delete parentNode.lastviewDateTime;
         }
         $v_0 = parentNode.listId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -20057,7 +20094,7 @@ SP.RecycleBinItemCollection.prototype = {
     get_childItemType: function SP_RecycleBinItemCollection$get_childItemType() {
         return SP.RecycleBinItem;
     },
-    $Al_2: function SP_RecycleBinItemCollection$$Al_2() {
+    $An_2: function SP_RecycleBinItemCollection$$An_2() {
         var $v_0 = this.get_data();
 
         while ($v_0.length > 0) {
@@ -20094,14 +20131,14 @@ SP.RecycleBinItemCollection.prototype = {
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteAll', null);
 
         $v_0.addQuery($v_1);
-        this.$Al_2();
+        this.$An_2();
     },
     restoreAll: function SP_RecycleBinItemCollection$restoreAll() {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'RestoreAll', null);
 
         $v_0.addQuery($v_1);
-        this.$Al_2();
+        this.$An_2();
     },
     deleteAllSecondStageItems: function SP_RecycleBinItemCollection$deleteAllSecondStageItems() {
         var $v_0 = this.get_context();
@@ -23765,7 +23802,7 @@ SP.RoleDefinitionBindingCollection.prototype = {
     get_childItemType: function SP_RoleDefinitionBindingCollection$get_childItemType() {
         return SP.RoleDefinition;
     },
-    $As_2: function SP_RoleDefinitionBindingCollection$$As_2() {
+    $Au_2: function SP_RoleDefinitionBindingCollection$$Au_2() {
         var $v_0 = this.get_data();
 
         while ($v_0.length > 0) {
@@ -23791,7 +23828,7 @@ SP.RoleDefinitionBindingCollection.prototype = {
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'RemoveAll', null);
 
         $v_0.addQuery($v_1);
-        this.$As_2();
+        this.$Au_2();
     }
 };
 SP.RoleDefinitionCollection = function SP_RoleDefinitionCollection(context, objectPath) {
@@ -24667,27 +24704,27 @@ SP.SharingLinkInfo.prototype = {
     $8n_1: false,
     $8o_1: null,
     $1D_1: false,
-    $92_1: null,
+    $93_1: null,
     $2_1: null,
     $1X_1: false,
     $1G_1: null,
     $1H_1: false,
-    $9R_1: false,
     $9S_1: false,
-    $1J_1: false,
     $9T_1: false,
-    $9V_1: false,
+    $1J_1: false,
+    $9U_1: false,
+    $9W_1: false,
     $1K_1: false,
     $1L_1: false,
-    $9W_1: false,
-    $9c_1: null,
-    $9h_1: false,
+    $9X_1: false,
+    $9d_1: null,
+    $9i_1: false,
     $1M_1: 0,
-    $A0_1: null,
+    $A2_1: null,
     $1O_1: false,
     $1P_1: false,
     $1R_1: null,
-    $AI_1: null,
+    $AK_1: null,
     $1_1: null,
     get_allowsAnonymousAccess: function SP_SharingLinkInfo$get_allowsAnonymousAccess() {
         return this.$8n_1;
@@ -24699,7 +24736,7 @@ SP.SharingLinkInfo.prototype = {
         return this.$1D_1;
     },
     get_created: function SP_SharingLinkInfo$get_created() {
-        return this.$92_1;
+        return this.$93_1;
     },
     get_description: function SP_SharingLinkInfo$get_description() {
         return this.$2_1;
@@ -24714,19 +24751,19 @@ SP.SharingLinkInfo.prototype = {
         return this.$1H_1;
     },
     get_isActive: function SP_SharingLinkInfo$get_isActive() {
-        return this.$9R_1;
+        return this.$9S_1;
     },
     get_isAddressBarLink: function SP_SharingLinkInfo$get_isAddressBarLink() {
-        return this.$9S_1;
+        return this.$9T_1;
     },
     get_isCreateOnlyLink: function SP_SharingLinkInfo$get_isCreateOnlyLink() {
         return this.$1J_1;
     },
     get_isDefault: function SP_SharingLinkInfo$get_isDefault() {
-        return this.$9T_1;
+        return this.$9U_1;
     },
     get_isEditLink: function SP_SharingLinkInfo$get_isEditLink() {
-        return this.$9V_1;
+        return this.$9W_1;
     },
     get_isFormsLink: function SP_SharingLinkInfo$get_isFormsLink() {
         return this.$1K_1;
@@ -24735,19 +24772,19 @@ SP.SharingLinkInfo.prototype = {
         return this.$1L_1;
     },
     get_isUnhealthy: function SP_SharingLinkInfo$get_isUnhealthy() {
-        return this.$9W_1;
+        return this.$9X_1;
     },
     get_lastModified: function SP_SharingLinkInfo$get_lastModified() {
-        return this.$9c_1;
+        return this.$9d_1;
     },
     get_limitUseToApplication: function SP_SharingLinkInfo$get_limitUseToApplication() {
-        return this.$9h_1;
+        return this.$9i_1;
     },
     get_linkKind: function SP_SharingLinkInfo$get_linkKind() {
         return this.$1M_1;
     },
     get_passwordLastModified: function SP_SharingLinkInfo$get_passwordLastModified() {
-        return this.$A0_1;
+        return this.$A2_1;
     },
     get_requiresPassword: function SP_SharingLinkInfo$get_requiresPassword() {
         return this.$1O_1;
@@ -24759,7 +24796,7 @@ SP.SharingLinkInfo.prototype = {
         return this.$1R_1;
     },
     get_shareTokenString: function SP_SharingLinkInfo$get_shareTokenString() {
-        return this.$AI_1;
+        return this.$AK_1;
     },
     get_url: function SP_SharingLinkInfo$get_url() {
         return this.$1_1;
@@ -24800,7 +24837,7 @@ SP.SharingLinkInfo.prototype = {
         }
         $v_0 = parentNode.Created;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$92_1 = $v_0;
+            this.$93_1 = $v_0;
             delete parentNode.Created;
         }
         $v_0 = parentNode.Description;
@@ -24825,12 +24862,12 @@ SP.SharingLinkInfo.prototype = {
         }
         $v_0 = parentNode.IsActive;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9R_1 = $v_0;
+            this.$9S_1 = $v_0;
             delete parentNode.IsActive;
         }
         $v_0 = parentNode.IsAddressBarLink;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9S_1 = $v_0;
+            this.$9T_1 = $v_0;
             delete parentNode.IsAddressBarLink;
         }
         $v_0 = parentNode.IsCreateOnlyLink;
@@ -24840,12 +24877,12 @@ SP.SharingLinkInfo.prototype = {
         }
         $v_0 = parentNode.IsDefault;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9T_1 = $v_0;
+            this.$9U_1 = $v_0;
             delete parentNode.IsDefault;
         }
         $v_0 = parentNode.IsEditLink;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9V_1 = $v_0;
+            this.$9W_1 = $v_0;
             delete parentNode.IsEditLink;
         }
         $v_0 = parentNode.IsFormsLink;
@@ -24860,17 +24897,17 @@ SP.SharingLinkInfo.prototype = {
         }
         $v_0 = parentNode.IsUnhealthy;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9W_1 = $v_0;
+            this.$9X_1 = $v_0;
             delete parentNode.IsUnhealthy;
         }
         $v_0 = parentNode.LastModified;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9c_1 = $v_0;
+            this.$9d_1 = $v_0;
             delete parentNode.LastModified;
         }
         $v_0 = parentNode.LimitUseToApplication;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9h_1 = $v_0;
+            this.$9i_1 = $v_0;
             delete parentNode.LimitUseToApplication;
         }
         $v_0 = parentNode.LinkKind;
@@ -24880,7 +24917,7 @@ SP.SharingLinkInfo.prototype = {
         }
         $v_0 = parentNode.PasswordLastModified;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A0_1 = $v_0;
+            this.$A2_1 = $v_0;
             delete parentNode.PasswordLastModified;
         }
         $v_0 = parentNode.RequiresPassword;
@@ -24900,7 +24937,7 @@ SP.SharingLinkInfo.prototype = {
         }
         $v_0 = parentNode.ShareTokenString;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AI_1 = $v_0;
+            this.$AK_1 = $v_0;
             delete parentNode.ShareTokenString;
         }
         $v_0 = parentNode.Url;
@@ -26115,6 +26152,16 @@ SP.Site.prototype = {
             delete parentNode.UserCustomActions;
         }
     },
+    onboardTenantForBringYourOwnKey: function SP_Site$onboardTenantForBringYourOwnKey(keyInfo) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'OnboardTenantForBringYourOwnKey', [keyInfo]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.CustomerKeyStatusInfo();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
     rollTenantBringYourOwnKey: function SP_Site$rollTenantBringYourOwnKey(keyType, keyVaultInfo) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -26155,6 +26202,36 @@ SP.Site.prototype = {
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
+    createCopyJob: function SP_Site$createCopyJob(exportObjectUris, destinationUri, options) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'CreateCopyJob', [exportObjectUris, destinationUri, options]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.CopyMigrationInfo();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    createCopyJobs: function SP_Site$createCopyJobs(exportObjectUris, destinationUri, options) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'CreateCopyJobs', [exportObjectUris, destinationUri, options]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = [];
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    createSPAsyncReadJob: function SP_Site$createSPAsyncReadJob(url, readOptions, encryptionOption, azureContainerManifestUri, azureQueueReportUri) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'CreateSPAsyncReadJob', [url, readOptions, encryptionOption, azureContainerManifestUri, azureQueueReportUri]);
+
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.AsyncReadJobInfo();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
     createSPAsyncReadJobWithMultiUrl: function SP_Site$createSPAsyncReadJobWithMultiUrl(urls, readOptions, encryptionOption, azureContainerManifestUri, azureQueueReportUri) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -26192,16 +26269,6 @@ SP.Site.prototype = {
 
         $v_0.addQuery($v_2);
         $v_1 = new SP.ProvisionedMigrationQueueInfo();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    onboardTenantForBringYourOwnKey: function SP_Site$onboardTenantForBringYourOwnKey(keyInfo) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'OnboardTenantForBringYourOwnKey', [keyInfo]);
-
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.CustomerKeyStatusInfo();
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
@@ -26294,36 +26361,6 @@ SP.Site.prototype = {
 
         $v_0.addQuery($v_2);
         $v_1 = new SP.GuidResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    createCopyJob: function SP_Site$createCopyJob(exportObjectUris, destinationUri, options) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'CreateCopyJob', [exportObjectUris, destinationUri, options]);
-
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.CopyMigrationInfo();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    createCopyJobs: function SP_Site$createCopyJobs(exportObjectUris, destinationUri, options) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'CreateCopyJobs', [exportObjectUris, destinationUri, options]);
-
-        $v_0.addQuery($v_2);
-        $v_1 = [];
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    createSPAsyncReadJob: function SP_Site$createSPAsyncReadJob(url, readOptions, encryptionOption, azureContainerManifestUri, azureQueueReportUri) {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'CreateSPAsyncReadJob', [url, readOptions, encryptionOption, azureContainerManifestUri, azureQueueReportUri]);
-
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.AsyncReadJobInfo();
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     },
@@ -26698,7 +26735,7 @@ SP.SPInvitationCreationResult = function SP_SPInvitationCreationResult() {
 SP.SPInvitationCreationResult.prototype = {
     $7_1: null,
     $1Z_1: null,
-    $AP_1: false,
+    $AR_1: false,
     get_email: function SP_SPInvitationCreationResult$get_email() {
         return this.$7_1;
     },
@@ -26706,7 +26743,7 @@ SP.SPInvitationCreationResult.prototype = {
         return this.$1Z_1;
     },
     get_succeeded: function SP_SPInvitationCreationResult$get_succeeded() {
-        return this.$AP_1;
+        return this.$AR_1;
     },
     get_typeId: function SP_SPInvitationCreationResult$get_typeId() {
         return '{56593357-67a4-41f7-b6d8-cce2d1013afe}';
@@ -26739,7 +26776,7 @@ SP.SPInvitationCreationResult.prototype = {
         }
         $v_0 = parentNode.Succeeded;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AP_1 = $v_0;
+            this.$AR_1 = $v_0;
             delete parentNode.Succeeded;
         }
     }
@@ -26748,18 +26785,18 @@ SP.SPListRule = function SP_SPListRule() {
     SP.SPListRule.initializeBase(this);
 };
 SP.SPListRule.prototype = {
-    $91_1: null,
+    $92_1: null,
     $I_1: null,
-    $9x_1: null,
+    $9z_1: null,
     $0_1: null,
     get_condition: function SP_SPListRule$get_condition() {
-        return this.$91_1;
+        return this.$92_1;
     },
     get_id: function SP_SPListRule$get_id() {
         return this.$I_1;
     },
     get_outcome: function SP_SPListRule$get_outcome() {
-        return this.$9x_1;
+        return this.$9z_1;
     },
     get_title: function SP_SPListRule$get_title() {
         return this.$0_1;
@@ -26785,7 +26822,7 @@ SP.SPListRule.prototype = {
 
         $v_0 = parentNode.Condition;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$91_1 = $v_0;
+            this.$92_1 = $v_0;
             delete parentNode.Condition;
         }
         $v_0 = parentNode.ID;
@@ -26795,7 +26832,7 @@ SP.SPListRule.prototype = {
         }
         $v_0 = parentNode.Outcome;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9x_1 = $v_0;
+            this.$9z_1 = $v_0;
             delete parentNode.Outcome;
         }
         $v_0 = parentNode.Title;
@@ -27079,20 +27116,40 @@ SP.TeamChannelManager.demoteTeamChannelById = function SP_TeamChannelManager$dem
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
     return $v_0;
 };
+SP.TeamChannelManager.saveConversations = function SP_TeamChannelManager$saveConversations(context, listUrl, listItemId, updatedConversationsObject) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9c3b73df-2147-4e44-aff6-daf69b75ef2b}', 'SaveConversations', [listUrl, listItemId, updatedConversationsObject]);
+
+    context.addQuery($v_0);
+};
+SP.TeamChannelManager.getConversations = function SP_TeamChannelManager$getConversations(context, listUrl, listItemId) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9c3b73df-2147-4e44-aff6-daf69b75ef2b}', 'GetConversations', [listUrl, listItemId]);
+
+    context.addQuery($v_1);
+    $v_0 = new SP.StringResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+};
 SP.TenantAppInformation = function SP_TenantAppInformation() {
     SP.TenantAppInformation.initializeBase(this);
 };
 SP.TenantAppInformation.prototype = {
     $8p_1: null,
     $8r_1: null,
-    $93_1: null,
-    $9N_1: null,
+    $94_1: null,
     $9O_1: null,
+    $9P_1: null,
     $C_1: null,
-    $9e_1: null,
-    $9y_1: null,
-    $A3_1: null,
-    $A9_1: null,
+    $9f_1: null,
+    $A0_1: null,
+    $A5_1: null,
+    $AB_1: null,
     $6_1: 0,
     $0_1: null,
     get_appPrincipalId: function SP_TenantAppInformation$get_appPrincipalId() {
@@ -27102,28 +27159,28 @@ SP.TenantAppInformation.prototype = {
         return this.$8r_1;
     },
     get_creationTime: function SP_TenantAppInformation$get_creationTime() {
-        return this.$93_1;
+        return this.$94_1;
     },
     get_iconAbsoluteUrl: function SP_TenantAppInformation$get_iconAbsoluteUrl() {
-        return this.$9N_1;
+        return this.$9O_1;
     },
     get_iconFallbackAbsoluteUrl: function SP_TenantAppInformation$get_iconFallbackAbsoluteUrl() {
-        return this.$9O_1;
+        return this.$9P_1;
     },
     get_id: function SP_TenantAppInformation$get_id() {
         return this.$C_1;
     },
     get_launchUrl: function SP_TenantAppInformation$get_launchUrl() {
-        return this.$9e_1;
+        return this.$9f_1;
     },
     get_packageFingerprint: function SP_TenantAppInformation$get_packageFingerprint() {
-        return this.$9y_1;
+        return this.$A0_1;
     },
     get_productId: function SP_TenantAppInformation$get_productId() {
-        return this.$A3_1;
+        return this.$A5_1;
     },
     get_remoteAppUrl: function SP_TenantAppInformation$get_remoteAppUrl() {
-        return this.$A9_1;
+        return this.$AB_1;
     },
     get_status: function SP_TenantAppInformation$get_status() {
         return this.$6_1;
@@ -27162,17 +27219,17 @@ SP.TenantAppInformation.prototype = {
         }
         $v_0 = parentNode.CreationTime;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$93_1 = $v_0;
+            this.$94_1 = $v_0;
             delete parentNode.CreationTime;
         }
         $v_0 = parentNode.IconAbsoluteUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9N_1 = $v_0;
+            this.$9O_1 = $v_0;
             delete parentNode.IconAbsoluteUrl;
         }
         $v_0 = parentNode.IconFallbackAbsoluteUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9O_1 = $v_0;
+            this.$9P_1 = $v_0;
             delete parentNode.IconFallbackAbsoluteUrl;
         }
         $v_0 = parentNode.Id;
@@ -27182,22 +27239,22 @@ SP.TenantAppInformation.prototype = {
         }
         $v_0 = parentNode.LaunchUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9e_1 = $v_0;
+            this.$9f_1 = $v_0;
             delete parentNode.LaunchUrl;
         }
         $v_0 = parentNode.PackageFingerprint;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9y_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$A0_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.PackageFingerprint;
         }
         $v_0 = parentNode.ProductId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A3_1 = $v_0;
+            this.$A5_1 = $v_0;
             delete parentNode.ProductId;
         }
         $v_0 = parentNode.RemoteAppUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A9_1 = $v_0;
+            this.$AB_1 = $v_0;
             delete parentNode.RemoteAppUrl;
         }
         $v_0 = parentNode.Status;
@@ -27493,16 +27550,16 @@ SP.TimeZoneInformation = function SP_TimeZoneInformation() {
 };
 SP.TimeZoneInformation.prototype = {
     $8u_1: 0,
-    $95_1: 0,
-    $AL_1: 0,
+    $96_1: 0,
+    $AN_1: 0,
     get_bias: function SP_TimeZoneInformation$get_bias() {
         return this.$8u_1;
     },
     get_daylightBias: function SP_TimeZoneInformation$get_daylightBias() {
-        return this.$95_1;
+        return this.$96_1;
     },
     get_standardBias: function SP_TimeZoneInformation$get_standardBias() {
-        return this.$AL_1;
+        return this.$AN_1;
     },
     get_typeId: function SP_TimeZoneInformation$get_typeId() {
         return '{09e18222-7e4d-488b-811d-6ef43f31d17f}';
@@ -27530,12 +27587,12 @@ SP.TimeZoneInformation.prototype = {
         }
         $v_0 = parentNode.DaylightBias;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$95_1 = $v_0;
+            this.$96_1 = $v_0;
             delete parentNode.DaylightBias;
         }
         $v_0 = parentNode.StandardBias;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AL_1 = $v_0;
+            this.$AN_1 = $v_0;
             delete parentNode.StandardBias;
         }
     }
@@ -27544,45 +27601,45 @@ SP.UpgradeInfo = function SP_UpgradeInfo() {
     SP.UpgradeInfo.initializeBase(this);
 };
 SP.UpgradeInfo.prototype = {
-    $9D_1: null,
-    $9E_1: 0,
-    $9d_1: null,
-    $9k_1: null,
-    $AB_1: null,
+    $9E_1: null,
+    $9F_1: 0,
+    $9e_1: null,
+    $9l_1: null,
+    $AD_1: null,
     $1Q_1: 0,
-    $AM_1: null,
+    $AO_1: null,
     $6_1: 0,
-    $AW_1: 0,
-    $Ac_1: 0,
+    $AY_1: 0,
+    $Ae_1: 0,
     get_errorFile: function SP_UpgradeInfo$get_errorFile() {
-        return this.$9D_1;
-    },
-    get_errors: function SP_UpgradeInfo$get_errors() {
         return this.$9E_1;
     },
+    get_errors: function SP_UpgradeInfo$get_errors() {
+        return this.$9F_1;
+    },
     get_lastUpdated: function SP_UpgradeInfo$get_lastUpdated() {
-        return this.$9d_1;
+        return this.$9e_1;
     },
     get_logFile: function SP_UpgradeInfo$get_logFile() {
-        return this.$9k_1;
+        return this.$9l_1;
     },
     get_requestDate: function SP_UpgradeInfo$get_requestDate() {
-        return this.$AB_1;
+        return this.$AD_1;
     },
     get_retryCount: function SP_UpgradeInfo$get_retryCount() {
         return this.$1Q_1;
     },
     get_startTime: function SP_UpgradeInfo$get_startTime() {
-        return this.$AM_1;
+        return this.$AO_1;
     },
     get_status: function SP_UpgradeInfo$get_status() {
         return this.$6_1;
     },
     get_upgradeType: function SP_UpgradeInfo$get_upgradeType() {
-        return this.$AW_1;
+        return this.$AY_1;
     },
     get_warnings: function SP_UpgradeInfo$get_warnings() {
-        return this.$Ac_1;
+        return this.$Ae_1;
     },
     get_typeId: function SP_UpgradeInfo$get_typeId() {
         return '{a012e5fa-a28f-4232-9561-c4033f61c889}';
@@ -27605,27 +27662,27 @@ SP.UpgradeInfo.prototype = {
 
         $v_0 = parentNode.ErrorFile;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9D_1 = $v_0;
+            this.$9E_1 = $v_0;
             delete parentNode.ErrorFile;
         }
         $v_0 = parentNode.Errors;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9E_1 = $v_0;
+            this.$9F_1 = $v_0;
             delete parentNode.Errors;
         }
         $v_0 = parentNode.LastUpdated;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9d_1 = $v_0;
+            this.$9e_1 = $v_0;
             delete parentNode.LastUpdated;
         }
         $v_0 = parentNode.LogFile;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9k_1 = $v_0;
+            this.$9l_1 = $v_0;
             delete parentNode.LogFile;
         }
         $v_0 = parentNode.RequestDate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AB_1 = $v_0;
+            this.$AD_1 = $v_0;
             delete parentNode.RequestDate;
         }
         $v_0 = parentNode.RetryCount;
@@ -27635,7 +27692,7 @@ SP.UpgradeInfo.prototype = {
         }
         $v_0 = parentNode.StartTime;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AM_1 = $v_0;
+            this.$AO_1 = $v_0;
             delete parentNode.StartTime;
         }
         $v_0 = parentNode.Status;
@@ -27645,12 +27702,12 @@ SP.UpgradeInfo.prototype = {
         }
         $v_0 = parentNode.UpgradeType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AW_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$AY_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.UpgradeType;
         }
         $v_0 = parentNode.Warnings;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Ac_1 = $v_0;
+            this.$Ae_1 = $v_0;
             delete parentNode.Warnings;
         }
     }
@@ -27660,28 +27717,28 @@ SP.UsageInfo = function SP_UsageInfo() {
 };
 SP.UsageInfo.prototype = {
     $8s_1: 0,
-    $97_1: 0,
-    $9K_1: 0,
-    $AN_1: 0,
-    $AO_1: 0,
-    $Ab_1: 0,
+    $98_1: 0,
+    $9L_1: 0,
+    $AP_1: 0,
+    $AQ_1: 0,
+    $Ad_1: 0,
     get_bandwidth: function SP_UsageInfo$get_bandwidth() {
         return this.$8s_1;
     },
     get_discussionStorage: function SP_UsageInfo$get_discussionStorage() {
-        return this.$97_1;
+        return this.$98_1;
     },
     get_hits: function SP_UsageInfo$get_hits() {
-        return this.$9K_1;
+        return this.$9L_1;
     },
     get_storage: function SP_UsageInfo$get_storage() {
-        return this.$AN_1;
+        return this.$AP_1;
     },
     get_storagePercentageUsed: function SP_UsageInfo$get_storagePercentageUsed() {
-        return this.$AO_1;
+        return this.$AQ_1;
     },
     get_visits: function SP_UsageInfo$get_visits() {
-        return this.$Ab_1;
+        return this.$Ad_1;
     },
     get_typeId: function SP_UsageInfo$get_typeId() {
         return '{7ec28504-35f9-4fcf-a09f-401024417292}';
@@ -27709,27 +27766,27 @@ SP.UsageInfo.prototype = {
         }
         $v_0 = parentNode.DiscussionStorage;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$97_1 = $v_0;
+            this.$98_1 = $v_0;
             delete parentNode.DiscussionStorage;
         }
         $v_0 = parentNode.Hits;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9K_1 = $v_0;
+            this.$9L_1 = $v_0;
             delete parentNode.Hits;
         }
         $v_0 = parentNode.Storage;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AN_1 = $v_0;
+            this.$AP_1 = $v_0;
             delete parentNode.Storage;
         }
         $v_0 = parentNode.StoragePercentageUsed;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AO_1 = $v_0;
+            this.$AQ_1 = $v_0;
             delete parentNode.StoragePercentageUsed;
         }
         $v_0 = parentNode.Visits;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Ab_1 = $v_0;
+            this.$Ad_1 = $v_0;
             delete parentNode.Visits;
         }
     }
@@ -28475,13 +28532,13 @@ SP.UserIdInfo = function SP_UserIdInfo() {
     SP.UserIdInfo.initializeBase(this);
 };
 SP.UserIdInfo.prototype = {
-    $9u_1: null,
-    $9v_1: null,
+    $9w_1: null,
+    $9x_1: null,
     get_nameId: function SP_UserIdInfo$get_nameId() {
-        return this.$9u_1;
+        return this.$9w_1;
     },
     get_nameIdIssuer: function SP_UserIdInfo$get_nameIdIssuer() {
-        return this.$9v_1;
+        return this.$9x_1;
     },
     get_typeId: function SP_UserIdInfo$get_typeId() {
         return '{c5c3ae1a-63b6-4f25-a887-54b0b20a28e2}';
@@ -28504,12 +28561,12 @@ SP.UserIdInfo.prototype = {
 
         $v_0 = parentNode.NameId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9u_1 = $v_0;
+            this.$9w_1 = $v_0;
             delete parentNode.NameId;
         }
         $v_0 = parentNode.NameIdIssuer;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9v_1 = $v_0;
+            this.$9x_1 = $v_0;
             delete parentNode.NameIdIssuer;
         }
     }
@@ -28928,6 +28985,17 @@ SP.View.prototype = {
         }
         return $v_0;
     },
+    get_viewType2: function SP_View$get_viewType2() {
+        this.checkUninitializedProperty('ViewType2');
+        return ((this.get_objectData()).get_properties())['ViewType2'];
+    },
+    set_viewType2: function SP_View$set_viewType2(value) {
+        ((this.get_objectData()).get_properties())['ViewType2'] = value;
+        if (this.get_context()) {
+            (this.get_context()).addQuery(new SP.ClientActionSetProperty(this, 'ViewType2', value));
+        }
+        return value;
+    },
     get_visualizationInfo: function SP_View$get_visualizationInfo() {
         this.checkUninitializedProperty('VisualizationInfo');
         return ((this.get_objectData()).get_properties())['VisualizationInfo'];
@@ -29163,6 +29231,11 @@ SP.View.prototype = {
             this.updateClientObjectPropertyType('ViewFields', this.get_viewFields(), $v_0);
             (this.get_viewFields()).fromJson($v_0);
             delete parentNode.ViewFields;
+        }
+        $v_0 = parentNode.ViewType2;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            ((this.get_objectData()).get_properties())['ViewType2'] = $v_0;
+            delete parentNode.ViewType2;
         }
         $v_0 = parentNode.VisualizationInfo;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -29432,13 +29505,13 @@ SP.ViewFieldCollection.prototype = {
     get_childItemType: function SP_ViewFieldCollection$get_childItemType() {
         return String;
     },
-    $BN_2: function SP_ViewFieldCollection$$BN_2($p0) {
+    $BP_2: function SP_ViewFieldCollection$$BP_2($p0) {
         Array.add(this.get_data(), $p0);
     },
-    $BV_2: function SP_ViewFieldCollection$$BV_2($p0) {
+    $BX_2: function SP_ViewFieldCollection$$BX_2($p0) {
         Array.remove(this.get_data(), $p0);
     },
-    $As_2: function SP_ViewFieldCollection$$As_2() {
+    $Au_2: function SP_ViewFieldCollection$$Au_2() {
         var $v_0 = this.get_data();
 
         while ($v_0.length > 0) {
@@ -29470,21 +29543,21 @@ SP.ViewFieldCollection.prototype = {
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'Add', [strField]);
 
         $v_0.addQuery($v_1);
-        this.$BN_2(strField);
+        this.$BP_2(strField);
     },
     remove: function SP_ViewFieldCollection$remove(strField) {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'Remove', [strField]);
 
         $v_0.addQuery($v_1);
-        this.$BV_2(strField);
+        this.$BX_2(strField);
     },
     removeAll: function SP_ViewFieldCollection$removeAll() {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'RemoveAll', null);
 
         $v_0.addQuery($v_1);
-        this.$As_2();
+        this.$Au_2();
     }
 };
 SP.ViewFieldCollectionPropertyNames = function SP_ViewFieldCollectionPropertyNames() {
@@ -31707,6 +31780,12 @@ SP.Web.prototype = {
 
         $v_0.addQuery($v_1);
     },
+    unregisterPushNotificationSubscriber: function SP_Web$unregisterPushNotificationSubscriber(deviceAppInstanceId) {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'UnregisterPushNotificationSubscriber', [deviceAppInstanceId]);
+
+        $v_0.addQuery($v_1);
+    },
     getPushNotificationSubscribersByArgs: function SP_Web$getPushNotificationSubscribersByArgs(customArgs) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -31803,12 +31882,6 @@ SP.Web.prototype = {
         $v_1 = new SP.PushNotificationSubscriber($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'RegisterPushNotificationSubscriber', [deviceAppInstanceId, serviceToken]));
         return $v_1;
     },
-    unregisterPushNotificationSubscriber: function SP_Web$unregisterPushNotificationSubscriber(deviceAppInstanceId) {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'UnregisterPushNotificationSubscriber', [deviceAppInstanceId]);
-
-        $v_0.addQuery($v_1);
-    },
     getAvailableWebTemplates: function SP_Web$getAvailableWebTemplates(lcid, doIncludeCrossLanguage) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -31854,6 +31927,13 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.ChangeCollection($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetChanges', [query]));
+        return $v_1;
+    },
+    getFileByGuestUrl: function SP_Web$getFileByGuestUrl(guestUrl) {
+        var $v_0 = this.get_context();
+        var $v_1;
+
+        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByGuestUrl', [guestUrl]));
         return $v_1;
     },
     getFileByGuestUrlEnsureAccess: function SP_Web$getFileByGuestUrlEnsureAccess(guestUrl, ensureAccess) {
@@ -32081,13 +32161,6 @@ SP.Web.prototype = {
         var $v_1;
 
         $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByLinkingUrl', [linkingUrl]));
-        return $v_1;
-    },
-    getFileByGuestUrl: function SP_Web$getFileByGuestUrl(guestUrl) {
-        var $v_0 = this.get_context();
-        var $v_1;
-
-        $v_1 = new SP.File($v_0, new SP.ObjectPathMethod($v_0, this.get_path(), 'GetFileByGuestUrl', [guestUrl]));
         return $v_1;
     },
     loadApp: function SP_Web$loadApp(appPackageStream, installationLocaleLCID) {
@@ -33272,17 +33345,17 @@ SP.Utilities.PrincipalInfo = function SP_Utilities_PrincipalInfo() {
     SP.Utilities.PrincipalInfo.initializeBase(this);
 };
 SP.Utilities.PrincipalInfo.prototype = {
-    $96_1: null,
+    $97_1: null,
     $9_1: null,
     $7_1: null,
-    $9a_1: null,
+    $9b_1: null,
     $11_1: null,
-    $9p_1: null,
-    $A2_1: 0,
+    $9q_1: null,
+    $A4_1: 0,
     $X_1: 0,
-    $AK_1: null,
+    $AM_1: null,
     get_department: function SP_Utilities_PrincipalInfo$get_department() {
-        return this.$96_1;
+        return this.$97_1;
     },
     get_displayName: function SP_Utilities_PrincipalInfo$get_displayName() {
         return this.$9_1;
@@ -33291,22 +33364,22 @@ SP.Utilities.PrincipalInfo.prototype = {
         return this.$7_1;
     },
     get_jobTitle: function SP_Utilities_PrincipalInfo$get_jobTitle() {
-        return this.$9a_1;
+        return this.$9b_1;
     },
     get_loginName: function SP_Utilities_PrincipalInfo$get_loginName() {
         return this.$11_1;
     },
     get_mobile: function SP_Utilities_PrincipalInfo$get_mobile() {
-        return this.$9p_1;
+        return this.$9q_1;
     },
     get_principalId: function SP_Utilities_PrincipalInfo$get_principalId() {
-        return this.$A2_1;
+        return this.$A4_1;
     },
     get_principalType: function SP_Utilities_PrincipalInfo$get_principalType() {
         return this.$X_1;
     },
     get_sipAddress: function SP_Utilities_PrincipalInfo$get_sipAddress() {
-        return this.$AK_1;
+        return this.$AM_1;
     },
     get_typeId: function SP_Utilities_PrincipalInfo$get_typeId() {
         return '{c88e4d2e-768d-4065-9da4-d2880e08733e}';
@@ -33329,7 +33402,7 @@ SP.Utilities.PrincipalInfo.prototype = {
 
         $v_0 = parentNode.Department;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$96_1 = $v_0;
+            this.$97_1 = $v_0;
             delete parentNode.Department;
         }
         $v_0 = parentNode.DisplayName;
@@ -33344,7 +33417,7 @@ SP.Utilities.PrincipalInfo.prototype = {
         }
         $v_0 = parentNode.JobTitle;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9a_1 = $v_0;
+            this.$9b_1 = $v_0;
             delete parentNode.JobTitle;
         }
         $v_0 = parentNode.LoginName;
@@ -33354,12 +33427,12 @@ SP.Utilities.PrincipalInfo.prototype = {
         }
         $v_0 = parentNode.Mobile;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9p_1 = $v_0;
+            this.$9q_1 = $v_0;
             delete parentNode.Mobile;
         }
         $v_0 = parentNode.PrincipalId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A2_1 = $v_0;
+            this.$A4_1 = $v_0;
             delete parentNode.PrincipalId;
         }
         $v_0 = parentNode.PrincipalType;
@@ -33369,7 +33442,7 @@ SP.Utilities.PrincipalInfo.prototype = {
         }
         $v_0 = parentNode.SIPAddress;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AK_1 = $v_0;
+            this.$AM_1 = $v_0;
             delete parentNode.SIPAddress;
         }
     }
@@ -34059,13 +34132,13 @@ SP.UI.PopoutMenu.prototype = {
         SP.UI.PopoutMenu.endModal();
         SP.UI.PopoutMenu.removeCSSClassFromElement(this.$V_0, this.$2Q_0);
         if (!SP.ScriptUtility.isNullOrEmptyString(this.$2N_0)) {
-            this.$Be_0();
+            this.$Bg_0();
         }
         this.$V_0.rel = '';
         this._menuLaunched = false;
         SP.UI.PopoutMenu._activePopoutMenuInstance = null;
     },
-    $Be_0: function SP_UI_PopoutMenu$$Be_0() {
+    $Bg_0: function SP_UI_PopoutMenu$$Bg_0() {
         this.$1V_0.src = this.$2N_0;
         if (this.$8Z_0) {
             this.$1V_0.style.top = '-' + this.$8b_0 + 'px';
@@ -34100,41 +34173,41 @@ SP.UI.PopoutMenu.prototype = {
         var $v_A = SP.UI.PopoutMenu.getViewableLeft();
 
         if (this.get_defaultLaunchRight()) {
-            if (this.$Af_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Ah_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            if (this.$Au_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Aw_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            if (this.$Ae_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Ag_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            if (this.$At_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Av_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            this.$Af_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A);
+            this.$Ah_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A);
         }
         else {
-            if (this.$Ae_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Ag_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            if (this.$At_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Av_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            if (this.$Af_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Ah_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            if (this.$Au_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
+            if (this.$Aw_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A)) {
                 return;
             }
-            this.$Ae_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A);
+            this.$Ag_0($v_0, $v_1, $v_3, $v_4, $v_5, $v_6, $v_7, $v_8, $v_9, $v_A);
         }
     },
     positionMenuWithCoordinates: function SP_UI_PopoutMenu$positionMenuWithCoordinates(left, top) {
         this.$3_0.style.top = top + 6 + 'px';
         this.$3_0.style.left = left + 'px';
     },
-    $At_0: function SP_UI_PopoutMenu$$At_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
+    $Av_0: function SP_UI_PopoutMenu$$Av_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
         var $v_0 = $p5 + $p2 - $p0;
 
         if ($v_0 < $p9) {
@@ -34148,7 +34221,7 @@ SP.UI.PopoutMenu.prototype = {
         this.positionMenuWithCoordinates($v_0, $v_1);
         return true;
     },
-    $Ae_0: function SP_UI_PopoutMenu$$Ae_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
+    $Ag_0: function SP_UI_PopoutMenu$$Ag_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
         var $v_0 = $p5 + $p2 - $p0;
 
         if ($v_0 < $p9) {
@@ -34163,7 +34236,7 @@ SP.UI.PopoutMenu.prototype = {
         this.positionMenuWithCoordinates($v_0, $p4 + $p3);
         return true;
     },
-    $Au_0: function SP_UI_PopoutMenu$$Au_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
+    $Aw_0: function SP_UI_PopoutMenu$$Aw_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
         var $v_0 = $p5 + $p0;
         var $v_1 = $p9 + $p6;
 
@@ -34178,7 +34251,7 @@ SP.UI.PopoutMenu.prototype = {
         this.positionMenuWithCoordinates($p5, $v_2);
         return true;
     },
-    $Af_0: function SP_UI_PopoutMenu$$Af_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
+    $Ah_0: function SP_UI_PopoutMenu$$Ah_0($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9) {
         var $v_0 = $p5 + $p0;
         var $v_1 = $p9 + $p6;
 
@@ -34231,9 +34304,9 @@ SP.UI.PopoutMenu.prototype = {
 SP.UI.AttractModeControl = function SP_UI_AttractModeControl() {
     SP.UI.AttractModeControl.initializeBase(this, [document.createElement('div')]);
     (this.get_element()).className = SP.UI.AttractModeControl.cssAttractModeBackground;
-    this.$Bb_2();
+    this.$Bd_2();
 };
-SP.UI.AttractModeControl.$B5 = function SP_UI_AttractModeControl$$B5() {
+SP.UI.AttractModeControl.$B7 = function SP_UI_AttractModeControl$$B7() {
     var $v_0 = document.createElement('div');
 
     $v_0.className = SP.UI.AttractModeControl.cssAttractModeWrapper;
@@ -34248,15 +34321,15 @@ SP.UI.AttractModeControl.prototype = {
     get_textElement: function SP_UI_AttractModeControl$get_textElement() {
         return this.$1i_2;
     },
-    $Bb_2: function SP_UI_AttractModeControl$$Bb_2() {
-        var $v_0 = SP.UI.AttractModeControl.$B5();
+    $Bd_2: function SP_UI_AttractModeControl$$Bd_2() {
+        var $v_0 = SP.UI.AttractModeControl.$B7();
         var $v_1 = document.createElement('div');
 
         $v_1.className = SP.UI.AttractModeControl.cssAttractModeCell;
-        this.$2P_2 = this.$B4_2();
+        this.$2P_2 = this.$B6_2();
         $v_1.appendChild(this.$2P_2);
         $v_0.appendChild($v_1);
-        var $v_2 = this.$B6_2();
+        var $v_2 = this.$B8_2();
 
         Sys.UI.DomElement.addCssClass($v_2, SP.UI.AttractModeControl.cssAttractModeCell);
         Sys.UI.DomElement.addCssClass($v_2, SP.UI.AttractModeControl.cssAttractMode);
@@ -34266,14 +34339,14 @@ SP.UI.AttractModeControl.prototype = {
         $v_0.appendChild($v_2);
         (this.get_element()).appendChild($v_0);
     },
-    $B4_2: function SP_UI_AttractModeControl$$B4_2() {
+    $B6_2: function SP_UI_AttractModeControl$$B6_2() {
         var $v_0 = document.createElement('img');
 
         $v_0.src = SP.Utilities.Utility.getImageUrl(SP.UI.AttractModeControl.defaultAttractModeIcon);
         $v_0.className = SP.UI.AttractModeControl.cssAttractModeIcon;
         return $v_0;
     },
-    $B6_2: function SP_UI_AttractModeControl$$B6_2() {
+    $B8_2: function SP_UI_AttractModeControl$$B8_2() {
         var $v_0 = document.createElement('span');
 
         Sys.UI.DomElement.addCssClass($v_0, SP.UI.AttractModeControl.cssAttractMode);
@@ -34367,9 +34440,9 @@ SP.UI.MenuTest = function SP_UI_MenuTest() {
 };
 SP.UI.MenuTest.setup = function SP_UI_MenuTest$setup(relativeElement) {
     SP.UI.MenuTest.$1f = relativeElement;
-    relativeElement.attachEvent('onclick', SP.UI.MenuTest.$BM);
+    relativeElement.attachEvent('onclick', SP.UI.MenuTest.$BO);
 };
-SP.UI.MenuTest.$BM = function SP_UI_MenuTest$$BM() {
+SP.UI.MenuTest.$BO = function SP_UI_MenuTest$$BO() {
     var $v_0 = SP.UI.MenuTest.$1f._menu;
 
     if (!$v_0) {
@@ -34405,14 +34478,14 @@ SP.Application.UI.DefaultFormsInformation.prototype = {
     OtherForms: null
 };
 SP.Application.UI.DefaultFormsMenuBuilder = function SP_Application_UI_DefaultFormsMenuBuilder($p0) {
-    this.$$d_$BW_0 = Function.createDelegate(this, this.$BW_0);
-    this.$$d_$BX_0 = Function.createDelegate(this, this.$BX_0);
+    this.$$d_$BY_0 = Function.createDelegate(this, this.$BY_0);
+    this.$$d_$BZ_0 = Function.createDelegate(this, this.$BZ_0);
     this.$5_0 = $p0;
 };
 SP.Application.UI.DefaultFormsMenuBuilder.getDefaultFormsInformation = function SP_Application_UI_DefaultFormsMenuBuilder$getDefaultFormsInformation(requestor, listId) {
     var $v_0 = new SP.Application.UI.DefaultFormsMenuBuilder(listId);
 
-    $v_0.$Ap_0(requestor);
+    $v_0.$Ar_0(requestor);
 };
 SP.Application.UI.DefaultFormsMenuBuilder.$8j = function SP_Application_UI_DefaultFormsMenuBuilder$$8j($p0) {
     if (!SP.ScriptUtility.isNullOrUndefined($p0)) {
@@ -34425,7 +34498,7 @@ SP.Application.UI.DefaultFormsMenuBuilder.$8j = function SP_Application_UI_Defau
     }
     return $p0;
 };
-SP.Application.UI.DefaultFormsMenuBuilder.$BC = function SP_Application_UI_DefaultFormsMenuBuilder$$BC($p0, $p1) {
+SP.Application.UI.DefaultFormsMenuBuilder.$BE = function SP_Application_UI_DefaultFormsMenuBuilder$$BE($p0, $p1) {
     var $v_0 = new SP.Application.UI.DefaultFormsInformation();
 
     $v_0.DefaultForms = new SP.Application.UI.FormsInfo();
@@ -34454,7 +34527,7 @@ SP.Application.UI.DefaultFormsMenuBuilder.prototype = {
     $M_0: null,
     $3T_0: null,
     $N_0: null,
-    $BZ_0: function SP_Application_UI_DefaultFormsMenuBuilder$$BZ_0() {
+    $Bb_0: function SP_Application_UI_DefaultFormsMenuBuilder$$Bb_0() {
         var $v_0 = SP.ClientContext.get_current();
         var $v_1 = $v_0.get_web();
 
@@ -34466,21 +34539,21 @@ SP.Application.UI.DefaultFormsMenuBuilder.prototype = {
         $v_2.retrieve.call($v_2, 'Name', 'DisplayFormUrl', 'NewFormUrl', 'EditFormUrl');
         return $v_0;
     },
-    $Ap_0: function SP_Application_UI_DefaultFormsMenuBuilder$$Ap_0($p0) {
-        var $v_0 = this.$BZ_0();
+    $Ar_0: function SP_Application_UI_DefaultFormsMenuBuilder$$Ar_0($p0) {
+        var $v_0 = this.$Bb_0();
 
         this.$N_0 = $p0;
-        $v_0.executeQueryAsync(this.$$d_$BX_0, this.$$d_$BW_0);
+        $v_0.executeQueryAsync(this.$$d_$BZ_0, this.$$d_$BY_0);
     },
-    $BX_0: function SP_Application_UI_DefaultFormsMenuBuilder$$BX_0($p0, $p1) {
+    $BZ_0: function SP_Application_UI_DefaultFormsMenuBuilder$$BZ_0($p0, $p1) {
         if (!SP.ScriptUtility.isNullOrUndefined(this.$N_0)) {
-            var $v_0 = SP.Application.UI.DefaultFormsMenuBuilder.$BC(this.$M_0, this.$3T_0);
+            var $v_0 = SP.Application.UI.DefaultFormsMenuBuilder.$BE(this.$M_0, this.$3T_0);
 
             this.$N_0.onDefaultFormsInformationRetrieveSuccess($v_0);
         }
         this.$N_0 = null;
     },
-    $BW_0: function SP_Application_UI_DefaultFormsMenuBuilder$$BW_0($p0, $p1) {
+    $BY_0: function SP_Application_UI_DefaultFormsMenuBuilder$$BY_0($p0, $p1) {
         if ($p1 && !SP.ScriptUtility.isNullOrUndefined($p1.get_message())) { }
         if (!SP.ScriptUtility.isNullOrUndefined(this.$N_0)) {
             this.$N_0.onDefaultFormsInformationRetrieveFailure();
@@ -34490,7 +34563,7 @@ SP.Application.UI.DefaultFormsMenuBuilder.prototype = {
 };
 SP.Application.UI.BrowserUtility = function SP_Application_UI_BrowserUtility() {
 };
-SP.Application.UI.BrowserUtility.$BL = function SP_Application_UI_BrowserUtility$$BL() {
+SP.Application.UI.BrowserUtility.$BN = function SP_Application_UI_BrowserUtility$$BN() {
     return Sys.Browser.agent === Sys.Browser.Firefox || (Sys.Browser.name.toLowerCase()).indexOf('firefox') !== -1;
 };
 SP.Application.UI.ViewSelectorGroups = function SP_Application_UI_ViewSelectorGroups() {
@@ -34527,12 +34600,12 @@ SP.Application.UI.ServerMenus = function SP_Application_UI_ServerMenus() {
     this.MenuItems = [];
 };
 SP.Application.UI.ViewSelectorMenuBuilder = function SP_Application_UI_ViewSelectorMenuBuilder($p0, $p1) {
-    this.$$d_$B8_0 = Function.createDelegate(this, this.$B8_0);
-    this.$$d_$B9_0 = Function.createDelegate(this, this.$B9_0);
+    this.$$d_$BA_0 = Function.createDelegate(this, this.$BA_0);
+    this.$$d_$BB_0 = Function.createDelegate(this, this.$BB_0);
     this.$1F_0 = $p0;
     this.$5_0 = new SP.Guid($p1.listId);
     this.$B_0 = new SP.Guid($p1.viewId);
-    this.$Aa_0 = $p1.viewParameters;
+    this.$Ac_0 = $p1.viewParameters;
     this.$21_0 = $p1;
 };
 SP.Application.UI.ViewSelectorMenuBuilder.get_filterMenuItemsCallback = function SP_Application_UI_ViewSelectorMenuBuilder$get_filterMenuItemsCallback() {
@@ -34551,22 +34624,22 @@ SP.Application.UI.ViewSelectorMenuBuilder.showMenu = function SP_Application_UI_
     }
     var $v_1 = new SP.Application.UI.ViewSelectorMenuBuilder(elem, options);
 
-    $v_1.$B0_0();
+    $v_1.$B2_0();
 };
 SP.Application.UI.ViewSelectorMenuBuilder.getViewInformation = function SP_Application_UI_ViewSelectorMenuBuilder$getViewInformation(requestor, options) {
     var $v_0 = new SP.Application.UI.ViewSelectorMenuBuilder(null, options);
 
-    $v_0.$Ap_0(requestor);
+    $v_0.$Ar_0(requestor);
 };
 SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
     $1F_0: null,
     $5_0: null,
     $B_0: null,
     $21_0: null,
-    $Aa_0: null,
+    $Ac_0: null,
     $N_0: null,
     $1p_0: false,
-    $Am_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Am_0($p0, $p1) {
+    $Ao_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Ao_0($p0, $p1) {
         var $v_0 = SP.PageContextInfo.get_webServerRelativeUrl();
         var $v_1 = new SP.Utilities.UrlBuilder($v_0);
 
@@ -34579,16 +34652,16 @@ SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
         $v_2 += '&' + this.$21_0.viewParameters;
         SP.PageRequest.doPost($v_2, '', 'application/json', $p0, $p1);
     },
-    $B0_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B0_0() {
+    $B2_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B2_0() {
         this.$1p_0 = true;
-        this.$Am_0(this.$$d_$B9_0, this.$$d_$B8_0);
+        this.$Ao_0(this.$$d_$BB_0, this.$$d_$BA_0);
     },
-    $Ap_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Ap_0($p0) {
+    $Ar_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Ar_0($p0) {
         this.$1p_0 = false;
         this.$N_0 = $p0;
-        this.$Am_0(this.$$d_$B9_0, this.$$d_$B8_0);
+        this.$Ao_0(this.$$d_$BB_0, this.$$d_$BA_0);
     },
-    $B9_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B9_0($p0, $p1) {
+    $BB_0: function SP_Application_UI_ViewSelectorMenuBuilder$$BB_0($p0, $p1) {
         var $v_0 = new SP.Application.UI.ServerMenus();
 
         $v_0.MenuItems = eval(($p1.get_executor()).get_responseData());
@@ -34596,21 +34669,21 @@ SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
             $v_0.MenuItems = SP.Application.UI.ViewSelectorMenuBuilder.$2I($v_0.MenuItems);
         }
         if (this.$N_0) {
-            var $v_1 = this.$B3_0($v_0.MenuItems);
+            var $v_1 = this.$B5_0($v_0.MenuItems);
 
             this.$N_0.onViewInformationReturned($v_1);
             this.$N_0 = null;
         }
         if (this.$1F_0 && this.$1p_0) {
-            this.$B2_0(this.$1F_0, $v_0.MenuItems);
+            this.$B4_0(this.$1F_0, $v_0.MenuItems);
             this.$1p_0 = false;
         }
         this.$1F_0 = null;
         this.$5_0 = null;
         this.$B_0 = null;
-        this.$Aa_0 = null;
+        this.$Ac_0 = null;
     },
-    $B2_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B2_0($p0, $p1) {
+    $B4_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B4_0($p0, $p1) {
         var $v_0 = $p0.id;
 
         if (SP.ScriptUtility.isNullOrEmptyString($v_0)) {
@@ -34619,14 +34692,14 @@ SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
         $v_0 = $v_0 + '_menu';
         var $v_1 = SP.UI.Menu.create($v_0);
 
-        this.$Ay_0($v_1, $p1);
+        this.$B0_0($v_1, $p1);
         this.$1F_0._menu = $v_1;
         $v_1.show(this.$1F_0, false, false, -1);
     },
-    $Ay_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Ay_0($p0, $p1) {
+    $B0_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B0_0($p0, $p1) {
         var $v_0 = null;
         var $v_1 = false;
-        var $v_2 = SP.Application.UI.BrowserUtility.$BL();
+        var $v_2 = SP.Application.UI.BrowserUtility.$BN();
 
         for (var $v_3 = 0; $v_3 < $p1.length; $v_3++) {
             var $v_4 = $p1[$v_3];
@@ -34641,11 +34714,11 @@ SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
             else if ($v_5 === 'MenuItem') {
                 if ($v_1) {
                     if (!$v_2) {
-                        this.$Ak_0($v_0, $v_4);
+                        this.$Am_0($v_0, $v_4);
                     }
                 }
                 else {
-                    this.$Ak_0($p0, $v_4);
+                    this.$Am_0($p0, $v_4);
                 }
             }
             else if ($v_5 === 'SubMenuEnd') {
@@ -34663,10 +34736,10 @@ SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
             }
         }
     },
-    $Ak_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Ak_0($p0, $p1) {
+    $Am_0: function SP_Application_UI_ViewSelectorMenuBuilder$$Am_0($p0, $p1) {
         $p0.addMenuItem($p1.Text, $p1.ActionScriptText, $p1.ImageSourceUrl, null, $p1.Sequence, $p1.Description, $p1.Id);
     },
-    $B3_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B3_0($p0) {
+    $B5_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B5_0($p0) {
         var $v_0 = new SP.Application.UI.ViewSelectorGroups();
 
         $v_0.ModeratedViews = [];
@@ -34752,15 +34825,15 @@ SP.Application.UI.ViewSelectorMenuBuilder.prototype = {
         }
         return $v_0;
     },
-    $B8_0: function SP_Application_UI_ViewSelectorMenuBuilder$$B8_0($p0, $p1) {
+    $BA_0: function SP_Application_UI_ViewSelectorMenuBuilder$$BA_0($p0, $p1) {
     }
 };
 SP.Application.UI.MoreColorsPicker = function SP_Application_UI_MoreColorsPicker(e) {
-    this.$$d_$BQ_2 = Function.createDelegate(this, this.$BQ_2);
-    this.$$d_$BR_2 = Function.createDelegate(this, this.$BR_2);
+    this.$$d_$BS_2 = Function.createDelegate(this, this.$BS_2);
+    this.$$d_$BT_2 = Function.createDelegate(this, this.$BT_2);
     SP.Application.UI.MoreColorsPicker.initializeBase(this, [e]);
 };
-SP.Application.UI.MoreColorsPicker.$BH = function SP_Application_UI_MoreColorsPicker$$BH() {
+SP.Application.UI.MoreColorsPicker.$BJ = function SP_Application_UI_MoreColorsPicker$$BJ() {
     if (SP.Application.UI.MoreColorsPicker.$1j) {
         return;
     }
@@ -34770,7 +34843,7 @@ SP.Application.UI.MoreColorsPicker.prototype = {
     $2K_2: null,
     $8h_2: false,
     $i_2: null,
-    $Ad_2: null,
+    $Af_2: null,
     $8R_2: null,
     $8T_2: null,
     $2V_2: null,
@@ -34778,10 +34851,10 @@ SP.Application.UI.MoreColorsPicker.prototype = {
     initialize: function SP_Application_UI_MoreColorsPicker$initialize() {
         Sys.Component.prototype.initialize.call(this);
         this.$2K_2 = ((this.get_element()).getElementsByTagName('map'))[0];
-        this.$Ad_2 = ((this.get_element()).getElementsByTagName('input'))[0];
+        this.$Af_2 = ((this.get_element()).getElementsByTagName('input'))[0];
         this.$i_2 = ((this.get_element()).getElementsByTagName('input'))[1];
         this.$i_2.focus();
-        this.$2W_2 = this.$$d_$BR_2;
+        this.$2W_2 = this.$$d_$BT_2;
         $addHandler(this.$i_2, 'blur', this.$2W_2);
         var $v_0 = (this.get_element()).getElementsByTagName('div');
 
@@ -34793,19 +34866,19 @@ SP.Application.UI.MoreColorsPicker.prototype = {
                 this.$8T_2 = $v_0[$v_1];
             }
         }
-        this.$2V_2 = this.$$d_$BQ_2;
-        SP.Application.UI.MoreColorsPicker.$BH();
+        this.$2V_2 = this.$$d_$BS_2;
+        SP.Application.UI.MoreColorsPicker.$BJ();
         if (!(this.$2K_2.getElementsByTagName('area')).length) {
             for (var $v_3 = 0; $v_3 < SP.Application.UI.MoreColorsPicker.$1j.length; ++$v_3) {
-                this.$Aq_2(SP.Application.UI.MoreColorsPicker.$1j[$v_3]);
+                this.$As_2(SP.Application.UI.MoreColorsPicker.$1j[$v_3]);
             }
             var $v_2 = new SP.Application.UI.MappedColor('#000000', new Sys.UI.Point(154, 175));
 
             $v_2.$1l_0 = true;
-            this.$Aq_2($v_2);
+            this.$As_2($v_2);
         }
     },
-    $Aq_2: function SP_Application_UI_MoreColorsPicker$$Aq_2($p0) {
+    $As_2: function SP_Application_UI_MoreColorsPicker$$As_2($p0) {
         var $v_0 = document.createElement('area');
 
         $v_0.setAttribute('alt', $p0.$1k_0.toString());
@@ -34829,10 +34902,10 @@ SP.Application.UI.MoreColorsPicker.prototype = {
             Sys.Component.prototype.dispose.call(this);
         }
     },
-    $BR_2: function SP_Application_UI_MoreColorsPicker$$BR_2($p0) {
+    $BT_2: function SP_Application_UI_MoreColorsPicker$$BT_2($p0) {
         this.set_colorValue(this.$i_2.value);
     },
-    $BQ_2: function SP_Application_UI_MoreColorsPicker$$BQ_2($p0) {
+    $BS_2: function SP_Application_UI_MoreColorsPicker$$BS_2($p0) {
         var $v_0 = $p0.target;
 
         this.set_colorValue($v_0.getAttribute('value'));
@@ -34845,7 +34918,7 @@ SP.Application.UI.MoreColorsPicker.prototype = {
         if (!this.$8h_2) {
             this.$8T_2.style.backgroundColor = value;
             this.$8T_2.title = value;
-            this.$Ad_2.value = value;
+            this.$Af_2.value = value;
             this.$8h_2 = true;
         }
         this.$8R_2.style.backgroundColor = value;
@@ -34859,13 +34932,13 @@ SP.Application.UI.MappedColor = function SP_Application_UI_MappedColor($p0, $p1)
     this.$1k_0 = $p0;
     this.$1d_0 = $p1;
 };
-SP.Application.UI.MappedColor.$BI = function SP_Application_UI_MappedColor$$BI() {
+SP.Application.UI.MappedColor.$BK = function SP_Application_UI_MappedColor$$BK() {
     if (SP.Application.UI.MappedColor.$1W) {
         return;
     }
     SP.Application.UI.MappedColor.$1W = [new Sys.UI.Point(0, 0), new Sys.UI.Point(2, 0), new Sys.UI.Point(2, -1), new Sys.UI.Point(4, -1), new Sys.UI.Point(4, -2), new Sys.UI.Point(6, -2), new Sys.UI.Point(6, -3), new Sys.UI.Point(8, -3), new Sys.UI.Point(8, -2), new Sys.UI.Point(10, -2), new Sys.UI.Point(10, -1), new Sys.UI.Point(12, -1), new Sys.UI.Point(12, 0), new Sys.UI.Point(13, 0), new Sys.UI.Point(13, 8), new Sys.UI.Point(12, 8), new Sys.UI.Point(12, 9), new Sys.UI.Point(10, 9), new Sys.UI.Point(10, 10), new Sys.UI.Point(8, 10), new Sys.UI.Point(8, 11), new Sys.UI.Point(6, 11), new Sys.UI.Point(6, 10), new Sys.UI.Point(4, 10), new Sys.UI.Point(4, 9), new Sys.UI.Point(2, 9), new Sys.UI.Point(2, 8), new Sys.UI.Point(0, 8)];
 };
-SP.Application.UI.MappedColor.$BJ = function SP_Application_UI_MappedColor$$BJ() {
+SP.Application.UI.MappedColor.$BL = function SP_Application_UI_MappedColor$$BL() {
     if (SP.Application.UI.MappedColor.$2Z) {
         return;
     }
@@ -34886,8 +34959,8 @@ SP.Application.UI.MappedColor.prototype = {
         return $p0;
     },
     buildCoordsAttributeValue: function SP_Application_UI_MappedColor$buildCoordsAttributeValue() {
-        SP.Application.UI.MappedColor.$BI();
-        SP.Application.UI.MappedColor.$BJ();
+        SP.Application.UI.MappedColor.$BK();
+        SP.Application.UI.MappedColor.$BL();
         var $v_0 = '';
 
         if (SP.Application.UI.MappedColor.$1W.length > 0) {
@@ -34905,24 +34978,24 @@ SP.Application.UI.MappedColor.prototype = {
     }
 };
 SP.Application.UI.MoreColorsPage = function SP_Application_UI_MoreColorsPage(e) {
-    this.$$d_$BO_2 = Function.createDelegate(this, this.$BO_2);
-    this.$$d_$BT_2 = Function.createDelegate(this, this.$BT_2);
-    this.$$d_$BU_2 = Function.createDelegate(this, this.$BU_2);
+    this.$$d_$BQ_2 = Function.createDelegate(this, this.$BQ_2);
+    this.$$d_$BV_2 = Function.createDelegate(this, this.$BV_2);
+    this.$$d_$BW_2 = Function.createDelegate(this, this.$BW_2);
     SP.Application.UI.MoreColorsPage.initializeBase(this, [e]);
 };
 SP.Application.UI.MoreColorsPage.prototype = {
     $1c_2: null,
     $2J_2: null,
     $2U_2: null,
-    $Ag_2: null,
+    $Ai_2: null,
     $8S_2: null,
     $8f_2: null,
     initialize: function SP_Application_UI_MoreColorsPage$initialize() {
         Sys.Component.prototype.initialize.call(this);
         this.$2J_2 = $get('OkButton');
         this.$2U_2 = $get('CancelButton');
-        this.$Ag_2 = this.$$d_$BU_2;
-        this.$1c_2.add_propertyChanged(this.$Ag_2);
+        this.$Ai_2 = this.$$d_$BW_2;
+        this.$1c_2.add_propertyChanged(this.$Ai_2);
         var $v_0 = window.self.frameElement;
 
         if ($v_0) {
@@ -34933,10 +35006,10 @@ SP.Application.UI.MoreColorsPage.prototype = {
             }
         }
         this.$2J_2.setAttribute('onclick', '');
-        this.$8S_2 = this.$$d_$BT_2;
+        this.$8S_2 = this.$$d_$BV_2;
         $addHandler(this.$2J_2, 'click', this.$8S_2);
         this.$2U_2.setAttribute('onclick', '');
-        this.$8f_2 = this.$$d_$BO_2;
+        this.$8f_2 = this.$$d_$BQ_2;
         $addHandler(this.$2U_2, 'click', this.$8f_2);
     },
     dispose: function SP_Application_UI_MoreColorsPage$dispose() {
@@ -34947,19 +35020,19 @@ SP.Application.UI.MoreColorsPage.prototype = {
             Sys.Component.prototype.dispose.call(this);
         }
     },
-    $BU_2: function SP_Application_UI_MoreColorsPage$$BU_2($p0, $p1) {
+    $BW_2: function SP_Application_UI_MoreColorsPage$$BW_2($p0, $p1) {
         if ($p1.get_propertyName() === 'colorValue' && SP.UI.ModalDialog.get_childDialog()) {
             (SP.UI.ModalDialog.get_childDialog()).set_returnValue(this.$1c_2.get_colorValue());
         }
     },
-    $BT_2: function SP_Application_UI_MoreColorsPage$$BT_2($p0) {
+    $BV_2: function SP_Application_UI_MoreColorsPage$$BV_2($p0) {
         $p0.preventDefault();
         $p0.stopPropagation();
         if (SP.UI.ModalDialog.get_childDialog()) {
             (SP.UI.ModalDialog.get_childDialog()).close(1);
         }
     },
-    $BO_2: function SP_Application_UI_MoreColorsPage$$BO_2($p0) {
+    $BQ_2: function SP_Application_UI_MoreColorsPage$$BQ_2($p0) {
         $p0.preventDefault();
         $p0.stopPropagation();
         if (SP.UI.ModalDialog.get_childDialog()) {
@@ -34989,7 +35062,7 @@ SP.Application.UI.ThemeWebPage.prototype = {
     remove_themeDisplayUpdated: function SP_Application_UI_ThemeWebPage$remove_themeDisplayUpdated(value) {
         this.$2X_2.removeHandler('__ThemeDisplayUpdated', value);
     },
-    $Ba_2: function SP_Application_UI_ThemeWebPage$$Ba_2() {
+    $Bc_2: function SP_Application_UI_ThemeWebPage$$Bc_2() {
         var $v_0 = this.$2X_2.getHandler('__ThemeDisplayUpdated');
 
         if ($v_0) {
@@ -35049,7 +35122,7 @@ SP.Application.UI.ThemeWebPage.prototype = {
         if (null !== $v_4) {
             $v_4.innerHTML = $v_0 ? SP.Utilities.HttpUtility.htmlEncode($v_0.AccessibleDescription) : '';
         }
-        this.$Ba_2();
+        this.$Bc_2();
     },
     get_thmxThemes: function SP_Application_UI_ThemeWebPage$get_thmxThemes() {
         return this.$1g_2;
@@ -35060,49 +35133,49 @@ SP.Application.UI.ThemeWebPage.prototype = {
     }
 };
 SP.Application.UI.WikiPageNameInPlaceEditor = function SP_Application_UI_WikiPageNameInPlaceEditor(ownerDoc, displayElemId, editElemId, editTextBoxId) {
-    this.$$d_$BP_0 = Function.createDelegate(this, this.$BP_0);
-    this.$$d_$BY_0 = Function.createDelegate(this, this.$BY_0);
-    this.$$d_$BS_0 = Function.createDelegate(this, this.$BS_0);
+    this.$$d_$BR_0 = Function.createDelegate(this, this.$BR_0);
+    this.$$d_$Ba_0 = Function.createDelegate(this, this.$Ba_0);
+    this.$$d_$BU_0 = Function.createDelegate(this, this.$BU_0);
     this.$23_0 = ownerDoc;
     this.$Z_0 = this.$23_0.getElementById(displayElemId);
     this.$3l_0 = this.$23_0.getElementById(editElemId);
     this.$1E_0 = this.$23_0.getElementById(editTextBoxId);
-    this.$9M_0 = this.$$d_$BS_0;
-    this.$AV_0 = this.$$d_$BY_0;
-    this.$8w_0 = this.$$d_$BP_0;
+    this.$9N_0 = this.$$d_$BU_0;
+    this.$AX_0 = this.$$d_$Ba_0;
+    this.$8w_0 = this.$$d_$BR_0;
 };
 SP.Application.UI.WikiPageNameInPlaceEditor.prototype = {
     $23_0: null,
     $Z_0: null,
     $3l_0: null,
     $1E_0: null,
-    $9w_0: null,
-    $9I_0: false,
-    $9M_0: null,
-    $AV_0: null,
+    $9y_0: null,
+    $9J_0: false,
+    $9N_0: null,
+    $AX_0: null,
     $8w_0: null,
     editingPageCallback: function SP_Application_UI_WikiPageNameInPlaceEditor$editingPageCallback() {
-        this.$9w_0 = this.$1E_0.value.trim();
+        this.$9y_0 = this.$1E_0.value.trim();
     },
-    $BS_0: function SP_Application_UI_WikiPageNameInPlaceEditor$$BS_0($p0) {
+    $BU_0: function SP_Application_UI_WikiPageNameInPlaceEditor$$BU_0($p0) {
         this.$Z_0.className = 'ms-WikiPageNameEditor-DisplayHover';
     },
-    $BY_0: function SP_Application_UI_WikiPageNameInPlaceEditor$$BY_0($p0) {
+    $Ba_0: function SP_Application_UI_WikiPageNameInPlaceEditor$$Ba_0($p0) {
         this.$Z_0.className = 'ms-WikiPageNameEditor-DisplayClickable';
     },
-    $BP_0: function SP_Application_UI_WikiPageNameInPlaceEditor$$BP_0($p0) {
+    $BR_0: function SP_Application_UI_WikiPageNameInPlaceEditor$$BR_0($p0) {
         this.$Z_0.style.display = 'none';
         this.$3l_0.style.display = 'inline';
         this.$1E_0.focus();
     },
     savingPageCallback: function SP_Application_UI_WikiPageNameInPlaceEditor$savingPageCallback() {
         this.$1E_0.value = this.$1E_0.value.trim();
-        if (this.$9w_0 === this.$1E_0.value) {
-            if (this.$9I_0) {
-                $removeHandler(this.$Z_0, 'mouseover', this.$9M_0);
-                $removeHandler(this.$Z_0, 'mouseout', this.$AV_0);
+        if (this.$9y_0 === this.$1E_0.value) {
+            if (this.$9J_0) {
+                $removeHandler(this.$Z_0, 'mouseover', this.$9N_0);
+                $removeHandler(this.$Z_0, 'mouseout', this.$AX_0);
                 $removeHandler(this.$Z_0, 'click', this.$8w_0);
-                this.$9I_0 = false;
+                this.$9J_0 = false;
             }
             this.$Z_0.className = 'ms-WikiPageNameEditor-Display';
             this.$Z_0.style.display = 'inline';
@@ -35140,25 +35213,25 @@ SP.UI.ApplicationPages.CalendarScope.prototype = {
 SP.UI.ApplicationPages.CalendarScope.registerEnum('SP.UI.ApplicationPages.CalendarScope', false);
 SP.UI.ApplicationPages.SelectorSelectionEventArgs = function SP_UI_ApplicationPages_SelectorSelectionEventArgs(entities) {
     SP.UI.ApplicationPages.SelectorSelectionEventArgs.initializeBase(this);
-    this.$9B_1 = entities;
+    this.$9C_1 = entities;
 };
 SP.UI.ApplicationPages.SelectorSelectionEventArgs.prototype = {
-    $9B_1: null,
+    $9C_1: null,
     get_entities: function SP_UI_ApplicationPages_SelectorSelectionEventArgs$get_entities() {
-        return this.$9B_1;
+        return this.$9C_1;
     }
 };
 SP.UI.ApplicationPages.CalendarSelector = function SP_UI_ApplicationPages_CalendarSelector() {
-    this.$$d_$B7_1 = Function.createDelegate(this, this.$B7_1);
+    this.$$d_$B9_1 = Function.createDelegate(this, this.$B9_1);
     this.$1Y_1 = {};
     SP.UI.ApplicationPages.CalendarSelector.initializeBase(this);
 };
 SP.UI.ApplicationPages.CalendarSelector.instance = function SP_UI_ApplicationPages_CalendarSelector$instance() {
-    return SP.UI.ApplicationPages.CalendarSelector.$Aw;
+    return SP.UI.ApplicationPages.CalendarSelector.$Ay;
 };
 SP.UI.ApplicationPages.CalendarSelector.prototype = {
     registerSelector: function SP_UI_ApplicationPages_CalendarSelector$registerSelector(selector) {
-        selector.set_callback(this.$$d_$B7_1);
+        selector.set_callback(this.$$d_$B9_1);
         this.$1Y_1[this.$8k_1(selector.get_componentType(), selector.get_scopeKey())] = selector;
     },
     getSelector: function SP_UI_ApplicationPages_CalendarSelector$getSelector(type, scopeKey) {
@@ -35195,7 +35268,7 @@ SP.UI.ApplicationPages.CalendarSelector.prototype = {
         if ($v_1) {
             $v_1.revertTo(ent);
         }
-        var $v_2 = this.$Ao_1(scopeKey);
+        var $v_2 = this.$Aq_1(scopeKey);
 
         this.$8i_1(scopeKey, $v_2);
     },
@@ -35210,15 +35283,15 @@ SP.UI.ApplicationPages.CalendarSelector.prototype = {
             $v_1.removeEntity(ent);
         }
     },
-    $Ax_1: function SP_UI_ApplicationPages_CalendarSelector$$Ax_1($p0) {
+    $Az_1: function SP_UI_ApplicationPages_CalendarSelector$$Az_1($p0) {
         var $v_0 = new SP.UI.ApplicationPages.ResolveEntity();
 
         $v_0.entityType = '0';
         Array.add($p0, $v_0);
     },
-    $B7_1: function SP_UI_ApplicationPages_CalendarSelector$$B7_1($p0, $p1) {
+    $B9_1: function SP_UI_ApplicationPages_CalendarSelector$$B9_1($p0, $p1) {
         var $v_0 = $p0;
-        var $v_1 = this.$Ao_1($v_0.get_scopeKey());
+        var $v_1 = this.$Aq_1($v_0.get_scopeKey());
 
         this.$8i_1($v_0.get_scopeKey(), $v_1);
     },
@@ -35226,7 +35299,7 @@ SP.UI.ApplicationPages.CalendarSelector.prototype = {
         var $v_0 = [];
 
         if (this.$8g_1($p0, 4)) {
-            this.$Ax_1($v_0);
+            this.$Az_1($v_0);
         }
         else {
             var $v_1 = this.getSelector(3, $p0);
@@ -35253,7 +35326,7 @@ SP.UI.ApplicationPages.CalendarSelector.prototype = {
             $p1(this, new SP.UI.ApplicationPages.SelectorSelectionEventArgs($v_0));
         }
     },
-    $Ao_1: function SP_UI_ApplicationPages_CalendarSelector$$Ao_1($p0) {
+    $Aq_1: function SP_UI_ApplicationPages_CalendarSelector$$Aq_1($p0) {
         return (this.get_events()).getHandler($p0);
     },
     $8g_1: function SP_UI_ApplicationPages_CalendarSelector$$8g_1($p0, $p1) {
@@ -35275,7 +35348,7 @@ SP.UI.ApplicationPages.CalendarSelector.prototype = {
 };
 SP.UI.ApplicationPages.BaseSelectorComponent = function SP_UI_ApplicationPages_BaseSelectorComponent(key, type) {
     this.$D_0 = key;
-    this.$AU_0 = type;
+    this.$AW_0 = type;
     this.$W_0 = [];
     var $v_0 = SP.UI.ApplicationPages.CalendarSelector.instance();
 
@@ -35285,12 +35358,12 @@ SP.UI.ApplicationPages.BaseSelectorComponent.prototype = {
     $D_0: null,
     $W_0: null,
     $3D_0: null,
-    $AU_0: 0,
+    $AW_0: 0,
     get_scopeKey: function SP_UI_ApplicationPages_BaseSelectorComponent$get_scopeKey() {
         return this.$D_0;
     },
     get_componentType: function SP_UI_ApplicationPages_BaseSelectorComponent$get_componentType() {
-        return this.$AU_0;
+        return this.$AW_0;
     },
     get_selectedEntities: function SP_UI_ApplicationPages_BaseSelectorComponent$get_selectedEntities() {
         return this.$W_0;
@@ -35972,6 +36045,37 @@ Microsoft.SharePoint.Administration.TenantIdentityMappingUserType.prototype = {
     guestUser: 3
 };
 Microsoft.SharePoint.Administration.TenantIdentityMappingUserType.registerEnum('Microsoft.SharePoint.Administration.TenantIdentityMappingUserType', false);
+Microsoft.SharePoint.Administration.TenantIdentityMigrationState = function() {
+};
+Microsoft.SharePoint.Administration.TenantIdentityMigrationState.prototype = {
+    none: 0,
+    readyForMigration: 1,
+    migrationInProgress: 2,
+    migrationCompleted: 3,
+    migrationSuspended: 4
+};
+Microsoft.SharePoint.Administration.TenantIdentityMigrationState.registerEnum('Microsoft.SharePoint.Administration.TenantIdentityMigrationState', false);
+Microsoft.SharePoint.Administration.TenantIdentityMigrationStatus = function() {
+};
+Microsoft.SharePoint.Administration.TenantIdentityMigrationStatus.prototype = {
+    none: 0,
+    succeeded: 1,
+    unexceptedFailure: 2,
+    migratorInternalFailure: 3,
+    userMigrationSucceeded_GroupMigrationSucceeded: 4,
+    userMigrationSucceeded_GroupMigrationInternalFailure: 5,
+    userMigrationInternalFailure_GroupMigrationSucceeded: 6,
+    userMigrationInternalFailure_GroupMigrationInternalFailure: 7
+};
+Microsoft.SharePoint.Administration.TenantIdentityMigrationStatus.registerEnum('Microsoft.SharePoint.Administration.TenantIdentityMigrationStatus', false);
+Microsoft.SharePoint.Administration.TenantStoreIdentityMigrationProperty = function() {
+};
+Microsoft.SharePoint.Administration.TenantStoreIdentityMigrationProperty.prototype = {
+    identityMigrationState: 0,
+    identityMigrationStatus: 1,
+    identityMigrationStatusLastUpdated: 2
+};
+Microsoft.SharePoint.Administration.TenantStoreIdentityMigrationProperty.registerEnum('Microsoft.SharePoint.Administration.TenantStoreIdentityMigrationProperty', false);
 Microsoft.SharePoint.Administration.OrgAssets = function Microsoft_SharePoint_Administration_OrgAssets() {
     Microsoft.SharePoint.Administration.OrgAssets.initializeBase(this);
 };
@@ -38075,12 +38179,12 @@ SP.PageInstrumentation.PageImpressionClient = function SP_PageInstrumentation_Pa
 };
 SP.PageInstrumentation.PageImpressionClient.prototype = {
     $8t_1: null,
-    $8x_1: null,
+    $8y_1: null,
     get_basePageCorrelationId: function SP_PageInstrumentation_PageImpressionClient$get_basePageCorrelationId() {
         return this.$8t_1;
     },
     get_clientIdToClickInfoMap: function SP_PageInstrumentation_PageImpressionClient$get_clientIdToClickInfoMap() {
-        return this.$8x_1;
+        return this.$8y_1;
     },
     get_typeId: function SP_PageInstrumentation_PageImpressionClient$get_typeId() {
         return '{3cf9a910-cfaa-4c58-ac95-6d9e48f49047}';
@@ -38108,7 +38212,7 @@ SP.PageInstrumentation.PageImpressionClient.prototype = {
         }
         $v_0 = parentNode.ClientIdToClickInfoMap;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$8x_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$8y_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.ClientIdToClickInfoMap;
         }
     }
@@ -38165,6 +38269,15 @@ SP.Sharing.SharingDomainRestrictionMode.prototype = {
 };
 SP.Sharing.SharingDomainRestrictionMode.registerEnum('SP.Sharing.SharingDomainRestrictionMode', false);
 SP.Sharing.DocumentSharingManager = function SP_Sharing_DocumentSharingManager() {
+};
+SP.Sharing.DocumentSharingManager.getRoleDefinition = function SP_Sharing_DocumentSharingManager$getRoleDefinition(context, role) {
+    if (!context) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+
+    $v_0 = new SP.RoleDefinition(context, new SP.ObjectPathStaticMethod(context, '{10c23c0e-cead-4f15-9deb-a0f1d7507495}', 'GetRoleDefinition', [role]));
+    return $v_0;
 };
 SP.Sharing.DocumentSharingManager.isDocumentSharingEnabled = function SP_Sharing_DocumentSharingManager$isDocumentSharingEnabled(context, list) {
     if (!context) {
@@ -38226,30 +38339,21 @@ SP.Sharing.DocumentSharingManager.removeItemsFromSharedWithMeViewByPath = functi
     context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
     return $v_0;
 };
-SP.Sharing.DocumentSharingManager.getRoleDefinition = function SP_Sharing_DocumentSharingManager$getRoleDefinition(context, role) {
-    if (!context) {
-        throw Error.argumentNull('context');
-    }
-    var $v_0;
-
-    $v_0 = new SP.RoleDefinition(context, new SP.ObjectPathStaticMethod(context, '{10c23c0e-cead-4f15-9deb-a0f1d7507495}', 'GetRoleDefinition', [role]));
-    return $v_0;
-};
 SP.Sharing.SharedWithMeViewItemRemovalResult = function SP_Sharing_SharedWithMeViewItemRemovalResult() {
     SP.Sharing.SharedWithMeViewItemRemovalResult.initializeBase(this);
 };
 SP.Sharing.SharedWithMeViewItemRemovalResult.prototype = {
-    $9C_1: 0,
+    $9D_1: 0,
     $a_1: null,
-    $AQ_1: false,
+    $AS_1: false,
     get_errorCode: function SP_Sharing_SharedWithMeViewItemRemovalResult$get_errorCode() {
-        return this.$9C_1;
+        return this.$9D_1;
     },
     get_errorMessage: function SP_Sharing_SharedWithMeViewItemRemovalResult$get_errorMessage() {
         return this.$a_1;
     },
     get_success: function SP_Sharing_SharedWithMeViewItemRemovalResult$get_success() {
-        return this.$AQ_1;
+        return this.$AS_1;
     },
     get_typeId: function SP_Sharing_SharedWithMeViewItemRemovalResult$get_typeId() {
         return '{418572c1-2347-4190-90bd-30a19a251c11}';
@@ -38272,7 +38376,7 @@ SP.Sharing.SharedWithMeViewItemRemovalResult.prototype = {
 
         $v_0 = parentNode.ErrorCode;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9C_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$9D_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.ErrorCode;
         }
         $v_0 = parentNode.ErrorMessage;
@@ -38282,7 +38386,7 @@ SP.Sharing.SharedWithMeViewItemRemovalResult.prototype = {
         }
         $v_0 = parentNode.Success;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AQ_1 = $v_0;
+            this.$AS_1 = $v_0;
             delete parentNode.Success;
         }
     }
@@ -38343,11 +38447,11 @@ SP.Sharing.UserSharingResult = function SP_Sharing_UserSharingResult() {
 };
 SP.Sharing.UserSharingResult.prototype = {
     $8m_1: null,
-    $94_1: 0,
+    $95_1: 0,
     $9_1: null,
     $7_1: null,
     $1Z_1: null,
-    $9X_1: false,
+    $9Y_1: false,
     $1a_1: null,
     $6_1: false,
     $Y_1: null,
@@ -38355,7 +38459,7 @@ SP.Sharing.UserSharingResult.prototype = {
         return this.$8m_1;
     },
     get_currentRole: function SP_Sharing_UserSharingResult$get_currentRole() {
-        return this.$94_1;
+        return this.$95_1;
     },
     get_displayName: function SP_Sharing_UserSharingResult$get_displayName() {
         return this.$9_1;
@@ -38367,7 +38471,7 @@ SP.Sharing.UserSharingResult.prototype = {
         return this.$1Z_1;
     },
     get_isUserKnown: function SP_Sharing_UserSharingResult$get_isUserKnown() {
-        return this.$9X_1;
+        return this.$9Y_1;
     },
     get_message: function SP_Sharing_UserSharingResult$get_message() {
         return this.$1a_1;
@@ -38404,7 +38508,7 @@ SP.Sharing.UserSharingResult.prototype = {
         }
         $v_0 = parentNode.CurrentRole;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$94_1 = SP.DataConvert.fixupType(null, $v_0);
+            this.$95_1 = SP.DataConvert.fixupType(null, $v_0);
             delete parentNode.CurrentRole;
         }
         $v_0 = parentNode.DisplayName;
@@ -38424,7 +38528,7 @@ SP.Sharing.UserSharingResult.prototype = {
         }
         $v_0 = parentNode.IsUserKnown;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9X_1 = $v_0;
+            this.$9Y_1 = $v_0;
             delete parentNode.IsUserKnown;
         }
         $v_0 = parentNode.Message;
@@ -38483,27 +38587,27 @@ SP.SiteHealth.SiteHealthResult = function SP_SiteHealth_SiteHealthResult() {
     SP.SiteHealth.SiteHealthResult.initializeBase(this);
 };
 SP.SiteHealth.SiteHealthResult.prototype = {
-    $9o_1: null,
-    $AE_1: null,
-    $AF_1: null,
-    $AG_1: false,
+    $9p_1: null,
+    $AG_1: null,
     $AH_1: null,
+    $AI_1: false,
+    $AJ_1: null,
     $6_1: 0,
     $85_1: null,
     get_messageAsText: function SP_SiteHealth_SiteHealthResult$get_messageAsText() {
-        return this.$9o_1;
+        return this.$9p_1;
     },
     get_ruleHelpLink: function SP_SiteHealth_SiteHealthResult$get_ruleHelpLink() {
-        return this.$AE_1;
-    },
-    get_ruleId: function SP_SiteHealth_SiteHealthResult$get_ruleId() {
-        return this.$AF_1;
-    },
-    get_ruleIsRepairable: function SP_SiteHealth_SiteHealthResult$get_ruleIsRepairable() {
         return this.$AG_1;
     },
-    get_ruleName: function SP_SiteHealth_SiteHealthResult$get_ruleName() {
+    get_ruleId: function SP_SiteHealth_SiteHealthResult$get_ruleId() {
         return this.$AH_1;
+    },
+    get_ruleIsRepairable: function SP_SiteHealth_SiteHealthResult$get_ruleIsRepairable() {
+        return this.$AI_1;
+    },
+    get_ruleName: function SP_SiteHealth_SiteHealthResult$get_ruleName() {
+        return this.$AJ_1;
     },
     get_status: function SP_SiteHealth_SiteHealthResult$get_status() {
         return this.$6_1;
@@ -38540,27 +38644,27 @@ SP.SiteHealth.SiteHealthResult.prototype = {
 
         $v_0 = parentNode.MessageAsText;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9o_1 = $v_0;
+            this.$9p_1 = $v_0;
             delete parentNode.MessageAsText;
         }
         $v_0 = parentNode.RuleHelpLink;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AE_1 = $v_0;
+            this.$AG_1 = $v_0;
             delete parentNode.RuleHelpLink;
         }
         $v_0 = parentNode.RuleId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AF_1 = $v_0;
+            this.$AH_1 = $v_0;
             delete parentNode.RuleId;
         }
         $v_0 = parentNode.RuleIsRepairable;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AG_1 = $v_0;
+            this.$AI_1 = $v_0;
             delete parentNode.RuleIsRepairable;
         }
         $v_0 = parentNode.RuleName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$AH_1 = $v_0;
+            this.$AJ_1 = $v_0;
             delete parentNode.RuleName;
         }
         $v_0 = parentNode.Status;
@@ -39472,10 +39576,10 @@ SP.Workflow.WorkflowAssociationCreationInformation = function SP_Workflow_Workfl
 SP.Workflow.WorkflowAssociationCreationInformation.prototype = {
     $3Q_1: null,
     $3R_1: null,
-    $9J_1: null,
+    $9K_1: null,
     $4_1: null,
-    $AS_1: null,
-    $AT_1: null,
+    $AU_1: null,
+    $AV_1: null,
     get_contentTypeAssociationHistoryListName: function SP_Workflow_WorkflowAssociationCreationInformation$get_contentTypeAssociationHistoryListName() {
         return this.$3Q_1;
     },
@@ -39491,10 +39595,10 @@ SP.Workflow.WorkflowAssociationCreationInformation.prototype = {
         return value;
     },
     get_historyList: function SP_Workflow_WorkflowAssociationCreationInformation$get_historyList() {
-        return this.$9J_1;
+        return this.$9K_1;
     },
     set_historyList: function SP_Workflow_WorkflowAssociationCreationInformation$set_historyList(value) {
-        this.$9J_1 = value;
+        this.$9K_1 = value;
         return value;
     },
     get_name: function SP_Workflow_WorkflowAssociationCreationInformation$get_name() {
@@ -39505,17 +39609,17 @@ SP.Workflow.WorkflowAssociationCreationInformation.prototype = {
         return value;
     },
     get_taskList: function SP_Workflow_WorkflowAssociationCreationInformation$get_taskList() {
-        return this.$AS_1;
+        return this.$AU_1;
     },
     set_taskList: function SP_Workflow_WorkflowAssociationCreationInformation$set_taskList(value) {
-        this.$AS_1 = value;
+        this.$AU_1 = value;
         return value;
     },
     get_template: function SP_Workflow_WorkflowAssociationCreationInformation$get_template() {
-        return this.$AT_1;
+        return this.$AV_1;
     },
     set_template: function SP_Workflow_WorkflowAssociationCreationInformation$set_template(value) {
-        this.$AT_1 = value;
+        this.$AV_1 = value;
         return value;
     },
     get_typeId: function SP_Workflow_WorkflowAssociationCreationInformation$get_typeId() {
@@ -40278,14 +40382,14 @@ SP.Workflow.WorkflowTemplatePropertyNames.registerClass('SP.Workflow.WorkflowTem
 SP.Workflow.WorkflowTemplateCollection.registerClass('SP.Workflow.WorkflowTemplateCollection', SP.ClientObjectCollection);
 function sp_initialize() {
     SP.ClientContext.$2L = null;
-    SP.ULS.$Ah = false;
+    SP.ULS.$Aj = false;
     SP.ULS.$1e = false;
     SP.ULS.$8U = false;
     SP.ULS.$g = null;
     SP.ULS.$8V = false;
     SP.ULS.$1A = '';
-    SP.ULS.$Ai = 0;
-    SP.ULS.$Aj = [];
+    SP.ULS.$Ak = 0;
+    SP.ULS.$Al = [];
     SP.AlertPropertyNames.alertFrequency = 'AlertFrequency';
     SP.AlertPropertyNames.alertTemplateName = 'AlertTemplateName';
     SP.AlertPropertyNames.alertTime = 'AlertTime';
@@ -40996,6 +41100,7 @@ function sp_initialize() {
     SP.RecentListPropertyNames.icon = 'icon';
     SP.RecentListPropertyNames.lastModifiedDate = 'lastModifiedDate';
     SP.RecentListPropertyNames.lastViewDate = 'lastViewDate';
+    SP.RecentListPropertyNames.lastviewDateTime = 'lastviewDateTime';
     SP.RecentListPropertyNames.listId = 'listId';
     SP.RecentListPropertyNames.listTitle = 'listTitle';
     SP.RecentListPropertyNames.listUrl = 'listUrl';
@@ -41288,6 +41393,7 @@ function sp_initialize() {
     SP.ViewPropertyNames.toolbarTemplateName = 'ToolbarTemplateName';
     SP.ViewPropertyNames.viewType = 'ViewType';
     SP.ViewPropertyNames.viewData = 'ViewData';
+    SP.ViewPropertyNames.viewType2 = 'ViewType2';
     SP.ViewPropertyNames.visualizationInfo = 'VisualizationInfo';
     SP.ViewObjectPropertyNames.viewFields = 'ViewFields';
     SP.ViewFieldCollectionPropertyNames.schemaXml = 'SchemaXml';
@@ -41467,7 +41573,7 @@ function sp_initialize() {
     SP.Application.UI.MoreColorsPicker.$1j = null;
     SP.Application.UI.MappedColor.$1W = null;
     SP.Application.UI.MappedColor.$2Z = null;
-    SP.UI.ApplicationPages.CalendarSelector.$Aw = new SP.UI.ApplicationPages.CalendarSelector();
+    SP.UI.ApplicationPages.CalendarSelector.$Ay = new SP.UI.ApplicationPages.CalendarSelector();
     SP.UI.ApplicationPages.CalendarInstanceRepository.$2Y = {};
     SP.UI.ApplicationPages.ResolveEntity.typE_EVENT = '0';
     SP.UI.ApplicationPages.ResolveEntity.typE_USER = '1';

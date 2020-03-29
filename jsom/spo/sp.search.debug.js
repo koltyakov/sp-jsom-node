@@ -2606,16 +2606,6 @@ Microsoft.SharePoint.Client.Search.Query.SearchExecutor.prototype = {
         return $v_1;
     },
     
-    getScsEndPointInfo: function Microsoft_SharePoint_Client_Search_Query_SearchExecutor$getScsEndPointInfo() {
-        var $v_0 = this.get_context();
-        var $v_1;
-        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetScsEndPointInfo', null);
-        $v_0.addQuery($v_2);
-        $v_1 = new SP.JsonObjectResult();
-        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        return $v_1;
-    },
-    
     getScsPartialUpdateEndPointInfo: function Microsoft_SharePoint_Client_Search_Query_SearchExecutor$getScsPartialUpdateEndPointInfo() {
         var $v_0 = this.get_context();
         var $v_1;

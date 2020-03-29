@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 19904,
-                "rpr": 12015
+                "rup": 19918,
+                "rpr": 12024
             }
         };
     }
@@ -15858,6 +15858,9 @@ function SPThemeUtils_module_def() {
     function IsSiteThemed() {
         return GetSiteThemedCssFolderUrl() != null;
     }
+    function SiteHasAssociatedGroup() {
+        return Boolean(GetPageContextInfoProperty("groupId"));
+    }
     function ParseJsonOrUndefined(strJson) {
         var result;
 
@@ -15919,6 +15922,129 @@ function SPThemeUtils_module_def() {
     function WithCurrentTheme(themeCallback, bForceLoad) {
         _withTheme(themeCallback, bForceLoad);
     }
+    function GetTealTheme() {
+        var TealColors = {
+            themePrimary: "#03787c",
+            themeLighterAlt: "#f0f9fa",
+            themeLighter: "#c5e9ea",
+            themeLighter7F: "#7fc5e9ea",
+            themeLight: "#98d6d8",
+            themeLight7F: "#7f98d6d8",
+            themeTertiary: "#49aeb1",
+            themeSecondary: "#13898d",
+            themeDarkAlt: "#026d70",
+            themeDark: "#025c5f",
+            themeDarker: "#014446",
+            neutralLighterAlt: "#f8f8f8",
+            neutralLighter: "#f4f4f4",
+            neutralLight: "#eaeaea",
+            neutralLightC6: "#c6eaeaea",
+            neutralQuaternaryAlt: "#dadada",
+            neutralQuaternary: "#d0d0d0",
+            neutralTertiaryAlt: "#c8c8c8",
+            neutralTertiary: "#a6a6a6",
+            neutralSecondaryAlt: "#767676",
+            neutralSecondary: "#666666",
+            neutralPrimary: "#333333",
+            neutralPrimaryAlt: "#3c3c3c",
+            neutralDark: "#212121",
+            black: "#000000",
+            black7F: "#7f000000",
+            white: "#ffffff",
+            whiteD8: "#d8ffffff",
+            error: "#bf0000"
+        };
+        var slotMappings = [{
+            baseColor: TealColors.themeDarker,
+            slots: ["HyperlinkActive", "CommandLinksPressed", "NavigationPressed", "EmphasisHoverBorder", "TopBarPressedText", "HeaderNavigationPressedText", "Hyperlinkfollowed"]
+        }, {
+            baseColor: TealColors.themeDark,
+            slots: ["EmphasisHoverBackground", "EmphasisBorder"]
+        }, {
+            baseColor: TealColors.themePrimary,
+            slots: ["AccentText", "CommandLinksHover", "RowAccent", "NavigationAccent", "NavigationHover", "EmphasisBackground", "HeaderNavigationHoverText", "HeaderNavigationSelectedText", "SuiteBarBackground", "Hyperlink", "ContentAccent1"]
+        }, {
+            baseColor: TealColors.themeSecondary,
+            slots: ["AccentLines", "HeaderAccentLines", "ButtonPressedBorder"]
+        }, {
+            baseColor: TealColors.themeTertiary,
+            slots: ["SuiteBarHoverBackground"]
+        }, {
+            baseColor: TealColors.themeLight,
+            slots: ["StrongLines", "HeaderStrongLines", "SuiteBarHoverText", "ButtonPressedBackground", "ButtonHoverBorder"]
+        }, {
+            baseColor: TealColors.themeLighter,
+            slots: ["ButtonHoverBackground"]
+        }, {
+            baseColor: TealColors.themeLight7F,
+            slots: ["SelectionBackground"]
+        }, {
+            baseColor: TealColors.themeLighter7F,
+            slots: ["HoverBackground", "NavigationHoverBackground"]
+        }, {
+            baseColor: TealColors.white,
+            slots: ["PageBackground", "EmphasisText", "SuiteBarText", "TileText"]
+        }, {
+            baseColor: TealColors.whiteD8,
+            slots: ["BackgroundOverlay", "HeaderBackground", "FooterBackground"]
+        }, {
+            baseColor: TealColors.neutralLighterAlt,
+            slots: ["DisabledBackground", "HeaderDisabledBackground", "ButtonBackground", "ButtonDisabledBackground"]
+        }, {
+            baseColor: TealColors.neutralLighter,
+            slots: ["SubtleEmphasisBackground", "DialogBorder"]
+        }, {
+            baseColor: TealColors.neutralLightC6,
+            slots: ["NavigationSelectedBackground", "TopBarBackground"]
+        }, {
+            baseColor: TealColors.neutralLight,
+            slots: ["DisabledLines", "HeaderDisabledLines", "ButtonDisabledBorder", "SuiteBarDisabledText"]
+        }, {
+            baseColor: TealColors.neutralTertiaryAlt,
+            slots: ["SubtleLines", "HeaderSubtleLines", "ButtonGlyphDisabled"]
+        }, {
+            baseColor: TealColors.neutralTertiary,
+            slots: ["DisabledText", "CommandLinksDisabled", "HeaderDisableText", "ButtonDisabledText", "Lines", "HeaderLines", "ButtonBorder"]
+        }, {
+            baseColor: TealColors.neutralSecondaryAlt,
+            slots: ["SubtleBodyText", "HeaderSubtleText"]
+        }, {
+            baseColor: TealColors.neutralSecondary,
+            slots: ["CommandLinks", "Navigation", "SubtleEmphasisText", "TopBarText", "HeaderNavigationText", "ButtonGlyph"]
+        }, {
+            baseColor: TealColors.neutralPrimary,
+            slots: ["BodyText", "WebPartHeading", "HeaderText", "ButtonText", "ButtonGlyphActive", "TopBarHoverText"]
+        }, {
+            baseColor: TealColors.neutralDark,
+            slots: ["StrongBodyText", "SiteTitle", "CommandLinksSecondary", "SubtleEmphasisCommandLinks", "HeaderSiteTitle"]
+        }, {
+            baseColor: TealColors.black7F,
+            slots: ["TileBackgroundOverlay"]
+        }, {
+            baseColor: TealColors.error,
+            slots: ["ErrorText"]
+        }];
+        var tealPalette = {};
+        var numMappings = slotMappings.length;
+
+        for (var iMapping = 0; iMapping < numMappings; iMapping++) {
+            var mapping = slotMappings[iMapping];
+            var baseColor = mapping.baseColor;
+            var slots = mapping.slots;
+            var numSlots = slots.length;
+
+            for (var iSlot = 0; iSlot < numSlots; iSlot++) {
+                var slotName = slots[iSlot];
+
+                tealPalette[slotName] = baseColor;
+            }
+        }
+        return new Theming.ThemeInfo({
+            Palette: {
+                Colors: tealPalette
+            }
+        });
+    }
     var _strThemeOverride = "ThemeOverride";
 
     function WithSiteTheme(themeCallback, bForceLoad) {
@@ -15928,6 +16054,12 @@ function SPThemeUtils_module_def() {
         }
         var overrideTheme = Nav.getUrlKeyValue(_strThemeOverride);
         var hasOverride = Boolean(overrideTheme);
+        var useTeal = !hasOverride && FlightingAvailable() && Flighting.VariantConfiguration.IsExpFeatureClientEnabled(1546) && GetSiteThemedCssFolderUrl() == null;
+
+        if (useTeal) {
+            themeCallback(GetTealTheme());
+            return;
+        }
         var cachedTheme = !hasOverride ? GetCachedTheme() : null;
 
         if (cachedTheme == null && !UserCannotFetchTheme()) {
