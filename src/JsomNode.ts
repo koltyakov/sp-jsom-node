@@ -147,11 +147,11 @@ export class JsomNode {
       const registerNamespace = (namespaceString: string): void => {
         let curNs = global;
         global.window = global.window || {};
-        namespaceString.split('.').forEach((nsName) => {
-          if (typeof curNs[nsName] === 'undefined') {
-            curNs[nsName] = new Object();
+        namespaceString.split('.').forEach((ns) => {
+          if (typeof curNs[ns] === 'undefined') {
+            curNs[ns] = new Object();
           }
-          curNs = curNs[nsName];
+          curNs = curNs[ns];
           curNs.__namespace = true;
         });
         const nsName = namespaceString.split('.')[0];
