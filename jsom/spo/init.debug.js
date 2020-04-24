@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 19918,
-                "rpr": 12024
+                "rup": 20008,
+                "rpr": 12009
             }
         };
     }
@@ -12631,7 +12631,7 @@ function createCollapsibleStatusBar(strSummaryTitle, strSummaryBody) {
         }
         var rg = [];
 
-        rg.push("<div id=\"pageCollapsibleStatusBarHeader\" class=\"ms-status-status\" role=\"alert\" tabindex=\"0\">");
+        rg.push("<div id=\"pageCollapsibleStatusBarHeader\" class=\"ms-status-status\" role=\"alert\" tabindex=\"0\" onclick=\"javascript:toggleCollapsibleStatusBar(false)\">");
         rg.push("<span id='pageCollapsibleStatusBar_hiddenPriMsg' class='ms-accessible'>");
         rg.push(getStatusTitle(1) + Strings.STS.L_Status_Text);
         rg.push("</span>");
@@ -12651,9 +12651,9 @@ function createCollapsibleStatusBar(strSummaryTitle, strSummaryBody) {
         var collapseButtonText = Strings.STS.L_strCollapse_Text;
 
         rg.push("<span id=\"pageCollapsibleStatusBarButtonGroup\" style=\"float:right\">");
-        rg.push("<button tabindex=\"0\" title=\"" + expandButtonText + "\" aria-label=\"" + expandButtonText + "\" type=\"button\" onclick=\"javascript:toggleCollapsibleStatusBar()\" id=\"pageCollapsibleStatusBarChevronDown\"class=\"ms-collapsibleStatusChevronDown-iconSpan\" style=\"display: inline-block\"><img class=\"ms-collapsibleStatusChevronDown-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
-        rg.push("<button tabindex=\"0\" title=\"" + collapseButtonText + "\" aria-label=\"" + collapseButtonText + "\" type=\"button\" onclick=\"javascript:toggleCollapsibleStatusBar()\" id=\"pageCollapsibleStatusBarChevronUp\"class=\"ms-collapsibleStatusChevronUp-iconSpan\" style=\"display: none\"><img class=\"ms-collapsibleStatusChevronUp-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
-        rg.push("<button tabindex=\"0\" title=\"" + dismissButtonText + "\" aria-label=\"" + dismissButtonText + "\" type=\"button\" onclick=\"javascript:");
+        rg.push("<button tabindex=\"0\" title=\"" + expandButtonText + "\" aria-label=\"" + expandButtonText + "\" type=\"button\" onclick=\"javascript:event.stopPropagation();toggleCollapsibleStatusBar(true)\" id=\"pageCollapsibleStatusBarChevronDown\"class=\"ms-collapsibleStatusChevronDown-iconSpan\" style=\"display: inline-block\"><img class=\"ms-collapsibleStatusChevronDown-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
+        rg.push("<button tabindex=\"0\" title=\"" + collapseButtonText + "\" aria-label=\"" + collapseButtonText + "\" type=\"button\" onclick=\"javascript:event.stopPropagation();toggleCollapsibleStatusBar(true)\" id=\"pageCollapsibleStatusBarChevronUp\"class=\"ms-collapsibleStatusChevronUp-iconSpan\" style=\"display: none\"><img class=\"ms-collapsibleStatusChevronUp-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
+        rg.push("<button tabindex=\"0\" title=\"" + dismissButtonText + "\" aria-label=\"" + dismissButtonText + "\" type=\"button\" onclick=\"javascript:event.stopPropagation();");
         rg.push("var mgr = SP.Ribbon.PageManager.get_instance(); if(mgr && (mgr.get_commandDispatcher()).isCommandEnabled('DismissCollapsibleStatusBar')) (mgr.get_commandDispatcher()).executeCommand('DismissCollapsibleStatusBar', null);");
         rg.push("\" class=\"ms-collapsibleStatusDismiss-iconSpan\" style=\"display: inline-block\"><input type=\"hidden\" id=\"dismissCollapsibleStatusBarInput\"><img class=\"ms-collapsibleStatusDismiss-iconImg\" src=\"/_layouts/15/images/spcommon.png\"></button>");
         rg.push("</span>");
@@ -12848,7 +12848,7 @@ function removeCollapsibleStatus(sid) {
         }
     }
 }
-function toggleCollapsibleStatusBar() {
+function toggleCollapsibleStatusBar(shouldFocus) {
     var collapsibleStatusBar = document.getElementById("pageCollapsibleStatusBar");
     var collapsibleStatusBarContent = document.getElementById("pageCollapsibleStatusBarContent");
 
@@ -12861,7 +12861,9 @@ function toggleCollapsibleStatusBar() {
             collapsibleStatusBarContent.style.display = "inline-block";
             if (chevronUp !== null) {
                 chevronUp.style.display = "inline-block";
-                chevronUp.focus();
+                if (shouldFocus === true) {
+                    chevronUp.focus();
+                }
             }
             if (chevronDown !== null) {
                 chevronDown.style.display = "none";
@@ -12869,6 +12871,7 @@ function toggleCollapsibleStatusBar() {
             if (collapsibleStatusBar !== null) {
                 collapsibleStatusBar.setAttribute("aria-expanded", "true");
             }
+            SP.QoS.WriteUserEngagement("ClassicPublishing_PublishingPageSlowPerfBannerExpandedEvent");
         }
         else {
             collapsibleStatusBarContent.style.display = "none";
@@ -12877,11 +12880,14 @@ function toggleCollapsibleStatusBar() {
             }
             if (chevronDown !== null) {
                 chevronDown.style.display = "inline-block";
-                chevronDown.focus();
+                if (shouldFocus === true) {
+                    chevronDown.focus();
+                }
             }
             if (collapsibleStatusBar !== null) {
                 collapsibleStatusBar.setAttribute("aria-expanded", "false");
             }
+            SP.QoS.WriteUserEngagement("ClassicPublishing_PublishingPageSlowPerfBannerCollapsedEvent");
         }
     }
 }

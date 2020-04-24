@@ -2377,6 +2377,20 @@ SP.CompliancePolicy.SPPolicyStoreProxy.setSiteCompliancePolicyProperty = functio
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetSiteCompliancePolicyProperty', [ siteUrl, siteId, propertyName, propertyValue ]);
     context.addQuery($v_0);
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.registerSiteHoldEventReceiver = function SP_CompliancePolicy_SPPolicyStoreProxy$registerSiteHoldEventReceiver(context, siteUrl, siteId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'RegisterSiteHoldEventReceiver', [ siteUrl, siteId ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.unRegisterHoldEventReceiver = function SP_CompliancePolicy_SPPolicyStoreProxy$unRegisterHoldEventReceiver(context, siteUrl, siteId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'UnRegisterHoldEventReceiver', [ siteUrl, siteId ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     
     get_policyStoreUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_policyStoreUrl() {

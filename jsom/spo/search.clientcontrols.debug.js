@@ -4757,6 +4757,9 @@ Srch.U.isRealPowerPoint = function Srch_U$isRealPowerPoint(url) {
         return true;
     }
 }
+Srch.U.isClientTypeInQSKillSwitchActive = function Srch_U$isClientTypeInQSKillSwitchActive() {
+    return OffSwitch.IsActive(Srch.U.clientTypeInQSKillSwitch);
+}
 Srch.U.isBasicSearchCenter = function Srch_U$isBasicSearchCenter() {
     if (!OffSwitch.IsActive(Srch.U.$4f)) {
         var $v_0 = window._spPageContextInfo;
@@ -5908,7 +5911,7 @@ Srch.U.truncateUrl = function Srch_U$truncateUrl(url, maxChars) {
     }
     var $v_0 = url.indexOf('//');
     var $v_1 = '/';
-    var $v_2 = '\ufffd';
+    var $v_2 = '\u2026';
     if ($v_0 !== -1) {
         url = url.substr($v_0 + 2);
     }
@@ -5982,7 +5985,7 @@ Srch.U.truncateHighlightedUrl = function Srch_U$truncateHighlightedUrl(url, maxC
     }
     var $v_0 = url.indexOf('//');
     var $v_1 = '/';
-    var $v_2 = '\ufffd';
+    var $v_2 = '\u2026';
     if ($v_0 !== -1) {
         url = url.substr($v_0 + 2);
     }
@@ -9559,6 +9562,7 @@ Srch.U.$3v = '8C7CDB1D-A9CD-4FED-8420-EFAA93476756';
 Srch.U.$4f = '85650206-8AA7-46F3-827C-AC951FF1EC11';
 Srch.U.$2x = 'F0F9F850-3673-4F91-95B0-9DD2EE09452B';
 Srch.U.secureCookieKillSwitch = '4513C9D6-D660-4A0C-94AD-7316B43AE55E';
+Srch.U.clientTypeInQSKillSwitch = 'D653D00F-A3E3-47E7-8106-9BAF30700E93';
 Srch.U.hitHighlightingOpenTag = '<strong class=\"ms-srch-item-highlightedText\">';
 Srch.U.hitHighlightingCloseTag = '</strong>';
 Srch.U.$1X = '';
