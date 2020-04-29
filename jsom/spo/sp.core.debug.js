@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 20008,
-            "rpr": 12009
+            "rup": 20015,
+            "rpr": 12020
         }
     };
 }
@@ -295,10 +295,10 @@ SP.BWsaData.prototype = {
     m_wsaStreams: null
 };
 SP.BWsaClient = function SP_BWsaClient(uploadUrl, fIsOptedIn, sqmQosEnabled, qosDataPoints) {
-    this.$$d_$20_0 = Function.createDelegate(this, this.$20_0);
+    this.$$d_$21_0 = Function.createDelegate(this, this.$21_0);
     this.bWsaClientInit(uploadUrl, fIsOptedIn, sqmQosEnabled, qosDataPoints);
 };
-SP.BWsaClient.$25 = function SP_BWsaClient$$25() {
+SP.BWsaClient.$26 = function SP_BWsaClient$$26() {
     var $v_0 = 0;
     var $v_1 = window.navigator.userAgent;
     var $v_2 = -1;
@@ -328,7 +328,7 @@ SP.BWsaClient.$25 = function SP_BWsaClient$$25() {
         $v_2 = -1;
     }
     if ($v_2 >= 0) {
-        var $v_3 = SP.BWsaClient.$1i($v_1.substr($v_2));
+        var $v_3 = SP.BWsaClient.$1j($v_1.substr($v_2));
 
         if (Sys.Browser.agent === Sys.Browser.InternetExplorer && $v_3[0] === 7 && $v_1.indexOf('Trident/4.0') >= 0) {
             $v_3[0] = 8;
@@ -347,7 +347,7 @@ SP.BWsaClient.$25 = function SP_BWsaClient$$25() {
     $v_0 = $v_0;
     return $v_0;
 };
-SP.BWsaClient.$1i = function SP_BWsaClient$$1i($p0) {
+SP.BWsaClient.$1j = function SP_BWsaClient$$1j($p0) {
     var $v_0 = [0, 0];
 
     if (SP.BWsaClient.$1R($p0.charAt(0))) {
@@ -368,7 +368,7 @@ SP.BWsaClient.$1i = function SP_BWsaClient$$1i($p0) {
     }
     return $v_0;
 };
-SP.BWsaClient.$29 = function SP_BWsaClient$$29() {
+SP.BWsaClient.$2A = function SP_BWsaClient$$2A() {
     var $v_0 = 0;
     var $v_1 = 1;
     var $v_2 = window.navigator.userAgent;
@@ -404,7 +404,7 @@ SP.BWsaClient.$29 = function SP_BWsaClient$$29() {
         $v_4 = $v_2.indexOf($v_3);
     }
     if ($v_4 >= 0) {
-        var $v_6 = SP.BWsaClient.$1i($v_2.substr($v_4 + $v_3.length));
+        var $v_6 = SP.BWsaClient.$1j($v_2.substr($v_4 + $v_3.length));
 
         $v_0 = $v_0 + (($v_6[0] << 16) + $v_6[1]);
     }
@@ -427,13 +427,13 @@ SP.BWsaClient.$29 = function SP_BWsaClient$$29() {
     $v_0 = $v_0 | $v_5 << 29;
     return $v_0;
 };
-SP.BWsaClient.$2A = function SP_BWsaClient$$2A() {
+SP.BWsaClient.$2B = function SP_BWsaClient$$2B() {
     var $v_0 = window.screen.width & 65535;
     var $v_1 = window.screen.height & 65535;
 
     return ($v_1 << 16) + $v_0;
 };
-SP.BWsaClient.$26 = function SP_BWsaClient$$26() {
+SP.BWsaClient.$27 = function SP_BWsaClient$$27() {
     var $v_0 = window.navigator.userAgent;
     var $v_1 = 0;
 
@@ -534,7 +534,7 @@ SP.BWsaClient.prototype = {
     get_isContinuation: function SP_BWsaClient$get_isContinuation() {
         return this.$j_0;
     },
-    $2C_0: function SP_BWsaClient$$2C_0() {
+    $2D_0: function SP_BWsaClient$$2D_0() {
         var $v_0 = new SP.BWsaData();
         var $$dict_1 = this.$c_0;
 
@@ -584,21 +584,21 @@ SP.BWsaClient.prototype = {
         }
         return false;
     },
-    $1r_0: function SP_BWsaClient$$1r_0($p0) {
+    $1s_0: function SP_BWsaClient$$1s_0($p0) {
         try {
             if (this.$d_0 || this.$c_0[$p0]) {
                 return;
             }
             this.$d_0 = true;
-            this.$g_0(7982, SP.BWsaClient.$25());
-            this.$g_0(8049, SP.BWsaClient.$29());
+            this.$g_0(7982, SP.BWsaClient.$26());
+            this.$g_0(8049, SP.BWsaClient.$2A());
             this.$g_0(8814, 3);
-            this.$g_0(9411, SP.BWsaClient.$2A());
-            this.$g_0(9412, SP.BWsaClient.$26());
+            this.$g_0(9411, SP.BWsaClient.$2B());
+            this.$g_0(9412, SP.BWsaClient.$27());
         }
         catch ($$e_1) { }
     },
-    $1n_0: function SP_BWsaClient$$1n_0($p0) {
+    $1o_0: function SP_BWsaClient$$1o_0($p0) {
         if (this.$0_0.$8_0) {
             return true;
         }
@@ -637,7 +637,7 @@ SP.BWsaClient.prototype = {
             if (this.$1U_0()) {
                 return;
             }
-            this.$1r_0(dwDatapointId);
+            this.$1s_0(dwDatapointId);
             this.$a_0();
             var $v_0 = this.$1_0.m_wsaDatapoints[dwDatapointId];
 
@@ -803,7 +803,7 @@ SP.BWsaClient.prototype = {
     createStreamUnobfuscated: function SP_BWsaClient$createStreamUnobfuscated(WsaStreamEntryId, dwStreamType, dwWidth, dwMaxRows) {
         this.createStream(WsaStreamEntryId, dwStreamType, dwWidth, dwMaxRows);
     },
-    $2I_0: function SP_BWsaClient$$2I_0($p0) {
+    $2J_0: function SP_BWsaClient$$2J_0($p0) {
         delete $p0.m_Rows[$p0.m_RowsOverwritten];
         this.$1_0.m_cbStreams -= ($p0.m_Width + 1) * 4;
         $p0.m_RowCount--;
@@ -829,7 +829,7 @@ SP.BWsaClient.prototype = {
             for (var $v_1 = 0; $v_1 < values.length; $v_1++) {
                 $v_0.m_Values[$v_1] = values[$v_1];
             }
-            this.$1v_0(dwStreamId, $v_0);
+            this.$1w_0(dwStreamId, $v_0);
         }
         catch ($$e_4) { }
     },
@@ -841,7 +841,7 @@ SP.BWsaClient.prototype = {
         }
         this.addToStreamDw.apply(this, [dwStreamId].concat(values));
     },
-    $1v_0: function SP_BWsaClient$$1v_0($p0, $p1) {
+    $1w_0: function SP_BWsaClient$$1w_0($p0, $p1) {
         if (!this.$0_0.$8_0 && !this.$0_0.$D_0) {
             return;
         }
@@ -851,13 +851,13 @@ SP.BWsaClient.prototype = {
         if (this.$1U_0()) {
             return;
         }
-        this.$1r_0($p0);
+        this.$1s_0($p0);
         var $v_0 = this.$1_0.m_wsaStreams[$p0];
 
         if ($v_0) {
             this.$a_0();
             if ($v_0.m_RowCount >= $v_0.m_MaxRows && $v_0.m_StreamType === 2) {
-                this.$2I_0($v_0);
+                this.$2J_0($v_0);
             }
             if ($v_0.m_RowCount < $v_0.m_MaxRows) {
                 var $v_1 = $v_0.m_RowCount + $v_0.m_RowsOverwritten;
@@ -919,9 +919,9 @@ SP.BWsaClient.prototype = {
                 }
                 this.writeDocIdStream();
                 this.$1_0.m_wsaHeader.m_EndTime = SP.Ticks.getTicks64();
-                var $v_1 = this.$2J_0(this.$1_0, this.$0_0);
+                var $v_1 = this.$2K_0(this.$1_0, this.$0_0);
 
-                this.$2C_0();
+                this.$2D_0();
                 if ($v_1 && $v_1.length > 0) {
                     this.uploadWsaDataRequest($v_1);
                 }
@@ -941,10 +941,10 @@ SP.BWsaClient.prototype = {
             this.$S_0.send(json);
         }
     },
-    $24_0: function SP_BWsaClient$$24_0($p0) {
+    $25_0: function SP_BWsaClient$$25_0($p0) {
         return ((((((($p0.replace(new RegExp('[\\\\]', 'g'), '\\\\')).replace(new RegExp('[\\\"]', 'g'), '\\\\\\\"')).replace(new RegExp('[\\/]', 'g'), '\\\\/')).replace(new RegExp('[\\b]', 'g'), '\\\\b')).replace(new RegExp('[\\f]', 'g'), '\\\\f')).replace(new RegExp('[\\n]', 'g'), '\\\\n')).replace(new RegExp('[\\r]', 'g'), '\\\\r')).replace(new RegExp('[\\t]', 'g'), '\\\\t');
     },
-    $2J_0: function SP_BWsaClient$$2J_0($p0, $p1) {
+    $2K_0: function SP_BWsaClient$$2K_0($p0, $p1) {
         var $v_0 = new Sys.StringBuilder();
         var $v_1 = true;
         var $v_2 = false;
@@ -973,7 +973,7 @@ SP.BWsaClient.prototype = {
             };
             var $v_5 = $v_4.value;
 
-            if (!this.$1n_0($v_5.m_WsaId)) {
+            if (!this.$1o_0($v_5.m_WsaId)) {
                 continue;
             }
             $v_2 = true;
@@ -996,7 +996,7 @@ SP.BWsaClient.prototype = {
             };
             var $v_7 = $v_6.value;
 
-            if (!this.$1n_0($v_7.m_WsaId)) {
+            if (!this.$1o_0($v_7.m_WsaId)) {
                 continue;
             }
             $v_2 = true;
@@ -1033,7 +1033,7 @@ SP.BWsaClient.prototype = {
                         $v_0.append('\"\"');
                     }
                     else if (Object.getType($v_A.m_Values[$v_B]) === String) {
-                        $v_0.append('\"' + this.$24_0($v_A.m_Values[$v_B]) + '\"');
+                        $v_0.append('\"' + this.$25_0($v_A.m_Values[$v_B]) + '\"');
                     }
                     else {
                         $v_0.append($v_A.m_Values[$v_B]);
@@ -1081,10 +1081,10 @@ SP.BWsaClient.prototype = {
     $a_0: function SP_BWsaClient$$a_0() {
         if (SP.TimerResetCheck.isTimerResetNeeded()) {
             this.$w_0();
-            this.$X_0 = window.setTimeout(this.$$d_$20_0, this.$0_0.$m_0);
+            this.$X_0 = window.setTimeout(this.$$d_$21_0, this.$0_0.$m_0);
         }
     },
-    $20_0: function SP_BWsaClient$$20_0() {
+    $21_0: function SP_BWsaClient$$21_0() {
         this.$X_0 = 0;
         this.$w_0();
         this.uploadWsaData();
@@ -1162,7 +1162,7 @@ SP.RUMLogger.GetRUMLogger = function SP_RUMLogger$GetRUMLogger(wsa) {
     }
     return SP.RUMLogger.$P;
 };
-SP.RUMLogger.$27 = function SP_RUMLogger$$27($p0) {
+SP.RUMLogger.$28 = function SP_RUMLogger$$28($p0) {
     var $v_0 = 0;
 
     if ($p0) {
@@ -1200,13 +1200,13 @@ SP.RUMLogger.$1Q = function SP_RUMLogger$$1Q() {
     }
     return $v_1;
 };
-SP.RUMLogger.$2F = function SP_RUMLogger$$2F($p0) {
+SP.RUMLogger.$2G = function SP_RUMLogger$$2G($p0) {
     return typeof $p0 === 'undefined';
 };
 SP.RUMLogger.$2 = function SP_RUMLogger$$2($p0) {
     var $v_0 = null;
 
-    return $p0 === $v_0 || SP.RUMLogger.$2F($p0);
+    return $p0 === $v_0 || SP.RUMLogger.$2G($p0);
 };
 SP.RUMLogger.prototype = {
     $4_0: null,
@@ -1256,7 +1256,7 @@ SP.RUMLogger.prototype = {
         if (this.$1C_0) {
             return;
         }
-        var $v_0 = this.$1h_0(0);
+        var $v_0 = this.$1i_0(0);
 
         if ($v_0.length < 18) {
             return;
@@ -1264,7 +1264,7 @@ SP.RUMLogger.prototype = {
         var $v_1 = $v_0[18];
 
         if (this.$M_0 === 1) {
-            var $v_2 = this.$2B_0(0, 20);
+            var $v_2 = this.$2C_0(0, 20);
 
             if (SP.RUMLogger.$2($v_2)) {
                 return;
@@ -1297,7 +1297,7 @@ SP.RUMLogger.prototype = {
         this.CollectW3CPerformanceTimings();
         this.$U_0(groupId, tsId, (new Date()).getTime());
     },
-    $1p_0: function SP_RUMLogger$$1p_0($p0) {
+    $1q_0: function SP_RUMLogger$$1q_0($p0) {
         switch ($p0) {
         case 0:
         case 1:
@@ -1347,8 +1347,8 @@ SP.RUMLogger.prototype = {
         if (SP.RUMLogger.$2(this.$4_0) || SP.RUMLogger.$2(this.$K_0)) {
             return;
         }
-        tsId = this.$1f_0(tsId);
-        if (!this.$1p_0(tsId)) {
+        tsId = this.$1g_0(tsId);
+        if (!this.$1q_0(tsId)) {
             return;
         }
         if (this.$M_0 === 1 && tsId === 20) {
@@ -1356,7 +1356,7 @@ SP.RUMLogger.prototype = {
         }
         this.CollectW3CPerformanceTimings();
         this.$U_0(0, tsId, tsVal);
-        this.$1l_0(0, mdsTimeStamps);
+        this.$1m_0(0, mdsTimeStamps);
     },
     AddTTLB: function SP_RUMLogger$AddTTLB() {
         if (SP.RUMLogger.$2(this.$4_0) || SP.RUMLogger.$2(this.$K_0)) {
@@ -1384,14 +1384,14 @@ SP.RUMLogger.prototype = {
             return;
         }
         this.CollectW3CPerformanceTimings();
-        this.$1l_0(0, mdsTimeStamps);
+        this.$1m_0(0, mdsTimeStamps);
         this.$1D_0 = true;
     },
     DisplayDevDash: function SP_RUMLogger$DisplayDevDash() {
         if (SP.RUMLogger.$2(this.$4_0) || SP.RUMLogger.$2(this.$K_0)) {
             return;
         }
-        var $v_0 = this.$1h_0(0);
+        var $v_0 = this.$1i_0(0);
         var $v_1 = window.self.DeveloperDashboard;
 
         if ($v_1 && $v_1.PostMsg) {
@@ -1836,14 +1836,14 @@ SP.RUMLogger.prototype = {
             $v_2[$v_3++] = $v_4 + 0;
             $v_2[$v_3++] = $v_5;
         }
-        this.$1k_0(0, $v_2);
+        this.$1l_0(0, $v_2);
         this.$v_0 = true;
     },
     $U_0: function SP_RUMLogger$$U_0($p0, $p1, $p2) {
         var $v_0 = this.$4_0.$y_0(this.$K_0, $p0);
 
         if (!$v_0.length) {
-            var $v_1 = this.$1b_0($p0);
+            var $v_1 = this.$1c_0($p0);
 
             $v_1[1] = $p1;
             $v_1[2] = $p2;
@@ -1852,10 +1852,10 @@ SP.RUMLogger.prototype = {
             ($$t_5 = this.$4_0).addToStreamDw.apply($$t_5, [11016].concat($v_1));
         }
         else {
-            this.$1t_0($v_0, $p0, $p1, $p2);
+            this.$1u_0($v_0, $p0, $p1, $p2);
         }
     },
-    $1t_0: function SP_RUMLogger$$1t_0($p0, $p1, $p2, $p3) {
+    $1u_0: function SP_RUMLogger$$1u_0($p0, $p1, $p2, $p3) {
         var $v_0 = 1;
         var $v_1 = false;
 
@@ -1875,7 +1875,7 @@ SP.RUMLogger.prototype = {
             var $v_4 = $p0[$p0.length - 1];
 
             if ($v_0 === 9) {
-                var $v_5 = this.$1b_0($p1);
+                var $v_5 = this.$1c_0($p1);
                 var $$t_A;
 
                 ($$t_A = this.$4_0).addToStreamDw.apply($$t_A, [11016].concat($v_5));
@@ -1887,7 +1887,7 @@ SP.RUMLogger.prototype = {
             $v_4.m_Values[$v_0 + 1] = $p3;
         }
     },
-    $1l_0: function SP_RUMLogger$$1l_0($p0, $p1) {
+    $1m_0: function SP_RUMLogger$$1m_0($p0, $p1) {
         if ($p0 < 0 || $p0 > 0) {
             return;
         }
@@ -1897,14 +1897,14 @@ SP.RUMLogger.prototype = {
         var $v_0 = {};
 
         for (var $v_4 = 0; $v_4 < $p1.length; $v_4++) {
-            var $v_5 = this.$1f_0($v_4);
+            var $v_5 = this.$1g_0($v_4);
 
-            if (SP.RUMLogger.$2($p1[$v_4]) || !this.$1p_0($v_5)) {
+            if (SP.RUMLogger.$2($p1[$v_4]) || !this.$1q_0($v_5)) {
                 continue;
             }
             $v_0[$v_5.toString()] = $p1[$v_4];
         }
-        var $v_1 = SP.RUMLogger.$27($v_0);
+        var $v_1 = SP.RUMLogger.$28($v_0);
 
         if (!$v_1) {
             return;
@@ -1922,9 +1922,9 @@ SP.RUMLogger.prototype = {
             $v_3[$v_2++] = parseInt($v_6.key);
             $v_3[$v_2++] = $v_6.value;
         }
-        this.$1k_0($p0, $v_3);
+        this.$1l_0($p0, $v_3);
     },
-    $1k_0: function SP_RUMLogger$$1k_0($p0, $p1) {
+    $1l_0: function SP_RUMLogger$$1l_0($p0, $p1) {
         if ($p0 < 0 || $p0 > 0) {
             return;
         }
@@ -1935,7 +1935,7 @@ SP.RUMLogger.prototype = {
             this.$U_0($p0, $p1[$v_0], $p1[$v_0 + 1]);
         }
     },
-    $2B_0: function SP_RUMLogger$$2B_0($p0, $p1) {
+    $2C_0: function SP_RUMLogger$$2C_0($p0, $p1) {
         var $v_0 = this.$4_0.$y_0(this.$K_0, 0);
 
         if (!$v_0.length) {
@@ -1952,7 +1952,7 @@ SP.RUMLogger.prototype = {
         }
         return null;
     },
-    $1h_0: function SP_RUMLogger$$1h_0($p0) {
+    $1i_0: function SP_RUMLogger$$1i_0($p0) {
         var $v_0 = this.$4_0.$y_0(this.$K_0, 0);
 
         if (!$v_0.length) {
@@ -1971,7 +1971,7 @@ SP.RUMLogger.prototype = {
         }
         return $v_1;
     },
-    $1b_0: function SP_RUMLogger$$1b_0($p0) {
+    $1c_0: function SP_RUMLogger$$1c_0($p0) {
         if ($p0 < 0 || $p0 > 0) {
             return null;
         }
@@ -1984,7 +1984,7 @@ SP.RUMLogger.prototype = {
         }
         return $v_0;
     },
-    $1f_0: function SP_RUMLogger$$1f_0($p0) {
+    $1g_0: function SP_RUMLogger$$1g_0($p0) {
         switch ($p0) {
         case 0:
             return 20;
@@ -2027,7 +2027,7 @@ SP.SimpleLogger = function SP_SimpleLogger($p0) {
     this.$W_0 = $p0;
     this.$W_0.createStream(1234, 1, 1, 10000);
 };
-SP.SimpleLogger.$28 = function SP_SimpleLogger$$28($p0) {
+SP.SimpleLogger.$29 = function SP_SimpleLogger$$29($p0) {
     var $v_0 = 0;
 
     if ($p0) {
@@ -2067,7 +2067,7 @@ SP.SimpleLogger.prototype = {
         this.$W_0.uploadData();
     },
     WriteLogForEvents: function SP_SimpleLogger$WriteLogForEvents(eventName, eventObjects) {
-        if (!this.$1o_0(eventName)) {
+        if (!this.$1p_0(eventName)) {
             return;
         }
         var $v_0 = new Array(2);
@@ -2084,7 +2084,7 @@ SP.SimpleLogger.prototype = {
                 for (var $v_2 = 0; $v_2 < eventObjects.length; $v_2++) {
                     var $v_3 = Sys.Serialization.JavaScriptSerializer.serialize(eventObjects[$v_2]);
 
-                    if (this.$1m_0($v_3)) {
+                    if (this.$1n_0($v_3)) {
                         continue;
                     }
                     $v_0[$v_1] = $v_3;
@@ -2094,7 +2094,7 @@ SP.SimpleLogger.prototype = {
             else {
                 var $v_4 = Sys.Serialization.JavaScriptSerializer.serialize(eventObjects);
 
-                if (this.$1m_0($v_4)) {
+                if (this.$1n_0($v_4)) {
                     return;
                 }
                 $v_0[2] = $v_4;
@@ -2105,13 +2105,13 @@ SP.SimpleLogger.prototype = {
         ($$t_7 = this.$W_0).addToStreamDw.apply($$t_7, [1234].concat($v_0));
     },
     WriteLog: function SP_SimpleLogger$WriteLog(eventName, customProperties) {
-        if (!this.$1o_0(eventName)) {
+        if (!this.$1p_0(eventName)) {
             return;
         }
         if (!customProperties) {
             customProperties = {};
         }
-        var $v_0 = SP.SimpleLogger.$28(customProperties);
+        var $v_0 = SP.SimpleLogger.$29(customProperties);
 
         if ($v_0 > 40) {
             return;
@@ -2144,13 +2144,13 @@ SP.SimpleLogger.prototype = {
 
         ($$t_9 = this.$W_0).addToStreamDw.apply($$t_9, [1234].concat($v_1));
     },
-    $1o_0: function SP_SimpleLogger$$1o_0($p0) {
+    $1p_0: function SP_SimpleLogger$$1p_0($p0) {
         if (!$p0 || $p0 === '' || $p0 === 'undefined') {
             return false;
         }
         return true;
     },
-    $1m_0: function SP_SimpleLogger$$1m_0($p0) {
+    $1n_0: function SP_SimpleLogger$$1n_0($p0) {
         if ($p0.length > 15360) {
             return true;
         }
@@ -2214,7 +2214,7 @@ SP.Utilities.TaskTelemetry.prototype = {
     cancelTime: 0,
     currentSlice: 0,
     times: null,
-    $1Z_0: function SP_Utilities_TaskTelemetry$$1Z_0($p0, $p1, $p2) {
+    $1a_0: function SP_Utilities_TaskTelemetry$$1a_0($p0, $p1, $p2) {
         var $v_0 = this.currentSlice++;
 
         this.sliceStart[$v_0] = $p0 - this.startTime;
@@ -2223,7 +2223,7 @@ SP.Utilities.TaskTelemetry.prototype = {
 };
 SP.Utilities.Task = function SP_Utilities_Task(elementIn, taskType, timeOut, cb, longFunction, cancelFunction, progressFunction) {
     this.$$d_onBeforeUnload = Function.createDelegate(this, this.onBeforeUnload);
-    this.$1s_0 = taskType;
+    this.$1t_0 = taskType;
     this.$3_0 = cb;
     this.$12_0 = longFunction;
     this.$b_0 = cancelFunction;
@@ -2248,22 +2248,22 @@ SP.Utilities.Task.prototype = {
     $f_0: null,
     $17_0: null,
     $3_0: null,
-    $1s_0: 0,
+    $1t_0: 0,
     $A_0: null,
     $1V_0: '',
     start: function SP_Utilities_Task$start() {
-        if (SP.Utilities.TaskCarousel.$2M(2)) {
+        if (SP.Utilities.TaskCarousel.$2N(2)) {
             SP.Utilities.TaskCarousel.$p = SP.Utilities.TaskCarousel.$Q;
             SP.Utilities.TaskCarousel.$G = (SP.Utilities.TaskCarousel.$6 = (this.$6_0 = new Date()));
             this.$A_0 = new SP.Utilities.TaskTelemetry(this.$6_0, this.$3_0.state);
-            this.$H_0 = this.$3_0.commandFunction(this.$3_0.state, SP.Utilities.TaskCarousel.$1q);
-            this.$A_0.$1Z_0(this.$6_0, SP.Utilities.TaskCarousel.$5, this.$3_0.state);
+            this.$H_0 = this.$3_0.commandFunction(this.$3_0.state, SP.Utilities.TaskCarousel.$1r);
+            this.$A_0.$1a_0(this.$6_0, SP.Utilities.TaskCarousel.$5, this.$3_0.state);
             if (this.$H_0 < 1) {
                 SP.Utilities.TaskCarousel.$p = SP.Utilities.TaskCarousel.$T;
                 if (!SP.Utilities.TaskCarousel.$J) {
-                    SP.Utilities.TaskCarousel.$2K();
+                    SP.Utilities.TaskCarousel.$2L();
                 }
-                SP.Utilities.TaskCarousel.$1u(this);
+                SP.Utilities.TaskCarousel.$1v(this);
             }
             else if (this.$3_0.finishFunction) {
                 this.$A_0.finishTime = new Date() - this.$A_0.startTime;
@@ -2382,13 +2382,13 @@ SP.Utilities.TaskCarousel.resetSharedStopTimer = function SP_Utilities_TaskCarou
     if (SP.Utilities.TaskCarousel.$E) {
         window.clearTimeout(SP.Utilities.TaskCarousel.$E);
         if ($p0) {
-            SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Y, $p0);
+            SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Z, $p0);
         }
     }
 };
-SP.Utilities.TaskCarousel.$2K = function SP_Utilities_TaskCarousel$$2K() {
-    SP.Utilities.TaskCarousel.$J = window.setInterval(SP.Utilities.TaskCarousel.$2L, SP.Utilities.TaskCarousel.$T * 2);
-    SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Y, 3600000);
+SP.Utilities.TaskCarousel.$2L = function SP_Utilities_TaskCarousel$$2L() {
+    SP.Utilities.TaskCarousel.$J = window.setInterval(SP.Utilities.TaskCarousel.$2M, SP.Utilities.TaskCarousel.$T * 2);
+    SP.Utilities.TaskCarousel.$E = window.setTimeout(SP.Utilities.TaskCarousel.$1Z, 3600000);
     SP.Utilities.TaskCarousel.$F = 0;
 };
 SP.Utilities.TaskCarousel.$19 = function SP_Utilities_TaskCarousel$$19($p0, $p1) {
@@ -2422,7 +2422,7 @@ SP.Utilities.TaskCarousel.$19 = function SP_Utilities_TaskCarousel$$19($p0, $p1)
     }
     return true;
 };
-SP.Utilities.TaskCarousel.$2M = function SP_Utilities_TaskCarousel$$2M($p0) {
+SP.Utilities.TaskCarousel.$2N = function SP_Utilities_TaskCarousel$$2N($p0) {
     var $v_0 = true;
     var $v_1 = SP.Utilities.TaskCarousel.$7.length;
 
@@ -2483,7 +2483,7 @@ SP.Utilities.TaskCarousel.$o = function SP_Utilities_TaskCarousel$$o($p0, $p1, $
         SP.Utilities.TaskCarousel.$N = window.document.title;
     }
 };
-SP.Utilities.TaskCarousel.$1q = function SP_Utilities_TaskCarousel$$1q() {
+SP.Utilities.TaskCarousel.$1r = function SP_Utilities_TaskCarousel$$1r() {
     SP.Utilities.TaskCarousel.$5 = new Date();
     var $v_0 = SP.Utilities.TaskCarousel.$5 - SP.Utilities.TaskCarousel.$G;
 
@@ -2495,7 +2495,7 @@ SP.Utilities.TaskCarousel.$1q = function SP_Utilities_TaskCarousel$$1q() {
     }
     return false;
 };
-SP.Utilities.TaskCarousel.$1u = function SP_Utilities_TaskCarousel$$1u($p0) {
+SP.Utilities.TaskCarousel.$1v = function SP_Utilities_TaskCarousel$$1v($p0) {
     var $v_0 = SP.Utilities.TaskCarousel.$7.length;
     var $v_1;
 
@@ -2507,7 +2507,7 @@ SP.Utilities.TaskCarousel.$1u = function SP_Utilities_TaskCarousel$$1u($p0) {
     SP.Utilities.TaskCarousel.$7[$v_1] = $p0;
     SP.Utilities.TaskCarousel.$F++;
 };
-SP.Utilities.TaskCarousel.$2L = function SP_Utilities_TaskCarousel$$2L() {
+SP.Utilities.TaskCarousel.$2M = function SP_Utilities_TaskCarousel$$2M() {
     var $v_0 = false;
     var $v_1 = SP.Utilities.TaskCarousel.$7.length;
 
@@ -2532,8 +2532,8 @@ SP.Utilities.TaskCarousel.$2L = function SP_Utilities_TaskCarousel$$2L() {
             else if (!$v_3.$Y_0 && SP.Utilities.TaskCarousel.$G - $v_3.$6_0 >= SP.Utilities.TaskCarousel.$Z) {
                 $v_3.$Y_0 = true;
                 SP.Utilities.TaskCarousel.currentCancellableTask = $v_3;
-                SP.Utilities.TaskCarousel.$1x($v_3, SP.Utilities.TaskCarousel.$22);
-                SP.Utilities.TaskCarousel.$1z($v_3, $v_3.$$d_onBeforeUnload);
+                SP.Utilities.TaskCarousel.$1y($v_3, SP.Utilities.TaskCarousel.$23);
+                SP.Utilities.TaskCarousel.$20($v_3, $v_3.$$d_onBeforeUnload);
                 if ($v_3.$I_0) {
                     $v_3.$I_0($v_3.$H_0, SP.Utilities.TaskCarousel.$5 - $v_3.$6_0, $v_3.$3_0.state);
                 }
@@ -2541,8 +2541,8 @@ SP.Utilities.TaskCarousel.$2L = function SP_Utilities_TaskCarousel$$2L() {
                     SP.Utilities.TaskCarousel.$o($v_3.$H_0, SP.Utilities.TaskCarousel.$5 - $v_3.$6_0, $v_3.$3_0.state);
                 }
             }
-            $v_3.$H_0 = $v_3.$3_0.commandFunction($v_3.$3_0.state, SP.Utilities.TaskCarousel.$1q);
-            $v_3.$A_0.$1Z_0(SP.Utilities.TaskCarousel.$G, SP.Utilities.TaskCarousel.$5, $v_3.$3_0.state);
+            $v_3.$H_0 = $v_3.$3_0.commandFunction($v_3.$3_0.state, SP.Utilities.TaskCarousel.$1r);
+            $v_3.$A_0.$1a_0(SP.Utilities.TaskCarousel.$G, SP.Utilities.TaskCarousel.$5, $v_3.$3_0.state);
             if ($v_3.$H_0 >= 1) {
                 if ($v_3.$q_0 && $v_3.$B_0) {
                     $v_3.$B_0.style.cursor = 'default';
@@ -2551,7 +2551,7 @@ SP.Utilities.TaskCarousel.$2L = function SP_Utilities_TaskCarousel$$2L() {
                     $v_3.$A_0.finishTime = new Date() - $v_3.$A_0.startTime;
                     $v_3.$3_0.finishFunction($v_3.$B_0, $v_3.$3_0.state);
                 }
-                SP.Utilities.TaskCarousel.$23($v_3);
+                SP.Utilities.TaskCarousel.$24($v_3);
                 SP.Utilities.TaskCarousel.$1O($v_3);
                 SP.Utilities.TaskCarousel.$7[$v_2] = null;
                 --SP.Utilities.TaskCarousel.$F;
@@ -2577,10 +2577,10 @@ SP.Utilities.TaskCarousel.$2L = function SP_Utilities_TaskCarousel$$2L() {
         }
     }
     if (!$v_0) {
-        SP.Utilities.TaskCarousel.$1Y();
+        SP.Utilities.TaskCarousel.$1Z();
     }
 };
-SP.Utilities.TaskCarousel.$1Y = function SP_Utilities_TaskCarousel$$1Y() {
+SP.Utilities.TaskCarousel.$1Z = function SP_Utilities_TaskCarousel$$1Z() {
     if (SP.Utilities.TaskCarousel.$E) {
         window.clearTimeout(SP.Utilities.TaskCarousel.$E);
         SP.Utilities.TaskCarousel.$E = 0;
@@ -2591,21 +2591,21 @@ SP.Utilities.TaskCarousel.$1Y = function SP_Utilities_TaskCarousel$$1Y() {
     }
     SP.Utilities.TaskCarousel.$F = 0;
 };
-SP.Utilities.TaskCarousel.$22 = function SP_Utilities_TaskCarousel$$22() {
+SP.Utilities.TaskCarousel.$23 = function SP_Utilities_TaskCarousel$$23() {
     if (SP.Utilities.TaskCarousel.currentCancellableTask) {
         SP.Utilities.TaskCarousel.$19(SP.Utilities.TaskCarousel.currentCancellableTask, 1);
         SP.Utilities.TaskCarousel.currentCancellableTask = null;
     }
 };
-SP.Utilities.TaskCarousel.$1x = function SP_Utilities_TaskCarousel$$1x($p0, $p1) {
+SP.Utilities.TaskCarousel.$1y = function SP_Utilities_TaskCarousel$$1y($p0, $p1) {
     $p0.$17_0 = window.document.onstop;
     window.document.onstop = $p1;
 };
-SP.Utilities.TaskCarousel.$23 = function SP_Utilities_TaskCarousel$$23($p0) {
+SP.Utilities.TaskCarousel.$24 = function SP_Utilities_TaskCarousel$$24($p0) {
     window.document.onstop = $p0.$17_0;
     $p0.$17_0 = null;
 };
-SP.Utilities.TaskCarousel.$1z = function SP_Utilities_TaskCarousel$$1z($p0, $p1) {
+SP.Utilities.TaskCarousel.$20 = function SP_Utilities_TaskCarousel$$20($p0, $p1) {
     $p0.$f_0 = window.onbeforeunload;
     window.onbeforeunload = $p1;
 };
@@ -2625,7 +2625,7 @@ SP.UI.AspMenu = function SP_UI_AspMenu(e) {
     this.$i_2 = [];
     SP.UI.AspMenu.initializeBase(this, [e]);
 };
-SP.UI.AspMenu.$1g = function SP_UI_AspMenu$$1g($p0) {
+SP.UI.AspMenu.$1h = function SP_UI_AspMenu$$1h($p0) {
     var $v_0 = null;
 
     for (var $v_1 = 0, $v_2 = $p0.childNodes.length; $v_1 < $v_2; ++$v_1) {
@@ -2673,17 +2673,17 @@ SP.UI.AspMenu.prototype = {
     initialize: function SP_UI_AspMenu$initialize() {
         Sys.Component.prototype.initialize.call(this);
         this.$L_2 = ((this.get_element()).getElementsByTagName('ul'))[0];
-        this.$2D_2();
         this.$2E_2();
+        this.$2F_2();
     },
-    $2D_2: function SP_UI_AspMenu$$2D_2() {
+    $2E_2: function SP_UI_AspMenu$$2E_2() {
         var $v_0 = this.$L_2.getElementsByTagName('li');
 
         for (var $v_1 = 0, $v_2 = $v_0.length; $v_1 < $v_2; ++$v_1) {
             var $v_3 = $v_0[$v_1];
 
             $v_3.hoverDebouncer = 0;
-            this.$1y_2($v_3);
+            this.$1z_2($v_3);
         }
     },
     $10_2: function SP_UI_AspMenu$$10_2($p0, $p1) {
@@ -2694,7 +2694,7 @@ SP.UI.AspMenu.prototype = {
         }
         return false;
     },
-    $1y_2: function SP_UI_AspMenu$$1y_2($p0) {
+    $1z_2: function SP_UI_AspMenu$$1z_2($p0) {
         var $$t_C = this;
 
         $addHandler($p0, 'mouseover', function($p1_0) {
@@ -2723,12 +2723,12 @@ SP.UI.AspMenu.prototype = {
         var $$t_F = this;
 
         $addHandler($p0, 'focusout', function($p1_0) {
-            $$t_F.$1j_2($p0);
+            $$t_F.$1k_2($p0);
         });
         var $$t_G = this;
 
         $addHandler($p0, 'blur', function($p1_0) {
-            $$t_G.$1j_2($p0);
+            $$t_G.$1k_2($p0);
         });
         var $v_1 = $p0.querySelector('.additional-background');
 
@@ -2759,7 +2759,7 @@ SP.UI.AspMenu.prototype = {
             });
         }
     },
-    $1j_2: function SP_UI_AspMenu$$1j_2($p0) {
+    $1k_2: function SP_UI_AspMenu$$1k_2($p0) {
         if (!this.$10_2($p0, document.activeElement)) {
             var $v_0 = $p0.hoverDebouncer;
 
@@ -2830,7 +2830,7 @@ SP.UI.AspMenu.prototype = {
         var $v_1 = this.$1P_2(li, 1, li, true) + 6;
 
         Sys.UI.DomElement.addCssClass(li, 'hover');
-        var $v_2 = SP.UI.AspMenu.$1g(li);
+        var $v_2 = SP.UI.AspMenu.$1h(li);
 
         if ($v_2) {
             var $v_3 = window.innerWidth;
@@ -2906,6 +2906,9 @@ SP.UI.AspMenu.prototype = {
                     li.appendChild($v_C);
                 }
             }
+            if (!OffSwitch.IsActive(SP.UI.AspMenu.$1Y)) {
+                $v_2.removeAttribute('aria-hidden');
+            }
         }
     },
     hideSubMenu: function SP_UI_AspMenu$hideSubMenu(flyoutItem) {
@@ -2930,7 +2933,7 @@ SP.UI.AspMenu.prototype = {
     hideSubMenuCore: function SP_UI_AspMenu$hideSubMenuCore(li, newLi) {
         do {
             var $v_0 = document.documentElement.dir === 'rtl';
-            var $v_1 = SP.UI.AspMenu.$1g(li);
+            var $v_1 = SP.UI.AspMenu.$1h(li);
 
             if ($v_1) {
                 $v_1.style.top = '';
@@ -2940,6 +2943,9 @@ SP.UI.AspMenu.prototype = {
             }
             Sys.UI.DomElement.removeCssClass(li, 'hover-off');
             Sys.UI.DomElement.removeCssClass(li, 'hover');
+            if (!OffSwitch.IsActive(SP.UI.AspMenu.$1Y)) {
+                $v_1.setAttribute('aria-hidden', true);
+            }
             if (this.$9_2 && li && li !== this.$9_2 && this.$10_2(li, this.$9_2)) {
                 this.hideSubMenuCore(this.$9_2, li);
             }
@@ -2964,7 +2970,7 @@ SP.UI.AspMenu.prototype = {
             }
         } while (li);
     },
-    $2E_2: function SP_UI_AspMenu$$2E_2() {
+    $2F_2: function SP_UI_AspMenu$$2F_2() {
         if (!SP.ScriptUtility.isNullOrUndefined(this.$L_2.querySelectorAll)) {
             var $v_0 = this.$L_2.querySelectorAll('a.new-window');
 
@@ -2985,9 +2991,9 @@ SP.UI.AspMenu.prototype = {
 };
 Type.registerNamespace('SP.Disposal');
 SP.Disposal.DisposalManager = function SP_Disposal_DisposalManager() {
-    this.$$d_$2H_0 = Function.createDelegate(this, this.$2H_0);
+    this.$$d_$2I_0 = Function.createDelegate(this, this.$2I_0);
     this.$s_0 = [];
-    $addHandler(window, 'unload', this.$$d_$2H_0);
+    $addHandler(window, 'unload', this.$$d_$2I_0);
 };
 SP.Disposal.DisposalManager.get_instance = function SP_Disposal_DisposalManager$get_instance() {
     if (!SP.Disposal.DisposalManager.$P) {
@@ -2999,8 +3005,8 @@ SP.Disposal.DisposalManager.prototype = {
     registerForDisposal: function SP_Disposal_DisposalManager$registerForDisposal(objectToDispose) {
         Array.add(this.$s_0, objectToDispose);
     },
-    $2H_0: function SP_Disposal_DisposalManager$$2H_0($p0) {
-        $removeHandler(window, 'unload', this.$$d_$2H_0);
+    $2I_0: function SP_Disposal_DisposalManager$$2I_0($p0) {
+        $removeHandler(window, 'unload', this.$$d_$2I_0);
         for (var $v_0 = 0; $v_0 < this.$s_0.length; $v_0++) {
             try {
                 var $v_1 = this.$s_0[$v_0];
@@ -3071,14 +3077,14 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
     getECBMenuItemForCommand: function SP_Utilities_Internal_ECBAdapter$getECBMenuItemForCommand(commandId) {
         var $v_0 = this.getSelectedItems();
 
-        if (!this.$1c_0($v_0)) {
+        if (!this.$1d_0($v_0)) {
             return null;
         }
-        var $v_1 = this.$1e_0($v_0);
+        var $v_1 = this.$1f_0($v_0);
 
-        return this.$1d_0($v_1, commandId);
+        return this.$1e_0($v_1, commandId);
     },
-    $1d_0: function SP_Utilities_Internal_ECBAdapter$$1d_0($p0, $p1) {
+    $1e_0: function SP_Utilities_Internal_ECBAdapter$$1e_0($p0, $p1) {
         for (var $v_0 = 0; $v_0 < $p0.childNodes.length; $v_0++) {
             var $v_1 = $p0.childNodes[$v_0];
 
@@ -3089,7 +3095,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
                     return $v_2;
                 }
                 else if ($v_2.IsSubMenu) {
-                    var $v_3 = this.$1d_0($v_2, $p1);
+                    var $v_3 = this.$1e_0($v_2, $p1);
 
                     if (!IsNullOrUndefined($v_3)) {
                         return $v_3;
@@ -3141,17 +3147,17 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             return false;
         }
         if ($v_0 === 1) {
-            if (!this.$1c_0($v_1)) {
+            if (!this.$1d_0($v_1)) {
                 return false;
             }
-            var $v_2 = this.$1e_0($v_1);
+            var $v_2 = this.$1f_0($v_1);
 
             if (this.$1L_0($v_2, commandId)) {
                 return true;
             }
         }
         else if ($v_0 > 1 && this.bulkOperationAvailableForCommand(commandId)) {
-            return this.$1w_0($v_1, commandId);
+            return this.$1x_0($v_1, commandId);
         }
         return false;
     },
@@ -3171,7 +3177,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             return false;
         }
     },
-    $1w_0: function SP_Utilities_Internal_ECBAdapter$$1w_0($p0, $p1) {
+    $1x_0: function SP_Utilities_Internal_ECBAdapter$$1x_0($p0, $p1) {
         var $v_0 = this.get_clvp();
 
         if (IsNullOrUndefined($v_0)) {
@@ -3186,7 +3192,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             };
             var $v_2 = $v_1.key.split(',');
 
-            if (!this.$1a_0($v_0, $v_2[1])) {
+            if (!this.$1b_0($v_0, $v_2[1])) {
                 return false;
             }
             var $v_3 = (this.get_clvp()).CUIItemInfo[$v_2[1]];
@@ -3200,7 +3206,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
     bulkOperationAvailableForCommand: function SP_Utilities_Internal_ECBAdapter$bulkOperationAvailableForCommand(commandId) {
         return commandId === 'CheckOut' || commandId === 'CheckIn' || commandId === 'Delete' || commandId === 'DiscardCheckOut' || commandId === 'AddToTimeline' || commandId === 'Moderate' || commandId === 'MoveCopy';
     },
-    $1e_0: function SP_Utilities_Internal_ECBAdapter$$1e_0($p0) {
+    $1f_0: function SP_Utilities_Internal_ECBAdapter$$1f_0($p0) {
         var $$dict_1 = $p0;
 
         for (var $$key_2 in $$dict_1) {
@@ -3228,7 +3234,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             if (($v_3.getAttributeNode('type')).value !== 'separator') {
                 var $v_4 = $v_3;
 
-                if (this.$2G_0($v_4, $p1)) {
+                if (this.$2H_0($v_4, $p1)) {
                     $p0.setAttribute($v_0, 'TRUE');
                     return true;
                 }
@@ -3245,7 +3251,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         $p0.setAttribute($v_0, 'FALSE');
         return false;
     },
-    $2G_0: function SP_Utilities_Internal_ECBAdapter$$2G_0($p0, $p1) {
+    $2H_0: function SP_Utilities_Internal_ECBAdapter$$2H_0($p0, $p1) {
         if (IsNullOrUndefined($p0.CUIEnabledCommands)) {
             return false;
         }
@@ -3256,7 +3262,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         }
         return false;
     },
-    $1c_0: function SP_Utilities_Internal_ECBAdapter$$1c_0($p0) {
+    $1d_0: function SP_Utilities_Internal_ECBAdapter$$1d_0($p0) {
         var $v_0 = this.get_clvp();
 
         if (IsNullOrUndefined($v_0)) {
@@ -3271,13 +3277,13 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
             };
             var $v_2 = $v_1.key.split(',');
 
-            if (!this.$1a_0($v_0, $v_2[1])) {
+            if (!this.$1b_0($v_0, $v_2[1])) {
                 return false;
             }
         }
         return true;
     },
-    $1a_0: function SP_Utilities_Internal_ECBAdapter$$1a_0($p0, $p1) {
+    $1b_0: function SP_Utilities_Internal_ECBAdapter$$1b_0($p0, $p1) {
         var $v_0 = $p0.CUIItemInfo;
 
         if (IsNullOrUndefined($v_0)) {
@@ -3287,7 +3293,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         var $v_1 = $v_0[$p1];
 
         if (IsNullOrUndefined($v_1)) {
-            $v_1 = this.$21_0($p0, $p1);
+            $v_1 = this.$22_0($p0, $p1);
             if (IsNullOrUndefined($v_1)) {
                 return false;
             }
@@ -3295,7 +3301,7 @@ SP.Utilities.Internal.ECBAdapter.prototype = {
         }
         return true;
     },
-    $21_0: function SP_Utilities_Internal_ECBAdapter$$21_0($p0, $p1) {
+    $22_0: function SP_Utilities_Internal_ECBAdapter$$22_0($p0, $p1) {
         var $v_0 = window.itemTable;
 
         window.itemTable = $p0.GetEcbInfo($p1, this.$1J_0, this.$1K_0);
@@ -4454,6 +4460,7 @@ function sp_core_initialize() {
     SP.Utilities.TaskCarousel.$p = SP.Utilities.TaskCarousel.$Q;
     SP.UI.AspMenu.$1X = '{0}_FrameID_{1}';
     SP.UI.AspMenu.$1W = 1100;
+    SP.UI.AspMenu.$1Y = '955EBF35-B949-4DED-8173-0736843A1667';
     SP.Disposal.DisposalManager.$P = null;
 }
 ;

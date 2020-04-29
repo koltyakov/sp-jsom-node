@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 20008,
-                "rpr": 12009
+                "rup": 20015,
+                "rpr": 12020
             }
         };
     }
@@ -70,6 +70,7 @@ function $_global_init() {
             chrome7up: undefined,
             chrome8up: undefined,
             chrome9up: undefined,
+            chrome81up: undefined,
             iever: undefined,
             mac: undefined,
             major: undefined,
@@ -188,6 +189,7 @@ function $_global_init() {
             this.chrome7up = false;
             this.chrome8up = false;
             this.chrome9up = false;
+            this.chrome81up = false;
             if (this.chrome && this.major >= 5) {
                 var chmVerIdx = agt.indexOf("chrome/");
 
@@ -198,6 +200,7 @@ function $_global_init() {
                     this.chrome7up = chmVerInt >= 7;
                     this.chrome8up = chmVerInt >= 8;
                     this.chrome9up = chmVerInt >= 9;
+                    this.chrome81up = chmVerInt >= 81;
                 }
             }
             this.ipad = agt.indexOf("ipad") != -1;
@@ -294,6 +297,7 @@ function $_global_init() {
             this.chrome7up = false;
             this.chrome8up = false;
             this.chrome9up = false;
+            this.chrome81up = false;
             if (this.chrome && this.major >= 5) {
                 var chmVerIdx = agt.indexOf("chrome/");
 
@@ -304,6 +308,7 @@ function $_global_init() {
                     this.chrome7up = chmVerInt >= 7;
                     this.chrome8up = chmVerInt >= 8;
                     this.chrome9up = chmVerInt >= 9;
+                    this.chrome81up = chmVerInt >= 81;
                 }
             }
             this.msTouch = typeof navigator.msMaxTouchPoints != "undefined" && navigator.msMaxTouchPoints > 0;
