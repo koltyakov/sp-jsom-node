@@ -6,13 +6,16 @@
   "scripts": {
     "exec:js": "JSOM_ASSETS_FOLDER=${PWD}/dist/jsom node ./dist/index",
     "exec:ts": "ts-node ./src/index",
-    "build": "rimraf ./dist && webpack"
+    "build": "rimraf ./dist && webpack",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "sp-jsom-node": "^3.0.3"
+    "sp-jsom-node": "^3.0.3",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
@@ -26,5 +29,6 @@
     "typescript": "^3.8.3",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11"
-  }
+  },
+  "snyk": true
 }
