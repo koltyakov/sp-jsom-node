@@ -33,7 +33,7 @@
   "dependencies": {
     "@types/sharepoint": "^2016.1.8",
     "cpass": "^2.3.0",
-    "node-sp-auth": "^2.5.7",
+    "node-sp-auth": "^2.5.8",
     "node-sp-auth-config": "^2.9.3",
     "sp-request": "^2.1.3"
   },
