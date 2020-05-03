@@ -10,7 +10,7 @@ jsom.wizard().then(async () => {
   const oWeb = ctx.get_web();
   const peopleManager = new SP.UserProfiles.PeopleManager(ctx);
 
-  let oUsers = oWeb.get_siteUsers();
+  const oUsers = oWeb.get_siteUsers();
 
   const taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx);
   const termStore = taxSession.getDefaultSiteCollectionTermStore();
@@ -35,8 +35,8 @@ jsom.wizard().then(async () => {
     }).join('\n').split('\n').map(l => l.trim()).join('\n')
   );
 
-  let usersData = oUsers.get_data().map(user => {
-    let manager = peopleManager.getUserProfilePropertyFor(user.get_loginName(), 'Manager') as any;
+  const usersData = oUsers.get_data().map(user => {
+    const manager = peopleManager.getUserProfilePropertyFor(user.get_loginName(), 'Manager') as any;
     return { user, manager };
   });
 
@@ -48,8 +48,8 @@ jsom.wizard().then(async () => {
       .filter(u => u.user.get_principalType() === 1) // Users
       .filter(u => u.user.get_email() !== '')
       .map(u => {
-        let manager = u.manager.get_value();
-        let managerRes = usersData.filter(m => {
+        const manager = u.manager.get_value();
+        const managerRes = usersData.filter(m => {
           return m.user.get_loginName() === manager;
         });
         return u.manager.get_value() ?

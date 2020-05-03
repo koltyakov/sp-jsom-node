@@ -6,7 +6,8 @@
   "scripts": {
     "exec:js": "JSOM_ASSETS_FOLDER=${PWD}/dist/jsom node ./dist/index",
     "exec:ts": "ts-node ./src/index",
-    "build": "rimraf ./dist && webpack"
+    "build": "rimraf ./dist && webpack",
+    "lint": "tslint -p ."
   },
   "keywords": [],
   "author": "",
