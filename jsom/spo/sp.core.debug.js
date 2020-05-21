@@ -6,8 +6,8 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 20022,
-            "rpr": 12012
+            "rup": 20106,
+            "rpr": 12009
         }
     };
 }
@@ -2940,12 +2940,12 @@ SP.UI.AspMenu.prototype = {
                 $v_1.style.left = '';
                 $v_1.style.right = '';
                 $v_1.style.width = '';
+                if (!OffSwitch.IsActive(SP.UI.AspMenu.$1Y)) {
+                    $v_1.setAttribute('aria-hidden', true);
+                }
             }
             Sys.UI.DomElement.removeCssClass(li, 'hover-off');
             Sys.UI.DomElement.removeCssClass(li, 'hover');
-            if (!OffSwitch.IsActive(SP.UI.AspMenu.$1Y)) {
-                $v_1.setAttribute('aria-hidden', true);
-            }
             if (this.$9_2 && li && li !== this.$9_2 && this.$10_2(li, this.$9_2)) {
                 this.hideSubMenuCore(this.$9_2, li);
             }

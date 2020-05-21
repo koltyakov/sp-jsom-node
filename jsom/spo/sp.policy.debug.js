@@ -2391,6 +2391,38 @@ SP.CompliancePolicy.SPPolicyStoreProxy.unRegisterHoldEventReceiver = function SP
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'UnRegisterHoldEventReceiver', [ siteUrl, siteId ]);
     context.addQuery($v_0);
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.activateHoldFeatureOnSite = function SP_CompliancePolicy_SPPolicyStoreProxy$activateHoldFeatureOnSite(context, siteUrl, siteId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'ActivateHoldFeatureOnSite', [ siteUrl, siteId ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.getSiteSubscriptionProperty = function SP_CompliancePolicy_SPPolicyStoreProxy$getSiteSubscriptionProperty(context, tenantId, propertyName) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetSiteSubscriptionProperty', [ tenantId, propertyName ]);
+    context.addQuery($v_1);
+    $v_0 = new SP.StringResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setSiteSubscriptionProperty = function SP_CompliancePolicy_SPPolicyStoreProxy$setSiteSubscriptionProperty(context, tenantId, propertyName, propertyValue) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetSiteSubscriptionProperty', [ tenantId, propertyName, propertyValue ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.registerSiteSubscriptionEventReceiver = function SP_CompliancePolicy_SPPolicyStoreProxy$registerSiteSubscriptionEventReceiver(context, tenantId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'RegisterSiteSubscriptionEventReceiver', [ tenantId ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     
     get_policyStoreUrl: function SP_CompliancePolicy_SPPolicyStoreProxy$get_policyStoreUrl() {
