@@ -276,7 +276,8 @@ export class JsomNode {
                 ...jsomHeaders
               },
               body: wReq._body,
-              json: !isJsom,
+              // json: !isJsom, // sp-request v2
+              responseType: !isJsom ? 'json' : 'text', // sp-request v3
               agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
             })
               .then((response) => {
