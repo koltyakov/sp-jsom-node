@@ -4346,6 +4346,19 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         return value;
     },
     
+    get_cacheSchemaVersion: function SP_Publishing_Navigation_WebNavigationSettings$get_cacheSchemaVersion() {
+        this.checkUninitializedProperty('CacheSchemaVersion');
+        return ((this.get_objectData().get_properties()['CacheSchemaVersion']));
+    },
+    
+    set_cacheSchemaVersion: function SP_Publishing_Navigation_WebNavigationSettings$set_cacheSchemaVersion(value) {
+        this.get_objectData().get_properties()['CacheSchemaVersion'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'CacheSchemaVersion', value));
+        }
+        return value;
+    },
+    
     get_cachingRetryAttemptLeft: function SP_Publishing_Navigation_WebNavigationSettings$get_cachingRetryAttemptLeft() {
         this.checkUninitializedProperty('CachingRetryAttemptLeft');
         return ((this.get_objectData().get_properties()['CachingRetryAttemptLeft']));
@@ -4428,6 +4441,11 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['CachedHierarchyDepth'] = ($v_0);
             delete parentNode.CachedHierarchyDepth;
+        }
+        $v_0 = parentNode.CacheSchemaVersion;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['CacheSchemaVersion'] = ($v_0);
+            delete parentNode.CacheSchemaVersion;
         }
         $v_0 = parentNode.CachingRetryAttemptLeft;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -5180,6 +5198,7 @@ SP.Publishing.Navigation.StandardNavigationSettingsPropertyNames.termSetId = 'Te
 SP.Publishing.Navigation.StandardNavigationSettingsPropertyNames.termStoreId = 'TermStoreId';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.addNewPagesToNavigation = 'AddNewPagesToNavigation';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachedHierarchyDepth = 'CachedHierarchyDepth';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cacheSchemaVersion = 'CacheSchemaVersion';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachingRetryAttemptLeft = 'CachingRetryAttemptLeft';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachingState = 'CachingState';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.createFriendlyUrlsForNewPages = 'CreateFriendlyUrlsForNewPages';
