@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 20106,
-                "rpr": 12009
+                "rup": 20203,
+                "rpr": 12006
             }
         };
     }

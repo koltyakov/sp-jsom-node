@@ -6340,6 +6340,11 @@ PS.DraftTaskLink.prototype = {
         return value;
     },
     
+    get_predecessorTaskId: function PS_DraftTaskLink$get_predecessorTaskId() {ULSyTi:;
+        this.checkUninitializedProperty('PredecessorTaskId');
+        return ((this.get_objectData().get_properties()['PredecessorTaskId']));
+    },
+    
     get_start: function PS_DraftTaskLink$get_start() {ULSyTi:;
         var $v_0 = ((this.get_objectData().get_clientObjectProperties()['Start']));
         if (SP.ScriptUtility.isUndefined($v_0)) {
@@ -6347,6 +6352,11 @@ PS.DraftTaskLink.prototype = {
             this.get_objectData().get_clientObjectProperties()['Start'] = $v_0;
         }
         return $v_0;
+    },
+    
+    get_successorTaskId: function PS_DraftTaskLink$get_successorTaskId() {ULSyTi:;
+        this.checkUninitializedProperty('SuccessorTaskId');
+        return ((this.get_objectData().get_properties()['SuccessorTaskId']));
     },
     
     initPropertiesFromJson: function PS_DraftTaskLink$initPropertiesFromJson(parentNode) {ULSyTi:;
@@ -6368,11 +6378,21 @@ PS.DraftTaskLink.prototype = {
             this.get_objectData().get_properties()['LinkLagDuration'] = ($v_0);
             delete parentNode.LinkLagDuration;
         }
+        $v_0 = parentNode.PredecessorTaskId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['PredecessorTaskId'] = ($v_0);
+            delete parentNode.PredecessorTaskId;
+        }
         $v_0 = parentNode.Start;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.updateClientObjectPropertyType('Start', this.get_start(), $v_0);
             this.get_start().fromJson($v_0);
             delete parentNode.Start;
+        }
+        $v_0 = parentNode.SuccessorTaskId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['SuccessorTaskId'] = ($v_0);
+            delete parentNode.SuccessorTaskId;
         }
     },
     
@@ -16071,6 +16091,11 @@ PS.PublishedTaskLink.prototype = {
         return ((this.get_objectData().get_properties()['LinkLagFmt']));
     },
     
+    get_predecessorTaskId: function PS_PublishedTaskLink$get_predecessorTaskId() {ULSyTi:;
+        this.checkUninitializedProperty('PredecessorTaskId');
+        return ((this.get_objectData().get_properties()['PredecessorTaskId']));
+    },
+    
     get_projUid: function PS_PublishedTaskLink$get_projUid() {ULSyTi:;
         this.checkUninitializedProperty('ProjUid');
         return ((this.get_objectData().get_properties()['ProjUid']));
@@ -16083,6 +16108,11 @@ PS.PublishedTaskLink.prototype = {
             this.get_objectData().get_clientObjectProperties()['Start'] = $v_0;
         }
         return $v_0;
+    },
+    
+    get_successorTaskId: function PS_PublishedTaskLink$get_successorTaskId() {ULSyTi:;
+        this.checkUninitializedProperty('SuccessorTaskId');
+        return ((this.get_objectData().get_properties()['SuccessorTaskId']));
     },
     
     initPropertiesFromJson: function PS_PublishedTaskLink$initPropertiesFromJson(parentNode) {ULSyTi:;
@@ -16114,6 +16144,11 @@ PS.PublishedTaskLink.prototype = {
             this.get_objectData().get_properties()['LinkLagFmt'] = ($v_0);
             delete parentNode.LinkLagFmt;
         }
+        $v_0 = parentNode.PredecessorTaskId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['PredecessorTaskId'] = ($v_0);
+            delete parentNode.PredecessorTaskId;
+        }
         $v_0 = parentNode.ProjUid;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['ProjUid'] = ($v_0);
@@ -16124,6 +16159,11 @@ PS.PublishedTaskLink.prototype = {
             this.updateClientObjectPropertyType('Start', this.get_start(), $v_0);
             this.get_start().fromJson($v_0);
             delete parentNode.Start;
+        }
+        $v_0 = parentNode.SuccessorTaskId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['SuccessorTaskId'] = ($v_0);
+            delete parentNode.SuccessorTaskId;
         }
     }
 }
@@ -22983,6 +23023,8 @@ PS.DraftTaskObjectPropertyNames.statusManager = 'StatusManager';
 PS.DraftTaskObjectPropertyNames.successors = 'Successors';
 PS.DraftTaskLinkPropertyNames.dependencyType = 'DependencyType';
 PS.DraftTaskLinkPropertyNames.linkLagDuration = 'LinkLagDuration';
+PS.DraftTaskLinkPropertyNames.predecessorTaskId = 'PredecessorTaskId';
+PS.DraftTaskLinkPropertyNames.successorTaskId = 'SuccessorTaskId';
 PS.DraftTaskLinkObjectPropertyNames.end = 'End';
 PS.DraftTaskLinkObjectPropertyNames.start = 'Start';
 PS.EngagementPropertyNames.createdDate = 'CreatedDate';
@@ -23424,7 +23466,9 @@ PS.PublishedTaskLinkPropertyNames.dependencyType = 'DependencyType';
 PS.PublishedTaskLinkPropertyNames.linkLag = 'LinkLag';
 PS.PublishedTaskLinkPropertyNames.linkLagDuration = 'LinkLagDuration';
 PS.PublishedTaskLinkPropertyNames.linkLagFmt = 'LinkLagFmt';
+PS.PublishedTaskLinkPropertyNames.predecessorTaskId = 'PredecessorTaskId';
 PS.PublishedTaskLinkPropertyNames.projUid = 'ProjUid';
+PS.PublishedTaskLinkPropertyNames.successorTaskId = 'SuccessorTaskId';
 PS.PublishedTaskLinkObjectPropertyNames.end = 'End';
 PS.PublishedTaskLinkObjectPropertyNames.start = 'Start';
 PS.QueueJobPropertyNames.id = 'Id';
