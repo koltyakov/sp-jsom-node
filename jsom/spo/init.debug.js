@@ -7,7 +7,7 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 20203,
+                "rup": 21319,
                 "rpr": 12007
             }
         };
@@ -6685,7 +6685,7 @@ var browserUpdatedWithServerRedirectedUrl;
 function UpdateUrlWhenServerRedirects() {
     var pageContextInfo = window['_spPageContextInfo'];
 
-    if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(708) && !(window["OffSwitch"] == null || OffSwitch.IsActive("90329B12-2C48-4DBE-A1B9-08BC2BBA2C26")) && (window["OffSwitch"] == null || OffSwitch.IsActive("DC0DFB52-4F4C-479D-9D07-43DE94F3123F")) && (window["OffSwitch"] == null || OffSwitch.IsActive("3EDB0B41-115A-410E-9C6B-9390F1D1AD94") || !browserUpdatedWithServerRedirectedUrl) && Boolean(pageContextInfo) && Boolean(pageContextInfo.serverRedirectedUrl)) {
+    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("90329B12-2C48-4DBE-A1B9-08BC2BBA2C26")) && (window["OffSwitch"] == null || OffSwitch.IsActive("DC0DFB52-4F4C-479D-9D07-43DE94F3123F")) && (window["OffSwitch"] == null || OffSwitch.IsActive("3EDB0B41-115A-410E-9C6B-9390F1D1AD94") || !browserUpdatedWithServerRedirectedUrl) && Boolean(pageContextInfo) && Boolean(pageContextInfo.serverRedirectedUrl)) {
         var serverRedirectedUrl = pageContextInfo.serverRedirectedUrl;
 
         if (Boolean(pageContextInfo.isSPO) && window.location.protocol.toLowerCase() === 'https:') {
@@ -14054,7 +14054,12 @@ function IsInIframe() {
 function RenderProjectTaskListEditMode(renderCtx, postRenderFunc) {
     if (renderCtx.ListTemplateType == 171 && _spPageContextInfo.webTemplate == '6115') {
         if (Boolean(renderCtx.bInitialRender) && (renderCtx.ListData.LastRow == null || renderCtx.ListData.LastRow == 0)) {
-            renderCtx.inGridMode = true;
+            if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(1992)) {
+                renderCtx.inGridMode = false;
+            }
+            else {
+                renderCtx.inGridMode = true;
+            }
             postRenderFunc = function() {
                 EnsureScriptParams('inplview', 'InitGridFromView', renderCtx.view);
             };
@@ -14742,7 +14747,7 @@ function PerformanceLogger_module_def() {
         var perfDataTimer = null;
         var checkInterval = 100;
         var errorTimeOut = 30000;
-        var keyMetrics = ['ServerCorrelationId', 'ServerRequestDuration', 'EUPL', 'ServerUrl', 'ScenarioId', 'PageTransitionType', 'AppCache', 'FolderNav', 'W3cNavigationStart'];
+        var keyMetrics = ['ServerCorrelationId', 'ServerRequestDuration', 'EUPL', 'ScenarioId', 'PageTransitionType', 'AppCache', 'FolderNav', 'W3cNavigationStart'];
         var dataStartTime = Number((new Date()).getTime());
         var isServerCorrelationIdCollected = false;
         var isPageTransitionCollected = false;
@@ -14805,16 +14810,14 @@ function PerformanceLogger_module_def() {
             }
             dataState = collected ? PerformanceDataState.ReadyToUpload : PerformanceDataState.Incomplete;
             if (dataState === PerformanceDataState.Incomplete) {
-                if (!(window["OffSwitch"] == null || OffSwitch.IsActive("5DB2EE36-96C7-495F-877E-79DCAFC6ED72"))) {
-                    that.WriteServerCorrelationId();
-                    WriteServerUrl();
-                    if (!(window["OffSwitch"] == null || OffSwitch.IsActive("6B00B27F-4B76-428A-B177-0825E60374E5"))) {
-                        WriteReferrer();
-                    }
-                    that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
-                    if (ReadyToComputeEUPL()) {
-                        SetEUPLAndControlData();
-                    }
+                that.WriteServerCorrelationId();
+                WriteServerUrl();
+                if (!(window["OffSwitch"] == null || OffSwitch.IsActive("6B00B27F-4B76-428A-B177-0825E60374E5"))) {
+                    WriteReferrer();
+                }
+                that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
+                if (ReadyToComputeEUPL()) {
+                    SetEUPLAndControlData();
                 }
                 if (Number((new Date()).getTime()) - Number(dataStartTime) > errorTimeOut) {
                     dataState = PerformanceDataState.TimeOut;
@@ -14822,19 +14825,6 @@ function PerformanceLogger_module_def() {
                     EnsureScriptFunc("sp.core.js", "SP.SlapiInternal", function() {
                         ReportErrors('TimeOut', 'Did not get key perf metrics in ' + String(errorTimeOut) + ' milliseconds. Missed metrics: ' + missedKeyMetrics.join() + '.');
                     });
-                }
-                else {
-                    if (window["OffSwitch"] == null || OffSwitch.IsActive("5DB2EE36-96C7-495F-877E-79DCAFC6ED72")) {
-                        that.WriteServerCorrelationId();
-                        WriteServerUrl();
-                        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("6B00B27F-4B76-428A-B177-0825E60374E5"))) {
-                            WriteReferrer();
-                        }
-                        that.LogPerformanceData('EUPLBreakdown', JSON.stringify(euplBreakDown));
-                        if (ReadyToComputeEUPL()) {
-                            SetEUPLAndControlData();
-                        }
-                    }
                 }
             }
             else {
@@ -14949,7 +14939,7 @@ function PerformanceLogger_module_def() {
                 return;
             }
             if (!IsNullOrUndefined(that.PerformanceData)) {
-                that.LogPerformanceData('ServerUrl', window.location.href);
+                that.LogPerformanceData('ServerUrl', '');
                 isServerUrlCollected = true;
             }
         }
@@ -14959,7 +14949,7 @@ function PerformanceLogger_module_def() {
                 return;
             }
             if (!IsNullOrUndefined(that.PerformanceData)) {
-                that.LogPerformanceData('Referrer', window.document && document.referrer);
+                that.LogPerformanceData('Referrer', '');
                 isReferrerCollected = true;
             }
         }
@@ -15659,19 +15649,12 @@ function SPThemeUtils_module_def() {
         return typeof Flighting !== strUndefined && typeof Flighting.VariantConfiguration !== strUndefined && typeof Flighting.VariantConfiguration.IsExpFeatureClientEnabled !== strUndefined;
     }
     function UseClientSideTheming() {
-        var wtGroup = 64;
-        var wtCommSite = 68;
-        var wtContentCenterSite = 6001;
-        var wtSTS3 = "STS#3";
-        var wt;
-        var wtConfiguration;
-        var featureEnabled = FlightingAvailable() && (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(104) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(157) || Flighting.VariantConfiguration.IsExpFeatureClientEnabled(120) && ((wt = GetWebTemplate()) == wtGroup || wt == wtCommSite || wt == wtContentCenterSite || (wtConfiguration = GetWebTemplateConfiguration()) == wtSTS3));
-        var useCST = featureEnabled && typeof Theming !== strUndefined;
+        var useCST = typeof Theming !== strUndefined;
 
         return useCST;
     }
     function UseShellThemes() {
-        return UseClientSideTheming() && Flighting.VariantConfiguration.IsExpFeatureClientEnabled(107);
+        return UseClientSideTheming() && FlightingAvailable() && Flighting.VariantConfiguration.IsExpFeatureClientEnabled(107);
     }
     function GetPageManager() {
         return Theming.GetPageManager();
@@ -15680,7 +15663,9 @@ function SPThemeUtils_module_def() {
         return (GetPageManager()).GetCurrentStyleSheetText(styleSheetUrl);
     }
     function GetThemedStyleSheets() {
-        return (GetPageManager()).GetThemedStyleSheets();
+        var includeUnthemedSheets = !(window["OffSwitch"] == null || OffSwitch.IsActive("FAF5A1EC-E34B-4087-9448-4BFED87226EF"));
+
+        return (GetPageManager()).GetThemedStyleSheets(includeUnthemedSheets);
     }
     function GetThemeColor(colorSlot, opacity) {
         return (GetPageManager()).GetColorFromPalette(colorSlot, opacity);
@@ -16050,10 +16035,1949 @@ function SPThemeUtils_module_def() {
                 tealPalette[slotName] = baseColor;
             }
         }
+        var arrForegroundImageThemingRules = [{
+            "url": "/_layouts/15/images/accsvcthemed.png",
+            "operations": [{
+                "themeColor": "Navigation",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "accthemedcluster-navigation"
+            }]
+        }, {
+            "url": "/_layouts/15/images/accsvcthemed-accent.png",
+            "operations": [{
+                "themeColor": "NavigationAccent",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "accthemedcluster-navigation-accent"
+            }]
+        }, {
+            "url": "/_layouts/15/inc/pwa/images/siteicon.png",
+            "operations": [{
+                "themeColor": "EmphasisBackground",
+                "method": "Tinting",
+                "detach": true,
+                "hashOverride": "pwasiteicon"
+            }]
+        }, {
+            "url": "/_layouts/15/inc/pwa/images/pwaprojectdetails_48x48x32.png",
+            "operations": [{
+                "themeColor": "EmphasisBackground",
+                "method": "Tinting",
+                "detach": true,
+                "hashOverride": "pwaprojectdetails"
+            }]
+        }, {
+            "url": "/_layouts/15/images/popularitybar.png",
+            "operations": [{
+                "themeColor": "EmphasisBackground",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "PopularityBar"
+            }]
+        }, {
+            "url": "/_layouts/15/images/popularitybarshadow.png",
+            "operations": [{
+                "themeColor": "SubtleEmphasisBackground",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "PopularityBarShadow"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingslargestarfilled.png",
+            "operations": [{
+                "themeColor": "HyperlinkActive",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsLargeStarFilled"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingssmallstarempty.png",
+            "operations": [{
+                "themeColor": "Hyperlink",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsSmallStarEmpty"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingssmallstarfilled.png",
+            "operations": [{
+                "themeColor": "Hyperlink",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsSmallStarFilled"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingssmallstarlefthalffilled.png",
+            "operations": [{
+                "themeColor": "Hyperlink",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsSmallStarLeftHalfFilled"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingssmallstarrighthalffilled.png",
+            "operations": [{
+                "themeColor": "Hyperlink",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsSmallStarRightHalfFilled"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingssmallstarhoveroverempty.png",
+            "operations": [{
+                "themeColor": "HyperlinkActive",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsSmallStarHoveroverEmpty"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ratingssmallstarhoveroverfilled.png",
+            "operations": [{
+                "themeColor": "HyperlinkActive",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "RatingsSmallStarHoveroverFilled"
+            }]
+        }, {
+            "url": "/_layouts/15/images/reputationbarsquare.png",
+            "operations": [{
+                "themeColor": "AccentLines",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "ReputationBarSquare"
+            }]
+        }, {
+            "url": "/_layouts/15/images/reputationbarsquareshadow.png",
+            "operations": [{
+                "themeColor": "AccentLines",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "ReputationBarSquareShadow"
+            }]
+        }, {
+            "url": "/_layouts/15/images/communitiesgiftedbadge.16x16x32.png",
+            "operations": [{
+                "themeColor": "AccentLines",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "CommunitiesGiftedBadge.16x16x32"
+            }]
+        }, {
+            "url": "/_layouts/15/images/socialcommon.png",
+            "operations": [{
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 75,
+                    "y": 67,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 53,
+                    "y": 53,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 79,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 79,
+                    "y": 45,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 99,
+                    "y": 118,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 86,
+                    "y": 109,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 73,
+                    "y": 107,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 119,
+                    "y": 1,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 53,
+                    "y": 119,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 79,
+                    "y": 1,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 79,
+                    "y": 23,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 23,
+                    "y": 79,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 45,
+                    "y": 79,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 119,
+                    "y": 14,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 40,
+                    "y": 119,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 14,
+                    "y": 119,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 27,
+                    "y": 119,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 101,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 101,
+                    "y": 55,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 101,
+                    "y": 19,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 101,
+                    "y": 37,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 27,
+                    "y": 53,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 27,
+                    "y": 1,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 1,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 27,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 119,
+                    "y": 66,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 109,
+                    "y": 105,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 115,
+                    "y": 79,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 109,
+                    "y": 92,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 19,
+                    "y": 101,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 73,
+                    "y": 89,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 101,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 55,
+                    "y": 101,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 27,
+                    "y": 27,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 53,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 53,
+                    "y": 27,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 53,
+                    "y": 1,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 119,
+                    "y": 27,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 119,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 119,
+                    "y": 40,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 119,
+                    "y": 53,
+                    "width": 11,
+                    "height": 11
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "socialcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 101,
+                    "width": 16,
+                    "height": 16
+                }
+            }]
+        }, {
+            "url": "/_layouts/15/images/spcommon.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "v15breadcrumb",
+                "includeRectangle": {
+                    "x": 215,
+                    "y": 120,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 30,
+                    "width": 96,
+                    "height": 96
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 104,
+                    "y": 256,
+                    "width": 5,
+                    "height": 3
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 143,
+                    "y": 178,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 125,
+                    "y": 178,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 197,
+                    "y": 156,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 127,
+                    "y": 232,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyphDisabled",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 145,
+                    "y": 232,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 217,
+                    "y": 228,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 199,
+                    "y": 228,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyphDisabled",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 181,
+                    "y": 228,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 163,
+                    "y": 232,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 53,
+                    "y": 154,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 152,
+                    "y": 56,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 126,
+                    "y": 56,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 152,
+                    "y": 30,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 126,
+                    "y": 30,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 105,
+                    "y": 112,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 251,
+                    "y": 102,
+                    "width": 15,
+                    "height": 14
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 179,
+                    "y": 114,
+                    "width": 15,
+                    "height": 14
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 254,
+                    "y": 84,
+                    "width": 15,
+                    "height": 14
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 200,
+                    "y": 66,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 197,
+                    "y": 102,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 238,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 99,
+                    "y": 59,
+                    "width": 25,
+                    "height": 25
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 197,
+                    "y": 120,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 145,
+                    "y": 196,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 163,
+                    "y": 196,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 236,
+                    "y": 84,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 181,
+                    "y": 192,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "SuiteBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 56,
+                    "y": 256,
+                    "width": 8,
+                    "height": 8
+                }
+            }, {
+                "themeColor": "SuiteBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 202,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 233,
+                    "y": 174,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "SuiteBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 55,
+                    "y": 202,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 233,
+                    "y": 156,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 179,
+                    "y": 174,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 254,
+                    "y": 48,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 200,
+                    "y": 30,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 254,
+                    "y": 30,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 105,
+                    "y": 138,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 23,
+                    "y": 180,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 153,
+                    "y": 134,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 180,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 251,
+                    "y": 174,
+                    "width": 12,
+                    "height": 10
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 23,
+                    "y": 256,
+                    "width": 7,
+                    "height": 10
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 14,
+                    "y": 256,
+                    "width": 7,
+                    "height": 10
+                }
+            }, {
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 109,
+                    "y": 196,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 233,
+                    "y": 138,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 233,
+                    "y": 120,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 127,
+                    "y": 196,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationPressedText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 233,
+                    "y": 102,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 67,
+                    "y": 180,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 131,
+                    "y": 134,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 200,
+                    "y": 48,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 91,
+                    "y": 232,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 95,
+                    "y": 259,
+                    "width": 7,
+                    "height": 4
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 86,
+                    "y": 259,
+                    "width": 7,
+                    "height": 4
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 109,
+                    "y": 214,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 163,
+                    "y": 214,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 127,
+                    "y": 214,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 145,
+                    "y": 214,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 220,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 91,
+                    "y": 214,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 55,
+                    "y": 220,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 73,
+                    "y": 220,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 128,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 27,
+                    "y": 154,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 154,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 131,
+                    "y": 108,
+                    "width": 24,
+                    "height": 24
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 199,
+                    "y": 192,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksDisabled",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 19,
+                    "y": 220,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 218,
+                    "y": 30,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 220,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 218,
+                    "y": 48,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 217,
+                    "y": 192,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "SiteTitle",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 109,
+                    "y": 232,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "SiteTitle",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 235,
+                    "y": 228,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 73,
+                    "y": 238,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 197,
+                    "y": 138,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 254,
+                    "y": 66,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 89,
+                    "y": 178,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 103,
+                    "y": 160,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 32,
+                    "y": 256,
+                    "width": 10,
+                    "height": 10
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 175,
+                    "y": 152,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "HeaderNavigationHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 157,
+                    "y": 108,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 127,
+                    "y": 156,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "HeaderNavigationPressedText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 149,
+                    "y": 156,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 218,
+                    "y": 66,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 215,
+                    "y": 174,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 218,
+                    "y": 84,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationHoverText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 215,
+                    "y": 102,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationPressedText",
+                "method": "Filling",
+                "hashOverride": "spcommon",
+                "includeRectangle": {
+                    "x": 215,
+                    "y": 138,
+                    "width": 16,
+                    "height": 16
+                }
+            }]
+        }, {
+            "url": "/_layouts/15/images/attach16.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "attach16"
+            }]
+        }, {
+            "url": "/_layouts/15/images/commentcollapse12.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "commentcollapse12"
+            }]
+        }, {
+            "url": "/_layouts/15/images/commentexpand12.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "commentexpand12"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ecbarw.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "ecbarw"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ecbbutton.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "ecbbutton"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ecbbuttonrtl.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "ecbbuttonrtl"
+            }]
+        }, {
+            "url": "/_layouts/15/images/ellipsis.11x11x32.png",
+            "operations": [{
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "ellipsis.11x11x32"
+            }]
+        }, {
+            "url": "/_layouts/15/images/disableddeletefilterglyph.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "DisabledDeleteFilterGlyph"
+            }]
+        }, {
+            "url": "/_layouts/15/images/deletefilterglyph.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "DeleteFilterGlyph"
+            }]
+        }, {
+            "url": "/_layouts/15/images/mtgicnhd.gif",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "mtgicnhd"
+            }]
+        }, {
+            "url": "/_layouts/15/images/mtgicon.gif",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "mtgicon"
+            }]
+        }, {
+            "url": "/_layouts/15/images/o365brandsuite.png",
+            "operations": [{
+                "themeColor": "SuiteBarText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "O365BrandSuite"
+            }]
+        }, {
+            "url": "/_layouts/15/images/siteicon.png",
+            "operations": [{
+                "themeColor": "EmphasisBackground",
+                "method": "Tinting",
+                "detach": true,
+                "hashOverride": "siteicon"
+            }]
+        }, {
+            "url": "/_layouts/15/images/fgimg.png",
+            "operations": [{
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 629,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 187,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 433,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 449,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 126,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 142,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 427,
+                    "width": 5,
+                    "height": 3
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "fgimg",
+                "includeRectangle": {
+                    "x": 0,
+                    "y": 430,
+                    "width": 5,
+                    "height": 3
+                }
+            }]
+        }, {
+            "url": "/_layouts/15/images/searchresultui.png",
+            "operations": [{
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 35,
+                    "y": 57,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 53,
+                    "y": 1,
+                    "width": 32,
+                    "height": 32
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 69,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 35,
+                    "width": 32,
+                    "height": 32
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 35,
+                    "y": 35,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 1,
+                    "width": 24,
+                    "height": 32
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 57,
+                    "y": 35,
+                    "width": 20,
+                    "height": 20
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 27,
+                    "y": 1,
+                    "width": 24,
+                    "height": 32
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 105,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 75,
+                    "y": 75,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyph",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 57,
+                    "y": 75,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "ButtonGlyphActive",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 79,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "Hyperlink",
+                "method": "Filling",
+                "hashOverride": "searchresultui",
+                "includeRectangle": {
+                    "x": 87,
+                    "y": 19,
+                    "width": 16,
+                    "height": 16
+                }
+            }]
+        }, {
+            "url": "/_layouts/15/images/spnav.png",
+            "operations": [{
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 55,
+                    "y": 37,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 55,
+                    "y": 19,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationHoverText",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 19,
+                    "y": 37,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationPressedText",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 19,
+                    "y": 19,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinks",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 55,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksHover",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 19,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "CommandLinksPressed",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 37,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationHoverText",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "HeaderNavigationPressedText",
+                "method": "Filling",
+                "hashOverride": "spnav",
+                "includeRectangle": {
+                    "x": 37,
+                    "y": 19,
+                    "width": 16,
+                    "height": 16
+                }
+            }]
+        }, {
+            "url": "/_layouts/15/1033/images/sortdownglyph.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "SortDownGlyph"
+            }]
+        }, {
+            "url": "/_layouts/15/1033/images/sortupglyph.png",
+            "operations": [{
+                "themeColor": "BodyText",
+                "method": "Filling",
+                "detach": true,
+                "hashOverride": "SortUpGlyph"
+            }]
+        }, {
+            "url": "/_layouts/15/1033/images/spintl.png",
+            "operations": [{
+                "themeColor": "TopBarText",
+                "method": "Filling",
+                "hashOverride": "spintl",
+                "includeRectangle": {
+                    "x": 19,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }, {
+                "themeColor": "TopBarHoverText",
+                "method": "Filling",
+                "hashOverride": "spintl",
+                "includeRectangle": {
+                    "x": 1,
+                    "y": 1,
+                    "width": 16,
+                    "height": 16
+                }
+            }]
+        }];
+
         return new Theming.ThemeInfo({
             Palette: {
                 Colors: tealPalette
-            }
+            },
+            ForegroundImageRules: arrForegroundImageThemingRules
         });
     }
     var _strThemeOverride = "ThemeOverride";

@@ -1,6 +1,196 @@
 // JScript File
 
 
+Type.registerNamespace('SP.ComplianceFoundation');
+
+SP.ComplianceFoundation.ComplianceRetentionWorkItemSubmitter = function SP_ComplianceFoundation_ComplianceRetentionWorkItemSubmitter(context, objectPath) {
+    SP.ComplianceFoundation.ComplianceRetentionWorkItemSubmitter.initializeBase(this, [ context, objectPath ]);
+}
+
+
+SP.ComplianceFoundation.PreserveDocumentSubmitter = function SP_ComplianceFoundation_PreserveDocumentSubmitter(context, objectPath) {
+    SP.ComplianceFoundation.PreserveDocumentSubmitter.initializeBase(this, [ context, objectPath ]);
+}
+
+
+Type.registerNamespace('SP.ComplianceFoundation.Models');
+
+SP.ComplianceFoundation.Models.ComplianceTagInfo = function SP_ComplianceFoundation_Models_ComplianceTagInfo() {
+    SP.ComplianceFoundation.Models.ComplianceTagInfo.initializeBase(this);
+}
+SP.ComplianceFoundation.Models.ComplianceTagInfo.prototype = {
+    $5_1: false,
+    $6_1: false,
+    $7_1: false,
+    $0_1: null,
+    $8_1: null,
+    $9_1: null,
+    
+    get_isRecord: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_isRecord() {
+        return this.$5_1;
+    },
+    
+    set_isRecord: function SP_ComplianceFoundation_Models_ComplianceTagInfo$set_isRecord(value) {
+        this.$5_1 = value;
+        return value;
+    },
+    
+    get_isRegulatory: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_isRegulatory() {
+        return this.$6_1;
+    },
+    
+    set_isRegulatory: function SP_ComplianceFoundation_Models_ComplianceTagInfo$set_isRegulatory(value) {
+        this.$6_1 = value;
+        return value;
+    },
+    
+    get_shouldKeep: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_shouldKeep() {
+        return this.$7_1;
+    },
+    
+    set_shouldKeep: function SP_ComplianceFoundation_Models_ComplianceTagInfo$set_shouldKeep(value) {
+        this.$7_1 = value;
+        return value;
+    },
+    
+    get_tagName: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_tagName() {
+        return this.$0_1;
+    },
+    
+    set_tagName: function SP_ComplianceFoundation_Models_ComplianceTagInfo$set_tagName(value) {
+        this.$0_1 = value;
+        return value;
+    },
+    
+    get_unifiedRuleId: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_unifiedRuleId() {
+        return this.$8_1;
+    },
+    
+    set_unifiedRuleId: function SP_ComplianceFoundation_Models_ComplianceTagInfo$set_unifiedRuleId(value) {
+        this.$8_1 = value;
+        return value;
+    },
+    
+    get_unifiedTagId: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_unifiedTagId() {
+        return this.$9_1;
+    },
+    
+    set_unifiedTagId: function SP_ComplianceFoundation_Models_ComplianceTagInfo$set_unifiedTagId(value) {
+        this.$9_1 = value;
+        return value;
+    },
+    
+    get_typeId: function SP_ComplianceFoundation_Models_ComplianceTagInfo$get_typeId() {
+        return '{8d8e2313-34cf-48f7-9e0d-bd2d6eb9b362}';
+    },
+    
+    writeToXml: function SP_ComplianceFoundation_Models_ComplianceTagInfo$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        var $v_0 = [ 'IsRecord', 'IsRegulatory', 'ShouldKeep', 'TagName', 'UnifiedRuleId', 'UnifiedTagId' ];
+        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
+        SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
+    },
+    
+    initPropertiesFromJson: function SP_ComplianceFoundation_Models_ComplianceTagInfo$initPropertiesFromJson(parentNode) {
+        SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.IsRecord;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$5_1 = ($v_0);
+            delete parentNode.IsRecord;
+        }
+        $v_0 = parentNode.IsRegulatory;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$6_1 = ($v_0);
+            delete parentNode.IsRegulatory;
+        }
+        $v_0 = parentNode.ShouldKeep;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$7_1 = ($v_0);
+            delete parentNode.ShouldKeep;
+        }
+        $v_0 = parentNode.TagName;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$0_1 = ($v_0);
+            delete parentNode.TagName;
+        }
+        $v_0 = parentNode.UnifiedRuleId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$8_1 = ($v_0);
+            delete parentNode.UnifiedRuleId;
+        }
+        $v_0 = parentNode.UnifiedTagId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$9_1 = ($v_0);
+            delete parentNode.UnifiedTagId;
+        }
+    }
+}
+
+
+SP.ComplianceFoundation.Models.PreservedCloudAttachment = function SP_ComplianceFoundation_Models_PreservedCloudAttachment() {
+    SP.ComplianceFoundation.Models.PreservedCloudAttachment.initializeBase(this);
+}
+SP.ComplianceFoundation.Models.PreservedCloudAttachment.prototype = {
+    $2_1: null,
+    $A_1: null,
+    
+    get_compositeDocumentId: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$get_compositeDocumentId() {
+        return this.$2_1;
+    },
+    
+    set_compositeDocumentId: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$set_compositeDocumentId(value) {
+        this.$2_1 = value;
+        return value;
+    },
+    
+    get_url: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$get_url() {
+        return this.$A_1;
+    },
+    
+    set_url: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$set_url(value) {
+        this.$A_1 = value;
+        return value;
+    },
+    
+    get_typeId: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$get_typeId() {
+        return '{b09f8aa7-a2cd-4b60-a6ad-70465a20fd23}';
+    },
+    
+    writeToXml: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        var $v_0 = [ 'CompositeDocumentId', 'Url' ];
+        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
+        SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
+    },
+    
+    initPropertiesFromJson: function SP_ComplianceFoundation_Models_PreservedCloudAttachment$initPropertiesFromJson(parentNode) {
+        SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.CompositeDocumentId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$2_1 = ($v_0);
+            delete parentNode.CompositeDocumentId;
+        }
+        $v_0 = parentNode.Url;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$A_1 = ($v_0);
+            delete parentNode.Url;
+        }
+    }
+}
+
+
 Type.registerNamespace('SP.CompliancePolicy');
 
 SP.CompliancePolicy.DlpAccessScope = function() {}
@@ -69,105 +259,115 @@ SP.CompliancePolicy.ComplianceTag = function SP_CompliancePolicy_ComplianceTag()
     SP.CompliancePolicy.ComplianceTag.initializeBase(this);
 }
 SP.CompliancePolicy.ComplianceTag.prototype = {
-    $3_1: false,
-    $4_1: null,
-    $5_1: null,
-    $6_1: false,
-    $7_1: false,
-    $8_1: false,
-    $9_1: false,
-    $A_1: null,
-    $B_1: null,
-    $C_1: false,
-    $D_1: false,
-    $G_1: null,
-    $I_1: false,
+    $B_1: false,
+    $C_1: null,
+    $D_1: null,
+    $E_1: false,
+    $F_1: false,
+    $G_1: false,
+    $H_1: false,
+    $I_1: null,
     $J_1: null,
-    $K_1: null,
+    $K_1: false,
     $L_1: false,
-    $M_1: 0,
-    $N_1: null,
     $O_1: null,
     $P_1: null,
+    $R_1: false,
+    $S_1: null,
+    $T_1: null,
+    $U_1: false,
+    $V_1: 0,
+    $W_1: null,
+    $0_1: null,
+    $X_1: null,
+    $Y_1: false,
     
     get_acceptMessagesOnlyFromSendersOrMembers: function SP_CompliancePolicy_ComplianceTag$get_acceptMessagesOnlyFromSendersOrMembers() {
-        return this.$3_1;
-    },
-    
-    get_accessType: function SP_CompliancePolicy_ComplianceTag$get_accessType() {
-        return this.$4_1;
-    },
-    
-    get_allowAccessFromUnmanagedDevice: function SP_CompliancePolicy_ComplianceTag$get_allowAccessFromUnmanagedDevice() {
-        return this.$5_1;
-    },
-    
-    get_autoDelete: function SP_CompliancePolicy_ComplianceTag$get_autoDelete() {
-        return this.$6_1;
-    },
-    
-    get_blockDelete: function SP_CompliancePolicy_ComplianceTag$get_blockDelete() {
-        return this.$7_1;
-    },
-    
-    get_blockEdit: function SP_CompliancePolicy_ComplianceTag$get_blockEdit() {
-        return this.$8_1;
-    },
-    
-    get_containsSiteLabel: function SP_CompliancePolicy_ComplianceTag$get_containsSiteLabel() {
-        return this.$9_1;
-    },
-    
-    get_displayName: function SP_CompliancePolicy_ComplianceTag$get_displayName() {
-        return this.$A_1;
-    },
-    
-    get_encryptionRMSTemplateId: function SP_CompliancePolicy_ComplianceTag$get_encryptionRMSTemplateId() {
         return this.$B_1;
     },
     
-    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
+    get_accessType: function SP_CompliancePolicy_ComplianceTag$get_accessType() {
         return this.$C_1;
     },
     
-    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
+    get_allowAccessFromUnmanagedDevice: function SP_CompliancePolicy_ComplianceTag$get_allowAccessFromUnmanagedDevice() {
         return this.$D_1;
     },
     
-    get_notes: function SP_CompliancePolicy_ComplianceTag$get_notes() {
+    get_autoDelete: function SP_CompliancePolicy_ComplianceTag$get_autoDelete() {
+        return this.$E_1;
+    },
+    
+    get_blockDelete: function SP_CompliancePolicy_ComplianceTag$get_blockDelete() {
+        return this.$F_1;
+    },
+    
+    get_blockEdit: function SP_CompliancePolicy_ComplianceTag$get_blockEdit() {
         return this.$G_1;
     },
     
-    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
+    get_containsSiteLabel: function SP_CompliancePolicy_ComplianceTag$get_containsSiteLabel() {
+        return this.$H_1;
+    },
+    
+    get_displayName: function SP_CompliancePolicy_ComplianceTag$get_displayName() {
         return this.$I_1;
     },
     
-    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
+    get_encryptionRMSTemplateId: function SP_CompliancePolicy_ComplianceTag$get_encryptionRMSTemplateId() {
         return this.$J_1;
     },
     
-    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
+    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
         return this.$K_1;
     },
     
-    get_superLock: function SP_CompliancePolicy_ComplianceTag$get_superLock() {
+    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
         return this.$L_1;
     },
     
-    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
-        return this.$M_1;
-    },
-    
-    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
-        return this.$N_1;
-    },
-    
-    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+    get_multiStageReviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_multiStageReviewerEmail() {
         return this.$O_1;
     },
     
-    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+    get_notes: function SP_CompliancePolicy_ComplianceTag$get_notes() {
         return this.$P_1;
+    },
+    
+    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
+        return this.$R_1;
+    },
+    
+    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
+        return this.$S_1;
+    },
+    
+    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
+        return this.$T_1;
+    },
+    
+    get_superLock: function SP_CompliancePolicy_ComplianceTag$get_superLock() {
+        return this.$U_1;
+    },
+    
+    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+        return this.$V_1;
+    },
+    
+    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+        return this.$W_1;
+    },
+    
+    get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
+        return this.$0_1;
+    },
+    
+    get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
+        return this.$X_1;
+    },
+    
+    get_unlockedAsDefault: function SP_CompliancePolicy_ComplianceTag$get_unlockedAsDefault() {
+        return this.$Y_1;
     },
     
     get_typeId: function SP_CompliancePolicy_ComplianceTag$get_typeId() {
@@ -181,7 +381,7 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'SuperLock', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn' ];
+        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'MultiStageReviewerEmail', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'SuperLock', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn', 'UnlockedAsDefault' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -191,103 +391,113 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         var $v_0;
         $v_0 = parentNode.AcceptMessagesOnlyFromSendersOrMembers;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$3_1 = ($v_0);
+            this.$B_1 = ($v_0);
             delete parentNode.AcceptMessagesOnlyFromSendersOrMembers;
         }
         $v_0 = parentNode.AccessType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$4_1 = ($v_0);
+            this.$C_1 = ($v_0);
             delete parentNode.AccessType;
         }
         $v_0 = parentNode.AllowAccessFromUnmanagedDevice;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$5_1 = ($v_0);
+            this.$D_1 = ($v_0);
             delete parentNode.AllowAccessFromUnmanagedDevice;
         }
         $v_0 = parentNode.AutoDelete;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$6_1 = ($v_0);
+            this.$E_1 = ($v_0);
             delete parentNode.AutoDelete;
         }
         $v_0 = parentNode.BlockDelete;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$7_1 = ($v_0);
+            this.$F_1 = ($v_0);
             delete parentNode.BlockDelete;
         }
         $v_0 = parentNode.BlockEdit;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$8_1 = ($v_0);
+            this.$G_1 = ($v_0);
             delete parentNode.BlockEdit;
         }
         $v_0 = parentNode.ContainsSiteLabel;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9_1 = ($v_0);
+            this.$H_1 = ($v_0);
             delete parentNode.ContainsSiteLabel;
         }
         $v_0 = parentNode.DisplayName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A_1 = ($v_0);
+            this.$I_1 = ($v_0);
             delete parentNode.DisplayName;
         }
         $v_0 = parentNode.EncryptionRMSTemplateId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$B_1 = ($v_0);
+            this.$J_1 = ($v_0);
             delete parentNode.EncryptionRMSTemplateId;
         }
         $v_0 = parentNode.HasRetentionAction;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$C_1 = ($v_0);
+            this.$K_1 = ($v_0);
             delete parentNode.HasRetentionAction;
         }
         $v_0 = parentNode.IsEventTag;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$D_1 = ($v_0);
+            this.$L_1 = ($v_0);
             delete parentNode.IsEventTag;
+        }
+        $v_0 = parentNode.MultiStageReviewerEmail;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$O_1 = ($v_0);
+            delete parentNode.MultiStageReviewerEmail;
         }
         $v_0 = parentNode.Notes;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$G_1 = ($v_0);
+            this.$P_1 = ($v_0);
             delete parentNode.Notes;
         }
         $v_0 = parentNode.RequireSenderAuthenticationEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$I_1 = ($v_0);
+            this.$R_1 = ($v_0);
             delete parentNode.RequireSenderAuthenticationEnabled;
         }
         $v_0 = parentNode.ReviewerEmail;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$J_1 = ($v_0);
+            this.$S_1 = ($v_0);
             delete parentNode.ReviewerEmail;
         }
         $v_0 = parentNode.SharingCapabilities;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$K_1 = ($v_0);
+            this.$T_1 = ($v_0);
             delete parentNode.SharingCapabilities;
         }
         $v_0 = parentNode.SuperLock;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$L_1 = ($v_0);
+            this.$U_1 = ($v_0);
             delete parentNode.SuperLock;
         }
         $v_0 = parentNode.TagDuration;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$M_1 = ($v_0);
+            this.$V_1 = ($v_0);
             delete parentNode.TagDuration;
         }
         $v_0 = parentNode.TagId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$N_1 = ($v_0);
+            this.$W_1 = ($v_0);
             delete parentNode.TagId;
         }
         $v_0 = parentNode.TagName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$O_1 = ($v_0);
+            this.$0_1 = ($v_0);
             delete parentNode.TagName;
         }
         $v_0 = parentNode.TagRetentionBasedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$P_1 = ($v_0);
+            this.$X_1 = ($v_0);
             delete parentNode.TagRetentionBasedOn;
+        }
+        $v_0 = parentNode.UnlockedAsDefault;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$Y_1 = ($v_0);
+            delete parentNode.UnlockedAsDefault;
         }
     }
 }
@@ -297,34 +507,34 @@ SP.CompliancePolicy.DlpClassificationResult = function SP_CompliancePolicy_DlpCl
     SP.CompliancePolicy.DlpClassificationResult.initializeBase(this);
 }
 SP.CompliancePolicy.DlpClassificationResult.prototype = {
-    $0_1: null,
-    $1_1: 0,
-    $2_1: 0,
+    $1_1: null,
+    $3_1: 0,
+    $4_1: 0,
     
     get_classificationId: function SP_CompliancePolicy_DlpClassificationResult$get_classificationId() {
-        return this.$0_1;
-    },
-    
-    set_classificationId: function SP_CompliancePolicy_DlpClassificationResult$set_classificationId(value) {
-        this.$0_1 = value;
-        return value;
-    },
-    
-    get_confidence: function SP_CompliancePolicy_DlpClassificationResult$get_confidence() {
         return this.$1_1;
     },
     
-    set_confidence: function SP_CompliancePolicy_DlpClassificationResult$set_confidence(value) {
+    set_classificationId: function SP_CompliancePolicy_DlpClassificationResult$set_classificationId(value) {
         this.$1_1 = value;
         return value;
     },
     
+    get_confidence: function SP_CompliancePolicy_DlpClassificationResult$get_confidence() {
+        return this.$3_1;
+    },
+    
+    set_confidence: function SP_CompliancePolicy_DlpClassificationResult$set_confidence(value) {
+        this.$3_1 = value;
+        return value;
+    },
+    
     get_count: function SP_CompliancePolicy_DlpClassificationResult$get_count() {
-        return this.$2_1;
+        return this.$4_1;
     },
     
     set_count: function SP_CompliancePolicy_DlpClassificationResult$set_count(value) {
-        this.$2_1 = value;
+        this.$4_1 = value;
         return value;
     },
     
@@ -349,17 +559,17 @@ SP.CompliancePolicy.DlpClassificationResult.prototype = {
         var $v_0;
         $v_0 = parentNode.ClassificationId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$0_1 = ($v_0);
+            this.$1_1 = ($v_0);
             delete parentNode.ClassificationId;
         }
         $v_0 = parentNode.Confidence;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1_1 = ($v_0);
+            this.$3_1 = ($v_0);
             delete parentNode.Confidence;
         }
         $v_0 = parentNode.Count;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$2_1 = ($v_0);
+            this.$4_1 = ($v_0);
             delete parentNode.Count;
         }
     }
@@ -370,20 +580,20 @@ SP.CompliancePolicy.PendingReviewItemsStatistics = function SP_CompliancePolicy_
     SP.CompliancePolicy.PendingReviewItemsStatistics.initializeBase(this);
 }
 SP.CompliancePolicy.PendingReviewItemsStatistics.prototype = {
-    $E_1: null,
-    $F_1: null,
-    $H_1: 0,
+    $M_1: null,
+    $N_1: null,
+    $Q_1: 0,
     
     get_labelId: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_labelId() {
-        return this.$E_1;
+        return this.$M_1;
     },
     
     get_labelName: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_labelName() {
-        return this.$F_1;
+        return this.$N_1;
     },
     
     get_pendingReviewItemsCount: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_pendingReviewItemsCount() {
-        return this.$H_1;
+        return this.$Q_1;
     },
     
     get_typeId: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_typeId() {
@@ -407,17 +617,17 @@ SP.CompliancePolicy.PendingReviewItemsStatistics.prototype = {
         var $v_0;
         $v_0 = parentNode.LabelId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$E_1 = ($v_0);
+            this.$M_1 = ($v_0);
             delete parentNode.LabelId;
         }
         $v_0 = parentNode.LabelName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$F_1 = ($v_0);
+            this.$N_1 = ($v_0);
             delete parentNode.LabelName;
         }
         $v_0 = parentNode.PendingReviewItemsCount;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$H_1 = ($v_0);
+            this.$Q_1 = ($v_0);
             delete parentNode.PendingReviewItemsCount;
         }
     }
@@ -2359,6 +2569,42 @@ SP.CompliancePolicy.SPPolicyStoreProxy.setHoldGracePeriodInDays = function SP_Co
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetHoldGracePeriodInDays', [ gracePeriodInDays ]);
     context.addQuery($v_0);
 }
+SP.CompliancePolicy.SPPolicyStoreProxy.getAdvancedRecordVersioningDisabled = function SP_CompliancePolicy_SPPolicyStoreProxy$getAdvancedRecordVersioningDisabled(context) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetAdvancedRecordVersioningDisabled', null);
+    context.addQuery($v_1);
+    $v_0 = new SP.BooleanResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setAdvancedRecordVersioningDisabled = function SP_CompliancePolicy_SPPolicyStoreProxy$setAdvancedRecordVersioningDisabled(context, disabled) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetAdvancedRecordVersioningDisabled', [ disabled ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.getExpandFileVersionsInPHLEnabled = function SP_CompliancePolicy_SPPolicyStoreProxy$getExpandFileVersionsInPHLEnabled(context) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'GetExpandFileVersionsInPHLEnabled', null);
+    context.addQuery($v_1);
+    $v_0 = new SP.BooleanResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.setExpandFileVersionsInPHLEnabled = function SP_CompliancePolicy_SPPolicyStoreProxy$setExpandFileVersionsInPHLEnabled(context, enabled) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'SetExpandFileVersionsInPHLEnabled', [ enabled ]);
+    context.addQuery($v_0);
+}
 SP.CompliancePolicy.SPPolicyStoreProxy.getSiteCompliancePolicyProperty = function SP_CompliancePolicy_SPPolicyStoreProxy$getSiteCompliancePolicyProperty(context, siteUrl, siteId, propertyName) {
     if ((!context)) {
         throw Error.argumentNull('context');
@@ -2382,6 +2628,13 @@ SP.CompliancePolicy.SPPolicyStoreProxy.registerSiteHoldEventReceiver = function 
         throw Error.argumentNull('context');
     }
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'RegisterSiteHoldEventReceiver', [ siteUrl, siteId ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.registerSiteItemDeleteEventReceiver = function SP_CompliancePolicy_SPPolicyStoreProxy$registerSiteItemDeleteEventReceiver(context, siteUrl, siteId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'RegisterSiteItemDeleteEventReceiver', [ siteUrl, siteId ]);
     context.addQuery($v_0);
 }
 SP.CompliancePolicy.SPPolicyStoreProxy.unRegisterHoldEventReceiver = function SP_CompliancePolicy_SPPolicyStoreProxy$unRegisterHoldEventReceiver(context, siteUrl, siteId) {
@@ -2422,6 +2675,35 @@ SP.CompliancePolicy.SPPolicyStoreProxy.registerSiteSubscriptionEventReceiver = f
     }
     var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'RegisterSiteSubscriptionEventReceiver', [ tenantId ]);
     context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.registerSiteSubscriptionItemDeleteEventReceiver = function SP_CompliancePolicy_SPPolicyStoreProxy$registerSiteSubscriptionItemDeleteEventReceiver(context, tenantId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'RegisterSiteSubscriptionItemDeleteEventReceiver', [ tenantId ]);
+    context.addQuery($v_0);
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.findAlternativeScope = function SP_CompliancePolicy_SPPolicyStoreProxy$findAlternativeScope(context, tenantId, scope) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'FindAlternativeScope', [ tenantId, scope ]);
+    context.addQuery($v_1);
+    $v_0 = new SP.StringResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
+}
+SP.CompliancePolicy.SPPolicyStoreProxy.findPolicyScopeById = function SP_CompliancePolicy_SPPolicyStoreProxy$findPolicyScopeById(context, tenantId, scopeId) {
+    if ((!context)) {
+        throw Error.argumentNull('context');
+    }
+    var $v_0;
+    var $v_1 = new SP.ClientActionInvokeStaticMethod(context, '{9efa17eb-0d34-4f69-a085-5cc3f802439e}', 'FindPolicyScopeById', [ tenantId, scopeId ]);
+    context.addQuery($v_1);
+    $v_0 = new SP.StringResult();
+    context.addQueryIdAndResultObject($v_1.get_id(), $v_0);
+    return $v_0;
 }
 SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     
@@ -2492,6 +2774,16 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
         var $v_0 = this.get_context();
         var $v_1;
         var $v_2 = new SP.ClientActionInvokeMethod(this, 'RetagReviewItemsWithMetas', [ itemIds, newTagName, newTagMetas ]);
+        $v_0.addQuery($v_2);
+        $v_1 = (([]));
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    
+    retagUnifiedReviewItemsWithMetas: function SP_CompliancePolicy_SPPolicyStoreProxy$retagUnifiedReviewItemsWithMetas(itemIds, originalTagName, newTagName, newTagMetas) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'RetagUnifiedReviewItemsWithMetas', [ itemIds, originalTagName, newTagName, newTagMetas ]);
         $v_0.addQuery($v_2);
         $v_1 = (([]));
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
@@ -3082,6 +3374,10 @@ SP.RecordsRepository.Records.isRecord = function SP_RecordsRepository_Records$is
 }
 
 
+SP.ComplianceFoundation.ComplianceRetentionWorkItemSubmitter.registerClass('SP.ComplianceFoundation.ComplianceRetentionWorkItemSubmitter', SP.ClientObject);
+SP.ComplianceFoundation.PreserveDocumentSubmitter.registerClass('SP.ComplianceFoundation.PreserveDocumentSubmitter', SP.ClientObject);
+SP.ComplianceFoundation.Models.ComplianceTagInfo.registerClass('SP.ComplianceFoundation.Models.ComplianceTagInfo', SP.ClientValueObject);
+SP.ComplianceFoundation.Models.PreservedCloudAttachment.registerClass('SP.ComplianceFoundation.Models.PreservedCloudAttachment', SP.ClientValueObject);
 SP.CompliancePolicy.ComplianceTag.registerClass('SP.CompliancePolicy.ComplianceTag', SP.ClientValueObject);
 SP.CompliancePolicy.DlpClassificationResult.registerClass('SP.CompliancePolicy.DlpClassificationResult', SP.ClientValueObject);
 SP.CompliancePolicy.PendingReviewItemsStatistics.registerClass('SP.CompliancePolicy.PendingReviewItemsStatistics', SP.ClientValueObject);

@@ -87,7 +87,7 @@ Srch.ClientControl.toggleMessageDetails = function Srch_ClientControl$toggleMess
     }
     return false;
 }
-Srch.ClientControl.$3V = function Srch_ClientControl$$3V($p0) {
+Srch.ClientControl.$3X = function Srch_ClientControl$$3X($p0) {
     return $p0.showForViewerUsers;
 }
 Srch.ClientControl.prototype = {
@@ -99,11 +99,11 @@ Srch.ClientControl.prototype = {
     loaded: false,
     
     get_nextUniqueId: function Srch_ClientControl$get_nextUniqueId() {
-        this.$3X_2++;
-        return this.get_id() + this.$3X_2;
+        this.$3Z_2++;
+        return this.get_id() + this.$3Z_2;
     },
     
-    $3X_2: 0,
+    $3Z_2: 0,
     
     get_renderTemplateId: function Srch_ClientControl$get_renderTemplateId() {
         return this.$24_2;
@@ -164,15 +164,15 @@ Srch.ClientControl.prototype = {
     $1A_2: null,
     
     get_showDataErrors: function Srch_ClientControl$get_showDataErrors() {
-        return this.$32_2;
+        return this.$31_2;
     },
     
     set_showDataErrors: function Srch_ClientControl$set_showDataErrors(value) {
-        this.$32_2 = value;
+        this.$31_2 = value;
         return value;
     },
     
-    $32_2: false,
+    $31_2: false,
     
     get_alternateErrorMessage: function Srch_ClientControl$get_alternateErrorMessage() {
         return this.$t_2;
@@ -189,7 +189,7 @@ Srch.ClientControl.prototype = {
         return !this.loaded;
     },
     
-    $40_2: false,
+    $41_2: false,
     $2J_2: null,
     
     get_resultsPageAddress: function Srch_ClientControl$get_resultsPageAddress() {
@@ -217,7 +217,7 @@ Srch.ClientControl.prototype = {
             Srch.ClientControl.$q = true;
             Srch.U.getSearchCenterUrl(true);
         }
-        if (this.$40_2) {
+        if (this.$41_2) {
             this.$5V_2();
         }
         Sys.Component.prototype.initialize.call(this);
@@ -360,7 +360,7 @@ Srch.ClientControl.prototype = {
         }
         this.$1_2('LoadRenderTemplateScripts', 'Did not discover new render template script to load.');
         if (loadStandAloneCustomScripts) {
-            return this.$4S_2(success, failure, timeout);
+            return this.$4T_2(success, failure, timeout);
         }
         else {
             this.$1_2('LoadRenderTemplateScripts', 'Skip loading custom scripts.');
@@ -371,7 +371,7 @@ Srch.ClientControl.prototype = {
     $5y_2: function Srch_ClientControl$$5y_2($p0, $p1, $p2, $p3) {
         this.$1_2('RenderTemplateScriptsLoaded', 'All render template scripts loaded.');
         Srch.U.registerLoadedScripts($p0);
-        if (this.$4S_2($p1, $p2, $p3)) {
+        if (this.$4T_2($p1, $p2, $p3)) {
             return;
         }
         $p1();
@@ -379,11 +379,11 @@ Srch.ClientControl.prototype = {
     
     $5x_2: function Srch_ClientControl$$5x_2($p0, $p1) {
         this.$1_2('RenderTemplateScriptsFailed', 'Loading render template scripts faild.');
-        this.$4a_2($p0);
+        this.$4b_2($p0);
         $p1();
     },
     
-    $4S_2: function Srch_ClientControl$$4S_2($p0, $p1, $p2) {
+    $4T_2: function Srch_ClientControl$$4T_2($p0, $p1, $p2) {
         this.$1_2('LoadCustomScripts', 'Loading custom scripts...');
         if (!Srch.U.n(Srch.ScriptApplicationManager.get_current().$1Z_1)) {
             var $v_0 = [];
@@ -428,7 +428,7 @@ Srch.ClientControl.prototype = {
     
     $5H_2: function Srch_ClientControl$$5H_2($p0, $p1) {
         this.$1_2('CustomScriptsFailed', 'Loading custom scripts failed.');
-        var $v_0 = this.$4a_2($p0);
+        var $v_0 = this.$4b_2($p0);
         var $v_1 = String.format(SP.Utilities.HttpUtility.htmlEncode(Srch.Res.u_ScriptLoadFail), $v_0);
         var $v_2 = SP.Utilities.HttpUtility.htmlEncode(Srch.Res.u_ScriptLoadFailForViewer);
         var $v_3 = new Srch.ControlMessage(null, 2, 0, 'ResourceLoadException', $v_1, $v_2, null, null, false, true, false);
@@ -436,7 +436,7 @@ Srch.ClientControl.prototype = {
         $p1();
     },
     
-    $4a_2: function Srch_ClientControl$$4a_2($p0) {
+    $4b_2: function Srch_ClientControl$$4b_2($p0) {
         var $v_0 = '<ul>';
         if (!Srch.U.n($p0)) {
             for (var $v_1 = 0; $v_1 < $p0.length; $v_1++) {
@@ -504,14 +504,14 @@ Srch.ClientControl.prototype = {
     },
     
     updateDisplayControlWithNewMessages: function Srch_ClientControl$updateDisplayControlWithNewMessages() {
-        this.$49_2(true);
+        this.$4A_2(true);
     },
     
     displayControlMessages: function Srch_ClientControl$displayControlMessages() {
-        this.$49_2(false);
+        this.$4A_2(false);
     },
     
-    $49_2: function Srch_ClientControl$$49_2($p0) {
+    $4A_2: function Srch_ClientControl$$4A_2($p0) {
         var $v_0 = this.$5O_2(this.get_messages(), this.$c_2, this.$1L_2, Srch.U.$3O(), $p0);
         if (!Srch.U.w($v_0) || !$p0) {
             var $v_1 = this.$V_2.length > 0 || this.$Z_2.length > 0 || this.$c_2.length > 0;
@@ -602,10 +602,10 @@ Srch.ClientControl.prototype = {
     },
     
     $5k_2: function Srch_ClientControl$$5k_2($p0) {
-        return this.$3U_2($p0) || Srch.ClientControl.$3V($p0);
+        return this.$3W_2($p0) || Srch.ClientControl.$3X($p0);
     },
     
-    $3U_2: function Srch_ClientControl$$3U_2($p0) {
+    $3W_2: function Srch_ClientControl$$3W_2($p0) {
         return Srch.U.isPageInEditMode() || (!$p0.showInEditModeOnly && this.$62_2());
     },
     
@@ -618,7 +618,7 @@ Srch.ClientControl.prototype = {
     },
     
     $5j_2: function Srch_ClientControl$$5j_2($p0) {
-        return (Srch.ClientControl.$3V($p0) && !Srch.U.w($p0.messageDetailsForViewers)) || (this.$3U_2($p0) && !Srch.U.w($p0.messageDetails));
+        return (Srch.ClientControl.$3X($p0) && !Srch.U.w($p0.messageDetailsForViewers)) || (this.$3W_2($p0) && !Srch.U.w($p0.messageDetails));
     },
     
     $V_2: null,
@@ -672,10 +672,10 @@ Srch.ClientControl.prototype = {
         return $v_0;
     },
     
-    $37_2: null,
+    $36_2: null,
     
     $5O_2: function Srch_ClientControl$$5O_2($p0, $p1, $p2, $p3, $p4) {
-        this.$37_2 = {};
+        this.$36_2 = {};
         if (!$p4) {
             this.$V_2 = [];
             this.$Z_2 = [];
@@ -685,7 +685,7 @@ Srch.ClientControl.prototype = {
             this.$W_2 = '';
             this.$2m_2($p0, this.$V_2);
         }
-        if (this.$32_2) {
+        if (this.$31_2) {
             this.$2m_2($p1, this.$V_2);
         }
         var $v_0 = this.$2m_2($p2, this.$Z_2);
@@ -712,7 +712,7 @@ Srch.ClientControl.prototype = {
                 if (this.$1v_2 === 1) {
                     $v_4 = 'ms-status-yellow';
                 }
-                $v_1.append(String.format(Srch.ClientControl.$4X, SP.Utilities.HttpUtility.htmlEncode($v_2), SP.Utilities.HttpUtility.htmlEncode($v_3), $v_4));
+                $v_1.append(String.format(Srch.ClientControl.$4Y, SP.Utilities.HttpUtility.htmlEncode($v_2), SP.Utilities.HttpUtility.htmlEncode($v_3), $v_4));
                 this.$1o_2 = true;
                 this.$3K_2($v_1, this.$V_2);
                 if ($v_0) {
@@ -737,13 +737,13 @@ Srch.ClientControl.prototype = {
     $3K_2: function Srch_ClientControl$$3K_2($p0, $p1) {
         for (var $$arr_2 = $p1, $$len_3 = $$arr_2.length, $$idx_4 = 0; $$idx_4 < $$len_3; ++$$idx_4) {
             var $v_0 = $$arr_2[$$idx_4];
-            if (this.$3U_2($v_0) && !Srch.U.w($v_0.messageDetails)) {
+            if (this.$3W_2($v_0) && !Srch.U.w($v_0.messageDetails)) {
                 var $v_1 = ($v_0.encodeDetails) ? SP.Utilities.HttpUtility.htmlEncode($v_0.messageDetails) : $v_0.messageDetails;
-                this.$43_2($p0, String.format(Srch.ClientControl.$1w, $v_1));
+                this.$44_2($p0, String.format(Srch.ClientControl.$1w, $v_1));
             }
-            else if (Srch.ClientControl.$3V($v_0) && !Srch.U.w($v_0.messageDetailsForViewers)) {
+            else if (Srch.ClientControl.$3X($v_0) && !Srch.U.w($v_0.messageDetailsForViewers)) {
                 var $v_2 = ($v_0.encodeDetails) ? SP.Utilities.HttpUtility.htmlEncode($v_0.messageDetailsForViewers) : $v_0.messageDetailsForViewers;
-                this.$43_2($p0, String.format(Srch.ClientControl.$1w, $v_2));
+                this.$44_2($p0, String.format(Srch.ClientControl.$1w, $v_2));
             }
             this.$5N_2($p0, $v_0.correlationID);
         }
@@ -760,9 +760,9 @@ Srch.ClientControl.prototype = {
         }
     },
     
-    $43_2: function Srch_ClientControl$$43_2($p0, $p1) {
-        if (!this.$37_2[$p1]) {
-            this.$37_2[$p1] = true;
+    $44_2: function Srch_ClientControl$$44_2($p0, $p1) {
+        if (!this.$36_2[$p1]) {
+            this.$36_2[$p1] = true;
             this.$3J_2($p0);
             $p0.append($p1);
             return true;
@@ -804,7 +804,7 @@ Srch.DataProvider = function Srch_DataProvider(elem) {
     this.$$d_displayControl_QueryReady = Function.createDelegate(this, this.displayControl_QueryReady);
     this.$$d_$52_3 = Function.createDelegate(this, this.$52_3);
     this.$2E_3 = [];
-    this.$3g_3 = SP.Guid.get_empty();
+    this.$3i_3 = SP.Guid.get_empty();
     this.$2_3 = Srch.QueryState.$5R();
     this.$2e_3 = new Srch.QueryState();
     this.$1l_3 = -1;
@@ -812,7 +812,7 @@ Srch.DataProvider = function Srch_DataProvider(elem) {
     this.$2G_3 = -1;
     Srch.DataProvider.initializeBase(this, [ elem ]);
 }
-Srch.DataProvider.$4K = function Srch_DataProvider$$4K($p0, $p1) {
+Srch.DataProvider.$4L = function Srch_DataProvider$$4L($p0, $p1) {
     if (!Srch.U.n($p0) && !Srch.U.n($p0.queryStateUpdateOption) && $p0.queryStateUpdateOption !== -1) {
         return $p0.queryStateUpdateOption;
     }
@@ -822,15 +822,15 @@ Srch.DataProvider.prototype = {
     $26_3: false,
     $20_3: 0,
     $s_3: null,
-    $3T_3: false,
-    $3S_3: false,
+    $3V_3: false,
+    $3U_3: false,
     
     get_$25_3: function Srch_DataProvider$get_$25_3() {
-        return this.$3g_3.toString() + this.$5_3;
+        return this.$3i_3.toString() + this.$5_3;
     },
     
-    get_$4Y_3: function Srch_DataProvider$get_$4Y_3() {
-        this.$3g_3 = SP.Guid.newGuid();
+    get_$4Z_3: function Srch_DataProvider$get_$4Z_3() {
+        this.$3i_3 = SP.Guid.newGuid();
         return this.get_$25_3();
     },
     
@@ -1295,15 +1295,15 @@ Srch.DataProvider.prototype = {
     $2L_3: '',
     
     get_clientFunctionDetails: function Srch_DataProvider$get_clientFunctionDetails() {
-        return this.$3B_3;
+        return this.$3A_3;
     },
     
     set_clientFunctionDetails: function Srch_DataProvider$set_clientFunctionDetails(value) {
-        this.$3B_3 = value;
+        this.$3A_3 = value;
         return value;
     },
     
-    $3B_3: '',
+    $3A_3: '',
     
     get_maxPagesAfterCurrent: function Srch_DataProvider$get_maxPagesAfterCurrent() {
         return this.$Y_3;
@@ -1529,10 +1529,10 @@ Srch.DataProvider.prototype = {
                         if (Srch.Result.isInstanceOfType($v_3)) {
                             var $v_4 = $v_3;
                             if (Srch.U.e($v_4.$h_4)) {
-                                this.$3T_3 = true;
+                                this.$3V_3 = true;
                             }
                             if (Srch.U.e($v_4.$e_4)) {
-                                this.$3S_3 = true;
+                                this.$3U_3 = true;
                             }
                         }
                     }
@@ -1615,18 +1615,18 @@ Srch.DataProvider.prototype = {
         LogRUMExtendedAction('SearchDataProviderRaiseResultReady', this.$20_3, $v_0, new Date().getTime(), 0);
         this.$2u_3 = arg;
         if (!Srch.U.n(arg)) {
-            this.$4b_3(arg.result);
+            this.$4c_3(arg.result);
         }
         if (this.$5g_3()) {
             $v_1.stop();
             return;
         }
-        this.$4c_3(this.$2u_3);
+        this.$4d_3(this.$2u_3);
         $v_1.stop();
         LogRUMExtendedAction('SearchDataProviderDoneRaisingResultReady', this.$20_3, $v_0, new Date().getTime(), 0);
     },
     
-    $4c_3: function Srch_DataProvider$$4c_3($p0) {
+    $4d_3: function Srch_DataProvider$$4d_3($p0) {
         var $v_0 = this.get_events().getHandler(Srch.EventType.toString(4));
         if (!Srch.U.n($v_0)) {
             $v_0(this, $p0);
@@ -1660,10 +1660,10 @@ Srch.DataProvider.prototype = {
     $65_3: function Srch_DataProvider$$65_3() {
         this.$1_2('TemplateScriptsCallback', 'TemplateScriptsCallback');
         this.$2E_3 = [];
-        this.$4c_3(this.$2u_3);
+        this.$4d_3(this.$2u_3);
     },
     
-    $4b_3: function Srch_DataProvider$$4b_3($p0) {
+    $4c_3: function Srch_DataProvider$$4c_3($p0) {
         var $v_0 = new SP.CScope('DataProvider.ProcessResult');
         $v_0.start();
         this.$8_3 = 0;
@@ -1701,11 +1701,11 @@ Srch.DataProvider.prototype = {
                                 $v_1 += $v_5;
                             }
                         }
-                        if (this.$3S_3) {
+                        if (this.$3U_3) {
                             var $v_6 = Srch.U.getTableProperty($v_4, 'RenderTemplateId');
                             Srch.U.appendScriptsToLoad(this.$2E_3, $v_6);
                         }
-                        if (this.$3T_3) {
+                        if (this.$3V_3) {
                             var $v_7 = $v_4['ResultRows'];
                             if (!Srch.U.n($v_7) && $v_7.length > 0) {
                                 for (var $v_8 = 0; $v_8 < $v_7.length; $v_8++) {
@@ -1935,7 +1935,7 @@ Srch.DataProvider.prototype = {
             this.$Q_3 = $v_0.userAction;
             var $v_1 = $v_0.queryState;
             if (!Srch.U.n($v_1)) {
-                this.$38_3($v_1, Srch.DataProvider.$4K($v_0, 2));
+                this.$37_3($v_1, Srch.DataProvider.$4L($v_0, 2));
                 this.$3_2('DisplayControl_QueryReady', 'Query is \'{0}\'', this.$2_3.k);
                 this.issueQuery();
             }
@@ -1949,7 +1949,7 @@ Srch.DataProvider.prototype = {
             this.$Q_3 = $v_0.userAction;
             var $v_1 = $v_0.queryState;
             if (!Srch.U.n($v_1)) {
-                this.$38_3($v_1, Srch.DataProvider.$4K($v_0, 1));
+                this.$37_3($v_1, Srch.DataProvider.$4L($v_0, 1));
                 this.$3_2('SearchBox_QueryReady', 'Query is \'{0}\'', this.$2_3.k);
                 if (this.$u_3) {
                     this.$1_2('SearchBox_QueryReady', 'Batching mode');
@@ -1991,7 +1991,7 @@ Srch.DataProvider.prototype = {
             var $v_0 = e;
             if (!Srch.U.n($v_0)) {
                 this.$3_2('SearchBox_BatchResultReady', 'Passing batched event along for query group \'{0}\'', this.$5_3);
-                this.$4d_3($v_0.results);
+                this.$4e_3($v_0.results);
             }
         }
     },
@@ -2054,7 +2054,7 @@ Srch.DataProvider.prototype = {
             }
             if (!this.$2_3.equalsTo($v_0)) {
                 this.$1_2('Update', 'Change current state to navigate state');
-                this.$38_3($v_0, 0);
+                this.$37_3($v_0, 0);
                 this.issueQuery();
                 return;
             }
@@ -2074,7 +2074,7 @@ Srch.DataProvider.prototype = {
             this.$1_2('ProcessInitial', 'Already at initial state.');
             return;
         }
-        this.$38_3(this.get_initialQueryState(), 0);
+        this.$37_3(this.get_initialQueryState(), 0);
         var $v_0 = this.get_initialResultObject();
         if (!Srch.U.n($v_0)) {
             var $v_1 = new Srch.QueryEventArgs(this.$2_3);
@@ -2111,7 +2111,7 @@ Srch.DataProvider.prototype = {
         }
     },
     
-    $38_3: function Srch_DataProvider$$38_3($p0, $p1) {
+    $37_3: function Srch_DataProvider$$37_3($p0, $p1) {
         this.$2_3.copyFrom($p0, $p1);
         var $v_0 = new Srch.QueryEventArgs(this.$2_3);
         this.raiseQueryStateChangedEvent($v_0);
@@ -2141,7 +2141,7 @@ Srch.DataProvider.prototype = {
         this.$1_2('IssueQueryHelper', '*****Building query*****');
         Srch.U.fillKeywordQuery($v_3, this);
         Srch.U.appendArray($v_1, $v_3);
-        Srch.U.appendArray($v_2, this.get_$4Y_3());
+        Srch.U.appendArray($v_2, this.get_$4Z_3());
         $v_0.set_requestTimeout(600000);
         var $v_4 = Microsoft.SharePoint.Client.Search.Query.SearchExecutor.newObject($v_0);
         var $v_5 = new SP.ExceptionHandlingScope($v_0);
@@ -2185,7 +2185,7 @@ Srch.DataProvider.prototype = {
             else {
                 $$t_G.$1_2('IssueQueryHelper', '*****Success*****');
                 if (!Srch.U.n($v_9)) {
-                    $$t_G.$4d_3($v_9.get_value());
+                    $$t_G.$4e_3($v_9.get_value());
                 }
             }
         }, function($p1_0, $p1_1) {
@@ -2227,7 +2227,7 @@ Srch.DataProvider.prototype = {
         }
     },
     
-    $4d_3: function Srch_DataProvider$$4d_3($p0) {
+    $4e_3: function Srch_DataProvider$$4e_3($p0) {
         this.$3_2('RaiseResultReadyEventIfNeeded', 'Looking for result with request ID \'{0}\' for query group \'{1}\'', this.get_$25_3(), this.$5_3);
         if (!Srch.U.n($p0)) {
             var $v_0 = SP.Guid.get_empty().toString().length;
@@ -2401,10 +2401,10 @@ Srch.DisplayControl.prototype = {
     $3F_3: '',
     
     get_searchSkipped: function Srch_DisplayControl$get_searchSkipped() {
-        return this.$3j_3;
+        return this.$3l_3;
     },
     
-    $3j_3: false,
+    $3l_3: false,
     
     scriptApplication_PreLoad: function Srch_DisplayControl$scriptApplication_PreLoad(sender, e) {
         this.$1_2('ScriptApplication_PreLoad', 'DisplayControl');
@@ -2451,7 +2451,7 @@ Srch.DisplayControl.prototype = {
         if (!Srch.U.n($v_0)) {
             $v_0(this, arg);
         }
-        Srch.ScriptApplicationManager.get_current().$41_1();
+        Srch.ScriptApplicationManager.get_current().$42_1();
     },
     
     add_resultRendered: function Srch_DisplayControl$add_resultRendered(value) {
@@ -2523,7 +2523,7 @@ Srch.DisplayControl.prototype = {
     dataProvider_ResultReady: function Srch_DisplayControl$dataProvider_ResultReady(sender, e) {
         this.$1_2('DataProvider_ResultReady', '');
         var $v_0 = e;
-        this.$3j_3 = $v_0.searchSkipped;
+        this.$3l_3 = $v_0.searchSkipped;
         if (!Srch.U.n($v_0)) {
             this.processResultReady($v_0.result);
         }
@@ -2550,7 +2550,7 @@ Srch.DisplayControl.prototype = {
 
 Srch.Refinement = function Srch_Refinement(elem) {
     this.$$d_$56_4 = Function.createDelegate(this, this.$56_4);
-    this.$3Z_4 = {};
+    this.$3b_4 = {};
     Srch.Refinement.initializeBase(this, [ elem ]);
 }
 Srch.Refinement.$1q = function Srch_Refinement$$1q($p0, $p1) {
@@ -2582,10 +2582,10 @@ Srch.Refinement.submitMultiRefinement = function Srch_Refinement$submitMultiRefi
     var $v_0 = control;
     var $v_1;
     var $$t_7, $$t_8;
-    var $v_2 = (($$t_8 = Srch.Refinement.$4I(name, $v_0, useContains, ($$t_7 = {'val': $v_1}))), $v_1 = $$t_7.val, $$t_8);
+    var $v_2 = (($$t_8 = Srch.Refinement.$4J(name, $v_0, useContains, ($$t_7 = {'val': $v_1}))), $v_1 = $$t_7.val, $$t_8);
     $v_0.updateRefinementFilters(name, $v_2, 'OR', useKQL, $v_1);
 }
-Srch.Refinement.$4I = function Srch_Refinement$$4I($p0, $p1, $p2, $p3) {
+Srch.Refinement.$4J = function Srch_Refinement$$4J($p0, $p1, $p2, $p3) {
     Srch.U.ensureNotNullOrUndefined($p1, null, 'SubmitMultiRefinement', 'control');
     var $v_0 = document.getElementsByName($p0 + '_ChkGroup');
     var $v_1 = document.getElementsByName($p0 + '_txtGroup');
@@ -2704,15 +2704,15 @@ Srch.Refinement.prototype = {
     $2c_4: false,
     
     get_useManagedNavigationRefiners: function Srch_Refinement$get_useManagedNavigationRefiners() {
-        return this.$3w_4;
+        return this.$3x_4;
     },
     
     set_useManagedNavigationRefiners: function Srch_Refinement$set_useManagedNavigationRefiners(value) {
-        this.$3w_4 = value;
+        this.$3x_4 = value;
         return value;
     },
     
-    $3w_4: false,
+    $3x_4: false,
     
     get_emptyRefinementMessageId: function Srch_Refinement$get_emptyRefinementMessageId() {
         if (Srch.U.e(this.$1d_4)) {
@@ -2733,7 +2733,7 @@ Srch.Refinement.prototype = {
         $v_0.useKql = useKql;
         $v_0.useContains = useContains;
         $v_0.op = op;
-        this.$3Z_4[name] = $v_0;
+        this.$3b_4[name] = $v_0;
     },
     
     $56_4: function Srch_Refinement$$56_4($p0, $p1) {
@@ -2762,7 +2762,7 @@ Srch.Refinement.prototype = {
             for (var $v_0 = 0; $v_0 < this.$7_4.length; $v_0++) {
                 var $v_1 = this.$7_4[$v_0];
                 if (!Srch.U.n($v_1)) {
-                    var $v_2 = Srch.ValueInfo.ValueTypeHandler.$4C($v_1.propertyName);
+                    var $v_2 = Srch.ValueInfo.ValueTypeHandler.$4D($v_1.propertyName);
                     $v_2 = (Srch.U.w($v_2)) ? $v_1.renderTemplateId : $v_2;
                     if (this.$10_2 || ($v_2 !== $v_1.renderTemplateId)) {
                         Srch.U.appendScriptsToLoad(this.serverTemplateScriptsToLoad, $v_2);
@@ -3097,14 +3097,14 @@ Srch.Refinement.prototype = {
         if (!this.$2c_4 || this.get_dataProvider().$Q_3 === 3) {
             return;
         }
-        var $$dict_1 = this.$3Z_4;
+        var $$dict_1 = this.$3b_4;
         for (var $$key_2 in $$dict_1) {
             var $v_0 = { key: $$key_2, value: $$dict_1[$$key_2] };
             var $v_1 = $v_0.key;
             var $v_2 = $v_0.value;
             var $v_3;
             var $$t_9, $$t_A;
-            var $v_4 = (($$t_A = Srch.Refinement.$4I($v_1, this, $v_2.useContains, ($$t_9 = {'val': $v_3}))), $v_3 = $$t_9.val, $$t_A);
+            var $v_4 = (($$t_A = Srch.Refinement.$4J($v_1, this, $v_2.useContains, ($$t_9 = {'val': $v_3}))), $v_3 = $$t_9.val, $$t_A);
             var $v_5 = {};
             $v_5[$v_1] = $v_4;
             this.$53_4(this.get_dataProvider().$2_3, $v_5, $v_2.op, $v_2.useKql, $v_3);
@@ -3138,7 +3138,7 @@ Srch.Result = function Srch_Result(elem) {
 }
 Srch.Result.parsePropertyMappingWithSlotDisplayNames = function Srch_Result$parsePropertyMappingWithSlotDisplayNames(mappings) {
     if (!Srch.U.e(mappings)) {
-        return Srch.Result.$4Z(mappings);
+        return Srch.Result.$4a(mappings);
     }
     else {
         return {};
@@ -3148,13 +3148,13 @@ Srch.Result.parsePropertyMappingsString = function Srch_Result$parsePropertyMapp
     if (!Srch.U.e(mappings)) {
         var $v_0 = new RegExp('{[^}]+}', 'g');
         mappings = mappings.replace($v_0, '');
-        return Srch.Result.$4Z(mappings);
+        return Srch.Result.$4a(mappings);
     }
     else {
         return {};
     }
 }
-Srch.Result.$4Z = function Srch_Result$$4Z($p0) {
+Srch.Result.$4a = function Srch_Result$$4a($p0) {
     var $v_0 = {};
     if (!Srch.U.e($p0)) {
         var $v_1 = new RegExp('&quot;', 'g');
@@ -3279,92 +3279,125 @@ Srch.Result.prototype = {
     $y_4: 0,
     
     get_showSortOptions: function Srch_Result$get_showSortOptions() {
-        return this.$3q_4;
+        return this.$3s_4;
     },
     
     set_showSortOptions: function Srch_Result$set_showSortOptions(value) {
-        this.$3q_4 = value;
+        this.$3s_4 = value;
         return value;
     },
     
-    $3q_4: false,
+    $3s_4: false,
     
     get_showLanguageOptions: function Srch_Result$get_showLanguageOptions() {
-        return this.$3m_4;
+        return this.$3o_4;
     },
     
     set_showLanguageOptions: function Srch_Result$set_showLanguageOptions(value) {
-        this.$3m_4 = value;
+        this.$3o_4 = value;
         return value;
     },
     
-    $3m_4: true,
+    $3o_4: true,
     
     get_showXGeoOptions: function Srch_Result$get_showXGeoOptions() {
-        return this.$3t_4;
+        return this.$3v_4;
     },
     
     set_showXGeoOptions: function Srch_Result$set_showXGeoOptions(value) {
-        this.$3t_4 = value;
+        this.$3v_4 = value;
         return value;
     },
     
-    $3t_4: false,
+    $3v_4: false,
     
-    get_isXGeoFlighted: function Srch_Result$get_isXGeoFlighted() {
+    get_isContentSettingSelectionFlighted: function Srch_Result$get_isContentSettingSelectionFlighted() {
         return this.$3R_4;
     },
     
-    set_isXGeoFlighted: function Srch_Result$set_isXGeoFlighted(value) {
+    set_isContentSettingSelectionFlighted: function Srch_Result$set_isContentSettingSelectionFlighted(value) {
         this.$3R_4 = value;
         return value;
     },
     
     $3R_4: false,
     
+    get_contentSetting: function Srch_Result$get_contentSetting() {
+        return this.$3D_4;
+    },
+    
+    set_contentSetting: function Srch_Result$set_contentSetting(value) {
+        this.$3D_4 = value;
+        return value;
+    },
+    
+    $3D_4: 0,
+    
+    get_isXGeo3SForwardingFlighted: function Srch_Result$get_isXGeo3SForwardingFlighted() {
+        return this.$3S_4;
+    },
+    
+    set_isXGeo3SForwardingFlighted: function Srch_Result$set_isXGeo3SForwardingFlighted(value) {
+        this.$3S_4 = value;
+        return value;
+    },
+    
+    $3S_4: false,
+    
+    get_isXGeoFlighted: function Srch_Result$get_isXGeoFlighted() {
+        return this.$3T_4;
+    },
+    
+    set_isXGeoFlighted: function Srch_Result$set_isXGeoFlighted(value) {
+        this.$3T_4 = value;
+        return value;
+    },
+    
+    $3T_4: false,
+    
     get_searchCenterXGeoLocations: function Srch_Result$get_searchCenterXGeoLocations() {
-        return this.$3i_4;
+        return this.$3k_4;
     },
     
     set_searchCenterXGeoLocations: function Srch_Result$set_searchCenterXGeoLocations(value) {
-        this.$3i_4 = value;
+        this.$3k_4 = value;
         return value;
     },
     
-    $3i_4: '',
+    $3k_4: '',
     
     get_xGeoTenantsInfo: function Srch_Result$get_xGeoTenantsInfo() {
-        return this.$3z_4;
+        return this.$40_4;
     },
     
     set_xGeoTenantsInfo: function Srch_Result$set_xGeoTenantsInfo(value) {
-        this.$3z_4 = value;
+        this.$40_4 = value;
         return value;
     },
     
-    $3z_4: '',
+    $40_4: '',
     
     get_repositionLanguageDropDown: function Srch_Result$get_repositionLanguageDropDown() {
-        return this.$3f_4;
+        return this.$3h_4;
     },
     
     set_repositionLanguageDropDown: function Srch_Result$set_repositionLanguageDropDown(value) {
-        this.$3f_4 = value;
+        this.$3h_4 = value;
         return value;
     },
     
-    $3f_4: false,
+    $3h_4: false,
     
     get_showPaging: function Srch_Result$get_showPaging() {
-        return this.$3o_4;
+        return this.$3q_4;
     },
     
     set_showPaging: function Srch_Result$set_showPaging(value) {
-        this.$3o_4 = value;
+        this.$3q_4 = value;
         return value;
     },
     
-    $3o_4: true,
+    $3q_4: true,
     
     get_showResults: function Srch_Result$get_showResults() {
         return this.$2B_4;
@@ -3411,15 +3444,15 @@ Srch.Result.prototype = {
     $29_4: true,
     
     get_showDidYouMean: function Srch_Result$get_showDidYouMean() {
-        return this.$3l_4;
+        return this.$3n_4;
     },
     
     set_showDidYouMean: function Srch_Result$set_showDidYouMean(value) {
-        this.$3l_4 = value;
+        this.$3n_4 = value;
         return value;
     },
     
-    $3l_4: true,
+    $3n_4: true,
     
     get_showAdvancedLink: function Srch_Result$get_showAdvancedLink() {
         return this.$1O_4;
@@ -3444,37 +3477,37 @@ Srch.Result.prototype = {
     $1P_4: true,
     
     get_showResultCount: function Srch_Result$get_showResultCount() {
-        return this.$3p_4;
+        return this.$3r_4;
     },
     
     set_showResultCount: function Srch_Result$set_showResultCount(value) {
-        this.$3p_4 = value;
+        this.$3r_4 = value;
         return value;
     },
     
-    $3p_4: true,
+    $3r_4: true,
     
     get_showAlertMe: function Srch_Result$get_showAlertMe() {
-        return this.$3k_4;
+        return this.$3m_4;
     },
     
     set_showAlertMe: function Srch_Result$set_showAlertMe(value) {
-        this.$3k_4 = value;
+        this.$3m_4 = value;
         return value;
     },
     
-    $3k_4: true,
+    $3m_4: true,
     
     get_showViewDuplicates: function Srch_Result$get_showViewDuplicates() {
-        return this.$3s_4;
+        return this.$3u_4;
     },
     
     set_showViewDuplicates: function Srch_Result$set_showViewDuplicates(value) {
-        this.$3s_4 = value;
+        this.$3u_4 = value;
         return value;
     },
     
-    $3s_4: false,
+    $3u_4: false,
     
     get_pagingInfo: function Srch_Result$get_pagingInfo() {
         return this.$F_4;
@@ -3501,37 +3534,37 @@ Srch.Result.prototype = {
     $r_4: 'advanced.aspx',
     
     get_showUpScopeMessage: function Srch_Result$get_showUpScopeMessage() {
-        return this.$3r_4;
+        return this.$3t_4;
     },
     
     set_showUpScopeMessage: function Srch_Result$set_showUpScopeMessage(value) {
-        this.$3r_4 = value;
+        this.$3t_4 = value;
         return value;
     },
     
-    $3r_4: false,
+    $3t_4: false,
     
     get_scrollToTopOnRedraw: function Srch_Result$get_scrollToTopOnRedraw() {
-        return this.$2y_4;
+        return this.$2x_4;
     },
     
     set_scrollToTopOnRedraw: function Srch_Result$set_scrollToTopOnRedraw(value) {
-        this.$2y_4 = value;
+        this.$2x_4 = value;
         return value;
     },
     
-    $2y_4: false,
+    $2x_4: false,
     
     get_useSimplifiedQueryBuilder: function Srch_Result$get_useSimplifiedQueryBuilder() {
-        return this.$3x_4;
+        return this.$3y_4;
     },
     
     set_useSimplifiedQueryBuilder: function Srch_Result$set_useSimplifiedQueryBuilder(value) {
-        this.$3x_4 = value;
+        this.$3y_4 = value;
         return value;
     },
     
-    $3x_4: false,
+    $3y_4: false,
     
     get_preloadedItemTemplateIds: function Srch_Result$get_preloadedItemTemplateIds() {
         return this.$j_4;
@@ -3545,7 +3578,7 @@ Srch.Result.prototype = {
     $j_4: null,
     
     processResultReady: function Srch_Result$processResultReady(resultTableCollection) {
-        this.$4b_4(resultTableCollection);
+        this.$4c_4(resultTableCollection);
         Srch.DisplayControl.prototype.processResultReady.call(this, resultTableCollection);
     },
     
@@ -3592,7 +3625,7 @@ Srch.Result.prototype = {
                 return;
             }
             var $v_1 = new Srch.QueryState();
-            if ($v_0.$2_3.m === Srch.DataProvider.$3W || $v_0.$2_3.m === Srch.DataProvider.$1x) {
+            if ($v_0.$2_3.m === Srch.DataProvider.$3Y || $v_0.$2_3.m === Srch.DataProvider.$1x) {
                 $v_1.m = Srch.DataProvider.$1x;
             }
             else if ($v_0.$2_3.m === Srch.DataProvider.$3H || $v_0.$2_3.m === Srch.DataProvider.$1k) {
@@ -3634,13 +3667,13 @@ Srch.Result.prototype = {
                     $v_4.o = $v_3.sorts;
                     if ($p1) {
                         if ($v_0.$2_3.m === Srch.DataProvider.$1x) {
-                            $v_4.m = Srch.DataProvider.$3W;
+                            $v_4.m = Srch.DataProvider.$3Y;
                         }
                         else if ($v_0.$2_3.m === Srch.DataProvider.$1k) {
                             $v_4.m = Srch.DataProvider.$3H;
                         }
                         else if ($v_0.$2_3.m === Srch.DataProvider.$2f) {
-                            $v_4.m = Srch.DataProvider.$4W;
+                            $v_4.m = Srch.DataProvider.$4X;
                         }
                     }
                     $v_4.s = 1;
@@ -3724,7 +3757,7 @@ Srch.Result.prototype = {
         return false;
     },
     
-    $4b_4: function Srch_Result$$4b_4($p0) {
+    $4c_4: function Srch_Result$$4c_4($p0) {
         this.$F_4 = null;
         if (Srch.U.n($p0)) {
             return;
@@ -3866,37 +3899,37 @@ Srch.SearchBox.prototype = {
     $1O_3: false,
     
     get_showQuerySuggestions: function Srch_SearchBox$get_showQuerySuggestions() {
-        return this.$34_3;
-    },
-    
-    set_showQuerySuggestions: function Srch_SearchBox$set_showQuerySuggestions(value) {
-        this.$34_3 = value;
-        return value;
-    },
-    
-    $34_3: true,
-    
-    get_showNavigation: function Srch_SearchBox$get_showNavigation() {
-        return this.$3n_3 && !Srch.U.n(this.$1C_3) && this.$1C_3.length > 1;
-    },
-    
-    set_showNavigation: function Srch_SearchBox$set_showNavigation(value) {
-        this.$3n_3 = value;
-        return value;
-    },
-    
-    $3n_3: false,
-    
-    get_showPeopleNameSuggestions: function Srch_SearchBox$get_showPeopleNameSuggestions() {
         return this.$33_3;
     },
     
-    set_showPeopleNameSuggestions: function Srch_SearchBox$set_showPeopleNameSuggestions(value) {
+    set_showQuerySuggestions: function Srch_SearchBox$set_showQuerySuggestions(value) {
         this.$33_3 = value;
         return value;
     },
     
-    $33_3: false,
+    $33_3: true,
+    
+    get_showNavigation: function Srch_SearchBox$get_showNavigation() {
+        return this.$3p_3 && !Srch.U.n(this.$1C_3) && this.$1C_3.length > 1;
+    },
+    
+    set_showNavigation: function Srch_SearchBox$set_showNavigation(value) {
+        this.$3p_3 = value;
+        return value;
+    },
+    
+    $3p_3: false,
+    
+    get_showPeopleNameSuggestions: function Srch_SearchBox$get_showPeopleNameSuggestions() {
+        return this.$32_3;
+    },
+    
+    set_showPeopleNameSuggestions: function Srch_SearchBox$set_showPeopleNameSuggestions(value) {
+        this.$32_3 = value;
+        return value;
+    },
+    
+    $32_3: false,
     
     get_querySuggestionCompletionInterval: function Srch_SearchBox$get_querySuggestionCompletionInterval() {
         return this.$2q_3;
@@ -3965,26 +3998,26 @@ Srch.SearchBox.prototype = {
     $1P_3: false,
     
     get_serverInitialRender: function Srch_SearchBox$get_serverInitialRender() {
-        return this.$30_3;
+        return this.$2z_3;
     },
     
     set_serverInitialRender: function Srch_SearchBox$set_serverInitialRender(value) {
+        this.$2z_3 = value;
+        return value;
+    },
+    
+    $2z_3: false,
+    
+    get_setFocusOnPageLoad: function Srch_SearchBox$get_setFocusOnPageLoad() {
+        return this.$30_3;
+    },
+    
+    set_setFocusOnPageLoad: function Srch_SearchBox$set_setFocusOnPageLoad(value) {
         this.$30_3 = value;
         return value;
     },
     
     $30_3: false,
-    
-    get_setFocusOnPageLoad: function Srch_SearchBox$get_setFocusOnPageLoad() {
-        return this.$31_3;
-    },
-    
-    set_setFocusOnPageLoad: function Srch_SearchBox$set_setFocusOnPageLoad(value) {
-        this.$31_3 = value;
-        return value;
-    },
-    
-    $31_3: false,
     
     get_allowEmptySearch: function Srch_SearchBox$get_allowEmptySearch() {
         return this.$2K_3;
@@ -3998,15 +4031,15 @@ Srch.SearchBox.prototype = {
     $2K_3: false,
     
     get_updatePageTitle: function Srch_SearchBox$get_updatePageTitle() {
-        return this.$39_3;
+        return this.$38_3;
     },
     
     set_updatePageTitle: function Srch_SearchBox$set_updatePageTitle(value) {
-        this.$39_3 = value;
+        this.$38_3 = value;
         return value;
     },
     
-    $39_3: true,
+    $38_3: true,
     
     get_pageTitlePrefix: function Srch_SearchBox$get_pageTitlePrefix() {
         return this.$1z_3;
@@ -4060,15 +4093,15 @@ Srch.SearchBox.prototype = {
     $1J_3: 'ms-srch-sb-prompt ms-helperText',
     
     get_tryInplaceQuery: function Srch_SearchBox$get_tryInplaceQuery() {
-        return this.$35_3;
+        return this.$34_3;
     },
     
     set_tryInplaceQuery: function Srch_SearchBox$set_tryInplaceQuery(value) {
-        this.$35_3 = value;
+        this.$34_3 = value;
         return value;
     },
     
-    $35_3: true,
+    $34_3: true,
     
     get_searchBoxInputId: function Srch_SearchBox$get_searchBoxInputId() {
         return this.$N_3;
@@ -4244,13 +4277,13 @@ Srch.SearchBox.prototype = {
     
     scriptApplication_PostLoad: function Srch_SearchBox$scriptApplication_PostLoad(sender, e) {
         this.$1_2('ScriptApplication_PostLoad', 'SearchBox');
-        if (this.$30_3) {
+        if (this.$2z_3) {
             this.$1_2('ScriptApplication_PostLoad', 'Skipping render control during load.');
         }
         else {
             if (!this.loadServerTemplateScripts()) {
                 this.$1_2('ScriptApplication_PostLoad', 'Inline control render during PostLoad');
-                this.$3e_3();
+                this.$3g_3();
             }
         }
         Srch.ClientControl.prototype.scriptApplication_PostLoad.call(this, sender, e);
@@ -4259,7 +4292,7 @@ Srch.SearchBox.prototype = {
     serverTemplateScriptsCallback: function Srch_SearchBox$serverTemplateScriptsCallback() {
         Srch.ClientControl.prototype.serverTemplateScriptsCallback.call(this);
         this.$1_2('ServerTemplateScriptsCallback', 'Delay load control render');
-        this.$3e_3();
+        this.$3g_3();
     },
     
     add_queryReady: function Srch_SearchBox$add_queryReady(value) {
@@ -4327,13 +4360,13 @@ Srch.SearchBox.prototype = {
                     }
                     if (!this.loadServerTemplateScripts()) {
                         this.$1_2('DataProvider_QueryStateChanged', 'Inline control render during QueryStateChanged');
-                        this.$3e_3();
+                        this.$3g_3();
                     }
                 }
                 else {
                     this.$1_2('DataProvider_QueryStateChanged', 'Term did not change');
                 }
-                if (this.$39_3) {
+                if (this.$38_3) {
                     var $v_2 = (Srch.U.e(this.$1z_3)) ? Srch.Res.sb_ResultsPageTitle : this.$1z_3;
                     document.title = String.format($v_2, $v_1.k);
                 }
@@ -4355,14 +4388,14 @@ Srch.SearchBox.prototype = {
     
     dataProvider_QueryIssuing: function Srch_SearchBox$dataProvider_QueryIssuing(sender, e) {
         this.$1_2('DataProvider_QueryIssuing', '');
-        this.$4O_3();
+        this.$4P_3();
         this.$2p_3 = window.setTimeout(this.$$d_$63_3, this.$2h_3);
         this.$1I_3 = true;
     },
     
     dataProvider_ResultReady: function Srch_SearchBox$dataProvider_ResultReady(sender, e) {
         this.$1_2('DataProvider_ResultsReady', '');
-        this.$4O_3();
+        this.$4P_3();
     },
     
     $1I_3: false,
@@ -4390,7 +4423,7 @@ Srch.SearchBox.prototype = {
         }
     },
     
-    $4O_3: function Srch_SearchBox$$4O_3() {
+    $4P_3: function Srch_SearchBox$$4P_3() {
         if (this.$1I_3) {
             window.clearTimeout(this.$2p_3);
             this.$1I_3 = false;
@@ -4453,7 +4486,7 @@ Srch.SearchBox.prototype = {
                             }
                         ;
         var $v_3 = this.get_events().getHandler(Srch.EventType.toString(1));
-        if (!this.$35_3 || Srch.U.n($v_3)) {
+        if (!this.$34_3 || Srch.U.n($v_3)) {
             var $v_4 = Srch.U.getResultsPageUrl(this.$2v_3, term);
             if (!Srch.U.e($v_4)) {
                 this.$3_2('Search', 'Redirecting to url \'{0}\'...', $v_4);
@@ -4464,7 +4497,7 @@ Srch.SearchBox.prototype = {
         }
         this.$T_3 = term;
         EnsureScript('sp.search.js', TypeofFullName('Microsoft.SharePoint.Client.Search.Query.KeywordQuery'), this.$$d_$61_3);
-        Srch.ScriptApplicationManager.get_current().$41_1();
+        Srch.ScriptApplicationManager.get_current().$42_1();
     },
     
     $61_3: function Srch_SearchBox$$61_3() {
@@ -4493,7 +4526,7 @@ Srch.SearchBox.prototype = {
                     var $v_E = Microsoft.SharePoint.Client.Search.Query.KeywordQuery.newObject($v_3);
                     Srch.U.fillKeywordQuery($v_E, $v_D);
                     Srch.U.appendArray($v_4, $v_E);
-                    Srch.U.appendArray($v_5, $v_D.get_$4Y_3());
+                    Srch.U.appendArray($v_5, $v_D.get_$4Z_3());
                 }
             }
             var $v_6 = Microsoft.SharePoint.Client.Search.Query.SearchExecutor.newObject($v_3);
@@ -4534,7 +4567,7 @@ Srch.SearchBox.prototype = {
                 if ($v_7.get_hasException()) {
                     $$t_P.$1_2('Search', '*****failure*****');
                     var $v_F = Srch.ControlMessage.getFromExceptionHandlingScope($v_7);
-                    var $v_G = new Srch.BatchResultEventArgs($$t_P.$46_3($v_F));
+                    var $v_G = new Srch.BatchResultEventArgs($$t_P.$47_3($v_F));
                     $$t_P.raiseBatchResultReadyEvent($v_G);
                 }
                 else {
@@ -4552,7 +4585,7 @@ Srch.SearchBox.prototype = {
                 $v_0.stop();
                 if (!Srch.U.n($p1_1)) {
                     var $v_J = Srch.ControlMessage.getFromClientRequestFailedEventArgs($p1_1);
-                    var $v_K = new Srch.BatchResultEventArgs($$t_Q.$46_3($v_J));
+                    var $v_K = new Srch.BatchResultEventArgs($$t_Q.$47_3($v_J));
                     $$t_Q.raiseBatchResultReadyEvent($v_K);
                 }
             });
@@ -4612,7 +4645,7 @@ Srch.SearchBox.prototype = {
     },
     
     activateDefaultQuerySuggestionBehavior: function Srch_SearchBox$activateDefaultQuerySuggestionBehavior() {
-        if (this.$34_3) {
+        if (this.$33_3) {
             EnsureScriptFunc('ajaxtoolkit.js', 'AjaxControlToolkit.AutoCompleteBehavior', this.$$d_$5F_3);
         }
     },
@@ -4656,7 +4689,7 @@ Srch.SearchBox.prototype = {
             $v_0['offsetWidth'] = -2;
             $v_0['queryCount'] = this.$2r_3;
             $v_0['personalResultCount'] = this.$2k_3;
-            $v_0['showPeopleNameSuggestions'] = this.$33_3;
+            $v_0['showPeopleNameSuggestions'] = this.$32_3;
             $v_0['personalResultTitleSingular'] = Srch.Res.qs_PersonalResultTitleSingular;
             $v_0['personalResultTitlePlural'] = Srch.Res.qs_PersonalResultTitlePlural;
             $v_0['overlappingElementID'] = this.$E_3;
@@ -4667,7 +4700,7 @@ Srch.SearchBox.prototype = {
         }
     },
     
-    $46_3: function Srch_SearchBox$$46_3($p0) {
+    $47_3: function Srch_SearchBox$$47_3($p0) {
         var $v_0 = {};
         $v_0['__'] = $p0;
         var $v_1 = {};
@@ -4677,7 +4710,7 @@ Srch.SearchBox.prototype = {
         return $v_2;
     },
     
-    $3e_3: function Srch_SearchBox$$3e_3() {
+    $3g_3: function Srch_SearchBox$$3g_3() {
         this.$v_3 = {};
         var $v_0 = SP.PageContextInfo.get_siteAbsoluteUrl();
         var $v_1 = window._spPageContextInfo;
@@ -4710,7 +4743,7 @@ Srch.SearchBox.prototype = {
         else {
             this.renderControl(null, null);
         }
-        if (this.$31_3) {
+        if (this.$30_3) {
             this.focus();
         }
     }
@@ -4734,41 +4767,21 @@ Srch.U.n = function Srch_U$n(obj) {
     return SP.ScriptUtility.isNullOrUndefined(obj);
 }
 Srch.U.isRealWord = function Srch_U$isRealWord(url) {
-    if (!OffSwitch.IsActive(Srch.U.$2x)) {
-        return (url.endsWith('.docx') || url.endsWith('.doc') || url.endsWith('.docm') || url.endsWith('.dot') || url.endsWith('.dotm'));
-    }
-    else {
-        return true;
-    }
+    return (url.endsWith('.docx') || url.endsWith('.doc') || url.endsWith('.docm') || url.endsWith('.dot') || url.endsWith('.dotm'));
 }
 Srch.U.isRealExcel = function Srch_U$isRealExcel(url) {
-    if (!OffSwitch.IsActive(Srch.U.$2x)) {
-        return (url.endsWith('.xls') || url.endsWith('.xlsx') || url.endsWith('.xlsm') || url.endsWith('.xlsb') || url.endsWith('.xltm') || url.endsWith('.xltx') || url.endsWith('.xlam'));
-    }
-    else {
-        return true;
-    }
+    return (url.endsWith('.xls') || url.endsWith('.xlsx') || url.endsWith('.xlsm') || url.endsWith('.xlsb') || url.endsWith('.xltm') || url.endsWith('.xltx') || url.endsWith('.xlam'));
 }
 Srch.U.isRealPowerPoint = function Srch_U$isRealPowerPoint(url) {
-    if (!OffSwitch.IsActive(Srch.U.$2x)) {
-        return (url.endsWith('.ppt') || url.endsWith('.pptx') || url.endsWith('.pptm'));
-    }
-    else {
-        return true;
-    }
+    return (url.endsWith('.ppt') || url.endsWith('.pptx') || url.endsWith('.pptm'));
 }
 Srch.U.isClientTypeInQSKillSwitchActive = function Srch_U$isClientTypeInQSKillSwitchActive() {
     return OffSwitch.IsActive(Srch.U.clientTypeInQSKillSwitch);
 }
 Srch.U.isBasicSearchCenter = function Srch_U$isBasicSearchCenter() {
-    if (!OffSwitch.IsActive(Srch.U.$4f)) {
-        var $v_0 = window._spPageContextInfo;
-        var $v_1 = $v_0.webTemplate;
-        return '90' === $v_1;
-    }
-    else {
-        return false;
-    }
+    var $v_0 = window._spPageContextInfo;
+    var $v_1 = $v_0.webTemplate;
+    return '90' === $v_1;
 }
 Srch.U.isPageInEditMode = function Srch_U$isPageInEditMode() {
     if (Srch.U.e(Srch.U.$1X)) {
@@ -4883,11 +4896,11 @@ Srch.U.$5c = function Srch_U$$5c($p0, $p1) {
     }
     return;
 }
-Srch.U.$47 = function Srch_U$$47($p0, $p1) {
+Srch.U.$48 = function Srch_U$$48($p0, $p1) {
     Srch.U.$5c($p0, function($p1_0, $p1_1, $p1_2) {
         $p1($p1_0, $p1_1, $p1_2);
         if (!Srch.U.n($p1_2) && 'object' === typeof($p1_2)) {
-            Srch.U.$47($p1_2, $p1);
+            Srch.U.$48($p1_2, $p1);
         }
     });
 }
@@ -5167,10 +5180,10 @@ Srch.U.getClientComponent = function Srch_U$getClientComponent(e) {
     return $v_0;
 }
 Srch.U.getResultObject = function Srch_U$getResultObject(id) {
-    return Srch.ScriptApplicationManager.get_current().$3h_1[id];
+    return Srch.ScriptApplicationManager.get_current().$3j_1[id];
 }
 Srch.U.setResultObject = function Srch_U$setResultObject(id, resultObject) {
-    Srch.ScriptApplicationManager.get_current().$3h_1[id] = resultObject;
+    Srch.ScriptApplicationManager.get_current().$3j_1[id] = resultObject;
     resultObject['csr_id'] = id;
 }
 Srch.U.findResultObjectFromDOM = function Srch_U$findResultObjectFromDOM(e, type) {
@@ -5216,9 +5229,9 @@ Srch.U.ensureAllowedProtocol = function Srch_U$ensureAllowedProtocol(value) {
     return '';
 }
 Srch.U.isProtocolAllowed = function Srch_U$isProtocolAllowed(value, allowRelativeUrl) {
-    return Srch.U.$4Q(value, allowRelativeUrl, Srch.U.$44);
+    return Srch.U.$4R(value, allowRelativeUrl, Srch.U.$45);
 }
-Srch.U.$4Q = function Srch_U$$4Q($p0, $p1, $p2) {
+Srch.U.$4R = function Srch_U$$4R($p0, $p1, $p2) {
     if (Srch.U.e($p0)) {
         if ($p1) {
             return true;
@@ -5563,16 +5576,16 @@ Srch.U.fillKeywordQuery = function Srch_U$fillKeywordQuery(query, dp) {
     query.get_properties().set_item('QueryDateTimeCulture', dp.get_queryDateTimeCulture());
 }
 Srch.U.getUsernameFromAuthorField = function Srch_U$getUsernameFromAuthorField(authorField) {
-    var $v_0 = Srch.U.$4H(authorField, 2).trim();
+    var $v_0 = Srch.U.$4I(authorField, 2).trim();
     if ($v_0.indexOf(' ') >= 0) {
         $v_0 = $v_0.substring($v_0.indexOf(' ') + 1, $v_0.length);
     }
     return $v_0.trim();
 }
 Srch.U.getDisplayNameFromAuthorField = function Srch_U$getDisplayNameFromAuthorField(authorField) {
-    return Srch.U.$4H(authorField, 1).trim();
+    return Srch.U.$4I(authorField, 1).trim();
 }
-Srch.U.$4H = function Srch_U$$4H($p0, $p1) {
+Srch.U.$4I = function Srch_U$$4I($p0, $p1) {
     if (Srch.U.w($p0) || $p1 < 0 || $p1 > 2) {
         return '';
     }
@@ -5950,15 +5963,8 @@ Srch.U.truncateUrl = function Srch_U$truncateUrl(url, maxChars) {
             $v_5++;
             $v_D = true;
         }
-        if (!OffSwitch.IsActive(Srch.U.$3v)) {
-            if ($v_5 > $v_9) {
-                return $v_6 + $v_A;
-            }
-        }
-        else {
-            if ($v_5 === $v_9) {
-                return $v_6 + $v_A;
-            }
+        if ($v_5 > $v_9) {
+            return $v_6 + $v_A;
         }
         var $v_F = $v_4[$v_9];
         if ($v_F.length <= $v_B - $v_7.length) {
@@ -5970,10 +5976,8 @@ Srch.U.truncateUrl = function Srch_U$truncateUrl(url, maxChars) {
         if (!$v_D) {
             break;
         }
-        if (!OffSwitch.IsActive(Srch.U.$3v)) {
-            if ($v_5 > $v_9) {
-                return $v_6 + $v_A;
-            }
+        if ($v_5 > $v_9) {
+            return $v_6 + $v_A;
         }
     }
     var $v_C = $v_6 + $v_7 + $v_A;
@@ -6139,19 +6143,19 @@ Srch.U.getRenderTemplateByName = function Srch_U$getRenderTemplateByName(name, r
     }
     var $v_2 = String.format(Srch.Res.cc_err_TemplateNotFoundMessage, SP.Utilities.HttpUtility.htmlEncode(name));
     Srch.U.trace(null, 'GetRenderTemplateByName', $v_2);
-    Srch.U.logRenderingErrorMessageToContext(renderCtx, $v_2, Srch.U.$4U);
+    Srch.U.logRenderingErrorMessageToContext(renderCtx, $v_2, Srch.U.$4V);
     return $v_2;
 }
 Srch.U.addRenderContextCallback = function Srch_U$addRenderContextCallback(renderCtx, callbackType, callbackFunction, enforceUnique, templateFunction) {
     if (!Srch.U.n(renderCtx) && !Srch.U.w(callbackType) && !Srch.U.n(callbackFunction)) {
-        Srch.U.$42(callbackFunction, templateFunction);
+        Srch.U.$43(callbackFunction, templateFunction);
         AddRenderCallback(renderCtx, callbackType, callbackFunction, ((Srch.U.n(enforceUnique)) ? false : enforceUnique));
     }
 }
 Srch.U.setItemRenderWrapper = function Srch_U$setItemRenderWrapper(renderCtx, itemRenderWrapperFunction, templateFunction) {
     if (!Srch.U.n(renderCtx) && !Srch.U.n(itemRenderWrapperFunction)) {
-        Srch.U.$42(itemRenderWrapperFunction, templateFunction);
-        renderCtx[Srch.U.$4R] = itemRenderWrapperFunction;
+        Srch.U.$43(itemRenderWrapperFunction, templateFunction);
+        renderCtx[Srch.U.$4S] = itemRenderWrapperFunction;
     }
 }
 Srch.U.logRenderingErrorMessageToContext = function Srch_U$logRenderingErrorMessageToContext(renderCtx, messageText, operationName) {
@@ -6166,18 +6170,18 @@ Srch.U.logRenderingErrorMessageToContext = function Srch_U$logRenderingErrorMess
     }
     Srch.U.appendArray($v_1, $v_0);
 }
-Srch.U.$42 = function Srch_U$$42($p0, $p1) {
+Srch.U.$43 = function Srch_U$$43($p0, $p1) {
     return Srch.U.setFieldOnObject($p0, Srch.U.$1T, $p1);
 }
 Srch.U.$55 = function Srch_U$$55($p0, $p1, $p2) {
     var $v_0 = {};
-    $v_0[Srch.U.$3D] = $p1;
+    $v_0[Srch.U.$3C] = $p1;
     $v_0[Srch.U.$1T] = $p2;
-    return Srch.U.setFieldOnObject($p0, Srch.U.$3C, $v_0);
+    return Srch.U.setFieldOnObject($p0, Srch.U.$3B, $v_0);
 }
 Srch.U.getTemplateUrlFromFunctionOrRenderCtx = function Srch_U$getTemplateUrlFromFunctionOrRenderCtx(templateFunctionOrRenderCtx) {
     var $v_0 = Srch.U.getFieldOnObject(templateFunctionOrRenderCtx, Srch.U.$2S);
-    return Srch.U.getStringFieldOnObject($v_0, Srch.U.$4A);
+    return Srch.U.getStringFieldOnObject($v_0, Srch.U.$4B);
 }
 Srch.U.createErrorObjectWithExecContext = function Srch_U$createErrorObjectWithExecContext(messageText, operationName, templateFuncOrRenderCtx) {
     var $v_0 = {};
@@ -6233,7 +6237,7 @@ Srch.U.resolveRenderTemplate = function Srch_U$resolveRenderTemplate(renderCtx, 
         if (Srch.Refinement.isInstanceOfType($v_0)) {
             var $v_1 = renderCtx['RefinementControl'];
             if (!Srch.U.n($v_1)) {
-                var $v_2 = Srch.ValueInfo.ValueTypeHandler.$4C($v_1.propertyName);
+                var $v_2 = Srch.ValueInfo.ValueTypeHandler.$4D($v_1.propertyName);
                 $v_2 = (Srch.U.w($v_2)) ? $v_1.renderTemplateId : $v_2;
                 return Srch.U.getRenderTemplateByName($v_2, renderCtx);
             }
@@ -6395,7 +6399,7 @@ Srch.U.$5o = function Srch_U$$5o($p0) {
                 var $v_3 = $v_2[0].childNodes;
                 for (var $v_4 = 0; $v_4 < $v_3.length; $v_4++) {
                     var $v_5 = $v_3[$v_4];
-                    var $v_6 = Srch.U.$3Y($v_5);
+                    var $v_6 = Srch.U.$3a($v_5);
                     if ((($v_5.nodeName) in $v_0)) {
                         if (Srch.U.isArray($v_0[$v_5.nodeName])) {
                             Srch.U.appendArray($v_0[$v_5.nodeName], $v_6);
@@ -6610,7 +6614,7 @@ Srch.U.getMultipleHHXMLNodeValues = function Srch_U$getMultipleHHXMLNodeValues(x
         if (!Srch.U.n($v_1) && $v_1.length > 0) {
             var $v_2 = ($v_1.length > numItems) ? numItems : $v_1.length;
             for (var $v_3 = 0; $v_3 < $v_2; $v_3++) {
-                var $v_4 = Srch.U.$3Y($v_1[$v_3]);
+                var $v_4 = Srch.U.$3a($v_1[$v_3]);
                 if (!Srch.U.e($v_4)) {
                     $v_0 += $v_4;
                     if ($v_3 < $v_2 - 1) {
@@ -6627,12 +6631,12 @@ Srch.U.getSingleHHXMLNodeValue = function Srch_U$getSingleHHXMLNodeValue(xmlDoc,
     if (!Srch.U.n(xmlDoc) && !Srch.U.e(nodeName)) {
         var $v_1 = xmlDoc.getElementsByTagName(nodeName);
         if (!Srch.U.n($v_1) && $v_1.length > 0) {
-            $v_0 = Srch.U.$3Y($v_1[0]);
+            $v_0 = Srch.U.$3a($v_1[0]);
         }
     }
     return $v_0;
 }
-Srch.U.$3Y = function Srch_U$$3Y($p0) {
+Srch.U.$3a = function Srch_U$$3a($p0) {
     var $v_0 = '';
     if (!Srch.U.n($p0)) {
         var $v_1 = $p0.childNodes;
@@ -6641,11 +6645,11 @@ Srch.U.$3Y = function Srch_U$$3Y($p0) {
                 var $v_3 = $v_1[$v_2];
                 if (!Srch.U.n($v_3)) {
                     if ($v_3.nodeType === 3) {
-                        $v_0 += Srch.U.$4M($v_3);
+                        $v_0 += Srch.U.$4N($v_3);
                     }
                     else if ($v_3.nodeType === 1) {
                         if ($v_3.nodeName === 'c0') {
-                            $v_0 += Srch.U.hitHighlightingOpenTag + Srch.U.$4M($v_3) + Srch.U.hitHighlightingCloseTag;
+                            $v_0 += Srch.U.hitHighlightingOpenTag + Srch.U.$4N($v_3) + Srch.U.hitHighlightingCloseTag;
                         }
                         else if ($v_3.nodeName === 't0') {
                             $v_0 += '<t0/>';
@@ -6660,7 +6664,7 @@ Srch.U.$3Y = function Srch_U$$3Y($p0) {
     }
     return $v_0;
 }
-Srch.U.$4M = function Srch_U$$4M($p0) {
+Srch.U.$4N = function Srch_U$$4N($p0) {
     var $v_0 = '';
     if (!Srch.U.n($p0)) {
         $v_0 = $p0.nodeValue;
@@ -6843,7 +6847,7 @@ Srch.U.animateResults = function Srch_U$animateResults(result, userAction) {
     EnsureScript('core.js', TypeofFullName('SPAnimation'), function() {
         Srch.U.animate(result.get_element(), 15, null);
     });
-    if (result.$2y_4) {
+    if (result.$2x_4) {
         var $v_0 = Srch.U.getWorkspace(window.document.body);
         if (!Srch.U.n($v_0)) {
             $v_0.scrollTop = 0;
@@ -6970,7 +6974,7 @@ Srch.U.$3M = function Srch_U$$3M($p0, $p1) {
     }
     var $v_0 = $p1;
     var $v_1 = [ 'http', 'https' ];
-    if (Srch.U.$4Q($p1, false, $v_1) || $p1.toLowerCase().startsWith('~site')) {
+    if (Srch.U.$4R($p1, false, $v_1) || $p1.toLowerCase().startsWith('~site')) {
     }
     else if (!Srch.U.e($p0)) {
         var $v_2 = $p0.lastIndexOf('/');
@@ -7031,7 +7035,7 @@ Srch.U.replaceUrlTokens = function Srch_U$replaceUrlTokens(url) {
     }
     var $v_3 = Srch.U.$2Z();
     if (!Srch.U.w($v_3)) {
-        var $v_5 = Srch.U.$4L();
+        var $v_5 = Srch.U.$4M();
         if (!Srch.U.w($v_5) && $v_3 !== $v_5) {
             $v_3 = $v_5;
         }
@@ -7093,17 +7097,17 @@ Srch.U.urlTokenExpansion = function Srch_U$urlTokenExpansion(jsLink) {
 }
 Srch.U.includeCSS = function Srch_U$includeCSS(templateLink, relativeLink) {
     var $v_0 = Srch.U.$3M(templateLink, relativeLink);
-    Srch.U.$3b($v_0, false);
+    Srch.U.$3d($v_0, false);
 }
 Srch.U.includeScript = function Srch_U$includeScript(templateLink, scriptLink) {
     var $v_0 = Srch.U.$3M(templateLink, scriptLink);
-    Srch.U.$3b($v_0, false);
+    Srch.U.$3d($v_0, false);
 }
 Srch.U.includeLanguageScript = function Srch_U$includeLanguageScript(templateLink, scriptLink) {
     var $v_0 = Srch.U.$3M(templateLink, scriptLink);
-    Srch.U.$3b($v_0, true);
+    Srch.U.$3d($v_0, true);
 }
-Srch.U.$3b = function Srch_U$$3b($p0, $p1) {
+Srch.U.$3d = function Srch_U$$3d($p0, $p1) {
     Srch.U.traceFormatted(null, 'RegisterCustomScript', 'scriptLink:\'{0}\' languageScript:\'{1}\'', $p0, $p1);
     Srch.ScriptApplicationManager.get_current().$1Z_1[$p0] = $p1;
     if ($p1) {
@@ -7126,19 +7130,19 @@ Srch.U.loadResource = function Srch_U$loadResource(id) {
     return Srch.U.$B(id, true);
 }
 Srch.U.loadResourceForTemplate = function Srch_U$loadResourceForTemplate(id, templateFunc) {
-    return Srch.U.$4T(id, true, templateFunc);
+    return Srch.U.$4U(id, true, templateFunc);
 }
-Srch.U.$4P = function Srch_U$$4P() {
+Srch.U.$4Q = function Srch_U$$4Q() {
     var $v_0 = Srch.Res;
     return ((Srch.U.n($v_0)) ? null : $v_0);
 }
 Srch.U.$B = function Srch_U$$B($p0, $p1) {
-    return Srch.U.$4T($p0, $p1, null);
+    return Srch.U.$4U($p0, $p1, null);
 }
-Srch.U.$4T = function Srch_U$$4T($p0, $p1, $p2) {
+Srch.U.$4U = function Srch_U$$4U($p0, $p1, $p2) {
     var $v_0 = '';
     var $v_1 = false;
-    var $v_2 = Srch.U.$4P();
+    var $v_2 = Srch.U.$4Q();
     var $v_3 = Srch.U.$2Z();
     if (!Srch.U.w($v_3)) {
         $v_3 = $v_3.toLowerCase();
@@ -7188,14 +7192,14 @@ Srch.U.$3O = function Srch_U$$3O() {
 Srch.U.$2Z = function Srch_U$$2Z() {
     return Srch.ScriptApplicationManager.get_current().states['webUILanguageName'];
 }
-Srch.U.$4L = function Srch_U$$4L() {
+Srch.U.$4M = function Srch_U$$4M() {
     return Srch.ScriptApplicationManager.get_current().states['webUILanguageDirectory'];
 }
 Srch.U.$2Y = function Srch_U$$2Y() {
     return Srch.ScriptApplicationManager.get_current().states['webDefaultLanguageName'];
 }
 Srch.U.$5h = function Srch_U$$5h($p0, $p1, $p2) {
-    var $v_0 = Srch.U.$4P();
+    var $v_0 = Srch.U.$4Q();
     var $v_1 = Srch.U.$2Z();
     if (!Srch.U.w($v_1)) {
         $v_1 = $v_1.toLowerCase();
@@ -7244,7 +7248,7 @@ Srch.U.registerResourceDictionary = function Srch_U$registerResourceDictionary(l
 }
 Srch.U.$5W = function Srch_U$$5W($p0) {
     if (!Srch.U.n($p0) && !Srch.U.w(Srch.U.$2Y())) {
-        return $p0.replace(new RegExp('\\{Locale\\}', 'gi'), Srch.U.$4L());
+        return $p0.replace(new RegExp('\\{Locale\\}', 'gi'), Srch.U.$4M());
     }
     else {
         return $p0;
@@ -7441,7 +7445,7 @@ Srch.ScriptApplicationManager = function Srch_ScriptApplicationManager() {
     this.$$d_$57_1 = Function.createDelegate(this, this.$57_1);
     this.states = {};
     this.queryGroups = {};
-    this.$3h_1 = {};
+    this.$3j_1 = {};
     this.$1K_1 = {};
     this.$18_1 = {};
     this.$1Z_1 = {};
@@ -7465,7 +7469,7 @@ Srch.ScriptApplicationManager.get_clientRuntimeContext = function Srch_ScriptApp
     return Srch.ScriptApplicationManager.$w;
 }
 Srch.ScriptApplicationManager.prototype = {
-    $3y_1: null,
+    $3z_1: null,
     $16_1: null,
     $x_1: null,
     
@@ -7696,18 +7700,18 @@ Srch.ScriptApplicationManager.prototype = {
         }
         if (!Srch.U.n($v_1) && !Srch.U.n($v_2)) {
             $v_3 = $v_2;
-            Srch.QueryState.$45($v_3, false);
+            Srch.QueryState.$46($v_3, false);
             $v_3[$v_1] = null;
         }
         else {
-            Srch.QueryState.$45($v_3, true);
+            Srch.QueryState.$46($v_3, true);
         }
         $v_3['__'] = null;
         Srch.U.trace(null, 'AddNavigatePoint', Sys.Serialization.JavaScriptSerializer.serialize($v_3));
         ajaxNavigate.update(url, $v_3, fullNavigate);
     },
     
-    $41_1: function Srch_ScriptApplicationManager$$41_1() {
+    $42_1: function Srch_ScriptApplicationManager$$42_1() {
         this.navigateTo(null, false);
     },
     
@@ -7778,7 +7782,7 @@ Srch.QueryState.$5Z = function Srch_QueryState$$5Z($p0) {
     }
     return true;
 }
-Srch.QueryState.$45 = function Srch_QueryState$$45($p0, $p1) {
+Srch.QueryState.$46 = function Srch_QueryState$$46($p0, $p1) {
     if (!Srch.U.n($p0)) {
         var $v_0 = Srch.QueryState.$4;
         var $$dict_3 = $v_0;
@@ -7952,7 +7956,7 @@ Srch.QueryState.prototype = {
         }
     },
     
-    $3A_0: function Srch_QueryState$$3A_0($p0, $p1) {
+    $39_0: function Srch_QueryState$$39_0($p0, $p1) {
         if (Srch.U.n($p0) && Srch.U.n($p1)) {
             return true;
         }
@@ -7984,7 +7988,7 @@ Srch.QueryState.prototype = {
         if (this.d !== qs.d || this.m !== qs.m || this.l !== qs.l || this.s !== qs.s || this.k !== qs.k || this.e !== qs.e) {
             return false;
         }
-        if (!this.$3A_0(this.r, qs.r) || !this.$3A_0(this.x, qs.x) || !this.$3A_0(this.o, qs.o)) {
+        if (!this.$39_0(this.r, qs.r) || !this.$39_0(this.x, qs.x) || !this.$39_0(this.o, qs.o)) {
             return false;
         }
         return true;
@@ -8264,17 +8268,17 @@ Srch.ControlMessage.getFromExceptionHandlingScope = function Srch_ControlMessage
 }
 Srch.ControlMessage.getFromException = function Srch_ControlMessage$getFromException(scriptException) {
     if (!Srch.U.n(scriptException)) {
-        var $v_0 = Srch.ControlMessage.$4J(scriptException);
+        var $v_0 = Srch.ControlMessage.$4K(scriptException);
         return new Srch.ControlMessage(null, 2, -1, Srch.ControlMessage.$4g, $v_0, '', '', null, false, true, true);
     }
     return null;
 }
 Srch.ControlMessage.getForStringLoadFailure = function Srch_ControlMessage$getForStringLoadFailure(messageHeader, templateFunc) {
     var $v_0 = Srch.U.createErrorObjectWithExecContext(messageHeader, Srch.ControlMessage.$4x, templateFunc);
-    var $v_1 = Srch.ControlMessage.$4J($v_0);
-    return new Srch.ControlMessage(null, 2, -1, Srch.ControlMessage.$4V, $v_1, '', '', null, false, true, true);
+    var $v_1 = Srch.ControlMessage.$4K($v_0);
+    return new Srch.ControlMessage(null, 2, -1, Srch.ControlMessage.$4W, $v_1, '', '', null, false, true, true);
 }
-Srch.ControlMessage.$4J = function Srch_ControlMessage$$4J($p0) {
+Srch.ControlMessage.$4K = function Srch_ControlMessage$$4K($p0) {
     var $v_0 = '';
     if (!Srch.U.n($p0)) {
         $v_0 = Srch.U.getStringFieldOnObject($p0, 'message');
@@ -8282,12 +8286,12 @@ Srch.ControlMessage.$4J = function Srch_ControlMessage$$4J($p0) {
             if (Srch.U.w($v_0)) {
                 $v_0 = $p0.toString();
             }
-            var $v_1 = Srch.U.getFieldOnObject($p0, Srch.U.$3C);
+            var $v_1 = Srch.U.getFieldOnObject($p0, Srch.U.$3B);
             var $v_2 = Srch.ControlMessage.$5Y($v_1);
-            var $v_3 = Srch.U.getStringFieldOnObject($v_1, Srch.U.$3D);
+            var $v_3 = Srch.U.getStringFieldOnObject($v_1, Srch.U.$3C);
             var $v_4 = Srch.U.$B('cc_err_ExecContextExtraInfoFormat', false);
             if (Srch.U.w($v_4)) {
-                $v_4 = Srch.ControlMessage.$4B;
+                $v_4 = Srch.ControlMessage.$4C;
             }
             if (!Srch.U.w($v_2) || !Srch.U.w($v_3)) {
                 $v_0 = String.format($v_4, $v_0, $v_3, $v_2);
@@ -8511,7 +8515,7 @@ Srch.ValueInfo = function Srch_ValueInfo(originalInputValue, managedProperty, is
     this.$66_0();
 }
 Srch.ValueInfo.$$cctor = function Srch_ValueInfo$$$cctor() {
-    Srch.ValueInfo.$3a = new RegExp('\\\\', 'g');
+    Srch.ValueInfo.$3c = new RegExp('\\\\', 'g');
 }
 Srch.ValueInfo.$d = function Srch_ValueInfo$$d($p0) {
     var $v_0 = '';
@@ -8771,11 +8775,11 @@ Srch.ValueInfo.getCtxItemValueWithMappings = function Srch_ValueInfo$getCtxItemV
 }
 Srch.ValueInfo.overrideRenderingForProperty = function Srch_ValueInfo$overrideRenderingForProperty(propertyNameToOverride, propertyNameForBaseRendering) {
     var $v_0 = propertyNameToOverride + '_OverrideMatchRendering_' + propertyNameForBaseRendering;
-    Srch.ValueInfo.ValueTypeHandler.$3c($v_0, propertyNameToOverride, propertyNameForBaseRendering);
+    Srch.ValueInfo.ValueTypeHandler.$3e($v_0, propertyNameToOverride, propertyNameForBaseRendering);
 }
 Srch.ValueInfo.overrideRefinementTemplateForProperty = function Srch_ValueInfo$overrideRefinementTemplateForProperty(propertyNameToOverride, propertyNameForBaseRendering, overrideRenderTemplateId) {
     var $v_0 = propertyNameToOverride + '_OverrideMatchRendering_' + propertyNameForBaseRendering + '_OverrideMatchRendering_';
-    var $v_1 = Srch.ValueInfo.ValueTypeHandler.$3c($v_0, propertyNameToOverride, propertyNameForBaseRendering);
+    var $v_1 = Srch.ValueInfo.ValueTypeHandler.$3e($v_0, propertyNameToOverride, propertyNameForBaseRendering);
     $v_1.refinementOverrideTemplateId = overrideRenderTemplateId;
 }
 Srch.ValueInfo.prototype = {
@@ -8896,7 +8900,7 @@ Srch.ValueInfo.Parsers.$64 = function Srch_ValueInfo_Parsers$$64($p0) {
             $p0.isEntity = true;
             $p0.entityLabel = $v_1[$v_1.length - 1];
             $p0.entityId = $p0.inputValue.toString();
-            $p0.entityId = $p0.entityId.replace(Srch.ValueInfo.$3a, '\\\\');
+            $p0.entityId = $p0.entityId.replace(Srch.ValueInfo.$3c, '\\\\');
             $p0.entityType = $v_1[0];
         }
     }
@@ -8939,7 +8943,7 @@ Srch.ValueInfo.Parsers.$2Q = function Srch_ValueInfo_Parsers$$2Q($p0) {
     var $v_1 = Date.parseInvariant($v_0);
     if (Srch.U.n($v_1)) {
         var $v_2 = new RegExp('(:[0-9][0-9])\\.?[0-9]*Z', 'g');
-        if (!OffSwitch.IsActive(Srch.ValueInfo.$3u)) {
+        if (!OffSwitch.IsActive(Srch.ValueInfo.$3w)) {
             $v_0 = $v_0.replace($v_2, '$1Z');
             $v_1 = new Date($v_0);
             $v_0 = $v_0.replace('T', ' ');
@@ -9198,24 +9202,24 @@ Srch.ValueInfo.ValueTypeHandler = function Srch_ValueInfo_ValueTypeHandler() {
     this.valueRenderer = Srch.ValueInfo.Renderers.defaultRenderedValueHtmlEncoded;
     this.filterTokenGenerator = Srch.ValueInfo.Renderers.defaultFilterToken;
 }
-Srch.ValueInfo.ValueTypeHandler.$4G = function Srch_ValueInfo_ValueTypeHandler$$4G() {
+Srch.ValueInfo.ValueTypeHandler.$4H = function Srch_ValueInfo_ValueTypeHandler$$4H() {
     if (Srch.U.n(Srch.ScriptApplicationManager.get_current())) {
         return {};
     }
-    var $v_0 = Srch.ScriptApplicationManager.get_current().$3y_1;
+    var $v_0 = Srch.ScriptApplicationManager.get_current().$3z_1;
     if (Srch.U.n($v_0)) {
         $v_0 = {};
-        Srch.ScriptApplicationManager.get_current().$3y_1 = $v_0;
+        Srch.ScriptApplicationManager.get_current().$3z_1 = $v_0;
         Srch.ValueInfo.ValueTypeHandler.$5a();
     }
     return $v_0;
 }
-Srch.ValueInfo.ValueTypeHandler.$3d = function Srch_ValueInfo_ValueTypeHandler$$3d($p0) {
+Srch.ValueInfo.ValueTypeHandler.$3f = function Srch_ValueInfo_ValueTypeHandler$$3f($p0) {
     if (Srch.U.n($p0)) {
         return;
     }
-    var $v_0 = Srch.ValueInfo.ValueTypeHandler.$4G();
-    for (var $$arr_2 = Srch.ValueInfo.ValueTypeHandler.$4N, $$len_3 = $$arr_2.length, $$idx_4 = 0; $$idx_4 < $$len_3; ++$$idx_4) {
+    var $v_0 = Srch.ValueInfo.ValueTypeHandler.$4H();
+    for (var $$arr_2 = Srch.ValueInfo.ValueTypeHandler.$4O, $$len_3 = $$arr_2.length, $$idx_4 = 0; $$idx_4 < $$len_3; ++$$idx_4) {
         var $v_1 = $$arr_2[$$idx_4];
         var $v_2 = Srch.U.getOrCreateFieldOnObject($v_0, $v_1, {});
         var $v_3 = $p0.matching[$v_1];
@@ -9232,10 +9236,10 @@ Srch.ValueInfo.ValueTypeHandler.$13 = function Srch_ValueInfo_ValueTypeHandler$$
     return Srch.U.getFieldOnObject($v_0, $p2);
 }
 Srch.ValueInfo.ValueTypeHandler.$2V = function Srch_ValueInfo_ValueTypeHandler$$2V($p0, $p1) {
-    var $v_0 = Srch.ValueInfo.ValueTypeHandler.$4G();
+    var $v_0 = Srch.ValueInfo.ValueTypeHandler.$4H();
     var $v_1 = Srch.ValueInfo.ValueTypeHandler.$2U(Srch.ValueInfo.ValueTypeHandler.$1b, $v_0, Srch.ValueInfo.ValueTypeHandler.$k);
     if (Srch.U.n($v_1)) {
-        $v_1 = Srch.ValueInfo.ValueTypeHandler.get_$48();
+        $v_1 = Srch.ValueInfo.ValueTypeHandler.get_$49();
     }
     if (Srch.U.w($p0) && Srch.U.w($p1)) {
         return $v_1;
@@ -9245,18 +9249,18 @@ Srch.ValueInfo.ValueTypeHandler.$2V = function Srch_ValueInfo_ValueTypeHandler$$
         $v_2 = Srch.ValueInfo.ValueTypeHandler.$2U($p0, $v_0, Srch.ValueInfo.ValueTypeHandler.$k);
         if (Srch.U.n($v_2)) {
             var $v_3 = Srch.ValueInfo.$d($p0);
-            $v_2 = Srch.ValueInfo.ValueTypeHandler.$2U($v_3, $v_0, Srch.ValueInfo.ValueTypeHandler.$36);
+            $v_2 = Srch.ValueInfo.ValueTypeHandler.$2U($v_3, $v_0, Srch.ValueInfo.ValueTypeHandler.$35);
         }
     }
     if (Srch.U.w($p1)) {
         $p1 = Srch.ValueInfo.ValueTypeHandler.$5X($p0);
     }
     if (Srch.U.n($v_2) && !Srch.U.w($p1)) {
-        $v_2 = Srch.ValueInfo.ValueTypeHandler.$2U($p1, $v_0, Srch.ValueInfo.ValueTypeHandler.$2z);
+        $v_2 = Srch.ValueInfo.ValueTypeHandler.$2U($p1, $v_0, Srch.ValueInfo.ValueTypeHandler.$2y);
     }
     return (Srch.U.n($v_2)) ? $v_1 : $v_2;
 }
-Srch.ValueInfo.ValueTypeHandler.$4C = function Srch_ValueInfo_ValueTypeHandler$$4C($p0) {
+Srch.ValueInfo.ValueTypeHandler.$4D = function Srch_ValueInfo_ValueTypeHandler$$4D($p0) {
     var $v_0 = Srch.ValueInfo.ValueTypeHandler.$2V($p0, null);
     return (!Srch.U.n($v_0) && !Srch.U.w($v_0.refinementOverrideTemplateId)) ? $v_0.refinementOverrideTemplateId : '';
 }
@@ -9290,15 +9294,15 @@ Srch.ValueInfo.ValueTypeHandler.$5B = function Srch_ValueInfo_ValueTypeHandler$$
     }
     return $v_0;
 }
-Srch.ValueInfo.ValueTypeHandler.$3c = function Srch_ValueInfo_ValueTypeHandler$$3c($p0, $p1, $p2) {
+Srch.ValueInfo.ValueTypeHandler.$3e = function Srch_ValueInfo_ValueTypeHandler$$3e($p0, $p1, $p2) {
     var $v_0 = Srch.ValueInfo.ValueTypeHandler.$5C($p0, $p2, null);
     $v_0.matching = {};
     $v_0.matching[Srch.ValueInfo.ValueTypeHandler.$k] = [ $p1 ];
-    Srch.ValueInfo.ValueTypeHandler.$3d($v_0);
+    Srch.ValueInfo.ValueTypeHandler.$3f($v_0);
     return $v_0;
 }
 Srch.ValueInfo.ValueTypeHandler.$23 = function Srch_ValueInfo_ValueTypeHandler$$23($p0, $p1, $p2, $p3) {
-    return Srch.ValueInfo.ValueTypeHandler.$4e($p0, $p1, $p2, null, $p3);
+    return Srch.ValueInfo.ValueTypeHandler.$4f($p0, $p1, $p2, null, $p3);
 }
 Srch.ValueInfo.ValueTypeHandler.$5X = function Srch_ValueInfo_ValueTypeHandler$$5X($p0) {
     if (Srch.U.w($p0)) {
@@ -9322,20 +9326,20 @@ Srch.ValueInfo.ValueTypeHandler.$5X = function Srch_ValueInfo_ValueTypeHandler$$
 }
 Srch.ValueInfo.ValueTypeHandler.$o = function Srch_ValueInfo_ValueTypeHandler$$o($p0, $p1, $p2, $p3, $p4) {
     var $v_0 = [];
-    return Srch.ValueInfo.ValueTypeHandler.$4e($p0, $p1, $p2, $p3, $p4);
+    return Srch.ValueInfo.ValueTypeHandler.$4f($p0, $p1, $p2, $p3, $p4);
 }
-Srch.ValueInfo.ValueTypeHandler.$4e = function Srch_ValueInfo_ValueTypeHandler$$4e($p0, $p1, $p2, $p3, $p4) {
+Srch.ValueInfo.ValueTypeHandler.$4f = function Srch_ValueInfo_ValueTypeHandler$$4f($p0, $p1, $p2, $p3, $p4) {
     var $v_0 = new Srch.ValueInfo.ValueTypeHandler();
     $v_0.id = $p0;
     $v_0.baseHandlerId = $p0;
     $v_0.matching[Srch.ValueInfo.ValueTypeHandler.$k] = $p1;
-    $v_0.matching[Srch.ValueInfo.ValueTypeHandler.$36] = $p2;
-    $v_0.matching[Srch.ValueInfo.ValueTypeHandler.$2z] = $p3;
+    $v_0.matching[Srch.ValueInfo.ValueTypeHandler.$35] = $p2;
+    $v_0.matching[Srch.ValueInfo.ValueTypeHandler.$2y] = $p3;
     $v_0.valueRenderer = $p4;
-    Srch.ValueInfo.ValueTypeHandler.$3d($v_0);
+    Srch.ValueInfo.ValueTypeHandler.$3f($v_0);
     return $v_0;
 }
-Srch.ValueInfo.ValueTypeHandler.get_$48 = function Srch_ValueInfo_ValueTypeHandler$get_$48() {
+Srch.ValueInfo.ValueTypeHandler.get_$49 = function Srch_ValueInfo_ValueTypeHandler$get_$49() {
     var $v_0 = new Srch.ValueInfo.ValueTypeHandler();
     $v_0.id = Srch.ValueInfo.ValueTypeHandler.$1b;
     $v_0.baseHandlerId = Srch.ValueInfo.ValueTypeHandler.$1b;
@@ -9363,7 +9367,7 @@ Srch.ValueInfo.ValueTypeHandler.$2W = function Srch_ValueInfo_ValueTypeHandler$$
     return $v_0;
 }
 Srch.ValueInfo.ValueTypeHandler.$5a = function Srch_ValueInfo_ValueTypeHandler$$5a() {
-    Srch.ValueInfo.ValueTypeHandler.$3d(Srch.ValueInfo.ValueTypeHandler.get_$48());
+    Srch.ValueInfo.ValueTypeHandler.$3f(Srch.ValueInfo.ValueTypeHandler.get_$49());
     var $v_0 = Srch.ValueInfo.ValueTypeHandler.$o('NumericInt', [ 'UrlDepth', 'DocumentSummarySize', 'PictureHeight', 'PictureWidth', 'Rank', 'RecsClickedLifeTime', 'RecsClickedRecent', 'ReplyCount', 'siterank', 'SocialDistance', 'ViewsLifeTime', 'ViewsLifeTimeUniqueUsers', 'ViewsRecent', 'ViewsRecentUniqueUsers' ], [ 'OWSINTG', 'OWSRCNT' ], [ 'Integer' ], Srch.ValueInfo.Renderers.defaultNumberRenderer);
     $v_0.valueParser = Srch.ValueInfo.Parsers.$5m;
     $v_0.intervalLabels = Srch.ValueInfo.ValueTypeHandler.get_$3E();
@@ -9376,7 +9380,7 @@ Srch.ValueInfo.ValueTypeHandler.$5a = function Srch_ValueInfo_ValueTypeHandler$$
     var $v_3 = Srch.ValueInfo.ValueTypeHandler.$o('EcmaDateRefinersSingle', [ 'RefinableDateSingle00', 'RefinableDateSingle01', 'RefinableDateSingle02', 'RefinableDateSingle03', 'RefinableDateSingle04' ], [ 'OWSDATE' ], [ 'EcmaDate' ], Srch.ValueInfo.Renderers.defaultDateRenderer);
     $v_3.valueParser = Srch.ValueInfo.Parsers.$2Q;
     $v_3.intervalLabels = Srch.ValueInfo.ValueTypeHandler.$2W();
-    if (!OffSwitch.IsActive(Srch.ValueInfo.$3u)) {
+    if (!OffSwitch.IsActive(Srch.ValueInfo.$3w)) {
         var $v_B = Srch.ValueInfo.ValueTypeHandler.$o('EcmaDateRefinersInvariant', [ 'RefinableDateInvariant00', 'RefinableDateInvariant01' ], [], [], Srch.ValueInfo.Renderers.defaultDateInvariantRenderer);
         $v_B.valueParser = Srch.ValueInfo.Parsers.$2Q;
         $v_B.intervalLabels = Srch.ValueInfo.ValueTypeHandler.$2W();
@@ -9397,7 +9401,7 @@ Srch.ValueInfo.ValueTypeHandler.$5a = function Srch_ValueInfo_ValueTypeHandler$$
     $v_8.valueParser = Srch.ValueInfo.Parsers.$67;
     var $v_9 = Srch.ValueInfo.ValueTypeHandler.$o('Boolean', [ 'IsDocument', 'IsContainer', 'IsData', 'IsDefaultView', 'IsEmptyList', 'IsListItem', 'IsMyDocuments', 'IsPartiallyProcessed', 'IsReport', 'IsSharedWithGroup', 'NonDocument', 'RobotsNoIndex', 'SiteClosed', 'SiteContainer' ], [ 'OWSBOOL' ], [ 'YesNo' ], Srch.ValueInfo.Renderers.defaultBooleanRendering);
     $v_9.valueParser = Srch.ValueInfo.Parsers.$59;
-    var $v_A = Srch.ValueInfo.ValueTypeHandler.$3c('FileSize', 'Size', 'NumericPropOWSINTG');
+    var $v_A = Srch.ValueInfo.ValueTypeHandler.$3e('FileSize', 'Size', 'NumericPropOWSINTG');
     $v_A.valueRenderer = Srch.ValueInfo.Renderers.numberFileSizeRendering;
 }
 Srch.ValueInfo.ValueTypeHandler.prototype = {
@@ -9441,7 +9445,7 @@ Srch.ParseJSONUtil.evaluateTokensInJsonObject = function Srch_ParseJSONUtil$eval
     if (!Srch.U.n($v_0) && $v_0) {
         return;
     }
-    Srch.U.$47(jsonObject, function($p1_0, $p1_1, $p1_2) {
+    Srch.U.$48(jsonObject, function($p1_0, $p1_1, $p1_2) {
         if ('string' === typeof($p1_2)) {
             var $v_1 = Srch.ParseJSONUtil.evaluateJsonValueToken($p1_2);
             if ('string' !== typeof($v_1)) {
@@ -9545,11 +9549,11 @@ Srch.DataConvertUtil.registerClass('Srch.DataConvertUtil');
 Microsoft.SharePoint.Client.Search.Query.KnownTableTypes.registerClass('Microsoft.SharePoint.Client.Search.Query.KnownTableTypes');
 function search_clientcontrols_initialize() {
 this.$q = false;
-Srch.ClientControl.$4X = '<div><a href=\"#\" style=\"cursor:pointer; \" class=\"ms-calloutLink ms-clientcontrol-showdetails\" onclick=\"Srch.ClientControl.toggleMessageDetails(this.parentNode);;return false;\">{0}</a><a href=\"#\" style=\"display: none; cursor:pointer; \" class=\"ms-calloutLink ms-clientcontrol-hidedetails\" onclick=\"Srch.ClientControl.toggleMessageDetails(this.parentNode);;return false;\">{1}</a><br style=\"display: none;\"/><br style=\"display: none;\"/><div style=\"display: none;\" id=\"ms-search-errors\" class=\"ms-status-msg {2} ms-clientcontrol-errors\" style=\"word-wrap:break-word\">';
+Srch.ClientControl.$4Y = '<div><a href=\"#\" style=\"cursor:pointer; \" class=\"ms-calloutLink ms-clientcontrol-showdetails\" onclick=\"Srch.ClientControl.toggleMessageDetails(this.parentNode);;return false;\">{0}</a><a href=\"#\" style=\"display: none; cursor:pointer; \" class=\"ms-calloutLink ms-clientcontrol-hidedetails\" onclick=\"Srch.ClientControl.toggleMessageDetails(this.parentNode);;return false;\">{1}</a><br style=\"display: none;\"/><br style=\"display: none;\"/><div style=\"display: none;\" id=\"ms-search-errors\" class=\"ms-status-msg {2} ms-clientcontrol-errors\" style=\"word-wrap:break-word\">';
 Srch.ClientControl.$1w = '<div class=\"ms-search-error\">{0}</div>';
-Srch.DataProvider.$4W = 'D9BFB1A1-9036-4627-83B2-BBD9983AC8A1';
+Srch.DataProvider.$4X = 'D9BFB1A1-9036-4627-83B2-BBD9983AC8A1';
 Srch.DataProvider.$2f = '4790B250-E2AF-4E4A-8136-600739EE3163';
-Srch.DataProvider.$3W = '0BBA4D7D-4F2C-4086-975A-8F9D2B6C6D53';
+Srch.DataProvider.$3Y = '0BBA4D7D-4F2C-4086-975A-8F9D2B6C6D53';
 Srch.DataProvider.$1x = '5DF7BA10-55D6-4da1-B55F-896F7BCB486B';
 Srch.DataProvider.$3H = 'C8BDD081-7379-4c71-AAC8-61B6AA6E25A6';
 Srch.DataProvider.$1k = '02B657FE-924F-4b2b-BB91-4A12BAF9929A';
@@ -9557,10 +9561,7 @@ Srch.Refinement.$54 = new RegExp('[^\\s\"]+|\"[^\"]*\"');
 Srch.Refinement.refinemenT_TITLE_PREFIX = 'rf_RefinementTitle_';
 Srch.SearchBox.searchBoxBorderClassName = 'ms-srch-sb-border';
 Srch.SearchBox.searchBoxFocusedBorderClassName = 'ms-srch-sb-borderFocused';
-Srch.U.$44 = [ 'http://', 'https://', 'file://', 'file:\\\\', 'ftp://', 'mailto:', 'news:', 'nntp:', 'rtsp://', 'tel:', 'pnm://', 'mms://', 'data:' ];
-Srch.U.$3v = '8C7CDB1D-A9CD-4FED-8420-EFAA93476756';
-Srch.U.$4f = '85650206-8AA7-46F3-827C-AC951FF1EC11';
-Srch.U.$2x = 'F0F9F850-3673-4F91-95B0-9DD2EE09452B';
+Srch.U.$45 = [ 'http://', 'https://', 'file://', 'file:\\\\', 'ftp://', 'mailto:', 'news:', 'nntp:', 'rtsp://', 'tel:', 'pnm://', 'mms://', 'data:' ];
 Srch.U.secureCookieKillSwitch = '4513C9D6-D660-4A0C-94AD-7316B43AE55E';
 Srch.U.clientTypeInQSKillSwitch = 'D653D00F-A3E3-47E7-8106-9BAF30700E93';
 Srch.U.hitHighlightingOpenTag = '<strong class=\"ms-srch-item-highlightedText\">';
@@ -9579,13 +9580,13 @@ Srch.U.pathTruncationLengthWithMetadata = 41;
 Srch.U.personaControlRenderedThreshold = 60;
 Srch.U.maximumSocialMetadataValue = 1000;
 Srch.U.contentFixedWidthLength = 90;
-Srch.U.$4U = 'LoadTemplate';
-Srch.U.$4R = 'ItemRenderWrapper';
-Srch.U.$3C = 'ExecutionContext';
+Srch.U.$4V = 'LoadTemplate';
+Srch.U.$4S = 'ItemRenderWrapper';
+Srch.U.$3B = 'ExecutionContext';
 Srch.U.$1T = 'TemplateFunction';
-Srch.U.$3D = 'Operation';
+Srch.U.$3C = 'Operation';
 Srch.U.$2S = 'DisplayTemplateData';
-Srch.U.$4A = 'TemplateUrl';
+Srch.U.$4B = 'TemplateUrl';
 Srch.U.$2b = 'root';
 Srch.U.hitHighlightedDelimiterXml = '<ddd/>';
 Srch.U.hitHighlightedDelimiterHtml = '&#8230;';
@@ -9632,9 +9633,9 @@ Srch.ScriptApplicationManager.$w = null;
 Srch.QueryGroup.broadcastName = '__';
 Srch.QueryState.$4 = new Srch.QueryState();
 Srch.ControlMessage.$4g = 'RuntimeException';
-Srch.ControlMessage.$4V = 'LocStringIdNotFoundWarning';
+Srch.ControlMessage.$4W = 'LocStringIdNotFoundWarning';
 Srch.ControlMessage.$4x = 'LoadResource';
-Srch.ControlMessage.$4B = '{0} ({1}: {2})';
+Srch.ControlMessage.$4C = '{0} ({1}: {2})';
 Srch.ControlMessage.$4y = ';';
 Srch.ClickRecorder.pageImpressionInPropertyBag = 'piPageImpression';
 Srch.ClickRecorder.pageImpressionSearchResult = 'piSearchResult';
@@ -9646,8 +9647,8 @@ Srch.ClickRecorder.pageImpressionSubResultIndex = 'piSearchSubResultIndex';
 Srch.ClickRecorder.$J = null;
 Srch.RefinementUtil.searchRefinementClientControls = {};
 Srch.RefinementUtil.searchRefinementControls = {};
-Srch.ValueInfo.$3a = null;
-Srch.ValueInfo.$3u = 'CAC101F7-CF4D-45B3-90A7-C883FAF3E210';
+Srch.ValueInfo.$3c = null;
+Srch.ValueInfo.$3w = 'CAC101F7-CF4D-45B3-90A7-C883FAF3E210';
 Srch.ValueInfo.$4w = '2e713a63-fa06-4455-b6ff-a1e42803b889';
 Srch.ValueInfo.taxFacetInfoPropertyName = 'owsmetadatafacetinfo';
 Srch.ValueInfo.taxAllTagsPropertyName = 'owstaxidmetadataalltagsinfo';
@@ -9663,10 +9664,10 @@ Srch.ValueInfo.displayAuthorFieldPropertyName = 'DisplayAuthor';
 Srch.ValueInfo.$3Q = [ 'min', 'max', 'range', 'value', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ];
 Srch.ValueInfo.$$cctor();
 Srch.ValueInfo.ValueTypeHandler.$k = 'PropNameExact';
-Srch.ValueInfo.ValueTypeHandler.$36 = 'TypeCode';
-Srch.ValueInfo.ValueTypeHandler.$2z = 'SearchType';
+Srch.ValueInfo.ValueTypeHandler.$35 = 'TypeCode';
+Srch.ValueInfo.ValueTypeHandler.$2y = 'SearchType';
 Srch.ValueInfo.ValueTypeHandler.$1b = '*';
-Srch.ValueInfo.ValueTypeHandler.$4N = [ Srch.ValueInfo.ValueTypeHandler.$k, Srch.ValueInfo.ValueTypeHandler.$36, Srch.ValueInfo.ValueTypeHandler.$2z ];
+Srch.ValueInfo.ValueTypeHandler.$4O = [ Srch.ValueInfo.ValueTypeHandler.$k, Srch.ValueInfo.ValueTypeHandler.$35, Srch.ValueInfo.ValueTypeHandler.$2y ];
 Srch.ValueInfo.ValueTypeHandler.$51 = '(Refinable)?(String|Date|Int|Double|Decimal|YesNo)[0-9][0-9]';
 Srch.ParseJSONUtil.$4j = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\(([0-9]+(?:,[0-9]+){2,6})\\)\\\\/\\\"', 'g');
 Srch.ParseJSONUtil.$4h = new RegExp('(^|[^\\\\])\\\"\\\\/Date\\((-?[0-9]+)(?:[a-zA-Z]|(?:\\+|-)[0-9]{4})\\)\\\\/\\\"', 'g');

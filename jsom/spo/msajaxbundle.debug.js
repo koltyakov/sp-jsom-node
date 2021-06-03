@@ -5979,21 +5979,21 @@ Sys.Net.XMLHttpExecutor = function Sys$Net$XMLHttpExecutor() {
         
         if (_this._xmlHttpRequest.readyState === 4 ) {
             try {
-                if (typeof(_this._xmlHttpRequest.status) === "undefined") {
+                if (typeof(_this._xmlHttpRequest.status) === "undefined" || _this._xmlHttpRequest.status === 0) {
                     return;
                 }
             }
             catch(ex) {
                 return;
             }
-
+            
             _this._clearTimer();
             _this._responseAvailable = true;
-            _this._webRequest.completed(Sys.EventArgs.Empty);
-            if (_this._xmlHttpRequest != null) {
-                _this._xmlHttpRequest.onreadystatechange = Function.emptyMethod;
-                _this._xmlHttpRequest = null;
-            }
+                _this._webRequest.completed(Sys.EventArgs.Empty);
+                if (_this._xmlHttpRequest != null) {
+                    _this._xmlHttpRequest.onreadystatechange = Function.emptyMethod;
+                    _this._xmlHttpRequest = null;
+                }
         }
     });
     this._clearTimer = (function() {

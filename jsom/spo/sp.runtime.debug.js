@@ -6,7 +6,7 @@
         "version": {
             "rmj": 16,
             "rmm": 0,
-            "rup": 20203,
+            "rup": 21319,
             "rpr": 12007
         }
     };
@@ -4796,7 +4796,6 @@ function sp_runtime_initialize() {
     SP.ResourceStrings.cC_TimeoutGettingThemeInfo = 'CC_TimeoutGettingThemeInfo';
     SP.ResourceStrings.cC_Welcome = 'CC_Welcome';
     SP.ResourceStrings.cannotFindContextWebServerRelativeUrl = 'CannotFindContextWebServerRelativeUrl';
-    SP.ResourceStrings.cannotFindPlatformLibrary = 'CannotFindPlatformLibrary';
     SP.ResourceStrings.collectionHasNotBeenInitialized = 'CollectionHasNotBeenInitialized';
     SP.ResourceStrings.collectionModified = 'CollectionModified';
     SP.ResourceStrings.invalidUsageOfConditionalScope = 'InvalidUsageOfConditionalScope';
@@ -4856,7 +4855,6 @@ function sp_runtime_initialize() {
     SP.RuntimeRes.rE_CannotAccessSiteOpenWindowFailed = 'This page cannot open a window to access the web site \"{0}\" or it cannot reference the opened window. Please browse to that web site, and then browse to this page again.';
     SP.RuntimeRes.noObjectPathAssociatedWithObject = 'The object is not associated with an object identity or the object identity is invalid.';
     SP.RuntimeRes.pP_ServerProblem = 'Sorry, we\'re having trouble reaching the server.';
-    SP.RuntimeRes.cannotFindPlatformLibrary = 'Cannot find platform service library. For Windows Store application, please include Microsoft.SharePoint.Client.Runtime.WindowsStore.dll in the application package. For Windows Phone application, please include Microsoft.SharePoint.Client.Runtime.WindowsPhone.dll in the application package. For Windows application, please install Microsoft.SharePoint.Client.Runtime.Windows.dll in the GAC (Global Assembly Cache) or make it available for the Windows application.';
     SP.RuntimeRes.rE_BrowserNotSupported = 'The required functionalities are not supported by your browser. Please make sure you are using IE 8 or above, or other modern browser. Please make sure the \'X-UA-Compatible\' meta tag is set to be \'IE=8\' or above.';
     SP.RuntimeRes.cC_InvalidJSON = 'Invalid JSON data.';
     SP.RuntimeRes.invalidUsageOfExceptionHandlingScope = 'Incorrect usage of exception handling scope.';

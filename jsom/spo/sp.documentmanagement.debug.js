@@ -190,6 +190,26 @@ SP.DocumentSet.DocumentSet.importDocumentSet = function SP_DocumentSet_DocumentS
 }
 SP.DocumentSet.DocumentSet.prototype = {
     
+    get_versionCollection: function SP_DocumentSet_DocumentSet$get_versionCollection() {
+        var $v_0 = ((this.get_objectData().get_clientObjectProperties()['VersionCollection']));
+        if (SP.ScriptUtility.isUndefined($v_0)) {
+            $v_0 = new SP.DocumentSet.DocumentSetVersionCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'VersionCollection'));
+            this.get_objectData().get_clientObjectProperties()['VersionCollection'] = $v_0;
+        }
+        return $v_0;
+    },
+    
+    initPropertiesFromJson: function SP_DocumentSet_DocumentSet$initPropertiesFromJson(parentNode) {
+        SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.VersionCollection;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.updateClientObjectPropertyType('VersionCollection', this.get_versionCollection(), $v_0);
+            this.get_versionCollection().fromJson($v_0);
+            delete parentNode.VersionCollection;
+        }
+    },
+    
     exportDocumentSet: function SP_DocumentSet_DocumentSet$exportDocumentSet() {
         var $v_0 = this.get_context();
         var $v_1;
@@ -199,6 +219,10 @@ SP.DocumentSet.DocumentSet.prototype = {
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
         return $v_1;
     }
+}
+
+
+SP.DocumentSet.DocumentSetObjectPropertyNames = function SP_DocumentSet_DocumentSetObjectPropertyNames() {
 }
 
 
@@ -314,6 +338,332 @@ SP.DocumentSet.DocumentSetTemplateObjectPropertyNames = function SP_DocumentSet_
 }
 
 
+SP.DocumentSet.DocumentSetVersion = function SP_DocumentSet_DocumentSetVersion(context, objectPath) {
+    SP.DocumentSet.DocumentSetVersion.initializeBase(this, [ context, objectPath ]);
+}
+SP.DocumentSet.DocumentSetVersion.prototype = {
+    
+    get_comments: function SP_DocumentSet_DocumentSetVersion$get_comments() {
+        this.checkUninitializedProperty('Comments');
+        return ((this.get_objectData().get_properties()['Comments']));
+    },
+    
+    get_created: function SP_DocumentSet_DocumentSetVersion$get_created() {
+        this.checkUninitializedProperty('Created');
+        return ((this.get_objectData().get_properties()['Created']));
+    },
+    
+    get_createdBy: function SP_DocumentSet_DocumentSetVersion$get_createdBy() {
+        this.checkUninitializedProperty('CreatedBy');
+        return ((this.get_objectData().get_properties()['CreatedBy']));
+    },
+    
+    get_parentCollection: function SP_DocumentSet_DocumentSetVersion$get_parentCollection() {
+        var $v_0 = ((this.get_objectData().get_clientObjectProperties()['ParentCollection']));
+        if (SP.ScriptUtility.isUndefined($v_0)) {
+            $v_0 = new SP.DocumentSet.DocumentSetVersionCollection(this.get_context(), new SP.ObjectPathProperty(this.get_context(), this.get_path(), 'ParentCollection'));
+            this.get_objectData().get_clientObjectProperties()['ParentCollection'] = $v_0;
+        }
+        return $v_0;
+    },
+    
+    get_versionLabel: function SP_DocumentSet_DocumentSetVersion$get_versionLabel() {
+        this.checkUninitializedProperty('VersionLabel');
+        return ((this.get_objectData().get_properties()['VersionLabel']));
+    },
+    
+    initPropertiesFromJson: function SP_DocumentSet_DocumentSetVersion$initPropertiesFromJson(parentNode) {
+        SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.Comments;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['Comments'] = ($v_0);
+            delete parentNode.Comments;
+        }
+        $v_0 = parentNode.Created;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['Created'] = ($v_0);
+            delete parentNode.Created;
+        }
+        $v_0 = parentNode.CreatedBy;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['CreatedBy'] = ($v_0);
+            delete parentNode.CreatedBy;
+        }
+        $v_0 = parentNode.ParentCollection;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.updateClientObjectPropertyType('ParentCollection', this.get_parentCollection(), $v_0);
+            this.get_parentCollection().fromJson($v_0);
+            delete parentNode.ParentCollection;
+        }
+        $v_0 = parentNode.VersionLabel;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['VersionLabel'] = ($v_0);
+            delete parentNode.VersionLabel;
+        }
+    },
+    
+    getDisplayFields: function SP_DocumentSet_DocumentSetVersion$getDisplayFields() {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetDisplayFields', null);
+        $v_0.addQuery($v_2);
+        $v_1 = (([]));
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    
+    getDisplayContents: function SP_DocumentSet_DocumentSetVersion$getDisplayContents() {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetDisplayContents', null);
+        $v_0.addQuery($v_2);
+        $v_1 = (([]));
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    }
+}
+
+
+SP.DocumentSet.DocumentSetVersionPropertyNames = function SP_DocumentSet_DocumentSetVersionPropertyNames() {
+}
+
+
+SP.DocumentSet.DocumentSetVersionObjectPropertyNames = function SP_DocumentSet_DocumentSetVersionObjectPropertyNames() {
+}
+
+
+SP.DocumentSet.DocumentSetVersionCollection = function SP_DocumentSet_DocumentSetVersionCollection(context, objectPath) {
+    SP.DocumentSet.DocumentSetVersionCollection.initializeBase(this, [ context, objectPath ]);
+}
+SP.DocumentSet.DocumentSetVersionCollection.prototype = {
+    
+    itemAt: function SP_DocumentSet_DocumentSetVersionCollection$itemAt(index) {
+        return this.getItemAtIndex(index);
+    },
+    
+    get_item: function SP_DocumentSet_DocumentSetVersionCollection$get_item(index) {
+        return this.getItemAtIndex(index);
+    },
+    
+    get_childItemType: function SP_DocumentSet_DocumentSetVersionCollection$get_childItemType() {
+        return SP.DocumentSet.DocumentSetVersion;
+    },
+    
+    add: function SP_DocumentSet_DocumentSetVersionCollection$add(isLastMajor, comments) {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'Add', [ isLastMajor, comments ]);
+        $v_0.addQuery($v_1);
+    }
+}
+
+
+SP.DocumentSet.DocumentSetVersionField = function SP_DocumentSet_DocumentSetVersionField() {
+    SP.DocumentSet.DocumentSetVersionField.initializeBase(this);
+}
+SP.DocumentSet.DocumentSetVersionField.prototype = {
+    $3_1: null,
+    $4_1: null,
+    $6_1: false,
+    $0_1: null,
+    
+    get_formattedValue: function SP_DocumentSet_DocumentSetVersionField$get_formattedValue() {
+        return this.$3_1;
+    },
+    
+    set_formattedValue: function SP_DocumentSet_DocumentSetVersionField$set_formattedValue(value) {
+        this.$3_1 = value;
+        return value;
+    },
+    
+    get_id: function SP_DocumentSet_DocumentSetVersionField$get_id() {
+        return this.$4_1;
+    },
+    
+    set_id: function SP_DocumentSet_DocumentSetVersionField$set_id(value) {
+        this.$4_1 = value;
+        return value;
+    },
+    
+    get_isFieldFound: function SP_DocumentSet_DocumentSetVersionField$get_isFieldFound() {
+        return this.$6_1;
+    },
+    
+    set_isFieldFound: function SP_DocumentSet_DocumentSetVersionField$set_isFieldFound(value) {
+        this.$6_1 = value;
+        return value;
+    },
+    
+    get_title: function SP_DocumentSet_DocumentSetVersionField$get_title() {
+        return this.$0_1;
+    },
+    
+    set_title: function SP_DocumentSet_DocumentSetVersionField$set_title(value) {
+        this.$0_1 = value;
+        return value;
+    },
+    
+    get_typeId: function SP_DocumentSet_DocumentSetVersionField$get_typeId() {
+        return '{17195ef5-1f62-4a31-9ff7-e42eec5ff89e}';
+    },
+    
+    writeToXml: function SP_DocumentSet_DocumentSetVersionField$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        var $v_0 = [ 'FormattedValue', 'Id', 'IsFieldFound', 'Title' ];
+        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
+        SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
+    },
+    
+    initPropertiesFromJson: function SP_DocumentSet_DocumentSetVersionField$initPropertiesFromJson(parentNode) {
+        SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.FormattedValue;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$3_1 = ($v_0);
+            delete parentNode.FormattedValue;
+        }
+        $v_0 = parentNode.Id;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$4_1 = ($v_0);
+            delete parentNode.Id;
+        }
+        $v_0 = parentNode.IsFieldFound;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$6_1 = ($v_0);
+            delete parentNode.IsFieldFound;
+        }
+        $v_0 = parentNode.Title;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$0_1 = ($v_0);
+            delete parentNode.Title;
+        }
+    }
+}
+
+
+SP.DocumentSet.DocumentSetVersionItem = function SP_DocumentSet_DocumentSetVersionItem() {
+    SP.DocumentSet.DocumentSetVersionItem.initializeBase(this);
+}
+SP.DocumentSet.DocumentSetVersionItem.prototype = {
+    $5_1: 0,
+    $7_1: false,
+    $8_1: null,
+    $9_1: null,
+    $0_1: null,
+    $H_1: null,
+    
+    get_internalId: function SP_DocumentSet_DocumentSetVersionItem$get_internalId() {
+        return this.$5_1;
+    },
+    
+    set_internalId: function SP_DocumentSet_DocumentSetVersionItem$set_internalId(value) {
+        this.$5_1 = value;
+        return value;
+    },
+    
+    get_isItemFound: function SP_DocumentSet_DocumentSetVersionItem$get_isItemFound() {
+        return this.$7_1;
+    },
+    
+    set_isItemFound: function SP_DocumentSet_DocumentSetVersionItem$set_isItemFound(value) {
+        this.$7_1 = value;
+        return value;
+    },
+    
+    get_itemUrl: function SP_DocumentSet_DocumentSetVersionItem$get_itemUrl() {
+        return this.$8_1;
+    },
+    
+    set_itemUrl: function SP_DocumentSet_DocumentSetVersionItem$set_itemUrl(value) {
+        this.$8_1 = value;
+        return value;
+    },
+    
+    get_linkToDocumentUrl: function SP_DocumentSet_DocumentSetVersionItem$get_linkToDocumentUrl() {
+        return this.$9_1;
+    },
+    
+    set_linkToDocumentUrl: function SP_DocumentSet_DocumentSetVersionItem$set_linkToDocumentUrl(value) {
+        this.$9_1 = value;
+        return value;
+    },
+    
+    get_title: function SP_DocumentSet_DocumentSetVersionItem$get_title() {
+        return this.$0_1;
+    },
+    
+    set_title: function SP_DocumentSet_DocumentSetVersionItem$set_title(value) {
+        this.$0_1 = value;
+        return value;
+    },
+    
+    get_versionLabel: function SP_DocumentSet_DocumentSetVersionItem$get_versionLabel() {
+        return this.$H_1;
+    },
+    
+    set_versionLabel: function SP_DocumentSet_DocumentSetVersionItem$set_versionLabel(value) {
+        this.$H_1 = value;
+        return value;
+    },
+    
+    get_typeId: function SP_DocumentSet_DocumentSetVersionItem$get_typeId() {
+        return '{d9ea6f67-67a6-4304-8fa6-8dab74cfaf0a}';
+    },
+    
+    writeToXml: function SP_DocumentSet_DocumentSetVersionItem$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        var $v_0 = [ 'InternalId', 'IsItemFound', 'ItemUrl', 'LinkToDocumentUrl', 'Title', 'VersionLabel' ];
+        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
+        SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
+    },
+    
+    initPropertiesFromJson: function SP_DocumentSet_DocumentSetVersionItem$initPropertiesFromJson(parentNode) {
+        SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.InternalId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$5_1 = ($v_0);
+            delete parentNode.InternalId;
+        }
+        $v_0 = parentNode.IsItemFound;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$7_1 = ($v_0);
+            delete parentNode.IsItemFound;
+        }
+        $v_0 = parentNode.ItemUrl;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$8_1 = ($v_0);
+            delete parentNode.ItemUrl;
+        }
+        $v_0 = parentNode.LinkToDocumentUrl;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$9_1 = ($v_0);
+            delete parentNode.LinkToDocumentUrl;
+        }
+        $v_0 = parentNode.Title;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$0_1 = ($v_0);
+            delete parentNode.Title;
+        }
+        $v_0 = parentNode.VersionLabel;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$H_1 = ($v_0);
+            delete parentNode.VersionLabel;
+        }
+    }
+}
+
+
 SP.DocumentSet.SharedFieldCollection = function SP_DocumentSet_SharedFieldCollection(context, objectPath) {
     SP.DocumentSet.SharedFieldCollection.initializeBase(this, [ context, objectPath ]);
 }
@@ -382,45 +732,45 @@ SP.MetadataNavigation.ConfiguredMetadataNavigationItem = function SP_MetadataNav
     SP.MetadataNavigation.ConfiguredMetadataNavigationItem.initializeBase(this);
 }
 SP.MetadataNavigation.ConfiguredMetadataNavigationItem.prototype = {
-    $9_1: null,
-    $A_1: null,
-    $B_1: null,
-    $C_1: false,
-    $D_1: false,
-    $E_1: false,
-    $F_1: false,
-    $G_1: false,
+    $I_1: null,
+    $J_1: null,
+    $K_1: null,
+    $L_1: false,
+    $M_1: false,
+    $N_1: false,
+    $O_1: false,
+    $P_1: false,
     
     get_fieldDisplayName: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_fieldDisplayName() {
-        return this.$9_1;
+        return this.$I_1;
     },
     
     get_fieldTitle: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_fieldTitle() {
-        return this.$A_1;
+        return this.$J_1;
     },
     
     get_fieldTypeAsString: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_fieldTypeAsString() {
-        return this.$B_1;
+        return this.$K_1;
     },
     
     get_isContentTypeField: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isContentTypeField() {
-        return this.$C_1;
+        return this.$L_1;
     },
     
     get_isFolderHierarchy: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isFolderHierarchy() {
-        return this.$D_1;
+        return this.$M_1;
     },
     
     get_isHierarchy: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isHierarchy() {
-        return this.$E_1;
+        return this.$N_1;
     },
     
     get_isMultiValueLookup: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isMultiValueLookup() {
-        return this.$F_1;
+        return this.$O_1;
     },
     
     get_isTaxonomyField: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_isTaxonomyField() {
-        return this.$G_1;
+        return this.$P_1;
     },
     
     get_typeId: function SP_MetadataNavigation_ConfiguredMetadataNavigationItem$get_typeId() {
@@ -444,42 +794,42 @@ SP.MetadataNavigation.ConfiguredMetadataNavigationItem.prototype = {
         var $v_0;
         $v_0 = parentNode.FieldDisplayName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$9_1 = ($v_0);
+            this.$I_1 = ($v_0);
             delete parentNode.FieldDisplayName;
         }
         $v_0 = parentNode.FieldTitle;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$A_1 = ($v_0);
+            this.$J_1 = ($v_0);
             delete parentNode.FieldTitle;
         }
         $v_0 = parentNode.FieldTypeAsString;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$B_1 = ($v_0);
+            this.$K_1 = ($v_0);
             delete parentNode.FieldTypeAsString;
         }
         $v_0 = parentNode.IsContentTypeField;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$C_1 = ($v_0);
+            this.$L_1 = ($v_0);
             delete parentNode.IsContentTypeField;
         }
         $v_0 = parentNode.IsFolderHierarchy;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$D_1 = ($v_0);
+            this.$M_1 = ($v_0);
             delete parentNode.IsFolderHierarchy;
         }
         $v_0 = parentNode.IsHierarchy;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$E_1 = ($v_0);
+            this.$N_1 = ($v_0);
             delete parentNode.IsHierarchy;
         }
         $v_0 = parentNode.IsMultiValueLookup;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$F_1 = ($v_0);
+            this.$O_1 = ($v_0);
             delete parentNode.IsMultiValueLookup;
         }
         $v_0 = parentNode.IsTaxonomyField;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$G_1 = ($v_0);
+            this.$P_1 = ($v_0);
             delete parentNode.IsTaxonomyField;
         }
     }
@@ -537,94 +887,94 @@ SP.Video.EmbedCodeConfiguration = function SP_Video_EmbedCodeConfiguration() {
     SP.Video.EmbedCodeConfiguration.initializeBase(this);
 }
 SP.Video.EmbedCodeConfiguration.prototype = {
-    $0_1: false,
     $1_1: false,
     $2_1: false,
-    $3_1: false,
-    $4_1: false,
-    $5_1: 0,
-    $6_1: 0,
-    $7_1: null,
-    $8_1: 0,
+    $A_1: false,
+    $B_1: false,
+    $C_1: false,
+    $D_1: 0,
+    $E_1: 0,
+    $F_1: null,
+    $G_1: 0,
     
     get_autoPlay: function SP_Video_EmbedCodeConfiguration$get_autoPlay() {
-        return this.$0_1;
-    },
-    
-    set_autoPlay: function SP_Video_EmbedCodeConfiguration$set_autoPlay(value) {
-        this.$0_1 = value;
-        return value;
-    },
-    
-    get_displayTitle: function SP_Video_EmbedCodeConfiguration$get_displayTitle() {
         return this.$1_1;
     },
     
-    set_displayTitle: function SP_Video_EmbedCodeConfiguration$set_displayTitle(value) {
+    set_autoPlay: function SP_Video_EmbedCodeConfiguration$set_autoPlay(value) {
         this.$1_1 = value;
         return value;
     },
     
-    get_linkToOwnerProfilePage: function SP_Video_EmbedCodeConfiguration$get_linkToOwnerProfilePage() {
+    get_displayTitle: function SP_Video_EmbedCodeConfiguration$get_displayTitle() {
         return this.$2_1;
     },
     
-    set_linkToOwnerProfilePage: function SP_Video_EmbedCodeConfiguration$set_linkToOwnerProfilePage(value) {
+    set_displayTitle: function SP_Video_EmbedCodeConfiguration$set_displayTitle(value) {
         this.$2_1 = value;
         return value;
     },
     
+    get_linkToOwnerProfilePage: function SP_Video_EmbedCodeConfiguration$get_linkToOwnerProfilePage() {
+        return this.$A_1;
+    },
+    
+    set_linkToOwnerProfilePage: function SP_Video_EmbedCodeConfiguration$set_linkToOwnerProfilePage(value) {
+        this.$A_1 = value;
+        return value;
+    },
+    
     get_linkToVideoHomePage: function SP_Video_EmbedCodeConfiguration$get_linkToVideoHomePage() {
-        return this.$3_1;
+        return this.$B_1;
     },
     
     set_linkToVideoHomePage: function SP_Video_EmbedCodeConfiguration$set_linkToVideoHomePage(value) {
-        this.$3_1 = value;
+        this.$B_1 = value;
         return value;
     },
     
     get_loop: function SP_Video_EmbedCodeConfiguration$get_loop() {
-        return this.$4_1;
+        return this.$C_1;
     },
     
     set_loop: function SP_Video_EmbedCodeConfiguration$set_loop(value) {
-        this.$4_1 = value;
+        this.$C_1 = value;
         return value;
     },
     
     get_pixelHeight: function SP_Video_EmbedCodeConfiguration$get_pixelHeight() {
-        return this.$5_1;
+        return this.$D_1;
     },
     
     set_pixelHeight: function SP_Video_EmbedCodeConfiguration$set_pixelHeight(value) {
-        this.$5_1 = value;
+        this.$D_1 = value;
         return value;
     },
     
     get_pixelWidth: function SP_Video_EmbedCodeConfiguration$get_pixelWidth() {
-        return this.$6_1;
+        return this.$E_1;
     },
     
     set_pixelWidth: function SP_Video_EmbedCodeConfiguration$set_pixelWidth(value) {
-        this.$6_1 = value;
+        this.$E_1 = value;
         return value;
     },
     
     get_previewImagePath: function SP_Video_EmbedCodeConfiguration$get_previewImagePath() {
-        return this.$7_1;
+        return this.$F_1;
     },
     
     set_previewImagePath: function SP_Video_EmbedCodeConfiguration$set_previewImagePath(value) {
-        this.$7_1 = value;
+        this.$F_1 = value;
         return value;
     },
     
     get_startTime: function SP_Video_EmbedCodeConfiguration$get_startTime() {
-        return this.$8_1;
+        return this.$G_1;
     },
     
     set_startTime: function SP_Video_EmbedCodeConfiguration$set_startTime(value) {
-        this.$8_1 = value;
+        this.$G_1 = value;
         return value;
     },
     
@@ -649,47 +999,47 @@ SP.Video.EmbedCodeConfiguration.prototype = {
         var $v_0;
         $v_0 = parentNode.AutoPlay;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$0_1 = ($v_0);
+            this.$1_1 = ($v_0);
             delete parentNode.AutoPlay;
         }
         $v_0 = parentNode.DisplayTitle;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$1_1 = ($v_0);
+            this.$2_1 = ($v_0);
             delete parentNode.DisplayTitle;
         }
         $v_0 = parentNode.LinkToOwnerProfilePage;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$2_1 = ($v_0);
+            this.$A_1 = ($v_0);
             delete parentNode.LinkToOwnerProfilePage;
         }
         $v_0 = parentNode.LinkToVideoHomePage;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$3_1 = ($v_0);
+            this.$B_1 = ($v_0);
             delete parentNode.LinkToVideoHomePage;
         }
         $v_0 = parentNode.Loop;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$4_1 = ($v_0);
+            this.$C_1 = ($v_0);
             delete parentNode.Loop;
         }
         $v_0 = parentNode.PixelHeight;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$5_1 = ($v_0);
+            this.$D_1 = ($v_0);
             delete parentNode.PixelHeight;
         }
         $v_0 = parentNode.PixelWidth;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$6_1 = ($v_0);
+            this.$E_1 = ($v_0);
             delete parentNode.PixelWidth;
         }
         $v_0 = parentNode.PreviewImagePath;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$7_1 = ($v_0);
+            this.$F_1 = ($v_0);
             delete parentNode.PreviewImagePath;
         }
         $v_0 = parentNode.StartTime;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$8_1 = ($v_0);
+            this.$G_1 = ($v_0);
             delete parentNode.StartTime;
         }
     }
@@ -748,8 +1098,15 @@ SP.DocumentSet.DefaultDocument.registerClass('SP.DocumentSet.DefaultDocument', S
 SP.DocumentSet.DefaultDocumentPropertyNames.registerClass('SP.DocumentSet.DefaultDocumentPropertyNames');
 SP.DocumentSet.DefaultDocumentCollection.registerClass('SP.DocumentSet.DefaultDocumentCollection', SP.ClientObjectCollection);
 SP.DocumentSet.DocumentSet.registerClass('SP.DocumentSet.DocumentSet', SP.ClientObject);
+SP.DocumentSet.DocumentSetObjectPropertyNames.registerClass('SP.DocumentSet.DocumentSetObjectPropertyNames');
 SP.DocumentSet.DocumentSetTemplate.registerClass('SP.DocumentSet.DocumentSetTemplate', SP.ClientObject);
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.registerClass('SP.DocumentSet.DocumentSetTemplateObjectPropertyNames');
+SP.DocumentSet.DocumentSetVersion.registerClass('SP.DocumentSet.DocumentSetVersion', SP.ClientObject);
+SP.DocumentSet.DocumentSetVersionPropertyNames.registerClass('SP.DocumentSet.DocumentSetVersionPropertyNames');
+SP.DocumentSet.DocumentSetVersionObjectPropertyNames.registerClass('SP.DocumentSet.DocumentSetVersionObjectPropertyNames');
+SP.DocumentSet.DocumentSetVersionCollection.registerClass('SP.DocumentSet.DocumentSetVersionCollection', SP.ClientObjectCollection);
+SP.DocumentSet.DocumentSetVersionField.registerClass('SP.DocumentSet.DocumentSetVersionField', SP.ClientValueObject);
+SP.DocumentSet.DocumentSetVersionItem.registerClass('SP.DocumentSet.DocumentSetVersionItem', SP.ClientValueObject);
 SP.DocumentSet.SharedFieldCollection.registerClass('SP.DocumentSet.SharedFieldCollection', SP.ClientObjectCollection);
 SP.DocumentSet.WelcomePageFieldCollection.registerClass('SP.DocumentSet.WelcomePageFieldCollection', SP.ClientObjectCollection);
 SP.MetadataNavigation.ConfiguredMetadataNavigationItem.registerClass('SP.MetadataNavigation.ConfiguredMetadataNavigationItem', SP.ClientValueObject);
@@ -761,10 +1118,16 @@ function sp_documentmanagement_initialize() {
 SP.DocumentSet.DefaultDocumentPropertyNames.contentTypeId = 'ContentTypeId';
 SP.DocumentSet.DefaultDocumentPropertyNames.documentPath = 'DocumentPath';
 SP.DocumentSet.DefaultDocumentPropertyNames.name = 'Name';
+SP.DocumentSet.DocumentSetObjectPropertyNames.versionCollection = 'VersionCollection';
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.allowedContentTypes = 'AllowedContentTypes';
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.defaultDocuments = 'DefaultDocuments';
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.sharedFields = 'SharedFields';
 SP.DocumentSet.DocumentSetTemplateObjectPropertyNames.welcomePageFields = 'WelcomePageFields';
+SP.DocumentSet.DocumentSetVersionPropertyNames.comments = 'Comments';
+SP.DocumentSet.DocumentSetVersionPropertyNames.created = 'Created';
+SP.DocumentSet.DocumentSetVersionPropertyNames.createdBy = 'CreatedBy';
+SP.DocumentSet.DocumentSetVersionPropertyNames.versionLabel = 'VersionLabel';
+SP.DocumentSet.DocumentSetVersionObjectPropertyNames.parentCollection = 'ParentCollection';
 };
 sp_documentmanagement_initialize();
 

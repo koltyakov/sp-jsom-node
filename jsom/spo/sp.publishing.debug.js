@@ -79,7 +79,7 @@ SP.Publishing.AcronymInformation = function SP_Publishing_AcronymInformation() {
 }
 SP.Publishing.AcronymInformation.prototype = {
     $7_1: null,
-    $F_1: null,
+    $I_1: null,
     $1_1: 0,
     $3_1: null,
     
@@ -93,11 +93,11 @@ SP.Publishing.AcronymInformation.prototype = {
     },
     
     get_color: function SP_Publishing_AcronymInformation$get_color() {
-        return this.$F_1;
+        return this.$I_1;
     },
     
     set_color: function SP_Publishing_AcronymInformation$set_color(value) {
-        this.$F_1 = value;
+        this.$I_1 = value;
         return value;
     },
     
@@ -145,7 +145,7 @@ SP.Publishing.AcronymInformation.prototype = {
         }
         $v_0 = parentNode.Color;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$F_1 = ($v_0);
+            this.$I_1 = ($v_0);
             delete parentNode.Color;
         }
         $v_0 = parentNode.Lcid;
@@ -408,6 +408,154 @@ SP.Publishing.AddinSettingsPropertyNames = function SP_Publishing_AddinSettingsP
 }
 
 
+SP.Publishing.BoostFieldsData = function SP_Publishing_BoostFieldsData() {
+    SP.Publishing.BoostFieldsData.initializeBase(this);
+}
+SP.Publishing.BoostFieldsData.prototype = {
+    $D_1: null,
+    $E_1: false,
+    $S_1: null,
+    $V_1: 0,
+    $i_1: 0,
+    $j_1: 0,
+    $p_1: 0,
+    $q_1: 0,
+    
+    get_boostOrderType: function SP_Publishing_BoostFieldsData$get_boostOrderType() {
+        return this.$D_1;
+    },
+    
+    set_boostOrderType: function SP_Publishing_BoostFieldsData$set_boostOrderType(value) {
+        this.$D_1 = value;
+        return value;
+    },
+    
+    get_boostUntilSeen: function SP_Publishing_BoostFieldsData$get_boostUntilSeen() {
+        return this.$E_1;
+    },
+    
+    set_boostUntilSeen: function SP_Publishing_BoostFieldsData$set_boostUntilSeen(value) {
+        this.$E_1 = value;
+        return value;
+    },
+    
+    get_expiry: function SP_Publishing_BoostFieldsData$get_expiry() {
+        return this.$S_1;
+    },
+    
+    set_expiry: function SP_Publishing_BoostFieldsData$set_expiry(value) {
+        this.$S_1 = value;
+        return value;
+    },
+    
+    get_impressions: function SP_Publishing_BoostFieldsData$get_impressions() {
+        return this.$V_1;
+    },
+    
+    set_impressions: function SP_Publishing_BoostFieldsData$set_impressions(value) {
+        this.$V_1 = value;
+        return value;
+    },
+    
+    get_nextItemId: function SP_Publishing_BoostFieldsData$get_nextItemId() {
+        return this.$i_1;
+    },
+    
+    set_nextItemId: function SP_Publishing_BoostFieldsData$set_nextItemId(value) {
+        this.$i_1 = value;
+        return value;
+    },
+    
+    get_nextItemVersion: function SP_Publishing_BoostFieldsData$get_nextItemVersion() {
+        return this.$j_1;
+    },
+    
+    set_nextItemVersion: function SP_Publishing_BoostFieldsData$set_nextItemVersion(value) {
+        this.$j_1 = value;
+        return value;
+    },
+    
+    get_previousItemId: function SP_Publishing_BoostFieldsData$get_previousItemId() {
+        return this.$p_1;
+    },
+    
+    set_previousItemId: function SP_Publishing_BoostFieldsData$set_previousItemId(value) {
+        this.$p_1 = value;
+        return value;
+    },
+    
+    get_previousItemVersion: function SP_Publishing_BoostFieldsData$get_previousItemVersion() {
+        return this.$q_1;
+    },
+    
+    set_previousItemVersion: function SP_Publishing_BoostFieldsData$set_previousItemVersion(value) {
+        this.$q_1 = value;
+        return value;
+    },
+    
+    get_typeId: function SP_Publishing_BoostFieldsData$get_typeId() {
+        return '{90fb360a-8c0f-44e9-9dfa-487b5735c396}';
+    },
+    
+    writeToXml: function SP_Publishing_BoostFieldsData$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        var $v_0 = [ 'BoostOrderType', 'BoostUntilSeen', 'Expiry', 'Impressions', 'NextItemId', 'NextItemVersion', 'PreviousItemId', 'PreviousItemVersion' ];
+        SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
+        SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
+    },
+    
+    initPropertiesFromJson: function SP_Publishing_BoostFieldsData$initPropertiesFromJson(parentNode) {
+        SP.ClientValueObject.prototype.initPropertiesFromJson.call(this, parentNode);
+        var $v_0;
+        $v_0 = parentNode.BoostOrderType;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$D_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.BoostOrderType;
+        }
+        $v_0 = parentNode.BoostUntilSeen;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$E_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.BoostUntilSeen;
+        }
+        $v_0 = parentNode.Expiry;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$S_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.Expiry;
+        }
+        $v_0 = parentNode.Impressions;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$V_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.Impressions;
+        }
+        $v_0 = parentNode.NextItemId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$i_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.NextItemId;
+        }
+        $v_0 = parentNode.NextItemVersion;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$j_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.NextItemVersion;
+        }
+        $v_0 = parentNode.PreviousItemId;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$p_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.PreviousItemId;
+        }
+        $v_0 = parentNode.PreviousItemVersion;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$q_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.PreviousItemVersion;
+        }
+    }
+}
+
+
 SP.Publishing.CustomizableString = function SP_Publishing_CustomizableString(context, objectPath) {
     SP.Publishing.CustomizableString.initializeBase(this, [ context, objectPath ]);
 }
@@ -521,44 +669,44 @@ SP.Publishing.DesignPackageInfo = function SP_Publishing_DesignPackageInfo() {
     SP.Publishing.DesignPackageInfo.initializeBase(this);
 }
 SP.Publishing.DesignPackageInfo.prototype = {
-    $W_1: 0,
-    $Y_1: 0,
-    $f_1: null,
-    $g_1: null,
+    $a_1: 0,
+    $c_1: 0,
+    $m_1: null,
+    $n_1: null,
     
     get_majorVersion: function SP_Publishing_DesignPackageInfo$get_majorVersion() {
-        return this.$W_1;
+        return this.$a_1;
     },
     
     set_majorVersion: function SP_Publishing_DesignPackageInfo$set_majorVersion(value) {
-        this.$W_1 = value;
+        this.$a_1 = value;
         return value;
     },
     
     get_minorVersion: function SP_Publishing_DesignPackageInfo$get_minorVersion() {
-        return this.$Y_1;
+        return this.$c_1;
     },
     
     set_minorVersion: function SP_Publishing_DesignPackageInfo$set_minorVersion(value) {
-        this.$Y_1 = value;
+        this.$c_1 = value;
         return value;
     },
     
     get_packageGuid: function SP_Publishing_DesignPackageInfo$get_packageGuid() {
-        return this.$f_1;
+        return this.$m_1;
     },
     
     set_packageGuid: function SP_Publishing_DesignPackageInfo$set_packageGuid(value) {
-        this.$f_1 = value;
+        this.$m_1 = value;
         return value;
     },
     
     get_packageName: function SP_Publishing_DesignPackageInfo$get_packageName() {
-        return this.$g_1;
+        return this.$n_1;
     },
     
     set_packageName: function SP_Publishing_DesignPackageInfo$set_packageName(value) {
-        this.$g_1 = value;
+        this.$n_1 = value;
         return value;
     },
     
@@ -583,22 +731,22 @@ SP.Publishing.DesignPackageInfo.prototype = {
         var $v_0;
         $v_0 = parentNode.MajorVersion;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$W_1 = ($v_0);
+            this.$a_1 = ($v_0);
             delete parentNode.MajorVersion;
         }
         $v_0 = parentNode.MinorVersion;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Y_1 = ($v_0);
+            this.$c_1 = ($v_0);
             delete parentNode.MinorVersion;
         }
         $v_0 = parentNode.PackageGuid;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$f_1 = ($v_0);
+            this.$m_1 = ($v_0);
             delete parentNode.PackageGuid;
         }
         $v_0 = parentNode.PackageName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$g_1 = ($v_0);
+            this.$n_1 = ($v_0);
             delete parentNode.PackageName;
         }
     }
@@ -624,33 +772,54 @@ SP.Publishing.EnumerateOnlyVideoCollection.prototype = {
 }
 
 
+SP.Publishing.FeedVideoPageFieldsData = function SP_Publishing_FeedVideoPageFieldsData() {
+    SP.Publishing.FeedVideoPageFieldsData.initializeBase(this);
+}
+SP.Publishing.FeedVideoPageFieldsData.prototype = {
+    
+    get_typeId: function SP_Publishing_FeedVideoPageFieldsData$get_typeId() {
+        return '{a4baabef-62f5-4456-b3ce-bb5a6b878952}';
+    },
+    
+    writeToXml: function SP_Publishing_FeedVideoPageFieldsData$writeToXml(writer, serializationContext) {
+        if (!writer) {
+            throw Error.argumentNull('writer');
+        }
+        if (!serializationContext) {
+            throw Error.argumentNull('serializationContext');
+        }
+        SP.Publishing.RepostPageFieldsData.prototype.writeToXml.call(this, writer, serializationContext);
+    }
+}
+
+
 SP.Publishing.ImageRendition = function SP_Publishing_ImageRendition() {
     SP.Publishing.ImageRendition.initializeBase(this);
 }
 SP.Publishing.ImageRendition.prototype = {
-    $P_1: null,
-    $Q_1: 0,
+    $T_1: null,
+    $U_1: 0,
     $4_1: 0,
-    $y_1: 0,
+    $17_1: 0,
     $0_1: null,
-    $10_1: 0,
-    $w_1: 0,
+    $1A_1: 0,
+    $15_1: 0,
     
     get_group: function SP_Publishing_ImageRendition$get_group() {
-        return this.$P_1;
+        return this.$T_1;
     },
     
     set_group: function SP_Publishing_ImageRendition$set_group(value) {
-        this.$P_1 = value;
+        this.$T_1 = value;
         return value;
     },
     
     get_height: function SP_Publishing_ImageRendition$get_height() {
-        return this.$Q_1;
+        return this.$U_1;
     },
     
     set_height: function SP_Publishing_ImageRendition$set_height(value) {
-        this.$Q_1 = value;
+        this.$U_1 = value;
         return value;
     },
     
@@ -668,15 +837,15 @@ SP.Publishing.ImageRendition.prototype = {
     },
     
     get_version: function SP_Publishing_ImageRendition$get_version() {
-        return this.$10_1;
+        return this.$1A_1;
     },
     
     get_width: function SP_Publishing_ImageRendition$get_width() {
-        return this.$w_1;
+        return this.$15_1;
     },
     
     set_width: function SP_Publishing_ImageRendition$set_width(value) {
-        this.$w_1 = value;
+        this.$15_1 = value;
         return value;
     },
     
@@ -695,7 +864,7 @@ SP.Publishing.ImageRendition.prototype = {
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         writer.writeStartElement('Property');
         writer.writeAttributeString('Name', 'IdCsom');
-        SP.DataConvert.writeValueToXmlElement(writer, this.$y_1, serializationContext);
+        SP.DataConvert.writeValueToXmlElement(writer, this.$17_1, serializationContext);
         writer.writeEndElement();
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -705,12 +874,12 @@ SP.Publishing.ImageRendition.prototype = {
         var $v_0;
         $v_0 = parentNode.Group;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$P_1 = ($v_0);
+            this.$T_1 = ($v_0);
             delete parentNode.Group;
         }
         $v_0 = parentNode.Height;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Q_1 = ($v_0);
+            this.$U_1 = ($v_0);
             delete parentNode.Height;
         }
         $v_0 = parentNode.Id;
@@ -720,7 +889,7 @@ SP.Publishing.ImageRendition.prototype = {
         }
         $v_0 = parentNode.IdCsom;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$y_1 = ($v_0);
+            this.$17_1 = ($v_0);
             delete parentNode.IdCsom;
         }
         $v_0 = parentNode.Name;
@@ -730,12 +899,12 @@ SP.Publishing.ImageRendition.prototype = {
         }
         $v_0 = parentNode.Version;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$10_1 = ($v_0);
+            this.$1A_1 = ($v_0);
             delete parentNode.Version;
         }
         $v_0 = parentNode.Width;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$w_1 = ($v_0);
+            this.$15_1 = ($v_0);
             delete parentNode.Width;
         }
     }
@@ -747,10 +916,10 @@ SP.Publishing.PageLayoutCreationInformation = function SP_Publishing_PageLayoutC
 }
 SP.Publishing.PageLayoutCreationInformation.prototype = {
     $A_1: null,
-    $X_1: null,
     $b_1: null,
-    $c_1: null,
-    $11_1: null,
+    $f_1: null,
+    $g_1: null,
+    $1B_1: null,
     
     get_associatedContentTypeId: function SP_Publishing_PageLayoutCreationInformation$get_associatedContentTypeId() {
         return this.$A_1;
@@ -762,38 +931,38 @@ SP.Publishing.PageLayoutCreationInformation.prototype = {
     },
     
     get_masterPageUrl: function SP_Publishing_PageLayoutCreationInformation$get_masterPageUrl() {
-        return this.$X_1;
-    },
-    
-    set_masterPageUrl: function SP_Publishing_PageLayoutCreationInformation$set_masterPageUrl(value) {
-        this.$X_1 = value;
-        return value;
-    },
-    
-    get_newPageLayoutEditablePath: function SP_Publishing_PageLayoutCreationInformation$get_newPageLayoutEditablePath() {
         return this.$b_1;
     },
     
-    set_newPageLayoutEditablePath: function SP_Publishing_PageLayoutCreationInformation$set_newPageLayoutEditablePath(value) {
+    set_masterPageUrl: function SP_Publishing_PageLayoutCreationInformation$set_masterPageUrl(value) {
         this.$b_1 = value;
         return value;
     },
     
+    get_newPageLayoutEditablePath: function SP_Publishing_PageLayoutCreationInformation$get_newPageLayoutEditablePath() {
+        return this.$f_1;
+    },
+    
+    set_newPageLayoutEditablePath: function SP_Publishing_PageLayoutCreationInformation$set_newPageLayoutEditablePath(value) {
+        this.$f_1 = value;
+        return value;
+    },
+    
     get_newPageLayoutNameWithoutExtension: function SP_Publishing_PageLayoutCreationInformation$get_newPageLayoutNameWithoutExtension() {
-        return this.$c_1;
+        return this.$g_1;
     },
     
     set_newPageLayoutNameWithoutExtension: function SP_Publishing_PageLayoutCreationInformation$set_newPageLayoutNameWithoutExtension(value) {
-        this.$c_1 = value;
+        this.$g_1 = value;
         return value;
     },
     
     get_web: function SP_Publishing_PageLayoutCreationInformation$get_web() {
-        return this.$11_1;
+        return this.$1B_1;
     },
     
     set_web: function SP_Publishing_PageLayoutCreationInformation$set_web(value) {
-        this.$11_1 = value;
+        this.$1B_1 = value;
         return value;
     },
     
@@ -823,17 +992,17 @@ SP.Publishing.PageLayoutCreationInformation.prototype = {
         }
         $v_0 = parentNode.MasterPageUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$X_1 = ($v_0);
+            this.$b_1 = ($v_0);
             delete parentNode.MasterPageUrl;
         }
         $v_0 = parentNode.NewPageLayoutEditablePath;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$b_1 = ($v_0);
+            this.$f_1 = ($v_0);
             delete parentNode.NewPageLayoutEditablePath;
         }
         $v_0 = parentNode.NewPageLayoutNameWithoutExtension;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$c_1 = ($v_0);
+            this.$g_1 = ($v_0);
             delete parentNode.NewPageLayoutNameWithoutExtension;
         }
         $v_0 = parentNode.Web;
@@ -873,16 +1042,16 @@ SP.Publishing.PublishingPageInformation = function SP_Publishing_PublishingPageI
     SP.Publishing.PublishingPageInformation.initializeBase(this);
 }
 SP.Publishing.PublishingPageInformation.prototype = {
-    $x_1: null,
+    $16_1: null,
     $0_1: null,
-    $z_1: null,
+    $19_1: null,
     
     get_folder: function SP_Publishing_PublishingPageInformation$get_folder() {
-        return this.$x_1;
+        return this.$16_1;
     },
     
     set_folder: function SP_Publishing_PublishingPageInformation$set_folder(value) {
-        this.$x_1 = value;
+        this.$16_1 = value;
         return value;
     },
     
@@ -896,11 +1065,11 @@ SP.Publishing.PublishingPageInformation.prototype = {
     },
     
     get_pageLayoutListItem: function SP_Publishing_PublishingPageInformation$get_pageLayoutListItem() {
-        return this.$z_1;
+        return this.$19_1;
     },
     
     set_pageLayoutListItem: function SP_Publishing_PublishingPageInformation$set_pageLayoutListItem(value) {
-        this.$z_1 = value;
+        this.$19_1 = value;
         return value;
     },
     
@@ -1131,7 +1300,7 @@ SP.Publishing.SharePagePreviewByEmailFieldsData = function SP_Publishing_SharePa
 }
 SP.Publishing.SharePagePreviewByEmailFieldsData.prototype = {
     $2_1: null,
-    $j_1: null,
+    $s_1: null,
     
     get_message: function SP_Publishing_SharePagePreviewByEmailFieldsData$get_message() {
         return this.$2_1;
@@ -1143,11 +1312,11 @@ SP.Publishing.SharePagePreviewByEmailFieldsData.prototype = {
     },
     
     get_recipientEmails: function SP_Publishing_SharePagePreviewByEmailFieldsData$get_recipientEmails() {
-        return this.$j_1;
+        return this.$s_1;
     },
     
     set_recipientEmails: function SP_Publishing_SharePagePreviewByEmailFieldsData$set_recipientEmails(value) {
-        this.$j_1 = value;
+        this.$s_1 = value;
         return value;
     },
     
@@ -1177,7 +1346,7 @@ SP.Publishing.SharePagePreviewByEmailFieldsData.prototype = {
         }
         $v_0 = parentNode.recipientEmails;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$j_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$s_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.recipientEmails;
         }
     }
@@ -1210,14 +1379,14 @@ SP.Publishing.SitePage3DFieldsData = function SP_Publishing_SitePage3DFieldsData
     SP.Publishing.SitePage3DFieldsData.initializeBase(this);
 }
 SP.Publishing.SitePage3DFieldsData.prototype = {
-    $o_2: null,
+    $x_2: null,
     
     get_spaceContent: function SP_Publishing_SitePage3DFieldsData$get_spaceContent() {
-        return this.$o_2;
+        return this.$x_2;
     },
     
     set_spaceContent: function SP_Publishing_SitePage3DFieldsData$set_spaceContent(value) {
-        this.$o_2 = value;
+        this.$x_2 = value;
         return value;
     },
     
@@ -1242,7 +1411,7 @@ SP.Publishing.SitePage3DFieldsData.prototype = {
         var $v_0;
         $v_0 = parentNode.SpaceContent;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$o_2 = ($v_0);
+            this.$x_2 = ($v_0);
             delete parentNode.SpaceContent;
         }
     }
@@ -1255,14 +1424,15 @@ SP.Publishing.SitePageFieldsData = function SP_Publishing_SitePageFieldsData() {
 SP.Publishing.SitePageFieldsData.prototype = {
     $B_1: null,
     $C_1: null,
-    $D_1: null,
-    $E_1: null,
-    $K_1: null,
-    $V_1: null,
+    $F_1: null,
+    $G_1: null,
+    $H_1: null,
+    $N_1: null,
     $Z_1: null,
-    $i_1: null,
+    $d_1: null,
     $r_1: null,
-    $s_1: null,
+    $10_1: null,
+    $11_1: null,
     
     get_authorByline: function SP_Publishing_SitePageFieldsData$get_authorByline() {
         return this.$B_1;
@@ -1283,74 +1453,83 @@ SP.Publishing.SitePageFieldsData.prototype = {
     },
     
     get_canvasContent1: function SP_Publishing_SitePageFieldsData$get_canvasContent1() {
-        return this.$D_1;
+        return this.$F_1;
     },
     
     set_canvasContent1: function SP_Publishing_SitePageFieldsData$set_canvasContent1(value) {
-        this.$D_1 = value;
+        this.$F_1 = value;
         return value;
     },
     
     get_canvasJson1: function SP_Publishing_SitePageFieldsData$get_canvasJson1() {
-        return this.$E_1;
+        return this.$G_1;
     },
     
     set_canvasJson1: function SP_Publishing_SitePageFieldsData$set_canvasJson1(value) {
-        this.$E_1 = value;
+        this.$G_1 = value;
+        return value;
+    },
+    
+    get_categories: function SP_Publishing_SitePageFieldsData$get_categories() {
+        return this.$H_1;
+    },
+    
+    set_categories: function SP_Publishing_SitePageFieldsData$set_categories(value) {
+        this.$H_1 = value;
         return value;
     },
     
     get_description: function SP_Publishing_SitePageFieldsData$get_description() {
-        return this.$K_1;
+        return this.$N_1;
     },
     
     set_description: function SP_Publishing_SitePageFieldsData$set_description(value) {
-        this.$K_1 = value;
+        this.$N_1 = value;
         return value;
     },
     
     get_layoutWebpartsContent: function SP_Publishing_SitePageFieldsData$get_layoutWebpartsContent() {
-        return this.$V_1;
-    },
-    
-    set_layoutWebpartsContent: function SP_Publishing_SitePageFieldsData$set_layoutWebpartsContent(value) {
-        this.$V_1 = value;
-        return value;
-    },
-    
-    get_modified: function SP_Publishing_SitePageFieldsData$get_modified() {
         return this.$Z_1;
     },
     
-    set_modified: function SP_Publishing_SitePageFieldsData$set_modified(value) {
+    set_layoutWebpartsContent: function SP_Publishing_SitePageFieldsData$set_layoutWebpartsContent(value) {
         this.$Z_1 = value;
         return value;
     },
     
-    get_publishStartDate: function SP_Publishing_SitePageFieldsData$get_publishStartDate() {
-        return this.$i_1;
+    get_modified: function SP_Publishing_SitePageFieldsData$get_modified() {
+        return this.$d_1;
     },
     
-    set_publishStartDate: function SP_Publishing_SitePageFieldsData$set_publishStartDate(value) {
-        this.$i_1 = value;
+    set_modified: function SP_Publishing_SitePageFieldsData$set_modified(value) {
+        this.$d_1 = value;
         return value;
     },
     
-    get_title: function SP_Publishing_SitePageFieldsData$get_title() {
+    get_publishStartDate: function SP_Publishing_SitePageFieldsData$get_publishStartDate() {
         return this.$r_1;
     },
     
-    set_title: function SP_Publishing_SitePageFieldsData$set_title(value) {
+    set_publishStartDate: function SP_Publishing_SitePageFieldsData$set_publishStartDate(value) {
         this.$r_1 = value;
         return value;
     },
     
+    get_title: function SP_Publishing_SitePageFieldsData$get_title() {
+        return this.$10_1;
+    },
+    
+    set_title: function SP_Publishing_SitePageFieldsData$set_title(value) {
+        this.$10_1 = value;
+        return value;
+    },
+    
     get_topicHeader: function SP_Publishing_SitePageFieldsData$get_topicHeader() {
-        return this.$s_1;
+        return this.$11_1;
     },
     
     set_topicHeader: function SP_Publishing_SitePageFieldsData$set_topicHeader(value) {
-        this.$s_1 = value;
+        this.$11_1 = value;
         return value;
     },
     
@@ -1365,7 +1544,7 @@ SP.Publishing.SitePageFieldsData.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AuthorByline', 'BannerImageUrl', 'CanvasContent1', 'CanvasJson1', 'Description', 'LayoutWebpartsContent', 'Modified', 'PublishStartDate', 'Title', 'TopicHeader' ];
+        var $v_0 = [ 'AuthorByline', 'BannerImageUrl', 'CanvasContent1', 'CanvasJson1', 'Categories', 'Description', 'LayoutWebpartsContent', 'Modified', 'PublishStartDate', 'Title', 'TopicHeader' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -1385,42 +1564,47 @@ SP.Publishing.SitePageFieldsData.prototype = {
         }
         $v_0 = parentNode.CanvasContent1;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$D_1 = ($v_0);
+            this.$F_1 = ($v_0);
             delete parentNode.CanvasContent1;
         }
         $v_0 = parentNode.CanvasJson1;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$E_1 = ($v_0);
+            this.$G_1 = ($v_0);
             delete parentNode.CanvasJson1;
+        }
+        $v_0 = parentNode.Categories;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$H_1 = ($v_0);
+            delete parentNode.Categories;
         }
         $v_0 = parentNode.Description;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$K_1 = ($v_0);
+            this.$N_1 = ($v_0);
             delete parentNode.Description;
         }
         $v_0 = parentNode.LayoutWebpartsContent;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$V_1 = ($v_0);
+            this.$Z_1 = ($v_0);
             delete parentNode.LayoutWebpartsContent;
         }
         $v_0 = parentNode.Modified;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Z_1 = ($v_0);
+            this.$d_1 = ($v_0);
             delete parentNode.Modified;
         }
         $v_0 = parentNode.PublishStartDate;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$i_1 = ($v_0);
+            this.$r_1 = ($v_0);
             delete parentNode.PublishStartDate;
         }
         $v_0 = parentNode.Title;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$r_1 = ($v_0);
+            this.$10_1 = ($v_0);
             delete parentNode.Title;
         }
         $v_0 = parentNode.TopicHeader;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$s_1 = ($v_0);
+            this.$11_1 = ($v_0);
             delete parentNode.TopicHeader;
         }
     }
@@ -1431,24 +1615,24 @@ SP.Publishing.SitePageVersionInfo = function SP_Publishing_SitePageVersionInfo()
     SP.Publishing.SitePageVersionInfo.initializeBase(this);
 }
 SP.Publishing.SitePageVersionInfo.prototype = {
-    $S_1: null,
-    $T_1: null,
+    $W_1: null,
+    $X_1: null,
     
     get_lastVersionCreated: function SP_Publishing_SitePageVersionInfo$get_lastVersionCreated() {
-        return this.$S_1;
+        return this.$W_1;
     },
     
     set_lastVersionCreated: function SP_Publishing_SitePageVersionInfo$set_lastVersionCreated(value) {
-        this.$S_1 = value;
+        this.$W_1 = value;
         return value;
     },
     
     get_lastVersionCreatedBy: function SP_Publishing_SitePageVersionInfo$get_lastVersionCreatedBy() {
-        return this.$T_1;
+        return this.$X_1;
     },
     
     set_lastVersionCreatedBy: function SP_Publishing_SitePageVersionInfo$set_lastVersionCreatedBy(value) {
-        this.$T_1 = value;
+        this.$X_1 = value;
         return value;
     },
     
@@ -1473,12 +1657,12 @@ SP.Publishing.SitePageVersionInfo.prototype = {
         var $v_0;
         $v_0 = parentNode.LastVersionCreated;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$S_1 = ($v_0);
+            this.$W_1 = ($v_0);
             delete parentNode.LastVersionCreated;
         }
         $v_0 = parentNode.LastVersionCreatedBy;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$T_1 = ($v_0);
+            this.$X_1 = ($v_0);
             delete parentNode.LastVersionCreatedBy;
         }
     }
@@ -1537,26 +1721,26 @@ SP.Publishing.SiteSharingEmailContext = function SP_Publishing_SiteSharingEmailC
     SP.Publishing.SiteSharingEmailContext.initializeBase(this);
 }
 SP.Publishing.SiteSharingEmailContext.prototype = {
-    $I_1: null,
-    $J_1: null,
+    $L_1: null,
+    $M_1: null,
     $2_1: null,
-    $u_1: null,
+    $12_1: null,
     
     get_customDescription: function SP_Publishing_SiteSharingEmailContext$get_customDescription() {
-        return this.$I_1;
+        return this.$L_1;
     },
     
     set_customDescription: function SP_Publishing_SiteSharingEmailContext$set_customDescription(value) {
-        this.$I_1 = value;
+        this.$L_1 = value;
         return value;
     },
     
     get_customTitle: function SP_Publishing_SiteSharingEmailContext$get_customTitle() {
-        return this.$J_1;
+        return this.$M_1;
     },
     
     set_customTitle: function SP_Publishing_SiteSharingEmailContext$set_customTitle(value) {
-        this.$J_1 = value;
+        this.$M_1 = value;
         return value;
     },
     
@@ -1570,11 +1754,11 @@ SP.Publishing.SiteSharingEmailContext.prototype = {
     },
     
     get_url: function SP_Publishing_SiteSharingEmailContext$get_url() {
-        return this.$u_1;
+        return this.$12_1;
     },
     
     set_url: function SP_Publishing_SiteSharingEmailContext$set_url(value) {
-        this.$u_1 = value;
+        this.$12_1 = value;
         return value;
     },
     
@@ -1599,12 +1783,12 @@ SP.Publishing.SiteSharingEmailContext.prototype = {
         var $v_0;
         $v_0 = parentNode.CustomDescription;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$I_1 = ($v_0);
+            this.$L_1 = ($v_0);
             delete parentNode.CustomDescription;
         }
         $v_0 = parentNode.CustomTitle;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$J_1 = ($v_0);
+            this.$M_1 = ($v_0);
             delete parentNode.CustomTitle;
         }
         $v_0 = parentNode.Message;
@@ -1614,7 +1798,7 @@ SP.Publishing.SiteSharingEmailContext.prototype = {
         }
         $v_0 = parentNode.Url;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$u_1 = ($v_0);
+            this.$12_1 = ($v_0);
             delete parentNode.Url;
         }
     }
@@ -2004,16 +2188,16 @@ SP.Publishing.TextValueWithLanguage = function SP_Publishing_TextValueWithLangua
     SP.Publishing.TextValueWithLanguage.initializeBase(this);
 }
 SP.Publishing.TextValueWithLanguage.prototype = {
-    $G_1: null,
+    $J_1: null,
     $1_1: 0,
     $3_1: null,
     
     get_colorSeed: function SP_Publishing_TextValueWithLanguage$get_colorSeed() {
-        return this.$G_1;
+        return this.$J_1;
     },
     
     set_colorSeed: function SP_Publishing_TextValueWithLanguage$set_colorSeed(value) {
-        this.$G_1 = value;
+        this.$J_1 = value;
         return value;
     },
     
@@ -2056,7 +2240,7 @@ SP.Publishing.TextValueWithLanguage.prototype = {
         var $v_0;
         $v_0 = parentNode.ColorSeed;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$G_1 = ($v_0);
+            this.$J_1 = ($v_0);
             delete parentNode.ColorSeed;
         }
         $v_0 = parentNode.Lcid;
@@ -2077,34 +2261,34 @@ SP.Publishing.TopicPageFieldsData = function SP_Publishing_TopicPageFieldsData()
     SP.Publishing.TopicPageFieldsData.initializeBase(this);
 }
 SP.Publishing.TopicPageFieldsData.prototype = {
-    $L_2: null,
-    $M_2: null,
-    $N_2: null,
+    $O_2: null,
+    $P_2: null,
+    $Q_2: null,
     
     get_entityId: function SP_Publishing_TopicPageFieldsData$get_entityId() {
-        return this.$L_2;
+        return this.$O_2;
     },
     
     set_entityId: function SP_Publishing_TopicPageFieldsData$set_entityId(value) {
-        this.$L_2 = value;
+        this.$O_2 = value;
         return value;
     },
     
     get_entityRelations: function SP_Publishing_TopicPageFieldsData$get_entityRelations() {
-        return this.$M_2;
+        return this.$P_2;
     },
     
     set_entityRelations: function SP_Publishing_TopicPageFieldsData$set_entityRelations(value) {
-        this.$M_2 = value;
+        this.$P_2 = value;
         return value;
     },
     
     get_entityType: function SP_Publishing_TopicPageFieldsData$get_entityType() {
-        return this.$N_2;
+        return this.$Q_2;
     },
     
     set_entityType: function SP_Publishing_TopicPageFieldsData$set_entityType(value) {
-        this.$N_2 = value;
+        this.$Q_2 = value;
         return value;
     },
     
@@ -2129,17 +2313,17 @@ SP.Publishing.TopicPageFieldsData.prototype = {
         var $v_0;
         $v_0 = parentNode.EntityId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$L_2 = ($v_0);
+            this.$O_2 = ($v_0);
             delete parentNode.EntityId;
         }
         $v_0 = parentNode.EntityRelations;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$M_2 = ($v_0);
+            this.$P_2 = ($v_0);
             delete parentNode.EntityRelations;
         }
         $v_0 = parentNode.EntityType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$N_2 = ($v_0);
+            this.$Q_2 = ($v_0);
             delete parentNode.EntityType;
         }
     }
@@ -3149,7 +3333,11 @@ SP.Publishing.Navigation.PortalNavigationCacheState.prototype = {
     pendingEnable: 2, 
     refreshing: 3, 
     pendingOptOut: 4, 
-    optedOut: 5
+    optedOut: 5, 
+    enabledGlobal: 6, 
+    enabledCurrent: 7, 
+    enabledBoth: 8, 
+    notNeeded: 9
 }
 SP.Publishing.Navigation.PortalNavigationCacheState.registerEnum('SP.Publishing.Navigation.PortalNavigationCacheState', false);
 
@@ -3169,18 +3357,18 @@ SP.Publishing.Navigation.NavigationTermProviderNameCollection = function SP_Publ
 }
 SP.Publishing.Navigation.NavigationTermProviderNameCollection.prototype = {
     
-    $12_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$12_2($p0) {
+    $1C_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$1C_2($p0) {
         Array.add(this.get_data(), $p0);
     },
     
-    $13_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$13_2() {
+    $1D_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$1D_2() {
         var $v_0 = this.get_data();
         while ($v_0.length > 0) {
             Array.removeAt($v_0, $v_0.length - 1);
         }
     },
     
-    $14_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$14_2($p0) {
+    $1E_2: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$$1E_2($p0) {
         Array.remove(this.get_data(), $p0);
     },
     
@@ -3200,14 +3388,14 @@ SP.Publishing.Navigation.NavigationTermProviderNameCollection.prototype = {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'Add', [ item ]);
         $v_0.addQuery($v_1);
-        this.$12_2(item);
+        this.$1C_2(item);
     },
     
     clear: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$clear() {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'Clear', null);
         $v_0.addQuery($v_1);
-        this.$13_2();
+        this.$1D_2();
     },
     
     remove: function SP_Publishing_Navigation_NavigationTermProviderNameCollection$remove(item) {
@@ -3217,7 +3405,7 @@ SP.Publishing.Navigation.NavigationTermProviderNameCollection.prototype = {
         $v_0.addQuery($v_2);
         $v_1 = new SP.BooleanResult();
         $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
-        this.$14_2(item);
+        this.$1E_2(item);
         return $v_1;
     }
 }
@@ -4429,6 +4617,32 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         return value;
     },
     
+    get_portalNavigationSuccessfulRefreshID: function SP_Publishing_Navigation_WebNavigationSettings$get_portalNavigationSuccessfulRefreshID() {
+        this.checkUninitializedProperty('PortalNavigationSuccessfulRefreshID');
+        return ((this.get_objectData().get_properties()['PortalNavigationSuccessfulRefreshID']));
+    },
+    
+    set_portalNavigationSuccessfulRefreshID: function SP_Publishing_Navigation_WebNavigationSettings$set_portalNavigationSuccessfulRefreshID(value) {
+        this.get_objectData().get_properties()['PortalNavigationSuccessfulRefreshID'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'PortalNavigationSuccessfulRefreshID', value));
+        }
+        return value;
+    },
+    
+    get_portalNavigationSuccessfulRefreshTime: function SP_Publishing_Navigation_WebNavigationSettings$get_portalNavigationSuccessfulRefreshTime() {
+        this.checkUninitializedProperty('PortalNavigationSuccessfulRefreshTime');
+        return ((this.get_objectData().get_properties()['PortalNavigationSuccessfulRefreshTime']));
+    },
+    
+    set_portalNavigationSuccessfulRefreshTime: function SP_Publishing_Navigation_WebNavigationSettings$set_portalNavigationSuccessfulRefreshTime(value) {
+        this.get_objectData().get_properties()['PortalNavigationSuccessfulRefreshTime'] = value;
+        if ((this.get_context())) {
+            this.get_context().addQuery(new SP.ClientActionSetProperty(this, 'PortalNavigationSuccessfulRefreshTime', value));
+        }
+        return value;
+    },
+    
     initPropertiesFromJson: function SP_Publishing_Navigation_WebNavigationSettings$initPropertiesFromJson(parentNode) {
         SP.ClientObject.prototype.initPropertiesFromJson.call(this, parentNode);
         var $v_0;
@@ -4478,6 +4692,16 @@ SP.Publishing.Navigation.WebNavigationSettings.prototype = {
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.get_objectData().get_properties()['LastCachingRefreshAttempted'] = ($v_0);
             delete parentNode.LastCachingRefreshAttempted;
+        }
+        $v_0 = parentNode.PortalNavigationSuccessfulRefreshID;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['PortalNavigationSuccessfulRefreshID'] = ($v_0);
+            delete parentNode.PortalNavigationSuccessfulRefreshID;
+        }
+        $v_0 = parentNode.PortalNavigationSuccessfulRefreshTime;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.get_objectData().get_properties()['PortalNavigationSuccessfulRefreshTime'] = ($v_0);
+            delete parentNode.PortalNavigationSuccessfulRefreshTime;
         }
     },
     
@@ -4540,14 +4764,14 @@ SP.Publishing.PortalLaunch.PortalLaunchSetupWrapper = function SP_Publishing_Por
     SP.Publishing.PortalLaunch.PortalLaunchSetupWrapper.initializeBase(this);
 }
 SP.Publishing.PortalLaunch.PortalLaunchSetupWrapper.prototype = {
-    $p_1: null,
+    $y_1: null,
     
     get_spPortalLaunchWaveSetups: function SP_Publishing_PortalLaunch_PortalLaunchSetupWrapper$get_spPortalLaunchWaveSetups() {
-        return this.$p_1;
+        return this.$y_1;
     },
     
     set_spPortalLaunchWaveSetups: function SP_Publishing_PortalLaunch_PortalLaunchSetupWrapper$set_spPortalLaunchWaveSetups(value) {
-        this.$p_1 = value;
+        this.$y_1 = value;
         return value;
     },
     
@@ -4572,7 +4796,7 @@ SP.Publishing.PortalLaunch.PortalLaunchSetupWrapper.prototype = {
         var $v_0;
         $v_0 = parentNode.SPPortalLaunchWaveSetups;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$p_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$y_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.SPPortalLaunchWaveSetups;
         }
     }
@@ -4584,9 +4808,9 @@ SP.Publishing.PortalLaunch.PortalLaunchWave = function SP_Publishing_PortalLaunc
 }
 SP.Publishing.PortalLaunch.PortalLaunchWave.prototype = {
     $5_1: null,
-    $U_1: null,
+    $Y_1: null,
     $0_1: null,
-    $e_1: 0,
+    $k_1: 0,
     
     get_groups: function SP_Publishing_PortalLaunch_PortalLaunchWave$get_groups() {
         return this.$5_1;
@@ -4598,11 +4822,11 @@ SP.Publishing.PortalLaunch.PortalLaunchWave.prototype = {
     },
     
     get_launchDateUtc: function SP_Publishing_PortalLaunch_PortalLaunchWave$get_launchDateUtc() {
-        return this.$U_1;
+        return this.$Y_1;
     },
     
     set_launchDateUtc: function SP_Publishing_PortalLaunch_PortalLaunchWave$set_launchDateUtc(value) {
-        this.$U_1 = value;
+        this.$Y_1 = value;
         return value;
     },
     
@@ -4616,11 +4840,11 @@ SP.Publishing.PortalLaunch.PortalLaunchWave.prototype = {
     },
     
     get_order: function SP_Publishing_PortalLaunch_PortalLaunchWave$get_order() {
-        return this.$e_1;
+        return this.$k_1;
     },
     
     set_order: function SP_Publishing_PortalLaunch_PortalLaunchWave$set_order(value) {
-        this.$e_1 = value;
+        this.$k_1 = value;
         return value;
     },
     
@@ -4651,7 +4875,7 @@ SP.Publishing.PortalLaunch.PortalLaunchWave.prototype = {
         }
         $v_0 = parentNode.LaunchDateUtc;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$U_1 = ($v_0);
+            this.$Y_1 = ($v_0);
             delete parentNode.LaunchDateUtc;
         }
         $v_0 = parentNode.Name;
@@ -4661,7 +4885,7 @@ SP.Publishing.PortalLaunch.PortalLaunchWave.prototype = {
         }
         $v_0 = parentNode.Order;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$e_1 = ($v_0);
+            this.$k_1 = ($v_0);
             delete parentNode.Order;
         }
     }
@@ -4673,8 +4897,8 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveGroup = function SP_Publishing_Portal
 }
 SP.Publishing.PortalLaunch.PortalLaunchWaveGroup.prototype = {
     $4_1: null,
-    $n_1: null,
-    $v_1: null,
+    $w_1: null,
+    $13_1: null,
     
     get_id: function SP_Publishing_PortalLaunch_PortalLaunchWaveGroup$get_id() {
         return this.$4_1;
@@ -4686,20 +4910,20 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveGroup.prototype = {
     },
     
     get_siteUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveGroup$get_siteUrl() {
-        return this.$n_1;
+        return this.$w_1;
     },
     
     set_siteUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveGroup$set_siteUrl(value) {
-        this.$n_1 = value;
+        this.$w_1 = value;
         return value;
     },
     
     get_userGroupName: function SP_Publishing_PortalLaunch_PortalLaunchWaveGroup$get_userGroupName() {
-        return this.$v_1;
+        return this.$13_1;
     },
     
     set_userGroupName: function SP_Publishing_PortalLaunch_PortalLaunchWaveGroup$set_userGroupName(value) {
-        this.$v_1 = value;
+        this.$13_1 = value;
         return value;
     },
     
@@ -4729,12 +4953,12 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveGroup.prototype = {
         }
         $v_0 = parentNode.SiteUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$n_1 = ($v_0);
+            this.$w_1 = ($v_0);
             delete parentNode.SiteUrl;
         }
         $v_0 = parentNode.UserGroupName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$v_1 = ($v_0);
+            this.$13_1 = ($v_0);
             delete parentNode.UserGroupName;
         }
     }
@@ -4747,17 +4971,18 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveSetup = function SP_Publishing_Portal
 SP.Publishing.PortalLaunch.PortalLaunchWaveSetup.prototype = {
     $8_1: null,
     $9_1: null,
-    $H_1: null,
-    $O_1: 0,
-    $R_1: false,
-    $a_1: null,
-    $d_1: null,
-    $h_1: 0,
-    $k_1: 0,
+    $K_1: null,
+    $R_1: 0,
+    $18_1: false,
+    $e_1: null,
+    $h_1: null,
     $l_1: null,
-    $m_1: null,
-    $q_1: 0,
-    $t_1: null,
+    $o_1: 0,
+    $t_1: 0,
+    $u_1: null,
+    $v_1: null,
+    $z_1: 0,
+    $14_1: null,
     $6_1: null,
     
     get_alternativeUrlsOfNewSite: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_alternativeUrlsOfNewSite() {
@@ -4779,101 +5004,105 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveSetup.prototype = {
     },
     
     get_createdOn: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_createdOn() {
-        return this.$H_1;
+        return this.$K_1;
     },
     
     set_createdOn: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_createdOn(value) {
-        this.$H_1 = value;
+        this.$K_1 = value;
         return value;
     },
     
     get_expectedUsersSize: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_expectedUsersSize() {
-        return this.$O_1;
-    },
-    
-    set_expectedUsersSize: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_expectedUsersSize(value) {
-        this.$O_1 = value;
-        return value;
-    },
-    
-    get_isPaused: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_isPaused() {
         return this.$R_1;
     },
     
-    set_isPaused: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_isPaused(value) {
+    set_expectedUsersSize: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_expectedUsersSize(value) {
         this.$R_1 = value;
         return value;
     },
     
+    get_isPaused: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_isPaused() {
+        return this.$18_1;
+    },
+    
     get_modifiedOn: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_modifiedOn() {
-        return this.$a_1;
+        return this.$e_1;
     },
     
     set_modifiedOn: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_modifiedOn(value) {
-        this.$a_1 = value;
+        this.$e_1 = value;
         return value;
     },
     
     get_newSiteUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_newSiteUrl() {
-        return this.$d_1;
-    },
-    
-    set_newSiteUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_newSiteUrl(value) {
-        this.$d_1 = value;
-        return value;
-    },
-    
-    get_pauseAtWave: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_pauseAtWave() {
         return this.$h_1;
     },
     
-    set_pauseAtWave: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_pauseAtWave(value) {
+    set_newSiteUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_newSiteUrl(value) {
         this.$h_1 = value;
         return value;
     },
     
-    get_redirectionType: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_redirectionType() {
-        return this.$k_1;
-    },
-    
-    set_redirectionType: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_redirectionType(value) {
-        this.$k_1 = value;
-        return value;
-    },
-    
-    get_redirectUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_redirectUrl() {
+    get_ownersAndEditors: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_ownersAndEditors() {
         return this.$l_1;
     },
     
-    set_redirectUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_redirectUrl(value) {
+    set_ownersAndEditors: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_ownersAndEditors(value) {
         this.$l_1 = value;
         return value;
     },
     
+    get_pauseAtWave: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_pauseAtWave() {
+        return this.$o_1;
+    },
+    
+    set_pauseAtWave: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_pauseAtWave(value) {
+        this.$o_1 = value;
+        return value;
+    },
+    
+    get_redirectionType: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_redirectionType() {
+        return this.$t_1;
+    },
+    
+    set_redirectionType: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_redirectionType(value) {
+        this.$t_1 = value;
+        return value;
+    },
+    
+    get_redirectUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_redirectUrl() {
+        return this.$u_1;
+    },
+    
+    set_redirectUrl: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_redirectUrl(value) {
+        this.$u_1 = value;
+        return value;
+    },
+    
     get_siteId: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_siteId() {
-        return this.$m_1;
+        return this.$v_1;
     },
     
     set_siteId: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_siteId(value) {
-        this.$m_1 = value;
+        this.$v_1 = value;
         return value;
     },
     
     get_status: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_status() {
-        return this.$q_1;
+        return this.$z_1;
     },
     
     set_status: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_status(value) {
-        this.$q_1 = value;
+        this.$z_1 = value;
         return value;
     },
     
-    get_triggerUrls: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_triggerUrls() {
-        return this.$t_1;
+    get_waveOverrideUsers: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$get_waveOverrideUsers() {
+        return this.$14_1;
     },
     
-    set_triggerUrls: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_triggerUrls(value) {
-        this.$t_1 = value;
+    set_waveOverrideUsers: function SP_Publishing_PortalLaunch_PortalLaunchWaveSetup$set_waveOverrideUsers(value) {
+        this.$14_1 = value;
         return value;
     },
     
@@ -4897,7 +5126,7 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveSetup.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AlternativeUrlsOfNewSite', 'AlternativeUrlsOfOldSite', 'CreatedOn', 'ExpectedUsersSize', 'IsPaused', 'ModifiedOn', 'NewSiteUrl', 'PauseAtWave', 'RedirectionType', 'RedirectUrl', 'SiteId', 'Status', 'TriggerUrls', 'Waves' ];
+        var $v_0 = [ 'AlternativeUrlsOfNewSite', 'AlternativeUrlsOfOldSite', 'CreatedOn', 'ExpectedUsersSize', 'IsPaused', 'ModifiedOn', 'NewSiteUrl', 'OwnersAndEditors', 'PauseAtWave', 'RedirectionType', 'RedirectUrl', 'SiteId', 'Status', 'WaveOverrideUsers', 'Waves' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -4917,58 +5146,63 @@ SP.Publishing.PortalLaunch.PortalLaunchWaveSetup.prototype = {
         }
         $v_0 = parentNode.CreatedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$H_1 = ($v_0);
+            this.$K_1 = ($v_0);
             delete parentNode.CreatedOn;
         }
         $v_0 = parentNode.ExpectedUsersSize;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$O_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$R_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.ExpectedUsersSize;
         }
         $v_0 = parentNode.IsPaused;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$R_1 = ($v_0);
+            this.$18_1 = ($v_0);
             delete parentNode.IsPaused;
         }
         $v_0 = parentNode.ModifiedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$a_1 = ($v_0);
+            this.$e_1 = ($v_0);
             delete parentNode.ModifiedOn;
         }
         $v_0 = parentNode.NewSiteUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$d_1 = ($v_0);
+            this.$h_1 = ($v_0);
             delete parentNode.NewSiteUrl;
+        }
+        $v_0 = parentNode.OwnersAndEditors;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$l_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            delete parentNode.OwnersAndEditors;
         }
         $v_0 = parentNode.PauseAtWave;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$h_1 = ($v_0);
+            this.$o_1 = ($v_0);
             delete parentNode.PauseAtWave;
         }
         $v_0 = parentNode.RedirectionType;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$k_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$t_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.RedirectionType;
         }
         $v_0 = parentNode.RedirectUrl;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$l_1 = ($v_0);
+            this.$u_1 = ($v_0);
             delete parentNode.RedirectUrl;
         }
         $v_0 = parentNode.SiteId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$m_1 = ($v_0);
+            this.$v_1 = ($v_0);
             delete parentNode.SiteId;
         }
         $v_0 = parentNode.Status;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$q_1 = ((SP.DataConvert.fixupType(null, $v_0)));
+            this.$z_1 = ((SP.DataConvert.fixupType(null, $v_0)));
             delete parentNode.Status;
         }
-        $v_0 = parentNode.TriggerUrls;
+        $v_0 = parentNode.WaveOverrideUsers;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$t_1 = ((SP.DataConvert.fixupType(null, $v_0)));
-            delete parentNode.TriggerUrls;
+            this.$14_1 = ($v_0);
+            delete parentNode.WaveOverrideUsers;
         }
         $v_0 = parentNode.Waves;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
@@ -4985,11 +5219,15 @@ SP.Publishing.AddinPlugin.registerClass('SP.Publishing.AddinPlugin', SP.ClientOb
 SP.Publishing.AddinPluginPropertyNames.registerClass('SP.Publishing.AddinPluginPropertyNames');
 SP.Publishing.AddinSettings.registerClass('SP.Publishing.AddinSettings', SP.ClientObject);
 SP.Publishing.AddinSettingsPropertyNames.registerClass('SP.Publishing.AddinSettingsPropertyNames');
+SP.Publishing.BoostFieldsData.registerClass('SP.Publishing.BoostFieldsData', SP.ClientValueObject);
 SP.Publishing.CustomizableString.registerClass('SP.Publishing.CustomizableString', SP.ClientObject);
 SP.Publishing.CustomizableStringPropertyNames.registerClass('SP.Publishing.CustomizableStringPropertyNames');
 SP.Publishing.DesignPackage.registerClass('SP.Publishing.DesignPackage');
 SP.Publishing.DesignPackageInfo.registerClass('SP.Publishing.DesignPackageInfo', SP.ClientValueObject);
 SP.Publishing.EnumerateOnlyVideoCollection.registerClass('SP.Publishing.EnumerateOnlyVideoCollection', SP.ClientObjectCollection);
+SP.Publishing.SitePageFieldsData.registerClass('SP.Publishing.SitePageFieldsData', SP.ClientValueObject);
+SP.Publishing.RepostPageFieldsData.registerClass('SP.Publishing.RepostPageFieldsData', SP.Publishing.SitePageFieldsData);
+SP.Publishing.FeedVideoPageFieldsData.registerClass('SP.Publishing.FeedVideoPageFieldsData', SP.Publishing.RepostPageFieldsData);
 SP.Publishing.ImageRendition.registerClass('SP.Publishing.ImageRendition', SP.ClientValueObject);
 SP.Publishing.PageLayoutCreationInformation.registerClass('SP.Publishing.PageLayoutCreationInformation', SP.ClientValueObject);
 SP.Publishing.ScheduledItem.registerClass('SP.Publishing.ScheduledItem', SP.ClientObject);
@@ -4998,8 +5236,6 @@ SP.Publishing.PublishingPageInformation.registerClass('SP.Publishing.PublishingP
 SP.Publishing.PublishingSite.registerClass('SP.Publishing.PublishingSite', SP.ClientObject);
 SP.Publishing.PublishingWeb.registerClass('SP.Publishing.PublishingWeb', SP.ClientObject);
 SP.Publishing.PublishingWebObjectPropertyNames.registerClass('SP.Publishing.PublishingWebObjectPropertyNames');
-SP.Publishing.SitePageFieldsData.registerClass('SP.Publishing.SitePageFieldsData', SP.ClientValueObject);
-SP.Publishing.RepostPageFieldsData.registerClass('SP.Publishing.RepostPageFieldsData', SP.Publishing.SitePageFieldsData);
 SP.Publishing.ScheduledItemPropertyNames.registerClass('SP.Publishing.ScheduledItemPropertyNames');
 SP.Publishing.ScheduledItemObjectPropertyNames.registerClass('SP.Publishing.ScheduledItemObjectPropertyNames');
 SP.Publishing.Search.registerClass('SP.Publishing.Search', SP.ClientObject);
@@ -5203,6 +5439,8 @@ SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachingRetryAttemptL
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.cachingState = 'CachingState';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.createFriendlyUrlsForNewPages = 'CreateFriendlyUrlsForNewPages';
 SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.lastCachingRefreshAttempted = 'LastCachingRefreshAttempted';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.portalNavigationSuccessfulRefreshID = 'PortalNavigationSuccessfulRefreshID';
+SP.Publishing.Navigation.WebNavigationSettingsPropertyNames.portalNavigationSuccessfulRefreshTime = 'PortalNavigationSuccessfulRefreshTime';
 SP.Publishing.Navigation.WebNavigationSettingsObjectPropertyNames.currentNavigation = 'CurrentNavigation';
 SP.Publishing.Navigation.WebNavigationSettingsObjectPropertyNames.globalNavigation = 'GlobalNavigation';
 

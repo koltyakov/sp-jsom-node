@@ -818,7 +818,9 @@ PS.ProjectContext.QueueJobPoll.prototype = {
                     return true;
             }
         }
-        $p0.val = 4;
+        else {
+            $p0.val = 4;
+        }
         return false;
     },
     
