@@ -1,7 +1,7 @@
 {
   "name": "sp-jsom-node",
   "description": "SharePoint JavaScript Object Model for Node.js",
-  "version": "3.1.5",
+  "version": "3.2.0",
   "main": "./dist/index.js",
   "typings": "./dist/index",
   "scripts": {
@@ -33,8 +33,8 @@
   "dependencies": {
     "@types/sharepoint": "^2016.1.9",
     "cpass": "^2.3.0",
-    "node-sp-auth": "^2.5.9",
-    "node-sp-auth-config": "^2.9.4",
+    "node-sp-auth": "^3.0.4",
+    "node-sp-auth-config": "^3.0.1",
     "sp-request": "^2.1.3"
   },
   "devDependencies": {
