@@ -3,9 +3,9 @@ import { expect } from 'chai';
 import * as sprequest from 'sp-request';
 import { IAuthContext } from 'node-sp-auth-config';
 
-import { JsomNode } from '../../src';
-import { getAuthCtx, getAuth } from '../misc';
-import { Environments } from '../configs';
+import { JsomNode } from '../src';
+import { getAuthCtx, getAuth } from './misc';
+import { Environments } from './configs';
 
 const testVariables = {
   newListName: 'JsomNode Temporary List'

@@ -21,5 +21,6 @@ async function checkOrPromptForIntegrationConfigCreds (): Promise<void> {
 
 }
 
-checkOrPromptForIntegrationConfigCreds()
-  .catch(console.warn);
+if (process.argv.indexOf('--init') !== -1) {
+  checkOrPromptForIntegrationConfigCreds().catch(console.warn);
+}

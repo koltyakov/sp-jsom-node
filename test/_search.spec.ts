@@ -2,9 +2,9 @@ import * as Mocha from 'mocha';
 import { expect } from 'chai';
 import { IAuthContext } from 'node-sp-auth-config';
 
-import { JsomNode } from '../../src';
-import { getAuthCtx, getAuth } from '../misc';
-import { Environments } from '../configs';
+import { JsomNode } from '../src';
+import { getAuthCtx, getAuth } from './misc';
+import { Environments } from './configs';
 
 describe(`sp-jsom-node search tests`, () => {
 

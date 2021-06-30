@@ -269,14 +269,14 @@ export class JsomNode {
           };
 
           if (wReq._httpVerb.toLowerCase() === 'post') {
-            return request.post({
-              url: requestUrl,
+            return request.post(requestUrl, {
+              // url: requestUrl,
               headers: {
                 ...wReq._headers,
                 ...jsomHeaders
               },
               body: wReq._body,
-              json: !isJsom,
+              responseType: !isJsom ? 'json' : undefined,
               agent: utils.isUrlHttps(requestUrl) ? this.agent : undefined
             })
               .then((response) => {
