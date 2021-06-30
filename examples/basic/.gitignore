@@ -3,3 +3,4 @@ config/**/private.json
 config/**/private.*.json
 dist
 tmp
+package-lock.json

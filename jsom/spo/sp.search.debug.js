@@ -5230,6 +5230,26 @@ Microsoft.SharePoint.Client.Search.Administration.SearchObjectOwner.newObject = 
 }
 
 
+Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider = function Microsoft_SharePoint_Client_Search_Administration_SiteCrawlVersionInfoProvider(context, site) {
+    Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider.initializeBase(this, [ context, SP.ClientUtility.getOrCreateObjectPathForConstructor(context, '{4c9d9c79-e81e-4da3-bb87-eaf29575d2ae}', arguments) ]);
+}
+Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider.newObject = function Microsoft_SharePoint_Client_Search_Administration_SiteCrawlVersionInfoProvider$newObject(context, site) {
+    return new Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider(context, new SP.ObjectPathConstructor(context, '{4c9d9c79-e81e-4da3-bb87-eaf29575d2ae}', [ site ]));
+}
+Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider.prototype = {
+    
+    getSiteCrawlVersionStatus: function Microsoft_SharePoint_Client_Search_Administration_SiteCrawlVersionInfoProvider$getSiteCrawlVersionStatus() {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetSiteCrawlVersionStatus', null);
+        $v_0.addQuery($v_2);
+        $v_1 = new SP.ClientResult();
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    }
+}
+
+
 Type.registerNamespace('Microsoft.SharePoint.Client.Search.ContentPush');
 
 Microsoft.SharePoint.Client.Search.ContentPush.CertificateService = function Microsoft_SharePoint_Client_Search_ContentPush_CertificateService(context) {
@@ -5561,6 +5581,7 @@ Microsoft.Office.Server.Search.REST.SearchObjectOwnerResult.registerClass('Micro
 Microsoft.Office.Server.Search.WebControls.ControlMessage.registerClass('Microsoft.Office.Server.Search.WebControls.ControlMessage', SP.ClientValueObject);
 Microsoft.SharePoint.Client.Search.Administration.DocumentCrawlLog.registerClass('Microsoft.SharePoint.Client.Search.Administration.DocumentCrawlLog', SP.ClientObject);
 Microsoft.SharePoint.Client.Search.Administration.SearchObjectOwner.registerClass('Microsoft.SharePoint.Client.Search.Administration.SearchObjectOwner', SP.ClientObject);
+Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider.registerClass('Microsoft.SharePoint.Client.Search.Administration.SiteCrawlVersionInfoProvider', SP.ClientObject);
 Microsoft.SharePoint.Client.Search.ContentPush.CertificateService.registerClass('Microsoft.SharePoint.Client.Search.ContentPush.CertificateService', SP.ClientObject);
 Microsoft.SharePoint.Client.Search.ContentPush.PushTenantManager.registerClass('Microsoft.SharePoint.Client.Search.ContentPush.PushTenantManager', SP.ClientObject);
 Microsoft.SharePoint.Client.Search.ContentPush.PushTenantServiceInfo.registerClass('Microsoft.SharePoint.Client.Search.ContentPush.PushTenantServiceInfo', SP.ClientObject);

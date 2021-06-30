@@ -20,12 +20,12 @@ export const downloadJsomScripts = async (envCfgs: IEnvironmentConfig[]): Promis
 
         const scriptPath = script.replace('{{lcid}}', lcid);
         const scriptUrl = `${siteUrl}/_layouts/15/${scriptPath}`;
-        await Promise.resolve(spr.get(scriptUrl, {
+        await spr.get(scriptUrl, {
           headers: {
             Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
           },
-          json: false
-        }))
+          responseType: undefined
+        })
           .then((response: any) => {
             if (response.statusCode === 200) {
               const localFilePath = path.join(process.cwd(), 'jsom', envCfg.envCode || '', scriptUrl.split('/_layouts/15/')[1]);

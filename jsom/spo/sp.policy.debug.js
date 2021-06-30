@@ -265,22 +265,23 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
     $E_1: false,
     $F_1: false,
     $G_1: false,
-    $H_1: false,
-    $I_1: null,
+    $H_1: 0,
+    $I_1: false,
     $J_1: null,
-    $K_1: false,
+    $K_1: null,
     $L_1: false,
-    $O_1: null,
+    $M_1: false,
     $P_1: null,
-    $R_1: false,
-    $S_1: null,
+    $Q_1: null,
+    $S_1: false,
     $T_1: null,
-    $U_1: false,
-    $V_1: 0,
-    $W_1: null,
-    $0_1: null,
+    $U_1: null,
+    $V_1: false,
+    $W_1: 0,
     $X_1: null,
-    $Y_1: false,
+    $0_1: null,
+    $Y_1: null,
+    $Z_1: false,
     
     get_acceptMessagesOnlyFromSendersOrMembers: function SP_CompliancePolicy_ComplianceTag$get_acceptMessagesOnlyFromSendersOrMembers() {
         return this.$B_1;
@@ -306,56 +307,60 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         return this.$G_1;
     },
     
-    get_containsSiteLabel: function SP_CompliancePolicy_ComplianceTag$get_containsSiteLabel() {
+    get_complianceFlags: function SP_CompliancePolicy_ComplianceTag$get_complianceFlags() {
         return this.$H_1;
     },
     
-    get_displayName: function SP_CompliancePolicy_ComplianceTag$get_displayName() {
+    get_containsSiteLabel: function SP_CompliancePolicy_ComplianceTag$get_containsSiteLabel() {
         return this.$I_1;
     },
     
-    get_encryptionRMSTemplateId: function SP_CompliancePolicy_ComplianceTag$get_encryptionRMSTemplateId() {
+    get_displayName: function SP_CompliancePolicy_ComplianceTag$get_displayName() {
         return this.$J_1;
     },
     
-    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
+    get_encryptionRMSTemplateId: function SP_CompliancePolicy_ComplianceTag$get_encryptionRMSTemplateId() {
         return this.$K_1;
     },
     
-    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
+    get_hasRetentionAction: function SP_CompliancePolicy_ComplianceTag$get_hasRetentionAction() {
         return this.$L_1;
     },
     
-    get_multiStageReviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_multiStageReviewerEmail() {
-        return this.$O_1;
+    get_isEventTag: function SP_CompliancePolicy_ComplianceTag$get_isEventTag() {
+        return this.$M_1;
     },
     
-    get_notes: function SP_CompliancePolicy_ComplianceTag$get_notes() {
+    get_multiStageReviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_multiStageReviewerEmail() {
         return this.$P_1;
     },
     
-    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
-        return this.$R_1;
+    get_notes: function SP_CompliancePolicy_ComplianceTag$get_notes() {
+        return this.$Q_1;
     },
     
-    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
+    get_requireSenderAuthenticationEnabled: function SP_CompliancePolicy_ComplianceTag$get_requireSenderAuthenticationEnabled() {
         return this.$S_1;
     },
     
-    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
+    get_reviewerEmail: function SP_CompliancePolicy_ComplianceTag$get_reviewerEmail() {
         return this.$T_1;
     },
     
-    get_superLock: function SP_CompliancePolicy_ComplianceTag$get_superLock() {
+    get_sharingCapabilities: function SP_CompliancePolicy_ComplianceTag$get_sharingCapabilities() {
         return this.$U_1;
     },
     
-    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
+    get_superLock: function SP_CompliancePolicy_ComplianceTag$get_superLock() {
         return this.$V_1;
     },
     
-    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+    get_tagDuration: function SP_CompliancePolicy_ComplianceTag$get_tagDuration() {
         return this.$W_1;
+    },
+    
+    get_tagId: function SP_CompliancePolicy_ComplianceTag$get_tagId() {
+        return this.$X_1;
     },
     
     get_tagName: function SP_CompliancePolicy_ComplianceTag$get_tagName() {
@@ -363,11 +368,11 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
     },
     
     get_tagRetentionBasedOn: function SP_CompliancePolicy_ComplianceTag$get_tagRetentionBasedOn() {
-        return this.$X_1;
+        return this.$Y_1;
     },
     
     get_unlockedAsDefault: function SP_CompliancePolicy_ComplianceTag$get_unlockedAsDefault() {
-        return this.$Y_1;
+        return this.$Z_1;
     },
     
     get_typeId: function SP_CompliancePolicy_ComplianceTag$get_typeId() {
@@ -381,7 +386,7 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         if (!serializationContext) {
             throw Error.argumentNull('serializationContext');
         }
-        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'MultiStageReviewerEmail', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'SuperLock', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn', 'UnlockedAsDefault' ];
+        var $v_0 = [ 'AcceptMessagesOnlyFromSendersOrMembers', 'AccessType', 'AllowAccessFromUnmanagedDevice', 'AutoDelete', 'BlockDelete', 'BlockEdit', 'ComplianceFlags', 'ContainsSiteLabel', 'DisplayName', 'EncryptionRMSTemplateId', 'HasRetentionAction', 'IsEventTag', 'MultiStageReviewerEmail', 'Notes', 'RequireSenderAuthenticationEnabled', 'ReviewerEmail', 'SharingCapabilities', 'SuperLock', 'TagDuration', 'TagId', 'TagName', 'TagRetentionBasedOn', 'UnlockedAsDefault' ];
         SP.DataConvert.writePropertiesToXml(writer, this, $v_0, serializationContext);
         SP.ClientValueObject.prototype.writeToXml.call(this, writer, serializationContext);
     },
@@ -419,69 +424,74 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
             this.$G_1 = ($v_0);
             delete parentNode.BlockEdit;
         }
-        $v_0 = parentNode.ContainsSiteLabel;
+        $v_0 = parentNode.ComplianceFlags;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
             this.$H_1 = ($v_0);
+            delete parentNode.ComplianceFlags;
+        }
+        $v_0 = parentNode.ContainsSiteLabel;
+        if (!SP.ScriptUtility.isUndefined($v_0)) {
+            this.$I_1 = ($v_0);
             delete parentNode.ContainsSiteLabel;
         }
         $v_0 = parentNode.DisplayName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$I_1 = ($v_0);
+            this.$J_1 = ($v_0);
             delete parentNode.DisplayName;
         }
         $v_0 = parentNode.EncryptionRMSTemplateId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$J_1 = ($v_0);
+            this.$K_1 = ($v_0);
             delete parentNode.EncryptionRMSTemplateId;
         }
         $v_0 = parentNode.HasRetentionAction;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$K_1 = ($v_0);
+            this.$L_1 = ($v_0);
             delete parentNode.HasRetentionAction;
         }
         $v_0 = parentNode.IsEventTag;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$L_1 = ($v_0);
+            this.$M_1 = ($v_0);
             delete parentNode.IsEventTag;
         }
         $v_0 = parentNode.MultiStageReviewerEmail;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$O_1 = ($v_0);
+            this.$P_1 = ($v_0);
             delete parentNode.MultiStageReviewerEmail;
         }
         $v_0 = parentNode.Notes;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$P_1 = ($v_0);
+            this.$Q_1 = ($v_0);
             delete parentNode.Notes;
         }
         $v_0 = parentNode.RequireSenderAuthenticationEnabled;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$R_1 = ($v_0);
+            this.$S_1 = ($v_0);
             delete parentNode.RequireSenderAuthenticationEnabled;
         }
         $v_0 = parentNode.ReviewerEmail;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$S_1 = ($v_0);
+            this.$T_1 = ($v_0);
             delete parentNode.ReviewerEmail;
         }
         $v_0 = parentNode.SharingCapabilities;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$T_1 = ($v_0);
+            this.$U_1 = ($v_0);
             delete parentNode.SharingCapabilities;
         }
         $v_0 = parentNode.SuperLock;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$U_1 = ($v_0);
+            this.$V_1 = ($v_0);
             delete parentNode.SuperLock;
         }
         $v_0 = parentNode.TagDuration;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$V_1 = ($v_0);
+            this.$W_1 = ($v_0);
             delete parentNode.TagDuration;
         }
         $v_0 = parentNode.TagId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$W_1 = ($v_0);
+            this.$X_1 = ($v_0);
             delete parentNode.TagId;
         }
         $v_0 = parentNode.TagName;
@@ -491,12 +501,12 @@ SP.CompliancePolicy.ComplianceTag.prototype = {
         }
         $v_0 = parentNode.TagRetentionBasedOn;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$X_1 = ($v_0);
+            this.$Y_1 = ($v_0);
             delete parentNode.TagRetentionBasedOn;
         }
         $v_0 = parentNode.UnlockedAsDefault;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Y_1 = ($v_0);
+            this.$Z_1 = ($v_0);
             delete parentNode.UnlockedAsDefault;
         }
     }
@@ -580,20 +590,20 @@ SP.CompliancePolicy.PendingReviewItemsStatistics = function SP_CompliancePolicy_
     SP.CompliancePolicy.PendingReviewItemsStatistics.initializeBase(this);
 }
 SP.CompliancePolicy.PendingReviewItemsStatistics.prototype = {
-    $M_1: null,
     $N_1: null,
-    $Q_1: 0,
+    $O_1: null,
+    $R_1: 0,
     
     get_labelId: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_labelId() {
-        return this.$M_1;
-    },
-    
-    get_labelName: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_labelName() {
         return this.$N_1;
     },
     
+    get_labelName: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_labelName() {
+        return this.$O_1;
+    },
+    
     get_pendingReviewItemsCount: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_pendingReviewItemsCount() {
-        return this.$Q_1;
+        return this.$R_1;
     },
     
     get_typeId: function SP_CompliancePolicy_PendingReviewItemsStatistics$get_typeId() {
@@ -617,17 +627,17 @@ SP.CompliancePolicy.PendingReviewItemsStatistics.prototype = {
         var $v_0;
         $v_0 = parentNode.LabelId;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$M_1 = ($v_0);
+            this.$N_1 = ($v_0);
             delete parentNode.LabelId;
         }
         $v_0 = parentNode.LabelName;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$N_1 = ($v_0);
+            this.$O_1 = ($v_0);
             delete parentNode.LabelName;
         }
         $v_0 = parentNode.PendingReviewItemsCount;
         if (!SP.ScriptUtility.isUndefined($v_0)) {
-            this.$Q_1 = ($v_0);
+            this.$R_1 = ($v_0);
             delete parentNode.PendingReviewItemsCount;
         }
     }
@@ -2820,18 +2830,6 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
         return $v_1;
     },
     
-    addDynamicScopeBinding: function SP_CompliancePolicy_SPPolicyStoreProxy$addDynamicScopeBinding(identity, siteId) {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'AddDynamicScopeBinding', [ identity, siteId ]);
-        $v_0.addQuery($v_1);
-    },
-    
-    deleteDynamicScopeBinding: function SP_CompliancePolicy_SPPolicyStoreProxy$deleteDynamicScopeBinding(identity, siteId) {
-        var $v_0 = this.get_context();
-        var $v_1 = new SP.ClientActionInvokeMethod(this, 'DeleteDynamicScopeBinding', [ identity, siteId ]);
-        $v_0.addQuery($v_1);
-    },
-    
     getDynamicScopeBindingBySiteId: function SP_CompliancePolicy_SPPolicyStoreProxy$getDynamicScopeBindingBySiteId(siteId) {
         var $v_0 = this.get_context();
         var $v_1;
@@ -2845,6 +2843,22 @@ SP.CompliancePolicy.SPPolicyStoreProxy.prototype = {
     bulkUpdateDynamicScopeBindings: function SP_CompliancePolicy_SPPolicyStoreProxy$bulkUpdateDynamicScopeBindings(scopesToAdd, scopesToRemove, siteId) {
         var $v_0 = this.get_context();
         var $v_1 = new SP.ClientActionInvokeMethod(this, 'BulkUpdateDynamicScopeBindings', [ scopesToAdd, scopesToRemove, siteId ]);
+        $v_0.addQuery($v_1);
+    },
+    
+    getSiteAdaptivePolicies: function SP_CompliancePolicy_SPPolicyStoreProxy$getSiteAdaptivePolicies(siteId) {
+        var $v_0 = this.get_context();
+        var $v_1;
+        var $v_2 = new SP.ClientActionInvokeMethod(this, 'GetSiteAdaptivePolicies', [ siteId ]);
+        $v_0.addQuery($v_2);
+        $v_1 = (([]));
+        $v_0.addQueryIdAndResultObject($v_2.get_id(), $v_1);
+        return $v_1;
+    },
+    
+    updateSiteAdaptivePolicies: function SP_CompliancePolicy_SPPolicyStoreProxy$updateSiteAdaptivePolicies(policiesToAdd, policiesToRemove, siteId) {
+        var $v_0 = this.get_context();
+        var $v_1 = new SP.ClientActionInvokeMethod(this, 'UpdateSiteAdaptivePolicies', [ policiesToAdd, policiesToRemove, siteId ]);
         $v_0.addQuery($v_1);
     },
     

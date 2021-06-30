@@ -7,8 +7,8 @@ function $_global_init() {
             "version": {
                 "rmj": 16,
                 "rmm": 0,
-                "rup": 21319,
-                "rpr": 12007
+                "rup": 21416,
+                "rpr": 12005
             }
         };
     }
@@ -1361,13 +1361,35 @@ function $_global_init() {
     }
     Flighting.VariantConfiguration = {};
     Flighting.VariantConfiguration.IsExpFeatureClientEnabled = function(id) {
-        var elem = Math.floor(id / 32);
+        var elem;
         var mask;
+        var expFeatures = Flighting.ExpFeatures;
+        var pageContextInfo = window['_spPageContextInfo'];
 
-        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("AF5A380E-20E0-4096-BA87-2C4CDFB4DBDF"))) {
-            var expFeatures = Flighting.ExpFeatures;
-            var pageContextInfo = window['_spPageContextInfo'];
+        if (!(window["OffSwitch"] == null || OffSwitch.IsActive("428D8477-AA82-4755-A55D-273CECAB3AEF"))) {
+            if (id >= 60000) {
+                var flight = id - 60000 + 2000 + 1;
 
+                elem = Math.floor(flight / 32);
+                mask = 1 << flight % 32;
+            }
+            else if (id <= 2000) {
+                elem = Math.floor(id / 32);
+                mask = 1 << id % 32;
+            }
+            else {
+                return false;
+            }
+            if (expFeatures.length === 0 && pageContextInfo != null && pageContextInfo.ExpFeatures != null) {
+                expFeatures = _spPageContextInfo.ExpFeatures;
+            }
+            if (elem < 0 || elem >= expFeatures.length) {
+                return false;
+            }
+            return (expFeatures[elem] & mask) != 0;
+        }
+        else {
+            elem = Math.floor(id / 32);
             if (expFeatures.length === 0 && pageContextInfo != null && pageContextInfo.ExpFeatures != null) {
                 expFeatures = _spPageContextInfo.ExpFeatures;
             }
@@ -1376,13 +1398,6 @@ function $_global_init() {
             }
             mask = 1 << id % 32;
             return (expFeatures[elem] & mask) != 0;
-        }
-        else {
-            if (elem < 0 || elem >= Flighting.ExpFeatures.length) {
-                return false;
-            }
-            mask = 1 << id % 32;
-            return (Flighting.ExpFeatures[elem] & mask) != 0;
         }
     };
     String.prototype.trim = function() {
@@ -4038,6 +4053,7 @@ function PageContextInfo_InitializePrototype() {
     PageContextInfo.prototype.pageItemId = 0;
     PageContextInfo.prototype.userId = "";
     PageContextInfo.prototype.systemUserKey = "";
+    PageContextInfo.prototype.serverTime = "";
     PageContextInfo.prototype.alertsEnabled = false;
     PageContextInfo.prototype.siteServerRelativeUrl = "";
     PageContextInfo.prototype.allowSilverlightPrompt = "";
@@ -18547,6 +18563,40 @@ function SuiteNavRendering_module_def() {
             suiteNavDataMonitor.Dispose();
             shellDataCallback(suiteNavData);
         }, suiteVersion);
+    }
+    SuiteNavRendering.ConfigureMast = ConfigureMast;
+    function ConfigureMast() {
+        if (Flighting.VariantConfiguration.IsExpFeatureClientEnabled(60222) && !(window["OffSwitch"] == null || OffSwitch.IsActive("8FE233B6-3394-4918-A449-B5808E8B40BD"))) {
+            var serverTimeString = '';
+
+            if (typeof _spPageContextInfo != "undefined") {
+                serverTimeString = _spPageContextInfo.serverTime;
+            }
+            var serverTimeAtPageLoad = Boolean(serverTimeString) ? Date.parse(serverTimeString) : 0;
+
+            if (Boolean(serverTimeAtPageLoad)) {
+                window.addEventListener('focus', function(evt) {
+                    var mastInteraction = window["MastInteraction"];
+
+                    if (mastInteraction != null && mastInteraction.ShowPrompt != null) {
+                        var atob = window["atob"];
+                        var signInTimeFromCookie = GetCookieValue('SIMI');
+                        var signInTime = Boolean(signInTimeFromCookie) ? Number((JSON.parse(atob(signInTimeFromCookie)))["st"]) : 0;
+
+                        if (signInTime != 0 && signInTime > serverTimeAtPageLoad) {
+                            mastInteraction.SignOutPage();
+                            mastInteraction.ShowPrompt(true);
+                        }
+                    }
+                }, false);
+            }
+        }
+    }
+    function GetCookieValue(cookieName) {
+        var arrMatches = document.cookie.match(new RegExp('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)'));
+        var cookieValue = arrMatches != null ? arrMatches.pop() : '';
+
+        return cookieValue;
     }
     function ExtractItemsFromMenu(menuElement, itemsContainer, linksData) {
         function UrlFromOnclick(clickHandler) {
